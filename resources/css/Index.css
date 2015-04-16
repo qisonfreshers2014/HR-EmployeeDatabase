@@ -1,0 +1,40 @@
+
+body {
+    background-color: #FFFFFF;
+    color: #000000;
+    font-family: serif,sans-serif,cursive,Arial;
+    width: 100%;
+}
+
+.header {
+    border-bottom: 1px solid #000000;
+    height: 95px;
+}
+.footer {
+    border-top: 1px solid #000000;
+    clear: both;
+    margin-top: 10%;
+}
+.container {
+    position: relative;
+    display:block !important;
+
+}
+.leftContainer {
+	 background-color: #FFFFFF;
+    float: left;
+    position: relative;
+    width: 55%;
+
+}
+.rightContainer {
+	 background-color: #FFFFFF;
+    float: right;
+    position: relative;
+    width: 45%;
+
+}
+
+.footer p {
+    text-align: center;
+}

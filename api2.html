@@ -1,0 +1,1498 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+                    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<script src="resources/js/lib/jquery.js"></script>
+<script src="resources/js/lib/jquery.treeview.js"></script>
+<link href="resources/css/jquery.treeview.css" rel="stylesheet">
+<style type="text/css">
+#browser {
+	font-family: Verdana, helvetica, arial, sans-serif;
+	font-size: 68.75%;
+}
+
+.headerTitle {
+	color: red;
+	text-align: center;
+}
+</style>
+<script>
+	$(document).ready(function() {
+		$("#browser").treeview({
+			collapsed : true,
+			animated : "fast"
+
+		})
+	});
+</script>
+
+</head>
+<body>
+	<h2 class="headerTitle">Browse the APIs here</h2>
+	<ul id="browser" class="filetree">
+		<li><span class="folder module">Consultants</span>
+			<ul>
+				<li><span class="folder api">get consultants</span>
+					<ul id="folder1_1">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/consultant/getConsultants</span></li>
+						<li><span class="file input"> input1 :{"pageNo": 1,
+								"pageSize": 10 } } </span></li>
+						<li><span class="file input"> input2 :{"pageNo": 1,
+								"pageSize": 10, "status":"Active-Bench","skills":"Java" } } </span></li>
+						<li><span class="file input"> input3 :{"pageNo": 1,
+								"pageSize": 10, "status":"Active-Bench" } } </span></li>
+						<li><span class="file output">output :
+								{"status":"SUCCESS","payload":[ {
+								"First_Name":"Dipen","Last_Name":"Shah","Status":"Active","Rate":"60","Base_Rate":"50","Resume_Id":"45",
+								"Bench_Recruiter_Id":"25","Phone_No":"9875325390","Alternate_No":"","Emergency_No":"",
+								"Email1":"dipen.shah@gmail.com","Email2":"","Current_Location_Id":4,"Visa_Status":"Citizen",
+								"Visa_Exp_Date":"","File_Status":"Verified","SSN":"87635563","Current_Address":"416
+								Water St. New York, NY 10002",
+								"Driving_License_Id":"87","Driving_License_Expiry_Date":"22-Aug-2025","Passport_id":"29","Visa_Copy_Id":"49",
+								"Reference_Form_Id":"786","Area_Reference":"","Skype_Id":"dipenshah27","DOB":"01-Jan-1986","Age":"28",
+								"Accomodation":"Y","Skills":[{"Skill_Id":6,"Is_Major":"YES"},{"Skill_Id":5,"Is_Major":"NO"}],
+								"Preffered_LocationIds":[3,4,7],"Search_String_Ids":[5,9,16], },
+								{ } ]} </span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">get consultant details</span>
+					<ul id="folder1_2">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/consultant/getConsultantDetails</span></li>
+						<li><span class="file input"> input
+								:{"payload":{"Consultant_Id":5}} </span></li>
+						<li><span class="file output"> output :
+								{"status":"SUCCESS","payload": {
+								"First_Name":"Dipen","Last_Name":"Shah","Status":"Active","Rate":"60","Base_Rate":"50","Resume_Id":"45",
+								"Bench_Recruiter_Id":"25","Phone_No":"9875325390","Alternate_No":"","Emergency_No":"",
+								"Email1":"dipen.shah@gmail.com","Email2":"","Current_Location_Id":4,"Visa_Status":"Citizen",
+								"Visa_Exp_Date":"","File_Status":"Verified","SSN":"87635563","Current_Address":"416
+								Water St. New York, NY 10002",
+								"Driving_License_Id":"87","Driving_License_Expiry_Date":"22-Aug-2025","Passport_id":"29","Visa_Copy_Id":"49",
+								"Reference_Form_Id":"786","Area_Reference":"","Skype_Id":"dipenshah27","DOB":"01-Jan-1986","Age":"28",
+								"Accomodation":"Y","Skills":[{"Skill_Id":6,"Is_Major":"YES"},{"Skill_Id":5,"Is_Major":"NO"}],
+								"Preffered_LocationIds":[3,4,7],"Search_String_Ids":[5,9,16], }
+								} </span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">change consultants status</span>
+					<ul id="folder1_3">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/consultant/updateConsultantStatus</span></li>
+						<li><span class="file input"> input
+								:{"payload":{"Consultant_Id":8,"Status":"Active"}} </span></li>
+						<li><span class="file output"> output :
+								{"status":"SUCCESS","payload":true} </span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">get consultant Resumes</span>
+					<ul id="folder1_4">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/consultant/getConsultantResumes</span></li>
+						<li><span class="file input"> input1
+								:{"payload":{"Consultant_Id":"17"}} </span></li>
+						<li><span class="file input"> input2
+								:{"payload":{"Consultant_id":17,"tagList":[{"Tag_Id":1,"Value":"Hyderabad"},
+								{"Tag_Id":2,"Value":"Oracle"}]}} </span></li>
+						<li><span class="file output"> output :
+								{"status":"SUCCESS","payload":[{"Version_Number":1,
+								"resume_path":"https://docs.google.com/spreadsheets/d/1To-EDZKHOJqNw6NzgAYI4aM8Nb_uHl0_kW8DbPxgw1k/edit#gid=1724133771",
+								"Resume_Group_Id":25,"Description":"Java version with Java Skill
+								Highlighted","Updated_By":10,"Upload_Date":"20-APR-2014"},
+								{"Version_Number":2,
+								"resume_path":"https://docs.google.com/spreadsheets/d/1To-EDZKHOJqNw6NzgAYI4aM8Nb_uHl0_kW8DbPgfdhd",
+								"Resume_Group_Id":29,"Description":"Android version with Android
+								Skill
+								Highlighted","Updated_By":16,"Upload_Date":"15-MAY-2014"}]} </span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+<ul>
+				<li><span class="folder api">add new resume details</span>
+					<ul id="folder1_5">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/consultant/addResume</span></li>
+						<li><span class="file input"> input
+								:{"payload":{"Consultant_Id":"17","Version_Number":3,"resume_path":"https://docs.google.com/spreadsheets/d/1To-EDZKHOJqNw6NzgAYI4aMhfgf",
+								"Resume_Group_Id":28,"Description":"Oracle Resume
+								Version","Updated_By":27,"Upload_Date":"26-MAY-2014","tags":[{"Tag_Id":1,"value":"New
+								York"},{"Tag_Id":2,"value":"Oracle"}]}} </span></li>
+						<li><span class="file output"> output :
+								{"status":"SUCCESS","payload":true} </span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">submit resumes</span>
+					<ul id="folder1_9">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/requirement/submitResumes</span></li>
+						<li><span class="file input"> input : { "payload":
+								{"requirementId": 21,
+								"client":"TCS","requirementUrl":"www.naukri+login&oq=naukri&aqs.com","resumeIds":
+								[1, 7, 11,53,45,65,67,78], "templateUsedId":21,"salesPersonId":
+								11} } </span></li>
+						<li><span class="file output">output :
+								{"status":"SUCCESS","payload":true}</span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+<ul>
+				<li><span class="folder api">update existing resume
+						details</span>
+					<ul id="folder1_48">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/resume/updateResume</span></li>
+						<li><span class="file input"> input : { "payload": {
+								"resumeId": 3, "consultantId": 22, "versionNumber": 3,
+								"resumePath":
+								"https://drive.google.com/?tab=mo&authuser=0#my-drive",
+								"ResumeGroupId": 1, "description": "Java resume with 3 Years of
+								Experience.", "UpdatedBy": 43, "uploadedDate": "12-04-2014",
+								"setAsDefault": 1 } } </span></li>
+						<li><span class="file output">output :
+								{"status":"SUCCESS","payload":true}</span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">send email to consultant</span>
+					<ul id="folder1_49">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/consultant/sendEmail</span></li>
+						<li><span class="file input"> input : { "payload": {
+								"consultantId": 2, "employeeId": 21, "clientId": 10, "to":
+								"abc@gmail.com", "from": "system@gmail.com", "emailTemplate": 4,
+								"emailDescription": "content of the mail", "cc":
+								"abc@client.com", "bcc": "admin@futran.com" } } </span></li>
+						<li><span class="file output"> output :
+								{"status":"SUCCESS","payload":true} </span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">search</span>
+					<ul id="folder1_50">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/------/search</span></li>
+						<li><span class="file input"> input :
+								{"payload":{"searchKey":"9876432156"}} </span></li>
+						<li><span class="file output">output : NOT GIVEN</span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">View list of consultants
+						who has previously taken the interview with the same Client/vendor
+						with the same skill </span>
+					<ul id="folder1_51">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/consultant/getConsultants</span></li>
+						<li><span class="file input"> input : { "payload": {
+								"clientId": 12, "skillId": 6 } } </span></li>
+						<li><span class="file output">output : { "status":
+								"SUCCESS", "payload": [ { "consultantId": 2, "name": "Akshay",
+								"email": "akshay.saireddy@gmail.com" }, { "consultantId": 4,
+								"name": "Anar", "email": "anar_singh@gmail.com" }, {
+								"consultantId": 23, "name": "Dinesh", "email":
+								"dinesh.agarwal@gmail.com" } ] } </span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Nikitha Reddy</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">Add a Consultant</span>
+					<ul id="folder3_1">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/consultant/addConsultant</span></li>
+						<li><span class="file input"> input : {"payload": {
+								"First_Name":"Dipen","Last_Name":"Shah","Status":"Active","Rate":"60","Base_Rate":"50","Resume_Id":"45",
+								"Bench_Recruiter_Id":"25","Phone_No":"9875325390","Alternate_No":"","Emergency_No":"",
+								"Email1":"dipen.shah@gmail.com","Email2":"","Current_Location_Id":4,"Visa_Status":"Citizen",
+								"Visa_Exp_Date":"","File_Status":"Verified","SSN":"87635563","Current_Address":"416
+								Water St. New York, NY 10002",
+								"Driving_License_Id":"87","Driving_License_Expiry_Date":"22-Aug-2025","Passport_id":"29","Visa_Copy_Id":"49",
+								"Reference_Form_Id":"786","Area_Reference":"","Skype_Id":"dipenshah27","DOB":"01-Jan-1986","Age":"28",
+								"Accomodation":"Y","Skills":[{"Skill_Id":6,"Is_Major":"YES"},{"Skill_Id":5,"Is_Major":"NO"}],
+								"Preffered_LocationIds":[3,4,7],"Search_String_Ids":[5,9,16] }}
+						</span></li>
+						<li><span class="file output">{"status":"SUCCESS","payload":true}</span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : author : Shiva</span></li>
+					</ul></li>
+			</ul>
+
+			<ul>
+				<li><span class="folder api">Update/Edit a Consultant </span>
+					<ul id="folder3_2">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/consultant/updateConsultant</span></li>
+						<li><span class="file input"> input : {"payload": {
+								"id":10,
+								"First_Name":"Dipen","Last_Name":"Shah","Status":"Active","Rate":"60","Base_Rate":"50","Resume_Id":"45",
+								"Bench_Recruiter_Id":"25","Phone_No":"9875325390","Alternate_No":"9875325391","Emergency_No":"",
+								"Email1":"dipen.shah@gmail.com","Email2":"","Current_Location_Id":9,"Visa_Status":"Citizen",
+								"Visa_Exp_Date":"","File_Status":"Verified","SSN":"87635563","Current_Address":"416
+								Water St. New York, NY 10002",
+								"Driving_License_Id":"87","Driving_License_Expiry_Date":"22-Aug-2025","Passport_id":"29","Visa_Copy_Id":"49",
+								"Reference_Form_Id":"786","Area_Reference":"","Skype_Id":"dipenshah27","DOB":"01-Jan-1986","Age":"28",
+								"Accomodation":"Y","Skills":[{"Skill_Id":6,"Is_Major":"YES"},{"Skill_Id":5,"Is_Major":"NO"}],
+								"Preffered_LocationIds":[3,4,7],"Search_String_Ids":[5,9,16] }}
+						</span></li>
+						<li><span class="file output">{"status":"SUCCESS","payload":true}</span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Shiva</span></li>
+					</ul></li>
+			</ul>
+		</li>
+		<li><span class="folder module">Requirements</span>
+			<ul>
+				<li><span class="folder api">get requirements</span>
+					<ul id="folder1_6">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/requirement/getRequirements</span></li>
+						<li><span class="file input"> input1 : { "payload": {
+								"pageNo": 1, "pageSize": 2 } } </span></li>
+						<li><span class="file input"> input2 : { "payload": {
+								"pageNo": 1, "pageSize": 2, Client_Id": 1 } } </span></li>
+						<li><span class="file input"> input3 : { "payload": {
+								"pageNo": 1, "pageSize": 2, Client_Id": 1,"Skills": [ 34 ] } } </span></li>
+						<li><span class="file output">output : { "status":
+								"SUCCESS", "payload": { "pageNo": 1, "end": 1, "start": 1,
+								"count": 6, "list": [ { "Requirement_Id": 101, "Client_Id": 1,
+								"Skills": [ 34 ], "Designation": "Senior Software Engineer",
+								"Experience": "3-4 years", "Description": "Java openings for
+								Senior Software Engineers", "Tags": [ "Java" ],
+								"No_Of_Positions": 2, "Valid_From": "22-May-2014", "Valid_To":
+								"03-Jun-2014", "URL": "www.naukri.com/HqWed4FDxadHN",
+								"Location": 23 }, { "Requirement_Id": 154, "Client_Id": 6,
+								"Skills": [ 34 ], "Designation": "Java Developer", "Experience":
+								"3-4 years", "Description": "Java Developer openings ", "Tags":
+								[ "Java" ], "No_Of_Positions": 3, "Valid_From": "22-May-2014",
+								"Valid_To": "03-Jun-2014", "URL":
+								"www.naukri.com/HqWed4FDxadHN", "Location": 23 } ] } }</span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Nikitha Reddy</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">get requirement details</span>
+					<ul id="folder1_10">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/requirement/getRequirementDetails</span></li>
+						<li><span class="file input"> input
+								:{"payload":{"Requirement_Id":15}} </span></li>
+						<li><span class="file output"> output :
+								{"status":"SUCCESS","payload":{"Client_Id":10,
+								"Skill_Ids":[10],"Designation":"", "Experience":"2
+								years","Tags":"Java",
+								"No_Of_Positions":5,"valid_From":"20-Apr-2014","Valid_To":"25-May-2014","URL":"www.naukri.com?jobId=7526724",
+								"Location_Id":10}} </span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Nikitha Reddy</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">update requirement details</span>
+					<ul id="folder1_11">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/requirement/updateRequirementDetails</span></li>
+
+						<li><span class="file input"> input : input : {
+								"payload": {"requirementId":11 "clientName":"abcd",
+								"skills":"abcd, sedg", "designation":"Business Analyst",
+								"experience":"4 yrs", "description":"abcd abcd abcd",
+								"tags":"business analyst", "noOfPositions":4,
+								"validFrom":12345678990, "validTo":12344567899,
+								"url":"www.naukri.com/we&ref", "location":"sedr" } } </span></li>
+						<li><span class="file output">output :
+								{"status":"SUCCESS","payload":true}</span></li>
+
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Nikitha Reddy</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">add requirement</span>
+					<ul id="folder1_12">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/requirement/addRequirement</span></li>
+
+						<li><span class="file input"> input : { "payload": {
+								"clientName":"abcd", "skills":"abcd, sedg",
+								"designation":"Business Analyst", "experience":"4 yrs",
+								"description":"abcd abcd abcd", "tags":"business analyst",
+								"noOfPositions":4, "validFrom":12345678990,
+								"validTo":12344567899, "url":"www.naukri.com/we&ref",
+								"location":"sedr" } } </span></li>
+						<li><span class="file output">output :
+								{"status":"SUCCESS","payload":true}</span></li>
+
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Nikitha Reddy</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">get clients</span>
+					<ul id="folder1_13">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/client/getClients</span></li>
+						<li><span class="file input"> input :{ "payload": {
+								"pageNo": 1, "pageSize": 2 } }</span></li>
+						<li><span class="file output"> output : { "status":
+								"SUCCESS", "payload": { "pageNo": 1, "end": 1, "start": 1,
+								"count": 10, "list": [ { "id": 1, "name": "TCS", "status":
+								"Active", "location": "Hyderabad", "contactNo": "040-23123456",
+								"contactEmail": "support@tcs.com", "type": "Client" }, {"id": 2,
+								"name": "Aspire Consultants", "status": "Active", "location":
+								"Hyderabad", "contactNo": "040-23235456", "contactEmail":
+								"support@aspire.com", "type": "Vendor" } ] } } </span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">get client details</span>
+					<ul id="folder1_14">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/client/getClientDetails</span></li>
+						<li><span class="file input"> input
+								:{"payload":{"Client_Id":5}} </span></li>
+						<li><span class="file output"> output :
+								{"status":"SUCCESS","payload":{"Name":"TCS","Location_Id":10,"Contact_No":0406756858,"Contact_Email":"careers@tcs.com"}}</span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">blacklist a client</span>
+					<ul id="folder1_15">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/client/blacklistClient</span></li>
+						<li><span class="file input"> input :{ "payload": {
+								"clientId":34, "reason":"ran away fraud company" } } </span></li>
+						<li><span class="file output"> output :
+								{"status":"SUCCESS","payload":true} </span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">add a client</span>
+					<ul id="folder1_45">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/client/addClient</span></li>
+
+						<li><span class="file input"> input : { "payload": {
+								"name": "qison", "status": "Active", "contactNumber":
+								"1234567890", "type": "client", "location": "asdf", "email":
+								"abcd@test.pass" } } </span></li>
+						<li><span class="file output">{"status":"SUCCESS","payload":{"id":1234}}</span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">update client details</span>
+					<ul id="folder1_46">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/client/updateClient</span></li>
+						<li><span class="file input"> input : { "payload": {
+								"clientId": "1234", "name": "qison", "status": "Active",
+								"contactNumber": "1234567890", "type": "client", "location":
+								"asdf", "email": "abcd@test.pass" } } </span></li>
+						<li><span class="file output">{"status":"SUCCESS","payload":true}</span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">add skill</span>
+					<ul id="folder1_16">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/skill/addSkills</span></li>
+						<li><span class="file input"> input :{ "payload": {
+								"names":["java", "SQL"] } } </span></li>
+						<li><span class="file output"> output :
+								{"status":"SUCCESS","payload":true} </span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+		</li>
+		<li><span class="folder module">Marketing Activity</span>
+			<ul>
+				<li><span class="folder api">get marketing activities</span>
+					<ul id="folder1_17">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/marketingActivity/getMarketingActivities</span></li>
+						<li><span class="file input"> input1 :{"pageNo": 1,
+								"pageSize": 10 } } </span></li>
+						<li><span class="file input"> input2 :{"pageNo": 1,
+								"pageSize": 10, "salespersonId": 21 } } </span></li>
+						<li><span class="file input"> input3 :{"pageNo": 1,
+								"pageSize": 10, "consultantId": 211 } } </span></li>
+						<li><span class="file input"> input4 :{"pageNo": 1,
+								"pageSize": 10, "requirementId": 241 } } </span></li>
+						<li><span class="file output"> output : { "status":
+								"SUCCESS", "payload": [ { "consultantName": "Ajay", "resumeId":
+								12, "resumeSubmissionTime": 1234567896, "client": { "clientId":
+								101, "name": "amazone", "location": "abcd", "contactNo":
+								1234567890, "contactEmail": "abcd@test.pass", "type": "vendor"
+								}, "confirmedRate": 100, "rateConfirmationDate": 1234567890,
+								"requirementId": 1234 }, { "consultantName": "Ajay", "resumeId":
+								12, "resumeSubmissionTime": 1234567896, "client": { "clientId":
+								101, "name": "amazone", "location": "abcd", "contactNo":
+								1234567890, "contactEmail": "abcd@test.pass", "type": "vendor"
+								}, "confirmedRate": 100, "rateConfirmationDate": 1234567890,
+								"requirementId": 1234 } ] } </span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">get marketing activity
+						details</span>
+					<ul id="folder1_18">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/marketingActivity/getMarketingActivityDetails</span></li>
+						<li><span class="file input"> input :{ "payload": {
+								"marketingActivityId":1234 } } </span></li>
+						<li><span class="file output"> output : { "status":
+								"SUCCESS", "payload": { "consultantName": "Ajay", "salesPerson":
+								"Ravi", "resumeId": 12, "resumeSubmissionTime": 1234567896,
+								"client": { "clientId": 101, "name": "amazone", "location":
+								"abcd", "contactNo": 1234567890, "contactEmail":
+								"abcd@test.pass", "type": "vendor" }, "confirmedRate": 100,
+								"rateConfirmationDate": 1234567890, "requirementId": 1234,
+								"firstInterviewId": 2345 } } </span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">update rate confirmation</span>
+					<ul id="folder1_19">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/marketingActivity/updateRateConfirmation</span></li>
+						<li><span class="file input"> input
+								:{"payload":{"Marketing_Activity_Id":"10",
+								"Confirmed_Rate":"55", "Rate_Confirmation_Date":"2014-05-20"}} </span></li>
+						<li><span class="file output">output :
+								{"status":"SUCCESS","payload":"true"}</span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">update marketing activity
+						details</span>
+					<ul id="folder1_20">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/marketingActivity/updateMarketingActivityDetails</span></li>
+						<li><span class="file input"> input : { "payload": {
+								"id":12 "consltantId": 11, "resumeId": 12,
+								"resumeSubmissionTime": 12345676654, "clientId": 101,
+								"requirementId": 2345, "contactName": "wersdfg",
+								"contactNumber": 12345678998, "contactEmail": "abcd@test.pass" }
+								} </span></li>
+						<li><span class="file output"> output :
+								{"status":"SUCCESS","payload":true} </span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">get interview managers</span>
+					<ul id="folder1_21">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/interviewManager/getInterviewManagers</span></li>
+						<li><span class="file input"> input :{ "payload": {
+								"interviewId":21, "pageNo": 1, "pageSize": 10 } } </span></li>
+						<li><span class="file output"> output :
+								{"status":"SUCCESS","payload": { "pageNo": 1, "end": 6, "start":
+								1, "count": 6, "list": [ { "name": "Ajay Kumar", "Phone No 1":
+								"9089786751", "Phone No 2": "040-24745231", "email1":
+								"ajay.kumar@gmail.com", "email2": "ajay.kumar25@gmail.com",
+								"clientId": 54 }, { "name": "Vijay Kumar", "Phone No 1":
+								"9089786731", "Phone No 2": "040-24745211", "email1":
+								"vijay.kumar@gmail.com", "email2": "vijay.kumar25@gmail.com",
+								"clientId": 51 } ] } } </span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Nikitha Reddy</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">add interview manager</span>
+					<ul id="folder1_22">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/interviewManager/addInterviewManager</span></li>
+						<li><span class="file input"> input
+								:{"payload":{"Interviewer_Manager_Name":"Keyur",
+								"Client_Id":"10","Primary_Contact":9836358537,
+								"Secondary_Contact":"","Primary_Email":"Keyur@tcs.com",
+								"Secondary_Email":""}} </span></li>
+						<li><span class="file output">output :
+								{"status":"SUCCESS","payload":"true"}</span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">update interview manager</span>
+					<ul id="folder1_23">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/interviewManager/updateInterviewManager</span></li>
+						<li><span class="file input"> input : { "payload": {
+								"id": 76, "name": "Ajay Kumar", "Phone No 1": "9089786751",
+								"Phone No 2": "040-24745231", "email1": "ajay.kumar@gmail.com",
+								"email2": "ajay.kumar25@gmail.com", "clientId": 54 } } </span></li>
+						<li><span class="file output"> output :
+								{"status":"SUCCESS","payload":true} </span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Nikitha Reddy</span></li>
+					</ul></li>
+			</ul>
+		</li>
+		<li><span class="folder module">Interviews</span>
+			<ul>
+				<li><span class="folder api">schedule interview</span>
+					<ul id="folder1_7">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/interview/scheduleInterview</span></li>
+						<li><span class="file input"> input : { "payload": {
+								"requirementId":3, "consultantId":1567,
+								"consultantName":"Akshay", "location":"Boston", "date":"",
+								"startTime":"","endTime":"", "rate":60, "skillIds":"[2,4]",
+								"clientId":21, "vendorId":null, "interviewType":"oneOnOne",
+								"travelRequired":0, "travelExpansesBy":null, "projectOnHold":0,
+								"interviewManager":"Satish", "primaryContact":"9898986565",
+								"secondaryContact":null, "primaryEmail":"abcd@test.pass",
+								"emailTemplateID":21, "notifyConsultant":1 } } </span></li>
+						<li><span class="file output"> output :
+								{"status":"SUCCESS","payload":true} </span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">get interviews</span>
+					<ul id="folder1_8">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/interview/getInterviews</span></li>
+						<li><span class="file input"> input1 : {"pageNo": 1,
+								"pageSize": 10 } } </span></li>
+						<li><span class="file input"> input2 :
+								{"payload":{"Consultant_Id":13,"Interview_Status":"Offered","Vendor_Id":"",
+								"Client_Id":12,"From":"10-APR-2014","To":"05-MAY-2014"}} </span></li>
+						<li><span class="file output">output : { "status":
+								"SUCCESS", "payload": { "pageNo": 1, "end": 1, "start": 1,
+								"count": 1, "list": [ { "consultantName":"Sunil", "Status":
+								"interview scheduled", "skill": " Business Analyst", "rate": 60,
+								"date": 123344556666, "client":"HCL", "interviewID": 24,
+								"location": "New Delhi", "typeOfInterview": "oneOnOne", "cts": 0
+								}, { "consultantName":"Sunil", "Status": "interview scheduled",
+								"skill": " Business Analyst", "rate": 60, "date": 12334453666,
+								"client":"TCS", "interviewID": 23, "location": "Gurgaon",
+								"typeOfInterview": "oneOnOne", "cts": 0 }, {
+								"consultantName":"Sunil", "Status": "interview scheduled",
+								"skill": " Business Analyst", "rate": 60, "date": 123366853666,
+								"client":"BDI", "interviewID": 25, "location": "Noida",
+								"typeOfInterview": "oneOnOne", "cts": 0 },] } } </span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">get interview details</span>
+					<ul id="folder1_24">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/interview/getInterviewDetails</span></li>
+						<li><span class="file input"> input :{"payload": {
+								"id": 76}} </span></li>
+						<li><span class="file output"> output : { "status":
+								"SUCCESS", "payload": { "interview_Id": "3", "Consultant_Id": 5,
+								"Status": "Interview scheduled", "Consultant_Skill_Id": 6,
+								"Consultant_Rate": 60, "Rate_Confirmed": 58, "Date":
+								"17-May-2014", "Time": "4:30PM", "Client_Id": "6",
+								"Location_Id": 14, "Interview_Type": "Web Cam" } } </span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">update interview details</span>
+					<ul id="folder1_25">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/interview/updateInterviewDetails</span></li>
+						<li><span class="file input"> input :{ "status":
+								"SUCCESS", "payload": { "interview_Id": "3", "Consultant_Id": 5,
+								"Status": "Interview scheduled", "Consultant_Skill_Id": 6,
+								"Consultant_Rate": 60, "Rate_Confirmed": 58, "Date":
+								"17-May-2014", "Time": "4:30PM", "Client_Id": "6",
+								"Location_Id": 14, "Interview_Type": "Web Cam" } } </span></li>
+						<li><span class="file output"> output :
+								{"status":"SUCCESS","payload":true} </span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul> <!-- <ul>
+				<li><span class="folder api">update interview manager
+						details for interview</span>
+					<ul id="folder1_26">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/interview/updateInterviewManager</span></li>
+						<li><span class="file input"> input :{} </span></li>
+						<li><span class="file output"> output :
+								{"status":"SUCCESS","payload":true} </span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul> -->
+			<ul>
+				<li><span class="folder api">update interview status</span>
+					<ul id="folder1_27">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/interview/updateInterviewStatus</span></li>
+						<li><span class="file input"> input : { "payload": {
+								"consultantId":4, "interviewId":3, "status"":"offered",
+								"comment":"Consultant cleared the interview and the job is
+								offered to him." } } </span></li>
+						<li><span class="file output"> output :
+								{"status":"SUCCESS","payload":true} </span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">schedule next interview
+						round</span>
+					<ul id="folder1_28">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/interview/scheduleNextRound</span></li>
+						<li><span class="file input"> input : { "payload": {
+								"previousInterviewId":4, "requirementId":3, "consultantId":1567,
+								"consultantName":"Akshay", "location":"Boston", "date":"",
+								"startTime":"", "endTime":"", "rate":60, "skillIds":"[2,4]",
+								"clientId":21, "vendorId":null, "interviewType":"oneOnOne",
+								"travelRequired":0, "travelExpansesBy":null, "projectOnHold":0,
+								"interviewManager":"Satish", "primaryContact":"9898986565",
+								"secondaryContact":null, "primaryEmail":"abcd@test.pass",
+								"emailTemplateID":21, "notifyConsultant":1 } } </span></li>
+						<li><span class="file output"> output :
+								{"status":"SUCCESS","payload":true} </span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">get interview Comments</span>
+					<ul id="folder1_29">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/interview/getInterviewComments</span></li>
+						<li><span class="file input"> input : { "payload": {
+								"interviewId":21, "pageNo": 1, "pageSize": 10 } } </span></li>
+						<li><span class="file output">output : { "payload": {
+								"pageNo": 1, "end": 6, "start": 1, "count": 6, "list": [ {
+								"inteviewId": 76, "Comments": "Very poor in communication", }, {
+								"inteviewId": 76, "Comments": "Good technical skills", } ] } }</span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Nikitha Reddy</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">post interview Comment</span>
+					<ul id="folder1_30">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/interview/postInterviewComment</span></li>
+						<li><span class="file input"> input : { "payload": {
+								"interviewId":21, "employeeID": 1, "description": "this
+								interview may get postponed" } } </span></li>
+						<li><span class="file output"> output :
+								{"status":"SUCCESS","payload":true} </span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+		</li>
+		<li><span class="folder module">Employees</span>
+			<ul>
+				<li><span class="folder api">Add Employee</span>
+					<ul id="folder3_12">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/employee/addEmployee</span></li>
+						<li><span class="file input"> input :
+								{"payload":{"firstName":"Anil","lastName":"Kumar","email":"anil@futran.com","extension":705,"phone1":"9569324272","phone2":"8569784525","dateOfJoining":"24
+								August,
+								2012","status":"Active","lastDay":"","department":"Marketing","ssn":"AAS-DFE-WS123","location":23,"DOB":"2
+								June, 1978","roleId":3}} </span></li>
+						<li><span class="file output">output :
+								{"status":"SUCCESS","payload":true}</span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Nikitha Reddy</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">Update Employee</span>
+					<ul id="folder3_13">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/employee/updateEmployee</span></li>
+						<li><span class="file input"> input :
+								{"payload":{"id":11,"firstName":"Anil","lastName":"Kumar","email":"anil@futran.com","extension":705,"phone1":"9569324272","phone2":"8569784525","dateOfJoining":"24
+								August,
+								2012","status":"Active","lastDay":"","department":"Marketing","ssn":"AAS-DFE-WS123","location":23,"DOB":"2
+								June, 1978","roleId":3}} </span></li>
+						<li><span class="file output">output :
+								{"status":"SUCCESS","payload":true}</span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Nikitha Reddy</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">get Employee Details</span>
+					<ul id="folder3_14">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/employee/getEmployeeDetails</span></li>
+						<li><span class="file input"> input :
+								{"payload":{"id":11}} </span></li>
+						<li><span class="file output">output :
+								{"status":"SUCCESS","payload":{"id":11,"firstName":"Anil","lastName":"Kumar","email":"anil@futran.com","extension":705,"phone1":"9569324272","phone2":"8569784525","dateOfJoining":"24
+								August,2012","status":"Active","lastDay":"","department":"Marketing","ssn":"AAS-DFE-WS123","location":23,"DOB":"2
+								June, 1978","roleId":3}}</span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Nikitha Reddy</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">get Employees</span>
+					<ul id="folder3_15">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/employee/getEmployees</span></li>
+						<li><span class="file input"> input : { "payload": {
+								"pageNo": 1, "pageSize": 2 } } </span></li>
+						<li><span class="file input"> input 2 : { "payload": {
+								"pageNo": 1, "pageSize": 2,"roleId":2 } } </span></li>
+						<li><span class="file input"> input : { "payload": {
+								"pageNo": 1, "pageSize": 2,"roleId":3 } } Only Sales Leads</span></li>
+						<li><span class="file output">output :
+								{"status":"SUCCESS","payload":{"pageNo":1,"end":1,"start":1,"count":10,"list":[{"id":11,"firstName":"Anil","lastName":"Kumar","email":"anil@futran.com","extension":705,"phone1":"9569324272","phone2":"8569784525","dateOfJoining":"24
+								August,2012","status":"Active","lastDay":"","department":"Marketing","ssn":"AAS-DFE-WS123","location":23,"DOB":"2
+								June,
+								1978","roleId":3},{"id":12,"firstName":"Sunil","lastName":"Kumar","email":"sunil@futran.com@futran.com","extension":706,"phone1":"9569324212","phone2":"9069784525","dateOfJoining":"24
+								May,2013","status":"Active","lastDay":"","department":"Marketing","ssn":"BBS-DFE-WS123","location":23,"DOB":"2
+								July, 1978","roleId":3}]}}</span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Nikitha Reddy</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">Assign Sales Person as
+						Sales Team Lead</span>
+					<ul id="folder3_16">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/employee/assignAsSalesLead</span></li>
+						<li><span class="file input"> input :
+								{"payload":{"id":11,"roleId":2}} </span></li>
+						<li><span class="file output">output :
+								{"status":"SUCCESS","payload":true}</span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Nikitha Reddy</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">get salesperson targets</span>
+					<ul id="folder1_47">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/employee/getTargets</span></li>
+						<li><span class="file input"> input1 : {"payload":{
+								"employeeId": 2, "Month": "January", "year":"2014"} } </span></li>
+						<li><span class="file input"> input2 : {} </span></li>
+						<li><span class="file output">output : { "status":
+								"SUCCESS", "payload": { "employeeId": 2, "Month": "January",
+								"year": "2014", "target": 10 } }</span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">assign consultant to
+						salesperson</span>
+					<ul id="folder2_1">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/consultant/assignTo</span></li>
+						<li><span class="file input"> input :
+								{"payload":{"consultantIds":[1,2,3,4,5,6,7,8], "salespersonId":
+								12}} </span></li>
+						<li><span class="file output">{"status":"SUCCESS","payload":true}</span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">get salespersons(team)</span>
+					<ul id="folder2_2">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/employee/getSalesPersons</span></li>
+						<li><span class="file input"> input :
+								{"payload":{"pageNo":1, "pageSize":10, "salesleadId": 123}} </span></li>
+						<li><span class="file output">output :
+								{"status":"SUCCESS","payload": {"Sales_Person_List":[
+								{"id":2,"Name":"Keyur
+								Patel","Email":"keyur.patel@mail.com","Sales_group_Names":["Java
+								Group","DB Group"]
+								,"Target":"10","Achieved_Targets":5,"Consultant_Names":['Ajay','Akshay','Chandan']},
+								{"id":3,"Name":"Das
+								Gupta","Email":"das.gupta@yahoo.com","Sales_group_Names":["Java
+								Group","QA Group"],"Target":"7",
+								"Achieved_Targets":3,"Consultant_Names":['Ved','Vinay','Nishant']}
+								] } }</span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">get salesperson details</span>
+					<ul id="folder2_3">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/employee/getSalesPerson</span></li>
+						<li><span class="file input"> input :{"payload":{"id":
+								12}} </span></li>
+						<li><span class="file output">output :
+								{"status":"SUCCESS","payload":
+								{"First_Name":"Das","Last_Name":"Gupta","Email":"das.gupta@yahoo.com","Extension":"DTS456567","Primary_Phone":"9734763463",
+								"Secondary_Phone":"","Date_Of_Joining":"08-JAN-2014","Status":"Active","Last_Day":"","Department":"SupportTeam","SSN":"4327387",
+								"Location_Id":10,"DOB":"19-NOV-1987","Role_Id":3,"Superior_Employee_Id:19,"Current_Target":"7",
+								"Consultants_Assigned_Ids":[12,36,43,67,73,89,90,97],"Sales_Group_Ids":[3,7,12]
+								} } </span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">assign target to
+						salesperson</span>
+					<ul id="folder2_4">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/employee/assignTarget</span></li>
+						<li><span class="file input"> input :
+								{"payload":{"salesPersonId": 245, "month": "January", "target":
+								10}} </span></li>
+						<li><span class="file output">{"status":"SUCCESS","payload":true}</span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">assign group to a
+						salesperson</span>
+					<ul id="folder2_5">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/employee/assignGroup</span></li>
+						<li><span class="file input"> input :
+								{"payload":{"groupIds":[1,2,5], "salesPersonId": 255}} </span></li>
+						<li><span class="file output">{"status":"SUCCESS","payload":true}</span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+		</li>
+		<li><span class="folder module">Sales Groups</span>
+			<ul>
+				<li><span class="folder api">get sales groups</span>
+					<ul id="folder2_6">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/salesGroup/getSalesGroups</span></li>
+						<li><span class="file input"> input :
+								{"payload":{"pageNo":1, "pageSize":10}} </span></li>
+						<li><span class="file output">output :
+								{"status":"SUCCESS","payload": {"Sales_Group_List":[
+								{"id":1,"Name":"Database
+								Group","Sales_Persons_Names":["Sam","John","Jack","Jill","Terry","Ronaldo"],
+								"Search_Strings":["sql","rdbms"],"Resume_Group_Names":["Freshers","Novice"]},
+								{"id":2,"Name":"Java
+								Group","Sales_Persons_Names":["Sam","John","Messi"],
+								"Search_Strings":["j2se","j2me"],"Resume_Group_Names":["Senioir
+								Devs","Analysts"]} ]} }</span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">Add Sales Group </span>
+					<ul id="folder3_3">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/salesGroup/add </span></li>
+						<li><span class="file input"> input : { "payload": {
+								"groupName": "Oracle", "searchString": "Oracle,Database,sql" } }
+						</span></li>
+						<li><span class="file output">{"status":"SUCCESS","payload":true}</span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Shilpa
+								Chaudhary</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">Update/Edit Sales Group</span>
+					<ul id="folder3_4">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/salesGroup/update </span></li>
+						<li><span class="file input"> input : { "payload": {
+								"id":1234, "grpName": "Oracle", "searchString":
+								"Oracle,Database,sql" } } </span></li>
+						<li><span class="file output">{"status":"SUCCESS","payload":true}</span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Shilpa
+								Chaudhary</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">get Sales Group Details </span>
+					<ul id="folder3_5">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/salesGroup/getDetails </span></li>
+						<li><span class="file input"> input : {
+								"payload":{"salesGroupId":1223} } </span></li>
+						<li><span class="file output">
+								{"status":"SUCCESS","payload":{"name":"oracle",
+								"searchString":"oracle, DB, sql",
+								"members":[{"name":"ajay"},{"name":"ravi"}],
+								"resumeGrpAccess":[{"name":"java"},{"name":"oracle"}] }} </span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Shilpa
+								Chaudhary</span></li>
+					</ul></li>
+			</ul>
+		</li>
+		<li><span class="folder module">Resume Groups</span>
+			<ul>
+				<li><span class="folder api">Get All Resume Groups </span>
+					<ul id="folder3_6">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/resumeGroup/getAllGroups </span></li>
+						<li><span class="file input"> input : {} </span></li>
+						<li><span class="file output">
+								{"status":"SUCCESS","payload":[{"resumeGrpName":"oracle",
+								"searchString":"oracle, DB, sql",
+								"resumeIds":[{"id":12},{"id":14}],
+								"salesPersonsAccess":[{"name":"ajay"},{"name":"ravi"}] },
+								{"resumeGrpName":"oracle", "searchString":"oracle, DB, sql",
+								"resumeIds":[{"id":12},{"id":14}],
+								"salesPersonsAccess":[{"name":"ajay"},{"name":"ravi"}] }]} </span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">Add Resume Group</span>
+					<ul id="folder3_7">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/resumeGroup/add </span></li>
+						<li><span class="file input"> input : { "payload": {
+								"grpName": "Oracle", "searchString": "Oracle,Database,sql" } } </span></li>
+						<li><span class="file output">
+								{"status":"SUCCESS","payload":true} </span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">Update/Edit Resume Group</span>
+					<ul id="folder3_8">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/resumeGroup/update </span></li>
+						<li><span class="file input"> input : { "payload": {
+								"id":1234, "grpName": "Oracle", "searchString":
+								"Oracle,Database,sql" } }</span></li>
+						<li><span class="file output">
+								{"status":"SUCCESS","payload":true} </span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">Get Resume Group Details</span>
+					<ul id="folder3_9">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/resumeGroup/getResumeGroupDetails
+						</span></li>
+						<li><span class="file input"> input : {
+								"payload":{"resumeGroupId":1223} }</span></li>
+						<li><span class="file output">
+								{"status":"SUCCESS","payload":{"resumeGrpName":"oracle",
+								"searchString":"oracle, DB, sql",
+								"resumeIds":[{"id":12},{"id":14}],
+								"salesPersonsAccess":[{"name":"ajay"},{"name":"ravi"}] }}</span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">Provide Resume Group Access
+						to Sales Groups</span>
+					<ul id="folder3_10">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/resumeGroup/provideAccess </span></li>
+						<li><span class="file input"> input : {
+								"payload":{"resumeGroupId":1223,"salesGroupId":4321} }</span></li>
+						<li><span class="file output">
+								{"status":"SUCCESS","payload":true}</span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">Add Resume to Resume Groups
+				</span>
+					<ul id="folder3_11">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/resumeGroup/AddResumeToResumeGroup
+						</span></li>
+						<li><span class="file input"> input : {
+								"payload":{"resumeGroupId":1223,"resumeId":4321} } </span></li>
+						<li><span class="file output">
+								{"status":"SUCCESS","payload":true}</span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+		</li>
+		<li><span class="folder module">Sales Issues</span>
+			<ul>
+				<li><span class="folder api">create Sales issue</span>
+					<ul id="folder1_31">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/saleIssue/createSalesIssue</span></li>
+
+						<li><span class="file input"> input : { "payload": {
+								"issueDesc":"abcd abcd abcd abcd", "consultantId":1234,
+								"assignedTo":empId (1235), "status":"open", "resolutionDate":"",
+								"categoryId":11, "comment":"" } } </span></li>
+						<li><span class="file output"> output :
+								{"status":"SUCCESS","payload":true} </span></li>
+
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">get sales issues</span>
+					<ul id="folder1_32">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/saleIssue/getsaleIssues</span></li>
+
+						<li><span class="file input"> input : {"pageNo": 1,
+								"pageSize": 10 } } </span></li>
+						<li><span class="file output"> { "status": "SUCCESS",
+								"payload": [ { "creationTimestamp": 123456789987,
+								"modificationTimestamp": 123456789987, "createdBy": 1235,
+								"modifiedBy": 1235, "issueId": 1222, "issueDesc": "abcd abcd
+								abcd abcd", "consultantId": 1234, "assignedTo": 1235, "status":
+								"open", "resolutionDate": "", "categoryId": 11, "comment": "" },
+								{ "creationTimestamp": 123456789987, "modificationTimestamp":
+								123456789987, "createdBy": 1235, "modifiedBy": 1235, "issueId":
+								1222, "issueDesc": "abcd abcd abcd abcd", "consultantId": 1234,
+								"assignedTo": 1235, "status": "open", "resolutionDate": "",
+								"categoryId": 11, "comment": "" } ] } </span></li>
+
+
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Shilpa
+								Chaudhary</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">get sales issue details</span>
+					<ul id="folder1_33">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/saleIssue/getSaleIssueDetails</span></li>
+						<li><span class="file input"> input :{ "payload": {
+								"id": 8}} </span></li>
+						<li><span class="file output"> output : { "status":
+								"SUCCESS", "payload": { "id": 8, "date": "12-05-2014",
+								"description": "asa asas f et ffpf ffdf d ", "categoryId": 23,
+								"createdBy": 9, "status": "Open"} } </span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">update sales issue</span>
+					<ul id="folder1_34">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/saleIssue/updateSaleIssueDetails</span></li>
+						<li><span class="file input"> input : { "payload": {
+								"id":28, "issueDesc":"abcd abcd abcd abcd", "consultantId":1234,
+								"assignedTo":empId (1235), "status":"open", "resolutionDate":"",
+								"categoryId":11, "comment":"" } } </span></li>
+						<li><span class="file output"> output :
+								{"status":"SUCCESS","payload":true} </span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">post comment to sales issue</span>
+					<ul id="folder1_35">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/saleIssue/postSalesIssueComment</span></li>
+						<li><span class="file input"> input : { "payload":
+								{"issueId":1223, "comment":"abcd abcd abcd abcd" } } </span></li>
+						<li><span class="file output"> output :
+								{"status":"SUCCESS","payload":true} </span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">resolve sales issue</span>
+					<ul id="folder1_36">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/saleIssue/resolveSaleIssue</span></li>
+						<li><span class="file input"> input :{ "payload": {
+								"id": 16, "status": "resolved" } } </span></li>
+						<li><span class="file output"> output :
+								{"status":"SUCCESS","payload":true} </span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">get sales issue comments</span>
+					<ul id="folder1_37">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/saleIssue/getSalesIssueComments</span></li>
+						<li><span class="file input"> input : {
+								"payload":{"issueId":1223, "pageNo": 1, "pageSize": 10 } } </span></li>
+						<li><span class="file output"> output : { "status":
+								"SUCCESS", "payload": [ { "id": 1223, "comment": "abcd abcd abcd
+								abcd", "addedBy": 44, "addedDate": "12-02-2014" }, { "id": 1223,
+								"comment": "abcd11 abcd22 abcd33 abcd44", "addedBy": 31,
+								"addedDate": "14-02-2014" } ] } </span></li>
+
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+		</li>
+		<li><span class="folder module">Support Issues</span>
+			<ul>
+				<li><span class="folder api">get support issues</span>
+					<ul id="folder1_38">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/supportIssue/getSupportIssues</span></li>
+						<li><span class="file input"> input :{ "payload": {
+								"pageNo": 1, "pageSize": 2 } } </span></li>
+						<li><span class="file output"> output : { "status":
+								"SUCCESS", "payload": { "pageNo": 1, "end": 10, "start": 1,
+								"count": 10, "list": [ { "supportId": 8, "date": "12-05-2014",
+								"consultantId": 17, "supportRequiredOn": "PL", "assignedTo": 9,
+								"paid/free": "Yes", "whoWillPay": "self", "rateDetails": 50,
+								"status": "Open", "hours": 30, "supportType": 34 }, {
+								"supportId": 9, "date": "12-05-2014", "consultantId": 11,
+								"supportRequiredOn": "Oracle Apps", "assignedTo": 21,
+								"paid/free": "No", "status": "Open", "hours": 10, "supportType":
+								34 } ] } } </span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">create support issue</span>
+					<ul id="folder1_39">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/supportIssue/createSupportIssue</span></li>
+						<li><span class="file input"> input : { "payload": {
+								"date": "12-05-2014", "consultantId": 17, "supportRequiredOn":
+								"PL", "assignedTo": 9, "paid/free": "Yes", "Who_will_pay":
+								"self", "rate details": 50, "status": "Open", "hours": 30,
+								"supportType": 34 } } </span></li>
+						<li><span class="file output">output :
+								{"status":"SUCCESS","payload":true}</span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">get support issue details</span>
+					<ul id="folder1_40">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/supportIssue/getSupportIssue</span></li>
+						<li><span class="file input"> input :{ "payload": {
+								"supportId": 8}} </span></li>
+						<li><span class="file output"> output : { "status":
+								"SUCCESS", "payload": { "supportId": 8, "date": "12-05-2014",
+								"consultantId": 17, "supportRequiredOn": "PL", "assignedTo": 9,
+								"paid/free": "Yes", "whoWillPay": "self", "rateDetails": 50,
+								"status": "Open", "hours": 30, "supportType": 34 } } </span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">update support issue</span>
+					<ul id="folder1_41">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/supportIssue/updateSupportIssue</span></li>
+						<li><span class="file input"> input : { "payload": {
+								"supportId": 8, "date": "12-05-2014", "consultantId": 17,
+								"supportRequiredOn": "PL", "assignedTo": 9, "paid/free": "Yes",
+								"whoWillPay": "self", "rateDetails": 50, "status": "Open",
+								"hours": 30, "supportType": 34 } } </span></li>
+						<li><span class="file output">output :
+								{"status":"SUCCESS","payload":true}</span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">post comment to support
+						issue</span>
+					<ul id="folder1_42">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/supportIssue/postSupportIssueComment</span></li>
+						<li><span class="file input"> input : { "payload":
+								{"issueId":123, "comment":"abcd abcd abcd abcd" } } </span></li>
+						<li><span class="file output"> output :
+								{"status":"SUCCESS","payload":true} </span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">resolve support issue</span>
+					<ul id="folder1_43">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/supportIssue/resolveSupportIssue</span></li>
+
+						<li><span class="file input"> input : { "payload": {
+								"supportId": 8, "status": "Resolved" } } </span></li>
+						<li><span class="file output">output :
+								{"status":"SUCCESS","payload":true}</span></li>
+
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">get support issue comments</span>
+					<ul id="folder1_44">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/supportIssue/getSupportIssueComments</span></li>
+						<li><span class="file input"> input : {
+								"payload":{"id":1223, "pageNo": 1, "pageSize": 10 } } </span></li>
+						<li><span class="file output"> output : { "status":
+								"SUCCESS", "payload": [ { "supportId": 1223, "comment": "abcd
+								abcd abcd abcd", "addedBy": 44, "addedDate": "12-02-2014" }, {
+								"supportId": 1223, "comment": "abcd11 abcd22 abcd33 abcd44",
+								"addedBy": 31, "addedDate": "14-02-2014" } ] } </span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Kavinder</span></li>
+					</ul></li>
+			</ul>
+		</li>
+		<li><span class="folder module">Admin Actions</span>
+			<ul>
+				<li><span class="folder api">Add Resume Tags Definition</span>
+					<ul id="folder3_17">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/resume/addResumeTag</span></li>
+						<li><span class="file input"> input :
+								{"payload":{"tagName":"Age","tagLabel":"What is your age?"}} </span></li>
+						<li><span class="file output">output :
+								{"status":"SUCCESS","payload":true}</span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Nikitha Reddy</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">Update Resume Tags
+						Definition</span>
+					<ul id="folder3_18">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/resume/updateResumeTag</span></li>
+						<li><span class="file input"> input :
+								{"payload":{"id":7,"tagName":"Age","tagLabel":"What is your
+								age?"}} </span></li>
+						<li><span class="file output">output :
+								{"status":"SUCCESS","payload":true}</span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Nikitha Reddy</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">get Resume tag details</span>
+					<ul id="folder3_19">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/resume/getResumeTagDetails</span></li>
+						<li><span class="file input"> input :
+								{"payload":{"id":7}} </span></li>
+						<li><span class="file output">output :
+								{"status":"SUCCESS","payload":{"id":7,"tagName":"Age","tagLabel":"What
+								is your age?"}}</span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Nikitha Reddy</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">Add Company</span>
+					<ul id="folder3_20">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/company/addCompany</span></li>
+						<li><span class="file input"> input : { "payload": {
+								"companyName ": "Staffing", "enterpriseId ": 2 } } </span></li>
+						<li><span class="file output">output :
+								{"status":"SUCCESS","payload":true}</span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Nikitha Reddy</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">Update Company</span>
+					<ul id="folder3_21">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/company/updateCompany</span></li>
+						<li><span class="file input"> input : { "payload": {
+								"id":4,"companyName ": "Staffing", "enterpriseId ": 2 } } </span></li>
+						<li><span class="file output">output :
+								{"status":"SUCCESS","payload":true}</span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Nikitha Reddy</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">get Companies</span>
+					<ul id="folder3_22">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/company/updateCompany</span></li>
+						<li><span class="file input"> input : { "payload": {
+								"pageNo": 1, "pageSize": 2 } } </span></li>
+						<li><span class="file output">output :
+								{"status":"SUCCESS","payload":{"pageNo":1,"end":1,"start":1,"count":10,"list":[{"id":4,"companyName":"Staffing","enterpriseId
+								":2},{"id":5,"companyName":"Training","enterpriseId ":2}]}}</span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Nikitha Reddy</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">get Company Details</span>
+					<ul id="folder3_23">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/company/updateCompany</span></li>
+						<li><span class="file input"> input : { "payload": {
+								"id":4}} </span></li>
+						<li><span class="file output">output :
+								{"status":"SUCCESS","payload": { "id":4,"companyName ":
+								"Staffing", "enterpriseId ": 2 } }</span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Nikitha Reddy</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">Add Support Type</span>
+					<ul id="folder3_24">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/supportType/addSupportType</span></li>
+						<li><span class="file input"> input : { "payload": {
+								"supportTypeName":"Technical"}} </span></li>
+						<li><span class="file output">output :
+								{"status":"SUCCESS","payload":true}</span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Nikitha Reddy</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">Update Support Type</span>
+					<ul id="folder3_25">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/supportType/addSupportType</span></li>
+						<li><span class="file input"> input : { "payload": {
+								"id":4,"supportTypeName":"Technical"}} </span></li>
+						<li><span class="file output">output :
+								{"status":"SUCCESS","payload":true}</span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Nikitha Reddy</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">get Support Types</span>
+					<ul id="folder3_26">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/supportType/getSupportTypes</span></li>
+						<li><span class="file input"> input : { "payload": {
+								"pageNo": 1, "pageSize": 2 } } </span></li>
+						<li><span class="file output">output :
+								{"status":"SUCCESS","payload":{"pageNo":1,"end":1,"start":1,"count":10,"list":[{"id":4,"supportTypeName":"Technical"},{"id":5,"supportTypeName":"Sales"}]}}
+						</span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Nikitha Reddy</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">get Support Type Details</span>
+					<ul id="folder3_27">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/supportType/getSupportTypes</span></li>
+						<li><span class="file input"> input : { "payload": {
+								"id":4 } } </span></li>
+						<li><span class="file output">output :
+								{"status":"SUCCESS","payload": {
+								"id":4,"supportTypeName":"Technical"}} </span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Nikitha Reddy</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">Add Location</span>
+					<ul id="folder3_28">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/location/addLocation</span></li>
+						<li><span class="file input"> input : { "payload": {
+								"id": 22, "name": "New York" } } </span></li>
+						<li><span class="file output">output :
+								{"status":"SUCCESS","payload":true} </span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Nikitha Reddy</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">Add Issue Category</span>
+					<ul id="folder3_29">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/category/addIssueCategory</span></li>
+						<li><span class="file input"> input : { "payload": {
+								"id": 12, "name": "Sales" } } </span></li>
+						<li><span class="file output">output :
+								{"status":"SUCCESS","payload":true} </span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Nikitha Reddy</span></li>
+					</ul></li>
+			</ul>
+			<ul>
+				<li><span class="folder api">Transfer Consultants</span>
+					<ul id="folder3_30">
+						<li><span class="file url">URL :
+								http://localhost:8080/services/v1/consultant/transferConsultants</span></li>
+						<li><span class="file reqtype">method : POST</span></li>
+						<li><span class="file author">author : Nikitha Reddy</span></li>
+					</ul></li>
+			</ul>
+		</li>
+	</ul>
+</body>
+</html>
