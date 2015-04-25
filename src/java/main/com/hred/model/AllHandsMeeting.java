@@ -58,7 +58,7 @@ public class AllHandsMeeting extends AbstractObject{
 	@Override
 	public int getObjectType() {
 		// TODO Auto-generated method stub
-		return ObjectTypes.ALLHANDSMEETING;
+		return ObjectTypes.ALL_HANDS_MEETING;
 	}
 
 }

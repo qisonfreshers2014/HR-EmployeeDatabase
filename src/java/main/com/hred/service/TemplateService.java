@@ -3,7 +3,6 @@ package com.hred.service;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -26,7 +25,6 @@ import com.hred.service.annotations.RestService;
 import com.hred.service.annotations.ServiceStatus;
 import com.hred.service.annotations.UnSecure;
 import com.hred.service.common.WebserviceRequest;
-import com.hred.service.descriptors.outputDescriptor.TemplateListOutputDiscriptor;
 
 @Path("/v1/template/")
 public class TemplateService extends BaseService {
