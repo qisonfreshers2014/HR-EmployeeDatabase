@@ -42,13 +42,16 @@ RequestManager.prototype.sendToServer = function (api, data, callback, options) 
             "header":"Error"
         };
         //PopupDialog.showErrorMsg(preferences);
-        alert(preferences);
+        //alert(preferences);
     }
 
 }
 
 RequestManager.prototype.loadTest=function(data,callback){
 	this.sendToServer('user/test', data, callback);
+}
+RequestManager.prototype.authenticate=function(data,callback){
+	this.sendToServer('employee/authenticate', data, callback);
 }
 
 
