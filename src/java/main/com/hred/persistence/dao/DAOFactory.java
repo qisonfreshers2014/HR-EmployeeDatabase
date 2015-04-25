@@ -1,6 +1,7 @@
 package com.hred.persistence.dao;
 
 
+import com.hred.persistence.daoimpl.*;
 import com.hred.persistence.daoimpl.UserDAOImpl;
 
 
@@ -24,10 +25,16 @@ public class DAOFactory {
 	}
 
 
-
-	
 	public UserDAO getUserDAO() {
 		return UserDAOImpl.getInstance();
+	}
+	
+	public EmployeeDAO getEmployeeDAO() {
+		return EmployeeDAOImpl.getInstance();
+	}
+	
+	public SkillsDAO getSkillDAO(){
+		return SkillDAOImpl.getInstance();
 	}
 
 

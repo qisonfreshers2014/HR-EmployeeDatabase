@@ -23,4 +23,7 @@ public interface BaseDAO {
  public List<BaseObject> save(List<BaseObject> persistentObjects);
 
  public BaseObject getObjectById(long id) throws ObjectNotFoundException;
+
+ 
+ 
 }

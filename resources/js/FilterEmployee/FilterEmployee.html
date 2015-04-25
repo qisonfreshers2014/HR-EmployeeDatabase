@@ -1,0 +1,48 @@
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<!-- <link rel="stylesheet" href="FilterEmployee.css" > </link>
+<script src="FilterEmployee.js"> 
+</script> -->
+</head> 
+
+<title>Filter Employee Details</title>
+<body>
+ <div>
+ Gender:<select id="gender" style="width:20%">
+<option value="0" selected>select </option>
+<option value="1">Female</option>
+<option value="2">Male</option> 
+</select>
+<p id="gerror"></p>
+
+CurrentDesignation:<select id="designation" style="width:20%">
+<option  value="0" selected>select</option>
+<option value="1">TSE</option>
+<option value="2">ASE</option> 
+<option value="3">SE</option> 
+<option value="4">SSE</option> 
+</select>
+<p id="designerror" class="error2"></p>
+</div> 
+
+<div>
+DOJ: <input id="date" onfocusout="empname()" type="date" size="10">
+<p id="derror"></p>
+ 
+YearOfExperience:From<input type="text" id="year1" size="4" onfocusout="yoe()">
+<!-- To <input type="text" size="4" id="year2" onfocusout="yoe1()"> -->
+<p id="yerror">you cannot leave this empty</p>
+</div>
+
+<div>
+HighestQualification:<input type="text" name="qualification" size="10" id="qualification1" onfocusout="highest_qualification()"/> 
+<p id="herror">you cannot leave this empty</p>
+</div>
+<div><input type="button" id="Filter" value="Filter"  size="10"/></div>
+
+<table id="displayData">
+<tr>Filter Employee Details</tr></table>
+</body>
+</html>
+ 

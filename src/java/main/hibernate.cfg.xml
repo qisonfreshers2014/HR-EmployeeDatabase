@@ -6,9 +6,9 @@
 	<session-factory>
 
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="hibernate.connection.url">jdbc:mysql://localhost/recom</property>
-		<property name="hibernate.connection.username">root</property>
-		<property name="hibernate.connection.password">qison</property>
+		<property name="hibernate.connection.url">jdbc:mysql://192.168.10.4/HRMS</property>
+		<property name="hibernate.connection.username">hrms</property>
+		<property name="hibernate.connection.password">Qison123</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="hibernate.connection.pool_size">1</property>
 		<property name="hibernate.current_session_context_class">thread</property>
@@ -17,7 +17,8 @@
 		<property name="hibernate.hbm2ddl.auto">update</property>
 
 
-		<mapping class="com.hred.model.User" />
+		<mapping class="com.hred.model.Employee" />
+		 <mapping class="com.hred.model.Skills"/>
 
 	</session-factory>
 </hibernate-configuration>

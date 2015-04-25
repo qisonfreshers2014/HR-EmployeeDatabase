@@ -64,7 +64,7 @@ public class BaseDAOImpl implements BaseDAO{
 	 }
 
 	 @Override
-	 public List<BaseObject> save(List<BaseObject> objectList) {
+	 public List<BaseObject>save(List<BaseObject> objectList) {
 		Session  session = getSession();
 	  if (null != objectList && objectList.size() > 0) {
 	   short count = 0;
