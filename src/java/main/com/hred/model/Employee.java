@@ -1,5 +1,7 @@
 package com.hred.model;
 
+
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -8,6 +10,7 @@ import javax.persistence.Table;
  * @author Jyothi Ambepu
  *
  */
+
 
 @Entity
 @Table(name = "EMPLOYEE")
@@ -63,6 +66,10 @@ public class Employee extends AbstractObject {
 	public Employee() {
 		
 	}
+	 public static final String AUTH_TYPE_REGULAR = "REGULAR";
+	 public static final int AUTH_STATUS_EXISTING = 0;
+	 public static final int AUTH_STATUS_NEW = 1; 
+	 public static final int AUTH_STATUS_NONE = 2;
 
 	public Employee(int employeeId) {
 		this.employeeId = employeeId;

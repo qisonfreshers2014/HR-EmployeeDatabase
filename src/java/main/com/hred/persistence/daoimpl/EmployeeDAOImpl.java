@@ -9,18 +9,22 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import com.hred.exception.EmployeeException;
+import com.hred.exception.ExceptionCodes;
+import com.hred.exception.ExceptionMessages;
+import com.hred.exception.UserException;
 import com.hred.model.Employee;
 import com.hred.persistence.dao.EmployeeDAO;
 import com.hred.persistence.session.SessionFactoryUtil;
 
-public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO{
-	
+public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
+
 	private static EmployeeDAO INSTANCE = null;
-	
-	private EmployeeDAOImpl(){
-		
+
+	private EmployeeDAOImpl() {
 	}
-	public static EmployeeDAO getInstance() {
+
+	public static EmployeeDAO getInstance()
+	{
 		if (INSTANCE == null) {
 			INSTANCE = new EmployeeDAOImpl();
 		}
@@ -31,6 +35,46 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO{
 
 	@Override
 	public List<Employee> getFilterEmployeeDetails(Employee employee) throws EmployeeException{
+	Session session = null;
+	List<Employee> list = null;
+	Transaction tx = null;
+	try {
+		session = getSession();
+		if (null == session) {
+			session = SessionFactoryUtil.getInstance().openSession();
+			tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+		}
+		Criteria createCriteria = session.createCriteria(Employee.class);
+		createCriteria.add(Restrictions.eq("gender",employee.getGender()));
+		createCriteria.add(Restrictions.eq("currentDesignation",employee.getCurrentDesignation()));
+		
+		createCriteria.add(Restrictions.eq("DOJ",employee.getDOJ()));
+				 
+	 	/*//createCriteria.add(Restrictions.gt("yearsofexperience",employee.getYearsofexperience()));
+		createCriteria.add(Restrictions.eq("highestQualification",employee.getHighestQualification()));
+		 
+			//createCriteria.add(Restrictions.eq("isDeleted",false));
+*/			
+		//createCriteria.add(Restrictions.eq("employeeName",employee.getEmployeeName()));
+		
+		list = (List<Employee>)createCriteria.list();
+	  } finally {
+			try {
+				if (tx != null) {
+					tx.commit();
+					if (session.isConnected())
+						session.close();
+				}
+			} catch (HibernateException e) {
+
+				e.printStackTrace();
+			}
+	  }
+	return  list;
+}
+
+	@Override
+	public Employee getUserByEmail(String email) throws UserException {
 		Session session = null;
 		List<Employee> list = null;
 		Transaction tx = null;
@@ -42,20 +86,16 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO{
 			}
 			Criteria createCriteria = session.createCriteria(Employee.class);
 			 
-			createCriteria.add(Restrictions.eq("gender",employee.getGender()));
-			createCriteria.add(Restrictions.eq("currentDesignation",employee.getCurrentDesignation()));
-			
-			createCriteria.add(Restrictions.eq("DOJ",employee.getDOJ()));
-					 
-		 	/*//createCriteria.add(Restrictions.gt("yearsofexperience",employee.getYearsofexperience()));
-			createCriteria.add(Restrictions.eq("highestQualification",employee.getHighestQualification()));
-			 
-				//createCriteria.add(Restrictions.eq("isDeleted",false));
-*/			
-			//createCriteria.add(Restrictions.eq("employeeName",employee.getEmployeeName()));
-			
-			list = (List<Employee>)createCriteria.list();
-		  } finally {
+
+			createCriteria.add(Restrictions.eq("email", email));
+			//createCriteria.add(Restrictions.eq("isDeleted", false));
+			list = createCriteria.list();
+			if (list.size() == 0) {
+				throw new UserException(ExceptionCodes.USER_DOESNOT_EXIST, ExceptionMessages.USER_DOESNOT_EXIST);
+			}
+
+		} finally {
+
 			try {
 				if (tx != null) {
 					tx.commit();
@@ -67,7 +107,8 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO{
 				e.printStackTrace();
 			}
 		}
-		return  list;	 
-	}
 	 
+		return list.iterator().next();
+		
+	}
 }

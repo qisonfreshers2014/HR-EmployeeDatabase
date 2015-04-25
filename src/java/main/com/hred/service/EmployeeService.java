@@ -1,5 +1,6 @@
 package com.hred.service;
 
+
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -29,27 +30,17 @@ import com.hred.service.common.WebserviceRequest;
 import com.hred.service.descriptors.outputDescriptors.EmployeeListOutputDescriptors;
  
 
-/**
- * @author 
- *
- */
-@Path("/employee")
-public class EmployeeService extends BaseService {
-	/**
-	 * @param headers
-	 * @param uriInfo
-	 * @param request
-	 * @return String
-	 * @throws ObjectNotFoundException
-	 * @throws BusinessException
-	 * @throws EncryptionException
-	 */
+
+@Path("/v1/employee/")
+public class EmployeeService {
+
 	@POST
 	@RestService(input = String.class, output = String.class)
 	@ServiceStatus(value = "complete")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/addemployee")
+	@Path("/authenticate")
+	@UnSecure
 	public String authenticate(@Context HttpHeaders headers,
 			@Context UriInfo uriInfo, WebserviceRequest request)
 			throws ObjectNotFoundException, BusinessException,
@@ -125,5 +116,10 @@ public class EmployeeService extends BaseService {
 		return JsonUtil.getJsonForListBasedOnDescriptor(employees, Employee.class, EmployeeListOutputDescriptors.class);
 		
 	}
-}
 
+	
+	public String getSessionId(){
+		return "ABC";
+	}
+	
+}

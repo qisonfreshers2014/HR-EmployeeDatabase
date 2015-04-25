@@ -8,6 +8,8 @@ package com.hred.exception;
  */
 public interface ExceptionMessages {
 
+	public static final String OBJECT_NOT_FOUND = "Object not found";
+	
 	//General exceptions
 	public static final String INVALID_EMAIL_PATTERN = "Invalid email pattern.";
 	public static final String WEAK_PASSWORD = "Weak password.";
@@ -152,6 +154,11 @@ public interface ExceptionMessages {
 	public static final String EMPLOYEE_DOES_NOT_EXIST = "Employee does not exist";
 	 
 	 
+	public static final String TEMPLATE_DOES_NOT_EXIST = "Template does not exist to edit";
+	
+	//holidays related Exception Messages
+	public static final String HOLIDAYSID_DOESNOT_EXIST = "Invalid Holiday Id";
+	
 
 	
 	

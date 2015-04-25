@@ -42,7 +42,7 @@ RequestManager.prototype.sendToServer = function (api, data, callback, options) 
             "header":"Error"
         };
         //PopupDialog.showErrorMsg(preferences);
-        alert(preferences);
+        //alert(preferences);
     }
 
 }
@@ -58,5 +58,26 @@ RequestManager.prototype.loadTest=function(data,callback){
 	this.sendToServer('user/test', data, callback);
 }  
 
+RequestManager.prototype.getTemplateById = function(data, callback) {
+   this.sendToServer('template/viewTemplate', data, callback);
+  }
+RequestManager.prototype.loadTest=function(data,callback){
+	this.sendToServer('user/test', data, callback);
+}
+RequestManager.prototype.authenticate=function(data,callback){
+	this.sendToServer('employee/authenticate', data, callback);
+}
+
+RequestManager.prototype.holidaysData=function(data,callback){
+	this.sendToServer('holidays/save', data, callback);
+}
+
+RequestManager.prototype.getHolidaysData=function(data,callback){
+	this.sendToServer('holidays/getHolidays', data, callback);
+}
+
+RequestManager.prototype.dynamicallyEdit=function(data,callback){
+	this.sendToServer('holidays/editHoliday', data, callback);
+}
 
 var RequestManager = new RequestManager();

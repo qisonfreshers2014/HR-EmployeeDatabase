@@ -2,7 +2,9 @@ package com.hred.handler;
 
 
 
+import com.hred.common.Constants;
 import com.hred.exception.UserException;
+import com.hred.handler.annotations.AuthorizeEntity;
 import com.hred.model.User;
 import com.hred.persistence.dao.DAOFactory;
 import com.hred.persistence.dao.UserDAO;
@@ -13,6 +15,8 @@ import com.hred.persistence.dao.UserDAO;
  */
 
 public class UserHandler extends AbstractHandler {
+
+	
 	private static UserHandler INSTANCE = null;
 
 	private UserHandler() {
@@ -35,7 +39,8 @@ public class UserHandler extends AbstractHandler {
 
 		return user;
 	}
-	public User save(User user){
+	@AuthorizeEntity(roles = {Constants.HR})
+	public User saveAOP(User user){
 		User userSaved=(User) DAOFactory.getInstance().getUserDAO().saveObject(user);
 		return userSaved;
 	}

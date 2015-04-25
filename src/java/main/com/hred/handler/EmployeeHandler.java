@@ -1,5 +1,6 @@
 package com.hred.handler;
 
+
 import java.util.List;
 
 import com.hred.exception.EmployeeException;
@@ -8,6 +9,8 @@ import com.hred.persistence.dao.DAOFactory;
 import com.hred.persistence.dao.EmployeeDAO;
 
 public class EmployeeHandler extends AbstractHandler {
+
+
 	private static EmployeeHandler INSTANCE = null;
 
 	private EmployeeHandler() {
