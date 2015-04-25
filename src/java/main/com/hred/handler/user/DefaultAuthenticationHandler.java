@@ -29,7 +29,6 @@ import com.hred.persistence.dao.DAOFactory;
  * 
  */
 public class DefaultAuthenticationHandler implements AuthenticationHandler {
-	AuthenticationOutput authenticationOutput=null;
 
 	@Override
 	public AuthenticationOutput authenticate(AuthenticationInput input)
@@ -43,6 +42,7 @@ public class DefaultAuthenticationHandler implements AuthenticationHandler {
 		if (isLoginValidated(daInput)){
 		String email = daInput.getEmail();
 		String password = daInput.getPassword();
+
 	
 		Employee emp = null;
 		DAOFactory daoFactory = DAOFactory.getInstance();
@@ -58,14 +58,14 @@ public class DefaultAuthenticationHandler implements AuthenticationHandler {
 		
 		
 	////////////////////////////////////////////////////////////
-		
+		String encryptedPassword=Utils.encrypt(password.trim());
 		boolean emailValidity = emailFromDB.equals(email);
-		boolean passwordValidity = passwordFromDB.equals(password);
+		boolean passwordValidity = passwordFromDB.equals(encryptedPassword);
 
 		if (!emailValidity) {
-			throw new BusinessException(ExceptionCodes.INVALID_PASSWORD,
+			throw new BusinessException(ExceptionCodes.EMAIL_DOESNOT_EXIST,
 
-					ExceptionMessages.INVALID_PASSWORD);
+					ExceptionMessages.EMAIL_DOESNOT_EXIST);
 		}
 		else if (!passwordValidity) {
 			throw new BusinessException(ExceptionCodes.INVALID_PASSWORD,
@@ -97,6 +97,7 @@ public class DefaultAuthenticationHandler implements AuthenticationHandler {
 		userSessionToken.setUserEmail(emp.getEmail());
 		userSessionToken.setUserId(emp.getId());
 		userSessionToken.setUserSessionId(sessionToken);
+		//userSessionToken.setRoleId(employee.());  //set the role here
 		//////////////////////////////////////////
 
 		////////////////////////////////////////////
@@ -107,8 +108,8 @@ public class DefaultAuthenticationHandler implements AuthenticationHandler {
 		AuthenticationOutput authenticationOutput = new AuthenticationOutput(sessionToken, authStatus, emp);
 	return authenticationOutput;
 	}
-		
-		return authenticationOutput;
+	else
+		return null;
 }
 
 	private boolean isLoginValidated(DefaultAuthenticationInput daInput) throws UserException{

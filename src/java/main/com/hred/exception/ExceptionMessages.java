@@ -8,6 +8,8 @@ package com.hred.exception;
  */
 public interface ExceptionMessages {
 
+	public static final String OBJECT_NOT_FOUND = "Object not found";
+	
 	//General exceptions
 	public static final String INVALID_EMAIL_PATTERN = "Invalid email pattern.";
 	public static final String WEAK_PASSWORD = "Weak password.";
@@ -149,6 +151,9 @@ public interface ExceptionMessages {
 	public static final String BOTH_ADMIN_MEMBER_NOT_POSSIBLE = "User cannot be both member and admin.Choose any one ";
 	public static final String USER_IS_ADMIN_SO_CANNOT_BE_MEMBER = "This user has admin role so he cannot be member";
 	public static final String USER_IS_MEMBER_SO_CANNOT_BE_ADMIN = "This user has member role so he cannot be admin";
+	
+	//holidays related Exception Messages
+	public static final String HOLIDAYSID_DOESNOT_EXIST = "Invalid Holiday Id";
 	
 
 	

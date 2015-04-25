@@ -12,6 +12,8 @@ import com.hred.exception.BusinessException;
 import com.hred.exception.ObjectNotFoundException;
 import com.hred.handler.annotations.AuthorizeCategory;
 import com.hred.handler.annotations.AuthorizeEntity;
+import com.hred.model.ObjectTypes;
+import com.hred.model.User;
 import com.hred.persistence.dao.DAOFactory;
 import com.hred.service.common.ServiceRequestContext;
 import com.hred.service.common.ServiceRequestContextHolder;
@@ -24,8 +26,8 @@ import com.hred.service.common.ServiceRequestContextHolder;
 @Aspect
 public class HandlerAspect {
 
-	@Around("execution(* com.qts.handler.*.*AOP(..))"
-			+ " && !cflowbelow(execution(* com.qts.handler.*.*AOP(..)))")
+	@Around("execution(* com.hred.handler.*.*AOP(..))"
+			+ " && !cflowbelow(execution(* com.hred.handler.*.*AOP(..)))")
 	public Object doCheck(ProceedingJoinPoint thisJoinPoint) throws Throwable {
 		checkIsUserAuthorized(thisJoinPoint);
 		Object ob = thisJoinPoint.proceed();
@@ -54,14 +56,19 @@ public class HandlerAspect {
 
 		AuthorizeEntity authorizeEntity = signature.getMethod().getAnnotation(
 				AuthorizeEntity.class);
-		long[] roles = authorizeEntity.roles();
+		String[] roles = authorizeEntity.roles();
 		//String action = authorizeEntity.action();
 		//String entity = authorizeEntity.entity();
 		DAOFactory daoFactory = DAOFactory.getInstance();
 		//Role role = daoFactory.getRoleDAO().getRole(userRoleId);
 		long userId = Utils.getUserId();
 
-
+		User user = (User)daoFactory.getUserDAO().getObjectById(ServiceRequestContextHolder.getContext().getUserSessionToken().getUserId(), ObjectTypes.USER);
+//Check whether the designation of the logged in user is HR		
+//		if(user.){
+//			
+//		}
+		
 		/*long affinityId = context.getAffinityId();
 		long userRoleId = context.getUserSessionToken().getRoleId();
 
