@@ -24,8 +24,8 @@ import com.hred.service.common.ServiceRequestContextHolder;
 @Aspect
 public class HandlerAspect {
 
-	@Around("execution(* com.qts.handler.*.*AOP(..))"
-			+ " && !cflowbelow(execution(* com.qts.handler.*.*AOP(..)))")
+	@Around("execution(* com.hred.handler.*.*AOP(..))"
+			+ " && !cflowbelow(execution(* com.hred.handler.*.*AOP(..)))")
 	public Object doCheck(ProceedingJoinPoint thisJoinPoint) throws Throwable {
 		checkIsUserAuthorized(thisJoinPoint);
 		Object ob = thisJoinPoint.proceed();
