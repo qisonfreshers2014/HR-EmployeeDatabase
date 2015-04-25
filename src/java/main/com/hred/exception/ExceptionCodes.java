@@ -288,6 +288,9 @@ public interface ExceptionCodes {
 	public static final int RELEASE_ID_NULL = 9009;
 	public static final int DB_EXCEPTION = 9010;
 	
+	//holidays related Exception Codes
+	public static final int HOLIDAYSID_DOESNOT_EXIST = 9011;
+	
 	
 	
 	

@@ -1,6 +1,7 @@
 package com.hred.persistence.dao;
 
 
+import com.hred.persistence.daoimpl.HolidayDAOImpl;
 import com.hred.persistence.daoimpl.UserDAOImpl;
 
 
@@ -28,6 +29,11 @@ public class DAOFactory {
 	
 	public UserDAO getUserDAO() {
 		return UserDAOImpl.getInstance();
+	}
+
+	
+	public HolidayDAO getHolidayDAO() {
+		return HolidayDAOImpl.getInstance();
 	}
 
 

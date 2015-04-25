@@ -150,6 +150,9 @@ public interface ExceptionMessages {
 	public static final String USER_IS_ADMIN_SO_CANNOT_BE_MEMBER = "This user has admin role so he cannot be member";
 	public static final String USER_IS_MEMBER_SO_CANNOT_BE_ADMIN = "This user has member role so he cannot be admin";
 	
+	//holidays related Exception Messages
+	public static final String HOLIDAYSID_DOESNOT_EXIST = "Invalid Holiday Id";
+	
 
 	
 	
