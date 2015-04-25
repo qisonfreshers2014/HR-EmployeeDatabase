@@ -1,5 +1,7 @@
 package com.hred.model;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,13 +17,12 @@ import javax.persistence.MappedSuperclass;
 public abstract class AbstractObject implements BaseObject{
 
 	@Id
-	@GeneratedValue
 	@Column(name = "id")
 	private long id;
 	@Column(name = "cts")
-	private long cts;
+	private Timestamp cts;
 	@Column(name = "mts")
-	private long mts;
+	private Timestamp mts;
 	@Column(name = "created_by")
 	private long creatorId;
 	@Column(name = "modified_by")
@@ -59,12 +60,12 @@ public abstract class AbstractObject implements BaseObject{
 	}
 
 	@Override
-	public long getCts() {
+	public Timestamp getCts() {
 		return cts;
 	}
 
 	@Override
-	public void setCts(long cts) {
+	public void setCts(Timestamp cts) {
 		this.cts = cts;
 	}
 
@@ -79,12 +80,12 @@ public abstract class AbstractObject implements BaseObject{
 	}
 
 	@Override
-	public long getMts() {
+	public Timestamp getMts() {
 		return mts;
 	}
 
 	@Override
-	public void setMts(long mts) {
+	public void setMts(Timestamp mts) {
 		this.mts = mts;
 	}
 

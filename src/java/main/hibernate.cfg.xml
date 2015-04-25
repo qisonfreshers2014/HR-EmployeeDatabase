@@ -18,6 +18,8 @@
 
 
 		<mapping class="com.hred.model.Holiday" />
+		<mapping class="com.hred.model.User" />
+		<mapping class="com.hred.persistence.dao.model.IdCounter"/>
 
 	</session-factory>
 </hibernate-configuration>

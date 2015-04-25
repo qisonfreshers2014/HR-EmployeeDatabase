@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.TimeZone;
 
 import com.hred.common.EncryptionFactory;
+import com.hred.common.Utils;
 import com.hred.common.cache.Cache;
 import com.hred.common.cache.CacheManager;
 import com.hred.common.cache.CacheRegionType;
@@ -43,28 +44,30 @@ public class DefaultAuthenticationHandler implements AuthenticationHandler {
 		if (password != null) {
 			password = password.trim();
 		}
-		User user = null;
+		User employee = null;
+		
+		
 		DAOFactory daoFactory = DAOFactory.getInstance();
 		// TODO handle email doesn't exists case.
-		user = daoFactory.getUserDAO().getUserByEmail(email);
+		employee = daoFactory.getUserDAO().getUserByEmail(email);
 		//String encryptedPassword = Utils.encrypt(password);
-		String passwordFromDB = user.getPassword();
+		String passwordFromDB = employee.getPassword();
 		
 		
 		/////////////////////////////////////////////////////////////////////////////////
-		long userId = user.getId();
+		long userId = employee.getId();
 
 		
 		
 	////////////////////////////////////////////////////////////
+		String encryptedPassword=Utils.encrypt(password.trim());
+		boolean userValidity = passwordFromDB.equals(encryptedPassword);
 		
-		boolean userValidity = passwordFromDB.equals(password);//anil
-
 		if (!userValidity) {
 			throw new BusinessException(ExceptionCodes.INVALID_PASSWORD,
 
 					ExceptionMessages.INVALID_PASSWORD);
-		}//anil
+		}
 
 		authStatus = User.AUTH_STATUS_EXISTING;
 
@@ -73,8 +76,7 @@ public class DefaultAuthenticationHandler implements AuthenticationHandler {
 			TimeZone.setDefault(TimeZone.getDefault());
 			sessionToken = URLEncoder
 					.encode(EncryptionFactory.getEncryption(true).encrypt(
-							user.getEmail()
-									+ Calendar.getInstance().getTimeInMillis()),
+							employee.getEmail() + Calendar.getInstance().getTimeInMillis()),
 							"UTF-8");
 		} catch (EncryptionException ee) {
 			throw new SystemException(ExceptionCodes.INTERNAL_ERROR,
@@ -85,9 +87,10 @@ public class DefaultAuthenticationHandler implements AuthenticationHandler {
 		}
 
 		UserSessionToken userSessionToken = new UserSessionToken();
-		userSessionToken.setUserEmail(user.getEmail());
-		userSessionToken.setUserId(user.getId());
+		userSessionToken.setUserEmail(employee.getEmail());
+		userSessionToken.setUserId(employee.getId());
 		userSessionToken.setUserSessionId(sessionToken);
+		//userSessionToken.setRoleId(employee.());  //set the role here
 		//////////////////////////////////////////
 
 		////////////////////////////////////////////
@@ -95,7 +98,7 @@ public class DefaultAuthenticationHandler implements AuthenticationHandler {
 		cache.put(sessionToken, userSessionToken);
 		System.out.println("Session Token : "+sessionToken);		
 		System.out.println("Cached : "+cache.getValue(sessionToken));
-		AuthenticationOutput authenticationOutput = new AuthenticationOutput(sessionToken, authStatus, user);
+		AuthenticationOutput authenticationOutput = new AuthenticationOutput(sessionToken, authStatus, employee);
 		return authenticationOutput;
 	}
 

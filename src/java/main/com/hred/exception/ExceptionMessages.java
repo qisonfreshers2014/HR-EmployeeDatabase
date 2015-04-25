@@ -8,6 +8,8 @@ package com.hred.exception;
  */
 public interface ExceptionMessages {
 
+	public static final String OBJECT_NOT_FOUND = "Object not found";
+	
 	//General exceptions
 	public static final String INVALID_EMAIL_PATTERN = "Invalid email pattern.";
 	public static final String WEAK_PASSWORD = "Weak password.";
