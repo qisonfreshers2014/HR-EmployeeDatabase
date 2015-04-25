@@ -7,6 +7,7 @@ App.prototype.handleShow = function () {
 
 	   
 }
+
 App.prototype.loadViewTemplate = function(name){
 	Loader.loadViewTemplate(function(){
 		new EditTemplate();
@@ -59,6 +60,35 @@ App.prototype.loadTemplates = function(){
 App.prototype.loadNotifications = function(){
 					Loader.loadNotifications(function(){
 						new Notifications();
+	});
+}
+
+
+
+App.prototype.loadLogin=function(){
+	Loader.loadLogin();
+}
+
+App.prototype.loadNext=function(){
+	Loader.loadNext();
+	
+}
+
+App.prototype.loadHoliday=function(){
+	Loader.loadHoliday(function(){
+		new listHoliday();
+	});
+}
+
+App.prototype.loadEmployeeHoliday=function(){
+	Loader.loadEmployeeHoliday(function(){
+		new employeeHolidayList();
+	});
+}
+
+App.prototype.listEmployees=function(){
+	Loader.listEmployees(function(){
+		new employeesList();
 	});
 }
 

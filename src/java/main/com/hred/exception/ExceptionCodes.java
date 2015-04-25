@@ -290,6 +290,9 @@ public interface ExceptionCodes {
 	public static final int TEMPLATE_DOESNOT_EXIST = 201;
 	
 	
+	//holidays related Exception Codes
+	public static final int HOLIDAYSID_DOESNOT_EXIST = 9011;
+	
 	
 	
 	
