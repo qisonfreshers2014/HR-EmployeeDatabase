@@ -47,6 +47,9 @@ RequestManager.prototype.sendToServer = function (api, data, callback, options) 
 
 }
 
+RequestManager.prototype.getTemplateById = function(data, callback) {
+   this.sendToServer('template/viewTemplate', data, callback);
+  }
 RequestManager.prototype.loadTest=function(data,callback){
 	this.sendToServer('user/test', data, callback);
 }

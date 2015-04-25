@@ -40,11 +40,7 @@ public class BaseDAOImpl implements BaseDAO{
         }
 		return persistentObject;
 	}
-	@Override
-	 public  BaseObject getObjectById(long id)
-	   throws ObjectNotFoundException{
-		return null;
-	}
+	
 	 @Override
 	 public BaseObject update(BaseObject persistentObject) {
 		 Session session = getSession();
