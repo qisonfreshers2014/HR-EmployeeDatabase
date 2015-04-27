@@ -1,7 +1,6 @@
 package com.hred.persistence.dao;
+import com.hred.persistence.daoimpl.*;
 
-
-import com.hred.persistence.daoimpl.UserDAOImpl;
 
 
 /**
@@ -31,5 +30,54 @@ public class DAOFactory {
 	}
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+	public DesignationHistoryDAO getDesignationHistoryDAO(){
+			return DesignationHistoryDAOImpl.getInstance();
+	}
+	
+	public HRPolicyDAO getHRPolicyDAO(){
+		return HRPolicyDAOImpl.getInstance();
+}
 }
 

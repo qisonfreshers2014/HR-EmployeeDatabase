@@ -44,4 +44,34 @@ public interface ObjectTypes {
  public static final int USER_PROJECTS_ROLES = 134;
  public static final int ACTIVITIES = 135;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+ public static final int DESIGNATION_TYPE=182;
+ public static final int DESIGNATION_HISTORY=183;
+ public static final int FILEUPLOAD=184;
+ public static final int HRPOLICIES=186;
+ public static final int EMPLOYEE=187;
 }

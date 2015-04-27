@@ -13,7 +13,11 @@ Sample.prototype.handleShow = function() {
 }
 
 Sample.prototype.testService = function() {
-	var input = {"payload":{}};
+	
+	
+	App.loadDes();
+	//App.loadPolicy();
+/*	var input = {"payload":{}};
 	RequestManager.loadTest(input, function(data, success) {
 		if(success){
 			alert(data);
@@ -27,7 +31,7 @@ Sample.prototype.testService = function() {
 		}else{
 			alert("failed");
 		}
-	}.ctx(this));
+	}.ctx(this));*/
 }
 
 

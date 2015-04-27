@@ -55,4 +55,61 @@ RequestManager.prototype.loadTest=function(data,callback){
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+RequestManager.prototype.saveDes=function(data,callback){
+	this.sendToServer('designation_history/save', data, callback);
+}
+RequestManager.prototype.getDes=function(data,callback){
+	this.sendToServer('designation_history/getDesignations', data, callback);
+}
+RequestManager.prototype.getDesName=function(data,callback){
+	this.sendToServer('designation_history/getDesignationName', data, callback);
+}
+RequestManager.prototype.savePolicy=function(data,callback){
+	this.sendToServer('hr_policy/save', data, callback);
+}
 var RequestManager = new RequestManager();

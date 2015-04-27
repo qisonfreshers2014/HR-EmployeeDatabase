@@ -35,4 +35,59 @@ Loader.prototype.loadHTML = function(container, filePath, empty, callback) {
 
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Loader.prototype.loadDes = function(cb){
+		// LazyLoad.css('resources/js/designation/cssfile.css');
+		 LazyLoad.js('resources/js/designation/EmpDes.js',cb);
+}
+
+Loader.prototype.loadPolicy = function(cb){
+	/* LazyLoad.css('resources/js/designation/cssfile.css');*/
+	 LazyLoad.js('resources/js/addinghrpolicy/addpolicy.js',cb);
+}
 var Loader = new Loader();

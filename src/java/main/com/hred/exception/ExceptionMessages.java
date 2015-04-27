@@ -19,7 +19,10 @@ public interface ExceptionMessages {
 	public static final String  CACHE_REGION_NOT_FOUND = "Cache region not found.";
 	public static final String INTERNAL_ERROR = "Internal Error.";
 	public static final String AUTH_INPUT_NULL = "Authentication error has occurred. Please try again.";
-
+	
+	
+	public static final String DESIGNATION_DOESNOT_EXIST="This designation is not existed";
+	public static final String HRPolicy_DOESNOT_EXIST="This HRPolicy is not existed";
 
 
 	//Project WebService related Exceptions
