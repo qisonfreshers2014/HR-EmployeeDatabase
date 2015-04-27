@@ -4,8 +4,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.hred.persistence.annotations.Increment;
+
 @Entity
 @Table(name="HR_POLICIES")
+@Increment
 public class HRPolicy extends AbstractObject{
 
 	@Column(name="policy_name")

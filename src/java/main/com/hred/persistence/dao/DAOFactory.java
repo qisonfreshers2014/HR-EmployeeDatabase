@@ -58,55 +58,17 @@ public class DAOFactory {
 
 	
 	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
-	
 	public DesignationHistoryDAO getDesignationHistoryDAO(){
 			return DesignationHistoryDAOImpl.getInstance();
 	}
 	
 	public HRPolicyDAO getHRPolicyDAO(){
 		return HRPolicyDAOImpl.getInstance();
-}
+	}
+	
+	public SendNotificationHistoryDAO getSendNotificationHistoryDAO()
+	{
+		return SendNotificationHistoryDAOImpl.getInstance();
+	}
 }
 

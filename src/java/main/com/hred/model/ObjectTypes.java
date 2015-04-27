@@ -87,5 +87,8 @@ public static final int EMPLOYEE = 151;
  public static final int holiday_master = 171;
  public static final int holidays = 172;
  
+ public static final int SENDNOTIFICATION = 141;
+ public static final int SENDNOTIFICATIONHISTORY = 142;
+ 
 
 }

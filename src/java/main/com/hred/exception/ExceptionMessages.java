@@ -162,7 +162,11 @@ public interface ExceptionMessages {
 	
 	//holidays related Exception Messages
 	public static final String HOLIDAYSID_DOESNOT_EXIST = "Invalid Holiday Id";
-	
+	public static final String NO_BIRTHDAY_TODAY = "No Birthday ";
+	public static final String EMPLOYEE_DOESNOT_EXIST = "NO EMPLOYEE";
+	public static final String NO_WORK_ANNIVERSARY_TODAY = "No Work Anniversary Today";
+	public static final String NO_JOINEE_TODAY = "No Employee Joined Today";
+	public static final String TEMPLATE_DOESNOT_EXIST = "No Such Template Exist";
 
 	
 	

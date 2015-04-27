@@ -2,8 +2,11 @@ package com.hred.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
+import com.hred.persistence.annotations.Increment;
 @Entity
 @Table(name="appraisal_history")
+@Increment
 public class AppraisalHistory {
 	public AppraisalHistory()
 	{

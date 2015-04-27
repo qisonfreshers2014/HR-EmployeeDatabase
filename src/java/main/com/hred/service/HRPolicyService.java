@@ -29,7 +29,7 @@ import com.hred.service.common.WebserviceRequest;
  */
 
 @Path("/v1/hr_policy/")
-public class HRPolicyService {
+public class HRPolicyService extends BaseService {
 
 	@POST
 	@RestService(input = String.class, output = String.class)

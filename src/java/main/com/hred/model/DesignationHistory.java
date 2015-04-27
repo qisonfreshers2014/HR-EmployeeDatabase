@@ -5,8 +5,11 @@ import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
+import com.hred.persistence.annotations.Increment;
 @Entity
 @Table(name="DESIGNATION_HISTORY") 
+@Increment
 public class DesignationHistory extends AbstractObject{
 	
 	@Column(name="emp_id")

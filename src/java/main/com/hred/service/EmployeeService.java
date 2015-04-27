@@ -27,12 +27,15 @@ import com.hred.service.annotations.RestService;
 import com.hred.service.annotations.ServiceStatus;
 import com.hred.service.annotations.UnSecure;
 import com.hred.service.common.WebserviceRequest;
+import com.hred.service.descriptors.output.ActivitiesWorkAnniversaryOutputDescriptor;
+import com.hred.service.descriptors.output.DisplayNotificationHome;
+import com.hred.service.descriptors.output.NotificationHomeFilterInputDiscriptor;
 import com.hred.service.descriptors.outputDescriptors.EmployeeListOutputDescriptors;
  
 
 
 @Path("/v1/employee/")
-public class EmployeeService {
+public class EmployeeService extends BaseService {
 
 	@POST
 	@RestService(input = String.class, output = String.class)
@@ -117,9 +120,65 @@ public class EmployeeService {
 		
 	}
 
-	
-	public String getSessionId(){
-		return "ABC";
+	@POST
+	@RestService(input = String.class, output = String.class)
+	@ServiceStatus(value = "complete")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/getEmployees")
+	@UnSecure
+	public String getEmployees(@Context HttpHeaders headers,
+			@Context UriInfo uriInfo, WebserviceRequest request)
+			throws ObjectNotFoundException, BusinessException,
+			EncryptionException {
+		List<Employee> employees = EmployeeHandler.getInstance().getEmployees();
+
+		String outputString = "{\"status\": \"SUCCESS\", \"payload\": \"Test Successful\"}";
+		return outputString;
 	}
+
+		
+
+	@POST
+	@RestService(input = String.class, output = ActivitiesWorkAnniversaryOutputDescriptor.class)
+	@ServiceStatus(value = "complete")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/getAllEvents")
+	@UnSecure
+	public String getAllEvents(@Context HttpHeaders headers,
+			@Context UriInfo uriInfo, WebserviceRequest request)
+			throws BusinessException {
+		List<DisplayNotificationHome> getAllEvents = EmployeeHandler.getInstance()
+				.getAllEvents();
+		return JsonUtil
+				.getJsonForListBasedOnDescriptor(getAllEvents,
+						DisplayNotificationHome.class,
+						DisplayNotificationHome.class);
+	}
+	
+	
+	@POST
+	@RestService(input = String.class, output = String.class)
+	@ServiceStatus(value = "complete")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/getNotificationDisplayCriteria")
+	@UnSecure
+	public String getNotificationDisplayCriteria(@Context HttpHeaders headers, @Context UriInfo uriInfo,
+			WebserviceRequest request) throws ObjectNotFoundException,
+			BusinessException, EncryptionException {
+
+		NotificationHomeFilterInputDiscriptor filterCriteria = (NotificationHomeFilterInputDiscriptor) JsonUtil.getObject(request.getPayload(),
+				NotificationHomeFilterInputDiscriptor.class);
+
+		List<DisplayNotificationHome> displayoutput = EmployeeHandler.getInstance().getNotificationDisplayCriteria(filterCriteria);
+
+		return JsonUtil
+				.getJsonForListBasedOnDescriptor(displayoutput,
+						DisplayNotificationHome.class,
+						DisplayNotificationHome.class);
+	}
+	
 	
 }

@@ -31,7 +31,7 @@ import com.hred.service.common.WebserviceRequest;
  */
 
 @Path("/v1/designation_history/")
-public class DesignationHistoryService {
+public class DesignationHistoryService extends BaseService {
 	
 		/**
 		 * @param headers

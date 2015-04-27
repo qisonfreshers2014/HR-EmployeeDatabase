@@ -137,4 +137,23 @@ RequestManager.prototype.getDesName=function(data,callback){
 RequestManager.prototype.savePolicy=function(data,callback){
 	this.sendToServer('hr_policy/save', data, callback);
 }
+
+
+RequestManager.prototype.getNotificationDisplayCriteria=function(data,callback){
+	this.sendToServer('employee/getNotificationDisplayCriteria', data, callback);
+}
+
+
+RequestManager.prototype.getSentManualMail=function(data,callback){
+	this.sendToServer('SendNotificationHistory/sendMail', data, callback);
+}
+
+
+
+RequestManager.prototype.getSentMailContent=function(data,callback){
+	this.sendToServer('employee/getSentMailContent', data, callback);
+}
+RequestManager.prototype.getAllEvents=function(data,callback){
+	this.sendToServer('employee/getAllEvents', data, callback);
+}
 var RequestManager = new RequestManager();

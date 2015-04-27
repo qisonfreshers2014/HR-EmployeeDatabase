@@ -151,4 +151,20 @@ Loader.prototype.loadPolicy = function(cb){
 	/* LazyLoad.css('resources/js/designation/cssfile.css');*/
 	 LazyLoad.js('resources/js/addinghrpolicy/addpolicy.js',cb);
 }
+
+Loader.prototype.loadNotifArea = function(cb){
+	 LazyLoad.css('resources/js/SendNotification/NotificationArea.css');
+	 LazyLoad.js('resources/js/SendNotification/notificationALinkrea.js',cb);
+}
+Loader.prototype.loadManualMail = function(cb){
+	 LazyLoad.css('resources/js/SendNotification/sendNotification.css');
+	 LazyLoad.js('resources/js/SendNotification/sendNotificationMail.js',cb);
+}
+
+
+
+Loader.prototype.loadNotificationHomePage = function(cb){
+	 LazyLoad.css('resources/js/SendNotification/notificationHomePage.css');
+   LazyLoad.js('resources/js/SendNotification/notificationHomePage.js',cb);
+}
 var Loader = new Loader();

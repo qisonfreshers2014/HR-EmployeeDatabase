@@ -4,9 +4,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.hred.persistence.annotations.Increment;
+
 
 @Entity
 @Table(name = "skills_master")
+@Increment
 public class SkillsMaster extends AbstractObject {
 	@Column(name = "id")
 	 private int id;

@@ -150,4 +150,25 @@ App.prototype.loadPolicy=function(){
 			new addpolicy();
 		});
 }
+
+
+App.prototype.loadNotifArea = function(){
+	Loader.loadNotifArea(function(){
+		new NotificationALinkrea();
+	});		
+}
+	
+	
+App.prototype.loadManualMail = function(event,email,employeeName){
+	Loader.loadManualMail(function(){
+		new sendNotificationMail(event,email,employeeName);
+	});
+	
+}
+	App.prototype.loadNotificationHomePage = function(data){
+		Loader.loadNotificationHomePage(function(){
+			new loadNotificationHomePage(data);
+		});
+		
+}
 var App = new App();
