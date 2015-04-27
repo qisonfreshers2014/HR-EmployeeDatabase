@@ -287,6 +287,7 @@ public interface ExceptionCodes {
 	public static final int TIME_ENTRY_PRESENT = 9008;
 	public static final int RELEASE_ID_NULL = 9009;
 	public static final int DB_EXCEPTION = 9010;
+	public static final int FILE_IS_DELETED = 9011;
 	
 	
 	

@@ -7,8 +7,18 @@ function Sample() {
 Sample.prototype.handleShow = function() {
 	$('.container').show();
 	$('.testService').click(function(){
-		this.testService();
+		//this.testService();
 	}.ctx(this));
+	
+	
+	function UploadClickHandler(event){
+var thisEle = event.target;
+this.uploadMedia(function() {
+$(thisEle).one('click', UploadClickHandler.ctx(this));
+}.ctx(this));
+}
+$('.testService').one('click', UploadClickHandler.ctx(this));
+	
 
 }
 
@@ -28,6 +38,22 @@ Sample.prototype.testService = function() {
 			alert("failed");
 		}
 	}.ctx(this));
+}
+
+
+Sample.prototype.uploadMedia = function(callback) {
+var allowedFileType = "application";
+var uploader = new Uploader(allowedFileType, function(data){
+if (data.filePath) {
+var imageSrc = data.filePath;
+this.fileId = data.id;
+$('.mediaForProfileImage').attr('src', imageSrc);
+if(imageSrc != null){
+$('.mediaForProfileImage').lightBox();
+}
+}
+}.ctx(this));
+callback();
 }
 
 

@@ -9,7 +9,8 @@ package com.hred.exception;
 public interface ExceptionMessages {
 
 	public static final String OBJECT_NOT_FOUND = "Object not found";
-	
+	public static final String FILE_DOESNOT_EXIST = "File does not exist";
+	public static final String FILE_IS_DELETED = "File is deleted";
 	//General exceptions
 	public static final String INVALID_EMAIL_PATTERN = "Invalid email pattern.";
 	public static final String WEAK_PASSWORD = "Weak password.";
