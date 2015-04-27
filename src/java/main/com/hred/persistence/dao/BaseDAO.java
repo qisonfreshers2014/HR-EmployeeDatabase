@@ -10,6 +10,7 @@ import java.util.List;
 import com.hred.exception.ObjectNotFoundException;
 import com.hred.model.BaseObject;
 
+
 /*
  * These are the methods we want to expose to business handlers for direct use. So they can call e.g. saveObject method
  * on the corresponding DAOs
@@ -23,4 +24,6 @@ public interface BaseDAO {
 	 public List<BaseObject> save(List<BaseObject> persistentObjects);
 
 	 public BaseObject getObjectById(long id,int objectType) throws ObjectNotFoundException;
+
+
 }

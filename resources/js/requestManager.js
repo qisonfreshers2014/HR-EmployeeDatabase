@@ -12,7 +12,7 @@ RequestManager.prototype.sendToServer = function (api, data, callback, options) 
         contentType:'application/json',
         dataType:'json',
         type:'POST',
-        success:function (data) {
+        success:function(data) {
             console.log(data)
             if (data.status && data.status == 'SUCCESS') {
                 callback(data.payload, true);
@@ -42,17 +42,42 @@ RequestManager.prototype.sendToServer = function (api, data, callback, options) 
             "header":"Error"
         };
         //PopupDialog.showErrorMsg(preferences);
-        alert(preferences);
+        //alert(preferences);
     }
 
 }
 
+RequestManager.prototype.save = function(data, callback) {
+	  this.sendToServer('skills/save', data, callback);
+	 }
+	  
+RequestManager.prototype.getFilterEmployee = function(data, callback) {
+	  this.sendToServer('employee/getFilterEmployees', data, callback);
+	 }
+RequestManager.prototype.loadTest=function(data,callback){
+	this.sendToServer('user/test', data, callback);
+}  
+
+RequestManager.prototype.getTemplateById = function(data, callback) {
+   this.sendToServer('template/viewTemplate', data, callback);
+  }
 RequestManager.prototype.loadTest=function(data,callback){
 	this.sendToServer('user/test', data, callback);
 }
+RequestManager.prototype.authenticate=function(data,callback){
+	this.sendToServer('employee/authenticate', data, callback);
+}
 
+RequestManager.prototype.holidaysData=function(data,callback){
+	this.sendToServer('holidays/save', data, callback);
+}
 
+RequestManager.prototype.getHolidaysData=function(data,callback){
+	this.sendToServer('holidays/getHolidays', data, callback);
+}
 
-
+RequestManager.prototype.dynamicallyEdit=function(data,callback){
+	this.sendToServer('holidays/editHoliday', data, callback);
+}
 
 var RequestManager = new RequestManager();

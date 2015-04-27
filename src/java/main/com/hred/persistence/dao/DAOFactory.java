@@ -1,6 +1,7 @@
 package com.hred.persistence.dao;
 
 
+
 import com.hred.persistence.daoimpl.*;
 
 
@@ -24,10 +25,22 @@ public class DAOFactory {
 	}
 
 
-
-	
 	public UserDAO getUserDAO() {
 		return UserDAOImpl.getInstance();
+	}
+	
+	public EmployeeDAO getEmployeeDAO() {
+		return EmployeeDAOImpl.getInstance();
+	}
+	
+	public SkillsDAO getSkillDAO(){
+		return SkillDAOImpl.getInstance();
+	}
+
+
+	
+	public HolidayDAO getHolidayDAO() {
+		return HolidayDAOImpl.getInstance();
 	}
 
 	
@@ -37,6 +50,17 @@ public class DAOFactory {
 	public FileDAO getFileDAO() {
 		return FileDAOImpl.getInstance();
 	}
+	public TemplateDAO getTemplateDAO() {
+		return TemplateDAOimpl.getInstance();
+	}
+
+	public AllHandsMeetingDAO getAllHandsMeetingDAO() {
+	
+		return AllHandsMeetingDAOImpl.getInstance();
+	}
+
+	
+	
 
 }
 
