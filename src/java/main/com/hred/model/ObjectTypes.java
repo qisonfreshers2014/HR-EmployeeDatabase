@@ -46,4 +46,49 @@ public interface ObjectTypes {
  public static final int TEMPLATE = 201;
  public static final int EMPLOYEE = 161;
 
+
+public static final int ALL_HANDS_MEETING = 201;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+ public static final int DESIGNATION_TYPE=182;
+ public static final int DESIGNATION_HISTORY=183;
+ public static final int FILEUPLOAD=184;
+ public static final int HRPOLICIES=186;
+
+
+ 
+ //holiday_master 
+ public static final int holiday_master = 171;
+ public static final int holidays = 172;
+ 
+ public static final int SENDNOTIFICATION = 141;
+ public static final int SENDNOTIFICATIONHISTORY = 142;
+ 
+
 }

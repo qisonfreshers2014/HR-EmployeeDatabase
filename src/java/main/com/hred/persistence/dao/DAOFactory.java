@@ -1,10 +1,5 @@
 package com.hred.persistence.dao;
-
-
-import com.hred.model.Template;
-import com.hred.persistence.daoimpl.EmployeeDAOimpl;
-import com.hred.persistence.daoimpl.TemplateDAOimpl;
-import com.hred.persistence.daoimpl.UserDAOImpl;
+import com.hred.persistence.daoimpl.*;
 
 
 /**
@@ -27,18 +22,53 @@ public class DAOFactory {
 	}
 
 
-
-	
 	public UserDAO getUserDAO() {
 		return UserDAOImpl.getInstance();
 	}
+	
+	public EmployeeDAO getEmployeeDAO() {
+		return EmployeeDAOImpl.getInstance();
+	}
+	
+	public SkillsDAO getSkillDAO(){
+		return SkillDAOImpl.getInstance();
+	}
+
 
 	public TemplateDAO getTemplateDAO() {
 		return  TemplateDAOimpl.getInstance();
 	}
-	public EmployeeDAO getEmployeeDAO() {
-		return  EmployeeDAOimpl.getInstance();
+	
+	public HolidayDAO getHolidayDAO() {
+		return HolidayDAOImpl.getInstance();
 	}
 
+	
+	
+	
+	
+	public FileDAO getFileDAO() {
+		return FileDAOImpl.getInstance();
+	}
+
+	public AllHandsMeetingDAO getAllHandsMeetingDAO() {
+	
+		return AllHandsMeetingDAOImpl.getInstance();
+	}
+
+	
+	
+	public DesignationHistoryDAO getDesignationHistoryDAO(){
+			return DesignationHistoryDAOImpl.getInstance();
+	}
+	
+	public HRPolicyDAO getHRPolicyDAO(){
+		return HRPolicyDAOImpl.getInstance();
+	}
+	
+	public SendNotificationHistoryDAO getSendNotificationHistoryDAO()
+	{
+		return SendNotificationHistoryDAOImpl.getInstance();
+	}
 }
 

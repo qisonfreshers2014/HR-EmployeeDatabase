@@ -8,6 +8,10 @@ import com.hred.model.Template;
 import com.hred.model.User;
 import com.hred.persistence.dao.DAOFactory;
 import com.hred.persistence.dao.EmployeeDAO;
+import com.hred.handler.AbstractHandler;
+import com.hred.model.Template;
+import com.hred.model.User;
+import com.hred.persistence.dao.DAOFactory;
 import com.hred.persistence.dao.TemplateDAO;
 
 public class TemplateHandler extends AbstractHandler {
@@ -36,9 +40,22 @@ public class TemplateHandler extends AbstractHandler {
 		TemplateDAO temDAOImpl = (TemplateDAO) DAOFactory.getInstance().getTemplateDAO();
 		templates = (List<Template>) temDAOImpl.getTemplateByName(template);
 		return templates;
+	}
+	public Template update(Template template) {
+		// TODO Auto-generated method stub
+		Template tempEdited=(Template) DAOFactory.getInstance().getTemplateDAO().saveObject(template);
+		return tempEdited;
+	}
+	
+
+	public List<Template> viewTemplate(Template template) {
+		List<Template> templates = null;
+		TemplateDAO tempDAOImpl = (TemplateDAO) DAOFactory.getInstance().getTemplateDAO();
+		templates = (List<Template>) tempDAOImpl.viewTemplate(template);
+		return templates;
 		
 	}
-
+	
 
 
 

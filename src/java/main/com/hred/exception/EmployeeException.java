@@ -19,7 +19,6 @@ public class EmployeeException extends BusinessException{
 	}
 	public EmployeeException(int code,String message,List<Object> args){  //
 		super(code, message, args);
-				
 	}
 
 }

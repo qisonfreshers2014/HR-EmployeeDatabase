@@ -15,7 +15,8 @@ public class UserException extends BusinessException{
 		super(code);
 	}
 	
-	public UserException(int code,String message){
+	public UserException(int code,String message)
+	{
 		super(code, message);
 	}
 	public UserException(int code,String message,List<Object> args){  //

@@ -79,7 +79,7 @@ public class UserService extends BaseService {
 		User user = (User) JsonUtil.getObject(
 				request.getPayload(), User.class);
 
-		User output=(User) UserHandler.getInstance().save(user);
+		User output=(User) UserHandler.getInstance().saveAOP(user);
 		
 		return JsonUtil.getJsonBasedOnDescriptor(output,User.class);
 	}
