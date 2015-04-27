@@ -50,9 +50,13 @@ RequestManager.prototype.sendToServer = function (api, data, callback, options) 
 RequestManager.prototype.loadTest=function(data,callback){
 	this.sendToServer('user/test', data, callback);
 }
-
-
-
-
-
+RequestManager.prototype.addTemplate = function(data, callback) {
+	 this.sendToServer('template/save', data, callback);
+	}
+RequestManager.prototype.viewEmployeedatails = function(data, callback) {
+	 this.sendToServer('employee/viewEmployee', data, callback);
+	}
+RequestManager.prototype.getTemplates = function(data, callback) {
+	 this.sendToServer('template/gatTemplate', data, callback);
+	}
 var RequestManager = new RequestManager();

@@ -1,6 +1,9 @@
 package com.hred.persistence.dao;
 
 
+import com.hred.model.Template;
+import com.hred.persistence.daoimpl.EmployeeDAOimpl;
+import com.hred.persistence.daoimpl.TemplateDAOimpl;
 import com.hred.persistence.daoimpl.UserDAOImpl;
 
 
@@ -30,6 +33,12 @@ public class DAOFactory {
 		return UserDAOImpl.getInstance();
 	}
 
+	public TemplateDAO getTemplateDAO() {
+		return  TemplateDAOimpl.getInstance();
+	}
+	public EmployeeDAO getEmployeeDAO() {
+		return  EmployeeDAOimpl.getInstance();
+	}
 
 }
 
