@@ -8,6 +8,7 @@
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
 		<property name="hibernate.connection.url">jdbc:mysql://192.168.10.4/HRMS</property>
 		<property name="hibernate.connection.username">hrms</property>
+		<property name="hibernate.connection.password">Qison123</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="hibernate.connection.pool_size">8</property>
 		<property name="hibernate.current_session_context_class">thread</property>
