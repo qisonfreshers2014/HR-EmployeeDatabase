@@ -1,5 +1,7 @@
 package com.hred.model;
 
+import java.sql.Timestamp;
+
 /**
  * 
  * Defines all the common attributes across all model objects
@@ -16,9 +18,9 @@ public interface BaseObject {
 	 * CTS --> creation time stamp
 	 * @return
 	 */
-	long getCts();
+	Timestamp getCts();
 
-	void setCts(long cts);
+	void setCts(Timestamp timestamp);
 
 	long getCreatorId();
 
@@ -28,9 +30,9 @@ public interface BaseObject {
 	 * MTS --> last modified time stamp
 	 * @return
 	 */	
-	long getMts();
+	Timestamp getMts();
 
-	void setMts(long mts);
+	void setMts(Timestamp mts);
 
 	long getModifierId();
 

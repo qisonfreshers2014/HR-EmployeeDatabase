@@ -51,9 +51,9 @@ public class AuthenticationAspect {
 	Logger logger = Logger.getLogger("infodumps");
 	org.apache.log4j.Logger loggerL;
 
-	@Around("execution(* com.recom.service.*.*(..))"
-			+ " && !execution(* com.recom.service.*.getSessionId(..))"
-			+ " && !cflowbelow(execution(* com.recom.service.*.*(..)))")
+	@Around("execution(* com.hred.service.*.*(..))"
+			+ " && !execution(* com.hred.service.*.getSessionId(..))"
+			+ " && !cflowbelow(execution(* com.hred.service.*.*(..)))")
 	public Object doAccessCheck(ProceedingJoinPoint thisJoinPoint) {
 		// Object key = null;
 		Transaction tx = null;

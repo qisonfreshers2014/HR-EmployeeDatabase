@@ -54,5 +54,9 @@ public interface Constants {
 	public static String SOURCE_POLL = "poll";
 	public static String SOURCE_USER = "user";
 	public static String SOURCE_FEED = "feed";
+	
+	
+	public static final String HR = "HR";
+
 
 }

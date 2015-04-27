@@ -9,10 +9,10 @@ import javax.ws.rs.CookieParam;
  */
 public class BaseService {
 
-	public static final String SESSION_TOKEN_NAME = "recomSessionId";
+	public static final String SESSION_TOKEN_NAME = "hredSessionToken";
 	
 	@CookieParam(SESSION_TOKEN_NAME)
-	String recomSessionId;
+	String hredSessionToken;
 	
 
 	/*
@@ -23,7 +23,7 @@ public class BaseService {
     }
 
     public String getSessionId() {
-		return recomSessionId;
+		return hredSessionToken;
 	}
 	
 	
