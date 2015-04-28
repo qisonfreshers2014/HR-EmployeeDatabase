@@ -12,8 +12,11 @@ import java.util.Map;
 
 import org.apache.commons.collections.map.HashedMap;
 
+import com.hred.common.Utils;
 import com.hred.exception.BusinessException;
 import com.hred.exception.EmployeeException;
+import com.hred.exception.EncryptionException;
+import com.hred.exception.ObjectNotFoundException;
 import com.hred.model.Employee;
 import com.hred.model.SendNotificationHistory;
 import com.hred.persistence.dao.DAOFactory;
@@ -45,14 +48,21 @@ public class EmployeeHandler extends AbstractHandler {
 		  return empFirstName;
 		 }
 	
+	public Employee getEmployeeById(long id) throws EmployeeException {
+		Employee employee = null;
+		EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
+				.getEmployeeDAO();
+		employee = (Employee) empDAOImpl.getEmployeeById(id);
+
+		return employee;
+	}
 
 	public List<Employee> viewEmployee(Employee employee) {
 		List<Employee> employees = null;
-		EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance().getEmployeeDAO();
+		EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
+				.getEmployeeDAO();
 		employees = (List<Employee>) empDAOImpl.viewEmployee(employee);
 		return employees;
-		
-	
 	}
 
 	
@@ -84,21 +94,68 @@ public class EmployeeHandler extends AbstractHandler {
 		return employees;
 	}
 
-	public Employee save(Employee employee) {
+	public Employee save(Employee employee) throws EncryptionException {
+		employee.setDeleted(false);
+		employee.setPassword(Utils.encrypt(employee.getPassword()));
+		
 		Employee empSaved = (Employee) DAOFactory.getInstance()
 				.getEmployeeDAO().saveObject(employee);
 		return empSaved;
 	}
 
+
 	@SuppressWarnings("unchecked")
 	public List<Employee> getTodayBirthday() throws BusinessException {
 		List<Employee> emp = null;
 		EmployeeDAO employeeDAOImpl = DAOFactory.getInstance().getEmployeeDAO();
-		emp = employeeDAOImpl.getBirthday();
+		emp = employeeDAOImpl.getTodaysBirthday();
 
 		return emp;
 	}
 
+	public Employee updateEmployee(Employee employee) throws ObjectNotFoundException, EmployeeException, EncryptionException{
+		
+		Employee empFromDB = (Employee)DAOFactory.getInstance().getEmployeeDAO().getEmployeeById(employee.getId());
+		empFromDB.setContactNo(employee.getContactNo());
+		empFromDB.setEmail(employee.getEmail());
+		empFromDB.setCurrentAddress(employee.getCurrentAddress());
+		empFromDB.setPermanentAddress(employee.getPermanentAddress());
+		empFromDB.setEmergencycontactnumber(employee.getEmergencycontactnumber());
+		empFromDB.setEmergencyContactName(employee.getEmergencyContactName());
+		empFromDB.setRelationWithEmergencyConatact(employee.getRelationWithEmergencyConatact());
+		empFromDB.setPassword(Utils.encrypt(employee.getPassword()));
+		empFromDB.setSkype(employee.getSkype());
+		EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
+				.getEmployeeDAO();
+		employee = (Employee) empDAOImpl.update(empFromDB);
+		return employee;
+	}
+public Employee hrUpdateEmployee(Employee employee) throws ObjectNotFoundException, EmployeeException, EncryptionException{
+		
+		Employee empFromDB = (Employee)DAOFactory.getInstance().getEmployeeDAO().getEmployeeById(employee.getId());
+		empFromDB.setContactNo(employee.getContactNo());
+		empFromDB.setEmail(employee.getEmail());
+		empFromDB.setCurrentAddress(employee.getCurrentAddress());
+		empFromDB.setPermanentAddress(employee.getPermanentAddress());
+		empFromDB.setEmergencycontactnumber(employee.getEmergencycontactnumber());
+		empFromDB.setEmergencyContactName(employee.getEmergencyContactName());
+		empFromDB.setRelationWithEmergencyConatact(employee.getRelationWithEmergencyConatact());
+		empFromDB.setPassword(Utils.encrypt(employee.getPassword()));
+		empFromDB.setSkype(employee.getSkype());
+		empFromDB.setEmployeeId(employee.getEmployeeId());
+		empFromDB.setEmployeeName(employee.getEmployeeName());
+		empFromDB.setBankAccountNo(employee.getBankAccountNo());
+		empFromDB.setBloodGroup(employee.getBankAccountNo());
+		empFromDB.setDateOfJoining(employee.getDateOfBirth());
+		empFromDB.setFathersName(employee.getFathersName());
+		empFromDB.setHighestQualification(employee.getHighestQualification());
+		empFromDB.setPan(employee.getPan());
+		empFromDB.setPfNo(employee.getPfNo());
+		EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
+				.getEmployeeDAO();
+		employee = (Employee) empDAOImpl.update(empFromDB);
+		return employee;
+}
 
 	public List<Employee> getWorkAniversary() throws BusinessException {
 		// TODO Auto-generated method stub
@@ -141,7 +198,7 @@ public class EmployeeHandler extends AbstractHandler {
 		for (Employee birthday : empBirthday) {
 			DisplayNotificationHome displayNotificationHome = new DisplayNotificationHome();
 			displayNotificationHome.setEmployeeName(birthday.getEmployeeName());
-			displayNotificationHome.setDate(birthday.getDOB());
+			displayNotificationHome.setDate(birthday.getDateOfBirth());
 			displayNotificationHome.setEmployeeEmail(birthday.getEmail());
 			displayNotificationHome.setEvent("Birthday");
 			if (empidmapping.containsKey(birthday.getEmployeeId())) {
@@ -158,7 +215,7 @@ public class EmployeeHandler extends AbstractHandler {
 			DisplayNotificationHome displayNotificationHome = new DisplayNotificationHome();
 			displayNotificationHome
 					.setEmployeeName(aniversay.getEmployeeName());
-			displayNotificationHome.setDate(aniversay.getDOJ());
+			displayNotificationHome.setDate(aniversay.getDateOfJoining());
 			displayNotificationHome.setEmployeeEmail(aniversay.getEmail());
 			displayNotificationHome.setEvent("Aniversay");
 			if (empidmapping.containsKey(aniversay.getEmployeeId())) {
@@ -203,7 +260,7 @@ public class EmployeeHandler extends AbstractHandler {
 				DisplayNotificationHome displayNotificationHome = new DisplayNotificationHome();
 				displayNotificationHome.setEmployeeName(birthday.getEmployeeName());
 				displayNotificationHome.setEmployeeEmail(birthday.getEmail());
-				displayNotificationHome.setDate(birthday.getDOB());
+				displayNotificationHome.setDate(birthday.getDateOfBirth());
 				displayNotificationHome.setEvent("Birthday");
 				if (empidmapping.containsKey(birthday.getEmployeeId())) {
 					displayNotificationHome.setStatus("Send");
@@ -220,7 +277,7 @@ public class EmployeeHandler extends AbstractHandler {
 				DisplayNotificationHome displayNotificationHome = new DisplayNotificationHome();
 				displayNotificationHome.setEmployeeName(aniversay.getEmployeeName());
 				displayNotificationHome.setEmployeeEmail(aniversay.getEmail());
-				displayNotificationHome.setDate(aniversay.getDOJ());
+				displayNotificationHome.setDate(aniversay.getDateOfJoining());
 				displayNotificationHome.setEvent("Aniversay");
 				if (empidmapping.containsKey(aniversay.getEmployeeId())) {
 					displayNotificationHome.setStatus("Send");

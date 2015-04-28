@@ -6,13 +6,21 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-
 import com.hred.persistence.annotations.Increment;
+
+
+
+/**
+ * @author Venkatesh Chitla
+ *
+ */
 
 @Entity
 @Table(name = "EMPLOYEE")
 @Increment
 public class Employee extends AbstractObject {
+
+	
 
 	public static final String AUTH_TYPE_REGULAR = "REGULAR";
 	public static final int AUTH_STATUS_EXISTING = 0;
@@ -25,12 +33,13 @@ public class Employee extends AbstractObject {
 	private String employeeName;
 	@Column(name = "gender")
 	private String gender;
-	// @Temporal(TemporalType.DATE)
+	//@Temporal(TemporalType.DATE)
 	@Column(name = "DOB")
-	private Timestamp DOB;
-	// @Temporal(TemporalType.DATE)
+	private Timestamp dateOfBirth;
+	//@Temporal(TemporalType.DATE)
 	@Column(name = "DOJ")
-	private Timestamp DOJ;
+	private Timestamp dateOfJoining;
+
 	@Column(name = "years_of_experience")
 	private int yearsofexperience;
 	@Column(name = "contact_number")
@@ -69,18 +78,20 @@ public class Employee extends AbstractObject {
 	private int skill;
 	@Column(name = "Rating")
 	private int rating;
-	@Column(name = "variable_component")
+	@Column(name="variable_component")
 	private String variableComponent;
-
+	
 	public Employee() {
+		
 
 	}
 
 	public Employee(int employeeId) {
 		this.employeeId = employeeId;
-		// this.employeeName = employeeName;
+		//this.employeeName = employeeName;
 	}
 
+	
 	public int getEmployeeId() {
 		return employeeId;
 	}
@@ -105,20 +116,21 @@ public class Employee extends AbstractObject {
 		this.gender = gender;
 	}
 
-	public Timestamp getDOB() {
-		return DOB;
+
+	public Timestamp getDateOfBirth() {
+		return dateOfBirth;
 	}
 
-	public void setDOB(Timestamp dOB) {
-		DOB = dOB;
+	public void setDateOfBirth(Timestamp dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
 	}
 
-	public Timestamp getDOJ() {
-		return DOJ;
+	public Timestamp getDateOfJoining() {
+		return dateOfJoining;
 	}
 
-	public void setDOJ(Timestamp dOJ) {
-		DOJ = dOJ;
+	public void setDateOfJoining(Timestamp dateOfJoining) {
+		this.dateOfJoining = dateOfJoining;
 	}
 
 	public int getYearsofexperience() {

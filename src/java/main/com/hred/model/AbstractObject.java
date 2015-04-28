@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+
 /**
  * Abstract Object is the implementation for common attributes of all objects
  * in the system. And also all model objects in the system will inherit this class.
@@ -27,7 +28,7 @@ public abstract class AbstractObject implements BaseObject{
 	private long creatorId;
 	@Column(name = "modified_by")
 	private long modifierId;
-	@Column(name = "is_deleted")
+	@Column(name = "is_deleted",columnDefinition ="bit(1) default 0")
 	private boolean isDeleted;
 
 	public static final String LABEL_ID = "id";

@@ -61,7 +61,7 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 		return notificationHistory;
 	}
 
-	public String SentAutomatedMailMail() {
+	public String SentAutomatedMailMail() throws BusinessException {
 		
 			EmployeeDAO employeeDAOImpl = DAOFactory.getInstance()
 					.getEmployeeDAO();

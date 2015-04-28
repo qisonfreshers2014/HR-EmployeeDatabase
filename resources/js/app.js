@@ -121,13 +121,6 @@ App.prototype.listEmployees=function(){
 }
 
 
-
-
-
-
-
-
-
 App.prototype.loadViewEmployee=function(){
 	Loader.loadViewEmployee(function(){
 		new ViewEmployee();
@@ -147,26 +140,28 @@ App.prototype.loadempviewemployee=function(){
 }
 
 
+App.prototype.loadEmpl=function(){
+	Loader.loadEmpl(function(){
+		new AddEmployee();
+	});
+}
+App.prototype.loadEditEmp=function(){
+	Loader.loadEditEmp(function(){
+		new EditEmployee();
+	});
+}
 
+App.prototype.loadhrEditEmp=function(){
+	Loader.loadhrEditEmp(function(){
+		new HrEditEmployee();
+	});
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+App.prototype.loadtemplateList=function(){
+	Loader.loadtemplateList(function(){
+		new TemplateList();
+	});
+}
 
 App.prototype.loadDes=function(){
 	Loader.loadDes(function(){

@@ -54,12 +54,6 @@ public class DAOFactory {
 		
 	}
 	
-
-
-	
-	
-	
-	
 	public FileDAO getFileDAO() {
 		return FileDAOImpl.getInstance();
 	}

@@ -29,7 +29,6 @@
 		<mapping class="com.hred.model.HRPolicy" />
 		<mapping class="com.hred.model.AllHandsMeeting" />
 		<mapping class="com.hred.model.Holiday" />
-		<mapping class="com.hred.model.User" />
 		
 	</session-factory>
 </hibernate-configuration>

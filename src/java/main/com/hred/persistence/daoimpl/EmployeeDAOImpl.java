@@ -23,9 +23,6 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 
 	private static EmployeeDAO INSTANCE = null;
 
-	private EmployeeDAOImpl() {
-	}
-
 	public static EmployeeDAO getInstance()
 	{
 		if (INSTANCE == null) {
@@ -33,8 +30,43 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 		}
 		return INSTANCE;
 	}
- 
-	
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Employee getEmployeeById(long id) throws EmployeeException {
+		// TODO Auto-generated method stub
+		Session session = null;
+		List<Employee> list = null;
+		Transaction tx = null;
+		try {
+			session = getSession();
+			if (null == session) {
+				session = SessionFactoryUtil.getInstance().openSession();
+				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+			}
+			Criteria createCriteria = session.createCriteria(Employee.class);
+			/*String hql="from Employee where id="+id+"";		
+			org.hibernate.Query query = session.createQuery(hql);
+			 list  = query.list();*/
+			createCriteria.add(Restrictions.eq("id", id));
+			list = createCriteria.list();
+			if (list.size() == 0) {
+				throw new EmployeeException(ExceptionCodes.EMPLOYEE_DOESNOT_EXIST, ExceptionMessages.EMPLOYEE_DOESNOT_EXIST);
+			  } 
+		}finally {
+					try {
+						if (tx != null) {
+							tx.commit();
+							if (session.isConnected())
+								session.close();
+						}
+					} catch (HibernateException e) {
+
+						e.printStackTrace();
+					}
+			  }
+				return  (Employee) list.iterator().next();
+	}
 
 	@Override
 	public List<Employee> getFilterEmployeeDetails(Employee employee) throws EmployeeException{
@@ -51,7 +83,7 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 		createCriteria.add(Restrictions.eq("gender",employee.getGender()));
 		createCriteria.add(Restrictions.eq("currentDesignation",employee.getCurrentDesignation()));
 		
-		createCriteria.add(Restrictions.eq("DOJ",employee.getDOJ()));
+		createCriteria.add(Restrictions.eq("DOJ",employee.getDateOfJoining()));
 				 
 	 	/*//createCriteria.add(Restrictions.gt("yearsofexperience",employee.getYearsofexperience()));
 		createCriteria.add(Restrictions.eq("highestQualification",employee.getHighestQualification()));
@@ -110,6 +142,8 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 				e.printStackTrace();
 			}
 		}
+
+	
 	 
 		return list.iterator().next();
 		
@@ -123,45 +157,6 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 		List<Employee> list = createCriteria.list();
 		return list.iterator().next().getEmployeeName();
 	}
-	@Override
-	public Employee getEmployeeById(String id) throws EmployeeException {
-		// TODO Auto-generated method stub
-		Session session = null;
-		List<Employee> list = null;
-		Transaction tx = null;
-		try {
-			session = getSession();
-			if (null == session) {
-				session = SessionFactoryUtil.getInstance().openSession();
-				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
-			}
-			Criteria createCriteria = session.createCriteria(Employee.class);
-			// createCriteria.add(Restrictions.eq("id", id));
-			// createCriteria.add(Restrictions.eq("isDeleted", false));
-			list = createCriteria.list();
-			if (list.size() == 0) {
-				throw new EmployeeException(
-						ExceptionCodes.EMPLOYEE_DOESNOT_EXIST,
-						ExceptionMessages.EMPLOYEE_DOESNOT_EXIST);
-			}
-
-		} finally {
-
-			try {
-				if (tx != null) {
-					tx.commit();
-					if (session.isConnected())
-						session.close();
-				}
-			} catch (HibernateException e) {
-
-				e.printStackTrace();
-			}
-		}
-		return list.iterator().next();
-
-	}
-
 	@Override
 	public List<Employee> getEmployees() {
 		Session session = null;
@@ -187,8 +182,9 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 				e.printStackTrace();
 			}
 		}
-		return list;
+		return  list;	 
 	}
+
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -406,6 +402,12 @@ public List<DisplayNotificationHome> getEventWithinDate(NotificationHomeFilterIn
 			}
 		}
 		return list;
+	}
+
+	@Override
+	public Employee getEmployeeById(String id) throws EmployeeException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
