@@ -99,7 +99,7 @@ public class DefaultAuthenticationHandler implements AuthenticationHandler {
 		userSessionToken.setUserSessionId(sessionToken);
 		
 		
-		userSessionToken.setRoleName(emp.getCurrentDesignation());  //set the role here
+		//userSessionToken.setRoleName(emp.getCurrentDesignation());  //set the role here
 		//////////////////////////////////////////
 		
 		////////////////////////////////////////////

@@ -1,0 +1,52 @@
+#header {
+    background-color:none;
+    color:black;
+    text-align:left;
+    padding:20px;
+}
+#nav{
+    line-height:20px;
+    background-color:white;
+    height:800px;
+    width:900px;
+    float:left;
+    padding:5px;	
+	margin-right:50px;
+}
+table, th, td {
+    border: 1px solid black;
+	border-collapse:collapse;
+	 
+}
+.t1{
+	text-align:right;
+}
+#gerror{
+visibility:hidden;
+color:red;
+}
+
+#designerror{
+visibility:hidden;
+color:red;
+} 
+#herror{
+visibility:hidden;
+color:red;	
+}
+#rerror{
+visibility:hidden;
+color:red;
+} 
+#derror{
+	visibility:hidden;
+	color:red;
+}
+#yerror{
+	visibility:hidden;
+	color:red;
+}
+.button{
+width:98px;
+height:30px;
+} 

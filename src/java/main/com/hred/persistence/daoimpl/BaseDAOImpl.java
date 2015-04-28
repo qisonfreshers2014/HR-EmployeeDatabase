@@ -134,6 +134,7 @@ public class BaseDAOImpl implements BaseDAO{
 		return persistentObject;
 	}
 
+
 	@Override
 	public List<BaseObject> save(List<BaseObject> objectList) {
 		Session session = checkSession();

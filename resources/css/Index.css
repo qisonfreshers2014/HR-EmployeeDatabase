@@ -1,23 +1,30 @@
 body {
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     color: #000000;
     font-family: serif,sans-serif,cursive,Arial;
     width: 100%;
 }
-
 .header {
     border-bottom: 1px solid #000000;
     height: 95px;
+    margin-left: 8%;
 }
 .container {
     background-color: #ffffff;
     display: block;
     height: 459px;
+.footer {
+    border-top: 1px solid #000000;
+    clear: both;
+    margin-left: 8%;
+}
+.container{
+    display: block !important;
     position: relative;
     width: 70%;
 }
 .leftContainer {
-	 background-color: #FFFFFF;
+  background-color: #FFFFFF;
     float: left;
     position: relative;
     width: 55%;
@@ -25,7 +32,7 @@ body {
 
 }
 .rightContainer {
-	 background-color: #FFFFFF;
+  background-color: #FFFFFF;
     float: right;
     position: relative;
     width: 45%;
@@ -38,5 +45,4 @@ body {
     height:30px;
     bottom: 10px;
 }
-
 
