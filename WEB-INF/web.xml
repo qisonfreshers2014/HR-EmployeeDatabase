@@ -18,7 +18,7 @@ id="WebApp_ID" version="3.0">
              <param-value>true</param-value>
           </init-param>
         <load-on-startup>1</load-on-startup>
-    </servlet>fuh
+    </servlet>
     <servlet-mapping>
         <servlet-name>JerseyWebApp</servlet-name>
         <url-pattern>/services/*</url-pattern>

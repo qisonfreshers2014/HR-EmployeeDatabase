@@ -128,6 +128,7 @@ public interface ExceptionCodes {
 	public static final int EVENT_START_DATE_MUST_BE_FUTURE_DATE = 218;
 	public static final int EVENT_IN_LIVE_CONTENT_CANNOT_BE_CHANGED = 219;
 	public static final int CANNOT_AGREE_OR_DISAGREE_FLAGGED_OR_REMOVED_COMMENT = 220;
+	public static final int EMPLOYEE_DOESNOT_EXIST = 221;
 
 	//Mongo related exception Codes
 	public static final int COULD_NOT_START_MONGO_CLIENT = 1001;
@@ -287,6 +288,7 @@ public interface ExceptionCodes {
 	public static final int TIME_ENTRY_PRESENT = 9008;
 	public static final int RELEASE_ID_NULL = 9009;
 	public static final int DB_EXCEPTION = 9010;
+	public static final int NO_BIRTHDAY_TODAY = 228;
 	
 	
 	
