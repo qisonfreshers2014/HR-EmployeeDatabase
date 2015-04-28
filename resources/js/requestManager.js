@@ -54,6 +54,10 @@ RequestManager.prototype.authenticate=function(data,callback){
 	this.sendToServer('employee/authenticate', data, callback);
 }
 
+RequestManager.prototype.getTemplateById=function(data,callback){
+	this.sendToServer('template/viewTemplate', data, callback);
+}
+
 RequestManager.prototype.holidaysData=function(data,callback){
 	this.sendToServer('holidays/save', data, callback);
 }

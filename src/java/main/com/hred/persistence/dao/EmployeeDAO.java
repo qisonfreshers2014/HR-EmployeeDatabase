@@ -6,4 +6,6 @@ import com.hred.model.Employee;
 public interface EmployeeDAO extends BaseDAO {
 
 	public Employee getUserByEmail(String email) throws UserException;
+
+	public String getEmployeeName(long id);
 }

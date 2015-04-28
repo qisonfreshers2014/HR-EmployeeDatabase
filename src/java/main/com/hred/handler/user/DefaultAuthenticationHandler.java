@@ -67,12 +67,12 @@ public class DefaultAuthenticationHandler implements AuthenticationHandler {
 
 					ExceptionMessages.EMAIL_DOESNOT_EXIST);
 		}
-		else if (!passwordValidity) {
+	/*	else if (!passwordValidity) {
 			throw new BusinessException(ExceptionCodes.INVALID_PASSWORD,
 
 					ExceptionMessages.INVALID_PASSWORD);
 		}
-
+*/
 
 
 		authStatus = Employee.AUTH_STATUS_EXISTING;
@@ -97,9 +97,11 @@ public class DefaultAuthenticationHandler implements AuthenticationHandler {
 		userSessionToken.setUserEmail(emp.getEmail());
 		userSessionToken.setUserId(emp.getId());
 		userSessionToken.setUserSessionId(sessionToken);
-		//userSessionToken.setRoleId(employee.());  //set the role here
+		
+		
+		userSessionToken.setRoleName(emp.getCurrentDesignation());  //set the role here
 		//////////////////////////////////////////
-
+		
 		////////////////////////////////////////////
 		Cache cache = CacheManager.getInstance().getCache(CacheRegionType.USER_SESSION_CACHE);
 		cache.put(sessionToken, userSessionToken);

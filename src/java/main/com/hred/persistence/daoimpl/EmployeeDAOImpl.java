@@ -65,4 +65,13 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 		return list.iterator().next();
 		
 	}
+	
+	public String getEmployeeName(long id) {
+		Session session = null;
+		session = getSession();
+		Criteria createCriteria = session.createCriteria(Employee.class);
+		createCriteria.add(Restrictions.eq("id", id));
+		List<Employee> list = createCriteria.list();
+		return list.iterator().next().getEmployeeName();
+	}
 }

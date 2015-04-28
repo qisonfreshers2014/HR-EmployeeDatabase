@@ -13,7 +13,7 @@ Sample.prototype.handleShow = function() {
 }
 
 Sample.prototype.testService = function() {
-	App.loadLogin();
+	App.loadTemplate();
 
 }
 

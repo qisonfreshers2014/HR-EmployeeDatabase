@@ -3,23 +3,39 @@ function App() {
 	this.handleShow();
 }
 App.prototype.handleShow = function () {
-	 
-
-	   
+	 this.userName = "";
+	 this.jobRole = "";
+	 this.contactNo = "";
+	 this.gender = "";
 }
 
-App.prototype.loadLogin=function(){
-	Loader.loadLogin();
+App.prototype.loadFooter=function(){
+	Loader.loadFooter(function(){
+	});
 }
 
-App.prototype.loadNext=function(){
-	Loader.loadNext();
+App.prototype.loadEmployee=function(gender,contactNo){
+		this.gender = gender;
+		this.contactNo = contactNo;
+		Loader.loadEmployee();
 	
+}
+
+App.prototype.loadEmployeePage=function(name,jobRole){
+	this.userName = name;
+	this.jobRole=jobRole;
+	Loader.loadEmployeePage();
 }
 
 App.prototype.loadHoliday=function(){
 	Loader.loadHoliday(function(){
 		new listHoliday();
+	});
+}
+
+App.prototype.loadTemplate=function(){
+	Loader.loadTemplate(function(){
+		new Template();
 	});
 }
 

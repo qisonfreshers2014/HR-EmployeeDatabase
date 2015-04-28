@@ -29,14 +29,23 @@ public class DAOFactory {
 	public UserDAO getUserDAO() {
 		return UserDAOImpl.getInstance();
 	}
+	
+
+	/*public TemplateDAO getTemplateDAO() {
+		  return  TemplateDAOimpl.getInstance();
+		 }*/
+	
+	public HolidayDAO getHolidayDAO() {
+		return HolidayDAOImpl.getInstance();
+	}
+
 	public EmployeeDAO getEmployeeDAO() {
 		// TODO Auto-generated method stub
 		return EmployeeDAOImpl.getInstance();
 	}
 
-	
-	public HolidayDAO getHolidayDAO() {
-		return HolidayDAOImpl.getInstance();
+	public TemplateDAO getTemplateDAO() {
+		return TemplateDAOimpl.getInstance();
 	}
 
 

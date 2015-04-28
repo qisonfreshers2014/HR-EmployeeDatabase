@@ -35,21 +35,36 @@ Loader.prototype.loadHTML = function(container, filePath, empty, callback) {
 
 }
 
-Loader.prototype.loadLogin = function(cb){
-	LazyLoad.css('resources/js/Login/login.css');
-	LazyLoad.js('resources/js/Login/login.js',cb);	
+Loader.prototype.loadEmployeePage = function(){
+	 LazyLoad.css('resources/js/EmployeeHomepage/empHomePage.css');
+	 LazyLoad.js('resources/js/EmployeeHomepage/empHomePage.js');
+
+}
+Loader.prototype.loadEmployee = function(){
+	 LazyLoad.css('resources/js/EmployeeHomepage/employee.css');
+	 LazyLoad.js('resources/js/EmployeeHomepage/employee.js');
+
 }
 
-Loader.prototype.loadNext = function(cb){
-	LazyLoad.css('resources/js/Login/next.css');
-	LazyLoad.js('resources/js/Login/next.js',cb);	
+Loader.prototype.loadFooter = function(){
+	 LazyLoad.css('resources/js/EmployeeHomepage/footer.css');
+	 LazyLoad.js('resources/js/EmployeeHomepage/footer.js');
+
 }
+
 
 Loader.prototype.loadHoliday = function(){
 	 LazyLoad.css('resources/js/Holidays/holidays.css');
 	 LazyLoad.js('resources/js/Holidays/Holidays.js');
 
 }
+
+Loader.prototype.loadTemplate = function(){
+	 LazyLoad.css('resources/js/Templates/template.css');
+	 LazyLoad.js('resources/js/Templates/template.js');
+
+}
+
 
 Loader.prototype.loadEmployeeHoliday = function(){
 	 LazyLoad.css('resources/js/EmployeeHolidayList/EmployeeHolidayList.css');
