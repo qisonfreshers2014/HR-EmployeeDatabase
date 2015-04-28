@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.hred.persistence.annotations.Increment;
+
 
 
 /**
@@ -15,7 +17,15 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "EMPLOYEE")
+@Increment
 public class Employee extends AbstractObject {
+
+	
+
+	public static final String AUTH_TYPE_REGULAR = "REGULAR";
+	public static final int AUTH_STATUS_EXISTING = 0;
+	public static final int AUTH_STATUS_NEW = 1;
+	public static final int AUTH_STATUS_NONE = 2;
 
 	@Column(name = "employee_id")
 	private int employeeId;
@@ -29,6 +39,7 @@ public class Employee extends AbstractObject {
 	//@Temporal(TemporalType.DATE)
 	@Column(name = "DOJ")
 	private Timestamp dateOfJoining;
+
 	@Column(name = "years_of_experience")
 	private int yearsofexperience;
 	@Column(name = "contact_number")
@@ -72,6 +83,7 @@ public class Employee extends AbstractObject {
 	
 	public Employee() {
 		
+
 	}
 
 	public Employee(int employeeId) {

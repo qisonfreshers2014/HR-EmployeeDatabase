@@ -13,5 +13,4 @@ public interface BirthDayOutputDescriptor extends JSONSerializationDescriptor {
 	
 	@JsonProperty
 	public String getDOB();
-
 }

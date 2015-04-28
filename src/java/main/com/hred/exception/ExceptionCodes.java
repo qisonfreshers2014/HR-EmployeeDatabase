@@ -130,6 +130,9 @@ public interface ExceptionCodes {
 	public static final int CANNOT_AGREE_OR_DISAGREE_FLAGGED_OR_REMOVED_COMMENT = 220;
 	public static final int EMPLOYEE_DOESNOT_EXIST = 221;
 
+	public static final int DESIGNATION_DOESNOT_EXIST = 225;
+	public static final int HRPolicy_DOESNOT_EXIST = 226;
+	
 	//Mongo related exception Codes
 	public static final int COULD_NOT_START_MONGO_CLIENT = 1001;
 	public static final int DATABASE_CONFIGURATION_LOAD_ERROR = 1002;
@@ -288,7 +291,19 @@ public interface ExceptionCodes {
 	public static final int TIME_ENTRY_PRESENT = 9008;
 	public static final int RELEASE_ID_NULL = 9009;
 	public static final int DB_EXCEPTION = 9010;
-	public static final int NO_BIRTHDAY_TODAY = 228;
+	public static final int TEMPLATE_DOESNOT_EXIST =9011;
+	
+
+	public static final int FILE_IS_DELETED = 9015;
+	public static final int EMPLOYEE_DOES_NOT_EXIST = 10001;
+
+	
+	
+	//holidays related Exception Codes
+	public static final int HOLIDAYSID_DOESNOT_EXIST = 9011;
+	public static final int NO_WORK_ANNIVERSARY_TODAY = 9012;
+	public static final int NO_JOINEE_TODAY = 9013;
+	public static final int NO_BIRTHDAY_TODAY = 221;
 	
 	
 	

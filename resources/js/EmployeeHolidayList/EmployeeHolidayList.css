@@ -1,0 +1,13 @@
+@CHARSET "ISO-8859-1";
+
+.table{
+ position:relative;
+ width: 100%;
+ padding-left:5%;
+ padding-right:1%;
+ border:1px solid black;
+ margin-right:auto;
+ margin-left:auto;
+_margin-right:auto;
+_margin-left:auto;
+}

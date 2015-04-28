@@ -1,0 +1,30 @@
+#SendMail
+{width:100%;
+height:100%;
+ border-style: solid;
+    border-width: medium;
+    border-color: #0000ff;
+}
+
+#field
+{
+width:100%;
+height:40%;
+margin-left: 20px;
+}
+#sendtoDdb
+{
+width:90%;
+margin-left: 20px;
+}
+#textfeild
+{
+width:90%;
+margin-left: 20px;
+}
+
+#Subject
+{
+width:90%;
+margin-left: 20px;
+}
