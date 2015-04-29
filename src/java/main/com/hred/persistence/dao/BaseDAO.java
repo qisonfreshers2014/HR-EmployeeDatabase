@@ -24,4 +24,6 @@ public interface BaseDAO {
 
 	 public BaseObject getObjectById(long id,int objectType) throws ObjectNotFoundException;
 
+	
+
 }

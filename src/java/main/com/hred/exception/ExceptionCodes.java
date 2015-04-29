@@ -289,7 +289,14 @@ public interface ExceptionCodes {
 	public static final int DB_EXCEPTION = 9010;
 	
 	//holidays related Exception Codes
-	public static final int HOLIDAYSID_DOESNOT_EXIST = 9011;
+	public static final int HOLIDAY_DOESNOT_EXIST = 9011;
+	public static final int HOLIDAY_DESCRIPTION_NULL = 9012;
+	public static final int HOLIDAY_TYPE_NULL = 9013;
+	public static final int HOLIDAY_DATE_DOES_NOT_EXIST = 9014;
+	public static final int HOLIDAY_DATE_MISMATCH = 9015;
+	public static final int HOLIDAY_DATE_ALREADY_EXISTS = 9016;
+	
+	
 	
 	
 	

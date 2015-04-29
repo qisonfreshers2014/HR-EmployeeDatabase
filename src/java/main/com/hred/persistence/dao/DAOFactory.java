@@ -1,7 +1,9 @@
 package com.hred.persistence.dao;
 
 
+import com.hred.persistence.daoimpl.EmployeeDAOImpl;
 import com.hred.persistence.daoimpl.HolidayDAOImpl;
+import com.hred.persistence.daoimpl.HrPolicyDAOImpl;
 import com.hred.persistence.daoimpl.UserDAOImpl;
 
 
@@ -34,6 +36,18 @@ public class DAOFactory {
 	
 	public HolidayDAO getHolidayDAO() {
 		return HolidayDAOImpl.getInstance();
+	}
+
+	public EmployeeDAO getEmployeeDAO() {
+		return EmployeeDAOImpl.getInstance();
+	}
+
+	public HrPolicyDAO getHrPolicyDAO() {
+		return HrPolicyDAOImpl.getInstance();
+	}
+
+	public EmployeeDAO searchEmployeeDAO() {
+		return EmployeeDAOImpl.getInstance();
 	}
 
 

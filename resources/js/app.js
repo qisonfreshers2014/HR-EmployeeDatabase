@@ -20,11 +20,15 @@ App.prototype.loadEmployeeHoliday=function(){
 	});
 }
 
-App.prototype.listEmployees=function(){
-	Loader.listEmployees(function(){
-		new employeesList();
+App.prototype.listEmployee=function(){
+	Loader.listEmployee(function(){
+		new employeeList();
 	});
 }
 
-
+App.prototype.listPolicy=function(){
+		Loader.listPolicy(function(){
+		new policyList();
+	});
+}
 var App = new App();

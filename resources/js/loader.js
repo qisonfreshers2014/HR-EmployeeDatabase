@@ -46,11 +46,13 @@ Loader.prototype.loadEmployeeHoliday = function(){
 
 }
 
-Loader.prototype.listEmployees = function(){
-	 LazyLoad.css('resources/js/EmployeesList/EmployeesList.css');
-	 LazyLoad.js('resources/js/EmployeesList/EmployeesList.js');
+Loader.prototype.listEmployee = function(){
+	LazyLoad.js('resources/js/EmployeeList/EmployeeList.js');
 
 }
 
+Loader.prototype.listPolicy = function(){
+	LazyLoad.js('resources/js/HRPolicy/Policy.js');
 
+}
 var Loader = new Loader();

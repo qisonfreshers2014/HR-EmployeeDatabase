@@ -153,8 +153,13 @@ public interface ExceptionMessages {
 	public static final String USER_IS_MEMBER_SO_CANNOT_BE_ADMIN = "This user has member role so he cannot be admin";
 	
 	//holidays related Exception Messages
-	public static final String HOLIDAYSID_DOESNOT_EXIST = "Invalid Holiday Id";
-	
+	public static final String HOLIDAY_DOESNOT_EXIST = "No Holiday found";
+	public static final String HOLIDAY_DESCRIPTION_NULL = "Description should not be empty";
+	public static final String HOLIDAY_TYPE_NULL = "Type should not be empty";
+	public static final String HOLIDAY_DATE_DOES_NOT_EXIST = "Date field should not be empty";
+	public static final String HOLIDAY_DATE_ALREADY_EXISTS = "Date already exists";
+
+
 
 	
 	
