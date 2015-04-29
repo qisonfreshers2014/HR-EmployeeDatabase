@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.hred.exception;
 
 import java.util.List;
@@ -10,7 +7,9 @@ import java.util.List;
  *
  */
 public class EmployeeException extends BusinessException{
-	
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 	public EmployeeException(){
 		

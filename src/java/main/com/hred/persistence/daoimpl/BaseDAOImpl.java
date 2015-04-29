@@ -17,6 +17,7 @@ import com.hred.exception.ObjectNotFoundException;
 import com.hred.model.AbstractObject;
 import com.hred.model.BaseObject;
 import com.hred.model.Objects;
+import com.hred.model.Template;
 import com.hred.persistence.annotations.Increment;
 import com.hred.persistence.dao.BaseDAO;
 import com.hred.persistence.model.IdCounter;
@@ -133,6 +134,7 @@ public class BaseDAOImpl implements BaseDAO{
 		return persistentObject;
 	}
 
+
 	@Override
 	public List<BaseObject> save(List<BaseObject> objectList) {
 		Session session = checkSession();
@@ -150,4 +152,6 @@ public class BaseDAOImpl implements BaseDAO{
 		}
 		return objectList;
 	}
+
+	
 }

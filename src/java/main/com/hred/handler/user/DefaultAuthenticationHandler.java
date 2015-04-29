@@ -4,7 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Calendar;
 import java.util.TimeZone;
-
+import java.util.regex.Pattern;
 import com.hred.common.EncryptionFactory;
 import com.hred.common.Utils;
 import com.hred.common.cache.Cache;
@@ -16,7 +16,8 @@ import com.hred.exception.ExceptionCodes;
 import com.hred.exception.ExceptionMessages;
 import com.hred.exception.ObjectNotFoundException;
 import com.hred.exception.SystemException;
-import com.hred.model.User;
+import com.hred.exception.UserException;
+import com.hred.model.Employee;
 import com.hred.model.UserSessionToken;
 import com.hred.model.user.AuthenticationInput;
 import com.hred.model.user.AuthenticationOutput;
@@ -33,50 +34,56 @@ public class DefaultAuthenticationHandler implements AuthenticationHandler {
 	public AuthenticationOutput authenticate(AuthenticationInput input)
 			throws ObjectNotFoundException, BusinessException,
 			EncryptionException {
+		
+		
 
 		DefaultAuthenticationInput daInput = (DefaultAuthenticationInput) input;
-		int authStatus = User.AUTH_STATUS_NONE;
+		int authStatus = Employee.AUTH_STATUS_NONE;
+		if (isLoginValidated(daInput)){
 		String email = daInput.getEmail();
 		String password = daInput.getPassword();
-		if (email != null) {
-			email = email.trim().toLowerCase();
-		}
-		if (password != null) {
-			password = password.trim();
-		}
-		User employee = null;
-		
-		
+
+	
+		Employee emp = null;
 		DAOFactory daoFactory = DAOFactory.getInstance();
 		// TODO handle email doesn't exists case.
-		employee = daoFactory.getUserDAO().getUserByEmail(email);
+		emp = daoFactory.getEmployeeDAO().getUserByEmail(email);
 		//String encryptedPassword = Utils.encrypt(password);
-		String passwordFromDB = employee.getPassword();
-		
+		String emailFromDB = emp.getEmail();
+		String passwordFromDB=emp.getPassword();
 		
 		/////////////////////////////////////////////////////////////////////////////////
-		long userId = employee.getId();
+		long empId = emp.getId();
 
 		
 		
 	////////////////////////////////////////////////////////////
 		String encryptedPassword=Utils.encrypt(password.trim());
-		boolean userValidity = passwordFromDB.equals(encryptedPassword);
-		
-		if (!userValidity) {
+		boolean emailValidity = emailFromDB.equals(email);
+		boolean passwordValidity = passwordFromDB.equals(encryptedPassword);
+
+		if (!emailValidity) {
+			throw new BusinessException(ExceptionCodes.EMAIL_DOESNOT_EXIST,
+
+					ExceptionMessages.EMAIL_DOESNOT_EXIST);
+		}
+	/*	else if (!passwordValidity) {
 			throw new BusinessException(ExceptionCodes.INVALID_PASSWORD,
 
 					ExceptionMessages.INVALID_PASSWORD);
 		}
+*/
 
-		authStatus = User.AUTH_STATUS_EXISTING;
+
+		authStatus = Employee.AUTH_STATUS_EXISTING;
 
 		String sessionToken = null;
 		try {
 			TimeZone.setDefault(TimeZone.getDefault());
 			sessionToken = URLEncoder
 					.encode(EncryptionFactory.getEncryption(true).encrypt(
-							employee.getEmail() + Calendar.getInstance().getTimeInMillis()),
+							emp.getEmail()
+									+ Calendar.getInstance().getTimeInMillis()),
 							"UTF-8");
 		} catch (EncryptionException ee) {
 			throw new SystemException(ExceptionCodes.INTERNAL_ERROR,
@@ -87,19 +94,68 @@ public class DefaultAuthenticationHandler implements AuthenticationHandler {
 		}
 
 		UserSessionToken userSessionToken = new UserSessionToken();
-		userSessionToken.setUserEmail(employee.getEmail());
-		userSessionToken.setUserId(employee.getId());
+		userSessionToken.setUserEmail(emp.getEmail());
+		userSessionToken.setUserId(emp.getId());
 		userSessionToken.setUserSessionId(sessionToken);
-		//userSessionToken.setRoleId(employee.());  //set the role here
+		
+		
+		//userSessionToken.setRoleName(emp.getCurrentDesignation());  //set the role here
 		//////////////////////////////////////////
-
+		
 		////////////////////////////////////////////
 		Cache cache = CacheManager.getInstance().getCache(CacheRegionType.USER_SESSION_CACHE);
 		cache.put(sessionToken, userSessionToken);
 		System.out.println("Session Token : "+sessionToken);		
 		System.out.println("Cached : "+cache.getValue(sessionToken));
-		AuthenticationOutput authenticationOutput = new AuthenticationOutput(sessionToken, authStatus, employee);
-		return authenticationOutput;
+		AuthenticationOutput authenticationOutput = new AuthenticationOutput(sessionToken, authStatus, emp);
+	return authenticationOutput;
 	}
+	else
+		return null;
+}
 
+	private boolean isLoginValidated(DefaultAuthenticationInput daInput) throws UserException{
+		boolean isValidated = false;		
+		if (null == daInput) {
+			throw new UserException(ExceptionCodes.USER_ID_AND_PASSWORD_NULL,
+					ExceptionMessages.USER_ID_AND_PASSWORD_NULL);
+		}
+		isValidated = validateEmail(daInput.getEmail());
+		isValidated = validatePassword(daInput.getPassword());		
+		return isValidated;
+	}
+	private static boolean validateEmail(String email) throws UserException {
+		boolean isValidated = false;
+		if (email == null || email.isEmpty() || email.trim().isEmpty()) {
+			throw new UserException(ExceptionCodes.EMAIL_CANNOT_BE_EMPTY,
+					ExceptionMessages.EMAIL_CANNOT_BE_EMPTY);
+		}
+		boolean isEmailPatternValid = Pattern.compile(Utils.EMAIL_PATTERN)
+				.matcher(email).matches();
+		isValidated = true;
+		if (!isEmailPatternValid) {
+			isValidated = false;
+			throw new UserException(ExceptionCodes.EMAIL_FORMAT,
+					ExceptionMessages.EMAIL_FORMAT);
+		}
+		
+		return isValidated;
+	}
+	private boolean validatePassword(String password) throws UserException {
+		boolean isValidated = false;
+		if (password == null || password.trim().isEmpty()) {
+			isValidated = false;
+			throw new UserException(ExceptionCodes.PASSWORD_NULL,
+					ExceptionMessages.PASSWORD_NULL);
+		}
+		try {
+			Utils.validatePassword(password);
+			isValidated = true;
+		} catch (Exception be) {
+			isValidated = false;
+			throw new UserException(ExceptionCodes.PASSWORD_FORMAT,
+					ExceptionMessages.PASSWORD_FORMAT);
+		}
+		return isValidated;
+	}
 }

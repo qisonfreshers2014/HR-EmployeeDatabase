@@ -43,14 +43,27 @@ public interface ObjectTypes {
  public static final int USER_PROJECT = 133;
  public static final int USER_PROJECTS_ROLES = 134;
  public static final int ACTIVITIES = 135;
+public static final int TEMPLATE = 152;
 
+
+public static final int ALL_HANDS_MEETING = 201;
+
+ public static final int EMPLOYEE = 161;
+
+ public static final int DESIGNATION_TYPE=182;
+ public static final int DESIGNATION_HISTORY=183;
+ public static final int FILEUPLOAD=184;
+ public static final int HRPOLICIES=186;
  
  //holiday_master 
  public static final int HOLIDAYMASTER = 171;
  public static final int HOLIDAY = 172;
  
  //employee
-public static final int EMPLOYEE = 173;
+
  
+ public static final int SENDNOTIFICATION = 141;
+ public static final int SENDNOTIFICATIONHISTORY = 142;
  
+
 }

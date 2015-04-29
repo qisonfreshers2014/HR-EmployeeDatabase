@@ -2,11 +2,11 @@ package com.hred.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
 import javax.persistence.Table;
+
+import com.hred.persistence.annotations.Increment;
 
 /**
  * @author Anil Ram
@@ -14,6 +14,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "USER")
+@Increment
 public class User extends AbstractObject{
  
 

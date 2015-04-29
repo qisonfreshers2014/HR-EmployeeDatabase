@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+
 /**
  * Abstract Object is the implementation for common attributes of all objects
  * in the system. And also all model objects in the system will inherit this class.

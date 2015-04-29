@@ -1,0 +1,111 @@
+@CHARSET "ISO-8859-1";
+body {
+position: absolute;
+background-color: #f4f4f4;
+background-image: url(http://teambuilding.pt/wp-content/uploads/2015/02/gestao-competencias1.jpg?cb6f58);
+background-repeat: no-repeat;
+color: #5a5656;
+font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+font-size: 16px;
+line-height: 1.5em;
+}
+h1, p {
+position: absolute;
+margin-bottom: 20px;
+}
+a { text-decoration: none; }
+h1 {
+position: absolute; color:#FFFFFF;
+font-size: 1.5em; }
+strong {
+font-weight: bold;
+}
+
+#image{
+	position: absolute;
+	top: 0px;
+	
+	
+	width: 1000px;
+	height: 400px;
+	
+	background-size: cover;
+	background-image: url(http://confluenceedu.com/wp-content/uploads/2015/01/Human-Resources-Management.jpg);
+	background-repeat: no-repeat;
+	z-index: 0;
+		border-radius: 3px;
+-moz-border-radius: 3px;
+-webkit-border-radius: 3px;
+	
+}
+
+#welcome{
+
+position: absolute;
+top:80px;
+font-size: 25px;
+
+right:139px;
+color:black
+
+}
+.username{
+position: absolute;
+border: none;
+	width:294px;
+	height:32px!important;
+	padding:8px;
+	top:30px;
+	left:18px;
+	border-radius: 3px;
+-moz-border-radius: 3px;
+-webkit-border-radius: 3px;
+	
+}
+.password{
+position: absolute;
+	width:294px;
+	border: none;
+	height:32px!important;
+	padding:8px;
+	top:90px;
+	left:18px;
+	border-radius: 3px;
+-moz-border-radius: 3px;
+-webkit-border-radius: 3px;
+}
+
+.submit{
+position: absolute;
+	width:305px!important;
+	height:44px;
+	padding:8px;
+	bottom:30px;
+	left:18px;
+	background-color: #008dde;
+	border: none;
+	color: #f4f4f4;
+	border-radius: 3px;
+-moz-border-radius: 3px;
+-webkit-border-radius: 3px;
+}
+
+#login
+{
+position: absolute;
+top: 110px;	
+right: 75px;
+height:210px;
+width:310px;
+ background-color: #323B55;
+  padding: 15px;
+  border-radius: 3px;
+-moz-border-radius: 3px;
+-webkit-border-radius: 3px;
+}
+.message{
+position: absolute;
+margin-left:7px;
+margin-top:74px;
+color:rgb(237, 53, 81);
+}

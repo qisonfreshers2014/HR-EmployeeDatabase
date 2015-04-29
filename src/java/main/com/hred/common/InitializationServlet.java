@@ -1,6 +1,7 @@
 package com.hred.common;
 
 import java.io.IOException;
+import java.util.Timer;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.hred.common.cache.CacheHandler;
 import com.hred.common.cache.CacheManager;
 import com.hred.common.cache.CacheRegionType;
+import com.hred.model.NotificationTimer;
 import com.hred.model.UserSessionToken;
 
 /**
@@ -38,6 +40,8 @@ public class InitializationServlet extends HttpServlet {
 		if (initializeAllServices) {
 			// Initialize all Services one by one
 			initializeServices();
+			sendAutomatedNotificationMail();
+		
 		}
 	}
 
@@ -81,4 +85,14 @@ public class InitializationServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 	}
 
+	
+	public void sendAutomatedNotificationMail()
+	{
+		
+		NotificationTimer mailTimer=new NotificationTimer();
+		Timer notificationTimer = new Timer();
+		notificationTimer.schedule(mailTimer, 0, 24*60*60*1000);
+		
+	}
+	
 }
