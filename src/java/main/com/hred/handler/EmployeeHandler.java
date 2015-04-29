@@ -16,7 +16,7 @@ import com.hred.model.SendNotificationHistory;
 import com.hred.persistence.dao.DAOFactory;
 import com.hred.persistence.dao.EmployeeDAO;
 import com.hred.persistence.dao.SendNotificationHistoryDAO;
-import com.hred.service.descriptors.Input.EmployeeSearchInputDescriptor;
+import com.hred.service.descriptors.input.EmployeeSearchInputDescriptor;
 import com.hred.service.descriptors.output.DisplayNotificationHome;
 import com.hred.service.descriptors.output.NotificationHomeFilterInputDiscriptor;
 

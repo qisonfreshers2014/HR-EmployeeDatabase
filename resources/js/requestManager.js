@@ -50,7 +50,7 @@ RequestManager.prototype.sendToServer = function (api, data, callback, options) 
 
 }
 
-RequestManager.prototype.save = function(data, callback) {
+/*RequestManager.prototype.save = function(data, callback) {
 	  this.sendToServer('skills/save', data, callback);
 	 }
 	  
@@ -106,13 +106,53 @@ RequestManager.prototype.saveEmp=function(data,callback){
 	this.sendToServer('employee/save', data, callback);
 }
 
-RequestManager.prototype.getHreditEmployee=function(data,callback){
-	this.sendToServer('employee/getEmployee', data, callback);
-}
+<<<<<<< HEAD
+*/
+
 
 RequestManager.prototype.geteditEmployee=function(data,callback){
 	this.sendToServer('employee/getEmployee', data, callback);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+RequestManager.prototype.getAllHrPolicy=function(data,callback){
+	this.sendToServer('hr_policy/getPolicy', data, callback);
+}
+
+
+
+
+
+
+
+
 
 
 
@@ -125,6 +165,7 @@ RequestManager.prototype.updateEmp=function(data,callback){
 RequestManager.prototype.hrupdateEmp=function(data,callback){
 	this.sendToServer('employee/hrupdateEmployee', data, callback);
 }
+
 
 RequestManager.prototype.saveDes=function(data,callback){
 	this.sendToServer('designation_history/save', data, callback);

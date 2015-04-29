@@ -1,0 +1,46 @@
+<div id="div1">
+<div><h3>Edit Designation Details</h3></div>
+<hr>
+
+<div id="empNameDiv"><b>Employee Name</b>:<input type="text" value="" id="employeeName" readonly></div>
+
+<div id="dojDiv"><b>DOJ</b> :<input type="text" value="" id="doj" readonly></div>
+
+<div id="dateDiv">
+<b>Date</b><span class="red">*</span><input type="text" id="datepicker" required><div id="isDEmpty"></div>
+</div>
+
+<div id="salaryDiv"><b>Salary</b><span class="red">*</span><input type="text" id="salary" > <div id="isSEmpty"></div></div>
+
+<div id="designationDiv">
+<b>Designation</b><span class="red">*</span> 
+<select id="designation">
+<option value="0">Select Designation</option>
+<option value="1">CEO</option>
+<option value="2">COO</option>
+<option value="3">Architect</option>
+<option value="4">Marketing Engineer</option>
+<option value="5">HR</option>
+<option value="6">Project Manager</option>
+<option value="7">Senior Software Engineer</option>
+<option value="8">Software Engineer</option>
+<option value="9">Trainee Software Engineer</option>
+</select>
+<div id="isDesignationEmpty"> </div>
+</div>
+
+<div id="variblepayDiv"><b>VariablePay</b><span class="red">*</span><input type="text" id="variablePay"> <div id="isVPEmpty"></div></div>
+
+<div> <input type="button" id="save_designations" value="Save"> </div>
+</div>	
+
+<div id="div2">
+<div><h3>Appraisal History</h3></div>
+<hr>
+
+<table class="table">
+<tr><th>Designation</th><th>Salary</th><th>Variable Pay</th><th>Date</th></tr>
+</table><br>
+
+</div>
+

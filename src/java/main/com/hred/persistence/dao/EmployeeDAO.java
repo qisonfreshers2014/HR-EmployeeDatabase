@@ -6,7 +6,7 @@ import com.hred.exception.BusinessException;
 import com.hred.exception.EmployeeException;
 import com.hred.exception.UserException;
 import com.hred.model.Employee;
-import com.hred.service.descriptors.Input.EmployeeSearchInputDescriptor;
+import com.hred.service.descriptors.input.EmployeeSearchInputDescriptor;
 import com.hred.service.descriptors.output.DisplayNotificationHome;
 import com.hred.service.descriptors.output.NotificationHomeFilterInputDiscriptor;
 

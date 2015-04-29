@@ -14,11 +14,15 @@ App.prototype.loadFooter=function(){
 	});
 }
 
+/*
+=======
+
 App.prototype.loadEmployee=function(gender,contactNo){
 		this.gender = gender;
 		this.contactNo = contactNo;
 		Loader.loadEmployee();
 	
+>>>>>>> origin/master
 App.prototype.loadViewTemplate = function(name){
 	Loader.loadViewTemplate(function(){
 		new EditTemplate();
@@ -84,8 +88,8 @@ App.prototype.loadNotifications = function(){
 	});
 }
 
-
-
+*/
+/*
 App.prototype.loadLogin=function(){
 	Loader.loadLogin();
 }
@@ -130,6 +134,40 @@ App.prototype.listEmployees=function(){
 		new employeesList();
 	});
 }
+<<<<<<< HEAD
+
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+App.prototype.loadHRPolicyVeiwPage = function(){
+	Loader.loadHRPolicyVeiwPage(function(){
+		new policyList();
+	});
+}
+
+
+
+
+
+
 
 
 App.prototype.loadViewEmployee=function(){

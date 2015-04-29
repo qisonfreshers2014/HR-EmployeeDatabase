@@ -34,7 +34,7 @@ Loader.prototype.loadHTML = function(container, filePath, empty, callback) {
 	});
 
 }
-Loader.prototype.loadFilter = function(cb){
+/*Loader.prototype.loadFilter = function(cb){
 	 LazyLoad.css('resources/js/FilterEmployee/FilterEmployee.css');
 	 LazyLoad.js('resources/js/FilterEmployee/Filter.js',cb);
 }
@@ -107,11 +107,54 @@ Loader.prototype.listEmployee = function(){
 	LazyLoad.js('resources/js/EmployeeList/EmployeeList.js');
 
 }
-
 <<<<<<< HEAD
+
+
+
+
+
+*/
+
+
+
+
+Loader.prototype.loadHRPolicyVeiwPage = function(cb){
+	/* LazyLoad.css('resources/js/designation/cssfile.css');*/
+	 LazyLoad.js('resources/js/addinghrpolicy/Policy.js',cb);
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Loader.prototype.listPolicy = function(){
 	LazyLoad.js('resources/js/HRPolicy/Policy.js');
-=======
+}
 Loader.prototype.loadEmpl = function(e){
 	
 	 LazyLoad.js('resources/js/employee/addemp.js',e);
@@ -149,15 +192,6 @@ Loader.prototype.loadempviewemployee = function(cb){
 	LazyLoad.js('resources/js/empViewemployee.js', cb);
 }
 
-Loader.prototype.loadDes = function(cb){
-		// LazyLoad.css('resources/js/designation/cssfile.css');
-		 LazyLoad.js('resources/js/designation/EmpDes.js',cb);
-}
-
-Loader.prototype.loadPolicy = function(cb){
-	/* LazyLoad.css('resources/js/designation/cssfile.css');*/
-	 LazyLoad.js('resources/js/addinghrpolicy/addpolicy.js',cb);
-}
 
 Loader.prototype.loadNotifArea = function(cb){
 	 LazyLoad.css('resources/js/SendNotification/NotificationArea.css');
@@ -175,5 +209,38 @@ Loader.prototype.loadNotificationHomePage = function(cb){
    LazyLoad.js('resources/js/SendNotification/notificationHomePage.js',cb);
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Loader.prototype.loadDes = function(cb){
+		 LazyLoad.css('resources/js/editdesignation/editdesignation.css');
+		 LazyLoad.js('resources/js/editdesignation/editdesignation.js',cb);
 }
+
+Loader.prototype.loadPolicy = function(cb){
+	 LazyLoad.css('resources/js/addinghrpolicy/addpolicy.css');
+	 LazyLoad.js('resources/js/addinghrpolicy/addpolicy.js',cb);
+}
+
 var Loader = new Loader();

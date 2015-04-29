@@ -16,10 +16,13 @@
 		<property name="hibernate.show_sql">true</property>
 
 		<property name="hibernate.hbm2ddl.auto">update</property>
-		<property name="hibernate.connection.zeroDateTimeBehavior">convertToNull</property>
+		 <property name="hibernate.connection.zeroDateTimeBehavior">convertToNull</property>
+
+
+
+		<mapping class="com.hred.model.Employee" />
 
 		<mapping class="com.hred.model.HRPolicy" />
-		<mapping class="com.hred.model.Employee" />
 		<mapping class="com.hred.model.Holiday" />
 		<mapping class="com.hred.model.User" />
 		<mapping class="com.hred.persistence.model.IdCounter" />

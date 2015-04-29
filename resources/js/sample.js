@@ -21,24 +21,25 @@ Sample.prototype.handleShow = function() {
 		}*/
 	$('.container').show();
 	$('.testService').click(function(){
-		//this.testService();
+		this.testService();
 	}.ctx(this));
-	
-	
-	function UploadClickHandler(event){
-var thisEle = event.target;
-this.uploadMedia(function() {
-$(thisEle).one('click', UploadClickHandler.ctx(this));
-}.ctx(this));
-}
-$('.testService').one('click', UploadClickHandler.ctx(this));
 	
 
 }
 
 Sample.prototype.testService = function() {
 
+<<<<<<< HEAD
 	
+=======
+	//App.loadDes();
+App.loadPolicy();
+	//App.loadLogin();
+//App.loadHRPolicyVeiwPage();
+
+
+	//App.loadTemplate();
+>>>>>>> 2d722178dcda51f309041b30842e6248157a21ae
 	
 	//App.loadAddTemplate();
 	//App.loadViewEmployee();
@@ -63,25 +64,7 @@ Sample.prototype.testService = function() {
 	}.ctx(this));*/
 
 
-
 }
  
-
-Sample.prototype.uploadMedia = function(callback) {
-var allowedFileType = "application";
-var uploader = new Uploader(allowedFileType, function(data){
-if (data.filePath) {
-var imageSrc = data.filePath;
-this.fileId = data.id;
-$('.mediaForProfileImage').attr('src', imageSrc);
-if(imageSrc != null){
-$('.mediaForProfileImage').lightBox();
-}
-}
-}.ctx(this));
-callback();
-
-}
-
 
 var Sample= new Sample();

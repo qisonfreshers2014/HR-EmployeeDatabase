@@ -19,7 +19,7 @@ import com.hred.exception.UserException;
 import com.hred.model.Employee;
 import com.hred.persistence.dao.EmployeeDAO;
 import com.hred.persistence.session.SessionFactoryUtil;
-import com.hred.service.descriptors.Input.EmployeeSearchInputDescriptor;
+import com.hred.service.descriptors.input.EmployeeSearchInputDescriptor;
 import com.hred.service.descriptors.output.DisplayNotificationHome;
 import com.hred.service.descriptors.output.NotificationHomeFilterInputDiscriptor;
 
@@ -27,7 +27,8 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 
 	private static EmployeeDAO INSTANCE = null;
 
-	public static EmployeeDAO getInstance() {
+	public static EmployeeDAO getInstance()
+	{
 		if (INSTANCE == null) {
 			INSTANCE = new EmployeeDAOImpl();
 		}
@@ -48,64 +49,55 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 			}
 			Criteria createCriteria = session.createCriteria(Employee.class);
-			/*
-			 * String hql="from Employee where id="+id+""; org.hibernate.Query
-			 * query = session.createQuery(hql); list = query.list();
-			 */
+			/*String hql="from Employee where id="+id+"";		
+			org.hibernate.Query query = session.createQuery(hql);
+			 list  = query.list();*/
 			createCriteria.add(Restrictions.eq("id", id));
 			list = createCriteria.list();
 			if (list.size() == 0) {
-				throw new EmployeeException(
-						ExceptionCodes.EMPLOYEE_DOESNOT_EXIST,
-						ExceptionMessages.EMPLOYEE_DOESNOT_EXIST);
-			}
-		} finally {
-			try {
-				if (tx != null) {
-					tx.commit();
-					if (session.isConnected())
-						session.close();
-				}
-			} catch (HibernateException e) {
+				throw new EmployeeException(ExceptionCodes.EMPLOYEE_DOESNOT_EXIST, ExceptionMessages.EMPLOYEE_DOESNOT_EXIST);
+			  } 
+		}finally {
+					try {
+						if (tx != null) {
+							tx.commit();
+							if (session.isConnected())
+								session.close();
+						}
+					} catch (HibernateException e) {
 
-				e.printStackTrace();
-			}
-		}
-		return (Employee) list.iterator().next();
+						e.printStackTrace();
+					}
+			  }
+				return  (Employee) list.iterator().next();
 	}
 
 	@Override
-	public List<Employee> getFilterEmployeeDetails(Employee employee)
-			throws EmployeeException {
-		Session session = null;
-		List<Employee> list = null;
-		Transaction tx = null;
-		try {
-			session = getSession();
-			if (null == session) {
-				session = SessionFactoryUtil.getInstance().openSession();
-				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
-			}
-			Criteria createCriteria = session.createCriteria(Employee.class);
-			createCriteria.add(Restrictions.eq("gender", employee.getGender()));
-			createCriteria.add(Restrictions.eq("currentDesignation",
-					employee.getCurrentDesignation()));
-
-			createCriteria.add(Restrictions.eq("DOJ",
-					employee.getDateOfJoining()));
-
-			/*
-			 * //createCriteria.add(Restrictions.gt("yearsofexperience",employee.
-			 * getYearsofexperience()));
-			 * createCriteria.add(Restrictions.eq("highestQualification"
-			 * ,employee.getHighestQualification()));
-			 * 
-			 * //createCriteria.add(Restrictions.eq("isDeleted",false));
-			 */
-			// createCriteria.add(Restrictions.eq("employeeName",employee.getEmployeeName()));
-
-			list = (List<Employee>) createCriteria.list();
-		} finally {
+	public List<Employee> getFilterEmployeeDetails(Employee employee) throws EmployeeException{
+	Session session = null;
+	List<Employee> list = null;
+	Transaction tx = null;
+	try {
+		session = getSession();
+		if (null == session) {
+			session = SessionFactoryUtil.getInstance().openSession();
+			tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+		}
+		Criteria createCriteria = session.createCriteria(Employee.class);
+		createCriteria.add(Restrictions.eq("gender",employee.getGender()));
+		createCriteria.add(Restrictions.eq("currentDesignation",employee.getCurrentDesignation()));
+		
+		createCriteria.add(Restrictions.eq("DOJ",employee.getDateOfJoining()));
+				 
+	 	/*//createCriteria.add(Restrictions.gt("yearsofexperience",employee.getYearsofexperience()));
+		createCriteria.add(Restrictions.eq("highestQualification",employee.getHighestQualification()));
+		 
+			//createCriteria.add(Restrictions.eq("isDeleted",false));
+*/			
+		//createCriteria.add(Restrictions.eq("employeeName",employee.getEmployeeName()));
+		
+		list = (List<Employee>)createCriteria.list();
+	  } finally {
 			try {
 				if (tx != null) {
 					tx.commit();
@@ -116,9 +108,9 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 
 				e.printStackTrace();
 			}
-		}
-		return list;
-	}
+	  }
+	return  list;
+}
 
 	@Override
 	public Employee getUserByEmail(String email) throws UserException {
@@ -132,13 +124,13 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 			}
 			Criteria createCriteria = session.createCriteria(Employee.class);
+			 
 
 			createCriteria.add(Restrictions.eq("email", email));
-			// createCriteria.add(Restrictions.eq("isDeleted", false));
+			//createCriteria.add(Restrictions.eq("isDeleted", false));
 			list = createCriteria.list();
 			if (list.size() == 0) {
-				throw new UserException(ExceptionCodes.USER_DOESNOT_EXIST,
-						ExceptionMessages.USER_DOESNOT_EXIST);
+				throw new UserException(ExceptionCodes.USER_DOESNOT_EXIST, ExceptionMessages.USER_DOESNOT_EXIST);
 			}
 
 		} finally {
@@ -155,10 +147,12 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 			}
 		}
 
+	
+	 
 		return list.iterator().next();
-
+		
 	}
-
+	
 	public String getEmployeeName(long id) {
 		Session session = null;
 		session = getSession();
@@ -167,7 +161,6 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 		List<Employee> list = createCriteria.list();
 		return list.iterator().next().getEmployeeName();
 	}
-
 	@Override
 	public List<Employee> getEmployees() {
 		Session session = null;
@@ -193,8 +186,9 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 				e.printStackTrace();
 			}
 		}
-		return list;
+		return  list;	 
 	}
+
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -209,10 +203,12 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 				session = SessionFactoryUtil.getInstance().openSession();
 				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 			}
-			String hql = "from Employee where month(DOB)=month(sysdate())";//
+    String hql="from Employee where month(DOB)=month(sysdate())";//				
 			org.hibernate.Query query = session.createQuery(hql);
-			results = query.list();
-
+			 results = query.list();
+			 
+			 
+			 
 			if (results.size() == 0) {
 				throw new BusinessException(ExceptionCodes.NO_BIRTHDAY_TODAY,
 						ExceptionMessages.NO_BIRTHDAY_TODAY);
@@ -233,7 +229,7 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 		}
 		return results;
 	}
-
+	
 	@Override
 	public List<Employee> getWorkAniversary() throws BusinessException {
 		Session session = null;
@@ -245,14 +241,13 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 				session = SessionFactoryUtil.getInstance().openSession();
 				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 			}
-
-			String hql = "from Employee where month(DOJ)=month(sysdate())";
+			
+			String hql="from Employee where month(DOJ)=month(sysdate())";				
 			org.hibernate.Query query = session.createQuery(hql);
-			list = query.list();
-
+			 list  = query.list();
+			
 			if (list.size() == 0) {
-				throw new BusinessException(
-						ExceptionCodes.NO_WORK_ANNIVERSARY_TODAY,
+				throw new BusinessException(ExceptionCodes.NO_WORK_ANNIVERSARY_TODAY,
 						ExceptionMessages.NO_WORK_ANNIVERSARY_TODAY);
 			}
 
@@ -271,51 +266,46 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 		}
 		return list;
 	}
+	
+
+
 
 	@SuppressWarnings("deprecation")
-	public List<DisplayNotificationHome> getEventWithinDate(
-			NotificationHomeFilterInputDiscriptor filterCriteria) {
-		Session session = null;
-		List<DisplayNotificationHome> list = null;
-		Transaction tx = null;
+public List<DisplayNotificationHome> getEventWithinDate(NotificationHomeFilterInputDiscriptor filterCriteria) {
+	Session session = null;
+	List<DisplayNotificationHome> list = null;
+	Transaction tx = null;
+	
+
+	try {
+		session = getSession();
+		if (null == session) {
+			session = SessionFactoryUtil.getInstance().openSession();
+			tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+		}
+		
+		/*String hql="from Employee where day(DOB) between "+fromDate.getDay()+" and "+toDate.getDay()+" and month(DOB) between "+fromDate.getMonth()+" and "+toDate.getMonth()+" or  day(DOJ) between "+fromDate.getDay()+" and "+toDate.getDay()+" and month(DOJ) between "+fromDate.getMonth()+" and "+toDate.getMonth();			
+		org.hibernate.Query query = session.createQuery(hql);
+		list  = query.list();*/
+		
+	
+	} finally {
 
 		try {
-			session = getSession();
-			if (null == session) {
-				session = SessionFactoryUtil.getInstance().openSession();
-				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+			if (tx != null) {
+				tx.commit();
+				if (session.isConnected())
+					session.close();
 			}
+		} catch (HibernateException e) {
 
-			/*
-			 * String
-			 * hql="from Employee where day(DOB) between "+fromDate.getDay
-			 * ()+" and "
-			 * +toDate.getDay()+" and month(DOB) between "+fromDate.getMonth
-			 * ()+" and "
-			 * +toDate.getMonth()+" or  day(DOJ) between "+fromDate.getDay
-			 * ()+" and "
-			 * +toDate.getDay()+" and month(DOJ) between "+fromDate.getMonth
-			 * ()+" and "+toDate.getMonth(); org.hibernate.Query query =
-			 * session.createQuery(hql); list = query.list();
-			 */
-
-		} finally {
-
-			try {
-				if (tx != null) {
-					tx.commit();
-					if (session.isConnected())
-						session.close();
-				}
-			} catch (HibernateException e) {
-
-				e.printStackTrace();
-			}
+			e.printStackTrace();
 		}
-		return list;
 	}
-
-	public List<Employee> getTodaysBirthday() {
+	return list;
+}
+	
+	public List<Employee> getTodaysBirthday()  {
 
 		Session session = null;
 		List<Employee> results = null;
@@ -326,14 +316,16 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 				session = SessionFactoryUtil.getInstance().openSession();
 				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 			}
-
-			String hql = "from Employee where day(DOB) = day(sysdate()) and month(DOB)=month(sysdate())";
+			
+	
+    String hql="from Employee where day(DOB) = day(sysdate()) and month(DOB)=month(sysdate())";			
 			org.hibernate.Query query = session.createQuery(hql);
-			results = query.list();
-
-			if (results.size() == 0) {
-				System.out.println("No Aniversary");
-			}
+			 results = query.list();
+						 
+			 
+				if (results.size() == 0) {
+					System.out.println("No Aniversary");
+				}
 
 		} finally {
 
@@ -350,7 +342,6 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 		}
 		return results;
 	}
-
 	public List<Employee> getTodayWorkAniversary() {
 
 		Session session = null;
@@ -362,10 +353,12 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 				session = SessionFactoryUtil.getInstance().openSession();
 				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 			}
-			String hql = "from Employee where day(DOJ) = day(sysdate()) and month(DOJ)=month(sysdate())";//
+    String hql="from Employee where day(DOJ) = day(sysdate()) and month(DOJ)=month(sysdate())";//				
 			org.hibernate.Query query = session.createQuery(hql);
-			results = query.list();
-
+			 results = query.list();
+			 
+			 
+			 
 			if (results.size() == 0) {
 				System.out.println("No Aniversary");
 			}
@@ -421,7 +414,6 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 		return null;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Employee> getEmployee() {
 		Session session = null;
@@ -434,7 +426,7 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 			}
 			Criteria createCriteria = session.createCriteria(Employee.class);
-			list = (List<Employee>) createCriteria.list();
+			list = createCriteria.list();
 		} finally {
 			try {
 				if (tx != null) {
@@ -450,7 +442,6 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 		return list;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Employee> searchEmployee(EmployeeSearchInputDescriptor employee) {
 		Session session = null;
@@ -463,25 +454,15 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 			}
 			Criteria createCriteria = session.createCriteria(Employee.class);
-			// Criterion empid = Restrictions.eq("employeeId",
-			// employee.getSearchKey());
-			Criterion name = Restrictions.ilike("employeeName",
-					employee.getSearchKey(), MatchMode.ANYWHERE);
-			Criterion email = Restrictions.ilike("email",
-					employee.getSearchKey(), MatchMode.ANYWHERE);
-			// Criterion gender = Restrictions.eq("gender",
-			// employee.getSearchKey());
-			// Criterion experience = Restrictions.eq("yearsofexperience",
-			// employee.getSearchKey());
+			
+			Criterion name = Restrictions.ilike("employeeName", employee.getSearchKey(), MatchMode.ANYWHERE);
+			Criterion email = Restrictions.ilike("email", employee.getSearchKey(), MatchMode.ANYWHERE);
 			Disjunction disjunction = Restrictions.disjunction();
-			// disjunction.add(empid);
 			disjunction.add(name);
 			disjunction.add(email);
-			// disjunction.add(gender);
-			// disjunction.add(experience);
 			createCriteria.add(disjunction);
-
-			list = (List<Employee>) createCriteria.list();
+					
+			list = (List<Employee>)createCriteria.list();
 		} finally {
 			try {
 				if (tx != null) {

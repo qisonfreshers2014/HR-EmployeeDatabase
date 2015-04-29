@@ -1,4 +1,4 @@
-package com.hred.service.descriptors.Input;
+package com.hred.service.descriptors.input;
 
 
 
@@ -7,7 +7,10 @@ package com.hred.service.descriptors.Input;
 import java.sql.Timestamp;
 
 import org.codehaus.jackson.annotate.JsonProperty;
-
+/**
+ * @author Bhargavi Uppoju
+ *
+ */
 public class DesignationHistoryOutput
 {
 	

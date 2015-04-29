@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.hred.service.descriptors.Input;
+package com.hred.service.descriptors.input;
 
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;

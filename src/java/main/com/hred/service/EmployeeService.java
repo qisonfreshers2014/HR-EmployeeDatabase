@@ -26,7 +26,7 @@ import com.hred.service.annotations.RestService;
 import com.hred.service.annotations.ServiceStatus;
 import com.hred.service.annotations.UnSecure;
 import com.hred.service.common.WebserviceRequest;
-import com.hred.service.descriptors.Input.EmployeeSearchInputDescriptor;
+import com.hred.service.descriptors.input.EmployeeSearchInputDescriptor;
 import com.hred.service.descriptors.output.ActivitiesBirthDayOutputDescriptor;
 import com.hred.service.descriptors.output.ActivitiesWorkAnniversaryOutputDescriptor;
 import com.hred.service.descriptors.output.DisplayNotificationHome;

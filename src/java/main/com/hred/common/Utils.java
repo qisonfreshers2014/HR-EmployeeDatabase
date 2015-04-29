@@ -37,7 +37,7 @@ public final class Utils {
             throw new BusinessException(ExceptionCodes.EMAIL_CANNOT_BE_EMPTY,
                     ExceptionMessages.EMAIL_CANNOT_BE_EMPTY);
         }
-        boolean isEmailPatternValid = Pattern.compile(Utils.EMAIL_PATTERN)
+        boolean isEmailPatternValid = Pattern.compile(EMAIL_PATTERN)
                 .matcher(email).matches();
         if (!isEmailPatternValid) {
             throw new BusinessException(ExceptionCodes.INVALID_EMAIL_PATTERN,
