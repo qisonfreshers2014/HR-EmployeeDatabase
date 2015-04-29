@@ -20,6 +20,9 @@ public class Objects {
             case ObjectTypes.USER:
                 persistentObjectName = User.class;
                 break;
+            case ObjectTypes.FILE:
+                persistentObjectName = File.class;
+                break;
             default:
                 break;
         }

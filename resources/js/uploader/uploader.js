@@ -44,6 +44,7 @@ function Uploader(allowedFileType, callback, forAdmin, isQSPAdmin, mediaUpload) 
             }
         }.ctx(this));
 }
+
 Uploader.prototype.handleShow = function(allowedFileType) {
     var self = this;
     this.populateFileLimits();
@@ -82,7 +83,7 @@ Uploader.prototype.handleShow = function(allowedFileType) {
             if (isFileValidated) {
                 $('#uploadForm .btn-primary').attr("disabled", "disabled");
                 $("#progressbox").show();
-                $("#progressbar").html("<img src='img/loading.gif'>");
+                //$("#progressbar").html("<img src='img/loading.gif'>");
                 $("#statustxt").html("Uploading...");
             } else {
                 return false;
@@ -204,5 +205,5 @@ Uploader.prototype.getAllowedExtensions = function(allowedFileType) {
 if(allowedFileType == "image")
 	this.allowExtArray = ['jpg', 'png', 'jpeg'];
 else
-	this.allowExtArray = ['oda','pdf','doc','odt','docx'];
+	this.allowExtArray = ['oda','pdf','doc','odt','docx', 'png', 'jpg','jpeg','ods','txt','html'];
 }

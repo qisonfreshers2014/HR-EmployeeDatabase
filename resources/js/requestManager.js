@@ -47,7 +47,7 @@ RequestManager.prototype.sendToServer = function (api, data, callback, options) 
 
 }
 
-RequestManager.prototype.save = function(data, callback) {
+/*RequestManager.prototype.save = function(data, callback) {
 	  this.sendToServer('skills/save', data, callback);
 	 }
 	  
@@ -81,6 +81,7 @@ RequestManager.prototype.dynamicallyEdit=function(data,callback){
 }
 
 
+*/
 
 
 
@@ -112,8 +113,9 @@ RequestManager.prototype.dynamicallyEdit=function(data,callback){
 
 
 
-
-
+RequestManager.prototype.getAllHrPolicy=function(data,callback){
+	this.sendToServer('hr_policy/getPolicy', data, callback);
+}
 
 
 

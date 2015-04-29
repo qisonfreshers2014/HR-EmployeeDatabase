@@ -34,7 +34,7 @@ Loader.prototype.loadHTML = function(container, filePath, empty, callback) {
 	});
 
 }
-Loader.prototype.loadFilter = function(cb){
+/*Loader.prototype.loadFilter = function(cb){
 	 LazyLoad.css('resources/js/FilterEmployee/FilterEmployee.css');
 	 LazyLoad.js('resources/js/FilterEmployee/Filter.js',cb);
 }
@@ -98,14 +98,16 @@ Loader.prototype.listEmployees = function(){
 
 
 
+*/
 
 
 
 
+Loader.prototype.loadHRPolicyVeiwPage = function(cb){
+	/* LazyLoad.css('resources/js/designation/cssfile.css');*/
+	 LazyLoad.js('resources/js/addinghrpolicy/Policy.js',cb);
 
-
-
-
+}
 
 
 
@@ -143,12 +145,13 @@ Loader.prototype.listEmployees = function(){
 
 
 Loader.prototype.loadDes = function(cb){
-		// LazyLoad.css('resources/js/designation/cssfile.css');
-		 LazyLoad.js('resources/js/designation/EmpDes.js',cb);
+		 LazyLoad.css('resources/js/editdesignation/editdesignation.css');
+		 LazyLoad.js('resources/js/editdesignation/editdesignation.js',cb);
 }
 
 Loader.prototype.loadPolicy = function(cb){
-	/* LazyLoad.css('resources/js/designation/cssfile.css');*/
+	 LazyLoad.css('resources/js/addinghrpolicy/addpolicy.css');
 	 LazyLoad.js('resources/js/addinghrpolicy/addpolicy.js',cb);
 }
+
 var Loader = new Loader();

@@ -7,7 +7,7 @@ App.prototype.handleShow = function () {
 
 	   
 }
-
+/*
 App.prototype.loadViewTemplate = function(name){
 	Loader.loadViewTemplate(function(){
 		new EditTemplate();
@@ -73,8 +73,8 @@ App.prototype.loadNotifications = function(){
 	});
 }
 
-
-
+*/
+/*
 App.prototype.loadLogin=function(){
 	Loader.loadLogin();
 }
@@ -103,6 +103,7 @@ App.prototype.listEmployees=function(){
 }
 
 
+*/
 
 
 
@@ -122,8 +123,11 @@ App.prototype.listEmployees=function(){
 
 
 
-
-
+App.prototype.loadHRPolicyVeiwPage = function(){
+	Loader.loadHRPolicyVeiwPage(function(){
+		new policyList();
+	});
+}
 
 
 

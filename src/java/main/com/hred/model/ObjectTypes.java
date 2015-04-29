@@ -78,8 +78,7 @@ public static final int EMPLOYEE = 151;
  
  public static final int DESIGNATION_TYPE=182;
  public static final int DESIGNATION_HISTORY=183;
- public static final int FILEUPLOAD=184;
- public static final int HRPOLICIES=186;
+ public static final int HR_POLICIES=186;
 
 
  
