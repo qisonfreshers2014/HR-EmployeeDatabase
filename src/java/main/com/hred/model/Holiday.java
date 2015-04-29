@@ -12,6 +12,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.hred.persistence.annotations.Increment;
+
 /**
  * @author saisudha
  *
@@ -19,7 +21,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "HOLIDAY")
-
+@Increment
 public class Holiday  extends AbstractObject{
 
 	 @Temporal(TemporalType.DATE)

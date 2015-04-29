@@ -10,7 +10,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import com.hred.model.Holiday;
 import com.hred.service.annotations.SerializationDescriptor;
 import com.hred.service.descriptors.JSONSerializationDescriptor;
-import com.hred.service.descriptors.input.HolidayTypeInput;
+import com.hred.service.descriptors.Input.HolidayTypeInput;
 
 /**
  * @author saisudha

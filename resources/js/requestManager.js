@@ -68,6 +68,10 @@ RequestManager.prototype.authenticate=function(data,callback){
 	this.sendToServer('employee/authenticate', data, callback);
 }
 
+RequestManager.prototype.getTemplateById=function(data,callback){
+	this.sendToServer('template/viewTemplate', data, callback);
+}
+
 RequestManager.prototype.holidaysData=function(data,callback){
 	this.sendToServer('holidays/save', data, callback);
 }
@@ -80,10 +84,17 @@ RequestManager.prototype.dynamicallyEdit=function(data,callback){
 	this.sendToServer('holidays/editHoliday', data, callback);
 }
 
+RequestManager.prototype.saveEmp=function(data,callback){
+	this.sendToServer('employee/save', data, callback);
+}
 
+<<<<<<< HEAD
 */
 
 
+RequestManager.prototype.geteditEmployee=function(data,callback){
+	this.sendToServer('employee/getEmployee', data, callback);
+}
 
 
 
@@ -127,6 +138,17 @@ RequestManager.prototype.getAllHrPolicy=function(data,callback){
 
 
 
+RequestManager.prototype.getEmployees=function(data,callback){
+	this.sendToServer('employee/getEmployees', data, callback);
+}
+RequestManager.prototype.updateEmp=function(data,callback){
+	this.sendToServer('employee/updateEmployee', data, callback);
+}
+RequestManager.prototype.hrupdateEmp=function(data,callback){
+	this.sendToServer('employee/hrupdateEmployee', data, callback);
+}
+
+
 RequestManager.prototype.saveDes=function(data,callback){
 	this.sendToServer('designation_history/save', data, callback);
 }
@@ -138,5 +160,33 @@ RequestManager.prototype.getDesName=function(data,callback){
 }
 RequestManager.prototype.savePolicy=function(data,callback){
 	this.sendToServer('hr_policy/save', data, callback);
+}
+
+
+RequestManager.prototype.getNotificationDisplayCriteria=function(data,callback){
+	this.sendToServer('employee/getNotificationDisplayCriteria', data, callback);
+}
+RequestManager.prototype.addTemplate = function(data, callback) {
+	 this.sendToServer('template/save', data, callback);
+	}
+RequestManager.prototype.viewEmployeedatails = function(data, callback) {
+	 this.sendToServer('employee/viewEmployee', data, callback);
+	}
+RequestManager.prototype.getTemplates = function(data, callback) {
+	 this.sendToServer('template/gatTemplate', data, callback);
+	}
+
+
+RequestManager.prototype.getSentManualMail=function(data,callback){
+	this.sendToServer('SendNotificationHistory/sendMail', data, callback);
+}
+
+
+
+RequestManager.prototype.getSentMailContent=function(data,callback){
+	this.sendToServer('employee/getSentMailContent', data, callback);
+}
+RequestManager.prototype.getAllEvents=function(data,callback){
+	this.sendToServer('employee/getAllEvents', data, callback);
 }
 var RequestManager = new RequestManager();

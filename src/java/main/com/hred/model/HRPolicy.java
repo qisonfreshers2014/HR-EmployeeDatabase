@@ -5,10 +5,12 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import com.hred.persistence.annotations.Increment;
+
 /**
  * @author Bhargavi Uppoju
  *
  */
+
 @Entity
 @Table(name="HR_POLICIES")
 @Increment

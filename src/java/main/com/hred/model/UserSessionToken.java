@@ -21,6 +21,7 @@ public class UserSessionToken implements Serializable {
     protected String userEmail;
     protected long userId;  
     protected String nickName; //anil
+    protected String roleName;
     
     
     ///////////////////////////////
@@ -83,5 +84,15 @@ public class UserSessionToken implements Serializable {
                 " , userId: " + userId +
                 "]";
     }
+	public String getRoleName()
+	{
+		return roleName;
+	}
+
+	public void setRoleName(String roleName) {
+		
+		this.roleName = roleName;
+		
+	}
 
 }

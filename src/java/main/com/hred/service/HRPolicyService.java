@@ -33,7 +33,10 @@ import com.hred.service.descriptors.output.VeiwHRPolicyDiscriptor;
  */
 
 @Path("/v1/hr_policy/")
+
 public class HRPolicyService extends BaseService{
+
+
 
 	@POST
 	@RestService(input = String.class, output = String.class)

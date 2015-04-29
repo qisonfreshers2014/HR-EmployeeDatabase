@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.hred.exception.ObjectNotFoundException;
 import com.hred.model.BaseObject;
+import com.hred.model.Template;
 
 
 /*
@@ -24,6 +25,10 @@ public interface BaseDAO {
 	 public List<BaseObject> save(List<BaseObject> persistentObjects);
 
 	 public BaseObject getObjectById(long id,int objectType) throws ObjectNotFoundException;
+
+	
+	 
+	 
 
 
 }

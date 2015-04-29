@@ -1,0 +1,171 @@
+<html>
+
+<head>
+    <title>HrEditEmployee</title>
+    <style>
+        .table {
+            width: 50%;
+            text-align: left;
+            text-decoration: blink;
+        }
+        .tr {
+            height: 50%;
+            width: 50%;
+            font-size: 100%;
+            font-family: Calibri
+        }
+        .th {
+            color: black;
+        }
+        .bar {
+            color: brown;
+        }
+        .error {
+            color: red;
+        }
+        .body {
+            bgcolor: #99CCF;
+        }
+    </style>
+</script>  
+</head>
+<body class="body">
+    <form method="post">
+
+        <fieldset class="span4">
+            <table class="table">
+                <tr class="tr">
+                    <legend>
+                        <h3 class="bar">Personal Details</h3>
+                    </legend>
+                    <th class="th">EID<span class="error">*</span>
+                    </th>
+                    <td>
+                        <input type="text" value="" id="eid" readonly ><span class="error" id="eiderr" ></span>
+                    </td>
+                    <th class="th">Name<span class="error">*</span>
+                    </th>
+                    <td>
+                        <input type="text" value="" id="name"><span class="error" id="nameerr"></span>
+                    </td>
+                    <th class="th">Gender<span class="error">*</span>
+                    </th>
+                    <td>
+                        <input type="radio" name="male" id="male" class="gender">M
+                        <input type="radio" name="male" id="female" class="gender">F <br> <span class="error" id="generr"></span>
+		</td>
+                </tr>
+                <tr class="tr">
+                    <th class="th">DOB<span class="error">*</span>
+                    </th>
+                    <td>
+                        <input class="text" class="date" id="dob">
+                    </td>
+                    <th class="th">Blood Group</th>
+                    <td>
+                        <input type="text" name="bloodgroup" id="blood">
+                    </td>
+                </tr>
+                <tr class="tr">
+                    <th class="th">Highest Qualification<span class="error">*</span>
+                    </th>
+                    <td>
+                        <input type="text" name="highqualification" id="qual" ><span class="error" id="qualerr"></span>
+                    </td>
+                    
+</tr>
+		<tr class="tr">
+                    <th class="th">Father's Name<span class="error">*</span>
+                    </th>
+                    <td>
+                        <input type="text" name="fathersname" id="fathername"><span class="error" id="fathererr"></td>
+                    <th class="th">Salary<span class="error">*</span>
+                    </th>
+                    <td>
+                        <input type="text" name="salary" id="salary"><span class="error" id="salerr">
+                    </td>
+                    <th class="th">Variable Component</th>
+                    <td>
+                        <input type="text" name="variable" id="variable">
+                    </td>
+                </tr>
+</table>
+</fieldset>
+
+<fieldset class="span4">
+<table class="table">
+<tr  class="tr">
+<legend><h3 class="bar">Account Details</h3></legend>
+<th class="th">PAN Number<span class="error">*</span>
+                        </th>
+                        <td>
+                            <input type="text" name="pan" id="pannum"><span class="error" id="panerr"></td>
+<th class="th">PF Number<span class="error">*</span>
+                            </th>
+                            <td>
+                                <input type="text" name="pf" id="pfnum"><span class="error" id="pferr"></td>
+<th class="th">Bank Account Number<span class="error">*</span>
+                                </th>
+                                <td>
+                                    <input type="text" name="account" id="accountnum"><span class="error" id="acterr"></td>
+</tr>
+</table>
+</fieldset>
+<fieldset class="span4">
+			<table class="table">
+				<legend>
+					<h3 class="bar">Contact Details</h3>
+				</legend>
+				<tr class="tr">
+					<th class="th">Contact Number<span class="error">*</span>
+					</th>
+					<td><input type="text" name="num" id="contnum"><span
+						class="error" id="cnumerr"></td>
+
+					<th class="th">Current Address<span class="error">*</span>
+					</th>
+					<td><textarea rows="5" id="currentaddr"></textarea><br>
+					<span class="error" id="currentaddrerr"></span></td>
+					<th class="th">Permanent Address<span class="error">*</span>
+					</th>
+					<td><textarea rows="5" id="peraddr"></textarea><br>
+					<span class="error" id="peraddrerr"></span></td>
+				</tr>
+				<tr class="tr">
+					<th class="th">Emergency Contact<span class="error">*</span>
+					</th>
+					<td><input type="text" name="emergency" id="txtemercon"><span
+						class="error" id="emnumerr"></td>
+					<th class="th">Emergency Contact Name<span class="error">*</span>
+					</th>
+					<td><input type="text" name="conname" class="contactname"
+						id="txtemname"><span class="error" id="emnameerr"></td>
+					<th class="th">Relation with Emergency Contact<span
+						class="error">*</span>
+					</th>
+					<td><input type="text" name="relation" class="relation"
+						id="relation"><span class="error" id="relationerr"></span>
+					</td>					
+				</tr>
+				<tr>
+				<th class="th">Email<span class="error">*</span>
+					</th>
+					<td><input type="email" name="email" id="emal" readonly><span
+						class="error" id="emlerr"></span></td>
+					<th class="th">Password<span class="error">*</span>
+					</th>
+					<td><input type="password" name="password" id="password" readonly><span
+						class="error" id="pwderr"></td>
+					<th class="th">Skype Account<span class="error">*</span>
+					</th>
+					<td><input type="text" name="skype" id="skype"><span
+						class="error" id="skypeerr"></td>
+				</tr>
+			</table>
+		</fieldset>
+<center> <button type="submit" class="btn" id="hredit">Edit</button>
+           	 <button class="btn" id="hrupdate">Update</button> </center>
+</form>
+</body>
+</html>
+

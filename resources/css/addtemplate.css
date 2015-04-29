@@ -1,0 +1,10 @@
+@CHARSET "ISO-8859-1";
+#fields {
+	border:1px solid black;
+	padding:10px;
+	text_align=center;
+	font-weight:bold;
+}
+#header {
+	color:brown;
+}

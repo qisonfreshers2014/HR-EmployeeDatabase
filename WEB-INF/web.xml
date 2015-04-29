@@ -23,6 +23,7 @@ id="WebApp_ID" version="3.0">
         <servlet-name>JerseyWebApp</servlet-name>
         <url-pattern>/services/*</url-pattern>
     </servlet-mapping>
+
         <servlet>
 		<servlet-name>UploadServlet</servlet-name>
 		<servlet-class>com.hred.fileupload.UploadServlet</servlet-class>

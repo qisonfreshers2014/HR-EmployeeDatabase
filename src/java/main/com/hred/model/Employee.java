@@ -1,20 +1,31 @@
 package com.hred.model;
 
-
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.hred.persistence.annotations.Increment;
+
+
+
 /**
- * @author Jyothi Ambepu
+ * @author Venkatesh Chitla
  *
  */
 
-
 @Entity
 @Table(name = "EMPLOYEE")
+@Increment
 public class Employee extends AbstractObject {
+
+	
+
+	public static final String AUTH_TYPE_REGULAR = "REGULAR";
+	public static final int AUTH_STATUS_EXISTING = 0;
+	public static final int AUTH_STATUS_NEW = 1;
+	public static final int AUTH_STATUS_NONE = 2;
 
 	@Column(name = "employee_id")
 	private int employeeId;
@@ -22,14 +33,17 @@ public class Employee extends AbstractObject {
 	private String employeeName;
 	@Column(name = "gender")
 	private String gender;
+	//@Temporal(TemporalType.DATE)
 	@Column(name = "DOB")
-	private String DOB;
+	private Timestamp dateOfBirth;
+	//@Temporal(TemporalType.DATE)
 	@Column(name = "DOJ")
-	private String DOJ;
+	private Timestamp dateOfJoining;
+
 	@Column(name = "years_of_experience")
-	private String yearsofexperience;
+	private int yearsofexperience;
 	@Column(name = "contact_number")
-	private String contactNo;
+	private long contactNo;
 	@Column(name = "current_address")
 	private String currentAddress;
 	@Column(name = "permanent_address")
@@ -39,7 +53,7 @@ public class Employee extends AbstractObject {
 	@Column(name = "password")
 	private String password;
 	@Column(name = "emergency_contact_num")
-	private String emergencycontactnumber;
+	private long emergencycontactnumber;
 	@Column(name = "fathers_name")
 	private String fathersName;
 	@Column(name = "emergency_conatact_name")
@@ -49,9 +63,7 @@ public class Employee extends AbstractObject {
 	@Column(name = "bloog_group")
 	private String bloodGroup;
 	@Column(name = "current_designation")
-	private String currentDesignation;
-	@Column(name = "reporting_manager")
-	private String reportinManagerId;
+	private int currentDesignation;
 	@Column(name = "highest_qualification")
 	private String highestQualification;
 	@Column(name = "pan")
@@ -62,14 +74,17 @@ public class Employee extends AbstractObject {
 	private String bankAccountNo;
 	@Column(name = "skype")
 	private String skype;
+	@Column(name = "Skill")
+	private int skill;
+	@Column(name = "Rating")
+	private int rating;
+	@Column(name="variable_component")
+	private String variableComponent;
 	
 	public Employee() {
 		
+
 	}
-	 public static final String AUTH_TYPE_REGULAR = "REGULAR";
-	 public static final int AUTH_STATUS_EXISTING = 0;
-	 public static final int AUTH_STATUS_NEW = 1; 
-	 public static final int AUTH_STATUS_NONE = 2;
 
 	public Employee(int employeeId) {
 		this.employeeId = employeeId;
@@ -77,7 +92,6 @@ public class Employee extends AbstractObject {
 	}
 
 	
-
 	public int getEmployeeId() {
 		return employeeId;
 	}
@@ -102,35 +116,36 @@ public class Employee extends AbstractObject {
 		this.gender = gender;
 	}
 
-	public String getDOB() {
-		return DOB;
+
+	public Timestamp getDateOfBirth() {
+		return dateOfBirth;
 	}
 
-	public void setDOB(String dOB) {
-		DOB = dOB;
+	public void setDateOfBirth(Timestamp dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
 	}
 
-	public String getDOJ() {
-		return DOJ;
+	public Timestamp getDateOfJoining() {
+		return dateOfJoining;
 	}
 
-	public void setDOJ(String dOJ) {
-		DOJ = dOJ;
+	public void setDateOfJoining(Timestamp dateOfJoining) {
+		this.dateOfJoining = dateOfJoining;
 	}
 
-	public String getYearsofexperience() {
+	public int getYearsofexperience() {
 		return yearsofexperience;
 	}
 
-	public void setYearsofexperience(String yearsofexperience) {
+	public void setYearsofexperience(int yearsofexperience) {
 		this.yearsofexperience = yearsofexperience;
 	}
 
-	public String getContactNo() {
+	public long getContactNo() {
 		return contactNo;
 	}
 
-	public void setContactNo(String contactNo) {
+	public void setContactNo(long contactNo) {
 		this.contactNo = contactNo;
 	}
 
@@ -166,11 +181,11 @@ public class Employee extends AbstractObject {
 		this.password = password;
 	}
 
-	public String getEmergencycontactnumber() {
+	public long getEmergencycontactnumber() {
 		return emergencycontactnumber;
 	}
 
-	public void setEmergencycontactnumber(String emergencycontactnumber) {
+	public void setEmergencycontactnumber(long emergencycontactnumber) {
 		this.emergencycontactnumber = emergencycontactnumber;
 	}
 
@@ -207,20 +222,12 @@ public class Employee extends AbstractObject {
 		this.bloodGroup = bloodGroup;
 	}
 
-	public String getCurrentDesignation() {
+	public int getCurrentDesignation() {
 		return currentDesignation;
 	}
 
-	public void setCurrentDesignation(String currentDesignation) {
+	public void setCurrentDesignation(int currentDesignation) {
 		this.currentDesignation = currentDesignation;
-	}
-
-	public String getReportinManagerId() {
-		return reportinManagerId;
-	}
-
-	public void setReportinManagerId(String reportinManagerId) {
-		this.reportinManagerId = reportinManagerId;
 	}
 
 	public String getHighestQualification() {
@@ -261,6 +268,30 @@ public class Employee extends AbstractObject {
 
 	public void setSkype(String skype) {
 		this.skype = skype;
+	}
+
+	public int getSkill() {
+		return skill;
+	}
+
+	public void setSkill(int skill) {
+		this.skill = skill;
+	}
+
+	public int getRating() {
+		return rating;
+	}
+
+	public void setRating(int rating) {
+		this.rating = rating;
+	}
+
+	public String getVariableComponent() {
+		return variableComponent;
+	}
+
+	public void setVariableComponent(String variableComponent) {
+		this.variableComponent = variableComponent;
 	}
 
 	@Override

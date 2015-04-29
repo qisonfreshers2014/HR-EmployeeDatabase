@@ -26,6 +26,18 @@ public class DAOFactory {
 		return UserDAOImpl.getInstance();
 	}
 	
+
+	/*public TemplateDAO getTemplateDAO() {
+		  return  TemplateDAOimpl.getInstance();
+		 }*/
+	
+	public HolidayDAO getHolidayDAO() {
+		return HolidayDAOImpl.getInstance();
+	}
+
+
+
+
 	public EmployeeDAO getEmployeeDAO() {
 		return EmployeeDAOImpl.getInstance();
 	}
@@ -35,20 +47,15 @@ public class DAOFactory {
 	}
 
 
-	
-	public HolidayDAO getHolidayDAO() {
-		return HolidayDAOImpl.getInstance();
-	}
+	public TemplateDAO getTemplateDAO() {
 
-	
-	
-	
+		return TemplateDAOimpl.getInstance();
+
+		
+	}
 	
 	public FileDAO getFileDAO() {
 		return FileDAOImpl.getInstance();
-	}
-	public TemplateDAO getTemplateDAO() {
-		return TemplateDAOimpl.getInstance();
 	}
 
 	public AllHandsMeetingDAO getAllHandsMeetingDAO() {
@@ -58,55 +65,17 @@ public class DAOFactory {
 
 	
 	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
-	
 	public DesignationHistoryDAO getDesignationHistoryDAO(){
 			return DesignationHistoryDAOImpl.getInstance();
 	}
 	
 	public HRPolicyDAO getHRPolicyDAO(){
 		return HRPolicyDAOImpl.getInstance();
-}
+	}
+	
+	public SendNotificationHistoryDAO getSendNotificationHistoryDAO()
+	{
+		return SendNotificationHistoryDAOImpl.getInstance();
+	}
 }
 

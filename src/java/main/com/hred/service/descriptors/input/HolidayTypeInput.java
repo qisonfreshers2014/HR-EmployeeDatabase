@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.hred.service.descriptors.input;
+package com.hred.service.descriptors.Input;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 

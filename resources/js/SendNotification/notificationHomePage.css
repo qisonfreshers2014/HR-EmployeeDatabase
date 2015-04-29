@@ -1,0 +1,39 @@
+#head
+{
+	 border-style: solid;
+    border-width: medium;
+    border-color: #0000ff;
+    background-color:#3399FF;
+}
+#extraActions
+{
+	border-color: #0000ff;
+	border-style: solid;
+    border-width: medium;
+	border-top-style: none;
+	background-color:#3399FF;
+}
+#States
+{
+	margin-left:40%;
+}
+#Events
+{
+	margin-right:5%;
+}
+#fromDate
+{
+	margin-right:0%;
+}
+#toDate
+{
+	margin-right:5%;
+}
+
+.container {
+	height : 600px;
+}
+
+.leftContainer {
+	height : 500px;
+}
