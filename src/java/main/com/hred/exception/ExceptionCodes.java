@@ -292,6 +292,11 @@ public interface ExceptionCodes {
 	
 	//holidays related Exception Codes
 	public static final int HOLIDAYSID_DOESNOT_EXIST = 9011;
+	public static final int AllHANDSMEETINGID_DOESNOT_EXIST = 202;
+	public static final int EVERY_FIELD_IS_MANDATORY = 203;
+	public static final int ALLHANDSMEETING_DATE_ALREADY_EXISTS = 204;
+	
+	
 	
 	
 	

@@ -8,16 +8,29 @@ App.prototype.handleShow = function () {
 	   
 }
 
-App.prototype.loadViewTemplate = function(name){
+App.prototype.loadViewTemplate = function(dataid){
+	 Loader.loadCkeditor();
 	Loader.loadViewTemplate(function(){
-		new EditTemplate();
+		new EditTemplate(dataid);
 	});
 }
-App.prototype.loadAllHandsMeeting = function(name){
+App.prototype.loadAllHandsMeeting = function(){
 	Loader.loadAllHandsMeeting(function(){
-		new AllHandsMeeting();
+		new viewAllHandsMeeting();
 	});
 }
+App.prototype.loadAllhandmeeting = function(){
+	Loader.loadAllhandmeeting(function(){
+		new AllHandMeeting();
+	});
+}
+App.prototype.loadAllhandmeetings = function(dataid){
+	Loader.loadAllhandmeetings(function(){
+		new EditHandMeeting(dataid);
+	});
+}
+
+
 
 
 App.prototype.loadHRHomeHeader = function(name){

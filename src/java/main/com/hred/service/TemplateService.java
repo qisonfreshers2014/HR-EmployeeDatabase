@@ -80,6 +80,26 @@ public class TemplateService extends BaseService {
 
 		return JsonUtil.getJsonBasedOnDescriptor(output,Template.class);
 	}
+
+	@POST
+	@RestService(input = String.class, output = String.class)
+	@ServiceStatus(value = "complete")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/updateTemplate")
+	@UnSecure
+	public String update(@Context HttpHeaders headers,
+			@Context UriInfo uriInfo, WebserviceRequest request)
+			throws ObjectNotFoundException, BusinessException,
+			EncryptionException {
+
+		Template template = (Template) JsonUtil.getObject(
+				request.getPayload(), Template.class);
+
+		Template output=(Template) TemplateHandler.getInstance().update(template);
+
+		return JsonUtil.getJsonBasedOnDescriptor(output,Template.class);
+	}
 	
 	@POST
 	@RestService(input = String.class, output = String.class)

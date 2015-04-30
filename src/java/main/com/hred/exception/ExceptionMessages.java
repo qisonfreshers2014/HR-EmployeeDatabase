@@ -155,6 +155,16 @@ public interface ExceptionMessages {
 	
 	//holidays related Exception Messages
 	public static final String HOLIDAYSID_DOESNOT_EXIST = "Invalid Holiday Id";
+
+	
+
+	public static final String AllHANDSMEETINGID_DOESNOT_EXIST = "invalid All Hands Metting Id";
+
+	public static final String EVERY_FIELD_IS_MANDATORY = "every field is mandatory";
+
+	public static final String ALLHANDSMEETING_DATE_ALREADY_EXISTS = "All Hands Meeting date already exists";
+
+	
 	
 
 	

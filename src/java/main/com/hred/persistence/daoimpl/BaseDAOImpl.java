@@ -103,6 +103,9 @@ public class BaseDAOImpl implements BaseDAO{
 		Timestamp timestamp = new Timestamp(com.hred.common.DateUtils
 				.getCurrentTimeInGMT());
 		persistentObject.setMts(timestamp);
+		/*Timestamp timestamp1 = new Timestamp(com.hred.common.DateUtils
+				.getCurrentTimeInGMT());
+		persistentObject.setCts(timestamp1);*/
 		timestamp = null;
 		session.update(persistentObject);
         if (tx != null) {

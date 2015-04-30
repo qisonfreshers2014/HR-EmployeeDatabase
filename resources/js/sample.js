@@ -13,9 +13,14 @@ Sample.prototype.handleShow = function() {
 }
 
 Sample.prototype.testService = function() {
-
-	App.loadLogin();
-
+	/*var dataid="14";
+App.loadViewTemplate(dataid);*/
+	//App.loadLogin();
+//App.loadAllHandsMeeting();
+var name="vasavi";
+App.loadHRHomeHeader(name);
+App.loadHRHomePage();
+App.loadHRHomeFooter();
 
 }
 

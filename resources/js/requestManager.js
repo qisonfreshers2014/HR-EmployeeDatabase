@@ -46,10 +46,26 @@ RequestManager.prototype.sendToServer = function (api, data, callback, options) 
     }
 
 }
-
+RequestManager.prototype.addAllHands = function(data, callback) {
+	   this.sendToServer('allhandsmeeting/save', data, callback);
+	  }
+RequestManager.prototype.editAllHands = function(data, callback) {
+	   this.sendToServer('allhandsmeeting/update', data, callback);
+	  }
+RequestManager.prototype.editAllHandsMeeting = function(data, callback) {
+	   this.sendToServer('allhandsmeeting/editAllHandsMeeting', data, callback);
+	  }
+RequestManager.prototype.getAllHandsMeetingDetails = function(data, callback) {
+	   this.sendToServer('allhandsmeeting/getAllHandsMeeting', data, callback);
+	  }
 RequestManager.prototype.getTemplateById = function(data, callback) {
    this.sendToServer('template/viewTemplate', data, callback);
   }
+RequestManager.prototype.editTemplateDetails = function(data, callback) {
+	   this.sendToServer('template/updateTemplate', data, callback);
+	  }
+
+
 RequestManager.prototype.loadTest=function(data,callback){
 	this.sendToServer('user/test', data, callback);
 }
@@ -68,5 +84,6 @@ RequestManager.prototype.getHolidaysData=function(data,callback){
 RequestManager.prototype.dynamicallyEdit=function(data,callback){
 	this.sendToServer('holidays/editHoliday', data, callback);
 }
+
 
 var RequestManager = new RequestManager();

@@ -47,6 +47,8 @@ public class DAOFactory {
 		return AllHandsMeetingDAOImpl.getInstance();
 	}
 
+
+
 	
 	
 

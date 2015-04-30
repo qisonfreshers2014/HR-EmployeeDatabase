@@ -1,0 +1,26 @@
+/* th{
+	height:40px;
+}
+tr,td{
+
+	height:30px;
+	
+}
+table{
+	
+} */
+table,td,th {
+         border:1px solid black;
+         border-collapse:collapse;
+}
+td {
+ background-color:lightgary;
+ color:black;
+}
+th {
+ background-color:#7094b8;
+ color:black;
+}
+/* .submit{
+margin-left:80%";
+} */

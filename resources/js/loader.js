@@ -34,26 +34,46 @@ Loader.prototype.loadHTML = function(container, filePath, empty, callback) {
 	});
 
 }
+Loader.prototype.loadCkeditor = function(){
+	 LazyLoad.js('resources/js/ckeditor/ckeditor.js');
+	}
 
 Loader.prototype.loadViewTemplate = function (cb) {
-	 //LazyLoad.css('resources/js/HRhome/HRhomeHeader.css');
-	 LazyLoad.js('resources/js/HRhome/EditTemplate.js', cb);
+	// LazyLoad.css('resources/js/Template/EditTemplate.css');
+	LazyLoad.css('resources/js/AllCss/AllHand&EditTemplate&Home.css');
+	 LazyLoad.js('resources/js/Template/EditTemplate.js', cb);
 	}
 Loader.prototype.loadAllHandsMeeting = function (cb) {
-	 LazyLoad.css('resources/js/HRhome/AllHandsmeeting.css');
-	 LazyLoad.js('resources/js/HRhome/AllHandsmeeting.js', cb);
+	// LazyLoad.css('resources/js/AllHandsMeeting/viewAllHandsmeeting.css');
+	LazyLoad.css('resources/js/AllCss/AllHand&EditTemplate&Home.css');
+	 LazyLoad.js('resources/js/AllHandsMeeting/viewAllHandsmeeting.js', cb);
 	}
+Loader.prototype.loadAllhandmeeting = function (cb) {
+	// LazyLoad.css('resources/js/AllHandsMeeting/AllHandMeeting.css');
+	LazyLoad.css('resources/js/AllCss/AllHand&EditTemplate&Home.css');
+	 LazyLoad.js('resources/js/AllHandsMeeting/AllHandMeeting.js', cb);
+	}
+Loader.prototype.loadAllhandmeetings = function (cb) {
+//	 LazyLoad.css('resources/js/AllHandsMeeting/EditHandMeeting.css');
+	LazyLoad.css('resources/js/AllCss/AllHand&EditTemplate&Home.css');
+	 LazyLoad.js('resources/js/AllHandsMeeting/EditHandMeeting.js', cb);
+	}
+
+
 Loader.prototype.loadHRHomeHeader = function (cb) {
-	 LazyLoad.css('resources/js/HRhome/HRhomeHeader.css');
+	// LazyLoad.css('resources/js/HRhome/HRhomeHeader.css');
+	LazyLoad.css('resources/js/AllCss/AllHand&EditTemplate&Home.css');
 	 LazyLoad.js('resources/js/HRhome/HRhomeHeader.js', cb);
 	}
 
 Loader.prototype.loadHRHomePage = function (cb) {
-	 LazyLoad.css('resources/js/HRhome/HRhomepage.css');
+	// LazyLoad.css('resources/js/HRhome/HRhomepage.css');
+	LazyLoad.css('resources/js/AllCss/AllHand&EditTemplate&Home.css');
 	 LazyLoad.js('resources/js/HRhome/HRhomepage.js', cb);
 	}
 Loader.prototype.loadHRHomeFooter = function (cb) {
-	 LazyLoad.css('resources/js/HRhome/HRhomeFooter.css');
+	// LazyLoad.css('resources/js/HRhome/HRhomeFooter.css');
+	LazyLoad.css('resources/js/AllCss/AllHand&EditTemplate&Home.css');
 	 LazyLoad.js('resources/js/HRhome/HRhomeFooter.js', cb);
 	}
 

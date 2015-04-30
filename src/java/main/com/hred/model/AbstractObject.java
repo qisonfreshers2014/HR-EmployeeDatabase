@@ -27,7 +27,7 @@ public abstract class AbstractObject implements BaseObject{
 	private long creatorId;
 	@Column(name = "modified_by")
 	private long modifierId;
-	@Column(name = "is_deleted")
+	 @Column(name = "is_deleted")
 	private boolean isDeleted;
 
 	public static final String LABEL_ID = "id";

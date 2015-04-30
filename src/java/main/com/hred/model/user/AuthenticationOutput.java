@@ -1,12 +1,8 @@
 package com.hred.model.user;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.codehaus.jackson.annotate.JsonProperty;
 
 import com.hred.model.Employee;
-import com.hred.model.User;
 import com.hred.service.annotations.SerializationDescriptor;
 
 /**

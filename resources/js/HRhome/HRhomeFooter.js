@@ -7,7 +7,7 @@ function HRHomeFooter() {
 HRHomeFooter.prototype.handleShow = function() {
 	
 	
-	$('.container').show();
+	//$('.container').show();
 	$('.testService').click(function(){
 		this.testService();
 	}.ctx(this));

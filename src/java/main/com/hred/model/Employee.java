@@ -6,10 +6,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.hred.persistence.annotations.Increment;
+
 
 
 @Entity
 @Table(name = "EMPLOYEE")
+@Increment
 public class Employee extends AbstractObject {
 
 	@Column(name = "employee_id")
