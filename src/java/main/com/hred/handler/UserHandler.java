@@ -9,6 +9,7 @@ import com.hred.model.User;
 import com.hred.persistence.dao.DAOFactory;
 import com.hred.persistence.dao.UserDAO;
 
+
 /**
  * @author Shiva
  *
@@ -44,6 +45,8 @@ public class UserHandler extends AbstractHandler {
 		User userSaved=(User) DAOFactory.getInstance().getUserDAO().saveObject(user);
 		return userSaved;
 	}
+	
+	
 
 
 }

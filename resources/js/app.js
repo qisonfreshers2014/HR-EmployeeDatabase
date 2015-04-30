@@ -3,7 +3,7 @@ function App() {
 	this.handleShow();
 }
 App.prototype.handleShow = function () {
-	 this.userName = "";
+	 this.userName = "";	
 	 this.jobRole = "";
 	 this.contactNo = "";
 	 this.gender = "";
@@ -18,6 +18,7 @@ App.prototype.loadEmployee=function(gender,contactNo){
 		this.gender = gender;
 		this.contactNo = contactNo;
 		Loader.loadEmployee();
+}
 	
 App.prototype.loadViewTemplate = function(name){
 	Loader.loadViewTemplate(function(){

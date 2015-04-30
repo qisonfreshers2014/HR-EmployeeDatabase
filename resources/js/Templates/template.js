@@ -5,17 +5,15 @@ function Template() {
 }
 
 Template.prototype.handleShow = function() {		
-	var input = {"payload":{"id":15}};
+	var input = {"payload":{"id":34}};
 	RequestManager.getTemplateById(input, function(data, success) {
 
 		if(success){
-			
-			alert("hhjbb");
 			 var obj=data[0];
 			 
-			/* $('.name').text(obj.name);
-			 $('.subject').val(obj.name);
-			 $('.content').val(obj.name);*/
+			 $('.templateName').prepend(obj.name);
+			 $('.templateSubject').prepend(obj.subject);
+			 $('.templateContent').prepend(obj.content);
 		  }
 		 }.ctx(this));
 }

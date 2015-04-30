@@ -44,7 +44,7 @@ Loader.prototype.loadSkill = function(cb){
 }
 
 Loader.prototype.loadViewTemplate = function (cb) {
-	 //LazyLoad.css('resources/js/HRhome/HRhomeHeader.css');
+	 LazyLoad.css('resources/js/HRhome/HRhomeHeader.css');
 	 LazyLoad.js('resources/js/HRhome/EditTemplate.js', cb);
 	}
 Loader.prototype.loadAllHandsMeeting = function (cb) {
@@ -164,7 +164,10 @@ Loader.prototype.loadManualMail = function(cb){
 	 LazyLoad.css('resources/js/SendNotification/sendNotification.css');
 	 LazyLoad.js('resources/js/SendNotification/sendNotificationMail.js',cb);
 }
-
+Loader.prototype.loadLogin = function(cb){
+	 LazyLoad.css('resources/js/Login/login.css');
+	 LazyLoad.js('resources/js/Login/login.js');
+}
 
 
 Loader.prototype.loadNotificationHomePage = function(cb){

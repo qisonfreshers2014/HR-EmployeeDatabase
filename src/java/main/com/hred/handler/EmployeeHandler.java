@@ -6,6 +6,7 @@ import com.hred.persistence.dao.EmployeeDAO;
 
 
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,8 @@ import java.util.Map;
 import org.apache.commons.collections.map.HashedMap;
 
 import com.hred.common.Utils;
+import com.hred.common.cache.CacheManager;
+import com.hred.common.cache.CacheRegionType;
 import com.hred.exception.BusinessException;
 import com.hred.exception.EmployeeException;
 import com.hred.exception.EncryptionException;
@@ -22,6 +25,7 @@ import com.hred.model.SendNotificationHistory;
 import com.hred.persistence.dao.DAOFactory;
 import com.hred.persistence.dao.EmployeeDAO;
 import com.hred.persistence.dao.SendNotificationHistoryDAO;
+import com.hred.service.common.ServiceRequestContextHolder;
 import com.hred.service.descriptors.output.DisplayNotificationHome;
 import com.hred.service.descriptors.output.NotificationHomeFilterInputDiscriptor;
 
@@ -291,6 +295,14 @@ public Employee hrUpdateEmployee(Employee employee) throws ObjectNotFoundExcepti
 			
 		
 		return displayNotificationHomeList;
+	}
+	public boolean logout(){
+		boolean isLogout = false;
+		String userSessionId = ServiceRequestContextHolder.getContext()
+				.getUserSessionToken().getUserSessionId();
+		
+		isLogout = CacheManager.getInstance().getCache(CacheRegionType.USER_SESSION_CACHE).remove(userSessionId);
+		return isLogout;
 	}
 
 }

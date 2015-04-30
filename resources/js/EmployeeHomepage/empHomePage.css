@@ -3,38 +3,44 @@
     color: #4c6680;
     font-size: 20px;
 }
+
 #fixedheader {
-	
-    background-color: #17314b;
-    height: 100%;
-    width: 90%;
+    background-color: #4c6680;;
+    height: 97%;
+    width: 100%;
 }
+
 #qisonlogo {
-	
-    float: left;
+	float: left;    
 }
+
 /* #namebtn {
     float: right;
     font-size: 20px;
     margin-right: 6%;
     margin-top: 1%;
 } */
+
 #menudiv {
-	
-    float: left;
-    margin-left: 5%;
-    margin-top: 3%;
+
+   	float: left;    
+   	 margin-top: 59px;
 }
-#span1 {
-    position:absolute;
-    left:1121px;
-    top:15px;
-    
-}
+
 #logout {
-	 position:absolute;
-    left:1121px;
-    top:40px;
-    color:#FFFFFF
+/* 	 position:absolute;
+    left:1028px;
+    top:51px; */
+    color:#FFFFFF;
+	margin-left: 879px;
+    margin-top: 44px;
+}
+
+#employeeName{
+    color: #ffffff;	
+    margin-left: 1046px;
+    position: absolute;
+    top: 12px;
     
 }
+

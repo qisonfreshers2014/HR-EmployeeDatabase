@@ -58,6 +58,10 @@ RequestManager.prototype.loadTest=function(data,callback){
 	this.sendToServer('user/test', data, callback);
 }  
 
+RequestManager.prototype.logout=function(data,callback){
+	this.sendToServer('employee/logout', data, callback);
+}
+
 RequestManager.prototype.getTemplateById = function(data, callback) {
    this.sendToServer('template/viewTemplate', data, callback);
   }

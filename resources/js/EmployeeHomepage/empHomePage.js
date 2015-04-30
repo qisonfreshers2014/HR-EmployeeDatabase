@@ -36,6 +36,11 @@ empHomePage.prototype.handleShow = function() {
 		
 		App.loadhrpolicy();
 	});
+	
+	
+	$('#logout').click(function(event){
+		this.logout();
+	}.ctx(this));
 		
 }
 
@@ -46,6 +51,17 @@ empHomePage.prototype.checkUser = function(jobRole){
 	if(jobRole == "1")
 	$("#hr").show();
 	return true;
+}
+
+empHomePage.prototype.logout=function(){
+	var input={"payload":{}};
+	RequestManager.logout(input, function(data,success){
+		if(success){			
+			document.location.reload();
+		}
+	}.ctx(this));
+		
+	
 }
 
 var empHomePage= new empHomePage();

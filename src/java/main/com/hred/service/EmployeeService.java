@@ -118,6 +118,11 @@ public class EmployeeService extends BaseService {
 		return JsonUtil.getJsonBasedOnDescriptor(output, Employee.class);
 	}
 	
+	@POST
+	@RestService(input = String.class, output = String.class)
+	@ServiceStatus(value = "complete")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/viewEmployee")
 	@UnSecure
 	public String viewEmployee(@Context HttpHeaders headers,
@@ -272,6 +277,19 @@ public class EmployeeService extends BaseService {
 
 		return JsonUtil.getJsonForListBasedOnDescriptor(displayoutput,
 				DisplayNotificationHome.class, DisplayNotificationHome.class);
+	}
+	
+	@POST
+	@RestService(input=String.class,output=String.class)
+	@ServiceStatus(value="complete")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/logout")
+	public String logut(@Context HttpHeaders headers,
+			@Context UriInfo uriInfo, WebserviceRequest request){
+		
+		boolean isLogout = EmployeeHandler.getInstance().logout();	
+		return JsonUtil.getJsonBasedOnDescriptor(isLogout,Boolean.class);
 	}
 
 }
