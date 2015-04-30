@@ -33,10 +33,10 @@ Login.prototype.handleShow = function() {
 			    var jobRole=data.employee.currentDesignation;
 			    var gender=data.employee.gender;
 			    var contactNo=data.employee.contactNo;
-				/*App.loadEmployeePage(name,jobRole);
+				App.loadEmployeePage(name,jobRole);
 				App.loadFooter();
-				App.loadEmployee(gender,contactNo);*/
-				App.loadTemplate();
+				App.loadEmployee(gender,contactNo);
+				//App.loadTemplate();
 			}
 		}.ctx(this));
 	}
@@ -71,7 +71,7 @@ Login.prototype.handleShow = function() {
 	    	$('.message').text("Email length is large(?)");
 	        isValid = false;    	
 	    }
-	    else if(!minMaxLength.test(password) ){
+	 /*   else if(!minMaxLength.test(password) ){
 	    	$(".message").show();
 	    	$('.message').focus();
 	    	$('.message').text("Password is too short(?)");
@@ -100,7 +100,7 @@ Login.prototype.handleShow = function() {
 	    	$('.message').focus();
 	    	$('.message').text("Password has no Lowercase(?)");
 	        isValid = false;
-		}
+		}*/
 		/* else if(password.length < 6 ){
 			$(".message").show();
 			$('.message').focus();

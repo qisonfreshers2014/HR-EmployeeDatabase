@@ -6,7 +6,7 @@
 
 #fixedheader {
     background-color: #4c6680;;
-    height: 97%;
+    height: 99%;
     width: 100%;
 }
 
@@ -38,9 +38,12 @@
 
 #employeeName{
     color: #ffffff;	
-    margin-left: 1046px;
+    margin-left: 1065px;
     position: absolute;
-    top: 12px;
+    top: 21px;
     
+}
+th{
+	text-align:center;
 }
 
