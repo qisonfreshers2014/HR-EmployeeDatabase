@@ -71,7 +71,7 @@ Login.prototype.handleShow = function() {
 	    	$('.message').text("Email length is large(?)");
 	        isValid = false;    	
 	    }
-	   /* else if(!minMaxLength.test(password) ){
+	    else if(!minMaxLength.test(password) ){
 	    	$(".message").show();
 	    	$('.message').focus();
 	    	$('.message').text("Password is too short(?)");
@@ -100,7 +100,7 @@ Login.prototype.handleShow = function() {
 	    	$('.message').focus();
 	    	$('.message').text("Password has no Lowercase(?)");
 	        isValid = false;
-		}*/
+		}
 		/* else if(password.length < 6 ){
 			$(".message").show();
 			$('.message').focus();
