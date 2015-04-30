@@ -103,13 +103,6 @@ App.prototype.listEmployees=function(){
 }
 
 
-
-
-
-
-
-
-
 App.prototype.loadViewEmployee=function(){
 	Loader.loadViewEmployee(function(){
 		new ViewEmployee();
@@ -117,11 +110,13 @@ App.prototype.loadViewEmployee=function(){
 }
 
 App.prototype.loadAddTemplate = function(){
-	
-	Loader.loadAddTemplate(function(){
-		new AddTemplate();
-	});
-}
+	Loader.loadCkeditor();
+Loader.loadAddTemplate(function(){
+	new AddTemplate();
+		});
+	}
+
+
 App.prototype.loadempviewemployee=function(){
 	Loader.loadempviewemployee(function(){
 		new empViewemployee();

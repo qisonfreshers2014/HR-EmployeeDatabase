@@ -51,7 +51,7 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 		createCriteria.add(Restrictions.eq("gender",employee.getGender()));
 		createCriteria.add(Restrictions.eq("currentDesignation",employee.getCurrentDesignation()));
 		
-		createCriteria.add(Restrictions.eq("DOJ",employee.getDOJ()));
+		createCriteria.add(Restrictions.eq("DOJ",employee.getDateOfJoining()));
 				 
 	 	/*//createCriteria.add(Restrictions.gt("yearsofexperience",employee.getYearsofexperience()));
 		createCriteria.add(Restrictions.eq("highestQualification",employee.getHighestQualification()));

@@ -95,18 +95,27 @@ Loader.prototype.listEmployees = function(){
 }
 
 
-Loader.prototype.loadAddTemplate = function(cb){
-	LazyLoad.css('resources/css/addtemplate.css');
-	LazyLoad.js('resources/js/addtemplate.js', cb);
-	//LazyLoad.js('resources/js/lib/nicEdit.js',cb);
+Loader.prototype.loadAddTemplate = function(cb){	
+	LazyLoad.css('resources/css/addtemp&viewEmp.css');
+	//LazyLoad.css('resources/js/Template/addtemplate.css');
+	LazyLoad.js('resources/js/Template/addtemplate.js', cb);
+	
+	
+	//LazyLoad.js('http://js.nicedit.com/nicEdit-latest.js', cb);
+}
+
+Loader.prototype.loadCkeditor = function(){
+	LazyLoad.js('resources/js/ckeditor/ckeditor.js');
 }
 
 Loader.prototype.loadViewEmployee = function(cb){
-	LazyLoad.css('resources/css/viewEmployee.css');
+	LazyLoad.css('resources/css/addtemp&viewEmp.css');
+	//LazyLoad.css('resources/css/viewEmployee.css');
 	LazyLoad.js('resources/js/viewEmployee.js', cb);
 }
 Loader.prototype.loadempviewemployee = function(cb){
-	LazyLoad.css('resources/css/empviewemployee.css');
+     LazyLoad.css('resources/css/addtemp&viewEmp.css');
+	//LazyLoad.css('resources/css/empviewemployee.css');
 	LazyLoad.js('resources/js/empViewemployee.js', cb);
 }
 

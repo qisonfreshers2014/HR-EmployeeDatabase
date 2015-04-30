@@ -29,7 +29,7 @@ public class TemplateDAOimpl extends BaseDAOImpl implements TemplateDAO {
 
 
 	@SuppressWarnings("unchecked")
-	public List<Template> getTemplateByName(Template template) {
+	public List<Template> getTemplateByName() {
 		Session session = null;
 		List<Template> list = null;
 		Transaction tx = null;

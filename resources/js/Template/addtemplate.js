@@ -1,16 +1,18 @@
 function AddTemplate() {
-		Loader.loadHTML('.leftContainer', 'resources/AddTemplate.html', true, function(){
+		Loader.loadHTML('.container', 'resources/js/Template/AddTemplate.html', true, function(){
 		this.handleShow();
 	}.ctx(this));
 }
 AddTemplate.prototype.handleShow = function() {
 	
 	$('.container').show();
-	//bkLib.onDomLoaded(function() {
-
-		//new nicEditor({fullPanel : true}).panelInstance('field');
-		//});
+	//new nicEditor({fullPanel : true}).panelInstance("editor1");
+	$('#editor1').ckeditor({
+		filebrowserImageUploadUrl : '/UploadServletForCKEditor',
+		filebrowserUploadUrl : '/UploadServletForCKEditor'
+	});
 	$('.submit').click(function(){
+		
 		var input={"payload":{}};
 		RequestManager.getTemplates(input, function(data, success){
 			var templates=data;
@@ -20,16 +22,18 @@ AddTemplate.prototype.handleShow = function() {
 		//this.addTem();
 	
 	}.ctx(this));
-
+	
 }
+
+
 AddTemplate.prototype.addTem=function(){
 	      
-
+	var articleDesc = $('textarea#editor1').val();
       
-	 var input = {"payload":{"fileId":"17",
+	 var input = {"payload":{"fileId":parseInt($('#fileId').text()),
 	       "name":$('.templatename').val(),
 	       "subject":$('.subject').val(),
-	       "content":$('.content').val(),
+	       "content":articleDesc
 	       }};
 	
 	
@@ -37,7 +41,7 @@ AddTemplate.prototype.addTem=function(){
 RequestManager.addTemplate(input, function(data, success) {
 	if(success){
 		alert("successfully added");
-		var content = data;
+		//var content = data;
 		
 		//$( "input#clear" ).trigger( "click" );
 	}else{
@@ -50,11 +54,15 @@ RequestManager.addTemplate(input, function(data, success) {
 
 AddTemplate.prototype.duplicatevalidation=function(templates){ 
 	
-    if($('.templatename').val()==""||$('.subject').val()==""||$('.content').val()==""){
+	var articleDesc = $('textarea#editor1').val();
+	
+	
+	
+    if($('.templatename').val()==""||$('.subject').val()==""||articleDesc==""){
     	alert("failed to add,since every field is mandatory");
     }
     
- else{
+  else{
 	
 	 
 	for(i=0;i<templates.length;i++){

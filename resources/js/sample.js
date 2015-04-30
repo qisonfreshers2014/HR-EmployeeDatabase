@@ -7,11 +7,10 @@ function Sample() {
 Sample.prototype.handleShow = function() {
 	$('.container').show();
 	$('.testService').click(function(){
-		//this.testService();
+        this.testService();
 	}.ctx(this));
-	
-	
-	function UploadClickHandler(event){
+}
+	/*function UploadClickHandler(event){
 var thisEle = event.target;
 this.uploadMedia(function() {
 $(thisEle).one('click', UploadClickHandler.ctx(this));
@@ -20,11 +19,11 @@ $(thisEle).one('click', UploadClickHandler.ctx(this));
 $('.testService').one('click', UploadClickHandler.ctx(this));
 	
 
-}
+}*/
 
 Sample.prototype.testService = function() {
 	
-	//App.loadAddTemplate();
+	App.loadAddTemplate();
 	//App.loadViewEmployee();
 	//App.loadempviewemployee();
 	
@@ -46,13 +45,13 @@ Sample.prototype.testService = function() {
 		}
 	}.ctx(this));*/
 
-	App.loadLogin();
+	//App.loadLogin();
 
 
 }
  
 
-Sample.prototype.uploadMedia = function(callback) {
+/*Sample.prototype.uploadMedia = function(callback) {
 var allowedFileType = "application";
 var uploader = new Uploader(allowedFileType, function(data){
 if (data.filePath) {
@@ -68,5 +67,5 @@ callback();
 
 }
 
-
+*/
 var Sample= new Sample();

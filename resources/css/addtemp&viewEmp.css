@@ -1,0 +1,49 @@
+.tableviewEmployee {   margin-left:2%;
+            width: 50%;
+            text-align: left;
+            text-decoration: blink;
+        }
+        .trviewEmployee  {
+            height: 50%;
+            width: 50%;
+            font-size: 100%;
+            font-family: Calibri
+        }
+        .thviewEmployee  {
+            padding:10px;
+            color: black;
+        }
+        .heading {
+            margin-left:2%;
+            color: brown;
+        }
+       
+		.editviewEmployee { margin-top:1%;
+		      position:relative;
+			  right:2px;
+			  left:700px;
+			  }
+	  .container{
+                 background-color:lightgray;
+                }
+     
+            
+            
+     #fieldsaddTemplate {
+	          border:1px solid black;
+	         padding:10px;
+	         text_align=center;
+	           font-weight:bold;
+             }
+           
+     .star {
+	       color:red;
+	         font_size:20px;
+          }
+    
+   .inputelement
+                  {
+           font-size:15px;
+             font-weight: bold;
+            }
+          

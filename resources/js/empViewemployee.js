@@ -1,5 +1,5 @@
 function empViewemployee() {
-	Loader.loadHTML('.leftContainer', 'resources/empviewemployee.html', true, function(){
+	Loader.loadHTML('.container','resources/empviewemployee.html', true, function(){
 		this.handleShow();
 	}.ctx(this));
 }
@@ -24,7 +24,7 @@ empViewemployee.prototype.viewEmployeedetails=function(){
        
       
 	
-	var input= {"payload":{"id":5}};
+	var input= {"payload":{"id":66}};
 
 RequestManager.viewEmployeedatails(input, function(data, success) {
 	if(success){

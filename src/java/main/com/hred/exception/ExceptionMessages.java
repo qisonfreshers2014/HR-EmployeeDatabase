@@ -155,7 +155,6 @@ public interface ExceptionMessages {
 	public static final String BOTH_ADMIN_MEMBER_NOT_POSSIBLE = "User cannot be both member and admin.Choose any one ";
 	public static final String USER_IS_ADMIN_SO_CANNOT_BE_MEMBER = "This user has admin role so he cannot be member";
 	public static final String USER_IS_MEMBER_SO_CANNOT_BE_ADMIN = "This user has member role so he cannot be admin";
-	public static final String TEMPLATE_DOES_NOT_EXIST = "This template does not exist";
 	public static final String EMPLOYEE_DOESNOT_EXIST = "employee doesnot exist";
 	public static final String EMPLOYEE_DOES_NOT_EXIST = "Employee does not exist";
 	 
@@ -166,8 +165,10 @@ public interface ExceptionMessages {
 	public static final String NO_BIRTHDAY_TODAY = "No Birthday ";
 	public static final String NO_WORK_ANNIVERSARY_TODAY = "No Work Anniversary Today";
 	public static final String NO_JOINEE_TODAY = "No Employee Joined Today";
-	public static final String TEMPLATE_DOESNOT_EXIST = "No Such Template Exist";
-
-
+	
+   //Template related Exceptions
+	public static final String TEMPLATE_DOES_NOT_EXIST = "This template does not exist";
+	public static final String EVERY_FIELD_IS_MANDATORY = "every field is mandatory";
+	public static final String TEMPLATE_ALREADY_EXIST = "template with this name is already exist";
 }
 

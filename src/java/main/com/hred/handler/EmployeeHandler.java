@@ -133,7 +133,7 @@ public class EmployeeHandler extends AbstractHandler {
 		for (Employee birthday : empBirthday) {
 			DisplayNotificationHome displayNotificationHome = new DisplayNotificationHome();
 			displayNotificationHome.setEmployeeName(birthday.getEmployeeName());
-			displayNotificationHome.setDate(birthday.getDOB());
+			displayNotificationHome.setDate(birthday.getDateOfBirth());
 			displayNotificationHome.setEmployeeEmail(birthday.getEmail());
 			displayNotificationHome.setEvent("Birthday");
 			if (empidmapping.containsKey(birthday.getEmployeeId())) {
@@ -150,7 +150,7 @@ public class EmployeeHandler extends AbstractHandler {
 			DisplayNotificationHome displayNotificationHome = new DisplayNotificationHome();
 			displayNotificationHome
 					.setEmployeeName(aniversay.getEmployeeName());
-			displayNotificationHome.setDate(aniversay.getDOJ());
+			displayNotificationHome.setDate(aniversay.getDateOfJoining());
 			displayNotificationHome.setEmployeeEmail(aniversay.getEmail());
 			displayNotificationHome.setEvent("Aniversay");
 			if (empidmapping.containsKey(aniversay.getEmployeeId())) {
@@ -195,7 +195,7 @@ public class EmployeeHandler extends AbstractHandler {
 				DisplayNotificationHome displayNotificationHome = new DisplayNotificationHome();
 				displayNotificationHome.setEmployeeName(birthday.getEmployeeName());
 				displayNotificationHome.setEmployeeEmail(birthday.getEmail());
-				displayNotificationHome.setDate(birthday.getDOB());
+				displayNotificationHome.setDate(birthday.getDateOfBirth());
 				displayNotificationHome.setEvent("Birthday");
 				if (empidmapping.containsKey(birthday.getEmployeeId())) {
 					displayNotificationHome.setStatus("Send");
@@ -212,7 +212,7 @@ public class EmployeeHandler extends AbstractHandler {
 				DisplayNotificationHome displayNotificationHome = new DisplayNotificationHome();
 				displayNotificationHome.setEmployeeName(aniversay.getEmployeeName());
 				displayNotificationHome.setEmployeeEmail(aniversay.getEmail());
-				displayNotificationHome.setDate(aniversay.getDOJ());
+				displayNotificationHome.setDate(aniversay.getDateOfJoining());
 				displayNotificationHome.setEvent("Aniversay");
 				if (empidmapping.containsKey(aniversay.getEmployeeId())) {
 					displayNotificationHome.setStatus("Send");

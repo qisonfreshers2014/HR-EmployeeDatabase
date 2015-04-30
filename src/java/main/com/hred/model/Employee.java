@@ -14,277 +14,295 @@ import com.hred.persistence.annotations.Increment;
 @Increment
 public class Employee extends AbstractObject {
 
-	public static final String AUTH_TYPE_REGULAR = "REGULAR";
-	public static final int AUTH_STATUS_EXISTING = 0;
-	public static final int AUTH_STATUS_NEW = 1;
-	public static final int AUTH_STATUS_NONE = 2;
+ 
 
-	@Column(name = "employee_id")
-	private int employeeId;
-	@Column(name = "name")
-	private String employeeName;
-	@Column(name = "gender")
-	private String gender;
-	// @Temporal(TemporalType.DATE)
-	@Column(name = "DOB")
-	private Timestamp DOB;
-	// @Temporal(TemporalType.DATE)
-	@Column(name = "DOJ")
-	private Timestamp DOJ;
-	@Column(name = "years_of_experience")
-	private int yearsofexperience;
-	@Column(name = "contact_number")
-	private long contactNo;
-	@Column(name = "current_address")
-	private String currentAddress;
-	@Column(name = "permanent_address")
-	private String permanentAddress;
-	@Column(name = "email")
-	private String email;
-	@Column(name = "password")
-	private String password;
-	@Column(name = "emergency_contact_num")
-	private long emergencycontactnumber;
-	@Column(name = "fathers_name")
-	private String fathersName;
-	@Column(name = "emergency_conatact_name")
-	private String emergencyContactName;
-	@Column(name = "relation_with_contact")
-	private String relationWithEmergencyConatact;
-	@Column(name = "bloog_group")
-	private String bloodGroup;
-	@Column(name = "current_designation")
-	private int currentDesignation;
-	@Column(name = "highest_qualification")
-	private String highestQualification;
-	@Column(name = "pan")
-	private String pan;
-	@Column(name = "pf_num")
-	private String pfNo;
-	@Column(name = "bank_account_num")
-	private String bankAccountNo;
-	@Column(name = "skype")
-	private String skype;
-	@Column(name = "Skill")
-	private int skill;
-	@Column(name = "Rating")
-	private int rating;
-	@Column(name = "variable_component")
-	private String variableComponent;
+ public static final String AUTH_TYPE_REGULAR = "REGULAR";
+ public static final int AUTH_STATUS_EXISTING = 0;
+ public static final int AUTH_STATUS_NEW = 1;
+ public static final int AUTH_STATUS_NONE = 2;
 
-	public Employee() {
+ @Column(name = "employee_id")
+ private int employeeId;
+ @Column(name = "name")
+ private String employeeName;
+ @Column(name = "gender")
+ private String gender;
+ //@Temporal(TemporalType.DATE)
+ @Column(name = "DOB")
+ private Timestamp dateOfBirth;
+ //@Temporal(TemporalType.DATE)
+ @Column(name = "DOJ")
+ private Timestamp dateOfJoining;
 
-	}
+ @Column(name = "years_of_experience")
+ private int yearsofexperience;
+ @Column(name = "contact_number")
+ private long contactNo;
+ @Column(name = "current_address")
+ private String currentAddress;
+ @Column(name = "permanent_address")
+ private String permanentAddress;
+ @Column(name = "email")
+ private String email;
+ @Column(name = "password")
+ private String password;
+ @Column(name = "emergency_contact_num")
+ private long emergencycontactnumber;
+ @Column(name = "fathers_name")
+ private String fathersName;
+ @Column(name = "emergency_conatact_name")
+ private String emergencyContactName;
+ @Column(name = "relation_with_contact")
+ private String relationWithEmergencyConatact;
+ @Column(name = "bloog_group")
+ private String bloodGroup;
+ @Column(name = "current_designation")
+ private int currentDesignation;
+ @Column(name = "highest_qualification")
+ private String highestQualification;
+ @Column(name = "pan")
+ private String pan;
+ @Column(name = "pf_num")
+ private String pfNo;
+ @Column(name = "bank_account_num")
+ private String bankAccountNo;
+ @Column(name = "skype")
+ private String skype;
+ @Column(name = "Skill")
+ private String skill;
+ @Column(name = "Rating")
+ private int rating;
+ @Column(name="variable_component")
+ private String variableComponent;
+ @Column(name="Salary")
+ private String salary;
+ 
+ public String getSkill() {
+  return skill;
+ }
 
-	public Employee(int employeeId) {
-		this.employeeId = employeeId;
-		// this.employeeName = employeeName;
-	}
+ public void setSkill(String skill) {
+  this.skill = skill;
+ }
 
-	public int getEmployeeId() {
-		return employeeId;
-	}
+ public String getSalary() {
+  return salary;
+ }
 
-	public void setEmployeeId(int employeeId) {
-		this.employeeId = employeeId;
-	}
+ public void setSalary(String salary) {
+  this.salary = salary;
+ }
 
-	public String getEmployeeName() {
-		return employeeName;
-	}
+ public Employee() {
+  
 
-	public void setEmployeeName(String employeeName) {
-		this.employeeName = employeeName;
-	}
+ }
 
-	public String getGender() {
-		return gender;
-	}
+ public Employee(int employeeId) {
+  this.employeeId = employeeId;
+  //this.employeeName = employeeName;
+ }
 
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
+ 
+ public int getEmployeeId() {
+  return employeeId;
+ }
 
-	public Timestamp getDOB() {
-		return DOB;
-	}
+ public void setEmployeeId(int employeeId) {
+  this.employeeId = employeeId;
+ }
 
-	public void setDOB(Timestamp dOB) {
-		DOB = dOB;
-	}
+ public String getEmployeeName() {
+  return employeeName;
+ }
 
-	public Timestamp getDOJ() {
-		return DOJ;
-	}
+ public void setEmployeeName(String employeeName) {
+  this.employeeName = employeeName;
+ }
 
-	public void setDOJ(Timestamp dOJ) {
-		DOJ = dOJ;
-	}
+ public String getGender() {
+  return gender;
+ }
 
-	public int getYearsofexperience() {
-		return yearsofexperience;
-	}
+ public void setGender(String gender) {
+  this.gender = gender;
+ }
 
-	public void setYearsofexperience(int yearsofexperience) {
-		this.yearsofexperience = yearsofexperience;
-	}
 
-	public long getContactNo() {
-		return contactNo;
-	}
+ public Timestamp getDateOfBirth() {
+  return dateOfBirth;
+ }
 
-	public void setContactNo(long contactNo) {
-		this.contactNo = contactNo;
-	}
+ public void setDateOfBirth(Timestamp dateOfBirth) {
+  this.dateOfBirth = dateOfBirth;
+ }
 
-	public String getCurrentAddress() {
-		return currentAddress;
-	}
+ public Timestamp getDateOfJoining() {
+  return dateOfJoining;
+ }
 
-	public void setCurrentAddress(String currentAddress) {
-		this.currentAddress = currentAddress;
-	}
+ public void setDateOfJoining(Timestamp dateOfJoining) {
+  this.dateOfJoining = dateOfJoining;
+ }
 
-	public String getPermanentAddress() {
-		return permanentAddress;
-	}
+ public int getYearsofexperience() {
+  return yearsofexperience;
+ }
 
-	public void setPermanentAddress(String permanentAddress) {
-		this.permanentAddress = permanentAddress;
-	}
+ public void setYearsofexperience(int yearsofexperience) {
+  this.yearsofexperience = yearsofexperience;
+ }
 
-	public String getEmail() {
-		return email;
-	}
+ public long getContactNo() {
+  return contactNo;
+ }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+ public void setContactNo(long contactNo) {
+  this.contactNo = contactNo;
+ }
 
-	public String getPassword() {
-		return password;
-	}
+ public String getCurrentAddress() {
+  return currentAddress;
+ }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+ public void setCurrentAddress(String currentAddress) {
+  this.currentAddress = currentAddress;
+ }
 
-	public long getEmergencycontactnumber() {
-		return emergencycontactnumber;
-	}
+ public String getPermanentAddress() {
+  return permanentAddress;
+ }
 
-	public void setEmergencycontactnumber(long emergencycontactnumber) {
-		this.emergencycontactnumber = emergencycontactnumber;
-	}
+ public void setPermanentAddress(String permanentAddress) {
+  this.permanentAddress = permanentAddress;
+ }
 
-	public String getFathersName() {
-		return fathersName;
-	}
+ public String getEmail() {
+  return email;
+ }
 
-	public void setFathersName(String fathersName) {
-		this.fathersName = fathersName;
-	}
+ public void setEmail(String email) {
+  this.email = email;
+ }
 
-	public String getEmergencyContactName() {
-		return emergencyContactName;
-	}
+ public String getPassword() {
+  return password;
+ }
 
-	public void setEmergencyContactName(String emergencyContactName) {
-		this.emergencyContactName = emergencyContactName;
-	}
+ public void setPassword(String password) {
+  this.password = password;
+ }
 
-	public String getRelationWithEmergencyConatact() {
-		return relationWithEmergencyConatact;
-	}
+ public long getEmergencycontactnumber() {
+  return emergencycontactnumber;
+ }
 
-	public void setRelationWithEmergencyConatact(
-			String relationWithEmergencyConatact) {
-		this.relationWithEmergencyConatact = relationWithEmergencyConatact;
-	}
+ public void setEmergencycontactnumber(long emergencycontactnumber) {
+  this.emergencycontactnumber = emergencycontactnumber;
+ }
 
-	public String getBloodGroup() {
-		return bloodGroup;
-	}
+ public String getFathersName() {
+  return fathersName;
+ }
 
-	public void setBloodGroup(String bloodGroup) {
-		this.bloodGroup = bloodGroup;
-	}
+ public void setFathersName(String fathersName) {
+  this.fathersName = fathersName;
+ }
 
-	public int getCurrentDesignation() {
-		return currentDesignation;
-	}
+ public String getEmergencyContactName() {
+  return emergencyContactName;
+ }
 
-	public void setCurrentDesignation(int currentDesignation) {
-		this.currentDesignation = currentDesignation;
-	}
+ public void setEmergencyContactName(String emergencyContactName) {
+  this.emergencyContactName = emergencyContactName;
+ }
 
-	public String getHighestQualification() {
-		return highestQualification;
-	}
+ public String getRelationWithEmergencyConatact() {
+  return relationWithEmergencyConatact;
+ }
 
-	public void setHighestQualification(String highestQualification) {
-		this.highestQualification = highestQualification;
-	}
+ public void setRelationWithEmergencyConatact(
+   String relationWithEmergencyConatact) {
+  this.relationWithEmergencyConatact = relationWithEmergencyConatact;
+ }
 
-	public String getPan() {
-		return pan;
-	}
+ public String getBloodGroup() {
+  return bloodGroup;
+ }
 
-	public void setPan(String pan) {
-		this.pan = pan;
-	}
+ public void setBloodGroup(String bloodGroup) {
+  this.bloodGroup = bloodGroup;
+ }
 
-	public String getPfNo() {
-		return pfNo;
-	}
+ public int getCurrentDesignation() {
+  return currentDesignation;
+ }
 
-	public void setPfNo(String pfNo) {
-		this.pfNo = pfNo;
-	}
+ public void setCurrentDesignation(int currentDesignation) {
+  this.currentDesignation = currentDesignation;
+ }
 
-	public String getBankAccountNo() {
-		return bankAccountNo;
-	}
+ public String getHighestQualification() {
+  return highestQualification;
+ }
 
-	public void setBankAccountNo(String bankAccountNo) {
-		this.bankAccountNo = bankAccountNo;
-	}
+ public void setHighestQualification(String highestQualification) {
+  this.highestQualification = highestQualification;
+ }
 
-	public String getSkype() {
-		return skype;
-	}
+ public String getPan() {
+  return pan;
+ }
 
-	public void setSkype(String skype) {
-		this.skype = skype;
-	}
+ public void setPan(String pan) {
+  this.pan = pan;
+ }
 
-	public int getSkill() {
-		return skill;
-	}
+ public String getPfNo() {
+  return pfNo;
+ }
 
-	public void setSkill(int skill) {
-		this.skill = skill;
-	}
+ public void setPfNo(String pfNo) {
+  this.pfNo = pfNo;
+ }
 
-	public int getRating() {
-		return rating;
-	}
+ public String getBankAccountNo() {
+  return bankAccountNo;
+ }
 
-	public void setRating(int rating) {
-		this.rating = rating;
-	}
+ public void setBankAccountNo(String bankAccountNo) {
+  this.bankAccountNo = bankAccountNo;
+ }
 
-	public String getVariableComponent() {
-		return variableComponent;
-	}
+ public String getSkype() {
+  return skype;
+ }
 
-	public void setVariableComponent(String variableComponent) {
-		this.variableComponent = variableComponent;
-	}
+ public void setSkype(String skype) {
+  this.skype = skype;
+ }
 
-	@Override
-	public int getObjectType() {
-		return ObjectTypes.EMPLOYEE;
-	}
+ 
+ public int getRating() {
+  return rating;
+ }
+
+ public void setRating(int rating) {
+  this.rating = rating;
+ }
+
+ public String getVariableComponent() {
+  return variableComponent;
+ }
+
+ public void setVariableComponent(String variableComponent) {
+  this.variableComponent = variableComponent;
+ }
+
+ @Override
+ public int getObjectType() {
+  return ObjectTypes.EMPLOYEE;
+ }
 
 }
+
