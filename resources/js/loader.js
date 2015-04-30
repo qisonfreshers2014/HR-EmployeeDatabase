@@ -34,7 +34,7 @@ Loader.prototype.loadHTML = function(container, filePath, empty, callback) {
 	});
 
 }
-Loader.prototype.loadFilter = function(cb){
+/*Loader.prototype.loadFilter = function(cb){
 	 LazyLoad.css('resources/js/FilterEmployee/FilterEmployee.css');
 	 LazyLoad.js('resources/js/FilterEmployee/Filter.js',cb);
 }
@@ -66,15 +66,23 @@ Loader.prototype.loadHRHomeFooter = function (cb) {
 	}
 
 
-Loader.prototype.loadLogin = function(cb){
-	LazyLoad.css('resources/js/Login/login.css');
-	LazyLoad.js('resources/js/Login/login.js',cb);	
+Loader.prototype.loadEmployeePage = function(){
+	 LazyLoad.css('resources/js/EmployeeHomepage/empHomePage.css');
+	 LazyLoad.js('resources/js/EmployeeHomepage/empHomePage.js');
+
+}
+Loader.prototype.loadEmployee = function(){
+	 LazyLoad.css('resources/js/EmployeeHomepage/employee.css');
+	 LazyLoad.js('resources/js/EmployeeHomepage/employee.js');
+
 }
 
-Loader.prototype.loadNext = function(cb){
-	LazyLoad.css('resources/js/Login/next.css');
-	LazyLoad.js('resources/js/Login/next.js',cb);	
+Loader.prototype.loadFooter = function(){
+	 LazyLoad.css('resources/js/EmployeeHomepage/footer.css');
+	 LazyLoad.js('resources/js/EmployeeHomepage/footer.js');
+
 }
+
 
 Loader.prototype.loadHoliday = function(){
 	 LazyLoad.css('resources/js/Holidays/holidays.css');
@@ -82,19 +90,97 @@ Loader.prototype.loadHoliday = function(){
 
 }
 
+Loader.prototype.loadTemplate = function(){
+	 LazyLoad.css('resources/js/Templates/template.css');
+	 LazyLoad.js('resources/js/Templates/template.js');
+
+}
+
+
 Loader.prototype.loadEmployeeHoliday = function(){
 	 LazyLoad.css('resources/js/EmployeeHolidayList/EmployeeHolidayList.css');
 	 LazyLoad.js('resources/js/EmployeeHolidayList/EmployeeHolidayList.js');
 
 }
 
-Loader.prototype.listEmployees = function(){
-	 LazyLoad.css('resources/js/EmployeesList/EmployeesList.css');
-	 LazyLoad.js('resources/js/EmployeesList/EmployeesList.js');
+Loader.prototype.listEmployee = function(){
+	LazyLoad.js('resources/js/EmployeeList/EmployeeList.js');
+
+}
+<<<<<<< HEAD
+
+
+
+
+
+*/
+
+
+
+
+Loader.prototype.loadHRPolicyVeiwPage = function(cb){
+	/* LazyLoad.css('resources/js/designation/cssfile.css');*/
+	 LazyLoad.js('resources/js/addinghrpolicy/Policy.js',cb);
 
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Loader.prototype.listPolicy = function(){
+	LazyLoad.js('resources/js/HRPolicy/Policy.js');
+}
+Loader.prototype.loadEmpl = function(e){
+	
+	 LazyLoad.js('resources/js/employee/addemp.js',e);
+	 LazyLoad.css('resources/js/employee/addemp.css');
+
+}
+
+Loader.prototype.loadEditEmp = function(d){
+	LazyLoad.js('resources/js/employee/editemp.js', d);
+	LazyLoad.css('resources/js/employee/addemp.css');
+}
+
+Loader.prototype.loadhrEditEmp = function(f){
+	LazyLoad.js('resources/js/employee/hreditemp.js', f);
+	LazyLoad.css('resources/js/employee/addemp.css');
+}
+
+Loader.prototype.loadtemplateList = function(g){
+	LazyLoad.js('resources/js/employee/templateslist.js', g);
+	LazyLoad.css('resources/js/employee/addemp.css');
+}
+
+Loader.prototype.loadAddTemplate = function(cb){
+	LazyLoad.css('resources/css/addtemplate.css');
+	LazyLoad.js('resources/js/addtemplate.js', cb);
+	//LazyLoad.js('resources/js/lib/nicEdit.js',cb);
 Loader.prototype.loadAddTemplate = function(cb){	
 	LazyLoad.css('resources/css/addtemp&viewEmp.css');
 	//LazyLoad.css('resources/js/Template/addtemplate.css');
@@ -119,15 +205,6 @@ Loader.prototype.loadempviewemployee = function(cb){
 	LazyLoad.js('resources/js/empViewemployee.js', cb);
 }
 
-Loader.prototype.loadDes = function(cb){
-		// LazyLoad.css('resources/js/designation/cssfile.css');
-		 LazyLoad.js('resources/js/designation/EmpDes.js',cb);
-}
-
-Loader.prototype.loadPolicy = function(cb){
-	/* LazyLoad.css('resources/js/designation/cssfile.css');*/
-	 LazyLoad.js('resources/js/addinghrpolicy/addpolicy.js',cb);
-}
 
 Loader.prototype.loadNotifArea = function(cb){
 	 LazyLoad.css('resources/js/SendNotification/NotificationArea.css');
@@ -144,4 +221,39 @@ Loader.prototype.loadNotificationHomePage = function(cb){
 	 LazyLoad.css('resources/js/SendNotification/notificationHomePage.css');
    LazyLoad.js('resources/js/SendNotification/notificationHomePage.js',cb);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Loader.prototype.loadDes = function(cb){
+		 LazyLoad.css('resources/js/editdesignation/editdesignation.css');
+		 LazyLoad.js('resources/js/editdesignation/editdesignation.js',cb);
+}
+
+Loader.prototype.loadPolicy = function(cb){
+	 LazyLoad.css('resources/js/addinghrpolicy/addpolicy.css');
+	 LazyLoad.js('resources/js/addinghrpolicy/addpolicy.js',cb);
+}
+
 var Loader = new Loader();

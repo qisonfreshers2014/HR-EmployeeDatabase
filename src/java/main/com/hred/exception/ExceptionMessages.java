@@ -89,6 +89,7 @@ public interface ExceptionMessages {
 	 public static final String USER_ID_AND_PASSWORD_INVALID = "User id/password does not exist";
 	 public static final String PASSWORD_NULL = "password can not be null";
 	 public static final String USER_DOESNOT_EXIST = "user not existing with this id";
+	 public static final String EMPLOYEE_DOESNOT_EXIST = "employee not existing with this id";
 	 public static final String USER_CAN_NOT_ADDED = "user can not be added";
 	 public static final String LOCATION_INVALID = "Invalid location";
 	 public static final String DELETE_INVALID = "User not existing";
@@ -155,14 +156,19 @@ public interface ExceptionMessages {
 	public static final String BOTH_ADMIN_MEMBER_NOT_POSSIBLE = "User cannot be both member and admin.Choose any one ";
 	public static final String USER_IS_ADMIN_SO_CANNOT_BE_MEMBER = "This user has admin role so he cannot be member";
 	public static final String USER_IS_MEMBER_SO_CANNOT_BE_ADMIN = "This user has member role so he cannot be admin";
-	public static final String EMPLOYEE_DOESNOT_EXIST = "employee doesnot exist";
+	public static final String NO_BIRTHDAY_TODAY = "No birthday today";
+	public static final String TEMPLATE_DOES_NOT_EXIST = "This template does not exist";
 	public static final String EMPLOYEE_DOES_NOT_EXIST = "Employee does not exist";
 	 
 	 
-	
 	//holidays related Exception Messages
-	public static final String HOLIDAYSID_DOESNOT_EXIST = "Invalid Holiday Id";
-	public static final String NO_BIRTHDAY_TODAY = "No Birthday ";
+	public static final String HOLIDAY_DOESNOT_EXIST = "No Holiday found";
+	public static final String HOLIDAY_DESCRIPTION_NULL = "Description should not be empty";
+	public static final String HOLIDAY_TYPE_NULL = "Type should not be empty";
+	public static final String HOLIDAY_DATE_DOES_NOT_EXIST = "Date field should not be empty";
+	public static final String HOLIDAY_DATE_ALREADY_EXISTS = "Date already exists";
+
+
 	public static final String NO_WORK_ANNIVERSARY_TODAY = "No Work Anniversary Today";
 	public static final String NO_JOINEE_TODAY = "No Employee Joined Today";
 	

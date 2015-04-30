@@ -10,7 +10,7 @@ import com.hred.service.annotations.SerializationDescriptor;
 public interface ActivitiesBirthDayOutputDescriptor {
 	@JsonProperty
 	@SerializationDescriptor(value = BirthDayOutputDescriptor.class)
-	public List<Employee> getTodayBirthdays();
+	public List<Employee> getTodayBirthday();
 }
 
 

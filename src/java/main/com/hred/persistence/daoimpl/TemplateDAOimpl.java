@@ -9,6 +9,12 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
+import com.hred.exception.ExceptionCodes;
+import com.hred.exception.ExceptionMessages;
+import com.hred.exception.TemplateException;
+import com.hred.exception.UserException;
+import com.hred.model.Template;
+import com.hred.model.User;
 import com.hred.model.Template;
 import com.hred.persistence.dao.TemplateDAO;
 import com.hred.persistence.session.SessionFactoryUtil;
@@ -26,7 +32,6 @@ public class TemplateDAOimpl extends BaseDAOImpl implements TemplateDAO {
 		}
 		return INSTANCE;
 	}
-
 
 	@SuppressWarnings("unchecked")
 	public List<Template> getTemplateByName() {

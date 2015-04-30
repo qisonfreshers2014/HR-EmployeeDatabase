@@ -12,9 +12,13 @@ import com.hred.model.User;
 import com.hred.persistence.dao.DAOFactory;
 import com.hred.persistence.dao.EmployeeDAO;
 import com.hred.handler.AbstractHandler;
+
+
 import com.hred.model.Template;
-import com.hred.model.User;
+
 import com.hred.persistence.dao.DAOFactory;
+
+
 import com.hred.persistence.dao.TemplateDAO;
 
 public class TemplateHandler extends AbstractHandler {
@@ -96,7 +100,12 @@ public class TemplateHandler extends AbstractHandler {
 		TemplateDAO tempDAOImpl = (TemplateDAO) DAOFactory.getInstance().getTemplateDAO();
 		templates = (List<Template>) tempDAOImpl.viewTemplate(template);
 		return templates;
-		
 	}
-	
+	}
 }
+
+
+	
+		
+	
+

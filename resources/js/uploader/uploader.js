@@ -82,7 +82,7 @@ Uploader.prototype.handleShow = function(allowedFileType) {
             if (isFileValidated) {
                 $('#uploadForm .btn-primary').attr("disabled", "disabled");
                 $("#progressbox").show();
-                $("#progressbar").html("<img src='img/loading.gif'>");
+                $("#progressbar").html("<img src='/resources/images/loading.gif'>");
                 $("#statustxt").html("Uploading...");
             } else {
                 return false;

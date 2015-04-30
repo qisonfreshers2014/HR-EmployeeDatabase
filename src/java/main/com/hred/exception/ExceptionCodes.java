@@ -128,6 +128,8 @@ public interface ExceptionCodes {
 	public static final int EVENT_START_DATE_MUST_BE_FUTURE_DATE = 218;
 	public static final int EVENT_IN_LIVE_CONTENT_CANNOT_BE_CHANGED = 219;
 	public static final int CANNOT_AGREE_OR_DISAGREE_FLAGGED_OR_REMOVED_COMMENT = 220;
+	public static final int EMPLOYEE_DOESNOT_EXIST = 221;
+
 	public static final int DESIGNATION_DOESNOT_EXIST = 225;
 	public static final int HRPolicy_DOESNOT_EXIST = 226;
 	
@@ -289,7 +291,6 @@ public interface ExceptionCodes {
 	public static final int TIME_ENTRY_PRESENT = 9008;
 	public static final int RELEASE_ID_NULL = 9009;
 	public static final int DB_EXCEPTION = 9010;
-	public static final int EMPLOYEE_DOESNOT_EXIST = 9012;
 	
 
 	public static final int FILE_IS_DELETED = 9015;
@@ -298,7 +299,14 @@ public interface ExceptionCodes {
 	
 	
 	//holidays related Exception Codes
-	public static final int HOLIDAYSID_DOESNOT_EXIST = 9011;
+	public static final int HOLIDAY_DOESNOT_EXIST = 9011;
+	public static final int HOLIDAY_DESCRIPTION_NULL = 9012;
+	public static final int HOLIDAY_TYPE_NULL = 9013;
+	public static final int HOLIDAY_DATE_DOES_NOT_EXIST = 9014;
+	public static final int HOLIDAY_DATE_MISMATCH = 9015;
+	public static final int HOLIDAY_DATE_ALREADY_EXISTS = 9016;
+	
+	
 	public static final int NO_WORK_ANNIVERSARY_TODAY = 9012;
 	public static final int NO_JOINEE_TODAY = 9013;
 	public static final int NO_BIRTHDAY_TODAY = 221;

@@ -2,6 +2,10 @@ package com.hred.exception;
 
 import java.util.List;
 
+/**
+ * @author saisudha
+ *
+ */
 public class EmployeeException extends BusinessException{
 	/**
 	 * 
@@ -19,6 +23,7 @@ public class EmployeeException extends BusinessException{
 	}
 	public EmployeeException(int code,String message,List<Object> args){  //
 		super(code, message, args);
+				
 	}
 
 }

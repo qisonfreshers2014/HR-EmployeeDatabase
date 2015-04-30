@@ -1,25 +1,34 @@
 package com.hred.persistence.dao;
 
-
 import java.util.List;
 
-import com.hred.exception.EmployeeException;
-import com.hred.model.Employee;
 import com.hred.exception.BusinessException;
 import com.hred.exception.EmployeeException;
 import com.hred.exception.UserException;
 import com.hred.model.Employee;
+import com.hred.service.descriptors.input.EmployeeSearchInputDescriptor;
 import com.hred.service.descriptors.output.DisplayNotificationHome;
 import com.hred.service.descriptors.output.NotificationHomeFilterInputDiscriptor;
+
 /**
  * jyothi ambepu
+ * Venkatesh Chitla
+ * @author saisudha
  * 
  */
 public interface EmployeeDAO extends BaseDAO {
 	
+	 public List<Employee> getEmployee();
+
+	 public List<Employee> searchEmployee(EmployeeSearchInputDescriptor employee);
+	
 	List<Employee> viewEmployee(Employee employee);
 
 	public Employee getUserByEmail(String email) throws UserException;
+
+
+	public String getEmployeeName(long id);
+
 	
 	public List<Employee> getFilterEmployeeDetails(Employee employee) throws EmployeeException;
 	
@@ -37,6 +46,10 @@ public interface EmployeeDAO extends BaseDAO {
 
 	public List<DisplayNotificationHome> getEventWithinDate(NotificationHomeFilterInputDiscriptor filterCriteria);
 
-	public List<Employee> getTodaysBirthday() ;
 	public List<Employee> getTodayWorkAniversary();
+	
+	public Employee getEmployeeById(long id) throws EmployeeException;
+
+
+	public List<Employee> getTodaysBirthday() throws BusinessException;
 }

@@ -3,11 +3,26 @@ function App() {
 	this.handleShow();
 }
 App.prototype.handleShow = function () {
-	 
-
-	   
+	 this.userName = "";
+	 this.jobRole = "";
+	 this.contactNo = "";
+	 this.gender = "";
 }
 
+App.prototype.loadFooter=function(){
+	Loader.loadFooter(function(){
+	});
+}
+
+/*
+=======
+
+App.prototype.loadEmployee=function(gender,contactNo){
+		this.gender = gender;
+		this.contactNo = contactNo;
+		Loader.loadEmployee();
+	
+>>>>>>> origin/master
 App.prototype.loadViewTemplate = function(name){
 	Loader.loadViewTemplate(function(){
 		new EditTemplate();
@@ -73,20 +88,27 @@ App.prototype.loadNotifications = function(){
 	});
 }
 
-
-
+*/
+/*
 App.prototype.loadLogin=function(){
 	Loader.loadLogin();
 }
 
-App.prototype.loadNext=function(){
-	Loader.loadNext();
-	
+App.prototype.loadEmployeePage=function(name,jobRole){
+	this.userName = name;
+	this.jobRole=jobRole;
+	Loader.loadEmployeePage();
 }
 
 App.prototype.loadHoliday=function(){
 	Loader.loadHoliday(function(){
 		new listHoliday();
+	});
+}
+
+App.prototype.loadTemplate=function(){
+	Loader.loadTemplate(function(){
+		new Template();
 	});
 }
 
@@ -96,18 +118,33 @@ App.prototype.loadEmployeeHoliday=function(){
 	});
 }
 
+App.prototype.listEmployee=function(){
+	Loader.listEmployee(function(){
+		new employeeList();
+	});
+}
+
+App.prototype.listPolicy=function(){
+		Loader.listPolicy(function(){
+		new policyList();
+	});
+}
 App.prototype.listEmployees=function(){
 	Loader.listEmployees(function(){
 		new employeesList();
 	});
 }
+<<<<<<< HEAD
 
 
-App.prototype.loadViewEmployee=function(){
-	Loader.loadViewEmployee(function(){
-		new ViewEmployee();
-	});
-}
+*/
+
+
+
+
+
+
+
 
 App.prototype.loadAddTemplate = function(){
 	Loader.loadCkeditor();
@@ -133,6 +170,11 @@ App.prototype.loadempviewemployee=function(){
 
 
 
+App.prototype.loadHRPolicyVeiwPage = function(){
+	Loader.loadHRPolicyVeiwPage(function(){
+		new policyList();
+	});
+}
 
 
 
@@ -141,9 +183,47 @@ App.prototype.loadempviewemployee=function(){
 
 
 
+App.prototype.loadViewEmployee=function(){
+	Loader.loadViewEmployee(function(){
+		new ViewEmployee();
+	});
+}
+
+App.prototype.loadAddTemplate = function(){
+	
+	Loader.loadAddTemplate(function(){
+		new AddTemplate();
+	});
+}
+App.prototype.loadempviewemployee=function(){
+	Loader.loadempviewemployee(function(){
+		new empViewemployee();
+	});
+}
 
 
+App.prototype.loadEmpl=function(){
+	Loader.loadEmpl(function(){
+		new AddEmployee();
+	});
+}
+App.prototype.loadEditEmp=function(){
+	Loader.loadEditEmp(function(){
+		new EditEmployee();
+	});
+}
 
+App.prototype.loadhrEditEmp=function(){
+	Loader.loadhrEditEmp(function(){
+		new HrEditEmployee();
+	});
+}
+
+App.prototype.loadtemplateList=function(){
+	Loader.loadtemplateList(function(){
+		new TemplateList();
+	});
+}
 
 App.prototype.loadDes=function(){
 	Loader.loadDes(function(){
