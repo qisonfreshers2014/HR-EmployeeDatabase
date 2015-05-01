@@ -101,13 +101,13 @@ Loader.prototype.loadEmpl = function(e){
 
 }
 
-Loader.prototype.loadEditEmp = function(d){
-	LazyLoad.js('resources/js/employee/editemp.js', d);
+Loader.prototype.loadEditEmp = function(dataId){
+	LazyLoad.js('resources/js/employee/editemp.js', dataId);
 	LazyLoad.css('resources/js/employee/addemp.css');
 }
 
-Loader.prototype.loadhrEditEmp = function(f){
-	LazyLoad.js('resources/js/employee/hreditemp.js', f);
+Loader.prototype.loadhrEditEmp = function(dataId){
+	LazyLoad.js('resources/js/employee/hreditemp.js', dataId);
 	LazyLoad.css('resources/js/employee/addemp.css');
 }
 
@@ -137,7 +137,7 @@ Loader.prototype.loadDes = function(cb){
 }
 
 Loader.prototype.loadPolicy = function(cb){
-	/* LazyLoad.css('resources/js/designation/cssfile.css');*/
+	 LazyLoad.css('resources/js/designation/cssfile.css');
 	 LazyLoad.js('resources/js/addinghrpolicy/addpolicy.js',cb);
 }
 

@@ -10,7 +10,6 @@ import com.hred.service.descriptors.output.DisplayNotificationHome;
 import com.hred.service.descriptors.output.NotificationHomeFilterInputDiscriptor;
 
 /**
- * jyothi ambepu
  * Venkatesh Chitla
  * 
  */
@@ -22,17 +21,13 @@ public interface EmployeeDAO extends BaseDAO {
 	
 	public List<Employee> getFilterEmployeeDetails(Employee employee) throws EmployeeException;
 	
-	
 	public Employee getEmployeeById(String id) throws EmployeeException;
 
 	public List<Employee> getEmployees();
 
 	public List<Employee> getBirthday() throws BusinessException;
 
-
 	public List<Employee> getWorkAniversary() throws BusinessException;
-
-
 
 	public List<DisplayNotificationHome> getEventWithinDate(NotificationHomeFilterInputDiscriptor filterCriteria);
 
@@ -40,6 +35,13 @@ public interface EmployeeDAO extends BaseDAO {
 	
 	public Employee getEmployeeById(long id) throws EmployeeException;
 
-
 	public List<Employee> getTodaysBirthday() throws BusinessException;
+
+	public Boolean getEmployeeByEmail(String email) throws EmployeeException;
+
+	public Boolean getEmployeeByEmpId(int empid) throws EmployeeException;
+
+	
+	
+	
 }

@@ -67,7 +67,86 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 			  }
 				return  (Employee) list.iterator().next();
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public Boolean getEmployeeByEmail(String  email) throws EmployeeException {
+		Session session = null;
+		List<Employee> list = null;
+		Transaction tx = null;
+		try {
+			session = getSession();
+			if (null == session) {
+				session = SessionFactoryUtil.getInstance().openSession();
+				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+			}
+			Criteria createCriteria = session.createCriteria(Employee.class);
+			/*String hql="from Employee where id="+id+"";		
+			org.hibernate.Query query = session.createQuery(hql);
+			 list  = query.list();*/
+			createCriteria.add(Restrictions.eq("email", email));
+			list = createCriteria.list();
+			if (list.size() == 0) {
+				return false;
+			  } else{
+				  return true;
+			  }
+		}
+		
+		finally {
+		
+					try {
+						if (tx != null) {
+							tx.commit();
+							if (session.isConnected())
+								session.close();
+						}
+					} catch (HibernateException e) {
 
+						e.printStackTrace();
+					}
+			  }
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public Boolean getEmployeeByEmpId(int empid) throws EmployeeException {
+		Session session = null;
+		List<Employee> list = null;
+		Transaction tx = null;
+		try {
+			session = getSession();
+			if (null == session) {
+				session = SessionFactoryUtil.getInstance().openSession();
+				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+			}
+			Criteria createCriteria = session.createCriteria(Employee.class);
+			/*String hql="from Employee where id="+id+"";		
+			org.hibernate.Query query = session.createQuery(hql);
+			 list  = query.list();*/
+			createCriteria.add(Restrictions.eq("employeeId", empid));
+			list = createCriteria.list();
+			if (list.size() == 0) {
+				return false;
+			  } else{
+				  return true;
+			  }
+		}
+		
+		finally {
+		
+					try {
+						if (tx != null) {
+							tx.commit();
+							if (session.isConnected())
+								session.close();
+						}
+					} catch (HibernateException e) {
+
+						e.printStackTrace();
+					}
+			  }
+	}
 	@Override
 	public List<Employee> getFilterEmployeeDetails(Employee employee) throws EmployeeException{
 	Session session = null;
@@ -176,8 +255,6 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 		}
 		return  list;	 
 	}
-
-
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Employee> getBirthday() throws BusinessException {

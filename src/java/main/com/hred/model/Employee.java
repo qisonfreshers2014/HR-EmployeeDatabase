@@ -39,7 +39,6 @@ public class Employee extends AbstractObject {
 	//@Temporal(TemporalType.DATE)
 	@Column(name = "DOJ")
 	private Timestamp dateOfJoining;
-
 	@Column(name = "years_of_experience")
 	private int yearsofexperience;
 	@Column(name = "contact_number")
@@ -75,12 +74,40 @@ public class Employee extends AbstractObject {
 	@Column(name = "skype")
 	private String skype;
 	@Column(name = "Skill")
-	private int skill;
+	private String skill;
 	@Column(name = "Rating")
-	private int rating;
+	private String rating;
 	@Column(name="variable_component")
 	private String variableComponent;
+	@Column(name="Salary")
+	private String salary;
+	@Column(name="File_Path")
+	private String filePath;
 	
+	public String getFilePath() {
+		return filePath;
+	}
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+
+	public String getSkill() {
+		return skill;
+	}
+
+	public void setSkill(String skill) {
+		this.skill = skill;
+	}
+
+	public String getSalary() {
+		return salary;
+	}
+
+	public void setSalary(String salary) {
+		this.salary = salary;
+	}
+
 	public Employee() {
 		
 
@@ -269,20 +296,12 @@ public class Employee extends AbstractObject {
 	public void setSkype(String skype) {
 		this.skype = skype;
 	}
-
-	public int getSkill() {
-		return skill;
-	}
-
-	public void setSkill(int skill) {
-		this.skill = skill;
-	}
-
-	public int getRating() {
+	
+	public String getRating() {
 		return rating;
 	}
 
-	public void setRating(int rating) {
+	public void setRating(String rating) {
 		this.rating = rating;
 	}
 

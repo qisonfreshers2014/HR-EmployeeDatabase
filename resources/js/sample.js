@@ -21,24 +21,29 @@ Sample.prototype.handleShow = function() {
 		}*/
 	$('.container').show();
 	$('.testService').click(function(){
-		//this.testService();
+	this.testService();
 	}.ctx(this));
 	
 	
-	function UploadClickHandler(event){
+function UploadClickHandler(event){
 var thisEle = event.target;
 this.uploadMedia(function() {
 $(thisEle).one('click', UploadClickHandler.ctx(this));
 }.ctx(this));
 }
-$('.testService').one('click', UploadClickHandler.ctx(this));
+//$('.testService').one('click', UploadClickHandler.ctx(this));
 	
 
 }
 
 Sample.prototype.testService = function() {
 
-	App.loadLogin();
+var dataId = 3;	
+	//App.loadLogin();
+	App.loadEmpl();
+	//App.loadEditEmp(dataId);
+	//App.loadhrEditEmp(dataId);
+	//App.loadtemplateList();
 
 
 }

@@ -4,10 +4,12 @@ function TemplateList() {
 				this.handleShow();
 			}.ctx(this));
 }
-EditEmployee.prototype.handleShow = function() {
+TemplateList.prototype.handleShow = function() {
+
 
 	$('.container').show();
 	
 }
 
+var TemplateList = new TemplateList();
 

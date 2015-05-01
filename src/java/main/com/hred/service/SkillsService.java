@@ -27,7 +27,7 @@ import com.hred.service.common.WebserviceRequest;
  * @author Jyothi Ambepu
  *
  */
-@Path("/skills")
+@Path("/v1/skills/")
 public class SkillsService extends BaseService {
 	/**
 	 * @param headers

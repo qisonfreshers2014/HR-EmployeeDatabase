@@ -127,15 +127,15 @@ App.prototype.loadEmpl=function(){
 		new AddEmployee();
 	});
 }
-App.prototype.loadEditEmp=function(){
+App.prototype.loadEditEmp=function(dataId){
 	Loader.loadEditEmp(function(){
-		new EditEmployee();
+		new EditEmployee(dataId);
 	});
 }
 
-App.prototype.loadhrEditEmp=function(){
+App.prototype.loadhrEditEmp=function(dataId){
 	Loader.loadhrEditEmp(function(){
-		new HrEditEmployee();
+		new HrEditEmployee(dataId);
 	});
 }
 

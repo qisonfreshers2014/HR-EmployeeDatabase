@@ -13,7 +13,7 @@ RequestManager.prototype.sendToServer = function (api, data, callback, options) 
         dataType:'json',
         type:'POST',
         success:function(data) {
-            console.log(data)
+          // console.log(data)
             if (data.status && data.status == 'SUCCESS') {
                 callback(data.payload, true);
             } else {
@@ -28,7 +28,7 @@ RequestManager.prototype.sendToServer = function (api, data, callback, options) 
         data:JSON.stringify(data),
         error:function (xhr, error, exception) {
             //TODO remove console.log
-            console.log(xhr, error, exception);
+           // console.log(xhr, error, exception);
         }
     });
 
@@ -82,6 +82,13 @@ RequestManager.prototype.dynamicallyEdit=function(data,callback){
 
 RequestManager.prototype.saveEmp=function(data,callback){
 	this.sendToServer('employee/save', data, callback);
+}
+
+RequestManager.prototype.saveDesignation=function(data,callback){
+	this.sendToServer('designation_history/save', data, callback);
+}
+RequestManager.prototype.saveSkill=function(data,callback){
+	this.sendToServer('skills/save', data, callback);
 }
 
 RequestManager.prototype.getHreditEmployee=function(data,callback){
