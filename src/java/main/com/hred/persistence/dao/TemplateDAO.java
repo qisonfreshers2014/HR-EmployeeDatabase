@@ -7,7 +7,7 @@ import com.hred.model.Template;
 public interface TemplateDAO extends BaseDAO{
 
 	
-	List<Template> getTemplateByName(Template template);
+	
 	List<Template> getTemplateByName();
 
 

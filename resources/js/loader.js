@@ -34,7 +34,7 @@ Loader.prototype.loadHTML = function(container, filePath, empty, callback) {
 	});
 
 }
-/*Loader.prototype.loadFilter = function(cb){
+Loader.prototype.loadFilter = function(cb){
 	 LazyLoad.css('resources/js/FilterEmployee/FilterEmployee.css');
 	 LazyLoad.js('resources/js/FilterEmployee/Filter.js',cb);
 }
@@ -107,14 +107,6 @@ Loader.prototype.listEmployee = function(){
 	LazyLoad.js('resources/js/EmployeeList/EmployeeList.js');
 
 }
-<<<<<<< HEAD
-
-
-
-
-
-*/
-
 
 
 
@@ -123,33 +115,6 @@ Loader.prototype.loadHRPolicyVeiwPage = function(cb){
 	 LazyLoad.js('resources/js/addinghrpolicy/Policy.js',cb);
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 Loader.prototype.listPolicy = function(){
@@ -177,17 +142,11 @@ Loader.prototype.loadtemplateList = function(g){
 	LazyLoad.css('resources/js/employee/addemp.css');
 }
 
-Loader.prototype.loadAddTemplate = function(cb){
-	LazyLoad.css('resources/css/addtemplate.css');
-	LazyLoad.js('resources/js/addtemplate.js', cb);
-	//LazyLoad.js('resources/js/lib/nicEdit.js',cb);
 Loader.prototype.loadAddTemplate = function(cb){	
 	LazyLoad.css('resources/css/addtemp&viewEmp.css');
 	//LazyLoad.css('resources/js/Template/addtemplate.css');
 	LazyLoad.js('resources/js/Template/addtemplate.js', cb);
 	
-	
-	//LazyLoad.js('http://js.nicedit.com/nicEdit-latest.js', cb);
 }
 
 Loader.prototype.loadCkeditor = function(){
@@ -221,27 +180,6 @@ Loader.prototype.loadNotificationHomePage = function(cb){
 	 LazyLoad.css('resources/js/SendNotification/notificationHomePage.css');
    LazyLoad.js('resources/js/SendNotification/notificationHomePage.js',cb);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

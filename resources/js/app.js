@@ -14,15 +14,13 @@ App.prototype.loadFooter=function(){
 	});
 }
 
-/*
-=======
 
 App.prototype.loadEmployee=function(gender,contactNo){
 		this.gender = gender;
 		this.contactNo = contactNo;
 		Loader.loadEmployee();
 	
->>>>>>> origin/master
+}
 App.prototype.loadViewTemplate = function(name){
 	Loader.loadViewTemplate(function(){
 		new EditTemplate();
@@ -88,7 +86,7 @@ App.prototype.loadNotifications = function(){
 	});
 }
 
-*/
+
 /*
 App.prototype.loadLogin=function(){
 	Loader.loadLogin();

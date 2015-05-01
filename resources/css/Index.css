@@ -12,17 +12,14 @@ body {
 .container {
     background-color: #ffffff;
     display: block;
-    height: 459px;
+     width: 90%;
+    height: 1000px;
 .footer {
     border-top: 1px solid #000000;
     clear: both;
     margin-left: 8%;
 }
-.container{
-    display: block !important;
-    position: relative;
-    width: 70%;
-}
+
 .leftContainer {
   background-color: #FFFFFF;
     float: left;

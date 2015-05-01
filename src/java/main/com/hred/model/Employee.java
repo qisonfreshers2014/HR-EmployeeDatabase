@@ -23,59 +23,7 @@ public class Employee extends AbstractObject {
 
  
 
-	@Column(name = "employee_id")
-	private int employeeId;
-	@Column(name = "name")
-	private String employeeName;
-	@Column(name = "gender")
-	private String gender;
-	//@Temporal(TemporalType.DATE)
-	@Column(name = "DOB")
-	private Timestamp dateOfBirth;
-	//@Temporal(TemporalType.DATE)
-	@Column(name = "DOJ")
-	private Timestamp dateOfJoining;
-
-	@Column(name = "years_of_experience")
-	private int yearsofexperience;
-	@Column(name = "contact_number")
-	private long contactNo;
-	@Column(name = "current_address")
-	private String currentAddress;
-	@Column(name = "permanent_address")
-	private String permanentAddress;
-	@Column(name = "email")
-	private String email;
-	@Column(name = "password")
-	private String password;
-	@Column(name = "emergency_contact_num")
-	private long emergencycontactnumber;
-	@Column(name = "fathers_name")
-	private String fathersName;
-	@Column(name = "emergency_conatact_name")
-	private String emergencyContactName;
-	@Column(name = "relation_with_contact")
-	private String relationWithEmergencyConatact;
-	@Column(name = "bloog_group")
-	private String bloodGroup;
-	@Column(name = "current_designation")
-	private int currentDesignation;
-	@Column(name = "highest_qualification")
-	private String highestQualification;
-	@Column(name = "pan")
-	private String pan;
-	@Column(name = "pf_num")
-	private String pfNo;
-	@Column(name = "bank_account_num")
-	private String bankAccountNo;
-	@Column(name = "skype")
-	private String skype;
-	@Column(name = "Skill")
-	private int skill;
-	@Column(name = "Rating")
-	private int rating;
-	@Column(name="variable_component")
-	private String variableComponent;
+	
  public static final String AUTH_TYPE_REGULAR = "REGULAR";
  public static final int AUTH_STATUS_EXISTING = 0;
  public static final int AUTH_STATUS_NEW = 1;
@@ -142,10 +90,6 @@ public class Employee extends AbstractObject {
   return skill;
  }
 
-	public Employee(int employeeId) {
-		this.employeeId = employeeId;
-		//this.employeeName = employeeName;
-	}
  public void setSkill(String skill) {
   this.skill = skill;
  }
@@ -173,10 +117,6 @@ public class Employee extends AbstractObject {
  }
 
  
- public int getEmployeeId() {
-  return employeeId;
- }
-
 
 	public Timestamp getDateOfBirth() {
 		return dateOfBirth;
@@ -211,22 +151,9 @@ public class Employee extends AbstractObject {
  }
 
 
- public Timestamp getDateOfBirth() {
-  return dateOfBirth;
- }
 
- public void setDateOfBirth(Timestamp dateOfBirth) {
-  this.dateOfBirth = dateOfBirth;
- }
 
- public Timestamp getDateOfJoining() {
-  return dateOfJoining;
- }
-
- public void setDateOfJoining(Timestamp dateOfJoining) {
-  this.dateOfJoining = dateOfJoining;
- }
-
+ 
  public int getYearsofexperience() {
   return yearsofexperience;
  }

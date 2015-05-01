@@ -173,7 +173,7 @@ public interface ExceptionMessages {
 	public static final String NO_JOINEE_TODAY = "No Employee Joined Today";
 	
    //Template related Exceptions
-	public static final String TEMPLATE_DOES_NOT_EXIST = "This template does not exist";
+
 	public static final String EVERY_FIELD_IS_MANDATORY = "every field is mandatory";
 	public static final String TEMPLATE_ALREADY_EXIST = "template with this name is already exist";
 }

@@ -12,8 +12,6 @@ RequestManager.prototype.sendToServer = function (api, data, callback, options) 
         contentType:'application/json',
         dataType:'json',
         type:'POST',
-        success:function (data) {
-           console.log(data)
         success:function(data) {
             console.log(data)
             if (data.status && data.status == 'SUCCESS') {
@@ -23,7 +21,6 @@ RequestManager.prototype.sendToServer = function (api, data, callback, options) 
                     handleFailure(data.payload);
                 } else {
                     callback(data.payload, false);
-                    
                 }
             }
 

@@ -11,7 +11,7 @@ AddTemplate.prototype.handleShow = function() {
 		filebrowserImageUploadUrl : '/UploadServletForCKEditor',
 		filebrowserUploadUrl : '/UploadServletForCKEditor'
 	});
-	$('.submit').click(function(){
+	$('.save').click(function(){
 		
 		var input={"payload":{}};
 		RequestManager.getTemplates(input, function(data, success){

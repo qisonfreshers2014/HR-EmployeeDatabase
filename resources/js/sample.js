@@ -1,5 +1,5 @@
 function Sample() {
-	Loader.loadHTML('.leftContainer', 'sample.html', true, function(){
+	Loader.loadHTML('.container', 'sample.html', true, function(){
 		this.handleShow();
 	}.ctx(this));
 }
@@ -23,8 +23,8 @@ $('.testService').one('click', UploadClickHandler.ctx(this));
 
 Sample.prototype.testService = function() {
 	
-	App.loadAddTemplate();
-	//App.loadViewEmployee();
+	//App.loadAddTemplate();
+	App.loadViewEmployee();
 	//App.loadempviewemployee();
 	
 	//App.loadDes();

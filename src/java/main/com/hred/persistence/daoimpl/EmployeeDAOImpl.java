@@ -16,6 +16,7 @@ import com.hred.exception.UserException;
 import com.hred.model.Employee;
 import com.hred.persistence.dao.EmployeeDAO;
 import com.hred.persistence.session.SessionFactoryUtil;
+import com.hred.service.descriptors.input.EmployeeSearchInputDescriptor;
 import com.hred.service.descriptors.output.DisplayNotificationHome;
 import com.hred.service.descriptors.output.NotificationHomeFilterInputDiscriptor;
 
@@ -383,7 +384,7 @@ public List<DisplayNotificationHome> getEventWithinDate(NotificationHomeFilterIn
 				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 			}
 			Criteria createCriteria = session.createCriteria(Employee.class);
-			createCriteria.add(Restrictions.eq("id", employee.getId()));
+			createCriteria.add(Restrictions.eq("employeeId", employee.getEmployeeId()));
 			list = createCriteria.list();
 		} finally {
 			try {
@@ -399,5 +400,35 @@ public List<DisplayNotificationHome> getEventWithinDate(NotificationHomeFilterIn
 		}
 		return list;
 	}
+
+	@Override
+	public List<Employee> getEmployee() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Employee> searchEmployee(EmployeeSearchInputDescriptor employee) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getEmployeeName(long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Employee getEmployeeById(long id) throws EmployeeException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	
+
+	
+
 
 }
