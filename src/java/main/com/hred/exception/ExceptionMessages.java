@@ -173,6 +173,8 @@ public interface ExceptionMessages {
 	public static final String NO_JOINEE_TODAY = "No Employee Joined Today";
 	
    //Template related Exceptions
+	public static final String NO_BIRTHDAY_FOUND = "NO_BIRTHDAY_FOUND in the selected criteria";
+	public static final String NO_EMPLOYEE_JOINED_TODAY = "NO_EMPLOYEE_JOINED_in the selected criteria";
 
 	public static final String EVERY_FIELD_IS_MANDATORY = "every field is mandatory";
 	public static final String TEMPLATE_ALREADY_EXIST = "template with this name is already exist";

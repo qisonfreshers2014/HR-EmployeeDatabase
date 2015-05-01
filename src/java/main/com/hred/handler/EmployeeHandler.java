@@ -21,8 +21,9 @@ import com.hred.service.descriptors.output.DisplayNotificationHome;
 import com.hred.service.descriptors.output.NotificationHomeFilterInputDiscriptor;
 
 public class EmployeeHandler extends AbstractHandler {
-
-
+	List<Employee> empBirthday = null;
+	List<Employee> empWorkAniversay = null;
+	List<Employee> welcomeemp = null;
 	private static EmployeeHandler INSTANCE = null;
 
 	private EmployeeHandler() {
@@ -169,56 +170,67 @@ public Employee hrUpdateEmployee(Employee employee) throws ObjectNotFoundExcepti
 		return employee;
 }
 
-	public List<Employee> getWorkAniversary() throws BusinessException {
-		// TODO Auto-generated method stub
-		List<Employee> emp = null;
-		EmployeeDAO employeeDAOImpl = DAOFactory.getInstance().getEmployeeDAO();
-		emp = employeeDAOImpl.getWorkAniversary();
-
-		return emp;
-	}
 
 
 	@SuppressWarnings("null")
+	// This method will return all the event of the company within one month
 	public List<DisplayNotificationHome> getAllEvents()
 			throws BusinessException {
+		
+		
 		List<DisplayNotificationHome> displayNotificationHomeList = new ArrayList<DisplayNotificationHome>();
-		// TODO Auto-generated method stub
-		List<Employee> empBirthday = null;
-		List<Employee> empWorkAniversay = null;
-		
-		//DisplayNotificationHome displayNotificationHome = new DisplayNotificationHome();
-		//List<SendNotificationHistory> notificationHistory = new ArrayList<SendNotificationHistory>();
-
-		EmployeeDAO employeeDAOImpl = DAOFactory.getInstance().getEmployeeDAO();
-		empBirthday = employeeDAOImpl.getBirthday();
-		empWorkAniversay = employeeDAOImpl.getWorkAniversary();		
-		
 
 		SendNotificationHistoryDAO SendNotificationHistoryDAOImpl = DAOFactory
 				.getInstance().getSendNotificationHistoryDAO();
-		List<SendNotificationHistory> notificationHistory = SendNotificationHistoryDAOImpl.getHistorydata();
-		Map<Integer, String> empidmapping = new HashedMap();					
+		List<SendNotificationHistory> notificationHistory = SendNotificationHistoryDAOImpl
+				.getHistorydata();
+		EmployeeDAO employeeDAOImpl = DAOFactory.getInstance().getEmployeeDAO();
+		empBirthday = employeeDAOImpl.getBirthday();
+		empWorkAniversay = employeeDAOImpl.getWorkAniversary();
+
 		// Converting eachEmployeeHistory to map
+		Map<Integer, SendNotificationHistory> empidmapping = new HashedMap();
 		for (SendNotificationHistory eachEmployeeHistory : notificationHistory) {
-			empidmapping.put(eachEmployeeHistory.getEmployeeId(),eachEmployeeHistory.getTemplateId());
+			empidmapping.put(eachEmployeeHistory.getEmployeeId(),
+					eachEmployeeHistory);
 		}
+		
+		
+		welcomeemp = employeeDAOImpl.getWelcomeEmployee();
+		for (Employee welEmp : welcomeemp) {
+			DisplayNotificationHome displayNotificationHome = new DisplayNotificationHome();
+			displayNotificationHome.setEmployeeName(welEmp.getEmployeeName());
+			displayNotificationHome.setDate(welEmp.getDateOfJoining());
+			displayNotificationHome.setEmployeeEmail(welEmp.getEmail());
+			displayNotificationHome.setEvent("Welcome");
+			if (empidmapping.containsKey(welEmp.getEmployeeId())
+					&& empidmapping.get(welEmp.getEmployeeId()).getTemplateId()
+							.equalsIgnoreCase("02")) {
+				displayNotificationHome.setStatus("Send");
+			} else {
+				displayNotificationHome.setStatus("Not Send");
+			}
+			displayNotificationHome.setEmployeeEmail(welEmp.getEmail());
+			displayNotificationHomeList.add(displayNotificationHome);
+		}
+		
 		// Entering Birthday Records To be displayed along with the notification
 		// status
-		
-		
+
 		for (Employee birthday : empBirthday) {
 			DisplayNotificationHome displayNotificationHome = new DisplayNotificationHome();
 			displayNotificationHome.setEmployeeName(birthday.getEmployeeName());
 			displayNotificationHome.setDate(birthday.getDateOfBirth());
 			displayNotificationHome.setEmployeeEmail(birthday.getEmail());
 			displayNotificationHome.setEvent("Birthday");
-			if (empidmapping.containsKey(birthday.getEmployeeId())) {
+			if (empidmapping.containsKey(birthday.getEmployeeId())
+					&& empidmapping.get(birthday.getEmployeeId())
+							.getTemplateId().equalsIgnoreCase("01")) {
 				displayNotificationHome.setStatus("Send");
 			} else {
 				displayNotificationHome.setStatus("Not Send");
 			}
-			
+
 			displayNotificationHomeList.add(displayNotificationHome);
 		}
 		// Entering Aniversary Records To be displayed along with the
@@ -229,8 +241,10 @@ public Employee hrUpdateEmployee(Employee employee) throws ObjectNotFoundExcepti
 					.setEmployeeName(aniversay.getEmployeeName());
 			displayNotificationHome.setDate(aniversay.getDateOfJoining());
 			displayNotificationHome.setEmployeeEmail(aniversay.getEmail());
-			displayNotificationHome.setEvent("Aniversay");
-			if (empidmapping.containsKey(aniversay.getEmployeeId())) {
+			displayNotificationHome.setEvent("Aniversary");
+			if (empidmapping.containsKey(aniversay.getEmployeeId())
+					&& empidmapping.get(aniversay.getEmployeeId())
+							.getTemplateId().equalsIgnoreCase("02")) {
 				displayNotificationHome.setStatus("Send");
 			} else {
 				displayNotificationHome.setStatus("Not Send");
@@ -238,71 +252,185 @@ public Employee hrUpdateEmployee(Employee employee) throws ObjectNotFoundExcepti
 			displayNotificationHomeList.add(displayNotificationHome);
 		}
 
+	
+
 		return displayNotificationHomeList;
 	}
 
-	public List<DisplayNotificationHome> getNotificationDisplayCriteria(
-			NotificationHomeFilterInputDiscriptor filterCriteria) throws BusinessException {
-		List<Employee> empBirthday = null;
-		List<Employee> empWorkAniversay = null;
-		List<DisplayNotificationHome> displayNotificationHomeList = new ArrayList<DisplayNotificationHome>();
+
+// This method will return the event which are satisfying the criteria conditions
+public List<DisplayNotificationHome> getNotificationDisplayCriteria(NotificationHomeFilterInputDiscriptor filterCriteria)
+		throws BusinessException {
+	List<DisplayNotificationHome> displayNotificationHomeList = new ArrayList<DisplayNotificationHome>();
+	List<DisplayNotificationHome> displayNotificationHomeListAllevent = new ArrayList<DisplayNotificationHome>();
+	List<Employee> empBirthdayWithDates = null;
+	List<Employee> empWorkAniversayWithdates = null;
+	String selectedEvent=filterCriteria.getSelectedEvent();
+	EmployeeDAO employeeDAOImpl = DAOFactory.getInstance().getEmployeeDAO();
+	if(filterCriteria.getFromdate() == null || filterCriteria.getTodate() == null)
+	{
+		empBirthdayWithDates=employeeDAOImpl.getBirthday();
+		empWorkAniversayWithdates=employeeDAOImpl.getWorkAniversary();
+	}
+	else
+	{
+	
+		//Retriving the Birthday from the database which lies within the the selected dates
+		empBirthdayWithDates = employeeDAOImpl.getBirthdayWithindate(filterCriteria);
+		//Retriving the Aniversaries from the database which lies within the the selected dates
+		empWorkAniversayWithdates = employeeDAOImpl.getWorkAniversarywithdate(filterCriteria);
+	}
+	
+	//getting the history Data from the database
+	SendNotificationHistoryDAO SendNotificationHistoryDAOImpl = DAOFactory
+			.getInstance().getSendNotificationHistoryDAO();
+	List<SendNotificationHistory> notificationHistory = SendNotificationHistoryDAOImpl
+			.getHistorydata();
+	
+	Map<Integer, SendNotificationHistory> empidmapping = new HashedMap();
+	// Making a map with employee_id as key to check weather the nofification is send or not
+	for (SendNotificationHistory eachEmployeeHistory : notificationHistory) {
+		empidmapping.put(eachEmployeeHistory.getEmployeeId(),
+				eachEmployeeHistory);
+	}
+	
 		
-		EmployeeDAO employeeDAOImpl = DAOFactory.getInstance().getEmployeeDAO();
-		empBirthday = employeeDAOImpl.getBirthday();
-		empWorkAniversay = employeeDAOImpl.getWorkAniversary();
-		
-		// Taking History Data From the NotificationHistory Table
-		SendNotificationHistoryDAO SendNotificationHistoryDAOImpl = DAOFactory.getInstance().getSendNotificationHistoryDAO();
-		List<SendNotificationHistory> notificationHistory = SendNotificationHistoryDAOImpl.getHistorydata();
-		Map<Integer, SendNotificationHistory> empidmapping = new HashedMap();					
-		// Converting eachEmployeeHistory to map
-		for (SendNotificationHistory eachEmployeeHistory : notificationHistory) {
-			empidmapping.put(eachEmployeeHistory.getEmployeeId(),eachEmployeeHistory);
+	
+		// Entering Birthdays Records To be displayed along with the
+				// notification status
+		if (selectedEvent.equalsIgnoreCase("birthDay")) {
+		for (Employee birthday : empBirthdayWithDates) {
+			DisplayNotificationHome displayNotificationHome = new DisplayNotificationHome();
+			displayNotificationHome.setEmployeeName(birthday.getEmployeeName());
+			displayNotificationHome.setDate(birthday.getDateOfBirth());
+			displayNotificationHome.setEmployeeEmail(birthday.getEmail());
+			displayNotificationHome.setEvent("Birthday");
+			if (empidmapping.containsKey(birthday.getEmployeeId())
+					&& empidmapping.get(birthday.getEmployeeId())
+							.getTemplateId().equalsIgnoreCase("01")) {
+				displayNotificationHome.setStatus("Send");
+			} else {
+				displayNotificationHome.setStatus("Not Send");
+			}
+
+			displayNotificationHomeList.add(displayNotificationHome);
 		}
+		}
+		// Entering Aniversary Records To be displayed along with the
+		// notification status
+		else if (selectedEvent.equalsIgnoreCase("workAniversary")){
+		for (Employee aniversay : empWorkAniversayWithdates) {
+			DisplayNotificationHome displayNotificationHome = new DisplayNotificationHome();
+			displayNotificationHome
+					.setEmployeeName(aniversay.getEmployeeName());
+			displayNotificationHome.setDate(aniversay.getDateOfJoining());
+			displayNotificationHome.setEmployeeEmail(aniversay.getEmail());
+			displayNotificationHome.setEvent("Aniversary");
+			if (empidmapping.containsKey(aniversay.getEmployeeId())
+					&& empidmapping.get(aniversay.getEmployeeId())
+							.getTemplateId().equalsIgnoreCase("02")) {
+				displayNotificationHome.setStatus("Send");
+			} else {
+				displayNotificationHome.setStatus("Not Send");
+			}
+			displayNotificationHomeList.add(displayNotificationHome);
+		}
+	
+}
 		
-		
-		 java.util.Date todate=filterCriteria.getTodate();
-	 java.util.Date fromdate=filterCriteria.getFromdate();
-		 String selectedEvent=filterCriteria.getSelectedEvent();
-		String selectedState=filterCriteria.getSelectedState();
-		
-		if(selectedEvent.equalsIgnoreCase("birthDay"))
-				{
-			for (Employee birthday : empBirthday) {
+		else
+		{
+			for (Employee aniversay : empWorkAniversayWithdates) {
+				DisplayNotificationHome displayNotificationHome = new DisplayNotificationHome();
+				displayNotificationHome
+						.setEmployeeName(aniversay.getEmployeeName());
+				displayNotificationHome.setDate(aniversay.getDateOfJoining());
+				displayNotificationHome.setEmployeeEmail(aniversay.getEmail());
+				displayNotificationHome.setEvent("Aniversary");
+				if (empidmapping.containsKey(aniversay.getEmployeeId())
+						&& empidmapping.get(aniversay.getEmployeeId())
+								.getTemplateId().equalsIgnoreCase("02")) {
+
+					displayNotificationHome.setStatus("Send");
+				} else {
+					displayNotificationHome.setStatus("Not Send");
+				}
+				displayNotificationHomeList.add(displayNotificationHome);
+			}
+			for (Employee birthday : empBirthdayWithDates) {
 				DisplayNotificationHome displayNotificationHome = new DisplayNotificationHome();
 				displayNotificationHome.setEmployeeName(birthday.getEmployeeName());
-				displayNotificationHome.setEmployeeEmail(birthday.getEmail());
 				displayNotificationHome.setDate(birthday.getDateOfBirth());
+				displayNotificationHome.setEmployeeEmail(birthday.getEmail());
 				displayNotificationHome.setEvent("Birthday");
-				if (empidmapping.containsKey(birthday.getEmployeeId())) {
+				if (empidmapping.containsKey(birthday.getEmployeeId())
+						&& empidmapping.get(birthday.getEmployeeId())
+								.getTemplateId().equalsIgnoreCase("01")) {
 					displayNotificationHome.setStatus("Send");
 				} else {
 					displayNotificationHome.setStatus("Not Send");
 				}
-				
+
 				displayNotificationHomeList.add(displayNotificationHome);
 			}
-				}
-		else if(selectedEvent.equalsIgnoreCase("workAniversary"))
-		{
-			for (Employee aniversay : empWorkAniversay) {
-				DisplayNotificationHome displayNotificationHome = new DisplayNotificationHome();
-				displayNotificationHome.setEmployeeName(aniversay.getEmployeeName());
-				displayNotificationHome.setEmployeeEmail(aniversay.getEmail());
-				displayNotificationHome.setDate(aniversay.getDateOfJoining());
-				displayNotificationHome.setEvent("Aniversay");
-				if (empidmapping.containsKey(aniversay.getEmployeeId())) {
-					displayNotificationHome.setStatus("Send");
-				} else {
-					displayNotificationHome.setStatus("Not Send");
-				}
-				displayNotificationHomeList.add(displayNotificationHome);
 			}
-		}
 		
-			
-		
+	
 		return displayNotificationHomeList;
-	}
+
+
 
 }
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

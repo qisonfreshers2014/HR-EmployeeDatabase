@@ -68,11 +68,6 @@ public class FileHandler extends AbstractHandler {
         return fileMap;
     }
     
-    public java.io.File downloadFile(long id) throws BusinessException, IOException {
-    	java.io.File file = new java.io.File(getFile(id).getFilePath());
-		return file;
-    }
-    
     public Map<String, java.io.File> downloadFiles(List<Long> ids) throws BusinessException, IOException {
         Map<String,java.io.File> downloadMap = new HashMap<>();
         Map<Long, File> files = getFiles(ids);
@@ -92,5 +87,6 @@ public class FileHandler extends AbstractHandler {
             return veiwFile;
         }
 
+    
     
 }

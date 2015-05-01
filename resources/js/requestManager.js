@@ -114,6 +114,14 @@ RequestManager.prototype.geteditEmployee=function(data,callback){
 
 
 
+RequestManager.prototype.getContentForMail=function(data,callback){
+	this.sendToServer('template/getContentForMail', data, callback);
+}
+
+
+RequestManager.prototype.getEventWithDate=function(data,callback){
+	this.sendToServer('employee/getEventWithDate', data, callback);
+}
 
 
 
@@ -203,5 +211,8 @@ RequestManager.prototype.getSentMailContent=function(data,callback){
 }
 RequestManager.prototype.getAllEvents=function(data,callback){
 	this.sendToServer('employee/getAllEvents', data, callback);
+}
+RequestManager.prototype.getAllHrPolicy=function(data,callback){
+	this.sendToServer('policy/getPolicy', data, callback);
 }
 var RequestManager = new RequestManager();

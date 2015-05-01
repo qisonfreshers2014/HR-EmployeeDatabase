@@ -96,5 +96,7 @@ public class DAOFactory {
 	{
 		return SendNotificationHistoryDAOImpl.getInstance();
 	}
+
+	
 }
 

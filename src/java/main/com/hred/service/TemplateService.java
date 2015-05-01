@@ -64,23 +64,20 @@ public class TemplateService extends BaseService {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/viewTemplate")
 	@UnSecure
-	public String viewTemplate(@Context HttpHeaders headers, @Context UriInfo uriInfo,
-	WebserviceRequest request) throws ObjectNotFoundException,
-	BusinessException, EncryptionException, TemplateException {
+	public String viewTemplate(@Context HttpHeaders headers,
+			@Context UriInfo uriInfo, WebserviceRequest request)
+			throws ObjectNotFoundException, BusinessException,
+			EncryptionException, TemplateException {
 
 		Template template = (Template) JsonUtil.getObject(request.getPayload(),
 				Template.class);
-	List<Template> templates = TemplateHandler.getInstance().viewTemplate(template);
-	
-	//String outputString = "{\"status\": \"SUCCESS\", \"payload\": \"Test Successful\"}";
-	return JsonUtil.getJsonBasedOnDescriptor(templates, Template.class );
+		List<Template> templates = TemplateHandler.getInstance().viewTemplate(
+				template);
+
+		// String outputString =
+		// "{\"status\": \"SUCCESS\", \"payload\": \"Test Successful\"}";
+		return JsonUtil.getJsonBasedOnDescriptor(templates, Template.class);
 	}
-	
-
-
-
-
-
 
 	@POST
 	@RestService(input = String.class, output = String.class)
@@ -102,6 +99,26 @@ public class TemplateService extends BaseService {
 		// String outputString =
 		// "{\"status\": \"SUCCESS\", \"payload\": \"Test Successful\"}";
 		return JsonUtil.getJsonBasedOnDescriptor(templates, Template.class);
+	}
+
+	@POST
+	@RestService(input = String.class, output = String.class)
+	@ServiceStatus(value = "complete")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/getContentForMail")
+	@UnSecure
+	public String getContentForMail(@Context HttpHeaders headers,
+			@Context UriInfo uriInfo, WebserviceRequest request)
+			throws ObjectNotFoundException, BusinessException,
+			EncryptionException {
+
+		Template template = (Template) JsonUtil.getObject(request.getPayload(),
+				Template.class);
+
+		Template subject = TemplateHandler.getInstance().getContentForMail(
+				template);
+		return JsonUtil.getJsonBasedOnDescriptor(subject, Template.class);
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.hred.persistence.daoimpl;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -62,7 +63,8 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 		//createCriteria.add(Restrictions.eq("employeeName",employee.getEmployeeName()));
 		
 		list = (List<Employee>)createCriteria.list();
-	  } finally {
+	  }finally {
+
 			try {
 				if (tx != null) {
 					tx.commit();
@@ -73,9 +75,13 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 
 				e.printStackTrace();
 			}
-	  }
-	return  list;
+		}
+
+	
+	 
+		return list;
 }
+
 
 	@Override
 	public Employee getUserByEmail(String email) throws UserException {
@@ -203,9 +209,10 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 			 
 			 
 			if (results.size() == 0) {
-				throw new BusinessException(ExceptionCodes.NO_BIRTHDAY_TODAY,
-						ExceptionMessages.NO_BIRTHDAY_TODAY);
-			}
+			
+				System.out.println("NO_BIRTHDAY_FOUND_IN_THE_SELECTED_CRITERIA");
+				}
+		
 
 		} finally {
 
@@ -240,8 +247,43 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 			 list  = query.list();
 			
 			if (list.size() == 0) {
-				throw new BusinessException(ExceptionCodes.NO_WORK_ANNIVERSARY_TODAY,
-						ExceptionMessages.NO_WORK_ANNIVERSARY_TODAY);
+				System.out.println("NO_EMPLOYEE_JOINED_IN_THE_SELECTED_CRITERIA");
+			}
+
+		} finally {
+
+			try {
+				if (tx != null) {
+					tx.commit();
+					if (session.isConnected())
+						session.close();
+				}
+			} catch (HibernateException e) {
+
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	
+	@Override
+	public List<Employee> getWelcomeEmployee() throws BusinessException {
+		Session session = null;
+		List<Employee> list = null;
+		Transaction tx = null;
+		try {
+			session = getSession();
+			if (null == session) {
+				session = SessionFactoryUtil.getInstance().openSession();
+				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+			}
+			
+			String hql="from Employee where date(DOJ)=date(sysdate())";				
+			org.hibernate.Query query = session.createQuery(hql);
+			 list  = query.list();
+			
+			if (list.size() == 0) {
+				System.out.println("NO_EMPLOYEE_JOINED_IN_THE_SELECTED_CRITERIA");
 			}
 
 		} finally {
@@ -261,44 +303,8 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 	}
 	
 
-
-
-	@SuppressWarnings("deprecation")
-public List<DisplayNotificationHome> getEventWithinDate(NotificationHomeFilterInputDiscriptor filterCriteria) {
-	Session session = null;
-	List<DisplayNotificationHome> list = null;
-	Transaction tx = null;
 	
-
-	try {
-		session = getSession();
-		if (null == session) {
-			session = SessionFactoryUtil.getInstance().openSession();
-			tx = SessionFactoryUtil.getInstance().beginTransaction(session);
-		}
-		
-		/*String hql="from Employee where day(DOB) between "+fromDate.getDay()+" and "+toDate.getDay()+" and month(DOB) between "+fromDate.getMonth()+" and "+toDate.getMonth()+" or  day(DOJ) between "+fromDate.getDay()+" and "+toDate.getDay()+" and month(DOJ) between "+fromDate.getMonth()+" and "+toDate.getMonth();			
-		org.hibernate.Query query = session.createQuery(hql);
-		list  = query.list();*/
-		
-	
-	} finally {
-
-		try {
-			if (tx != null) {
-				tx.commit();
-				if (session.isConnected())
-					session.close();
-			}
-		} catch (HibernateException e) {
-
-			e.printStackTrace();
-		}
-	}
-	return list;
-}
-	
-	public List<Employee> getTodaysBirthday()  {
+	public List<Employee> getTodaysBirthday() throws BusinessException  {
 
 		Session session = null;
 		List<Employee> results = null;
@@ -317,7 +323,7 @@ public List<DisplayNotificationHome> getEventWithinDate(NotificationHomeFilterIn
 						 
 			 
 				if (results.size() == 0) {
-					System.out.println("No Aniversary");
+					System.out.println("NO_BIRTHDAY_FOUND_IN_THE_SELECTED_CRITERIA");
 				}
 
 		} finally {
@@ -335,7 +341,7 @@ public List<DisplayNotificationHome> getEventWithinDate(NotificationHomeFilterIn
 		}
 		return results;
 	}
-	public List<Employee> getTodayWorkAniversary() {
+	public List<Employee> getTodayWorkAniversary() throws BusinessException {
 
 		Session session = null;
 		List<Employee> results = null;
@@ -353,7 +359,8 @@ public List<DisplayNotificationHome> getEventWithinDate(NotificationHomeFilterIn
 			 
 			 
 			if (results.size() == 0) {
-				System.out.println("No Aniversary");
+				
+						System.out.println("NO_EMPLOYEE_JOINED_IN_THE_SELECTED_CRITERIA");
 			}
 
 		} finally {
@@ -370,6 +377,96 @@ public List<DisplayNotificationHome> getEventWithinDate(NotificationHomeFilterIn
 			}
 		}
 		return results;
+	}
+	@Override
+	public List<Employee> getWorkAniversarywithdate(NotificationHomeFilterInputDiscriptor filterCriteria) throws BusinessException{
+		Calendar todate = Calendar.getInstance();
+		todate.setTime(filterCriteria.getTodate());
+		int tomonth = todate.get(Calendar.MONTH)+1;
+		int today = todate.get(Calendar.DATE);		
+		Calendar fromdate = Calendar.getInstance();
+		fromdate.setTime(filterCriteria.getFromdate());		
+		int frommonth = fromdate.get(Calendar.MONTH)+1;
+		int fromday = fromdate.get(Calendar.DATE);
+		Session session = null;
+		List<Employee> list = null;
+		Transaction tx = null;
+		try {
+			session = getSession();
+			if (null == session) {
+				session = SessionFactoryUtil.getInstance().openSession();
+				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+			}
+			
+			String result ="from Employee where (day(DOJ) between "+fromday+" and "+today+") and (month(DOJ) between "+frommonth+" and "+tomonth+")";				
+			org.hibernate.Query query = session.createQuery(result);
+			 list  = query.list();
+			
+			if (list.size() == 0) {
+				System.out.println("NO_EMPLOYEE_JOINED_IN_THE_SELECTED_CRITERIA");
+			}
+
+		} finally {
+
+			try {
+				if (tx != null) {
+					tx.commit();
+					if (session.isConnected())
+						session.close();
+				}
+			} catch (HibernateException e) {
+
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	
+	@Override
+	public List<Employee> getBirthdayWithindate(NotificationHomeFilterInputDiscriptor filterCriteria) throws BusinessException{
+		
+		
+		Calendar todate = Calendar.getInstance();
+		todate.setTime(filterCriteria.getTodate());
+		int tomonth = todate.get(Calendar.MONTH)+1;
+		int today = todate.get(Calendar.DATE);		
+		Calendar fromdate = Calendar.getInstance();
+		fromdate.setTime(filterCriteria.getFromdate());		
+		int frommonth = fromdate.get(Calendar.MONTH)+1;
+		int fromday = fromdate.get(Calendar.DATE);
+		
+		Session session = null;
+		List<Employee> list = null;
+		Transaction tx = null;
+		try {
+			session = getSession();
+			if (null == session) {
+				session = SessionFactoryUtil.getInstance().openSession();
+				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+			}
+			
+			String result ="from Employee where (day(DOB) between "+fromday+" and "+today+") and (month(DOB) between "+frommonth+" and "+tomonth+")";	
+			org.hibernate.Query query = session.createQuery(result);
+			 list  = query.list();
+			
+			if (list.size() == 0) {
+			System.out.println("NO_BIRTHDAY_FOUND_IN_THE_SELECTED_CRITERIA");
+						
+			}
+
+		} finally {
+			try {
+				if (tx != null) {
+					tx.commit();
+					if (session.isConnected())
+						session.close();
+				}
+			} catch (HibernateException e) {
+
+				e.printStackTrace();
+			}
+		}
+		return list;
 	}
 
 	@Override
@@ -412,6 +509,7 @@ public List<DisplayNotificationHome> getEventWithinDate(NotificationHomeFilterIn
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
 
 	@Override
 	public String getEmployeeName(long id) {

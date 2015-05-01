@@ -44,7 +44,7 @@ public class InitializationServlet extends HttpServlet {
 		if (initializeAllServices) {
 			// Initialize all Services one by one
 			initializeServices();
-			sendAutomatedNotificationMail();
+			//sendAutomatedNotificationMail();
 		
 		}
 	}
@@ -95,6 +95,7 @@ public class InitializationServlet extends HttpServlet {
 	
 	public void sendAutomatedNotificationMail()
 	{
+		
 		
 		NotificationTimer mailTimer=new NotificationTimer();
 		Timer notificationTimer = new Timer();

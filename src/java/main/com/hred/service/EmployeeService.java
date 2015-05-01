@@ -27,8 +27,6 @@ import com.hred.service.annotations.ServiceStatus;
 import com.hred.service.annotations.UnSecure;
 import com.hred.service.common.WebserviceRequest;
 import com.hred.service.descriptors.input.EmployeeSearchInputDescriptor;
-import com.hred.service.descriptors.output.ActivitiesBirthDayOutputDescriptor;
-import com.hred.service.descriptors.output.ActivitiesWorkAnniversaryOutputDescriptor;
 import com.hred.service.descriptors.output.DisplayNotificationHome;
 import com.hred.service.descriptors.output.EmployeeListOutputDescriptors;
 import com.hred.service.descriptors.output.NotificationHomeFilterInputDiscriptor;
@@ -235,7 +233,7 @@ public class EmployeeService extends BaseService {
 	}
 
 	@POST
-	@RestService(input = String.class, output = Employee.class)
+	@RestService(input = String.class, output = DisplayNotificationHome.class)
 	@ServiceStatus(value = "complete")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -257,26 +255,9 @@ public class EmployeeService extends BaseService {
 
 	
 
-	@GET
-	@RestService(input = String.class, output = ActivitiesBirthDayOutputDescriptor.class)
-	@ServiceStatus(value = "complete")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/getTodayBirthday")
-	@UnSecure
-	public String getTodayBirthday(
-			
-			@Context HttpHeaders headers,
-			@Context UriInfo uriInfo, WebserviceRequest request)
-			throws BusinessException {
-		List<Employee> getTodayBirthdays = EmployeeHandler.getInstance()
-				.getTodayBirthday();
-		return JsonUtil.getJsonForListBasedOnDescriptor(getTodayBirthdays,
-				Employee.class, ActivitiesBirthDayOutputDescriptor.class);
-	}
 	
 	@POST
-	@RestService(input = String.class, output = ActivitiesWorkAnniversaryOutputDescriptor.class)
+	@RestService(input = String.class, output = DisplayNotificationHome.class)
 	@ServiceStatus(value = "complete")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -285,10 +266,21 @@ public class EmployeeService extends BaseService {
 	public String getAllEvents(@Context HttpHeaders headers,
 			@Context UriInfo uriInfo, WebserviceRequest request)
 			throws BusinessException {
-		List<DisplayNotificationHome> getAllEvents = EmployeeHandler
-				.getInstance().getAllEvents();
-		return JsonUtil.getJsonForListBasedOnDescriptor(getAllEvents,
-				DisplayNotificationHome.class, DisplayNotificationHome.class);
+		List<DisplayNotificationHome> getAllEvents = EmployeeHandler.getInstance()
+				.getAllEvents();
+		if(getAllEvents.size()==0)
+		{ 
+			String outputString = "{\"status\": \"SUCCESS\", \"payload\": \"No Data Found\"}";
+			return outputString;
+			
+			}
+		else
+		{
+				return JsonUtil
+						.getJsonForListBasedOnDescriptor(getAllEvents,
+								DisplayNotificationHome.class,
+								DisplayNotificationHome.class);
+		}
 	}
 
 	@POST
@@ -307,11 +299,22 @@ public class EmployeeService extends BaseService {
 				.getObject(request.getPayload(),
 						NotificationHomeFilterInputDiscriptor.class);
 
-		List<DisplayNotificationHome> displayoutput = EmployeeHandler
-				.getInstance().getNotificationDisplayCriteria(filterCriteria);
-
-		return JsonUtil.getJsonForListBasedOnDescriptor(displayoutput,
-				DisplayNotificationHome.class, DisplayNotificationHome.class);
+		List<DisplayNotificationHome> displayoutput = EmployeeHandler.getInstance().getNotificationDisplayCriteria(filterCriteria);
+if(displayoutput.size()==0)
+{ 
+	String outputString = "{\"status\": \"SUCCESS\", \"payload\": \"No Data Found\"}";
+	return outputString;
+	
 	}
-
+else
+{
+		return JsonUtil
+				.getJsonForListBasedOnDescriptor(displayoutput,
+						DisplayNotificationHome.class,
+						DisplayNotificationHome.class);
+}
+	}
+		
+	
+	
 }
