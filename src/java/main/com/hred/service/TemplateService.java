@@ -47,7 +47,6 @@ public class TemplateService extends BaseService {
 	public String save(@Context HttpHeaders headers, @Context UriInfo uriInfo,
 			WebserviceRequest request) throws ObjectNotFoundException,
 			BusinessException, EncryptionException {
-		 
 		Template template = (Template) JsonUtil.getObject(request.getPayload(),
 				Template.class);
 
@@ -94,7 +93,7 @@ public class TemplateService extends BaseService {
 		Template template = (Template) JsonUtil.getObject(request.getPayload(),
 				Template.class);
 		List<Template> templates = (List<Template>) TemplateHandler
-				.getInstance().getTemplateByName();
+				.getInstance().getTemplateByName(template);
 		System.out.println("COunt : " + templates.size());
 		// String outputString =
 		// "{\"status\": \"SUCCESS\", \"payload\": \"Test Successful\"}";
