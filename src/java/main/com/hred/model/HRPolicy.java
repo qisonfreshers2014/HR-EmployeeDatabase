@@ -15,7 +15,7 @@ public class HRPolicy extends AbstractObject{
 	private String policyName;
 	
 	@Column(name="file_id")
-	private String fileId;
+	private long fileId;
 
 	public String getPolicyName() {
 		return policyName;
@@ -25,11 +25,13 @@ public class HRPolicy extends AbstractObject{
 		this.policyName = policyName;
 	}
 
-	public String getFileId() {
+
+
+	public long getFileId() {
 		return fileId;
 	}
 
-	public void setFileId(String fileId) {
+	public void setFileId(long fileId) {
 		this.fileId = fileId;
 	}
 

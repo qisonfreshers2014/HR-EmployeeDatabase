@@ -167,6 +167,8 @@ public interface ExceptionMessages {
 	public static final String NO_WORK_ANNIVERSARY_TODAY = "No Work Anniversary Today";
 	public static final String NO_JOINEE_TODAY = "No Employee Joined Today";
 	public static final String TEMPLATE_DOESNOT_EXIST = "No Such Template Exist";
+	public static final String NO_BIRTHDAY_FOUND = "NO_BIRTHDAY_FOUND in the selected criteria";
+	public static final String NO_EMPLOYEE_JOINED_TODAY = "NO_EMPLOYEE_JOINED_in the selected criteria";
 
 	
 	

@@ -6,24 +6,33 @@ function Sample() {
 
 Sample.prototype.handleShow = function() {
 	$('.container').show();
+	
+	
 	$('.testService').click(function(){
-		//this.testService();
+		this.testService();
 	}.ctx(this));
 	
 	
-	function UploadClickHandler(event){
+/*	function UploadClickHandler(event){
 var thisEle = event.target;
 this.uploadMedia(function() {
 $(thisEle).one('click', UploadClickHandler.ctx(this));
 }.ctx(this));
 }
-$('.testService').one('click', UploadClickHandler.ctx(this));
+$('.testService').one('click', UploadClickHandler.ctx(this));*/
 	
 
 }
 
 Sample.prototype.testService = function() {
+	var input={};
+	RequestManager.getAllEvents(input, function(data, success) {
+		if (success) {		
+		
+							App.loadNotificationHomePage(data);
+				}});
 	
+
 	
 	//App.loadDes();
 	//App.loadPolicy();
@@ -43,7 +52,8 @@ Sample.prototype.testService = function() {
 		}
 	}.ctx(this));*/
 
-	App.loadLogin();
+
+	//App.loadLogin();
 
 
 }

@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.joda.time.LocalTime;
+
 import com.hred.common.cache.CacheHandler;
 import com.hred.common.cache.CacheManager;
 import com.hred.common.cache.CacheRegionType;
@@ -40,7 +42,7 @@ public class InitializationServlet extends HttpServlet {
 		if (initializeAllServices) {
 			// Initialize all Services one by one
 			initializeServices();
-			sendAutomatedNotificationMail();
+			//sendAutomatedNotificationMail();
 		
 		}
 	}
@@ -89,9 +91,11 @@ public class InitializationServlet extends HttpServlet {
 	public void sendAutomatedNotificationMail()
 	{
 		
+		
 		NotificationTimer mailTimer=new NotificationTimer();
 		Timer notificationTimer = new Timer();
 		notificationTimer.schedule(mailTimer, 0, 24*60*60*1000);
+		
 		
 	}
 	

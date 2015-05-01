@@ -16,7 +16,7 @@ public interface EmployeeDAO extends BaseDAO {
 
 	public Employee getUserByEmail(String email) throws UserException;
 	
-	public List<Employee> getFilterEmployeeDetails(Employee employee) throws EmployeeException;
+/*	public List<Employee> getFilterEmployeeDetails(Employee employee) throws EmployeeException;*/
 	
 	
 	public Employee getEmployeeById(String id) throws EmployeeException;
@@ -28,10 +28,16 @@ public interface EmployeeDAO extends BaseDAO {
 
 	public List<Employee> getWorkAniversary() throws BusinessException;
 
+	public List<Employee> getWelcomeEmployee() throws BusinessException;
+
+	
+
+	public List<Employee> getTodaysBirthday() throws BusinessException ;
+	public List<Employee> getTodayWorkAniversary() throws BusinessException;
+
+	public List<Employee> getBirthdayWithindate(NotificationHomeFilterInputDiscriptor filterCriteria) throws BusinessException;
+
+	public List<Employee> getWorkAniversarywithdate(NotificationHomeFilterInputDiscriptor filterCriteria) throws BusinessException;
 
 
-	public List<DisplayNotificationHome> getEventWithinDate(NotificationHomeFilterInputDiscriptor filterCriteria);
-
-	public List<Employee> getTodaysBirthday() ;
-	public List<Employee> getTodayWorkAniversary();
 }

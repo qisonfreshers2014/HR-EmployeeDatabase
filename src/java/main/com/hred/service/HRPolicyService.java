@@ -1,5 +1,7 @@
 package com.hred.service;
 
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -22,6 +24,9 @@ import com.hred.service.annotations.RestService;
 import com.hred.service.annotations.ServiceStatus;
 import com.hred.service.annotations.UnSecure;
 import com.hred.service.common.WebserviceRequest;
+import com.hred.service.descriptors.outputDescriptors.VeiwHRPolicies;
+import com.hred.service.descriptors.outputDescriptors.VeiwHRPolicyDiscriptor;
+
 
 /**
  * @author Bhargavi Uppoju
@@ -70,6 +75,42 @@ public class HRPolicyService extends BaseService {
 			HRPolicy output = (HRPolicy) HRPolicyHandler.getInstance().save(hrpolicy);
 
 			return JsonUtil.getJsonBasedOnDescriptor(output, HRPolicy.class);
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
+//view
+		@POST
+		@RestService(input = String.class, output = VeiwHRPolicies.class)
+		@ServiceStatus(value = "complete")
+		@Consumes(MediaType.APPLICATION_JSON)
+		@Produces(MediaType.APPLICATION_JSON)
+		@Path("/getPolicy")
+		@UnSecure
+		public String getPolicy(@Context HttpHeaders headers, @Context UriInfo uriInfo,
+				WebserviceRequest request) throws ObjectNotFoundException,
+				BusinessException, EncryptionException {		
+			HRPolicy policy = (HRPolicy) JsonUtil.getObject(request.getPayload(), HRPolicy.class);
+			List<VeiwHRPolicies> policies = HRPolicyHandler.getInstance().getPolicy();
+			System.out.println("Count : "+ policies.size());
+			return JsonUtil.getJsonForListBasedOnDescriptor(policies, VeiwHRPolicyDiscriptor.class, VeiwHRPolicies.class);
+
 		}
 
 	}

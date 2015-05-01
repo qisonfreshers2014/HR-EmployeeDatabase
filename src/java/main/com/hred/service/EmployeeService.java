@@ -27,7 +27,7 @@ import com.hred.service.annotations.RestService;
 import com.hred.service.annotations.ServiceStatus;
 import com.hred.service.annotations.UnSecure;
 import com.hred.service.common.WebserviceRequest;
-import com.hred.service.descriptors.output.ActivitiesWorkAnniversaryOutputDescriptor;
+
 import com.hred.service.descriptors.output.DisplayNotificationHome;
 import com.hred.service.descriptors.output.NotificationHomeFilterInputDiscriptor;
 import com.hred.service.descriptors.outputDescriptors.EmployeeListOutputDescriptors;
@@ -140,7 +140,7 @@ public class EmployeeService extends BaseService {
 		
 
 	@POST
-	@RestService(input = String.class, output = ActivitiesWorkAnniversaryOutputDescriptor.class)
+	@RestService(input = String.class, output = DisplayNotificationHome.class)
 	@ServiceStatus(value = "complete")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -151,10 +151,19 @@ public class EmployeeService extends BaseService {
 			throws BusinessException {
 		List<DisplayNotificationHome> getAllEvents = EmployeeHandler.getInstance()
 				.getAllEvents();
-		return JsonUtil
-				.getJsonForListBasedOnDescriptor(getAllEvents,
-						DisplayNotificationHome.class,
-						DisplayNotificationHome.class);
+		if(getAllEvents.size()==0)
+		{ 
+			String outputString = "{\"status\": \"SUCCESS\", \"payload\": \"No Data Found\"}";
+			return outputString;
+			
+			}
+		else
+		{
+				return JsonUtil
+						.getJsonForListBasedOnDescriptor(getAllEvents,
+								DisplayNotificationHome.class,
+								DisplayNotificationHome.class);
+		}
 	}
 	
 	
@@ -173,12 +182,21 @@ public class EmployeeService extends BaseService {
 				NotificationHomeFilterInputDiscriptor.class);
 
 		List<DisplayNotificationHome> displayoutput = EmployeeHandler.getInstance().getNotificationDisplayCriteria(filterCriteria);
-
+if(displayoutput.size()==0)
+{ 
+	String outputString = "{\"status\": \"SUCCESS\", \"payload\": \"No Data Found\"}";
+	return outputString;
+	
+	}
+else
+{
 		return JsonUtil
 				.getJsonForListBasedOnDescriptor(displayoutput,
 						DisplayNotificationHome.class,
 						DisplayNotificationHome.class);
+}
 	}
+		
 	
 	
 }

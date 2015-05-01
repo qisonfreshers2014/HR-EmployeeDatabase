@@ -4,6 +4,7 @@ body {
     color: #000000;
     font-family: serif,sans-serif,cursive,Arial;
     width: 100%;
+    font-size:12px;
 }
 .header {
     border-bottom: 1px solid #000000;
@@ -18,19 +19,34 @@ body {
 .container{
     display: block !important;
     position: relative;
-    width: 70%;
-}
-.leftContainer {
   background-color: #FFFFFF;
-    float: left;
-    position: relative;
-    width: 55%;
-
+    width: 90%;
 }
-.rightContainer {
-  background-color: #FFFFFF;
-    float: right;
-    position: relative;
-    width: 45%;
 
+
+
+
+
+.inputelement
+{
+	font-size:12px;
+	font-weight: bold;
+}
+th
+{
+	background-color:#7094b8;
+}
+h1
+{
+	color:brown;
+	text-align: center;
+}
+h3
+{
+	color:brown;
+}
+.errormessage
+{
+	color:red;
+	font-size:10px;
 }

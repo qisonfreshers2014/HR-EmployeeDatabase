@@ -300,7 +300,9 @@ public interface ExceptionCodes {
 	public static final int EMPLOYEE_DOESNOT_EXIST = 9011;
 	public static final int NO_WORK_ANNIVERSARY_TODAY = 9012;
 	public static final int NO_JOINEE_TODAY = 9013;
-	public static final int NO_BIRTHDAY_TODAY = 221;
+
+	public static final int NO_BIRTHDAY_FOUND = 221;
+	public static final int NO_EMPLOYEE_JOINED_TODAY = 222;
 	
 	
 	

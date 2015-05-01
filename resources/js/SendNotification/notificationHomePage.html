@@ -1,35 +1,33 @@
 
-<div id="home">
-<div id="head"><center><h1>Notifications</h1></center></div>
+<div id="Notificationhome">
+<div id="headNotification" ><h1>Notifications</h1></div>
 
-<div id="extraActions">
+<div id="extraActionsNotification">
 
-<select id="States">
-  <option value="notSend">Not Send</option>
-  <option value="send">Send</option>
-</select>
-
-<select id="Events">
-  <option value="none">Select Events</option>
+<select id="EventsNotification">
+  <option value="allEvent">Select All Events</option>
     <option value="birthDay">Birth Days</option>
   <option value="workAniversary">Work Anniversary</option>
-</select>
+</select>&nbsp&nbsp
+<div ="datedata">
+ &nbsp&nbsp&nbsp&nbspFromDate: <input type="text" class="date" id="fromDateNotification" required>&nbsp&nbsp
 
-FromDate: <input type="text" class="date" id="fromDate">
-&nbsp ToDate: <input type="text" class="date" id="toDate" >
-<input type="button" value="Retrive" id="retriveData">
-</div>
-<div id="dataTable">
-<table border="1" style="width:100% height:200px" id="displayData1">
-<tbody id="displayData">
+
+  ToDate: <input type="text" class="date" id="toDateNotification" required></div>
+<input type="button" value="Retrive Data" class="btn btn-primary btn-md" id="retriveDataNotification"></button>  </div>&nbsp&nbsp
+
+
+ <div id="dataTableNotification">
+<table border="1" class="table table-hover">
+<tbody id="displayDataNotification">
 <tr>
 <th>Employee Name</th>
 <th>Event Date</th>
 <th>Event</th>
+<th>Email</th>
 <th>Status</th>
 <th>Action</th>
 </tr>
 </tbody>
 </table>
-</div>
 </div>

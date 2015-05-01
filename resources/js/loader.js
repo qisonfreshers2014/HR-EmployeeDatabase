@@ -167,4 +167,11 @@ Loader.prototype.loadNotificationHomePage = function(cb){
 	 LazyLoad.css('resources/js/SendNotification/notificationHomePage.css');
    LazyLoad.js('resources/js/SendNotification/notificationHomePage.js',cb);
 }
+Loader.prototype.loadHrPolicyVeiwPage = function(cb){
+	
+  LazyLoad.js('resources/js/veiwHRPolicy/Policy.js',cb);
+}
+
+
+
 var Loader = new Loader();

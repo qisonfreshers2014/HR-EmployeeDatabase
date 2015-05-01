@@ -160,6 +160,7 @@ App.prototype.loadNotifArea = function(){
 	
 	
 App.prototype.loadManualMail = function(event,email,employeeName){
+//	Loader.loadCkeditor();
 	Loader.loadManualMail(function(){
 		new sendNotificationMail(event,email,employeeName);
 	});
@@ -169,6 +170,13 @@ App.prototype.loadManualMail = function(event,email,employeeName){
 		Loader.loadNotificationHomePage(function(){
 			new loadNotificationHomePage(data);
 		});
-		
 }
+
+		
+		App.prototype.loadHrPolicyVeiwPage = function(){
+			Loader.loadHrPolicyVeiwPage(function(){
+				new policyList();
+			});
+		}
+
 var App = new App();

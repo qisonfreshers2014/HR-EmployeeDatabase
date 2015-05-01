@@ -10,4 +10,6 @@ public interface TemplateDAO extends BaseDAO{
 	
 		List<Template> viewTemplate(Template template);
 
+		Template getContentForMail(Template template);
+
 }

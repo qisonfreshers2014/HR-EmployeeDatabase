@@ -70,9 +70,29 @@ public class TemplateDAOimpl extends BaseDAOImpl implements TemplateDAO {
 	return  list;  
 	}
 
+	public Template getContentForMail(Template template)
+	{
+		Session session = null;
+		Template list = null;
+		Transaction tx = null;
+		
+		session = getSession();
+		if (null == session) {
+		session = SessionFactoryUtil.getInstance().openSession();
+		tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+		}
+		Criteria createCriteria = session.createCriteria(Template.class);
+		createCriteria.add(Restrictions.eq("name",template.getSubject()));
+	/*	createCriteria.add(Restrictions.eq("name",  template.getSubject()));*/
+		list = (Template) createCriteria.uniqueResult();
+	
+	return list;	
 	
 	}
 
+
+	
+}
 	
 		 
 		
