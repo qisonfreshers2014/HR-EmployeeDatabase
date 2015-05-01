@@ -2,7 +2,9 @@ package com.hred.exception;
 
 import java.util.List;
 
-public class TemplateException extends BusinessException {
+	
+
+public class TemplateException  extends BusinessException {
 	private static final long serialVersionUID = 1L;
 	public TemplateException(){
 		

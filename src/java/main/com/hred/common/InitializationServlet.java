@@ -1,6 +1,8 @@
 package com.hred.common;
 
+import java.io.File;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.Timer;
 
 import javax.servlet.ServletConfig;
@@ -10,7 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.joda.time.LocalTime;
+import org.apache.commons.io.FileUtils;
 
 import com.hred.common.cache.CacheHandler;
 import com.hred.common.cache.CacheManager;
@@ -63,6 +65,9 @@ public class InitializationServlet extends HttpServlet {
 			.getCache(CacheRegionType.USER_SESSION_CACHE)
 			.getValue(sessionToken);		
 			System.out.println("Saved VAlue: "+value);
+			System.out.println("Copying File Uploads to Server "+ new Timestamp(System.currentTimeMillis()));
+			copyFileUploadsToServer();
+			System.out.println("Copied File Uploads to Server "+ new Timestamp(System.currentTimeMillis()));
 			
 		} catch (Throwable ex) {
 			ex.printStackTrace();
@@ -96,6 +101,22 @@ public class InitializationServlet extends HttpServlet {
 		Timer notificationTimer = new Timer();
 		notificationTimer.schedule(mailTimer, 0, 24*60*60*1000);
 		
+	}
+	public void copyFileUploadsToServer() throws IOException
+	{
+		
+        String workingDir = System.getProperty("user.dir");
+		File file1 = new File(workingDir);
+		String parentPath = file1.getParent();
+		File actualPath = new File(parentPath, "FileUpload");
+		
+ 		
+		File deployFolder = new File(workingDir, "deploy");
+		File webAppDir = new File(deployFolder, "webapp");
+		
+		File tempDir = new File(webAppDir, "FileUpload");
+ 		System.out.println("Copying "+actualPath.list().length+" files from "+actualPath+" to "+tempDir);
+ 		FileUtils.copyDirectory(actualPath, tempDir);
 		
 	}
 	

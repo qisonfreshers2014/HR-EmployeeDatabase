@@ -3,7 +3,6 @@ package com.hred.model;
 import java.util.TimerTask;
 
 import org.apache.commons.mail.EmailException;
-
 import com.hred.handler.SendNotificationHistoryHandler;
 
 
@@ -20,7 +19,6 @@ public class NotificationTimer extends TimerTask implements Runnable {
 				// TODO Auto-generated catch block
 			System.out.println("Unable to send mail");
 			}
-		
 			// TODO Auto-generated catch block
 			
 		

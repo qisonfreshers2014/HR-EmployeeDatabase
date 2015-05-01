@@ -25,19 +25,31 @@ employeeHolidayList.prototype.handleShow = function() {
 }
 
 employeeHolidayList.prototype.tableDisplay = function(content, status){
+	
 	for(var i = 0; i < content.length; i++) {
-			var obj = content[i];
-			if(obj.type == "Mandatory"){
+	
+		var obj = content[i];
+		
+		var value = obj.fromDate;
+		var res = new Date(value);
+		var year  = res.getFullYear();
+		var month = res.getMonth()+1 ;
+		var date = res.getDate (); 
+
+		var dayNames = new Array('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
+		var day = dayNames[res.getDay()];
+		
+		if(obj.type == "Mandatory"){
 				$('#mandatory').append('<table></table>');
-				$('#mandatory tr:last').after("<tr><td>"+obj.from_date+"</td><td>"+obj.description+"</td><td>"+obj.type+"</td></tr>");
+				$('#mandatory tr:last').after("<tr><td>"+year + "-" + month + "-" +date+"</td><td>"+obj.description+"</td><td>"+day+"</td></tr>");
 			}
 			if(obj.type == "Weekdays"){
 				$('#weekends').append('<table></table>');
-				$('#weekends tr:last').after("<tr><td>"+obj.from_date+"</td><td>"+obj.description+"</td><td>"+obj.type+"</td></tr>");
+				$('#weekends tr:last').after("<tr><td>"+year + "-" + month + "-" +date+"</td><td>"+obj.description+"</td><td>"+day+"</td></tr>");
 			}
 			if(obj.type == "Optional"){
 				$('#optional').append('<table></table>');
-				$('#optional tr:last').after("<tr><td>"+obj.from_date+"</td><td>"+content.description+"</td><td>"+obj.type+"</td></tr>");
+				$('#optional tr:last').after("<tr><td>"+year + "-" + month + "-" +date+"</td><td>"+obj.description+"</td><td>"+day+"</td></tr>");
 			}
 	
 			}

@@ -1,6 +1,10 @@
 package com.hred.model;
 
 import java.sql.Timestamp;
+/**
+ * @author Bhargavi Uppoju
+ *
+ */
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

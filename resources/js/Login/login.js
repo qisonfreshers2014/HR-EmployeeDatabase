@@ -3,13 +3,15 @@ function Login() {
 		this.handleShow();
 	}.ctx(this));
 }
+
 Login.prototype.handleShow = function() {		
 	$('#userName').focus();	
 	$("#Submit").click(function (event) {
-		
+		//if (event.keyCode == 13){
+		//	 $("#Submit").click();
 			  if(this.validateLogin($('input.username').val(),$('input.password').val())){		
 					this.authenticate();
-					
+		//	  }		
 		  }
 		 }.ctx(this));
 }
@@ -25,15 +27,18 @@ Login.prototype.handleShow = function() {
 				var  token = data.sessionToken;
 			      setCookie('hredSessionToken', token, null);
 				console.log("************************");
-				console.dir(data);
-				if(data.employee.currentDesignation=="TSE")
-				{
-				App.loadNext();
-				}
+			//	console.dir(data);
+				//if(data.employee.currentDesignation=="2")
+				//{
 			
-			else{
-				alert("notbhjb");
-				}
+				var name=data.employee.employeeName;
+			    var jobRole=data.employee.currentDesignation;
+			    var gender=data.employee.gender;
+			    var contactNo=data.employee.contactNo;
+				App.loadEmployeePage(name,jobRole);
+				App.loadFooter();
+				App.loadEmployee(gender,contactNo);
+				//App.loadTemplate();
 			}
 		}.ctx(this));
 	}

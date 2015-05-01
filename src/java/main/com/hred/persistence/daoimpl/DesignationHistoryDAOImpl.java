@@ -1,5 +1,9 @@
 package com.hred.persistence.daoimpl;
 import java.util.List;
+/**
+ * @author Bhargavi Uppoju
+ *
+ */
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;

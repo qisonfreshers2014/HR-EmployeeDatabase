@@ -1,61 +1,66 @@
 <div id="fields">
 <div class="left">
- FromDate: <input type="text" class="date" id="start_from" required><div id="fromDate" class="error">Enter start date</div>
-</div>
-<div  class="right">
-  ToDate: <input type="text" class="date" id="ends_at" required><div id="toDate" class="error">Enter end date</div>
-</div><br/><br/>
-<div class="description">
-Description:<textarea placeholder="write description here" rows='3' cols='30' id="description" required></textarea><div id="descrp" class="error">Enter description</div>
+Date:<input type="text" class="date" id="start_from"><span class="red"><sup>*</sup></span><div id="fromDate" class="error">Enter start date</div>
 </div>
 <div id="main">
-        	Type: <select id="dropdown" required>
+        	Type:<select id="dropdown" required>
             	<option value="Default">Default</option>
 				<option value="Mandatory">Mandatory</option>
 				<option value="Optional">Optional</option>
 				<option value="Weekdays">Weekdays</option>
-			</select>
-	</div><div id="type" class="error">Enter holiday type</div></div><br/><br/><br/><br/><br/>
-</div>
-<center>
-<input type="button" value="add" id="add"/>&nbsp;&nbsp;
+			</select><span class="red"><sup>*</sup></span> 
+	<div id="type" class="error">Enter holiday type</div>
+</div><br/><br/>
+<!-- <div  class="right">
+  ToDate: <input type="text" class="date" id="ends_at" required><div id="toDate" class="error">Enter end date</div>
+</div><br/><br/> -->
+<div class="description">
+Description:<textarea placeholder="write description here" rows='3' cols='50' id="description"></textarea><span class="red"><sup>*</sup></span><div id="descrp" class="error">Enter description</div>
+</div><br/><br/><br/><br/><br/><br/>
 
+<div class="buttons">
+
+<!-- <input type="button" value="add" id="add"/>&nbsp;&nbsp; -->
+<center>
 <input type ="button" value="save" id="save"/>
 
 <input type ="button" value="Update" id="update"/>
-</center><br/><br/><br/>
+</center>
+</div><br/><br/><br/><br/><br/>
 
 <div id="display">
 
-<table class="table" id="mandatory">
+<table class="table table-bordered" id="mandatory">
 <tr>
 <th  colspan="3">List of Mandatory Holidays </th>
 </tr>
 <tr>
-<td><b>Date</b></td><td><b> Description </b></td><td><b>Type</b></td>
+<td><b>Date</b></td><td><b> Description </b></td><td><b>Day</b></td>
 </tr>
 
 
 </table><br>
 
-<table class="table" id="weekends">
+<table class="table table-bordered" id="weekends">
 <tr>
 <th  colspan="3">Holidays falling on weekends</th>
 </tr>
  <tr>
-<td><b>Date</b></td><td><b> Description</b> </td><td><b>Type</b></td>
+<td><b>Date</b></td><td><b> Description</b> </td><td><b>Day</b></td>
 </tr>
 
 </table><br>
 
-<table class="table" id="optional">
+<table class="table table-bordered" id="optional">
 <tr>
 <th  colspan="3"> Optional Holidays </th>
 </tr>
  <tr>
-<td><b>Date</b></td><td><b>Description</b></td><td><b>Type</b></td>
+<td><b>Date</b></td><td><b>Description</b></td><td><b>Day</b></td>
 </tr>
 
 </table>
+
+</div>
 
 </div>

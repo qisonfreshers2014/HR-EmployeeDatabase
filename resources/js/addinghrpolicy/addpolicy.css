@@ -1,0 +1,6 @@
+div { margin: 20px; }
+#fields{margin-top:35px;}
+#addPolicy{ font-size:19px;  border:1px solid black}
+#policyNameDiv,#fileDiv,#saveDiv,#salaryDiv{ font-size:13px;}
+#isPEmpty,#Plen,#Pletter,#isFEmpty{color:red; font-size:12px;}
+.red{color:red;}

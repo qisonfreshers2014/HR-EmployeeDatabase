@@ -14,7 +14,6 @@ import com.hred.exception.ExceptionMessages;
 import com.hred.exception.ObjectNotFoundException;
 import com.hred.model.File;
 import com.hred.model.ObjectTypes;
-import com.hred.model.SendNotificationHistory;
 import com.hred.persistence.dao.FileDAO;
 import com.hred.persistence.session.SessionFactoryUtil;
 
@@ -22,20 +21,17 @@ public class FileDAOImpl extends BaseDAOImpl implements FileDAO {
 
 	private static FileDAO INSTANCE = null;
 
-
 	public static FileDAO getInstance() {
 		if (INSTANCE == null) {
 			INSTANCE = new FileDAOImpl();
 		}
 		return INSTANCE;
 	}
-	
-	
+
 	public File saveFile(File file) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 
 	@Override
 	public File getFile(long fileId) throws BusinessException {
@@ -48,21 +44,26 @@ public class FileDAOImpl extends BaseDAOImpl implements FileDAO {
 					ExceptionCodes.FILE_DOESNOT_EXIST,
 					ExceptionMessages.FILE_DOESNOT_EXIST);
 		}
-		if(file.getDeleted()){
-			throw new BusinessException(
-					ExceptionCodes.FILE_IS_DELETED,
+		if (file.getDeleted()) {
+			throw new BusinessException(ExceptionCodes.FILE_IS_DELETED,
 					ExceptionMessages.FILE_IS_DELETED);
 		}
 		return file;
-}
-    @Override
-    public List<File> getFiles(List<Long> fileIds){
-        Criteria customCriteria = createCustomCriteria(File.class);
-        customCriteria.add(Restrictions.in(File.LABEL_ID,fileIds));
-        List<File> fileList = customCriteria.list();
-        return fileList;
-    }
+	}
 
+	@Override
+	public List<File> getFiles(List<Long> fileIds) {
+		Criteria customCriteria = createCustomCriteria(File.class);
+		customCriteria.add(Restrictions.in(File.LABEL_ID, fileIds));
+		List<File> fileList = customCriteria.list();
+		return fileList;
+	}
+
+	public File getFiles(String file_id) throws ObjectNotFoundException {
+
+		return (File) getObjectById(Integer.parseInt(file_id), ObjectTypes.FILE);
+
+	}
 
 	@Override
 	public List<File> getAllFiles() {
@@ -75,12 +76,10 @@ public class FileDAOImpl extends BaseDAOImpl implements FileDAO {
 				session = SessionFactoryUtil.getInstance().openSession();
 				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 			}
-			
-			String hql="from File";				
+
+			String hql = "from File";
 			org.hibernate.Query query = session.createQuery(hql);
-			allFileDetails  = query.list();
-			
-		
+			allFileDetails = query.list();
 
 		} finally {
 
@@ -98,14 +97,4 @@ public class FileDAOImpl extends BaseDAOImpl implements FileDAO {
 		return allFileDetails;
 	}
 
-
-	@Override
-			public File getFiles(String file_id) throws ObjectNotFoundException {
-	    	
-	    	return (File) getObjectById(Integer.parseInt(file_id), ObjectTypes.FILE);	
-	
-	}
-	}
-
-
-
+}

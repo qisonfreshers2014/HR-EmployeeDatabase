@@ -23,14 +23,21 @@ public class AuthenticationOutput {
 
  
  /////////////////////////////
- public AuthenticationOutput(String sessionToken, int authStatus, Employee emp) {
+/* public AuthenticationOutput(String sessionToken, int authStatus, Employee emp) {
   this.sessionToken = sessionToken;
   this.authStatus = authStatus;
   this.emp = emp;
 
- }
+ }*/
 
- @JsonProperty
+ public AuthenticationOutput(String sessionToken, int authStatus, Employee emp) {
+	// TODO Auto-generated constructor stub
+	 this.sessionToken = sessionToken;
+	  this.authStatus = authStatus;
+	  this.emp = emp;
+}
+
+@JsonProperty
  public String getSessionToken() {
   return sessionToken;
  }

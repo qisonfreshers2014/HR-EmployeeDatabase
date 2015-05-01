@@ -60,14 +60,14 @@ Sample.prototype.testService = function() {
  
 
 Sample.prototype.uploadMedia = function(callback) {
-var allowedFileType = "application";
+var allowedFileType = "image";
 var uploader = new Uploader(allowedFileType, function(data){
 if (data.filePath) {
 var imageSrc = data.filePath;
 this.fileId = data.id;
 $('.mediaForProfileImage').attr('src', imageSrc);
 if(imageSrc != null){
-$('.mediaForProfileImage').lightBox();
+//$('.mediaForProfileImage').lightBox();
 }
 }
 }.ctx(this));

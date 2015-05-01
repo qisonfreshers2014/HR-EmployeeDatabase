@@ -1,8 +1,8 @@
 package com.hred.handler;
 
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import com.hred.exception.ExceptionCodes;
 import com.hred.exception.ExceptionMessages;
@@ -12,17 +12,9 @@ import com.hred.model.HRPolicy;
 import com.hred.persistence.dao.DAOFactory;
 import com.hred.persistence.dao.FileDAO;
 import com.hred.persistence.dao.HRPolicyDAO;
-import com.hred.service.descriptors.outputDescriptors.VeiwHRPolicies;
-
-
-/**
- * @author Bhargavi Uppoju
- *
- */
+import com.hred.service.descriptors.output.VeiwHRPolicies;
 
 public class HRPolicyHandler extends AbstractHandler {
-
-	public static final String POLICY_NAME_PATTERN = "^[A-Za-z0-9\\s]*$";
 	private static HRPolicyHandler INSTANCE = null;
 
 	private HRPolicyHandler() {
@@ -38,15 +30,14 @@ public class HRPolicyHandler extends AbstractHandler {
 	public HRPolicy save(HRPolicy hrpolicy) throws HRPolicyException{
 		String policyName = hrpolicy.getPolicyName();
 		long fileId = hrpolicy.getFileId();
-		validateFields(policyName, fileId);
-		validateFields(policyName, fileId);
-
+		validatePolicyName(policyName);
+		validateFileId(fileId);
 		HRPolicy hrpolicy_saved = (HRPolicy) DAOFactory.getInstance()
 				.getHRPolicyDAO().saveObject(hrpolicy);
 		return hrpolicy_saved;
 	}
 
-	public void validateFields(String policyName, long fileID) throws HRPolicyException
+	public void validatePolicyName(String policyName) throws HRPolicyException
 	{
 
 		if (policyName == null || policyName.isEmpty()
@@ -54,13 +45,18 @@ public class HRPolicyHandler extends AbstractHandler {
 			throw new HRPolicyException(ExceptionCodes.HRPolicy_DOESNOT_EXIST,
 					ExceptionMessages.HRPolicy_DOESNOT_EXIST);
 		}
-		boolean isNameValid = Pattern.compile(POLICY_NAME_PATTERN)
-				.matcher(policyName).matches();
-		
-		if (!isNameValid) {
+
+
+	}
+	public void validateFileId(long fileId) throws HRPolicyException
+	{
+
+		if (fileId == 0) 
+		{
 			throw new HRPolicyException(ExceptionCodes.HRPolicy_DOESNOT_EXIST,
 					ExceptionMessages.HRPolicy_DOESNOT_EXIST);
 		}
+
 
 	}
 
@@ -87,5 +83,8 @@ public class HRPolicyHandler extends AbstractHandler {
 		return veiwHRPolicieslist;
 
 	}
+
+
+
 
 }

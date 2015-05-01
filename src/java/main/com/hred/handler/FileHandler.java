@@ -77,19 +77,16 @@ public class FileHandler extends AbstractHandler {
         }
         return downloadMap;
     } 
-
-    public File getFiles(String file_id){
-         File veiwFile= new File();
-        if(null!=file_id && file_id.length()>0){
-        	try {
-				veiwFile =DAOFactory.getInstance().getFileDAO().getFiles(file_id);
-			} catch (ObjectNotFoundException e) {
-				// TODO Auto-generated catch block
-				System.out.println(" No file Found");
-			}
+    
+    
+     public File getFiles(String file_id) throws ObjectNotFoundException{
+             File veiwFile= new File();
+            if(null!=file_id && file_id.length()>0){
+            	veiwFile =DAOFactory.getInstance().getFileDAO().getFiles(file_id);
+            }
+            return veiwFile;
         }
-        return veiwFile;
-    }
+
     
     
 }

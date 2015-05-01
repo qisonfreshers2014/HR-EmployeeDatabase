@@ -2,16 +2,10 @@ package com.hred.handler;
 
 import java.util.List;
 
-import com.hred.exception.TemplateException;
-import com.hred.handler.AbstractHandler;
-import com.hred.model.File;
-import com.hred.model.HRPolicy;
 import com.hred.model.Template;
-import com.hred.model.User;
 import com.hred.persistence.dao.DAOFactory;
 import com.hred.persistence.dao.FileDAO;
 import com.hred.persistence.dao.TemplateDAO;
-import com.hred.service.descriptors.outputDescriptors.VeiwHRPolicies;
 
 public class TemplateHandler extends AbstractHandler {
 	private static TemplateHandler INSTANCE = null;
@@ -36,6 +30,12 @@ public class TemplateHandler extends AbstractHandler {
 		return tempSaved;
 	}
 
+	public List<Template> getTemplateByName(Template template) {
+		List<Template> templates = null;
+		TemplateDAO temDAOImpl = (TemplateDAO) DAOFactory.getInstance().getTemplateDAO();
+		templates = (List<Template>) temDAOImpl.getTemplateByName(template);
+		return templates;
+	}
 	public Template update(Template template) {
 		// TODO Auto-generated method stub
 		Template tempEdited = (Template) DAOFactory.getInstance()
@@ -79,4 +79,7 @@ public class TemplateHandler extends AbstractHandler {
 
 
 
+	
+		
+	
 

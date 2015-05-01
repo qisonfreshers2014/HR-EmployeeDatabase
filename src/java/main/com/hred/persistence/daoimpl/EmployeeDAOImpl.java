@@ -7,6 +7,9 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Disjunction;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 import com.hred.exception.BusinessException;
@@ -17,15 +20,13 @@ import com.hred.exception.UserException;
 import com.hred.model.Employee;
 import com.hred.persistence.dao.EmployeeDAO;
 import com.hred.persistence.session.SessionFactoryUtil;
+import com.hred.service.descriptors.input.EmployeeSearchInputDescriptor;
 import com.hred.service.descriptors.output.DisplayNotificationHome;
 import com.hred.service.descriptors.output.NotificationHomeFilterInputDiscriptor;
 
 public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 
 	private static EmployeeDAO INSTANCE = null;
-
-	private EmployeeDAOImpl() {
-	}
 
 	public static EmployeeDAO getInstance()
 	{
@@ -34,9 +35,87 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 		}
 		return INSTANCE;
 	}
- 
-	
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public Employee getEmployeeById(long id) throws EmployeeException {
+		// TODO Auto-generated method stub
+		Session session = null;
+		List<Employee> list = null;
+		Transaction tx = null;
+		try {
+			session = getSession();
+			if (null == session) {
+				session = SessionFactoryUtil.getInstance().openSession();
+				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+			}
+			Criteria createCriteria = session.createCriteria(Employee.class);
+			/*String hql="from Employee where id="+id+"";		
+			org.hibernate.Query query = session.createQuery(hql);
+			 list  = query.list();*/
+			createCriteria.add(Restrictions.eq("id", id));
+			list = createCriteria.list();
+			if (list.size() == 0) {
+				throw new EmployeeException(ExceptionCodes.EMPLOYEE_DOESNOT_EXIST, ExceptionMessages.EMPLOYEE_DOESNOT_EXIST);
+			  } 
+		}finally {
+					try {
+						if (tx != null) {
+							tx.commit();
+							if (session.isConnected())
+								session.close();
+						}
+					} catch (HibernateException e) {
+
+						e.printStackTrace();
+					}
+			  }
+				return  (Employee) list.iterator().next();
+	}
+
+	@Override
+	public List<Employee> getFilterEmployeeDetails(Employee employee) throws EmployeeException{
+	Session session = null;
+	List<Employee> list = null;
+	Transaction tx = null;
+	try {
+		session = getSession();
+		if (null == session) {
+			session = SessionFactoryUtil.getInstance().openSession();
+			tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+		}
+		Criteria createCriteria = session.createCriteria(Employee.class);
+		createCriteria.add(Restrictions.eq("gender",employee.getGender()));
+		createCriteria.add(Restrictions.eq("currentDesignation",employee.getCurrentDesignation()));
+		
+		createCriteria.add(Restrictions.eq("DOJ",employee.getDateOfJoining()));
+				 
+	 	/*//createCriteria.add(Restrictions.gt("yearsofexperience",employee.getYearsofexperience()));
+		createCriteria.add(Restrictions.eq("highestQualification",employee.getHighestQualification()));
+		 
+			//createCriteria.add(Restrictions.eq("isDeleted",false));
+*/			
+		//createCriteria.add(Restrictions.eq("employeeName",employee.getEmployeeName()));
+		
+		list = (List<Employee>)createCriteria.list();
+	  }finally {
+
+			try {
+				if (tx != null) {
+					tx.commit();
+					if (session.isConnected())
+						session.close();
+				}
+			} catch (HibernateException e) {
+
+				e.printStackTrace();
+			}
+		}
+
+	
+	 
+		return list;
+}
 
 
 	@Override
@@ -73,50 +152,21 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 				e.printStackTrace();
 			}
 		}
+
+	
 	 
 		return list.iterator().next();
 		
 	}
 	
-	@Override
-	public Employee getEmployeeById(String id) throws EmployeeException {
-		// TODO Auto-generated method stub
+	public String getEmployeeName(long id) {
 		Session session = null;
-		List<Employee> list = null;
-		Transaction tx = null;
-		try {
-			session = getSession();
-			if (null == session) {
-				session = SessionFactoryUtil.getInstance().openSession();
-				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
-			}
-			Criteria createCriteria = session.createCriteria(Employee.class);
-			// createCriteria.add(Restrictions.eq("id", id));
-			// createCriteria.add(Restrictions.eq("isDeleted", false));
-			list = createCriteria.list();
-			if (list.size() == 0) {
-				throw new EmployeeException(
-						ExceptionCodes.EMPLOYEE_DOESNOT_EXIST,
-						ExceptionMessages.EMPLOYEE_DOESNOT_EXIST);
-			}
-
-		} finally {
-
-			try {
-				if (tx != null) {
-					tx.commit();
-					if (session.isConnected())
-						session.close();
-				}
-			} catch (HibernateException e) {
-
-				e.printStackTrace();
-			}
-		}
-		return list.iterator().next();
-
+		session = getSession();
+		Criteria createCriteria = session.createCriteria(Employee.class);
+		createCriteria.add(Restrictions.eq("id", id));
+		List<Employee> list = createCriteria.list();
+		return list.iterator().next().getEmployeeName();
 	}
-
 	@Override
 	public List<Employee> getEmployees() {
 		Session session = null;
@@ -142,8 +192,9 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 				e.printStackTrace();
 			}
 		}
-		return list;
+		return  list;	 
 	}
+
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -411,7 +462,69 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 			}
 
 		} finally {
+			try {
+				if (tx != null) {
+					tx.commit();
+					if (session.isConnected())
+						session.close();
+				}
+			} catch (HibernateException e) {
 
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+
+	@Override
+	public List<Employee> viewEmployee(Employee employee) {
+		Session session = null;
+		List<Employee> list = null;
+		Transaction tx = null;
+		try {
+			session = getSession();
+			if (null == session) {
+				session = SessionFactoryUtil.getInstance().openSession();
+				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+			}
+			Criteria createCriteria = session.createCriteria(Employee.class);
+			createCriteria.add(Restrictions.eq("id", employee.getId()));
+			list = createCriteria.list();
+		} finally {
+			try {
+				if (tx != null) {
+					tx.commit();
+					if (session.isConnected())
+						session.close();
+				}
+			} catch (HibernateException e) {
+
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+
+	@Override
+	public Employee getEmployeeById(String id) throws EmployeeException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Employee> getEmployee() {
+		Session session = null;
+		List<Employee> list = null;
+		Transaction tx = null;
+		try {
+			session = getSession();
+			if (null == session) {
+				session = SessionFactoryUtil.getInstance().openSession();
+				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+			}
+			Criteria createCriteria = session.createCriteria(Employee.class);
+			list = createCriteria.list();
+		} finally {
 			try {
 				if (tx != null) {
 					tx.commit();
@@ -426,4 +539,41 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 		return list;
 	}
 	
+
+	@Override
+	public List<Employee> searchEmployee(EmployeeSearchInputDescriptor employee) {
+		Session session = null;
+		List<Employee> list = null;
+		Transaction tx = null;
+		try {
+			session = getSession();
+			if (null == session) {
+				session = SessionFactoryUtil.getInstance().openSession();
+				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+			}
+			Criteria createCriteria = session.createCriteria(Employee.class);
+			
+			Criterion name = Restrictions.ilike("employeeName", employee.getSearchKey(), MatchMode.ANYWHERE);
+			Criterion email = Restrictions.ilike("email", employee.getSearchKey(), MatchMode.ANYWHERE);
+			Disjunction disjunction = Restrictions.disjunction();
+			disjunction.add(name);
+			disjunction.add(email);
+			createCriteria.add(disjunction);
+					
+			list = (List<Employee>)createCriteria.list();
+		} finally {
+			try {
+				if (tx != null) {
+					tx.commit();
+					if (session.isConnected())
+						session.close();
+				}
+			} catch (HibernateException e) {
+
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+
 }

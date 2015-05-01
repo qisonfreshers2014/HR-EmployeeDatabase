@@ -8,8 +8,6 @@ import javax.persistence.Table;
 
 import com.hred.persistence.annotations.Increment;
 
-
-
 /**
  * @author Venkatesh Chitla
  *
@@ -19,8 +17,6 @@ import com.hred.persistence.annotations.Increment;
 @Table(name = "EMPLOYEE")
 @Increment
 public class Employee extends AbstractObject {
-
-	
 
 	public static final String AUTH_TYPE_REGULAR = "REGULAR";
 	public static final int AUTH_STATUS_EXISTING = 0;
@@ -33,10 +29,10 @@ public class Employee extends AbstractObject {
 	private String employeeName;
 	@Column(name = "gender")
 	private String gender;
-	//@Temporal(TemporalType.DATE)
+	// @Temporal(TemporalType.DATE)
 	@Column(name = "DOB")
 	private Timestamp dateOfBirth;
-	//@Temporal(TemporalType.DATE)
+	// @Temporal(TemporalType.DATE)
 	@Column(name = "DOJ")
 	private Timestamp dateOfJoining;
 	@Column(name = "years_of_experience")
@@ -77,13 +73,13 @@ public class Employee extends AbstractObject {
 	private String skill;
 	@Column(name = "Rating")
 	private String rating;
-	@Column(name="variable_component")
+	@Column(name = "variable_component")
 	private String variableComponent;
-	@Column(name="Salary")
+	@Column(name = "Salary")
 	private String salary;
-	@Column(name="File_Path")
+	@Column(name = "File_Path")
 	private String filePath;
-	
+
 	public String getFilePath() {
 		return filePath;
 	}
@@ -109,16 +105,14 @@ public class Employee extends AbstractObject {
 	}
 
 	public Employee() {
-		
 
 	}
 
 	public Employee(int employeeId) {
 		this.employeeId = employeeId;
-		//this.employeeName = employeeName;
+		// this.employeeName = employeeName;
 	}
 
-	
 	public int getEmployeeId() {
 		return employeeId;
 	}
@@ -142,7 +136,6 @@ public class Employee extends AbstractObject {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-
 
 	public Timestamp getDateOfBirth() {
 		return dateOfBirth;
@@ -296,7 +289,7 @@ public class Employee extends AbstractObject {
 	public void setSkype(String skype) {
 		this.skype = skype;
 	}
-	
+
 	public String getRating() {
 		return rating;
 	}

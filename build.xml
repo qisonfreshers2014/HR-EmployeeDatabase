@@ -28,6 +28,7 @@
 
     <!-- build output directory -->
     <property name="dest.dir" value="../target"/>
+    <property name="permanentFileUpload.dir" value="../FileUpload"></property>
 
     <!-- environment -->
     <property environment="env"/>
@@ -119,6 +120,7 @@
 
     <target name="requiredFolders">
         <mkdir dir="${log.dir}"/>
+        <mkdir dir="${permanentFileUpload.dir}"/>
     </target>
 
     <!-- COMPILE -->

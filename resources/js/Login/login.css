@@ -3,6 +3,7 @@ body {
 position: absolute;
 background-color: #f4f4f4;
 background-image: url(http://teambuilding.pt/wp-content/uploads/2015/02/gestao-competencias1.jpg?cb6f58);
+background-repeat: no-repeat;
 color: #5a5656;
 font-family: 'Open Sans', Arial, Helvetica, sans-serif;
 font-size: 16px;
@@ -30,6 +31,7 @@ font-weight: bold;
 	
 	background-size: cover;
 	background-image: url(http://confluenceedu.com/wp-content/uploads/2015/01/Human-Resources-Management.jpg);
+	background-repeat: no-repeat;
 	z-index: 0;
 		border-radius: 3px;
 -moz-border-radius: 3px;
@@ -43,7 +45,7 @@ position: absolute;
 top:80px;
 font-size: 25px;
 
-right:110px;
+right:139px;
 color:black
 
 }
@@ -92,9 +94,9 @@ position: absolute;
 {
 position: absolute;
 top: 110px;	
-right: 65px;
+right: 75px;
 height:210px;
-width:320px;
+width:310px;
  background-color: #323B55;
   padding: 15px;
   border-radius: 3px;
