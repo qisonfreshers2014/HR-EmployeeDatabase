@@ -24,7 +24,7 @@
 #menudiv {
 
    	float: left;    
-   	 margin-top: 59px;
+   	 margin-top: 5%;
 }
 
 #logout {
@@ -32,15 +32,15 @@
     left:1028px;
     top:51px; */
     color:#FFFFFF;
-	margin-left: 879px;
-    margin-top: 44px;
+	 margin-left: 65%;
+    margin-top: 3.4%;
 }
 
 #employeeName{
-    color: #ffffff;	
-    margin-left: 1065px;
+   color: #ffffff;
+    margin-left: 79%;
     position: absolute;
-    top: 21px;
+    top: 8%;
     
 }
 th{

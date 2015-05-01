@@ -53,34 +53,34 @@ Login.prototype.handleShow = function() {
 	    var upper = /[A-Z]/;
 	    var lower = /[a-z]/;
 	    if(email == "" || email == null) {
-	    	$(".message").show();
-	    	$('.message').focus();
-	    	$('.message').text("Email must be filled(?)");
+	    	$(".errormessage").show();
+	    	$('.errormessage').focus();
+	    	$('.errormessage').text("Email must be filled(?)");
 	        isValid = false;
 	    }
 
 	    else if(!emailReg.test(email)) {
-	    	$(".message").show();
-	    	$('.message').focus();
-	    	$('.message').text("Enter a valid email(?)");
+	    	$(".errormessage").show();
+	    	$('.errormessage').focus();
+	    	$('.errormessage').text("Enter a valid email(?)");
 	        isValid = false;
 	    }
 	    else if (email.length > 128){
-	    	$(".message").show();
-	    	$('.message').focus();
-	    	$('.message').text("Email length is large(?)");
+	    	$(".errormessage").show();
+	    	$('.errormessage').focus();
+	    	$('.errormessage').text("Email length is large(?)");
 	        isValid = false;    	
 	    }
-	 /*   else if(!minMaxLength.test(password) ){
-	    	$(".message").show();
-	    	$('.message').focus();
-	    	$('.message').text("Password is too short(?)");
+	    else if(!minMaxLength.test(password) ){
+	    	$(".errormessage").show();
+	    	$('.errormessage').focus();
+	    	$('.errormessage').text("Password is too short(?)");
 	        isValid = false;
 		} 
 	    else if(!special.test(password) ){
-	    	$(".message").show();
-	    	$('.message').focus();
-	    	$('.message').text("Password has no special character(?)");
+	    	$(".errormessage").show();
+	    	$('.errormessage').focus();
+	    	$('.errormessage').text("Password has no special character(?)");
 	        isValid = false;
 		} 
 	    else if(!number.test(password) ){
@@ -100,7 +100,7 @@ Login.prototype.handleShow = function() {
 	    	$('.message').focus();
 	    	$('.message').text("Password has no Lowercase(?)");
 	        isValid = false;
-		}*/
+		}
 		/* else if(password.length < 6 ){
 			$(".message").show();
 			$('.message').focus();
@@ -109,13 +109,13 @@ Login.prototype.handleShow = function() {
 		} 
 		else if(password.trim().length  > 128)
 			{
-			$(".message").show();
-			$('.message').focus();
-	    	$('.message').text("password is too large(?)");	
+			$(".errormessage").show();
+			$('.errormessage').focus();
+	    	$('.errormessage').text("password is too large(?)");	
 			}*/
 		    else
 			{
-			$(".message").empty();
+			$(".errormessage").empty();
 			isValid = true;    
 			}
 		return isValid; 
