@@ -18,13 +18,16 @@ body {
 .container{
     display: block !important;
     position: relative;
-    width: 70%;
+    width: 90%;
+    height:650px;
+    background-color:white;
 }
+
 .leftContainer {
   background-color: #FFFFFF;
     float: left;
     position: relative;
-    width: 55%;
+    width: 85%;
 
 }
 .rightContainer {

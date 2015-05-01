@@ -5,6 +5,8 @@ import java.util.Set;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 
+ 
+
 import com.hred.model.Employee;
 import com.hred.model.User;
 import com.hred.service.annotations.SerializationDescriptor;
@@ -29,8 +31,8 @@ public class AuthenticationOutput {
   this.emp = emp;
 
  }
-
- @JsonProperty
+ 
+@JsonProperty
  public String getSessionToken() {
   return sessionToken;
  }
@@ -40,7 +42,7 @@ public class AuthenticationOutput {
   return authStatus;
  }
  
- @SerializationDescriptor(value = Employee.class)
+ @SerializationDescriptor(value = User.class)
     @JsonProperty
  public Employee getEmployee() {
   return emp;

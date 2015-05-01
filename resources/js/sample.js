@@ -14,7 +14,9 @@ Sample.prototype.handleShow = function() {
 
 Sample.prototype.testService = function() {
 
-	App.loadLogin();
+	//App.loadLogin();
+//App.loadFilter();
+App.loadSkill();
 
 
 }

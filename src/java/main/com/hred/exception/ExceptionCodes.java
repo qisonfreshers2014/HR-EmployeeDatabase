@@ -293,7 +293,11 @@ public interface ExceptionCodes {
 	
 	//holidays related Exception Codes
 	public static final int HOLIDAYSID_DOESNOT_EXIST = 9011;
+
 	
+	//Skills 
+	public static final int Skills_DOESNOT_EXIST = 12000;
+	public static final int SKILLNAME_ALREADY_EXISTS = 120001;
 	
 	
 	

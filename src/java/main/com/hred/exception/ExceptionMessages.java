@@ -158,6 +158,12 @@ public interface ExceptionMessages {
 	
 	//holidays related Exception Messages
 	public static final String HOLIDAYSID_DOESNOT_EXIST = "Invalid Holiday Id";
+
+	
+	//skills related Exception messages
+	public static final String Skills_DOESNOT_EXIST = "Invalid skill Name";
+
+	public static final String SKILLNAME_ALREADY_EXISTS = "Skill name is already exist";
 	
 
 	

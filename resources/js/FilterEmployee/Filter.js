@@ -1,209 +1,147 @@
 function FilterEmp() {
-	Loader.loadHTML('.leftContainer', 'resources/js/FilterEmployee/FilterEmployee.html', true, function(){
+	Loader.loadHTML('.container', 'resources/js/FilterEmployee/FilterEmployee.html', true, function(){
 		this.handleShow();
 	}.ctx(this));
 }
 
 FilterEmp.prototype.handleShow = function() {
 	$('.container').show();
+	$( "#datepicker" ).datepicker({dateFormat:'yy-mm-dd',showButtonPanel:
+	 true,changeMonth:true,changeYear:true,showAnim:'drop',minDate:new Date(1993,12,31),
+	 maxDate:new Date(2050,12,31)});
+		  	  
+		$("#year1").focusout(function(){
+        if($(this).val().match('[0-9-+]+$')){
+			   $("#yerror").text("");
+			  }
+        else if($(this).val){
+        	
+        }
+       		  else{
+			   $("#yerror").text("should enter only numbers");
+              
+			  }
+	});
+	$("#year2").focusout(function(){
+        if($(this).val().match('[0-9-+]+$')){
+			   $("#yerror").text("");
+			  }
+			  else{
+			   $("#yerror").text("should enter only numbers");
+              
+			  }
+	});
+	$("#qualification1").focusout(function(){
+        if($(this).val().match('[a-zA-Z.""]+$')){
+			   $("#herror").text("");
+			  }
+			  else{
+			   $("#herror").text("Should enter only characters only");
+              
+			  }
+	});
+	
 	$('#Filter').click(function(){
+		
 		/*event.preventDefault();*/
+		
 		this.FilterEmployee();
 		//this.Filterdata();
 	}.ctx(this));
 	
 }
 
-FilterEmp.prototype.validateFilterEmp=function(){
-
-	var valid = true;
-	 //validation for gender
-	var result = document.getElementById("gender").value;
-	  if (result == "0") 
-	  {
-	   document.getElementById("gerror").innerHTML = "Please Select Gender";
-	   document.getElementById("gerror").style.visibility = 'visible';
-	   valid = false;
-	  }
-	  else
-	   document.getElementById("gerror").innerHTML = " ";
+/*FilterEmp.prototype.validateFilter=function(){
 	
-	  
-	
-	//For designation validations
-	  var result = document.getElementById("designation").value;
-	  if (result == "0") 
-	  {
-	   document.getElementById("designerror").innerHTML = "Please Select Designation";
-	   document.getElementById("designerror").style.visibility = 'visible';
-	   valid = false;
-	  }
-	  else
-	   document.getElementById("designerror").innerHTML = " ";
-	 
-	
-	 	
-	//for date of joining validations
-	  var x=document.getElementById("date").value;
+	 var x=document.getElementById("datepicker").value;
 	  var error=document.getElementById("derror")
 	  var doj=new Date(x);
 	  var today= new Date();
 	  var dojday=doj.getDate();
-	  var dojmonth=doj.getMonth()+1;
-	  var dojyear=doj.getFullYear();
-	  var todayday=today.getDate();
-	  var todaymonth=today.getMonth()+1;
-	  var todayyear=today.getFullYear();
-	  var day;
 	  if(doj>today)
 	  {
-	  	error.innerHTML="Invalid Date";
+	  	error.innerHTML="Invalid Date Of Join";
 	  	error.style.visibility = "visible"; 
-	  	valid = false;
-	   
-	  }
-	  else{
-	  	error.style.visibility="hidden";
-	  }
-	    
-
-	  if(dojday>todayday)
-	  {
-	  todayday=todayday+30;
-	   day=todayday-dojday;
-	  todaymonth=todaymonth-1;
-	  }
-	  else 
-	  {
-	  day=todayday-dojday;
-	  }
-	  var month;
-
-	  if(dojmonth>todaymonth)
-	  {
-
-	  todaymonth=todaymonth+12;
-	  month=todaymonth-dojmonth;
-	  todayyear=todayyear-1;
+	  valid = false;
 	  }
 	  else
-	   {
-	   month=todaymonth-dojmonth;
-	   }
-	  var year =todayyear-dojyear;
-	   
+	  	error.style.visibility="hidden";
+	       
 	  
-	  //validations for date of join
-	 	var error=document.getElementById("yerror");
-		var year1= document.getElementById("year1").value;
-		var num =/^[0-3]?[0-9]\/[01]?[0-9]\/[12][90][0-9][0-9]$/;
-		if(year1 == "" ) 
-		 {
-			error.style.visibility="visible";
-			valid = false;
-		 } 
-		  else if(isNaN(year1))
-		 {
-			  error.innerHTML="This year format is not recognized.Enter only numbers.";
-			  error.style.visibility="visible";
-			  valid = false;
-		 }
-		 else  
-			 error.style.visibility="hidden"; 
-		 
- //validation for date of joining
-		/*var error=document.getElementById("yerror");
-		var year= document.getElementById("year2").value;
-		var num =/^[0-3]?[0-9]\/[01]?[0-9]\/[12][90][0-9][0-9]$/;
-		if(year == "" ) 
-		 {
-			error.style.visibility="visible";
-			valid = false;
-		 } 
-		  else if(isNaN(year))
-		 {
-			  error.innerHTML="This year format is not recognized.Enter only numbers.";
-			  error.style.visibility="visible";
-			  valid = false;
-		 }
-		 else  
-			 error.style.visibility="hidden"; 
-	  */
-	
-	//For highest_Qualification validations
-		/*var nerr = $("#herror");
-		var qualification = $("#qualification1").val();
-		var qual=/^[a-zA-Z.""]+$/;
-		if (qualification == "") { 
-			$(nerr).text("required field");
-			$(nerr).css("color","red");
-			valid false;
-			} 
-			else if (!(qualification.match(qual) || qualification == isNaN)) {
-			$(nerr).text("please check the qualification");
-			$(nerr).css("color","red");
-			valid false;
-			} 
-			else 
-			$(nerr).text("");
-			 */
-			 
-			 
-
-	var herr=document.getElementById("herror");
-	var qualification = document.getElementById("qualification1").value;
-	var char =/^[a-zA-Z.""]+$/;
-	if(qualification === "") 
-	 {
-		herr.style.visibility="visible";
-		valid = false;
-	 }   
-	 else if(!(qualification.match(char) || qualification == isNaN))
-	 {
-		 herr.innerHTML= "invalid qualification / It should be characters only";
-		 herr.style.visibility="visible";
-		 valid = false;
-	  
-	 }
-	 else  
-		 herr.style.visibility="hidden"; 
-		return valid;
+	  return true;
 }
+*/
 
 FilterEmp.prototype.FilterEmployee = function(){
-	
-	if(this.validateFilterEmp()){
-	  var input={"payload":{"gender":$('#gender').val(),"currentDesignation":$('#designation').val(),
-			"DOJ":$('#date').val(),"yearsofexperience":$('#year1').val(),
+	 
+ var inputdate=$('#datepicker').val()+' 00:00:00'
+ if(inputdate == null)
+	 {
+	 inputdate=null;
+	 }
+	var payload = {};
+	if($('#gender').val().trim().length != 0){
+		payload.gender = $('#gender').val();
+	}
+	if($('#qualification1').val().trim().length != 0){
+		payload.highestQualification = $('#qualification1').val();
+	}
+	if($('#designation').val() != 0){
+		payload.currentDesignation = $('#designation').val();
+	}
+	if($('#datepicker').val().trim().length != 0){
+		payload.dateOfJoining = $('#datepicker').val() + ' 00:00:00';
+	}
+	if($('#year1').val().trim().length != 0 && $('#year2').val().trim().length !=0 ){
+		payload.from = ($('#year1').val());
+		payload.to = ($('#year2').val());
+	}
+	console.log(payload);
+/*var input={"payload":{"gender":$('#gender').val(),"currentDesignation":$('#designation').val(),
+			"dateOfJoining":$('#datepicker').val()+' 00:00:00',"from":$('#year1').val(),"to":$('#year2').val(),
 			 "highestQualification":$('#qualification1').val(),
 			}};
-	  
-	  
-	  RequestManager.getFilterEmployee(input, function(data, success) {
+	if($('#datepicker').val().trim().length == 0 ){
+	var	input={"payload":{"gender":$('#gender').val(),"currentDesignation":$('#designation').val(),
+			 "highestQualification":$('#qualification1').val()
+			}};
+	}
+	if($('#qualification1').val().trim().length == 0 ){
+		var	input={"payload":{"gender":$('#gender').val(),"currentDesignation":$('#designation').val(),
+				 "highestQualification":$('#qualification1').val()
+			}};
+		}
+	*/
+	
+	    RequestManager.getFilterEmployee({"payload" : payload}, function(data, success) {
+	    	 
 		 if(success){
 			 alert("success");
 			   var i;
-				  
-				        for(i = 0; i < data.length; i++) {
-				         var item = data[i];
-				     	        
-				 
-	$('#displayData').append('<table style="width:80%"></table>');
-	 $('#displayData').after('<tr><td>'+item.employeeId+'</td><td>'+item.employeeName+'</td><td>'+item.gender+'</td><td>'
-	+item.DOB+'</td><td>'+item.DOJ+'</td><td>'+item.email+'</td><td>'+item.fatherName+'</td><td>'
-	+item.designation+'</td><td>'+item.highestQualification+'</td><td>'+item.skypeId+'</td><td>'
-	+item.highestQualification+'</td></tr>');
-				       
-				  }
-					 }else{
-					  alert("failed to retrieved");
-					 }
+				   for(i = 0; i < data.length; i++) {
+				       var item = data[i];
+	 					
+			//$('#displayData').append('<table></table>');
+			$('#displayData').append("<tr><td>"+item.employeeId+"</td><td>"+item.employeeName+"</td><td>"+item.gender+"</td><td>"
+			+new Date(item.dob).getFullYear()+"-"+(new Date(item.dob).getMonth()+1)+"-"+new Date(item.dob).getDate()+"</td><td>"
+			+new Date(item.doj).getFullYear()+"-"+(new Date(item.doj).getMonth()+1)+"-"+new Date(item.doj).getDate()+"</td><td>"+item.email+"</td><td>"+item.fathersName+"</td><td>"
+			+item.currentDesignation+"</td><td>"+item.highestQualification+"</td><td>"+item.skype+"</td><td>"
+			+item.contactNo+"</td></tr>");
+			    $("#gender").val("");
+			    $("#designation").val("");
+			    $("#datepicker").val("");
+			    $("#year1").val("");
+			    $("#year2").val("");
+			    $("#qualification1").val("");
+				   }    
+				  }else{
+					  alert("failed to retrieved");					
+					  }
 					}.ctx(this));
-				}
-			};
-		    			  
- 
- 
+			 
+	
+	
+}
  
 
 	

@@ -109,6 +109,12 @@ public class AllHandsMeetingDAOImpl extends BaseDAOImpl implements AllHandsMeeti
 		return  list;	 
 	}
 
+	@Override
+	public AllHandsMeeting saveObject(AllHandsMeeting allhandsmeetingInput) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 }
 

@@ -4,24 +4,26 @@
 
 	import org.codehaus.jackson.annotate.JsonProperty;
 
-	import com.hred.model.Employee;
+ 
+
+import com.hred.model.FilterEmployee;
 	import com.hred.service.annotations.SerializationDescriptor;
-	import com.hred.service.descriptors.JSONSerializationDescriptor;
-	import com.hred.service.descriptors.input.EmployeeOutput;
+import com.hred.service.descriptors.JSONSerializationDescriptor;
+import com.hred.service.descriptors.input.EmployeeOutput;
 
 	public class EmployeeListOutputDescriptors implements
 			JSONSerializationDescriptor {
 		
-		List<Employee> employees;
+		List<FilterEmployee> Filters;
 		
 		@SerializationDescriptor(EmployeeOutput.class)
 		@JsonProperty
-		public List<Employee> getEmployees() {
-			return employees;
+		public List<FilterEmployee> getEmployees() {
+			return Filters;
 		}
 
-		public void setEmployees(List<Employee> employees) {
-			this.employees = employees;
+		public void setEmployees(List<FilterEmployee> employees) {
+			this.Filters = Filters;
 		}
 
 	}

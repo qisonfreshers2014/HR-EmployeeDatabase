@@ -27,10 +27,11 @@ public class DAOFactory {
 	public UserDAO getUserDAO() {
 		return UserDAOImpl.getInstance();
 	}
-	
 	public EmployeeDAO getEmployeeDAO() {
-		return EmployeeDAOImpl.getInstance();
+		// TODO Auto-generated method stub
+		  return EmployeeDAOImpl.getInstance();
 	}
+	 
 	
 	public SkillsDAO getSkillDAO(){
 		return SkillDAOImpl.getInstance();
@@ -52,7 +53,7 @@ public class DAOFactory {
 	}
 
 	
-	
 
+	
 }
 

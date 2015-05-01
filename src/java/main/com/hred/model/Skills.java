@@ -4,10 +4,15 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.hred.persistence.annotations.Increment;
+
 @Entity
-@Table(name = "Emp_Skills")
+@Table(name = "EMPLOYEESKILLS")
+@Increment
 public class Skills extends AbstractObject{
 
+	/* @Column(name = "skills_id")
+	 private int skillsId; */
 	 @Column(name = "emp_id")
 	 private int empId; 
 	 @Column(name = "skills")
@@ -33,16 +38,18 @@ public class Skills extends AbstractObject{
 	 public static final int AUTH_STATUS_NEW = 1; 
 	 public static final int AUTH_STATUS_NONE = 2;
 	 
-	 public Skills(int empId, String skills,
+	 public Skills( 
+	int empId, String skills,
 	   String rating,boolean trainingAttended)
 	   {
+	 
 	  this.empId = empId;
 	  this.skills = skills;
 	  this.rating = rating;
 	  this.trainingAttended = trainingAttended;
 	    }
 
-
+	  
 	 /**
 	  * @return the empId
 	  */
@@ -60,7 +67,7 @@ public class Skills extends AbstractObject{
 	 /**
 	  * @return the skills
 	  */
-	 public String getSkills() {
+	 public  String getSkills() {
 	  return skills;
 	 }
 
