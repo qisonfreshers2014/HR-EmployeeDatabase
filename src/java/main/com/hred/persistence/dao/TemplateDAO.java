@@ -6,14 +6,14 @@ import com.hred.model.Template;
 
 public interface TemplateDAO extends BaseDAO{
 
-	List<Template> getTemplateByName(Template template);
-
-	
-
-	
-
 	
 	
-		List<Template> viewTemplate(Template template);
+	List<Template> getTemplateByName();
 
+
+		Template getContentForMail(Template template);
+
+	
+	List<Template> viewTemplate(Template template);
 }
+

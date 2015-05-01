@@ -317,7 +317,6 @@ public interface ExceptionCodes {
 	public static final int TIME_ENTRY_PRESENT = 9008;
 	public static final int RELEASE_ID_NULL = 9009;
 	public static final int DB_EXCEPTION = 9010;
-	public static final int TEMPLATE_DOESNOT_EXIST =9011;
 	
 
 	public static final int FILE_IS_DELETED = 9015;
@@ -326,13 +325,22 @@ public interface ExceptionCodes {
 	
 	
 	//holidays related Exception Codes
-	public static final int HOLIDAYSID_DOESNOT_EXIST = 9011;
+	public static final int HOLIDAY_DOESNOT_EXIST = 9011;
+	public static final int HOLIDAY_DESCRIPTION_NULL = 9012;
+	public static final int HOLIDAY_TYPE_NULL = 9013;
+	public static final int HOLIDAY_DATE_DOES_NOT_EXIST = 9014;
+	public static final int HOLIDAY_DATE_MISMATCH = 9015;
+	public static final int HOLIDAY_DATE_ALREADY_EXISTS = 9016;
+	
+	
 	public static final int NO_WORK_ANNIVERSARY_TODAY = 9012;
 	public static final int NO_JOINEE_TODAY = 9013;
-	public static final int NO_BIRTHDAY_TODAY = 221;
-	
-	
-	
-	
 
+	public static final int NO_BIRTHDAY_FOUND = 221;
+	public static final int NO_EMPLOYEE_JOINED_TODAY = 222;
+	
+	//Template related Exceptions
+	public static final int TEMPLATE_DOESNOT_EXIST =9016;
+	public static final int EVERY_FIELD_IS_MANDATORY = 9017;
+	public static final int TEMPLATE_ALREADY_EXIST =9018;
 }

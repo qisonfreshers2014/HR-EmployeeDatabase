@@ -1,5 +1,5 @@
 function empViewemployee() {
-	Loader.loadHTML('.leftContainer', 'resources/empviewemployee.html', true, function(){
+	Loader.loadHTML('.container','resources/empviewemployee.html', true, function(){
 		this.handleShow();
 	}.ctx(this));
 }
@@ -24,17 +24,22 @@ empViewemployee.prototype.viewEmployeedetails=function(){
        
       
 	
-	var input= {"payload":{"id":5}};
+	var input= {"payload":{"employeeId":1200}};
 
 RequestManager.viewEmployeedatails(input, function(data, success) {
 	if(success){
 	var obj=data[0]
 	//alert(obj.employeeName);
+	  var dobformat = new Date(obj.dateOfBirth);
+	  var byear = dobformat.getFullYear();
+	  var bmonth = dobformat.getMonth()+1;
+	  var bdate = dobformat.getDate();
+	  
 	$('#eid').val(obj.employeeId);
 	$('#name').val(obj.employeeName);
 	$('#gender').val(obj.gender);
-	$('#DOB').val(obj.DOB);
-	//$('#doj').val(obj.DOJ);
+	$('#DOB').val(byear+"-"+bmonth+"-"+bdate);
+     // $('#doj').val(obj.dateOfJoining);
 	//$('#ADOB').val(obj.yearsofexperience);
 	$('#cnct').val(obj.contactNo);
 	$('#curaddr').val(obj.currentAddress);

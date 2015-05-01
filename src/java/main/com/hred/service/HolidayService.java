@@ -61,8 +61,7 @@ public class HolidayService extends BaseService {
 			throws ObjectNotFoundException, BusinessException,
 			EncryptionException {
 		
-		Holiday holidays = (Holiday) JsonUtil.getObject(
-				request.getPayload(), Holiday.class);
+		Holiday holidays = (Holiday) JsonUtil.getObject(request.getPayload(), Holiday.class);
 
 		String outputString = "{\"status\": \"SUCCESS\", \"payload\": \"Test Successful\"}";
 		return outputString;
@@ -74,37 +73,36 @@ public class HolidayService extends BaseService {
 	@ServiceStatus(value = "complete")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/editHoliday")
+	@Path("/updateHoliday")
 	@UnSecure
-	public String editHoliday(@Context HttpHeaders headers,
+	public String updateHoliday(@Context HttpHeaders headers,
 			@Context UriInfo uriInfo, WebserviceRequest request)
 			throws ObjectNotFoundException, BusinessException,
 			EncryptionException {		
 		Holiday holiday = (Holiday) JsonUtil.getObject(request.getPayload(), Holiday.class);
-		Holiday output=(Holiday) HolidayHandler.getInstance().editHoliday(holiday);		
+		Holiday output=(Holiday) HolidayHandler.getInstance().updateHoliday(holiday);		
 		return JsonUtil.getJsonBasedOnDescriptor(output,Holiday.class);
 	}
 	
-/*@POST
-@RestService(input = String.class, output = String.class)
-@ServiceStatus(value = "complete")
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
-@Path("/getFilterEmployees")
-@UnSecure
-public String getFilterEmployeeDetails(@Context HttpHeaders headers, @Context UriInfo uriInfo,
-WebserviceRequest request) throws ObjectNotFoundException,
-BusinessException, EncryptionException, EmployeeException {
- 
-Employee employee = (Employee) JsonUtil.getObject(request.getPayload(),
-Employee.class);
- 
-List<Employee> employees = EmployeeHandler.getInstance().getFilterEmployeeDetails(employee);
-System.out.println("COunt : "+ employees.size());
-//String outputString = "{\"status\": \"SUCCESS\", \"payload\": \"Test Successful\"}";
-return JsonUtil.getJsonForListBasedOnDescriptor(employees, Employee.class, FilterListOutputDescriptors.class);
- 
-}*/
+	@POST
+	 @RestService(input = String.class, output = Holiday.class)
+	 @ServiceStatus(value = "complete")
+	 @Consumes(MediaType.APPLICATION_JSON)
+	 @Produces(MediaType.APPLICATION_JSON)
+	 @Path("/getHolidayId")
+	 @UnSecure
+	 public String getHolidayById(
+	   @Context HttpHeaders headers, @Context UriInfo uriInfo,
+	   WebserviceRequest request) throws ObjectNotFoundException,
+	   BusinessException, EncryptionException {
+		Holiday holiday = (Holiday) JsonUtil.getObject(request.getPayload(),Holiday.class);
+		List<Holiday>  holidays = (List<Holiday>) HolidayHandler.getInstance().getHolidayById(holiday);
+		System.out.println("Count : "+ holidays.size());
+	  return JsonUtil.getJsonForListBasedOnDescriptor(holidays, Holiday.class,Holiday.class);
+	 
+	 }
+	
+	
 
 @POST
 @RestService(input = String.class, output = Holiday.class)
@@ -118,7 +116,7 @@ public String getHolidays(@Context HttpHeaders headers, @Context UriInfo uriInfo
 		BusinessException, EncryptionException {		
 	Holiday holiday = (Holiday) JsonUtil.getObject(
 			request.getPayload(), Holiday.class);
-	List<Holiday> holidays = HolidayHandler.getInstance().getHolidays(holiday);
+	List<Holiday> holidays = HolidayHandler.getInstance().getHolidays();
 	System.out.println("Count : "+ holidays.size());
 	return JsonUtil.getJsonForListBasedOnDescriptor(holidays, Holiday.class, Holiday.class);
 

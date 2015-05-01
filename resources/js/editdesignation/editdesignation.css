@@ -1,0 +1,26 @@
+@CHARSET "ISO-8859-1";
+#div1,#div2
+{ 
+margin: 15px; border:1px solid black
+}
+div { margin: 15px;}
+#empNameDiv,#dojDiv,#dateDiv,#salaryDiv,#variblepayDiv,#designationDiv{ font-size:15px;}
+#isSEmpty,#isVPEmpty,#isDesignationEmpty,#isDEmpty{color:red; font-size:12px;}
+.red{color:red;}
+.ui-datepicker {
+    background: #CCC;
+    border: 1px solid #66F;
+    color: #000;
+}
+.table{
+ position:relative;
+ width: 100%;
+ padding-left:5%;
+ padding-right:1%;
+ border:1px solid black;
+ border-collapse:collapse;
+ margin-right:auto;
+ margin-left:auto;
+_margin-right:auto;
+_margin-left:auto;
+}

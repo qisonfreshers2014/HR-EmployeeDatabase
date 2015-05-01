@@ -20,15 +20,22 @@ public abstract class AbstractObject implements BaseObject{
 	@Id
 	@Column(name = "id")
 	private long id;
+	
 	@Column(name = "cts")
 	private Timestamp cts;
+	
 	@Column(name = "mts")
 	private Timestamp mts;
+	
 	@Column(name = "created_by")
 	private long creatorId;
+	
 	@Column(name = "modified_by")
 	private long modifierId;
-	@Column(name = "is_deleted",columnDefinition ="bit(1) default 0")
+
+	
+	@Column(name = "is_deleted")
+
 	private boolean isDeleted;
 
 	public static final String LABEL_ID = "id";

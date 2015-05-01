@@ -10,7 +10,7 @@ import javax.persistence.Table;
  */
 
 @Entity
-@Table(name = "holiday_master")
+@Table(name = "HOLIDAYMASTER")
 
 public class holiday_master extends AbstractObject{
 
@@ -47,7 +47,7 @@ public class holiday_master extends AbstractObject{
 	@Override
 	public int getObjectType() {
 		
-		return ObjectTypes.holiday_master;
+		return ObjectTypes.HOLIDAYMASTER;
 	}
 
 }

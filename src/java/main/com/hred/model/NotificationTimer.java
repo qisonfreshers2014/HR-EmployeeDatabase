@@ -2,7 +2,7 @@ package com.hred.model;
 
 import java.util.TimerTask;
 
-import com.hred.exception.BusinessException;
+import org.apache.commons.mail.EmailException;
 import com.hred.handler.SendNotificationHistoryHandler;
 
 
@@ -15,11 +15,10 @@ public class NotificationTimer extends TimerTask implements Runnable {
 	
 			try {
 				SendNotificationHistoryHandler.getInstance().SentAutomatedMailMail();
-			} catch (BusinessException e) {
+			} catch (EmailException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+			System.out.println("Unable to send mail");
 			}
-		
 			// TODO Auto-generated catch block
 			
 		
