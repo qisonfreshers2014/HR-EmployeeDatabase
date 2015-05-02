@@ -1,9 +1,9 @@
-function EditTemplate(dataid) {
-	Loader.loadHTML('.leftcontainer1', 'resources/js/Template/EditTemplate.html', true, function(){
+function editTemplate(dataid) {
+	Loader.loadHTML('.leftcontainer1', 'resources/js/Template/editTemplate.html', true, function(){
 		this.handleShow(dataid);
 }.ctx(this));
 }
-EditTemplate.prototype.handleShow=function(dataid){
+editTemplate.prototype.handleShow=function(dataid){
 	$('.container').show();
 	
 	$('textarea#templateContent').ckeditor(function(){
@@ -19,7 +19,7 @@ EditTemplate.prototype.handleShow=function(dataid){
 }
 
 
-EditTemplate.prototype.EditTemplateDetails=function(dataid){
+editTemplate.prototype.EditTemplateDetails=function(dataid){
 //alert(1);
 	 var input = {"payload":{"id":dataid}};
 	 RequestManager.getTemplateById(input, function(data, success) {
@@ -50,7 +50,7 @@ EditTemplate.prototype.EditTemplateDetails=function(dataid){
 }.ctx(this));
 	 
 }
-EditTemplate.prototype.editTemplateDetailsById=function(dataid){
+editTemplate.prototype.editTemplateDetailsById=function(dataid){
 //	alert(4);
 	var articleDesc = $('textarea#templateContent').val();//CKEDITOR.instances.templateContent.getData();
     var input ={"payload":{"id":dataid,"name":$('.templatename').val(),"subject":$('.subject').val(),"content":articleDesc}};

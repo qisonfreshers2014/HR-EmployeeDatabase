@@ -36,12 +36,13 @@
 
 /* --------------------container -----------------------*/
 .leftcontainer1 {
-    border: 1px solid #ffffff;
+  /*   border: 1px solid #ffffff; */
     color: #ffffff;
     margin-left:5%;
     min-height: 650px;
     width:90%;
-   
+    font-family:calibri;
+   font-size: 15px;
 }
 /* --------------------footer -----------------------*/
 .site-footer {
@@ -53,11 +54,12 @@
 }
 /* ------------------Edit template& add&edit all ands meeting----------------------- */
 #fieldsaddtemplate,#fieldsaddhandsmeeting {
- border:1px solid black;
- padding:10px;
+ /* border:1px solid black;*/
+ padding:10px; 
  text_align:center;
  font-weight:bold;
  color:black;
+  background-color: lightgray;
 }
 .heading {
  color:brown;
@@ -68,11 +70,16 @@ margin-top: 3%;
  font_size:20px;
 }
  .container{
-   background-color:lightgray;
+   background-color:white;
+   
   }
-  
-
-/*  view all ands meeting  */
+  .submit{
+    margin-left: 50%;
+  }
+  .submit1{
+    margin-left: 25%;
+  }
+/*  view all hands meeting  */
 table,td,th {
          border:1px solid black;
          border-collapse:collapse;
@@ -85,4 +92,15 @@ td {
 th {
  background-color:#7094b8;
  color:black;
+}
+.inputelement
+{
+ font-size:15px;
+ font-weight: bold;
+}
+#tempsubject{
+	margin-left: 4%;
+}
+.datepicker{
+	margin-left: 6.6%;
 }

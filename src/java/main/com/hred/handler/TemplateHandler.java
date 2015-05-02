@@ -28,36 +28,35 @@ public class TemplateHandler extends AbstractHandler {
 			INSTANCE = new TemplateHandler();
 		return INSTANCE;
 	}
-
-	 private void validationFunc(String templatename, String subject, String templateContent)  throws TemplateException{
-		    if (templatename == null || templatename.isEmpty()
-		        || templatename.trim().isEmpty()) {
-		       throw new TemplateException(ExceptionCodes.EVERY_FIELD_IS_MANDATORY,
-		         ExceptionMessages.EVERY_FIELD_IS_MANDATORY);
-		      }
-		    if (subject == null || subject.isEmpty()
-		        || subject.trim().isEmpty()) {
-		       throw new TemplateException(ExceptionCodes.EVERY_FIELD_IS_MANDATORY,
-		         ExceptionMessages.EVERY_FIELD_IS_MANDATORY);
-		      }
-		    if (templateContent == null || templateContent.isEmpty()
-		        || templateContent.trim().isEmpty()) {
-		       throw new TemplateException(ExceptionCodes.EVERY_FIELD_IS_MANDATORY,
-		         ExceptionMessages.EVERY_FIELD_IS_MANDATORY);
-		      }
-		   /* List<Template> data=viewTemplate();
-		    for(int i=0;i<data.size();i++){
-		    
-		     
-		     
-		     
-		    }
-		    */
-		 }
-	public Template save(Template template){
-		Template tempSaved=(Template) DAOFactory.getInstance().getTemplateDAO().saveObject(template);
-		return tempSaved;
-	}
+/*	private void validationFunc(String name, String subject, String content,Template template)  throws TemplateException{
+	    if (name == null || name.isEmpty()
+	        || name.trim().isEmpty()) {
+	       throw new TemplateException(ExceptionCodes.EVERY_FIELD_IS_MANDATORY,
+	         ExceptionMessages.EVERY_FIELD_IS_MANDATORY);
+	      }
+	    if (subject == null || subject.isEmpty()
+	        || subject.trim().isEmpty()) {
+	       throw new TemplateException(ExceptionCodes.EVERY_FIELD_IS_MANDATORY,
+	         ExceptionMessages.EVERY_FIELD_IS_MANDATORY);
+	      }
+	    if (content == null || content.isEmpty()
+	        || content.trim().isEmpty()) {
+	       throw new TemplateException(ExceptionCodes.EVERY_FIELD_IS_MANDATORY,
+	         ExceptionMessages.EVERY_FIELD_IS_MANDATORY);
+	      }
+	    List<Template> data=viewTemplate();
+	    for(int i=0;i<data.size();i++){
+	    
+	     String dbname=data.get(i).getName();
+	     if(dbname.compareTo(name)==0){
+	      throw new TemplateException(ExceptionCodes.TEMPLATE_ALREADY_EXIST,
+	                 ExceptionMessages.TEMPLATE_ALREADY_EXIST);
+	            
+	     }
+	          
+	    }
+	  
+	 }*/
 
 	public Template update(Template template) throws ObjectNotFoundException {
 		// TODO Auto-generated method stub

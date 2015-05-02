@@ -1,9 +1,9 @@
-function EditHandMeeting(dataid) {
-	Loader.loadHTML('.leftcontainer1', 'resources/js/AllHandsMeeting/EditHandMeeting.html', true, function(){
+function editHandMeeting(dataid) {
+	Loader.loadHTML('.leftcontainer1', 'resources/js/AllHandsMeeting/editHandMeeting.html', true, function(){
 		this.handleShow(dataid);
 }.ctx(this));
 }
-EditHandMeeting.prototype.handleShow=function(dataid){
+editHandMeeting.prototype.handleShow=function(dataid){
 	$('.container').show();
 		this.EditHandMeetingDetails(dataid);
 	//click event for update have to write
@@ -23,7 +23,7 @@ EditHandMeeting.prototype.handleShow=function(dataid){
 }
 
 
-EditHandMeeting.prototype.EditHandMeetingDetails=function(dataid){
+editHandMeeting.prototype.EditHandMeetingDetails=function(dataid){
 
 
 	 var input = {"payload":{"id":dataid}};
@@ -55,7 +55,7 @@ EditHandMeeting.prototype.EditHandMeetingDetails=function(dataid){
 }.ctx(this));
 	 
 }
-EditHandMeeting.prototype.editAllHandsMeetingById=function(dataid){
+editHandMeeting.prototype.editAllHandsMeetingById=function(dataid){
 	
 	
 //alert(3);
@@ -64,7 +64,7 @@ EditHandMeeting.prototype.editAllHandsMeetingById=function(dataid){
 			 {
 			 alert("date format should must yyyy/MM/dd HH:mm:ss ");
 			 }*/
-	 if($('#date').val()==""||$('#employee').val()==""||$('#description').val()==""){
+	 if($('#datepicker').val()==""||$('#employee').val()==""||$('#description').val()==""){
 	     	alert("failed to add,since every field is mandatory");
 	     }
 	 else{
@@ -75,6 +75,8 @@ EditHandMeeting.prototype.editAllHandsMeetingById=function(dataid){
     	//alert(5);
         if(success){
          alert("Successfully Inserted");
+        }else if(data.code == 204){
+        	alert("Date already exists");
         }
         else{
          alert("Failed to Add");

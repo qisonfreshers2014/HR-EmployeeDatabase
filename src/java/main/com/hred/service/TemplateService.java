@@ -61,26 +61,7 @@ public class TemplateService extends BaseService {
 	}
 
 
-	@POST
-	@RestService(input = String.class, output = String.class)
-	@ServiceStatus(value = "complete")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/save")
-	@UnSecure
-	public String save(@Context HttpHeaders headers,
-			@Context UriInfo uriInfo, WebserviceRequest request)
-			throws ObjectNotFoundException, BusinessException,
-			EncryptionException {
-
-		Template template = (Template) JsonUtil.getObject(
-				request.getPayload(), Template.class);
-
-		Template output=(Template) TemplateHandler.getInstance().save(template);
-
-		return JsonUtil.getJsonBasedOnDescriptor(output,Template.class);
-	}
-
+	
 	@POST
 	@RestService(input = String.class, output = String.class)
 	@ServiceStatus(value = "complete")

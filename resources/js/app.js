@@ -11,7 +11,7 @@ App.prototype.handleShow = function () {
 App.prototype.loadViewTemplate = function(dataid){
 	 Loader.loadCkeditor();
 	Loader.loadViewTemplate(function(){
-		new EditTemplate(dataid);
+		new editTemplate(dataid);
 	});
 }
 App.prototype.loadAllHandsMeeting = function(){
@@ -21,12 +21,12 @@ App.prototype.loadAllHandsMeeting = function(){
 }
 App.prototype.loadAllhandmeeting = function(){
 	Loader.loadAllhandmeeting(function(){
-		new AllHandMeeting();
+		new allHandMeeting();
 	});
 }
 App.prototype.loadAllhandmeetings = function(dataid){
 	Loader.loadAllhandmeetings(function(){
-		new EditHandMeeting(dataid);
+		new editHandMeeting(dataid);
 	});
 }
 
@@ -35,24 +35,24 @@ App.prototype.loadAllhandmeetings = function(dataid){
 
 App.prototype.loadHRHomeHeader = function(name){
 	Loader.loadHRHomeHeader(function(){
-		new HRHomeHeader(name);
+		new hRHomeHeader(name);
 	});
 }
 App.prototype.loadHRHomePage = function(){
 	Loader.loadHRHomePage(function(){
-		new HRHomePage();
+		new hRHomePage();
 	});
 }
 
 App.prototype.loadHRHomeFooter = function(){
 	Loader.loadHRHomeFooter(function(){
-		new HRHomeFooter();
+		new hRHomeFooter();
 	});
 }
 
 App.prototype.loadEmp = function(){
 	Loader.loadEmp(function(){
-		new Emp();
+		new emp();
 	});
 }
 App.prototype.loadHRPolicy = function(){

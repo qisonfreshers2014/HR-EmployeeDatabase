@@ -45,9 +45,12 @@ public class AllHandsMeetingHandler extends AbstractHandler {
 	}
 	 private void validationFunc(Timestamp date, String employee, String description,List<AllHandsMeeting> allhandsmeeting)  throws AllHandsMeetingException{
 		   
-		  // List<AllHandsMeeting> data=save();
+/*		if(date.compareTo()==0){
+			
+		}
+		 else{*/
 		    for (int i = 0; i < allhandsmeeting.size(); i++) {
-		    	 // Timestamp dbdate = data.get(i).getFromDate(); 
+		    
 		        Timestamp dbdate = allhandsmeeting.get(i).getDate();
 		           if(dbdate.compareTo(date) == 0){
 		            throw new AllHandsMeetingException(ExceptionCodes.ALLHANDSMEETING_DATE_ALREADY_EXISTS,
@@ -55,13 +58,7 @@ public class AllHandsMeetingHandler extends AbstractHandler {
 		            
 		        }    
 		    }   
-		 
-		/* 
-		 if (date == null)
-		    {
-		       throw new AllHandsMeetingException(ExceptionCodes.EVERY_FIELD_IS_MANDATORY,
-		         ExceptionMessages.EVERY_FIELD_IS_MANDATORY);
-		      }*/
+		//}
 		    if (employee == null || employee.isEmpty()
 		        || employee.trim().isEmpty()) {
 		       throw new AllHandsMeetingException(ExceptionCodes.EVERY_FIELD_IS_MANDATORY,
@@ -86,6 +83,7 @@ public class AllHandsMeetingHandler extends AbstractHandler {
 	}
 
 	
+	
 	public List<AllHandsMeeting> getAllHandsMeetingById(AllHandsMeeting allhandsmeeting) throws AllHandsMeetingException{
 		List<AllHandsMeeting> allhandsmeetings = null;
 		AllHandsMeetingDAO allhandsmeetingDAOImpl = (AllHandsMeetingDAO) DAOFactory.getInstance().getAllHandsMeetingDAO();
@@ -95,13 +93,20 @@ public class AllHandsMeetingHandler extends AbstractHandler {
 	}
 	
 	
-	public AllHandsMeeting update(AllHandsMeeting allhandsmeeting) throws ObjectNotFoundException {
+	public AllHandsMeeting update(AllHandsMeeting allhandsmeeting) throws ObjectNotFoundException, AllHandsMeetingException {
 		// TODO Auto-generated method stub
 		
 		AllHandsMeeting allhandsmeetingFromDB = (AllHandsMeeting)DAOFactory.getInstance().getAllHandsMeetingDAO().getObjectById(allhandsmeeting.getId(), ObjectTypes.ALL_HANDS_MEETING);
-		allhandsmeetingFromDB.setDate(allhandsmeeting.getDate());
+	allhandsmeetingFromDB.setDate(allhandsmeeting.getDate());
 		allhandsmeetingFromDB.setEmployee(allhandsmeeting.getEmployee());
 		allhandsmeetingFromDB.setDescription(allhandsmeeting.getDescription());
+	/*List<AllHandsMeeting> allhands = getAllHandsMeeting();
+	Timestamp date=allhandsmeeting.getDate();
+	String employee=allhandsmeeting.getEmployee();
+	String description=allhandsmeeting.getDescription();
+		
+	validationFunc(date,employee,description,allhands);*/
+		
 		AllHandsMeeting allhandsmeetingEdited = (AllHandsMeeting) DAOFactory.getInstance().getAllHandsMeetingDAO().update(allhandsmeetingFromDB);
 		return allhandsmeetingEdited;
 	}

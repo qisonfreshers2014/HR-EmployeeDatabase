@@ -1,10 +1,10 @@
-function AllHandMeeting() {
-	Loader.loadHTML('.leftcontainer1', 'resources/js/AllHandsMeeting/AllHandsMeeting.html', true, function(){
+function allHandMeeting() {
+	Loader.loadHTML('.leftcontainer1', 'resources/js/AllHandsMeeting/allHandsMeeting.html', true, function(){
 		this.handleShow();
 	}.ctx(this));
 }
 
-AllHandMeeting.prototype.handleShow = function() {
+allHandMeeting.prototype.handleShow = function() {
 	$( "#datepicker" ).datepicker({dateFormat:'yy-mm-dd',showButtonPanel:
 		   true,changeMonth:true,changeYear:true,showAnim:'drop',minDate:new Date(1993,12,31),
 		   maxDate:new Date(2050,12,31)});
@@ -15,13 +15,14 @@ $('#save').click(function(){
 }.ctx(this));
 
 }
-AllHandMeeting.prototype.addAllHandsMeeting=function(){
+allHandMeeting.prototype.addAllHandsMeeting=function(){
 	//var dateformat=/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/;
-	 if($('#date').val()==""||$('#employee').val()==""||$('#description').val()==""){
+	//var regex = /^[A-Za-z]+( [A-Za-z]+){3,15}$/;
+	 if($('#datepicker').val()==""||$('#employee').val()==""||$('#description').val()==""){
      	alert("failed to add,since every field is mandatory");
      }/*else
 	 
-	 if(!($('#date').val()).match(dateformat))
+	 if(!($('#employee').val()).match(regex))
 		 {
 		 alert("date format should must yyyy/MM/dd HH:mm:ss ");
 		 }*/

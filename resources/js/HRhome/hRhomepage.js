@@ -1,17 +1,17 @@
-function HRHomePage() {
-	Loader.loadHTML('.container', 'resources/js/HRhome/HRhomepage.html', true, function(){
+function hRHomePage() {
+	Loader.loadHTML('.container', 'resources/js/HRhome/hRhomepage.html', true, function(){
 		this.handleShow();
 	}.ctx(this));
 }
 
-HRHomePage.prototype.handleShow = function() {
+hRHomePage.prototype.handleShow = function() {
 	
 	
 	$('.container').show();
 
 }
 
-HRHomePage.prototype.testService = function() {
+hRHomePage.prototype.testService = function() {
 	
 	console.log('Loaded');
 	

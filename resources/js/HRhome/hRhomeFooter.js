@@ -1,10 +1,10 @@
-function HRHomeFooter() {
-	Loader.loadHTML('.footer', 'resources/js/HRhome/HRhomeFooter.html', true, function(){
+function hRHomeFooter() {
+	Loader.loadHTML('.footer', 'resources/js/HRhome/hRhomeFooter.html', true, function(){
 		this.handleShow();
 	}.ctx(this));
 }
 
-HRHomeFooter.prototype.handleShow = function() {
+hRHomeFooter.prototype.handleShow = function() {
 	
 	
 	//$('.container').show();
@@ -16,7 +16,7 @@ HRHomeFooter.prototype.handleShow = function() {
 
 }
 
-HRHomeFooter.prototype.testService = function() {
+hRHomeFooter.prototype.testService = function() {
 	
 	
 	
