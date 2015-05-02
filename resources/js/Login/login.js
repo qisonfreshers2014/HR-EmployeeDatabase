@@ -33,10 +33,10 @@ Login.prototype.handleShow = function() {
 			    var jobRole=data.employee.currentDesignation;
 			    var gender=data.employee.gender;
 			    var contactNo=data.employee.contactNo;
-				App.loadEmployeePage(name,jobRole);
-				App.loadFooter();
-				App.loadEmployee(gender,contactNo);
-				//App.loadTemplate();
+				//App.loadEmployeePage(name,jobRole);
+				//App.loadFooter();
+				//App.loadEmployee(gender,contactNo);
+				App.loadTemplate();
 			}
 		}.ctx(this));
 	}
@@ -53,22 +53,22 @@ Login.prototype.handleShow = function() {
 	    var upper = /[A-Z]/;
 	    var lower = /[a-z]/;
 	    if(email == "" || email == null) {
-	    	$(".errormessage").show();
-	    	$('.errormessage').focus();
-	    	$('.errormessage').text("Email must be filled(?)");
+	    	$(".errormessage1").show();
+	    	$('.errormessage1').focus();
+	    	$('.errormessage1').text("Email must be filled(?)");
 	        isValid = false;
 	    }
 
 	    else if(!emailReg.test(email)) {
-	    	$(".errormessage").show();
-	    	$('.errormessage').focus();
-	    	$('.errormessage').text("Enter a valid email(?)");
+	    	$('.errormessage1').show();
+	    	$('.errormessage1').focus();
+	    	$('.errormessage1').text("Enter a valid email(?)");
 	        isValid = false;
 	    }
 	    else if (email.length > 128){
-	    	$(".errormessage").show();
-	    	$('.errormessage').focus();
-	    	$('.errormessage').text("Email length is large(?)");
+	    	$(".errormessage1").show();
+	    	$('.errormessage1').focus();
+	    	$('.errormessage1').text("Email length is large(?)");
 	        isValid = false;    	
 	    }
 	    else if(!minMaxLength.test(password) ){
@@ -84,21 +84,21 @@ Login.prototype.handleShow = function() {
 	        isValid = false;
 		} 
 	    else if(!number.test(password) ){
-	    	$(".message").show();
-	    	$('.message').focus();
-	    	$('.message').text("Password has no number(?)");
+	    	$(".errormessage").show();
+	    	$('.errormessage').focus();
+	    	$('.errormessage').text("Password has no number(?)");
 	        isValid = false;
 		} 
 	    else if(!upper.test(password) ){
-	    	$(".message").show();
-	    	$('.message').focus();
-	    	$('.message').text("Password has no Uppercase(?)");
+	    	$(".errormessage").show();
+	    	$('.errormessage').focus();
+	    	$('.errormessage').text("Password has no Uppercase(?)");
 	        isValid = false;
 		}
 	    else if(!lower.test(password) ){
-	    	$(".message").show();
-	    	$('.message').focus();
-	    	$('.message').text("Password has no Lowercase(?)");
+	    	$(".errormessage").show();
+	    	$('.errormessage').focus();
+	    	$('.errormessage').text("Password has no Lowercase(?)");
 	        isValid = false;
 		}
 		/* else if(password.length < 6 ){
@@ -115,7 +115,7 @@ Login.prototype.handleShow = function() {
 			}*/
 		    else
 			{
-			$(".errormessage").empty();
+			$(".errormessage1").empty();
 			isValid = true;    
 			}
 		return isValid; 

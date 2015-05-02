@@ -75,7 +75,7 @@ public class Employee extends AbstractObject {
 	@Column(name = "skype")
 	private String skype;
 	@Column(name = "Skill")
-	private int skill;
+	private String skill;
 	@Column(name = "Rating")
 	private int rating;
 	@Column(name="variable_component")
@@ -270,11 +270,11 @@ public class Employee extends AbstractObject {
 		this.skype = skype;
 	}
 
-	public int getSkill() {
+	public String getSkill() {
 		return skill;
 	}
 
-	public void setSkill(int skill) {
+	public void setSkill(String skill) {
 		this.skill = skill;
 	}
 

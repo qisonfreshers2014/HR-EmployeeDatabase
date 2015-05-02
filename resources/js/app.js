@@ -69,11 +69,7 @@ App.prototype.loadHRPolicy = function(){
 			new HRPolicy();
 	});
 }
-App.prototype.loadHoliday = function(){
-			Loader.loadHoliday(function(){
-				new Holiday();
-	});
-}
+
 App.prototype.loadTemplates = function(){
 				Loader.loadTemplates(function(){
 					new Templates();

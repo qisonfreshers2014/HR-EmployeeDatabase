@@ -67,12 +67,12 @@ public class DefaultAuthenticationHandler implements AuthenticationHandler {
 
 					ExceptionMessages.EMAIL_DOESNOT_EXIST);
 		}
-		else if (!passwordValidity) {
-			throw new BusinessException(ExceptionCodes.INVALID_PASSWORD,
-
-					ExceptionMessages.INVALID_PASSWORD);
-		}
-
+		/*	else if (!passwordValidity) {
+				throw new BusinessException(ExceptionCodes.INVALID_PASSWORD,
+	
+						ExceptionMessages.INVALID_PASSWORD);
+			}
+*/
 
 
 		authStatus = Employee.AUTH_STATUS_EXISTING;
@@ -92,7 +92,6 @@ public class DefaultAuthenticationHandler implements AuthenticationHandler {
 			throw new SystemException(ExceptionCodes.INTERNAL_ERROR,
 					ExceptionMessages.INTERNAL_ERROR);
 		}
-
 		UserSessionToken userSessionToken = new UserSessionToken();
 		userSessionToken.setUserEmail(emp.getEmail());
 		userSessionToken.setUserId(emp.getId());

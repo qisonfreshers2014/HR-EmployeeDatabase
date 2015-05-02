@@ -12,8 +12,9 @@ body {
 .container{
 	display: block !important;
 	width:90%;
-	margin-left:130px;
-	height:450px;
+	margin-left:10%;
+	height:1%;
+
 	
 }
 

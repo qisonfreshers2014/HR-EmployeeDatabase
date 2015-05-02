@@ -33,14 +33,14 @@ font-weight: bold;
 
 }
 .username{
-position: absolute;
-border: none;
-	width:294px;
-	height:32px!important;
-	padding:8px;
-	top:30px;
-	left:18px;
-	border-radius: 3px;
+	
+    height: 14.5% !important;
+    left: 2.3%;
+    min-width: 50px;
+    padding: 8px;
+    position: relative;
+    top: 5%;
+    width: 92%;
 -moz-border-radius: 3px;
 -webkit-border-radius: 3px;
  font-size:15px;
@@ -48,14 +48,13 @@ border: none;
 	
 }
 .password{
-position: absolute;
-	width:294px;
-	border: none;
-	height:32px!important;
-	padding:8px;
-	top:90px;
-	left:18px;
-	border-radius: 3px;
+font-weight: bold;
+    height: 14.5% !important;
+    left: 2.3%;
+    padding: 8px;
+    position: relative;
+    top: 18%;
+    width: 92%;
 -moz-border-radius: 3px;
 -webkit-border-radius: 3px;
  font-size:15px;
@@ -64,15 +63,15 @@ position: absolute;
 
 .submit{
 position: absolute;
-	width:305px!important;
-	height:44px;
-	padding:8px;
-	bottom:30px;
-	left:18px;
-	background-color: #008dde;
-	border: none;
-	color: #f4f4f4;
-	border-radius: 3px;
+	 background-color: #008dde;
+    border: medium none;
+    border-radius: 3%;
+    bottom: 9%;
+    color: #f4f4f4;
+    left: 6%;
+    padding: 3.6%;
+    position: absolute;
+    width: 87.5%;
 -moz-border-radius: 3px;
 -webkit-border-radius: 3px;
 }
@@ -81,7 +80,8 @@ position: absolute;
 {
 background-color: #323b55;
     border-radius: 3px;
-    height: 45%;
+    height: 48%;
+    min-width: 29.5%;
     padding: 15px;
     position: absolute;
     right: 5%;
@@ -91,24 +91,29 @@ background-color: #323b55;
 -webkit-border-radius: 3px;
 }
 .errormessage{
-position: absolute;
- margin-left: 2%;
-    margin-top: 33.5%;
-color:rgb(237, 53, 81);
+  position: relative;
+    left: 3%;
+    top: 22%;
+    color: rgb(237, 53, 81);
+}
+.errormessage1{
+  position: relative;
+    left: 3%;
+    top: 9%;
+    color: rgb(237, 53, 81);
 }
 .star{
-	color:red;
-	 font-size:20px;
-	 left: 308px;
+	  color: red;
+    font-size: 20px;
+    left: 2.5%;
     position: relative;
-    top: 23px;
 	
 	}
 	.star1{
-	color:red;
-	 font-size:20px;
-	left: 308px;
+	  color: red;
+    font-size: 20px;
+    left: 2.5%;
     position: relative;
-    top: 77px;
+    top: 12%;
 	 
 	}
