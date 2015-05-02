@@ -1,3 +1,4 @@
+ 
 function RequestManager() {
     this.apiPrefix = '/services/v1/';
 }
@@ -45,15 +46,42 @@ RequestManager.prototype.sendToServer = function (api, data, callback, options) 
         //alert(preferences);
     }
 
-}
 
+}
+RequestManager.prototype.addAllHands = function(data, callback) {
+	   this.sendToServer('allhandsmeeting/save', data, callback);
+	  }
+RequestManager.prototype.editAllHands = function(data, callback) {
+	   this.sendToServer('allhandsmeeting/update', data, callback);
+	  }
+RequestManager.prototype.editAllHandsMeeting = function(data, callback) {
+	   this.sendToServer('allhandsmeeting/editAllHandsMeeting', data, callback);
+	  }
+RequestManager.prototype.getAllHandsMeetingDetails = function(data, callback) {
+	   this.sendToServer('allhandsmeeting/getAllHandsMeeting', data, callback);
+	  }
+RequestManager.prototype.getTemplateById = function(data, callback) {
+   this.sendToServer('template/viewTemplate', data, callback);
+  }
+RequestManager.prototype.editTemplateDetails = function(data, callback) {
+	   this.sendToServer('template/updateTemplate', data, callback);
+	  }
+
+
+RequestManager.prototype.getSkillDetails = function(data, callback) {
+	  this.sendToServer('skills/getSkillsDetails', data, callback);
+	 }  
 RequestManager.prototype.save = function(data, callback) {
 	  this.sendToServer('skills/save', data, callback);
+	 } 
+RequestManager.prototype.getEditSKill = function(data, callback) {
+	  this.sendToServer('skills/geteditskills', data, callback);
 	 }
-	  
+ 
 RequestManager.prototype.getFilterEmployee = function(data, callback) {
-	  this.sendToServer('employee/getFilterEmployees', data, callback);
+	  this.sendToServer('employee/getEmployees', data, callback);
 	 }
+
 RequestManager.prototype.loadTest=function(data,callback){
 	this.sendToServer('user/test', data, callback);
 }  
@@ -62,34 +90,46 @@ RequestManager.prototype.logout=function(data,callback){
 	this.sendToServer('employee/logout', data, callback);
 }
 
+
+} 
+
 RequestManager.prototype.getTemplateById = function(data, callback) {
    this.sendToServer('template/viewTemplate', data, callback);
   }
-RequestManager.prototype.loadTest=function(data,callback){
-	this.sendToServer('user/test', data, callback);
-}
+
+
 RequestManager.prototype.authenticate=function(data,callback){
 	this.sendToServer('employee/authenticate', data, callback);
 }
-
-RequestManager.prototype.getTemplateById=function(data,callback){
-	this.sendToServer('template/viewTemplate', data, callback);
-}
+ 
 
 RequestManager.prototype.holidaysData=function(data,callback){
 	this.sendToServer('holidays/save', data, callback);
 }
-
+ 
 RequestManager.prototype.getHolidaysData=function(data,callback){
 	this.sendToServer('holidays/getHolidays', data, callback);
 }
 
+ 
 RequestManager.prototype.dynamicallyEdit=function(data,callback){
 	this.sendToServer('holidays/editHoliday', data, callback);
+
 }
+
+
+
+
 
 RequestManager.prototype.saveEmp=function(data,callback){
 	this.sendToServer('employee/save', data, callback);
+}
+
+RequestManager.prototype.saveDesignation=function(data,callback){
+	this.sendToServer('designation_history/save', data, callback);
+}
+RequestManager.prototype.saveSkill=function(data,callback){
+	this.sendToServer('skills/save', data, callback);
 }
 
 RequestManager.prototype.getHreditEmployee=function(data,callback){
@@ -99,8 +139,6 @@ RequestManager.prototype.getHreditEmployee=function(data,callback){
 RequestManager.prototype.geteditEmployee=function(data,callback){
 	this.sendToServer('employee/getEmployee', data, callback);
 }
-
-
 
 RequestManager.prototype.getEmployees=function(data,callback){
 	this.sendToServer('employee/getEmployees', data, callback);
@@ -125,7 +163,6 @@ RequestManager.prototype.savePolicy=function(data,callback){
 	this.sendToServer('hr_policy/save', data, callback);
 }
 
-
 RequestManager.prototype.getNotificationDisplayCriteria=function(data,callback){
 	this.sendToServer('employee/getNotificationDisplayCriteria', data, callback);
 }
@@ -138,18 +175,15 @@ RequestManager.prototype.viewEmployeedatails = function(data, callback) {
 RequestManager.prototype.getTemplates = function(data, callback) {
 	 this.sendToServer('template/gatTemplate', data, callback);
 	}
-
-
 RequestManager.prototype.getSentManualMail=function(data,callback){
 	this.sendToServer('SendNotificationHistory/sendMail', data, callback);
 }
-
-
 
 RequestManager.prototype.getSentMailContent=function(data,callback){
 	this.sendToServer('employee/getSentMailContent', data, callback);
 }
 RequestManager.prototype.getAllEvents=function(data,callback){
 	this.sendToServer('employee/getAllEvents', data, callback);
-}
+} 
+
 var RequestManager = new RequestManager();

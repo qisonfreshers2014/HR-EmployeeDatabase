@@ -1,35 +1,59 @@
+
 function App() {
 
 	this.handleShow();
 }
 App.prototype.handleShow = function () {
-	 this.userName = "";	
-	 this.jobRole = "";
-	 this.contactNo = "";
-	 this.gender = "";
+	 
+
+	   
 }
 
-App.prototype.loadFooter=function(){
-	Loader.loadFooter(function(){
-	});
-}
-
-App.prototype.loadEmployee=function(gender,contactNo){
-		this.gender = gender;
-		this.contactNo = contactNo;
-		Loader.loadEmployee();
-}
-	
-App.prototype.loadViewTemplate = function(name){
+App.prototype.loadViewTemplate = function(dataid){
+	 Loader.loadCkeditor();
 	Loader.loadViewTemplate(function(){
-		new EditTemplate();
+		new editTemplate(dataid);
 	});
 }
-App.prototype.loadAllHandsMeeting = function(name){
+App.prototype.loadAllHandsMeeting = function(){
 	Loader.loadAllHandsMeeting(function(){
-		new AllHandsMeeting();
+		new viewAllHandsMeeting();
 	});
 }
+App.prototype.loadAllhandmeeting = function(){
+	Loader.loadAllhandmeeting(function(){
+		new allHandMeeting();
+	});
+}
+App.prototype.loadAllhandmeetings = function(dataid){
+	Loader.loadAllhandmeetings(function(){
+		new editHandMeeting(dataid);
+	});
+}
+
+
+
+
+App.prototype.loadHRHomeHeader = function(name){
+	Loader.loadHRHomeHeader(function(){
+		new hRHomeHeader(name);
+	});
+}
+App.prototype.loadHRHomePage = function(){
+	Loader.loadHRHomePage(function(){
+		new hRHomePage();
+	});
+}
+
+App.prototype.loadHRHomeFooter = function(){
+	Loader.loadHRHomeFooter(function(){
+		new hRHomeFooter();
+	});
+}
+
+
+
+
 
 App.prototype.loadFilter=function(cb){
 	Loader.loadFilter(function(){
@@ -37,25 +61,11 @@ App.prototype.loadFilter=function(cb){
 	});
 }
 
-App.prototype.loadHRHomeHeader = function(name){
-	Loader.loadHRHomeHeader(function(){
-		new HRHomeHeader(name);
-	});
-}
-App.prototype.loadHRHomePage = function(){
-	Loader.loadHRHomePage(function(){
-		new HRHomePage();
-	});
-}
+
 
 App.prototype.loadSkill=function(cb){
 	Loader.loadSkill(function(){
 		new skill(cb);
-	});
-}
-App.prototype.loadHRHomeFooter = function(){
-	Loader.loadHRHomeFooter(function(){
-		new HRHomeFooter();
 	});
 }
 
@@ -69,7 +79,11 @@ App.prototype.loadHRPolicy = function(){
 			new HRPolicy();
 	});
 }
-
+App.prototype.loadHoliday = function(){
+			Loader.loadHoliday(function(){
+				new Holiday();
+	});
+}
 App.prototype.loadTemplates = function(){
 				Loader.loadTemplates(function(){
 					new Templates();
@@ -87,21 +101,14 @@ App.prototype.loadLogin=function(){
 	Loader.loadLogin();
 }
 
-App.prototype.loadEmployeePage=function(name,jobRole){
-	this.userName = name;
-	this.jobRole=jobRole;
-	Loader.loadEmployeePage();
+App.prototype.loadNext=function(){
+	Loader.loadNext();
+	
 }
 
 App.prototype.loadHoliday=function(){
 	Loader.loadHoliday(function(){
 		new listHoliday();
-	});
-}
-
-App.prototype.loadTemplate=function(){
-	Loader.loadTemplate(function(){
-		new Template();
 	});
 }
 
@@ -142,15 +149,15 @@ App.prototype.loadEmpl=function(){
 		new AddEmployee();
 	});
 }
-App.prototype.loadEditEmp=function(){
+App.prototype.loadEditEmp=function(dataId){
 	Loader.loadEditEmp(function(){
-		new EditEmployee();
+		new EditEmployee(dataId);
 	});
 }
 
-App.prototype.loadhrEditEmp=function(){
+App.prototype.loadhrEditEmp=function(dataId){
 	Loader.loadhrEditEmp(function(){
-		new HrEditEmployee();
+		new HrEditEmployee(dataId);
 	});
 }
 
@@ -194,4 +201,5 @@ App.prototype.loadManualMail = function(event,email,employeeName){
 		});
 		
 }
+
 var App = new App();

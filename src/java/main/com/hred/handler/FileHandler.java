@@ -10,6 +10,7 @@ import java.util.Map;
 import org.apache.commons.collections.CollectionUtils;
 
 import com.hred.exception.BusinessException;
+import com.hred.exception.ObjectNotFoundException;
 import com.hred.model.File;
 import com.hred.persistence.dao.DAOFactory;
 
@@ -67,11 +68,6 @@ public class FileHandler extends AbstractHandler {
         return fileMap;
     }
     
-    public java.io.File downloadFile(long id) throws BusinessException, IOException {
-    	java.io.File file = new java.io.File(getFile(id).getFilePath());
-		return file;
-    }
-    
     public Map<String, java.io.File> downloadFiles(List<Long> ids) throws BusinessException, IOException {
         Map<String,java.io.File> downloadMap = new HashMap<>();
         Map<Long, File> files = getFiles(ids);
@@ -81,6 +77,16 @@ public class FileHandler extends AbstractHandler {
         }
         return downloadMap;
     } 
+    
+    
+     public File getFiles(String file_id) throws ObjectNotFoundException{
+             File veiwFile= new File();
+            if(null!=file_id && file_id.length()>0){
+            	veiwFile =DAOFactory.getInstance().getFileDAO().getFiles(file_id);
+            }
+            return veiwFile;
+        }
 
+    
     
 }

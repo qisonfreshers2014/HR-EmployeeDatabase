@@ -1,4 +1,4 @@
-package com.hred.model;
+ package com.hred.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,9 +7,10 @@ import javax.persistence.Table;
 import com.hred.persistence.annotations.Increment;
 
 @Entity
-@Table(name = "Emp_Skills")
+@Table(name = "EMPLOYEESKILLS")
 @Increment
 public class Skills extends AbstractObject{
+
 
 	 @Column(name = "emp_id")
 	 private int empId; 
@@ -39,6 +40,7 @@ public class Skills extends AbstractObject{
 	 public Skills(int empId, String skills,
 	   String rating,boolean trainingAttended)
 	   {
+	 
 	  this.empId = empId;
 	  this.skills = skills;
 	  this.rating = rating;
@@ -46,65 +48,66 @@ public class Skills extends AbstractObject{
 	    }
 
 
-	 /**
-	  * @return the empId
-	  */
-	 public int getEmpId() {
-	  return empId;
-	 }
 
-	 /**
-	  * @param EmpId the empId to set
-	  */
-	 public void setEmpId(int empId) {
-	  this.empId = empId;
-	 }
 
-	 /**
-	  * @return the skills
-	  */
-	 public String getSkills() {
-	  return skills;
-	 }
+   public int getEmpId() {
+		return empId;
+	}
 
-	 /**
-	  * @param skills the skills to set
-	  */
-	 public void setSkills(String skills) {
-	  this.skills = skills;
-	 }
 
-	 /**
-	  * @return the rating
-	  */
-	 public String getRating() {
-	  return rating;
-	 }
 
-	 /**
-	  * @param rating the rating to set
-	  */
-	 public void setRating(String rating) { 
-	  this.rating = rating;
-	 }
 
-	 /**
-	  * @return the trainingAttended
-	  */
-	 public boolean getTrainingAttended() {
-		  return trainingAttended;
-		 }
+	public void setEmpId(int empId) {
+		this.empId = empId;
+	}
 
-		 /**
-		  * @param training attended the training attended  to set
-		  */
-		 public void setTrainingAttended(boolean trainingAttended) {
-		  this.trainingAttended = trainingAttended;
-		 }
- 
-   @Override
-	public int getObjectType() {
-	return ObjectTypes.USER;
+
+
+
+	public String getSkills() {
+		return skills;
+	}
+
+
+
+
+	public void setSkills(String skills) {
+		this.skills = skills;
+	}
+
+
+
+
+	public String getRating() {
+		return rating;
+	}
+
+
+
+
+	public void setRating(String rating) {
+		this.rating = rating;
+	}
+
+
+
+
+	public boolean isTrainingAttended() {
+		return trainingAttended;
+	}
+
+
+
+
+	public void setTrainingAttended(boolean trainingAttended) {
+		this.trainingAttended = trainingAttended;
+	}
+
+
+
+
+@Override
+ public int getObjectType() {
+ return ObjectTypes.USER;
 }
 }
- 

@@ -1,3 +1,4 @@
+ 
 package com.hred.service;
 
 import java.util.List;
@@ -20,28 +21,40 @@ import com.hred.exception.ObjectNotFoundException;
 import com.hred.handler.EmployeeHandler;
 import com.hred.handler.user.AuthenticationHandlerFactory;
 import com.hred.model.Employee;
+import com.hred.model.FilterEmployee;
 import com.hred.model.user.AuthenticationInput;
 import com.hred.model.user.AuthenticationOutput;
 import com.hred.service.annotations.RestService;
 import com.hred.service.annotations.ServiceStatus;
 import com.hred.service.annotations.UnSecure;
 import com.hred.service.common.WebserviceRequest;
-import com.hred.service.descriptors.output.ActivitiesBirthDayOutputDescriptor;
-import com.hred.service.descriptors.output.ActivitiesWorkAnniversaryOutputDescriptor;
 import com.hred.service.descriptors.output.DisplayNotificationHome;
 import com.hred.service.descriptors.output.NotificationHomeFilterInputDiscriptor;
 import com.hred.service.descriptors.outputDescriptors.EmployeeListOutputDescriptors;
 
+/**
+ * @author Venkatesh Chitla
+ *
+ */
 @Path("/v1/employee/")
 public class EmployeeService extends BaseService {
+
+	/**
+	 * @param headers
+	 * @param uriInfo
+	 * @param request
+	 * @return String
+	 * @throws ObjectNotFoundException
+	 * @throws BusinessException
+	 * @throws EncryptionException
+	 */
 
 	@POST
 	@RestService(input = String.class, output = String.class)
 	@ServiceStatus(value = "complete")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/authenticate")
-	@UnSecure
+	@Path("/addemployee")
 	public String authenticate(@Context HttpHeaders headers,
 			@Context UriInfo uriInfo, WebserviceRequest request)
 			throws ObjectNotFoundException, BusinessException,
@@ -57,8 +70,9 @@ public class EmployeeService extends BaseService {
 		return JsonUtil.getJsonBasedOnDescriptor(output,
 				AuthenticationOutput.class);
 	}
+	
 
-	@POST
+	/*@POST
 	@RestService(input = String.class, output = String.class)
 	@ServiceStatus(value = "complete")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -76,8 +90,9 @@ public class EmployeeService extends BaseService {
 				employee);
 
 		return JsonUtil.getJsonBasedOnDescriptor(output, Employee.class);
-	}
+	}*/
 
+	
 	@POST
 	@RestService(input = String.class, output = String.class)
 	@ServiceStatus(value = "complete")
@@ -98,6 +113,7 @@ public class EmployeeService extends BaseService {
 		return JsonUtil.getJsonBasedOnDescriptor(output, Employee.class);
 	}
 	
+	
 	@POST
 	@RestService(input = String.class, output = String.class)
 	@ServiceStatus(value = "complete")
@@ -111,6 +127,7 @@ public class EmployeeService extends BaseService {
 
 		Employee employee = (Employee) JsonUtil.getObject(request.getPayload(),
 				Employee.class);
+		
 
 		Employee output = (Employee) EmployeeHandler.getInstance().hrUpdateEmployee(
 				employee);
@@ -154,51 +171,22 @@ public class EmployeeService extends BaseService {
 		return outputString;
 	}
 	
-	@POST
-	@RestService(input = String.class, output = String.class)
-	@ServiceStatus(value = "complete")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/getFilterEmployees")
-	@UnSecure
-	public String getFilterEmployeeDetails(@Context HttpHeaders headers,
-			@Context UriInfo uriInfo, WebserviceRequest request)
-			throws ObjectNotFoundException, BusinessException,
-			EncryptionException, EmployeeException {
-
-		Employee employee = (Employee) JsonUtil.getObject(request.getPayload(),
-				Employee.class);
-
-
-		List<Employee> employees = EmployeeHandler.getInstance()
-				.getFilterEmployeeDetails(employee);
-		System.out.println("COunt : " + employees.size());
-		// String outputString =
-		// "{\"status\": \"SUCCESS\", \"payload\": \"Test Successful\"}";
-		return JsonUtil.getJsonForListBasedOnDescriptor(employees,
-				Employee.class, EmployeeListOutputDescriptors.class);
-
-	}
-
-	@POST
+/*	@POST
 	@RestService(input = String.class, output = String.class)
 	@ServiceStatus(value = "complete")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/getEmployees")
 	@UnSecure
-	public String getEmployees(@Context HttpHeaders headers,
-			@Context UriInfo uriInfo, WebserviceRequest request)
-			throws ObjectNotFoundException, BusinessException,
-			EncryptionException {
-		List<Employee> employees = EmployeeHandler.getInstance().getEmployees();
+ 	public String getEmployees(@Context HttpHeaders headers, @Context UriInfo uriInfo,
+			WebserviceRequest request) throws ObjectNotFoundException,
+			BusinessException, EncryptionException {	
+		FilterEmployee employee = (FilterEmployee) JsonUtil.getObject(request.getPayload(),	FilterEmployee.class);
+		List<Employee> employees = EmployeeHandler.getInstance().getEmployees(employee);
+ 	return JsonUtil.getJsonForListBasedOnDescriptor(employees, Employee.class, EmployeeListOutputDescriptors.class);
+		//return outputString;
+	}*/
 
-		String outputString = "{\"status\": \"SUCCESS\", \"payload\": \"Test Successful\"}";
-		return outputString;
-	}
-
-	
-	
 	@POST
 	@RestService(input = String.class, output = Employee.class)
 	@ServiceStatus(value = "complete")
@@ -217,31 +205,13 @@ public class EmployeeService extends BaseService {
 		return JsonUtil.getJsonBasedOnDescriptor(output, Employee.class);
 		//return JsonUtil.getJsonForListBasedOnDescriptor(employee,
 				//Employee.class, Employee.class);
+ 
 	}
 	
 
-	
-
-	@GET
-	@RestService(input = String.class, output = ActivitiesBirthDayOutputDescriptor.class)
-	@ServiceStatus(value = "complete")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/getTodayBirthday")
-	@UnSecure
-	public String getTodayBirthday(
-			
-			@Context HttpHeaders headers,
-			@Context UriInfo uriInfo, WebserviceRequest request)
-			throws BusinessException {
-		List<Employee> getTodayBirthdays = EmployeeHandler.getInstance()
-				.getTodayBirthday();
-		return JsonUtil.getJsonForListBasedOnDescriptor(getTodayBirthdays,
-				Employee.class, ActivitiesBirthDayOutputDescriptor.class);
-	}
 	
 	@POST
-	@RestService(input = String.class, output = ActivitiesWorkAnniversaryOutputDescriptor.class)
+	@RestService(input = String.class, output = DisplayNotificationHome.class)
 	@ServiceStatus(value = "complete")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)

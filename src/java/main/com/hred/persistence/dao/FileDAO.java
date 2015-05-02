@@ -12,4 +12,8 @@ public interface FileDAO extends BaseDAO {
 	public File getFile(long fileId) throws ObjectNotFoundException, BusinessException;
 
     List<File> getFiles(List<Long> fileIds);
+    List<File> getAllFiles();
+	
+	public File getFiles(String file_id) throws ObjectNotFoundException;
+	
 }

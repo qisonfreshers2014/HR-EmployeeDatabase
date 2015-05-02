@@ -1,4 +1,3 @@
-
 package com.hred.service;
 
 import java.util.List;
@@ -70,36 +69,33 @@ public class AllHandsMeetingService  extends BaseService {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/editAllHandsMeeting")
 	@UnSecure
-	public String edit(@Context HttpHeaders headers,
+	public String getAllHandsMeetingById(@Context HttpHeaders headers,
 			@Context UriInfo uriInfo, WebserviceRequest request)
 			throws ObjectNotFoundException, BusinessException,
 			EncryptionException {		
 		AllHandsMeeting allhandsmeeting = (AllHandsMeeting) JsonUtil.getObject(request.getPayload(), AllHandsMeeting.class);
-		AllHandsMeeting output=(AllHandsMeeting) AllHandsMeetingHandler.getInstance().edit(allhandsmeeting);		
+		//AllHandsMeeting output=(AllHandsMeeting) AllHandsMeetingHandler.getInstance().getAllHandsMeetingById(allhandsmeeting);
+		List<AllHandsMeeting> allhandsmeetings = AllHandsMeetingHandler.getInstance().getAllHandsMeetingById(allhandsmeeting);
+		return JsonUtil.getJsonBasedOnDescriptor(allhandsmeetings, AllHandsMeeting.class);
+		
+	}
+	
+	@POST
+	@RestService(input = AllHandsMeeting.class, output = AllHandsMeeting.class)
+	@ServiceStatus(value = "complete")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/update")
+	@UnSecure
+	public String update(@Context HttpHeaders headers,
+			@Context UriInfo uriInfo, WebserviceRequest request)
+			throws ObjectNotFoundException, BusinessException,
+			EncryptionException {		
+		AllHandsMeeting allhandsmeeting = (AllHandsMeeting) JsonUtil.getObject(request.getPayload(), AllHandsMeeting.class);
+		AllHandsMeeting output=(AllHandsMeeting) AllHandsMeetingHandler.getInstance().update(allhandsmeeting);		
 		return JsonUtil.getJsonBasedOnDescriptor(output,AllHandsMeeting.class);
 	}
 	
-/*@POST
-@RestService(input = String.class, output = String.class)
-@ServiceStatus(value = "complete")
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
-@Path("/getFilterEmployees")
-@UnSecure
-public String getFilterEmployeeDetails(@Context HttpHeaders headers, @Context UriInfo uriInfo,
-WebserviceRequest request) throws ObjectNotFoundException,
-BusinessException, EncryptionException, EmployeeException {
- 
-Employee employee = (Employee) JsonUtil.getObject(request.getPayload(),
-Employee.class);
- 
-List<Employee> employees = EmployeeHandler.getInstance().getFilterEmployeeDetails(employee);
-System.out.println("COunt : "+ employees.size());
-//String outputString = "{\"status\": \"SUCCESS\", \"payload\": \"Test Successful\"}";
-return JsonUtil.getJsonForListBasedOnDescriptor(employees, Employee.class, FilterListOutputDescriptors.class);
- 
-}*/
-
 @POST
 @RestService(input = String.class, output = AllHandsMeeting.class)
 @ServiceStatus(value = "complete")
@@ -112,7 +108,7 @@ public String getAllHandsMeeting(@Context HttpHeaders headers, @Context UriInfo 
 		BusinessException, EncryptionException {		
 AllHandsMeeting allhandsmeeting = (AllHandsMeeting) JsonUtil.getObject(
 			request.getPayload(),AllHandsMeeting.class);
-	List<AllHandsMeeting> allhandsmeetings = AllHandsMeetingHandler.getInstance().getAllHandsMeeting(allhandsmeeting);
+	List<AllHandsMeeting> allhandsmeetings = AllHandsMeetingHandler.getInstance().getAllHandsMeeting();
 	System.out.println("Count : "+ allhandsmeetings.size());
 	return JsonUtil.getJsonForListBasedOnDescriptor(allhandsmeetings, AllHandsMeeting.class, AllHandsMeeting.class);
 

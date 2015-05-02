@@ -8,41 +8,58 @@
 
 <title>Filter Employee Details</title>
 <body>
- <div>
- Gender:<select id="gender" style="width:20%">
-<option value="0" selected>select </option>
-<option value="1">Female</option>
-<option value="2">Male</option> 
-</select>
-<p id="gerror"></p>
+<br/><br/>
+<div class="head"><h1> Filter Employee</h1></div><br/></br>
 
-CurrentDesignation:<select id="designation" style="width:20%">
-<option  value="0" selected>select</option>
-<option value="1">TSE</option>
-<option value="2">ASE</option> 
-<option value="3">SE</option> 
-<option value="4">SSE</option> 
-</select>
-<p id="designerror" class="error2"></p>
+ <div  class="inputelement">
+<b>Gender <span class="inputelement"</span>&nbsp;&nbsp;&nbsp;:</b> <select id="gender" style="width:20%">
+<option value="" selected>select </option>
+<option value="F">Female</option>
+<option value="M">Male</option> 
+</select>&nbsp&nbsp&nbsp&nbsp&nbsp
+<b  class="inputelement">DOJ</b><span class="inputelement"></span>:<input type="text" id="datepicker"> 
+<p id="derror"></p> </div>
+</div>
+
+<div class="inputelement">
+<b>Highest Qualification:</b> <input type="text" name="qualification" size="30"  id="qualification1" onfocusout="highest_qualification()"/> 
+<b class="inputelement">Year Of Experience:</b><b style="font-size:15px";>From</b> <input type="text" id="year1" size="4"><b style="font-size:15px">To</b> <input type="text" size="4" id="year2"><br>
+ <span  class="p" id="herror"></span> <span  class="p" id="yerror"></span>
 </div> 
+<div><b class="inputelement">Current Designation&nbsp:</b> <select id="designation" style="width:20%">
+<option value="0">Select Designation</option>
+<option value="1">CEO</option>
+<option value="2">COO</option>
+<option value="3">Architect</option>
+<option value="4">Marketing Engineer</option>
+<option value="5">HR</option>
+<option value="6">Project Manager</option>
+<option value="7">Senior Software Engineer</option>
+<option value="8">Software Engineer</option>
+<option value="9">Trainee Software Engineer</option>
+</select></div><br><br>
 
-<div>
-DOJ: <input id="date" onfocusout="empname()" type="date" size="10">
-<p id="derror"></p>
+<div  class="inputelement" ><button type="button"  id="Filter" class="btn btn-primary btn-md">Filter</button>
+<!-- <input type="button" id="Filter" value="Filter"  size="10"/> --></div>
+<br/><br/>
  
-YearOfExperience:From<input type="text" id="year1" size="4" onfocusout="yoe()">
-<!-- To <input type="text" size="4" id="year2" onfocusout="yoe1()"> -->
-<p id="yerror">you cannot leave this empty</p>
-</div>
+<div class="heading"><h3>Filter Employee Details</h3> </div><br/><br/>
 
-<div>
-HighestQualification:<input type="text" name="qualification" size="10" id="qualification1" onfocusout="highest_qualification()"/> 
-<p id="herror">you cannot leave this empty</p>
-</div>
-<div><input type="button" id="Filter" value="Filter"  size="10"/></div>
-
-<table id="displayData">
-<tr>Filter Employee Details</tr></table>
+<table id="displayData" class="table table-hover" style="width:60%" >
+<tr>
+<th>EmployeeId</th>
+<th>EmployeeName</th>
+<th>Gender</th>
+<th>DOB</th>
+<th>DOJ</th>
+<th>Email</th>
+<th>FatherName</th>
+<th>Designation</th>
+<th>HighestQualification</th>
+<th>SkypeId</th>
+<th>ContactNo</th></tr>
+ 
+ </table>
 </body>
 </html>
  

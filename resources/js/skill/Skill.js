@@ -1,113 +1,172 @@
 function skill() {
-	Loader.loadHTML('.leftContainer', 'resources/js/skill/Skill.html', true, function(){
-		this.handleShow();
+	Loader.loadHTML('.container', 'resources/js/skill/Skill.html', true, function(){
+	this.handleShow();
 	}.ctx(this));
 }
+
 
 skill.prototype.handleShow = function() {
 	$('.container').show();
+	this.viewSkillDetails();
 	$('#save').click(function(){
+		this.validateSkill();
+		this.validateTrainingAttended();
+		this.validateEmpId();
+		this.validateRating();	
 		this.addSkill();
-	}.ctx(this));
+	 
+		}.ctx(this));
+	 }
 
+
+skill.prototype.viewSkillDetails=function(){
+	
+	var input={"payload":{}};
+	 
+	RequestManager.getSkillDetails(input, function(data, success) {
+		
+  		if(success){
+  	    
+  	    
+  		for( var i=0;i<data.length;i++){
+  		 
+  		var skill = data[i];
+  		//$('#displayData').append('<table></table>');
+		 
+		$('#displayData').append("<tr><td>"+skill.skills+"</td><td>"
+		+skill.trainingAttended+"</td><td>"+skill.empId+"</td><td>"
+		+skill.rating+"</td><td><input type='button' value='Edit' id='"+skill.id+"' class='dynamicEdit btn-primary btn-md'></td></tr>");
+		
+		var obj1=skill.id;
+  		}
+		$('.dynamicEdit').bind("click", function(event){	 
+		this.editSkill($(event.target).attr("id"));
+		}.ctx(this));
+  		}else{
+  			alert("no view details");
+  		}
+	}.ctx(this));
 }
 
-skill.prototype.skill=function(){
-	
-	 
-	//validations for skills
-	var skillerr=document.getElementById("skillerror1");
-	var skills = document.getElementById("skill").value;
-	var char =/^[a-zA-Z.""]+$/;
-	if(skills === "") 
-	 {
-		skillerr.style.visibility="visible";
-		valid = false;
-	 }   
-	 else if(!(skills.match(char) || skills == isNaN))
-	 {
-		 skillerr.innerHTML= "invalid skill / It should be characters only";
-		 skillerr.style.visibility="visible";
-		 valid = false;
-	  
-	 }
-	 else  
-		 skillerr.style.visibility="hidden";
-	
-	//validations for training attended
-	var trainingerr=document.getElementById("skillerror1");
-	var training = document.getElementById("attened1").value;
-	var char =/^[a-zA-Z]+$/;
-	if(training === "") 
-	 {
-		trainingerr.style.visibility="visible";
-		valid = false;
-	 }   
-	 else if(!(training.match(char) || training == isNaN))
-	 {
-		 trainingerr.innerHTML= "invalid training attended / It should be characters only";
-		 trainingerr.style.visibility="visible";
-		 valid = false;
-	  }
-	 else  
-		 trainingerr.style.visibility="hidden";
-	
-		//validations for EmployeeId
-		var error =document.getElementById("error");
-		var eid= document.getElementById("empid").value;
-		var num =/^[0-3]?[0-9]\/[01]?[0-9]\/[12][90][0-9][0-9]$/;
-		if(eid == "" ) 
-		 {
-			error.style.visibility="visible";
-			valid = false;
-		 } 
-		  else if(isNaN(eid))
-		 {
-			  error.innerHTML="This empid format is not recognized.Enter only numbers.";
-			  error.style.visibility="visible";
-			  valid = false;
-		 }
-		 else  
-			 error.style.visibility="hidden"; 
-		
-		//validations for rating
-		var error1 =document.getElementById("error");
-		var rating1= document.getElementById("rating").value;
-		var num =/^[0-3]?[0-9]\/[01]?[0-9]\/[12][90][0-9][0-9]$/;
-		if(rating1 == "" ) 
-		 {
-			error1.style.visibility="visible";
-			valid = false;
-		 } 
-		  else if(isNaN(rating1))
-		 {
-			  error1.innerHTML="This rating format is not recognized.Enter only numbers.";
-			  error1.style.visibility="visible";
-			  valid = false;
-		 }
-		 else  
-			 error1.style.visibility="hidden"; 
-		return true;
+
+
+skill.prototype.validateSkill=function(){
+ 
+ 	     var skill= $("#skill").val();
+		 if(skill==""){
+             $("#skillerror1").text("you cannot leave this empty");
+             return false;
+			  }
+		 else if(skill.match('[0-9-+]+$')){
+			   $("#skillerror1").text("Enter only characters only");
+			   return false;
+			  }
+			  else{
+			   $("#skillerror1").text("");
+               
+			  }
 	}
+skill.prototype.validateTrainingAttended=function(){ 
+	
+	var training= $("#attended1").val();
+	 if(training==""){
+        $("#skillerror2").text("you cannot leave this empty");
+        return false;
+		  }
+	 else if(training.match('[0-9-+]+$')){
+		   $("#skillerror2").text("Enter only characters(true/false) only");
+		   return false;
+		  }
+		  else{
+		   $("#skillerror2").text("");
+          
+		  }
+}
 
+skill.prototype.validateEmpId=function(){ 
+	 var empId= $("#empid").val();
+	 if(empId==""){
+         $("#error1").text("you cannot leave this empty");
+         return false;
+		  }
+	 else if(empId.match('[0-9-+]+$')){
+		   $("#error1").text("");
+		   return false;
+		  }
+		  else{
+		   $("#error1").text("Enter only numbers only");
+           
+		  }
+	 
+}
 
+skill.prototype.validateRating=function(){ 
+	 var rating= $("#rating").val();
+	 if(rating==""){
+        $("#error2").text("you cannot leave this empty");
+        return false;
+		  }
+	 else if(rating.match('[0-9-+]+$')){
+		   $("#error2").text("");
+		   return false;
+		  }
+		  else{
+		   $("#error2").text("Enter only numbers only");
+          
+		  }
+	 
+}
+	 
 skill.prototype.addSkill = function(){
-	if(this.skill()){
-	  var input={"payload":{"skills":$('#skill').val(),"trainingAttended":$('#attened1').val(),
+	 
+ 
+	  var input={"payload":{"skills":$('#skill').val(),"trainingAttended":$('#attended1').val(),
 			"empId":$('#empid').val(),"rating":$('#rating').val(),
 			  
 			}};
-	  
 	  	 RequestManager.save(input, function(data, success) {
+	  	 
+	  		if(success){
+	  	 alert("successfully inserted");
+	  		//$('#displayData').append("<table></table>");
+	  		$('#displayData').append("<tr><td>"+data.skills+"</td><td>"
+			+data.trainingAttended+"</td><td>"+data.empId+"</td><td>"
+			+data.rating+"</td><td><input type='button' value='Edit' id='"+data.id+"' class='dynamicEdit btn-primary btn-md'></td></tr>");
+	  		$("#skill").val("");
+		    $("#attened1").val("");
+		    $("#empid").val("");
+		    $("#rating").val("");
+	  		var obj1=data.id;
+			$('.dynamicEdit').bind("click", function(event){
+				 
+				this.editSkill($(event.target).attr("id"));
+			   
+		    }.ctx(this));
+		      //$( "input#clear" ).trigger( "click" );		
+			}
+	  		else if(data.code == 120001){
+		         alert("Skill Name & EmpId already exist");
+		        }
+			else{
+				  alert("failed to inserted");
+				 
+				}
+		}.ctx(this));
+	
+} 
+skill.prototype.editSkill = function(obj1){
+	 var input = { "payload" : {"id" : obj1} };
+	 RequestManager.getEditSKill(input,function(data,success){
+		 
 		 if(success){
+			$('#skill').val(data[0].skills);
+		    $('#attened1').val(data[0].trainingAttended);
+		    $('#empid').val(data[0].empId);
+		    $('#rating').val(data[0].rating);
+		 }
+		 else{
+			 alert("failed to edit");
+		 }
 		
-			$('#displayData').append('<table></table>');
-			var table = $('#displayData').children(); 
-			$('#displayData').after("<tr><td>"+data.skills+"</td><td>"+data.trainingAttended+"</td><td>"+data.empId+"</td><td>"+data.rating+"</td><td><input type='button' value='Edit'</td></tr>");
-			 
-			 }else{
-				  alert("failed to retrieved");
-				 }
-				}.ctx(this));
-		}
-};
+		 }.ctx(this));
+}

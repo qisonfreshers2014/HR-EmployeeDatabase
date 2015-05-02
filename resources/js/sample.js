@@ -21,48 +21,43 @@ Sample.prototype.handleShow = function() {
 		}*/
 	$('.container').show();
 	$('.testService').click(function(){
-		//this.testService();
+	this.testService();
 	}.ctx(this));
 	
 	
-	function UploadClickHandler(event){
+function UploadClickHandler(event){
 var thisEle = event.target;
 this.uploadMedia(function() {
 $(thisEle).one('click', UploadClickHandler.ctx(this));
 }.ctx(this));
 }
-$('.testService').one('click', UploadClickHandler.ctx(this));
+//$('.testService').one('click', UploadClickHandler.ctx(this));
 	
 
 }
 
 Sample.prototype.testService = function() {
 
-	App.loadTemplate();
-	
-	//App.loadAddTemplate();
-	//App.loadViewEmployee();
-	//App.loadempviewemployee();
-	
-	//App.loadDes();
-	//App.loadPolicy();
-/*	var input = {"payload":{}};
-	RequestManager.loadTest(input, function(data, success) {
-		if(success){
-			alert(data);
-			$(".leftContainer").show();
-			$(".leftContainer").css('background-color', 'aqua');
+	/*var dataid="14";
+App.loadViewTemplate(dataid);*/
+	//App.loadLogin();
+//App.loadAllHandsMeeting();
+var name="vasavi";
+App.loadHRHomeHeader(name);
+App.loadHRHomePage();
+App.loadHRHomeFooter();
 
-			$(".rightContainer").show();
-			$(".rightContainer").css('background-color', 'green');
-			$(".leftContainer").append('<p>'+data+ '</p>');
-			$(".rightContainer").append('<p>'+data+ '</p>');
-		}else{
-			alert("failed");
-		}
-	}.ctx(this));*/
-
-
+ 
+//App.loadLogin();
+//App.loadFilter();
+//  App.loadSkill();
+ 
+var dataId = 3;	
+	//App.loadLogin();
+	//App.loadEmpl();
+	//App.loadEditEmp(dataId);
+	//App.loadhrEditEmp(dataId);
+	//App.loadtemplateList(); 
 
 }
  
@@ -80,6 +75,7 @@ $('.mediaForProfileImage').lightBox();
 }
 }.ctx(this));
 callback();
+
 
 }
 

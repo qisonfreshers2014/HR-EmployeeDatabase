@@ -16,5 +16,6 @@ public interface UserDAO extends BaseDAO{
 	public User getUserByEmail(String email) throws UserException;
 
 
+
 	
 }

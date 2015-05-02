@@ -1,20 +1,22 @@
 
 .table {
-	width: 50%;
+	width: 100%;
 	text-align: left;
+	font-size:12px;
 	text-decoration: blink;
 }
 
 .tr {
-	height: 50%;
-	width: 50%;
+	height: 100%;
+	width: 100%;
 	font-size: 100%;
 	font-family: Calibri;
 }
-.th {
-	color: black;
+tr{
+	  background: #CCC;
+		color: black;
+		width : 20%;
 }
-
 .bar {
 	color: brown;
 }
@@ -23,13 +25,19 @@
 	color: red;
 }
 
-/* .container {
-	background-color: #CCF;
+.container {
+	 
+	 background-color: #FFF; 
 }
 .leftContainer {
-	background-color: #CCF;
-} */
+	 background-color: #FFF; 
+
+}
+.rightContainer{
+	background-color: #FFF; 
+}
 .ui-datepicker {
+	
     background: #CCC;
     border: 1px solid #66F;
     color: #000;
