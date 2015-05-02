@@ -14,9 +14,9 @@ public class Skills extends AbstractObject{
 	 @Column(name = "emp_id")
 	 private int empId; 
 	 @Column(name = "skills")
-	 private String skills;
+	 private int skills;
 	 @Column(name = "rating")
-	 private String rating;
+	 private int rating;
 	 @Column(name = "training_attended",columnDefinition= "bit")
 	 private boolean trainingAttended;
 	
@@ -36,8 +36,7 @@ public class Skills extends AbstractObject{
 	 public static final int AUTH_STATUS_NEW = 1; 
 	 public static final int AUTH_STATUS_NONE = 2;
 	 
-	 public Skills(int empId, String skills,
-	   String rating,boolean trainingAttended)
+	 public Skills(int empId, int skills,int rating,boolean trainingAttended)
 	   {
 	  this.empId = empId;
 	  this.skills = skills;
@@ -63,28 +62,28 @@ public class Skills extends AbstractObject{
 	 /**
 	  * @return the skills
 	  */
-	 public String getSkills() {
+	 public int getSkills() {
 	  return skills;
 	 }
 
 	 /**
 	  * @param skills the skills to set
 	  */
-	 public void setSkills(String skills) {
+	 public void setSkills(int skills) {
 	  this.skills = skills;
 	 }
 
 	 /**
 	  * @return the rating
 	  */
-	 public String getRating() {
+	 public int getRating() {
 	  return rating;
 	 }
 
 	 /**
 	  * @param rating the rating to set
 	  */
-	 public void setRating(String rating) { 
+	 public void setRating(int rating) { 
 	  this.rating = rating;
 	 }
 

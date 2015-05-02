@@ -21,7 +21,6 @@
 
 
 		<mapping class="com.hred.model.Employee" />
-
 		<mapping class="com.hred.model.HRPolicy" />
 		<mapping class="com.hred.model.Holiday" />
 		<mapping class="com.hred.model.User" />

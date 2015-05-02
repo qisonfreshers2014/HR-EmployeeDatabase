@@ -79,7 +79,7 @@ public class HRPolicyService extends BaseService{
 			return JsonUtil.getJsonBasedOnDescriptor(output, HRPolicy.class);
 		}
 		
-//view
+		//view HR Policies
 		@POST
 		@RestService(input = String.class, output = VeiwHRPolicies.class)
 		@ServiceStatus(value = "complete")

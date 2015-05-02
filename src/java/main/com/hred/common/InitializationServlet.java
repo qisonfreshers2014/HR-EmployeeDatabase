@@ -40,7 +40,7 @@ public class InitializationServlet extends HttpServlet {
 		if (initializeAllServices) {
 			// Initialize all Services one by one
 			initializeServices();
-			sendAutomatedNotificationMail();
+			//sendAutomatedNotificationMail();
 		
 		}
 	}

@@ -22,6 +22,7 @@ public class Objects {
                 break;
             case ObjectTypes.HOLIDAY:
                 persistentObjectName = Holiday.class;
+                break;
             case ObjectTypes.FILE:
                 persistentObjectName = File.class;
                 break;

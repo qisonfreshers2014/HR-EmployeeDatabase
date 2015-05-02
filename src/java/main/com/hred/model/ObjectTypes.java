@@ -47,15 +47,13 @@ public static final int TEMPLATE = 152;
 
 
 public static final int ALL_HANDS_MEETING = 201;
-
- public static final int EMPLOYEE = 161;
-
- public static final int DESIGNATION_TYPE=182;
+public static final int EMPLOYEE = 161;
+public static final int DESIGNATION_TYPE=182;
  public static final int DESIGNATION_HISTORY=183;
 
  public static final int HR_POLICIES=186;
 
-
+ //public static final int FILE = 108;
  public static final int FILEUPLOAD=184;
 
  

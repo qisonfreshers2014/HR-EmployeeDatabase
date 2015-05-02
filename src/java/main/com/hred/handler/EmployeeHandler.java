@@ -78,9 +78,6 @@ public class EmployeeHandler extends AbstractHandler {
 	}
 
 	
-	
- 
-	
 	public List<Employee> getFilterEmployeeDetails(Employee employee) throws EmployeeException {
 		List<Employee> employees = null;
 		EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance().getEmployeeDAO();
@@ -262,7 +259,7 @@ public Employee hrUpdateEmployee(Employee employee) throws ObjectNotFoundExcepti
 		
 		
 		 java.util.Date todate=filterCriteria.getTodate();
-	 java.util.Date fromdate=filterCriteria.getFromdate();
+		 java.util.Date fromdate=filterCriteria.getFromdate();
 		 String selectedEvent=filterCriteria.getSelectedEvent();
 		String selectedState=filterCriteria.getSelectedState();
 		

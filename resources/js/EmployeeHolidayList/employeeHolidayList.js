@@ -1,5 +1,5 @@
 function employeeHolidayList() {
-	Loader.loadHTML('.leftContainer', 'resources/js/EmployeeHolidayList/EmployeeHolidayList.html', true, function(){
+	Loader.loadHTML('.container', 'resources/js/EmployeeHolidayList/employeeHolidayList.html', true, function(){
 		this.handleShow();
 	}.ctx(this));
 }
@@ -13,7 +13,7 @@ employeeHolidayList.prototype.handleShow = function() {
 			 var content = data;
 			 var status = success;
 			 this.tableDisplay(content, status);
-			alert("successfully added");
+		
 		 	
 		}else{
 		  
@@ -24,6 +24,7 @@ employeeHolidayList.prototype.handleShow = function() {
 
 }
 
+//Holidays list for Employees to display
 employeeHolidayList.prototype.tableDisplay = function(content, status){
 	
 	for(var i = 0; i < content.length; i++) {
@@ -40,15 +41,15 @@ employeeHolidayList.prototype.tableDisplay = function(content, status){
 		var day = dayNames[res.getDay()];
 		
 		if(obj.type == "Mandatory"){
-				$('#mandatory').append('<table></table>');
+				$('#mandatory').append('<table><tbody></tbody></table>');
 				$('#mandatory tr:last').after("<tr><td>"+year + "-" + month + "-" +date+"</td><td>"+obj.description+"</td><td>"+day+"</td></tr>");
 			}
 			if(obj.type == "Weekdays"){
-				$('#weekends').append('<table></table>');
+				$('#weekends').append('<table><tbody></tbody></table>');
 				$('#weekends tr:last').after("<tr><td>"+year + "-" + month + "-" +date+"</td><td>"+obj.description+"</td><td>"+day+"</td></tr>");
 			}
 			if(obj.type == "Optional"){
-				$('#optional').append('<table></table>');
+				$('#optional').append('<table><tbody></tbody></table>');
 				$('#optional tr:last').after("<tr><td>"+year + "-" + month + "-" +date+"</td><td>"+obj.description+"</td><td>"+day+"</td></tr>");
 			}
 	

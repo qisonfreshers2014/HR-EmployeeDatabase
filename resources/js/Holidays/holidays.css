@@ -1,15 +1,15 @@
 @CHARSET "ISO-8859-1";
 
-.heading{
-	text-align:center;
-	background-color:#666;
-	 font-weight:bold;
+
+.holidayhead, .emphead, .hrhead, .empholidayhead {
+     color: brown;
+     margin-left: 40%;
+     margin-top: 3%;
 }
 
-#fields {
-margin-left:auto;
-margin-right:auto;
-width:50em;
+h3{
+	color : brown; 
+
 }
 p {
     font-family: Verdana, Arial, sans-serif;
@@ -17,6 +17,7 @@ p {
 }
 
 .left {
+	margin-top: 4%;
 	position: relative;
 	float: left;
 	
@@ -25,49 +26,88 @@ p {
 #update{
 	visibility: hidden;
 }
-.right {
-	position: relative;
-       float: right;
-	   
-}	
 
-.red{
-	color:red;
-	font-size: 20px;
-	}
-
-.description {
-	position : relative;
+.descrpdiv {
+	
+	position: absolute;
+    margin-top: 4%;;
 	float:left;
 	
 
 }
+
+#display{
+  padding-left:3%;
+  padding-right:3%;
+
+}
 #main {
+	margin-right: 100px;
+	margin-top: 4%;
 	position: relative;
 	float: right;
-	margin-right:30px;
+	
 }
 
-.table{
- position:relative;
- width: 100%;
- padding-left:5%;
- padding-right:1%;
- border:1px solid black;
- margin-right:auto;
- margin-left:auto;
-_margin-right:auto;
-_margin-left:auto;
-}
+
 .ui-datepicker {
     background: #CCC;
     border: 1px solid #66F;
     color: #000;
 }
 
-.error{
+.holidayerror{
 	visibility:hidden;
 	color:red;
 	font-style: italic;
 	font-size: 12px;
 }
+
+#fields {
+     background: none repeat scroll 0% 0% #cccccc;
+     margin-bottom: 3%;
+     margin-left: 2%;
+     margin-top: 6%;
+     width: 72em;
+  	padding-left:1%;
+ 
+}
+.inputelement{
+	 font-size:15px;
+     font-weight: bold;
+    
+}
+
+
+.star{
+	color:red;
+	font-size: 20px;
+	}
+#policylist,#holidaylist,#listemp{
+	
+	padding-top: 8%;
+	background:white;
+	padding-left: 3%;
+	padding-right:3%;
+	border: 1px  black;
+		
+}
+
+#searchdiv {
+     float: right;
+     height: 60%;
+     padding-top: 2%;
+	  padding-left:60%;
+    padding-right:2%;
+     width: 20%;
+}
+
+.navbuttons {
+	padding-top:1%;
+  padding-bottom:2%;
+  padding-right:3%;
+  float:right;
+     
+}
+
+

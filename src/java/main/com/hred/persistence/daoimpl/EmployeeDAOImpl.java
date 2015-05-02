@@ -342,6 +342,7 @@ public List<DisplayNotificationHome> getEventWithinDate(NotificationHomeFilterIn
 		}
 		return results;
 	}
+	
 	public List<Employee> getTodayWorkAniversary() {
 
 		Session session = null;
