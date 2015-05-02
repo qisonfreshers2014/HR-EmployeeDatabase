@@ -6,10 +6,10 @@ import com.hred.handler.AbstractHandler;
 
 
 import com.hred.model.Template;
-
 import com.hred.persistence.dao.DAOFactory;
 
 
+import com.hred.persistence.dao.FileDAO;
 import com.hred.persistence.dao.TemplateDAO;
 
 public class TemplateHandler extends AbstractHandler {
@@ -52,6 +52,30 @@ public class TemplateHandler extends AbstractHandler {
 		templates = (List<Template>) tempDAOImpl.viewTemplate(template);
 		return templates;
 	}
+	
+	 public Template getContentForMail(Template template) {
+		  Template receivedtemplates = null;
+		  String url = "";
+		  TemplateDAO tempDAOImpl = (TemplateDAO) DAOFactory.getInstance().getTemplateDAO();
+		  FileDAO fileDAOimpl = (FileDAO) DAOFactory.getInstance().getFileDAO();
+		  receivedtemplates = tempDAOImpl.getContentForMail(template);
+		  String finalContent =receivedtemplates.getContent();
+		  /*List<File> filelist = fileDAOimpl.getAllFiles();
+		  for (File eachfile : filelist) {
+		   if (eachfile.getId() == receivedtemplates.getFileId()) {
+		    url = eachfile.getFilePath();
+
+		   }  
+
+		  }
+		  finalContent+="<br/><<img src="+url+" width=\"250\" height=\"95\" border=\"0\" alt="+receivedtemplates.getSubject()+"><br>";
+		  template.setContent(finalContent);
+		  */  
+
+		  return receivedtemplates;
+
+		 }
+	
 	}
 
 

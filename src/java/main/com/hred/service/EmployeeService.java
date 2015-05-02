@@ -257,23 +257,7 @@ public class EmployeeService extends BaseService {
 
 	
 
-	@GET
-	@RestService(input = String.class, output = ActivitiesBirthDayOutputDescriptor.class)
-	@ServiceStatus(value = "complete")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/getTodayBirthday")
-	@UnSecure
-	public String getTodayBirthday(
-			
-			@Context HttpHeaders headers,
-			@Context UriInfo uriInfo, WebserviceRequest request)
-			throws BusinessException {
-		List<Employee> getTodayBirthdays = EmployeeHandler.getInstance()
-				.getTodayBirthday();
-		return JsonUtil.getJsonForListBasedOnDescriptor(getTodayBirthdays,
-				Employee.class, ActivitiesBirthDayOutputDescriptor.class);
-	}
+
 	
 	@POST
 	@RestService(input = String.class, output = ActivitiesWorkAnniversaryOutputDescriptor.class)
