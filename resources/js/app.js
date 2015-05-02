@@ -14,15 +14,17 @@ App.prototype.loadFooter=function(){
 	});
 }
 
+
+
 /*
-=======
+
 
 App.prototype.loadEmployee=function(gender,contactNo){
 		this.gender = gender;
 		this.contactNo = contactNo;
 		Loader.loadEmployee();
 	
->>>>>>> origin/master
+
 App.prototype.loadViewTemplate = function(name){
 	Loader.loadViewTemplate(function(){
 		new EditTemplate();
@@ -181,58 +183,14 @@ App.prototype.loadempviewemployee=function(){
 App.prototype.loadEmpl=function(){
 	Loader.loadEmpl(function(){
 		new AddEmployee();
-	});
-}
-App.prototype.loadEditEmp=function(){
-	Loader.loadEditEmp(function(){
-		new EditEmployee();
-	});
-}
-
-App.prototype.loadhrEditEmp=function(){
-	Loader.loadhrEditEmp(function(){
-		new HrEditEmployee();
-	});
-}
-
-App.prototype.loadtemplateList=function(){
-	Loader.loadtemplateList(function(){
-		new TemplateList();
-	});
-}
-
-App.prototype.loadDes=function(){
-	Loader.loadDes(function(){
-		new EmpDes();
-
-	});
-
-}
-
-App.prototype.loadPolicy=function(){
-		Loader.loadPolicy(function(){
-			new addpolicy();
 		});
-}
 
+	}
 
-App.prototype.loadNotifArea = function(){
-	Loader.loadNotifArea(function(){
-		new NotificationALinkrea();
-	});		
-}
+	App.prototype.loadPolicy=function(){
+			Loader.loadPolicy(function(){
+				new addpolicy();
+			});
+	}	
 	
-	
-App.prototype.loadManualMail = function(event,email,employeeName){
-	Loader.loadManualMail(function(){
-		new sendNotificationMail(event,email,employeeName);
-	});
-	
-}
-	App.prototype.loadNotificationHomePage = function(data){
-		Loader.loadNotificationHomePage(function(){
-			new loadNotificationHomePage(data);
-		});
-		
-}
 var App = new App();

@@ -62,6 +62,37 @@ e.printStackTrace();
 return  list; 
 }
 
+@SuppressWarnings("unchecked")
+@Override
+public List<DesignationHistory> getAllDesignationDetails(){
+Session session = null;
+List<DesignationHistory> list = null;
+Transaction tx = null;
+try {
+session = getSession();
+if (null == session) {
+session = SessionFactoryUtil.getInstance().openSession();
+tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+}
+Criteria createCriteria = session.createCriteria(DesignationHistory.class);
+
+//createCriteria.add(Restrictions.eq("isDeleted",false));
+list = (List<DesignationHistory>)createCriteria.list();
+ } finally {
+try {
+if (tx != null) {
+tx.commit();
+if (session.isConnected())
+session.close();
+}
+} catch (HibernateException e) {
+ 
+e.printStackTrace();
+}
+}
+return  list; 
+}
+
 
 @SuppressWarnings("unchecked")
 @Override

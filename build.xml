@@ -260,7 +260,7 @@
     <target name="runUnix" if="isUnix" >
         <echo>=== RUNNING UNIX Build ===</echo>
         <java dir="${dest.dir}" jar="${package.file}" fork="true" >
-            <jvmarg value="-Xrunjdwp:transport=dt_socket,address=9172,server=y,suspend=n"/>
+            <jvmarg value="-Xrunjdwp:transport=dt_socket,address=9396,server=y,suspend=n"/>
             <jvmarg value="-Xmx1024m"/>
             <jvmarg value="-XX:MaxPermSize=256m"/>
             <jvmarg value="-XX:HeapDumpPath=../heapdumps"/>

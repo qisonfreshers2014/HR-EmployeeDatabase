@@ -129,9 +129,10 @@ public interface ExceptionCodes {
 	public static final int EVENT_IN_LIVE_CONTENT_CANNOT_BE_CHANGED = 219;
 	public static final int CANNOT_AGREE_OR_DISAGREE_FLAGGED_OR_REMOVED_COMMENT = 220;
 	public static final int EMPLOYEE_DOESNOT_EXIST = 221;
-
+	
 	public static final int DESIGNATION_DOESNOT_EXIST = 225;
 	public static final int HRPolicy_DOESNOT_EXIST = 226;
+	public static final int DESIGNATIONDETAILS_ALREADY_EXISTS=227;
 	
 	//Mongo related exception Codes
 	public static final int COULD_NOT_START_MONGO_CLIENT = 1001;

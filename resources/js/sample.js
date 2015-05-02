@@ -1,5 +1,5 @@
 function Sample() {
-	Loader.loadHTML('.leftContainer','sample.html', true, function(){
+	Loader.loadHTML('.container','sample.html', true, function(){
 		this.handleShow();
 	}.ctx(this));
 }
@@ -29,8 +29,8 @@ Sample.prototype.handleShow = function() {
 
 Sample.prototype.testService = function() {
 
-	//App.loadDes();
-App.loadPolicy();
+	//App.loadDesignation();
+	App.loadPolicy();
 	//App.loadLogin();
 //App.loadHRPolicyVeiwPage();
 

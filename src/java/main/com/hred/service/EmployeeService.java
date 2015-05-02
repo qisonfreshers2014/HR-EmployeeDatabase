@@ -118,6 +118,11 @@ public class EmployeeService extends BaseService {
 		return JsonUtil.getJsonBasedOnDescriptor(output, Employee.class);
 	}
 	
+	@POST
+	@RestService(input = String.class, output = String.class)
+	@ServiceStatus(value = "complete")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/viewEmployee")
 	@UnSecure
 	public String viewEmployee(@Context HttpHeaders headers,

@@ -26,6 +26,7 @@ public interface ExceptionMessages {
 	
 	public static final String DESIGNATION_DOESNOT_EXIST="This designation is not existed";
 	public static final String HRPolicy_DOESNOT_EXIST="This HRPolicy is not existed";
+	public static final String DESIGNATIONDETAILS_ALREADY_EXISTS="This details are existed already";
 
 
 	//Project WebService related Exceptions

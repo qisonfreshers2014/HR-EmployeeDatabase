@@ -9,7 +9,7 @@ body {
     height: 95px;
     margin-left: 8%;
 }
-.container {
+/* .container {
     background-color: #ffffff;
     display: block;
     height: 459px;
@@ -17,13 +17,22 @@ body {
     border-top: 1px solid #000000;
     clear: both;
     margin-left: 8%;
-}
-.container{
+} */
+.leftcontainer{
+	background-color: #ffffff;
     display: block !important;
     position: relative;
-    width: 70%;
+    width:70%;
+    height:100%;
 }
-.leftContainer {
+
+ .container {
+    background-color: #FFF;
+    display: block;
+    width: 90%;
+    height: 100%;
+ }
+/* .leftContainer {
   background-color: #FFFFFF;
     float: left;
     position: relative;
@@ -38,7 +47,7 @@ body {
     width: 45%;
 	 height: 459px;
 
-}
+} */
 .footer {
     border-top: 1px solid #000000;
     width:94%;
