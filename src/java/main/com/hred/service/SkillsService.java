@@ -27,14 +27,15 @@ import com.hred.model.user.AuthenticationOutput;
 import com.hred.service.annotations.RestService;
 import com.hred.service.annotations.ServiceStatus;
 import com.hred.service.annotations.UnSecure;
-import com.hred.service.common.WebserviceRequest;
-import com.hred.service.descriptors.outputDescriptors.EmployeeListOutputDescriptors;
+import com.hred.service.common.WebserviceRequest;;
 
 /**
  * @author Jyothi Ambepu
  *
  */
-@Path("/v1/skills")
+ 
+ 
+@Path("/v1/skills/") 
 public class SkillsService extends BaseService {
 	/**
 	 * @param headers
@@ -114,18 +115,14 @@ public class SkillsService extends BaseService {
 			WebserviceRequest request) throws ObjectNotFoundException,
 			BusinessException, EncryptionException, SkillsException {	
 
-
 		Skills skills = (Skills) JsonUtil.getObject(request.getPayload(),
 				Skills.class);
-
-		
 		List<Skills> Skills = SkillsHandler.getInstance().getSkillsDetails();
 		//System.out.println("COunt : "+ Skills.size());
 		return JsonUtil.getJsonBasedOnDescriptor(Skills, Skills.class);
 		//String outputString = "{\"status\": \"SUCCESS\", \"payload\": \"COunt\"}";
 		//return outputString;
 		 
-		
 	}
 	
 	@POST
@@ -139,11 +136,9 @@ public class SkillsService extends BaseService {
 			WebserviceRequest request) throws ObjectNotFoundException,
 			BusinessException, EncryptionException, SkillsException {	
 
-
 		Skills skills = (Skills) JsonUtil.getObject(request.getPayload(),
 				Skills.class);
-
-		
+	
 		List<Skills> Skills = SkillsHandler.getInstance().getEditSkills(skills);
 		//System.out.println("COunt : "+ Skills.size());
 		return JsonUtil.getJsonBasedOnDescriptor(Skills, Skills.class);

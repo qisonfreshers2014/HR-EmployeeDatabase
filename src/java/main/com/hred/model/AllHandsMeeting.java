@@ -6,6 +6,7 @@ import javax.persistence.Table;
 
 import com.hred.persistence.annotations.Increment;
 
+
 @Entity
 @Table(name = "ALLHANDSMEETING")
 @Increment

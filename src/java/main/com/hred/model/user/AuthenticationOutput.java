@@ -20,18 +20,15 @@ public class AuthenticationOutput {
  private String sessionToken;
  private int authStatus;
  private Employee emp;
- ///////////////////////////////
 
 
- 
- /////////////////////////////
  public AuthenticationOutput(String sessionToken, int authStatus, Employee emp) {
-  this.sessionToken = sessionToken;
-  this.authStatus = authStatus;
-  this.emp = emp;
+	// TODO Auto-generated constructor stub
+	 this.sessionToken = sessionToken;
+	  this.authStatus = authStatus;
+	  this.emp = emp;
+}
 
- }
- 
 @JsonProperty
  public String getSessionToken() {
   return sessionToken;

@@ -17,6 +17,7 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 public abstract class AbstractObject implements BaseObject{
 
+
  @Id
  @GeneratedValue
  @Column(name = "id")
@@ -110,4 +111,7 @@ public abstract class AbstractObject implements BaseObject{
  public void setDeleted(boolean deleted) {
   isDeleted = deleted;
  }
+
+
+
 }

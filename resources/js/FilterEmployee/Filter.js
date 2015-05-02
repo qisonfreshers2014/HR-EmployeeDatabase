@@ -14,10 +14,7 @@ FilterEmp.prototype.handleShow = function() {
         if($(this).val().match('[0-9-+]+$')){
 			   $("#yerror").text("");
 			  }
-        else if($(this).val){
-        	
-        }
-       		  else{
+			  else{
 			   $("#yerror").text("should enter only numbers");
               
 			  }
@@ -120,11 +117,11 @@ FilterEmp.prototype.FilterEmployee = function(){
 			   var i;
 				   for(i = 0; i < data.length; i++) {
 				       var item = data[i];
-	 					
+	 					 
 			//$('#displayData').append('<table></table>');
 			$('#displayData').append("<tr><td>"+item.employeeId+"</td><td>"+item.employeeName+"</td><td>"+item.gender+"</td><td>"
-			+new Date(item.dob).getFullYear()+"-"+(new Date(item.dob).getMonth()+1)+"-"+new Date(item.dob).getDate()+"</td><td>"
-			+new Date(item.doj).getFullYear()+"-"+(new Date(item.doj).getMonth()+1)+"-"+new Date(item.doj).getDate()+"</td><td>"+item.email+"</td><td>"+item.fathersName+"</td><td>"
+			+new Date(item.dateOfBirth).getFullYear()+"-"+(new Date(item.dateOfBirth).getMonth()+1)+"-"+new Date(item.dateOfBirth).getDate()+"</td><td>"
+			+new Date(item.dateOfJoining).getFullYear()+"-"+(new Date(item.dateOfJoining).getMonth()+1)+"-"+new Date(item.dateOfJoining).getDate()+"</td><td>"+item.email+"</td><td>"+item.fathersName+"</td><td>"
 			+item.currentDesignation+"</td><td>"+item.highestQualification+"</td><td>"+item.skype+"</td><td>"
 			+item.contactNo+"</td></tr>");
 			    $("#gender").val("");

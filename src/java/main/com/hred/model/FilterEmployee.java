@@ -10,6 +10,8 @@ private Timestamp dateOfJoining;
 private String from;
 private String to;
 private String highestQualification;
+
+
 public FilterEmployee(String gender, int currentDesignation, Timestamp dateOfJoining,
 		String from, String to, String highestQualification) {
 	super();

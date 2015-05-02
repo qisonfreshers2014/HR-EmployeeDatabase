@@ -47,30 +47,27 @@ public class SkillsHandler extends AbstractHandler {
              if((dbSkill.compareTo(skillName) == 0) && (dbEmpid ==empId)){
               throw new SkillsException(ExceptionCodes.SKILLNAME_ALREADY_EXISTS,
                    ExceptionMessages.SKILLNAME_ALREADY_EXISTS);
-              
-          }    
+                }    
       }   
-       
-      if (skillName == null || skillName.isEmpty()|| skillName.trim().isEmpty()) {
+      if(skillName == null || skillName.isEmpty()|| skillName.trim().isEmpty()) {
   		throw new SkillsException(ExceptionCodes.Skills_DOESNOT_EXIST,ExceptionMessages.Skills_DOESNOT_EXIST);
-  	}
+  		}
    
-      if (empId==0) {
+      if (empId==0){
 			throw new SkillsException(ExceptionCodes.Skills_DOESNOT_EXIST,ExceptionMessages.Skills_DOESNOT_EXIST);
-      }
-	 if (rating == null || rating.isEmpty()|| rating.trim().isEmpty()) {
+      	}
+      
+      if (rating == null || rating.isEmpty()|| rating.trim().isEmpty()){
 				throw new SkillsException(ExceptionCodes.Skills_DOESNOT_EXIST,ExceptionMessages.Skills_DOESNOT_EXIST);
-			}
+		}
       
       }
-
- 
 	
 	public Skills save(Skills skills) throws SkillsException{
 	List<Skills> skill = getSkillsDetails();
 	//List<Skills> skill = getSkillsDetails(skills);
 		  String skillName = skills.getSkills();
-		  boolean trainingAttended = skills.getTrainingAttended();
+		  boolean trainingAttended = skills.isTrainingAttended();
 		  int empId = skills.getEmpId();
 		  String rating =skills.getRating();
 		  /*validateSkills(skillName);
@@ -81,31 +78,7 @@ public class SkillsHandler extends AbstractHandler {
 		Skills skillssaved=(Skills) DAOFactory.getInstance().getSkillDAO().saveObject(skills);
 		return skillssaved;
 	}
-	/*public  void validateSkills(String skillName) throws SkillsException {
-		if (skillName == null || skillName.isEmpty()|| skillName.trim().isEmpty()) {
-		throw new SkillsException(ExceptionCodes.Skills_DOESNOT_EXIST,ExceptionMessages.Skills_DOESNOT_EXIST);
-	}
-		
-	}
-	 private void validateTraining(boolean trainingAttended) {
-		if (trainingAttended == null) {
-			   throw new SkillsException(ExceptionCodes.HRPolicy_DOESNOT_EXIST,
-			     ExceptionMessages.HRPolicy_DOESNOT_EXIST);
-		
-		
-	}
-   public void validateRating(String rating) throws SkillsException {
-		if (rating == null || rating.isEmpty()|| rating.trim().isEmpty()) {
-			throw new SkillsException(ExceptionCodes.Skills_DOESNOT_EXIST,ExceptionMessages.Skills_DOESNOT_EXIST);
-		}
-		
-	}
-	public void validateEmpId(int empId) throws SkillsException {
-		if (empId==0) {
-			throw new SkillsException(ExceptionCodes.Skills_DOESNOT_EXIST,ExceptionMessages.Skills_DOESNOT_EXIST);
-					
-		}
-	}*/
+	 
 
 	public List<Skills> getEditSkills(Skills skills) throws SkillsException {
 		List<Skills> skill = null;
@@ -113,7 +86,5 @@ public class SkillsHandler extends AbstractHandler {
 		skill = (List<Skills>) skillsDAOImpl.getEditSkills(skills);
 		return skill;
 	}
-
-	 
 
 }

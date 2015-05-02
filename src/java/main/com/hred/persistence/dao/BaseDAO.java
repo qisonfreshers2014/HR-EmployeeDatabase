@@ -1,3 +1,4 @@
+
 package com.hred.persistence.dao;
 
 /**
@@ -7,17 +8,11 @@ package com.hred.persistence.dao;
 
 import java.util.List;
 
- 
-
- 
-
 import com.hred.exception.ObjectNotFoundException;
-import com.hred.exception.SkillsException;
 import com.hred.model.BaseObject;
 import com.hred.model.Employee;
 import com.hred.model.FilterEmployee;
-import com.hred.model.Skills;
- 
+
 
 
 /*
@@ -34,8 +29,7 @@ public interface BaseDAO {
 
 	 public BaseObject getObjectById(long id,int objectType) throws ObjectNotFoundException;
 
+	
  
-
-	 
 
 }

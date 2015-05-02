@@ -103,5 +103,80 @@ App.prototype.listEmployees=function(){
 }
 
 
+App.prototype.loadViewEmployee=function(){
+	Loader.loadViewEmployee(function(){
+		new ViewEmployee();
+	});
+}
 
+App.prototype.loadAddTemplate = function(){
+	
+	Loader.loadAddTemplate(function(){
+		new AddTemplate();
+	});
+}
+App.prototype.loadempviewemployee=function(){
+	Loader.loadempviewemployee(function(){
+		new empViewemployee();
+	});
+}
+
+
+App.prototype.loadEmpl=function(){
+	Loader.loadEmpl(function(){
+		new AddEmployee();
+	});
+}
+App.prototype.loadEditEmp=function(dataId){
+	Loader.loadEditEmp(function(){
+		new EditEmployee(dataId);
+	});
+}
+
+App.prototype.loadhrEditEmp=function(dataId){
+	Loader.loadhrEditEmp(function(){
+		new HrEditEmployee(dataId);
+	});
+}
+
+App.prototype.loadtemplateList=function(){
+	Loader.loadtemplateList(function(){
+		new TemplateList();
+	});
+}
+
+App.prototype.loadDes=function(){
+	Loader.loadDes(function(){
+		new EmpDes();
+
+	});
+
+}
+
+App.prototype.loadPolicy=function(){
+		Loader.loadPolicy(function(){
+			new addpolicy();
+		});
+}
+
+
+App.prototype.loadNotifArea = function(){
+	Loader.loadNotifArea(function(){
+		new NotificationALinkrea();
+	});		
+}
+	
+	
+App.prototype.loadManualMail = function(event,email,employeeName){
+	Loader.loadManualMail(function(){
+		new sendNotificationMail(event,email,employeeName);
+	});
+	
+}
+	App.prototype.loadNotificationHomePage = function(data){
+		Loader.loadNotificationHomePage(function(){
+			new loadNotificationHomePage(data);
+		});
+		
+}
 var App = new App();

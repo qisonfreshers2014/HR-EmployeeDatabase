@@ -4,6 +4,7 @@
 package com.hred.model;
 
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -24,16 +25,17 @@ import com.hred.persistence.annotations.Increment;
 @Increment
 public class Holiday  extends AbstractObject{
 
-	 @Temporal(TemporalType.DATE)
+	// @Temporal(TemporalType.DATE)
 	 @Column(name = "from_date")
-	 private java.util.Date  from_date; 
+	 private Timestamp  fromDate; 
 	 
-	 @Temporal(TemporalType.DATE)
+	 //@Temporal(TemporalType.DATE)	
 	 @Column(name = "to_date")
-	 private java.util.Date  to_date;
+	 private Timestamp  toDate;
 	 
 	 @Column(name = "description")
 	 private String description; 
+	
 	 @Column(name = "type")
 	 private String type; 
 	
@@ -51,13 +53,7 @@ public class Holiday  extends AbstractObject{
 		this.type = holiday.getType();
 	}*/
 
-	public Holiday(Date from_date, Date to_date, String description, String type) {
-		super();
-		this.from_date = from_date;
-		this.to_date = to_date;
-		this.description = description;
-		this.type = type;
-	}
+	
 
 	public Holiday(AbstractObject abstractObject) {
 		super(abstractObject);
@@ -78,30 +74,28 @@ public class Holiday  extends AbstractObject{
 
 	
 
-	@Override
-	public int getObjectType() {
-		
-		return ObjectTypes.holidays;
-	}
 
-	public java.util.Date getFrom_date() {
-		return from_date;
-	}
-
-	public void setFrom_date(java.util.Date from_date) {
-		this.from_date = from_date;
-	}
-
-	public java.util.Date getTo_date() {
-		return to_date;
-	}
-
-	public void setTo_date(java.util.Date to_date) {
-		this.to_date = to_date;
-	}
 
 	public String getDescription() {
 		return description;
+	}
+
+	
+
+	public Timestamp getFromDate() {
+		return fromDate;
+	}
+
+	public void setFromDate(Timestamp fromDate) {
+		this.fromDate = fromDate;
+	}
+
+	public Timestamp getToDate() {
+		return toDate;
+	}
+
+	public void setToDate(Timestamp toDate) {
+		this.toDate = toDate;
 	}
 
 	public void setDescription(String description) {
@@ -115,5 +109,22 @@ public class Holiday  extends AbstractObject{
 	public void setType(String type) {
 		this.type = type;
 	}
+
+	public Holiday(Timestamp fromDate, Timestamp toDate, String description,
+			String type) {
+		super();
+		this.fromDate = fromDate;
+		this.toDate = toDate;
+		this.description = description;
+		this.type = type;
+	}
+
+	@Override
+	public int getObjectType() {
+		
+		return ObjectTypes.HOLIDAY;
+	}
+
+	
 
 }

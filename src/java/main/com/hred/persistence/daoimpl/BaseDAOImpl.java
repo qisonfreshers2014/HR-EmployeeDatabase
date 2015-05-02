@@ -13,14 +13,10 @@ import org.hibernate.criterion.Restrictions;
 
 import com.hred.exception.ExceptionCodes;
 import com.hred.exception.ExceptionMessages;
- 
 import com.hred.exception.ObjectNotFoundException;
-import com.hred.exception.SkillsException;
 import com.hred.model.AbstractObject;
 import com.hred.model.BaseObject;
- 
 import com.hred.model.Objects;
-import com.hred.model.Skills;
 import com.hred.persistence.annotations.Increment;
 import com.hred.persistence.dao.BaseDAO;
 import com.hred.persistence.model.IdCounter;
@@ -156,7 +152,5 @@ public class BaseDAOImpl implements BaseDAO{
 		return objectList;
 	}
 
-	 
 
-	 
 }
