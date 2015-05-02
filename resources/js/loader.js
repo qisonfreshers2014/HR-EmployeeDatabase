@@ -19,12 +19,12 @@ Loader.prototype.loadHTML = function(container, filePath, empty, callback) {
 			if (callback) {
 				callback();
 				// console.log(container)
-				$(container).msgkey();
+				//$(container).msgkey();
 			}
-			/*
-			 * var compiledTemplate = Ember.Handlebars.compile(data);
-			 * Ember.View.create({ template: compiledTemplate
-			 * }).appendTo(container);
+			
+			/* var compiledTemplate = Ember.Handlebars.compile(data);
+			 Ember.View.create({ template: compiledTemplate
+			 }).appendTo(container);
 			 */
 		}
 	});
@@ -146,7 +146,6 @@ Loader.prototype.loadCkeditor = function(){
 	LazyLoad.js('resources/js/ckeditor/ckeditor.js');
 }
 
-Loader.prototype.loadViewEmployee = function(cb){
 Loader.prototype.loadViewEmployee = function(cb) {
 	LazyLoad.css('resources/css/addtemp&viewEmp.css');
 	//LazyLoad.css('resources/css/viewEmployee.css');
@@ -179,6 +178,7 @@ Loader.prototype.loadDes = function(cb) {
 Loader.prototype.loadDes = function(cb){
 		 LazyLoad.css('resources/js/editdesignation/editdesignation.css');
 		 LazyLoad.js('resources/js/editdesignation/editdesignation.js',cb);
+}
 Loader.prototype.loadPolicy = function(cb) {
 	LazyLoad.css('resources/js/addinghrpolicy/addpolicy.css');
 	LazyLoad.js('resources/js/addinghrpolicy/addpolicy.js', cb);

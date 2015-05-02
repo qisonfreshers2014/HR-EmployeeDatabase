@@ -38,8 +38,12 @@
            
      .star {
 	       color:red;
-	         font_size:20px;
+	         font-size:20px;
           }
+          
+     #align {
+           margin-left:4%;
+     }
     
    .inputelement
                   {

@@ -23,8 +23,8 @@ $('.testService').one('click', UploadClickHandler.ctx(this));
 
 Sample.prototype.testService = function() {
 	
-	//App.loadAddTemplate();
-	App.loadViewEmployee();
+      App.loadAddTemplate();
+	//App.loadViewEmployee();
 	//App.loadempviewemployee();
 	
 	//App.loadDes();

@@ -21,11 +21,6 @@ App.prototype.loadEmployee=function(gender,contactNo){
 		Loader.loadEmployee();
 	
 }
-App.prototype.loadViewTemplate = function(name){
-	Loader.loadViewTemplate(function(){
-		new EditTemplate();
-	});
-}
 
 	App.prototype.loadViewTemplate = function(name) {
 		Loader.loadViewTemplate(function() {
@@ -91,7 +86,25 @@ App.prototype.loadViewTemplate = function(name){
 			new Notifications();
 		});
 	}
-
+	App.prototype.loadAddTemplate = function(){
+		Loader.loadCkeditor();
+	Loader.loadAddTemplate(function(){
+		new AddTemplate();
+			});
+		}
+	
+	App.prototype.loadViewEmployee = function() {
+		Loader.loadViewEmployee(function() {
+			new ViewEmployee();
+		});
+	}
+	
+	App.prototype.loadempviewemployee = function() {
+		Loader.loadempviewemployee(function() {
+			new empViewemployee();
+		});
+	}
+	var App = new App();
 
 /*
 App.prototype.loadLogin=function(){
@@ -145,23 +158,9 @@ App.prototype.loadLogin=function(){
 		});
 	}
 
-	App.prototype.loadViewEmployee = function() {
-		Loader.loadViewEmployee(function() {
-			new ViewEmployee();
-		});
-	}
 
-	App.prototype.loadAddTemplate = function() {
-
-		Loader.loadAddTemplate(function() {
-			new AddTemplate();
-		});
-	}
-	App.prototype.loadempviewemployee = function() {
-		Loader.loadempviewemployee(function() {
-			new empViewemployee();
-		});
-	}
+	
+	
 
 	App.prototype.loadEmpl = function() {
 		Loader.loadEmpl(function() {
@@ -300,7 +299,7 @@ App.prototype.loadDes=function(){
 
 }
 
-App.prototype.loadPolicy=function(){
+
 		Loader.loadPolicy(function(){
 			new addpolicy();
 	App.prototype.loadHrPolicyVeiwPage = function() {
@@ -310,4 +309,4 @@ App.prototype.loadPolicy=function(){
 	}
 
 }
-var App = new App();
+*/

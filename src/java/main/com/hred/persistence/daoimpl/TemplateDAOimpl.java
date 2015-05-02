@@ -69,39 +69,44 @@ public class TemplateDAOimpl extends BaseDAOImpl implements TemplateDAO {
 
 
 
+	 @SuppressWarnings("unchecked")
+	 @Override
+	 public List< Template> viewTemplate( Template  template) throws TemplateException{
+	 Session session = null;
+	 List<Template> list = null;
+	 Transaction tx = null;
+	 try {
+	 session = getSession();
+	 if (null == session) {
+	 session = SessionFactoryUtil.getInstance().openSession();
+	 tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+	 }
+	 Criteria createCriteria = session.createCriteria(Template.class);
+	  
+	 createCriteria.add(Restrictions.eq("id",  template.getId()));
+	  
+	 //createCriteria.add(Restrictions.eq("isDeleted",false));
+	 list = (List<Template>)createCriteria.list();
+	 if (list.size() == 0) {
+	  throw new TemplateException(ExceptionCodes.TEMPLATE_DOESNOT_EXIST, ExceptionMessages.TEMPLATE_DOES_NOT_EXIST);
+	 }
+	  } finally {
+	 try {
+	 if (tx != null) {
+	 tx.commit();
+	 if (session.isConnected())
+	    session.close();
+	 }
+	 } catch (HibernateException e) {
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public List< Template> viewTemplate( Template  template){
-	Session session = null;
-	List<Template> list = null;
-	Transaction tx = null;
-	try {
-	session = getSession();
-	if (null == session) {
-	session = SessionFactoryUtil.getInstance().openSession();
-	tx = SessionFactoryUtil.getInstance().beginTransaction(session);
-	}
-	Criteria createCriteria = session.createCriteria(Template.class);
-	 
-	createCriteria.add(Restrictions.eq("id",  template.getId()));
-	 
-	//createCriteria.add(Restrictions.eq("isDeleted",false));
-	list = (List<Template>)createCriteria.list();
-	 } finally {
-	try {
-	if (tx != null) {
-	tx.commit();
-	if (session.isConnected())
-	   session.close();
-	}
-	} catch (HibernateException e) {
+	 e.printStackTrace();
+	 }
+	 }
+	 return  list;  
+	 }
 
-	e.printStackTrace();
-	}
-	}
-	return  list;  
-	}
+	 
+	 
 
 	public Template getContentForMail(Template template)
 	{

@@ -13,11 +13,13 @@ import javax.ws.rs.core.UriInfo;
 
 import com.hred.common.json.JsonUtil;
 import com.hred.exception.BusinessException;
-
+import com.hred.exception.EmployeeException;
 import com.hred.exception.EncryptionException;
 import com.hred.exception.ObjectNotFoundException;
 import com.hred.exception.TemplateException;
+import com.hred.handler.EmployeeHandler;
 import com.hred.handler.TemplateHandler;
+import com.hred.model.Employee;
 import com.hred.model.Template;
 import com.hred.service.annotations.RestService;
 import com.hred.service.annotations.ServiceStatus;
@@ -78,6 +80,7 @@ public class TemplateService extends BaseService {
 		return JsonUtil.getJsonBasedOnDescriptor(templates, Template.class);
 	}
 
+
 	@POST
 	@RestService(input = String.class, output = String.class)
 	@ServiceStatus(value = "complete")
@@ -93,12 +96,14 @@ public class TemplateService extends BaseService {
 		Template template = (Template) JsonUtil.getObject(request.getPayload(),
 				Template.class);
 		List<Template> templates = (List<Template>) TemplateHandler
-				.getInstance().getTemplateByName(template);
+				.getInstance().getTemplateByName();
 		System.out.println("COunt : " + templates.size());
 		// String outputString =
 		// "{\"status\": \"SUCCESS\", \"payload\": \"Test Successful\"}";
 		return JsonUtil.getJsonBasedOnDescriptor(templates, Template.class);
 	}
+
+
 
 	@POST
 	@RestService(input = String.class, output = String.class)
@@ -119,5 +124,26 @@ public class TemplateService extends BaseService {
 				template);
 		return JsonUtil.getJsonBasedOnDescriptor(subject, Template.class);
 	}
+	@POST
+	 @RestService(input = String.class, output = String.class)
+	 @ServiceStatus(value = "complete")
+	 @Consumes(MediaType.APPLICATION_JSON)
+	 @Produces(MediaType.APPLICATION_JSON)
+	 @Path("/updateTemplate")
+	 @UnSecure
+	 public String update(@Context HttpHeaders headers,
+	   @Context UriInfo uriInfo, WebserviceRequest request)
+	   throws ObjectNotFoundException, BusinessException,
+	   EncryptionException {
+
+	  Template template = (Template) JsonUtil.getObject(
+	    request.getPayload(), Template.class);
+
+	  Template output=(Template) TemplateHandler.getInstance().update(template);
+
+	  return JsonUtil.getJsonBasedOnDescriptor(output,Template.class);
+	 }
+	 
+	 
 
 }
