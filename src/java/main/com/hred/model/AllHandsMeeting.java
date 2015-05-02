@@ -9,6 +9,9 @@ import javax.rmi.CORBA.Tie;
 
 import com.hred.persistence.annotations.Increment;
 
+import com.hred.persistence.annotations.Increment;
+
+
 @Entity
 @Table(name = "ALLHANDSMEETING")
 @Increment

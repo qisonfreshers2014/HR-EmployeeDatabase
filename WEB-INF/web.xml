@@ -18,12 +18,30 @@ id="WebApp_ID" version="3.0">
              <param-value>true</param-value>
           </init-param>
         <load-on-startup>1</load-on-startup>
-    </servlet>fuh
+    </servlet>
     <servlet-mapping>
         <servlet-name>JerseyWebApp</servlet-name>
         <url-pattern>/services/*</url-pattern>
     </servlet-mapping>
-    
+
+     <servlet>
+		<servlet-name>UploadServlet</servlet-name>
+		<servlet-class>com.hred.fileupload.UploadServlet</servlet-class>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UploadServlet</servlet-name>
+		<url-pattern>/UploadServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>DownloadServlet</servlet-name>
+		<servlet-class>com.hred.filedownload.DownloadServlet</servlet-class>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DownloadServlet</servlet-name>
+		<url-pattern>/downloadServlet</url-pattern>
+	</servlet-mapping>
     <servlet>
     	<servlet-name>InitializationServlet</servlet-name>
    		<servlet-class>com.hred.common.InitializationServlet</servlet-class>
@@ -34,6 +52,16 @@ id="WebApp_ID" version="3.0">
         <servlet-name>InitializationServlet</servlet-name>
         <url-pattern>/InitializationServlet</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+		<servlet-name>UploadServletForCKEditor</servlet-name>
+		<servlet-class>com.hred.fileupload.UploadServletForCKEditor</servlet-class>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UploadServletForCKEditor</servlet-name>
+		<url-pattern>/UploadServletForCKEditor</url-pattern>
+	</servlet-mapping>
 
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>

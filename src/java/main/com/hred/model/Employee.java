@@ -1,6 +1,6 @@
 package com.hred.model;
 
-
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,140 +10,155 @@ import com.hred.persistence.annotations.Increment;
 
 
 
+/**
+ * @author Venkatesh Chitla
+ *
+ */
+
 @Entity
 @Table(name = "EMPLOYEE")
 @Increment
 public class Employee extends AbstractObject {
-
-	@Column(name = "employee_id")
-	private int employeeId;
-	@Column(name = "name")
-	private String employeeName;
-	@Column(name = "gender")
-	private String gender;
-	@Column(name = "DOB")
-	private String DOB;
-	@Column(name = "DOJ")
-	private String DOJ;
-	@Column(name = "years_of_experience")
-	private String yearsofexperience;
-	@Column(name = "contact_number")
-	private String contactNo;
-	@Column(name = "current_address")
-	private String currentAddress;
-	@Column(name = "permanent_address")
-	private String permanentAddress;
-	@Column(name = "email")
-	private String email;
-	@Column(name = "password")
-	private String password;
-	@Column(name = "emergency_contact_num")
-	private String emergencycontactnumber;
-	@Column(name = "fathers_name")
-	private String fathersName;
-	@Column(name = "emergency_conatact_name")
-	private String emergencyContactName;
-	@Column(name = "relation_with_contact")
-	private String relationWithEmergencyConatact;
-	@Column(name = "bloog_group")
-	private String bloodGroup;
-	@Column(name = "current_designation")
-	private String currentDesignation;
-	@Column(name = "reporting_manager")
-	private String reportinManagerId;
-	@Column(name = "highest_qualification")
-	private String highestQualification;
-	@Column(name = "pan")
-	private String pan;
-	@Column(name = "pf_num")
-	private String pfNo;
-	@Column(name = "bank_account_num")
-	private String bankAccountNo;
-	@Column(name = "skype")
-	private String skype;
-	
-	public Employee() {
-		
-	}
-	 public static final String AUTH_TYPE_REGULAR = "REGULAR";
+	public static final String AUTH_TYPE_REGULAR = "REGULAR";
 	 public static final int AUTH_STATUS_EXISTING = 0;
-	 public static final int AUTH_STATUS_NEW = 1; 
+	 public static final int AUTH_STATUS_NEW = 1;
 	 public static final int AUTH_STATUS_NONE = 2;
-
-	public Employee(int employeeId) {
-		this.employeeId = employeeId;
-		//this.employeeName = employeeName;
-	}
-
 	
+	@Column(name = "employee_id")
+	 private int employeeId;
+	 @Column(name = "name")
+	 private String employeeName;
+	 @Column(name = "gender")
+	 private String gender;
+	 //@Temporal(TemporalType.DATE)
+	 @Column(name = "DOB")
+	 private Timestamp dateOfBirth;
+	 //@Temporal(TemporalType.DATE)
+	 @Column(name = "DOJ")
+	 private Timestamp dateOfJoining;
+	 @Column(name = "years_of_experience")
+	 private int yearsofexperience;
+	 @Column(name = "contact_number")
+	 private long contactNo;
+	 @Column(name = "current_address")
+	 private String currentAddress;
+	 @Column(name = "permanent_address")
+	 private String permanentAddress;
+	 @Column(name = "email")
+	 private String email;
+	 @Column(name = "password")
+	 private String password;
+	 @Column(name = "emergency_contact_num")
+	 private long emergencycontactnumber;
+	 @Column(name = "fathers_name")
+	 private String fathersName;
+	 @Column(name = "emergency_conatact_name")
+	 private String emergencyContactName;
+	 @Column(name = "relation_with_contact")
+	 private String relationWithEmergencyConatact;
+	 @Column(name = "bloog_group")
+	 private String bloodGroup;
+	 @Column(name = "current_designation")
+	 private int currentDesignation;
+	 @Column(name = "highest_qualification")
+	 private String highestQualification;
+	 @Column(name = "pan")
+	 private String pan;
+	 @Column(name = "pf_num")
+	 private String pfNo;
+	 @Column(name = "bank_account_num")
+	 private String bankAccountNo;
+	 @Column(name = "skype")
+	 private String skype;
+	 @Column(name = "Skill")
+	 private String skill;
+	 @Column(name = "Rating")
+	 private String rating;
+	 @Column(name="variable_component")
+	 private String variableComponent;
+	 @Column(name="Salary")
+	 private String salary;
+	 @Column(name="File_Path")
+	 private String filePath;
 
-	public int getEmployeeId() {
-		return employeeId;
-	}
+  public Employee() {
+  
 
-	public void setEmployeeId(int employeeId) {
-		this.employeeId = employeeId;
-	}
+ }
 
-	public String getEmployeeName() {
-		return employeeName;
-	}
+ public Employee(int employeeId) {
+  this.employeeId = employeeId;
+  //this.employeeName = employeeName;
+ }
 
-	public void setEmployeeName(String employeeName) {
-		this.employeeName = employeeName;
-	}
+ 
+	 public int getEmployeeId() {
+	  return employeeId;
+	 }
+	
+	 public void setEmployeeId(int employeeId) {
+	  this.employeeId = employeeId;
+	 }
+	
+	 public String getEmployeeName() {
+	  return employeeName;
+	 }
+	
+	 public void setEmployeeName(String employeeName) {
+	  this.employeeName = employeeName;
+	 }
+	
+	 public String getGender() {
+	  return gender;
+	 }
+	
+	 public void setGender(String gender) {
+	  this.gender = gender;
+	 }
 
-	public String getGender() {
-		return gender;
-	}
 
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
+	 public Timestamp getDateOfBirth() {
+	  return dateOfBirth;
+	 }
+	
+	 public void setDateOfBirth(Timestamp dateOfBirth) {
+	  this.dateOfBirth = dateOfBirth;
+	 }
+	
+	 public Timestamp getDateOfJoining() {
+	  return dateOfJoining;
+	 }
+	
+	 public void setDateOfJoining(Timestamp dateOfJoining) {
+	  this.dateOfJoining = dateOfJoining;
+	 }
+	
+	 public int getYearsofexperience() {
+	  return yearsofexperience;
+	 }
+	
+	 public void setYearsofexperience(int yearsofexperience) {
+	  this.yearsofexperience = yearsofexperience;
+	 }
 
-	public String getDOB() {
-		return DOB;
-	}
-
-	public void setDOB(String dOB) {
-		DOB = dOB;
-	}
-
-	public String getDOJ() {
-		return DOJ;
-	}
-
-	public void setDOJ(String dOJ) {
-		DOJ = dOJ;
-	}
-
-	public String getYearsofexperience() {
-		return yearsofexperience;
-	}
-
-	public void setYearsofexperience(String yearsofexperience) {
-		this.yearsofexperience = yearsofexperience;
-	}
-
-	public String getContactNo() {
-		return contactNo;
-	}
-
-	public void setContactNo(String contactNo) {
-		this.contactNo = contactNo;
-	}
-
-	public String getCurrentAddress() {
-		return currentAddress;
-	}
-
-	public void setCurrentAddress(String currentAddress) {
-		this.currentAddress = currentAddress;
-	}
-
-	public String getPermanentAddress() {
-		return permanentAddress;
-	}
+	 public long getContactNo() {
+	  return contactNo;
+	 }
+	
+	 public void setContactNo(long contactNo) {
+	  this.contactNo = contactNo;
+	 }
+	
+	 public String getCurrentAddress() {
+	  return currentAddress;
+	 }
+	
+	 public void setCurrentAddress(String currentAddress) {
+	  this.currentAddress = currentAddress;
+	 }
+	 public String getPermanentAddress() {
+			return permanentAddress;
+		}
 
 	public void setPermanentAddress(String permanentAddress) {
 		this.permanentAddress = permanentAddress;
@@ -165,11 +180,11 @@ public class Employee extends AbstractObject {
 		this.password = password;
 	}
 
-	public String getEmergencycontactnumber() {
+	public long getEmergencycontactnumber() {
 		return emergencycontactnumber;
 	}
 
-	public void setEmergencycontactnumber(String emergencycontactnumber) {
+	public void setEmergencycontactnumber(long emergencycontactnumber) {
 		this.emergencycontactnumber = emergencycontactnumber;
 	}
 
@@ -206,20 +221,12 @@ public class Employee extends AbstractObject {
 		this.bloodGroup = bloodGroup;
 	}
 
-	public String getCurrentDesignation() {
+	public int getCurrentDesignation() {
 		return currentDesignation;
 	}
 
-	public void setCurrentDesignation(String currentDesignation) {
+	public void setCurrentDesignation(int currentDesignation) {
 		this.currentDesignation = currentDesignation;
-	}
-
-	public String getReportinManagerId() {
-		return reportinManagerId;
-	}
-
-	public void setReportinManagerId(String reportinManagerId) {
-		this.reportinManagerId = reportinManagerId;
 	}
 
 	public String getHighestQualification() {
@@ -262,9 +269,52 @@ public class Employee extends AbstractObject {
 		this.skype = skype;
 	}
 
-	@Override
-	public int getObjectType() {
-		return ObjectTypes.EMPLOYEE;
+	public String getRating() {
+		return rating;
 	}
+
+	public void setRating(String rating) {
+		this.rating = rating;
+	}
+
+	public String getVariableComponent() {
+		return variableComponent;
+	}
+
+	public void setVariableComponent(String variableComponent) {
+		this.variableComponent = variableComponent;
+	}
+
+	public String getFilePath() {
+	return filePath;
+	}
+	
+	public void setFilePath(String filePath) {
+	this.filePath = filePath;
+	}
+	
+	public String getSkill() {
+	return skill;
+	}
+	
+	public void setSkill(String skill) {
+	this.skill = skill;
+	}
+	
+	public String getSalary() {
+	return salary;
+	}
+	
+	public void setSalary(String salary) {
+	this.salary = salary;
+	}
+	
+
+
+
+ @Override
+ public int getObjectType() {
+  return ObjectTypes.EMPLOYEE;
+ }
 
 }

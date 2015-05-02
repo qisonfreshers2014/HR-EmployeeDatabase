@@ -1,0 +1,25 @@
+.table {
+            width: 50%;
+            text-align: left;
+            text-decoration: blink;
+        }
+        .tr {
+            height: 50%;
+            width: 50%;
+            font-size: 100%;
+            font-family: Calibri
+        }
+        .th {
+            color: black;
+        }
+        .bar {
+            color: brown;
+        }
+        .error {
+            color: red;
+        }
+		.edit{ color:brown;
+		      position:relative;
+			  right:2px;
+			  left:700px;
+			  }

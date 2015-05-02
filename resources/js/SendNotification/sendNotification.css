@@ -1,0 +1,23 @@
+ 
+#SendMailNotification {
+     height: 100%;
+    width: 100%;
+   
+    background-color:#CCC;
+}
+#SubmitdivNotification {
+    margin-left: 94%;
+    margin-top: 2%;
+}
+#sendtoDdbNotification {
+    margin-left: 20px;
+    width: 97%;
+}
+#textareaNotification {
+    margin-left: 20px;
+    width: 97%;
+}
+#SubjectNotification {
+    margin-left: 20px;
+    width: 97%;
+}

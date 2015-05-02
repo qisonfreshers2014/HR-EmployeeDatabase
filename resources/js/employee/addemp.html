@@ -1,0 +1,211 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>AddEmployee</title>
+
+</head>
+
+<body>
+	<form method="post" id="addemp">
+		<fieldset class="span4">
+			<table class="table">
+				<tr class="tr">
+				<legend>
+					<h3 class="bar">Personal Details</h3>
+					</legend>
+					<th class="th">EID<span class="error">*</span>
+					</th>
+					<td><input type="text" value="" id="eid" maxlength = "16"><br> <span
+						class="error" id="eiderr"></span></td>
+					<th class="th">Name<span class="error">*</span>
+					</th>
+					<td><input type="text" value="" id="name" maxlength = "25"><br> <span
+						class="error" id="nameerr"></span></td>
+					<th class="th">Gender<span class="error">*</span>
+					</th>
+					<td><select name="gender" id="gender">
+							<option value="">Select Gender</option>
+							<option value="Male">Male</option>
+							<option value="Female">Female</option>
+							</select><br> <span
+						class="error" id="generr"></span></td>
+				</tr>
+
+				<tr class="tr">
+					<th class="th">DOB<span class="error">*</span>
+					</th>
+					<td><input type="text" class="date" id="dob" maxlength = "16"><br>
+						<span class="dateerr" id="dateerr"></span></td>
+					<th class="th">Blood Group<span class="error">*</span></th>
+					<td><input type="text" name="bloodgroup" id="blood" maxlength = "16"><span
+						class="error" id="blooderr"></span></td>
+					<th class="th">Highest Qualification<span class="error">*</span>
+					</th>
+					<td><input type="text" name="highqualification" id="qual"
+						size="28%" maxlength = "16"><span class="error" id="qualerr" ></span></td>
+				</tr>
+				<tr class="tr">
+					<th class="th">Father's Name<span class="error">*</span>
+					</th>
+					<td><input type="text" name="fathersname" id="fathername" maxlength = "16"><br>
+						<span class="error" id="fathererr"></span></td>
+					<th class="th">Salary<span class="error">*</span>
+					</th>
+					<td><input type="text" name="salary" id="salary" maxlength = "16"><span
+						class="error" id="salerr"></span></td>
+					<th class="th">Variable Component</th>
+					<td><input type="text" name="variable" id="variable"
+						size="28%" maxlength = "16"></td>
+				</tr>
+				<tr class="tr">
+					<th class="th">Upload File
+					</th>
+					<td colspan="6"><input type="button" name="file" id="filename"
+						value="Upload Image"><span class="error" id="fileerr"></span></td>
+
+				</tr>
+			</table>
+		</fieldset>
+
+		<fieldset class="span4">
+			<table class="table">
+				<tr class="tr">
+				<legend>
+					<h3 class="bar">Account Details</h3>
+				</legend>
+					<th class="th">PAN</th>
+					<td><input type="text" name="pan" id="pannum" maxlength = "16"><span
+						class="error" id="panerr"></span></td>
+					<th class="th">PF Number</th>
+					<td><input type="text" name="pf" id="pfnum" maxlength = "16"><span
+						class="error" id="pferr"></span></td>
+					<th class="th">Bank Account Number</th>
+					<td><input type="text" name="account" id="accountnum"
+						size="32%" maxlength = "16"><span class="error" id="acterr"></span></td>
+					<th></th>
+					<td></td>
+				</tr>
+			</table>
+		</fieldset>
+
+		<fieldset class="span4">
+			<table class="table">
+			<legend>
+				<h3 class="bar">Contact Details</h3>
+			</legend>
+				<tr class="tr">
+					<th class="th">Contact Number<span class="error">*</span>
+					</th>
+					<td><input type="text" name="num" id="contnum"><span
+						class="error" id="cnumerr"></span></td>
+
+					<th class="th">Current Address<span class="error">*</span>
+					</th>
+					<td><textarea rows="5" id="currentaddr" maxlength = "50"></textarea><br> <span
+						class="error" id="currentaddrerr"></span></td>
+					<th class="th">Permanent Address<span class="error">*</span>
+					</th>
+					<td><textarea rows="5" id="peraddr" maxlength = "50"></textarea><br> <span
+						class="error" id="peraddrerr"></span></td>
+				</tr>
+				<tr class="tr">
+					<th class="th">Emergency Contact Number<span class="error">*</span>
+					</th>
+					<td><input type="text" name="emergency" id="txtemercon"><span
+						class="error" id="emnumerr"></span></td>
+					<th class="th">Emergency Contact Name<span class="error">*</span>
+					</th>
+					<td><input type="text" name="conname" class="contactname"
+						id="txtemname" maxlength = "16"><span class="error" id="emnameerr"></span></td>
+					<th class="th">Relation with Emergency Contact<span
+						class="error">*</span>
+					</th>
+					<td><input type="text" name="relation" class="relation"
+						id="relation" maxlength = "16"><span class="error" id="relationerr"></span>
+					</td>
+				</tr>
+				<tr>
+					<th class="th">Email<span class="error">*</span>
+					</th>
+					<td><input type="email" name="email" id="emal" maxlength = "20"><span
+						class="error" id="emlerr"></span></td>
+					<th class="th">Password<span class="error">*</span>
+					</th>
+					<td><input type="password" name="password" id="password" maxlength = "16"><span
+						class="error" id="pwderr" ></span></td>
+					<th class="th">Skype Account ID<span class="error">*</span>
+					</th>
+					<td><input type="text" name="skype" id="skype" maxlength = "16"><span
+						class="error" id="skypeerr"></span></td>
+				</tr>
+			</table>
+		</fieldset>
+
+
+		<fieldset class="span4">
+			<table class="table">
+			<legend>
+				<h3 class="bar">Designation Details</h3>
+			</legend>
+				<tr class="tr">
+					<th class="th">DOJ<span class="error">*</span>
+					</th>
+					<td><input type="text" name="doj" class="date" id="doj" maxlength = "16"><span
+						class="dateerr" id="dateerr"></span></td>
+					<th class="th">Years of Experience<span class="error">*</span>
+					</th>
+					<td><input type="text" name="yearexp" id="yearexp" size="24%"><span
+						class="error" id="yearexperr"></span></td>
+					<th class="th">Designation<span class="error">*</span>
+					</th>
+					<td><select name="designation" id="designation">
+							<option value="">Select Designation</option>
+							<option value="1">CEO</option>
+							<option value="2">COO</option>
+							<option value="3">Architect</option>
+							<option value="4">Marketing Engineer</option>
+							<option value="5">HR</option>
+							<option value="6">Project Manager</option>
+							<option value="7">Senior Software Engineer</option>
+							<option value="8">Software Engineer</option>
+							<option value="9">Trainee Software Engineer</option>
+
+					</select><br> <span class="error" id="descerr"></span></td>
+				</tr>
+			</table>
+		</fieldset>
+
+
+		<fieldset class="span4">
+			<table class="table">
+				<tr>
+				<legend>
+					<h3 class="bar">Skills</h3>
+				</legend>
+					<th class="th">Skill<span class="error">*</span>
+					</th>
+					<td colspan="2"><input type="text" id="skill" size="45%" maxlength = "16"><br>
+						<span class="error" id="skillerr"></span></td>
+					<th class="th">Rating<span class="error">*</span>
+					</th>
+					<td colspan="2"><input type="text" id="rating" size="46%"><br>
+						<span class="error" id="ratingerr"></span></td>
+				</tr>
+			</table>
+
+		</fieldset>
+
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<button type="submit" class="btn btn-primary btn-md" " id="add">Add</button>
+		<input type="reset" name="reset" value="Reset"
+			class="btn btn-primary btn-md" id ="reset">
+
+	</form>
+
+
+
+
+</body>
+
+</html>

@@ -1,6 +1,6 @@
 package com.hred.model.user;
 
-import com.hred.model.Employee;
+ 
 import com.hred.model.User;
 
 
@@ -25,7 +25,7 @@ public class DefaultAuthenticationInput implements AuthenticationInput {
  }
  
  public String getAuthType() {
-  return Employee.AUTH_TYPE_REGULAR;
+  return User.AUTH_TYPE_REGULAR;
  }
 
 

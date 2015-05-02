@@ -1,0 +1,45 @@
+
+.table {
+	width: 100%;
+	text-align: left;
+	font-size:12px;
+	text-decoration: blink;
+}
+
+.tr {
+	height: 100%;
+	width: 100%;
+	font-size: 100%;
+	font-family: Calibri;
+}
+tr{
+	  background: #CCC;
+		color: black;
+		width : 20%;
+}
+.bar {
+	color: brown;
+}
+
+.error {
+	color: red;
+}
+
+.container {
+	 
+	 background-color: #FFF; 
+}
+.leftContainer {
+	 background-color: #FFF; 
+
+}
+.rightContainer{
+	background-color: #FFF; 
+}
+.ui-datepicker {
+	
+    background: #CCC;
+    border: 1px solid #66F;
+    color: #000;
+}
+

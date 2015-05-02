@@ -2,7 +2,11 @@ package com.hred.model.user;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 
+ 
+
+
 import com.hred.model.Employee;
+import com.hred.model.User;
 import com.hred.service.annotations.SerializationDescriptor;
 
 /**
@@ -14,19 +18,16 @@ public class AuthenticationOutput {
  private String sessionToken;
  private int authStatus;
  private Employee emp;
- ///////////////////////////////
 
 
- 
- /////////////////////////////
  public AuthenticationOutput(String sessionToken, int authStatus, Employee emp) {
-  this.sessionToken = sessionToken;
-  this.authStatus = authStatus;
-  this.emp = emp;
+	// TODO Auto-generated constructor stub
+	 this.sessionToken = sessionToken;
+	  this.authStatus = authStatus;
+	  this.emp = emp;
+}
 
- }
-
- @JsonProperty
+@JsonProperty
  public String getSessionToken() {
   return sessionToken;
  }
@@ -36,7 +37,7 @@ public class AuthenticationOutput {
   return authStatus;
  }
  
- @SerializationDescriptor(value = Employee.class)
+ @SerializationDescriptor(value = User.class)
     @JsonProperty
  public Employee getEmployee() {
   return emp;

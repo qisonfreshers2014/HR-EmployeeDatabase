@@ -1,18 +1,43 @@
 function Sample() {
-	Loader.loadHTML('.leftContainer', 'sample.html', true, function(){
+	Loader.loadHTML('.leftContainer','sample.html', true, function(){
 		this.handleShow();
 	}.ctx(this));
 }
 
 Sample.prototype.handleShow = function() {
+	/*var input = {"payload":{}};
+	RequestManager.getEmployees(input, function(data, success) {
+		if(success){
+			console.dir(data);
+			$(".leftContainer").show();
+			$(".leftContainer").css('background-color', 'aqua');
+
+			$(".rightContainer").show();
+			$(".rightContainer").css('background-color', 'green');
+			$(".leftContainer").append('<p>'+data+ '</p>');
+			$(".rightContainer").append('<p>'+data+ '</p>');
+		}else{
+			alert("failed");
+		}*/
 	$('.container').show();
 	$('.testService').click(function(){
-		this.testService();
+	this.testService();
 	}.ctx(this));
+	
+	
+function UploadClickHandler(event){
+var thisEle = event.target;
+this.uploadMedia(function() {
+$(thisEle).one('click', UploadClickHandler.ctx(this));
+}.ctx(this));
+}
+//$('.testService').one('click', UploadClickHandler.ctx(this));
+	
 
 }
 
 Sample.prototype.testService = function() {
+
 	/*var dataid="14";
 App.loadViewTemplate(dataid);*/
 	//App.loadLogin();
@@ -21,6 +46,36 @@ var name="vasavi";
 App.loadHRHomeHeader(name);
 App.loadHRHomePage();
 App.loadHRHomeFooter();
+
+ 
+//App.loadLogin();
+//App.loadFilter();
+//  App.loadSkill();
+ 
+var dataId = 3;	
+	//App.loadLogin();
+	//App.loadEmpl();
+	//App.loadEditEmp(dataId);
+	//App.loadhrEditEmp(dataId);
+	//App.loadtemplateList(); 
+
+}
+ 
+
+Sample.prototype.uploadMedia = function(callback) {
+var allowedFileType = "application";
+var uploader = new Uploader(allowedFileType, function(data){
+if (data.filePath) {
+var imageSrc = data.filePath;
+this.fileId = data.id;
+$('.mediaForProfileImage').attr('src', imageSrc);
+if(imageSrc != null){
+$('.mediaForProfileImage').lightBox();
+}
+}
+}.ctx(this));
+callback();
+
 
 }
 

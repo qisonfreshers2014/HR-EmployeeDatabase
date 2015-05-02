@@ -1,0 +1,49 @@
+table,tr,th, td {
+    border: 1px solid black;
+	border-collapse:collapse;
+	width:25%;
+	
+}
+td {
+ background-color:lightgrey;
+ width:25%;
+}
+th {
+ background-color:#7094b8;
+ color:black;
+ width:25%;
+}
+
+.t1{
+	text-align:right;
+}
+.inputelement
+{
+ font-size:15px;
+  font-weight: bold;
+}
+ 
+#herror{
+visibility:visible;
+color:red;	
+font-size:12px;
+font:calibre;
+}
+#rerror{
+visibility:visible;
+color:red;
+font-size:12px;
+font:calibre;
+} 
+#derror{
+	visibility:hidden;
+	color:red;
+	font-size:12px;
+font:calibre;
+}
+#yerror{
+	visibility:visible;
+	color:red;
+	font-size:12px;
+font:calibre;
+} 

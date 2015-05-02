@@ -1,37 +1,44 @@
 package com.hred.persistence.daoimpl;
+
 import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
+import com.hred.exception.BusinessException;
+import com.hred.exception.EmployeeException;
 import com.hred.exception.ExceptionCodes;
 import com.hred.exception.ExceptionMessages;
-import com.hred.exception.UserException;
 import com.hred.model.Employee;
-import com.hred.model.User;
+import com.hred.model.FilterEmployee;
 import com.hred.persistence.dao.EmployeeDAO;
-import com.hred.persistence.dao.UserDAO;
 import com.hred.persistence.session.SessionFactoryUtil;
+import com.hred.service.descriptors.output.DisplayNotificationHome;
+import com.hred.service.descriptors.output.NotificationHomeFilterInputDiscriptor;
 
-public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
-
+public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO{
+	
 	private static EmployeeDAO INSTANCE = null;
 
-	private EmployeeDAOImpl() {
+	private EmployeeDAOImpl(){
+		
 	}
-
-	public static EmployeeDAO getInstance()
-	{
-		if (INSTANCE == null) {
+	
+	public static EmployeeDAO getInstance() {
+ 		if (INSTANCE == null) {
 			INSTANCE = new EmployeeDAOImpl();
 		}
 		return INSTANCE;
-	}
+	} 
+	
+	@SuppressWarnings("unchecked")
 	@Override
-	public Employee getUserByEmail(String email) throws UserException {
+	public Employee getEmployeeById(long id) throws EmployeeException {
+		// TODO Auto-generated method stub
 		Session session = null;
 		List<Employee> list = null;
 		Transaction tx = null;
@@ -42,11 +49,219 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 			}
 			Criteria createCriteria = session.createCriteria(Employee.class);
-			createCriteria.add(Restrictions.eq("email", email));
-			//createCriteria.add(Restrictions.eq("isDeleted", false));
+			/*String hql="from Employee where id="+id+"";		
+			org.hibernate.Query query = session.createQuery(hql);
+			 list  = query.list();*/
+			createCriteria.add(Restrictions.eq("id", id));
 			list = createCriteria.list();
 			if (list.size() == 0) {
-				throw new UserException(ExceptionCodes.USER_DOESNOT_EXIST, ExceptionMessages.USER_DOESNOT_EXIST);
+				throw new EmployeeException(ExceptionCodes.EMPLOYEE_DOESNOT_EXIST, ExceptionMessages.EMPLOYEE_DOESNOT_EXIST);
+			  } 
+		}finally {
+					try {
+						if (tx != null) {
+							tx.commit();
+							if (session.isConnected())
+								session.close();
+						}
+					} catch (HibernateException e) {
+
+						e.printStackTrace();
+					}
+			  }
+				return  (Employee) list.iterator().next();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public Boolean getEmployeeByEmail(String  email) throws EmployeeException {
+		Session session = null;
+		List<Employee> list = null;
+		Transaction tx = null;
+		try {
+			session = getSession();
+			if (null == session) {
+				session = SessionFactoryUtil.getInstance().openSession();
+				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+			}
+			Criteria createCriteria = session.createCriteria(Employee.class);
+			/*String hql="from Employee where id="+id+"";		
+			org.hibernate.Query query = session.createQuery(hql);
+			 list  = query.list();*/
+			createCriteria.add(Restrictions.eq("email", email));
+			list = createCriteria.list();
+			if (list.size() == 0) {
+				return false;
+			  } else{
+				  return true;
+			  }
+		}
+		
+		finally {
+		
+					try {
+						if (tx != null) {
+							tx.commit();
+							if (session.isConnected())
+								session.close();
+						}
+					} catch (HibernateException e) {
+
+						e.printStackTrace();
+					}
+			  }
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public Boolean getEmployeeByEmpId(int empid) throws EmployeeException {
+		Session session = null;
+		List<Employee> list = null;
+		Transaction tx = null;
+		try {
+			session = getSession();
+			if (null == session) {
+				session = SessionFactoryUtil.getInstance().openSession();
+				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+			}
+			Criteria createCriteria = session.createCriteria(Employee.class);
+			/*String hql="from Employee where id="+id+"";		
+			org.hibernate.Query query = session.createQuery(hql);
+			 list  = query.list();*/
+			createCriteria.add(Restrictions.eq("employeeId", empid));
+			list = createCriteria.list();
+			if (list.size() == 0) {
+				return false;
+			  } else{
+				  return true;
+			  }
+		}
+		
+		finally {
+		
+					try {
+						if (tx != null) {
+							tx.commit();
+							if (session.isConnected())
+								session.close();
+						}
+					} catch (HibernateException e) {
+
+						e.printStackTrace();
+					}
+			  }
+	}
+
+
+	@Override
+	public List<Employee> getEmployees(FilterEmployee filter) {
+		Session session = null;
+		List<Employee> list = null;
+		Transaction tx = null;
+		try {
+			session = getSession();
+			if (null == session) {
+				session = SessionFactoryUtil.getInstance().openSession();
+				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+			}
+//Criteria createCriteria = session.createCriteria(FilterEmployee.class);
+			
+//when all fields are entered
+			String query = "from Employee where 1=1";
+			if(filter.getCurrentDesignation() != 0){
+				query = query+" and currentDesignation="+filter.getCurrentDesignation();
+			}
+			if(filter.getDateOfJoining() != null){
+				query = query + " and DOJ='"+filter.getDateOfJoining()+"'";
+			}
+			if(filter.getFrom()!=null){
+				query = query + " and (years_of_experience + timestampdiff(MONTH,DOJ, sysdate())/12.0)>="+filter.getFrom();
+			}
+			if(filter.getGender() != null){
+				query = query + " and gender='"+filter.getGender()+"'";
+			}
+			if(filter.getHighestQualification() != null){
+				query = query + " and highestQualification='"+filter.getHighestQualification()+"'";
+			}
+			if(filter.getTo() !=null){
+				query = query + " and (years_of_experience + timestampdiff(MONTH,DOJ, sysdate())/12.0)<="+filter.getTo();
+			}
+			System.out.println("Quiery :\n"+ query);
+			Query hql1=session.createQuery(query);
+			list = (List<Employee>)hql1.list();
+	 		//list = createCriteria.list();
+		} finally {
+			try {
+				if (tx != null) {
+					tx.commit();
+					if (session.isConnected())
+						session.close();
+				}
+			} catch (HibernateException e) {
+
+				e.printStackTrace();
+			}
+		}
+		return  list;	 
+	}
+
+	/*@Override
+	public Employee getUserByEmail(String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}*/
+
+
+
+	@Override
+	public List<Employee> getEmployees() {
+		Session session = null;
+		List<Employee> list = null;
+		Transaction tx = null;
+		try {
+			session = getSession();
+			if (null == session) {
+				session = SessionFactoryUtil.getInstance().openSession();
+				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+			}
+			Criteria createCriteria = session.createCriteria(Employee.class);
+			list = createCriteria.list();
+		} finally {
+			try {
+				if (tx != null) {
+					tx.commit();
+					if (session.isConnected())
+						session.close();
+				}
+			} catch (HibernateException e) {
+
+				e.printStackTrace();
+			}
+		}
+		return  list;	 
+	}
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Employee> getBirthday() throws BusinessException {
+
+		Session session = null;
+		List<Employee> results = null;
+		Transaction tx = null;
+		try {
+			session = getSession();
+			if (null == session) {
+				session = SessionFactoryUtil.getInstance().openSession();
+				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+			}
+    String hql="from Employee where month(DOB)=month(sysdate())";//				
+			org.hibernate.Query query = session.createQuery(hql);
+			 results = query.list();
+			 
+			 
+			 
+			if (results.size() == 0) {
+				throw new BusinessException(ExceptionCodes.NO_BIRTHDAY_TODAY,
+						ExceptionMessages.NO_BIRTHDAY_TODAY);
 			}
 
 		} finally {
@@ -62,7 +277,197 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 				e.printStackTrace();
 			}
 		}
-		return list.iterator().next();
-		
+		return results;
 	}
+	
+	@Override
+	public List<Employee> getWorkAniversary() throws BusinessException {
+		Session session = null;
+		List<Employee> list = null;
+		Transaction tx = null;
+		try {
+			session = getSession();
+			if (null == session) {
+				session = SessionFactoryUtil.getInstance().openSession();
+				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+			}
+			
+			String hql="from Employee where month(DOJ)=month(sysdate())";				
+			org.hibernate.Query query = session.createQuery(hql);
+			 list  = query.list();
+			
+			if (list.size() == 0) {
+				throw new BusinessException(ExceptionCodes.NO_WORK_ANNIVERSARY_TODAY,
+						ExceptionMessages.NO_WORK_ANNIVERSARY_TODAY);
+			}
+
+		} finally {
+
+			try {
+				if (tx != null) {
+					tx.commit();
+					if (session.isConnected())
+						session.close();
+				}
+			} catch (HibernateException e) {
+
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	
+
+
+
+	@SuppressWarnings("deprecation")
+public List<DisplayNotificationHome> getEventWithinDate(NotificationHomeFilterInputDiscriptor filterCriteria) {
+	Session session = null;
+	List<DisplayNotificationHome> list = null;
+	Transaction tx = null;
+	
+
+	try {
+		session = getSession();
+		if (null == session) {
+			session = SessionFactoryUtil.getInstance().openSession();
+			tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+		}
+		
+		/*String hql="from Employee where day(DOB) between "+fromDate.getDay()+" and "+toDate.getDay()+" and month(DOB) between "+fromDate.getMonth()+" and "+toDate.getMonth()+" or  day(DOJ) between "+fromDate.getDay()+" and "+toDate.getDay()+" and month(DOJ) between "+fromDate.getMonth()+" and "+toDate.getMonth();			
+		org.hibernate.Query query = session.createQuery(hql);
+		list  = query.list();*/
+		
+	
+	} finally {
+
+		try {
+			if (tx != null) {
+				tx.commit();
+				if (session.isConnected())
+					session.close();
+			}
+		} catch (HibernateException e) {
+
+			e.printStackTrace();
+		}
+	}
+	return list;
+}
+	
+	public List<Employee> getTodaysBirthday()  {
+
+		Session session = null;
+		List<Employee> results = null;
+		Transaction tx = null;
+		try {
+			session = getSession();
+			if (null == session) {
+				session = SessionFactoryUtil.getInstance().openSession();
+				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+			}
+			
+	
+    String hql="from Employee where day(DOB) = day(sysdate()) and month(DOB)=month(sysdate())";			
+			org.hibernate.Query query = session.createQuery(hql);
+			 results = query.list();
+						 
+			 
+				if (results.size() == 0) {
+					System.out.println("No Aniversary");
+				}
+
+		} finally {
+
+			try {
+				if (tx != null) {
+					tx.commit();
+					if (session.isConnected())
+						session.close();
+				}
+			} catch (HibernateException e) {
+
+				e.printStackTrace();
+			}
+		}
+		return results;
+	}
+	public List<Employee> getTodayWorkAniversary() {
+
+		Session session = null;
+		List<Employee> results = null;
+		Transaction tx = null;
+		try {
+			session = getSession();
+			if (null == session) {
+				session = SessionFactoryUtil.getInstance().openSession();
+				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+			}
+    String hql="from Employee where day(DOJ) = day(sysdate()) and month(DOJ)=month(sysdate())";//				
+			org.hibernate.Query query = session.createQuery(hql);
+			 results = query.list();
+			 
+			 
+			 
+			if (results.size() == 0) {
+				System.out.println("No Aniversary");
+			}
+
+		} finally {
+
+			try {
+				if (tx != null) {
+					tx.commit();
+					if (session.isConnected())
+						session.close();
+				}
+			} catch (HibernateException e) {
+
+				e.printStackTrace();
+			}
+		}
+		return results;
+	}
+
+	@Override
+	public List<Employee> viewEmployee(Employee employee) {
+		Session session = null;
+		List<Employee> list = null;
+		Transaction tx = null;
+		try {
+			session = getSession();
+			if (null == session) {
+				session = SessionFactoryUtil.getInstance().openSession();
+				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+			}
+			Criteria createCriteria = session.createCriteria(Employee.class);
+			createCriteria.add(Restrictions.eq("id", employee.getId()));
+			list = createCriteria.list();
+		} finally {
+			try {
+				if (tx != null) {
+					tx.commit();
+					if (session.isConnected())
+						session.close();
+				}
+			} catch (HibernateException e) {
+
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+
+	@Override
+	public Employee getEmployeeById(String id) throws EmployeeException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Employee getUserByEmail(String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

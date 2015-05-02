@@ -1,0 +1,30 @@
+<div class="modal uploadMediaModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display:none;">
+   <form action="/UploadServlet" name="uploadForm" id="uploadForm" enctype="multipart/form-data" encoding="multipart/form-data" method="post">
+      <div class="modal-header">
+         <button type="button" class="close closeUploadPopupBtn" data-dismiss="modal" aria-hidden="true">x</button>
+         <h3 id="myModalLabel" class="modalHeading"></h3>
+      </div>
+      <div class="modal-body">
+         <div class="uploadMediaContainer">
+            <div class="alert alert-error" style="display:none;">
+               <button data-dismiss="alert" class="close" type="button">x</button>
+               <span class="errMsg"></span>
+            </div>
+            <div class="uploader">
+               <input type="file" name="uploadMediaInput" class="uploadMediaInput"
+                  size="40" /><br/><br/>
+               <span class="fileInfo hide" style="margin-left: 100px;">Your video will be uploaded and scheduled for moderation.</span>
+               <p id= "maxSizeAllowed" ></p>
+            </div>
+         </div>
+         <div id="progressbox">
+            <div id="statustxt"></div>
+            <div id="progressbar"></div>
+         </div>
+      </div>
+      <div class="modal-footer">
+         <button class="btn cancelUploadBtn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+         <input type="submit" name="SubmitButton" value="Upload Files" class="btn btn-primary">
+      </div>
+   </form>
+</div>

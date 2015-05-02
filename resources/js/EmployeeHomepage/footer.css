@@ -1,0 +1,12 @@
+
+.site-footer {
+    background-color: #17314b;
+    padding:42px;
+    width: 100%;  
+}
+
+#footerCaption{
+	position:absolute;
+	right:40%;
+	bottom: -15px;
+}

@@ -114,12 +114,16 @@ public class AllHandsMeetingDAOImpl extends BaseDAOImpl implements AllHandsMeeti
 		return  list;	 
 	}
 
+
 	//@Override
 /*	public AllHandsMeeting getAllHandsMeetingById(int id)
 			throws AllHandsMeetingException {
 		// TODO Auto-generated method stub
 		return null;
 	}*/
+
+	
+
 
 	
 }

@@ -20,12 +20,21 @@ public class Objects {
             case ObjectTypes.USER:
                 persistentObjectName = User.class;
                 break;
+
             case ObjectTypes.TEMPLATE:
             	persistentObjectName = Template.class;
             	break;
             case ObjectTypes.ALL_HANDS_MEETING:
             	persistentObjectName = AllHandsMeeting.class;
             	break;
+
+            case ObjectTypes.HOLIDAY:
+                persistentObjectName = Holiday.class;
+                break;
+            case ObjectTypes.FILE:
+                persistentObjectName = File.class;
+                break;
+
             default:
                 break;
         }

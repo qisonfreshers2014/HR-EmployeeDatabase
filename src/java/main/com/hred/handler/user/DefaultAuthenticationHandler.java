@@ -5,6 +5,7 @@ import java.net.URLEncoder;
 import java.util.Calendar;
 import java.util.TimeZone;
 import java.util.regex.Pattern;
+
 import com.hred.common.EncryptionFactory;
 import com.hred.common.Utils;
 import com.hred.common.cache.Cache;
@@ -17,7 +18,9 @@ import com.hred.exception.ExceptionMessages;
 import com.hred.exception.ObjectNotFoundException;
 import com.hred.exception.SystemException;
 import com.hred.exception.UserException;
+ 
 import com.hred.model.Employee;
+import com.hred.model.User;
 import com.hred.model.UserSessionToken;
 import com.hred.model.user.AuthenticationInput;
 import com.hred.model.user.AuthenticationOutput;
@@ -38,7 +41,7 @@ public class DefaultAuthenticationHandler implements AuthenticationHandler {
 		
 
 		DefaultAuthenticationInput daInput = (DefaultAuthenticationInput) input;
-		int authStatus = Employee.AUTH_STATUS_NONE;
+		int authStatus = User.AUTH_STATUS_NONE;
 		if (isLoginValidated(daInput)){
 		String email = daInput.getEmail();
 		String password = daInput.getPassword();
@@ -67,15 +70,15 @@ public class DefaultAuthenticationHandler implements AuthenticationHandler {
 
 					ExceptionMessages.EMAIL_DOESNOT_EXIST);
 		}
-		else if (!passwordValidity) {
+	/*	else if (!passwordValidity) {
 			throw new BusinessException(ExceptionCodes.INVALID_PASSWORD,
 
 					ExceptionMessages.INVALID_PASSWORD);
 		}
+*/
 
 
-
-		authStatus = Employee.AUTH_STATUS_EXISTING;
+		authStatus = User.AUTH_STATUS_EXISTING;
 
 		String sessionToken = null;
 		try {
@@ -97,9 +100,11 @@ public class DefaultAuthenticationHandler implements AuthenticationHandler {
 		userSessionToken.setUserEmail(emp.getEmail());
 		userSessionToken.setUserId(emp.getId());
 		userSessionToken.setUserSessionId(sessionToken);
-		//userSessionToken.setRoleId(employee.());  //set the role here
+		
+		
+		//userSessionToken.setRoleName(emp.getCurrentDesignation());  //set the role here
 		//////////////////////////////////////////
-
+		
 		////////////////////////////////////////////
 		Cache cache = CacheManager.getInstance().getCache(CacheRegionType.USER_SESSION_CACHE);
 		cache.put(sessionToken, userSessionToken);
