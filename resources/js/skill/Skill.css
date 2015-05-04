@@ -1,18 +1,111 @@
 
-table, th, td {
+table,tr,th, td {
     border: 1px solid black;
 	border-collapse:collapse;
+	text-align:center;
+	margin-left:5%;
+	font-family: Calibri;
+ font-size:12px;
+	
+}
+th{
+	  background-color:#7094b8;
+}
+th,td{
+	font-size:15px:
+	 
+}
+.red{
+	color:red;
+	font-size:10px;
+}
+.head{
+	 
+	font-weight: bold;
+ 	color:brown;
+  	margin-left:10%;
+  	font-family: Calibri;
+  	align-text:center;
 }
 
-.t1{
-	text-align:left;
+.heading
+{
+  font-weight: bold;
+  color:brown;
+  margin-left:4%; 
+  font-family: Calibri; 
 }
+.p{
+	margin-left:12%;
+	color:red;
+	
+}
+.e1{
+	margin-left:8%;
+	color:red;
+	
+}
+ 
+.div{
+	margin-left:8%;
+	font-family: Calibri;
+	font-size:15px;
+	font-weight: bold;
+}  
+
 #skillerror1{
-visibility:hidden;
+visibility:visible;
 color:red;
+font-size:12px;
+font:calibre;
+}  
+#skillerror2{
+visibility:visible;
+color:red;
+font-size:12px;
+font:calibre;
+}
+#error1{
+visibility:visible;
+color:red;
+font-size:12px;
+font:calibre;
 } 
-
-#error{
-visibility:hidden;
+#error2{
+visibility:visible;
 color:red;
+font-size:12px;
+font:calibre;
+}
+.inputelement
+{
+  font-size:15px;
+  font-weight: bold;
+   
+  margin-left:7%;
+} 
+#herror{
+visibility:visible;
+color:red;	
+font-size:12px;
+font:calibre;
+}
+#rerror{
+visibility:visible;
+color:red;
+font-size:12px;
+font:calibre;
+} 
+#derror{
+	visibility:hidden;
+	color:red;
+	font-size:12px;
+font:calibre;
+}
+#yerror{
+	visibility:visible;
+	color:red;
+	font-size:12px;
+	margin-left:8%;
+font:calibre;
 } 

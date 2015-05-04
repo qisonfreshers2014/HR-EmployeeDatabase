@@ -1,5 +1,7 @@
 package com.hred.exception;
 
+
+
 import java.util.List;
 
 /**
@@ -21,7 +23,7 @@ public class EmployeeException extends BusinessException{
 	public EmployeeException(int code,String message){
 		super(code, message);
 	}
-	public EmployeeException(int code,String message,List<Object> args){  //
+	public EmployeeException(int code,String message,List<Object> args){  
 		super(code, message, args);
 				
 	}

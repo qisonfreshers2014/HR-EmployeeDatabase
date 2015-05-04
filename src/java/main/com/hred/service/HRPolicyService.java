@@ -25,18 +25,16 @@ import com.hred.service.annotations.ServiceStatus;
 import com.hred.service.annotations.UnSecure;
 import com.hred.service.common.WebserviceRequest;
 import com.hred.service.descriptors.output.VeiwHRPolicies;
-import com.hred.service.descriptors.output.VeiwHRPolicyDiscriptor;
+import com.hred.service.descriptors.outputDescriptors.VeiwHRPolicyDiscriptor;
 
 /**
  * @author Bhargavi Uppoju
+ * @author Rizwan
  *
  */
 
 @Path("/v1/hr_policy/")
-
-public class HRPolicyService extends BaseService{
-
-
+public class HRPolicyService extends BaseService {
 
 	@POST
 	@RestService(input = String.class, output = String.class)
@@ -59,6 +57,7 @@ public class HRPolicyService extends BaseService{
 		return JsonUtil.getJsonBasedOnDescriptor(output,
 				AuthenticationOutput.class);
 	}
+
 
 		@POST
 		@RestService(input = HRPolicy.class, output = HRPolicy.class)
@@ -97,4 +96,7 @@ public class HRPolicyService extends BaseService{
 
 		}
 
-	}
+
+
+
+}

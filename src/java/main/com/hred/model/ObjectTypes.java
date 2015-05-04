@@ -59,13 +59,14 @@ public static final int DESIGNATION_TYPE=182;
  
  //holiday_master 
  public static final int HOLIDAYMASTER = 171;
- public static final int HOLIDAY = 172;
+ 
  
  //employee
 
  
  public static final int SENDNOTIFICATION = 141;
  public static final int SENDNOTIFICATIONHISTORY = 142;
+public  static final int HOLIDAY = 143;
  
 
 }

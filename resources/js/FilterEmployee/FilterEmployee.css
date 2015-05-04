@@ -1,52 +1,49 @@
-#header {
-    background-color:none;
-    color:black;
-    text-align:left;
-    padding:20px;
-}
-#nav{
-    line-height:20px;
-    background-color:white;
-    height:800px;
-    width:900px;
-    float:left;
-    padding:5px;	
-	margin-right:50px;
-}
-table, th, td {
+table,tr,th, td {
     border: 1px solid black;
 	border-collapse:collapse;
-	 
+	width:25%;
+	
 }
+td {
+ background-color:lightgrey;
+ width:25%;
+}
+th {
+ background-color:#7094b8;
+ color:black;
+ width:25%;
+}
+
 .t1{
 	text-align:right;
 }
-#gerror{
-visibility:hidden;
-color:red;
+.inputelement
+{
+ font-size:15px;
+  font-weight: bold;
 }
-
-#designerror{
-visibility:hidden;
-color:red;
-} 
+ 
 #herror{
-visibility:hidden;
+visibility:visible;
 color:red;	
+font-size:12px;
+font:calibre;
 }
 #rerror{
-visibility:hidden;
+visibility:visible;
 color:red;
+font-size:12px;
+font:calibre;
 } 
 #derror{
 	visibility:hidden;
 	color:red;
+	font-size:12px;
+font:calibre;
 }
 #yerror{
-	visibility:hidden;
+	visibility:visible;
 	color:red;
-}
-.button{
-width:98px;
-height:30px;
+	font-size:12px;
+font:calibre;
 } 

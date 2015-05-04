@@ -17,6 +17,7 @@ import com.hred.exception.EmployeeException;
 import com.hred.exception.ExceptionCodes;
 import com.hred.exception.ExceptionMessages;
 import com.hred.exception.UserException;
+import com.hred.model.AbstractObject;
 import com.hred.model.Employee;
 import com.hred.persistence.dao.EmployeeDAO;
 import com.hred.persistence.session.SessionFactoryUtil;
@@ -190,6 +191,325 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 	}
 
 
+	@Override
+	public List<Employee> searchEmployee(EmployeeSearchInputDescriptor employee) {
+		Session session = null;
+		List<Employee> list = null;
+		Transaction tx = null;
+		try {
+			session = getSession();
+			if (null == session) {
+				session = SessionFactoryUtil.getInstance().openSession();
+				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+			}
+			Criteria createCriteria = session.createCriteria(Employee.class);
+			createCriteria.add(Restrictions.eq("isDeleted", "0")); 
+			
+			Criterion name = Restrictions.ilike("employeeName", employee.getSearchKey(), MatchMode.ANYWHERE);
+			Criterion email = Restrictions.ilike("email", employee.getSearchKey(), MatchMode.ANYWHERE);
+			
+			Disjunction disjunction = Restrictions.disjunction();
+			disjunction.add(name);
+			disjunction.add(email);
+			createCriteria.add(disjunction);
+					
+			list = (List<Employee>)createCriteria.list();
+		} finally {
+			try {
+				if (tx != null) {
+					tx.commit();
+					if (session.isConnected())
+						session.close();
+				}
+			} catch (HibernateException e) {
+
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Employee> getBirthday() throws BusinessException {
+
+		Session session = null;
+		List<Employee> results = null;
+		Transaction tx = null;
+		try {
+			session = getSession();
+			if (null == session) {
+				session = SessionFactoryUtil.getInstance().openSession();
+				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+			}
+    String hql="from Employee where month(dateOfBirth)=month(sysdate())";//				
+			org.hibernate.Query query = session.createQuery(hql);
+			 results = query.list();
+			 
+			 
+			 
+			if (results.size() == 0) {
+				System.out.println("No Birthday");
+			}
+
+		} finally {
+
+			try {
+				if (tx != null) {
+					tx.commit();
+					if (session.isConnected())
+						session.close();
+				}
+			} catch (HibernateException e) {
+
+				e.printStackTrace();
+			}
+		}
+		return results;
+	}
+	
+	@Override
+	public List<Employee> getWorkAniversary() throws BusinessException {
+		Session session = null;
+		List<Employee> list = null;
+		Transaction tx = null;
+		try {
+			session = getSession();
+			if (null == session) {
+				session = SessionFactoryUtil.getInstance().openSession();
+				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+			}
+			
+			String hql="from Employee where month(dateOfJoining)=month(sysdate()) and year(dateOfJoining)!=year(sysdate())";				
+			org.hibernate.Query query = session.createQuery(hql);
+			 list  = query.list();
+			
+			if (list.size() == 0) {
+				System.out.println("No work Anivarsary");
+			}
+
+		} finally {
+
+			try {
+				if (tx != null) {
+					tx.commit();
+					if (session.isConnected())
+						session.close();
+				}
+			} catch (HibernateException e) {
+
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	@Override
+	public List<Employee> getWorkAniversarywithdate(NotificationHomeFilterInputDiscriptor filterCriteria) throws BusinessException{
+		Calendar todate = Calendar.getInstance();
+		todate.setTime(filterCriteria.getTodate());
+		int tomonth = todate.get(Calendar.MONTH)+1;
+		int today = todate.get(Calendar.DATE);		
+		Calendar fromdate = Calendar.getInstance();
+		fromdate.setTime(filterCriteria.getFromdate());		
+		int frommonth = fromdate.get(Calendar.MONTH)+1;
+		int fromday = fromdate.get(Calendar.DATE);
+		Session session = null;
+		List<Employee> list = null;
+		Transaction tx = null;
+		try {
+			session = getSession();
+			if (null == session) {
+				session = SessionFactoryUtil.getInstance().openSession();
+				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+			}
+			
+			String result ="from Employee where (day(dateOfJoining) between "+fromday+" and "+today+") and (month(dateOfJoining) between "+frommonth+" and "+tomonth+")";				
+			org.hibernate.Query query = session.createQuery(result);
+			 list  = query.list();
+			
+			if (list.size() == 0) {
+			
+				throw new UserException(ExceptionCodes.NO_EMPLOYEE_JOINED_TODAY, ExceptionMessages.NO_EMPLOYEE_JOINED_TODAY);
+			}
+
+		} finally {
+
+			try {
+				if (tx != null) {
+					tx.commit();
+					if (session.isConnected())
+						session.close();
+				}
+			} catch (HibernateException e) {
+
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	
+	@Override
+	public List<Employee> getBirthdayWithindate(NotificationHomeFilterInputDiscriptor filterCriteria) throws BusinessException{
+		
+		
+		Calendar todate = Calendar.getInstance();
+		todate.setTime(filterCriteria.getTodate());
+		int tomonth = todate.get(Calendar.MONTH)+1;
+		int today = todate.get(Calendar.DATE);		
+		Calendar fromdate = Calendar.getInstance();
+		fromdate.setTime(filterCriteria.getFromdate());		
+		int frommonth = fromdate.get(Calendar.MONTH)+1;
+		int fromday = fromdate.get(Calendar.DATE);
+		
+		Session session = null;
+		List<Employee> list = null;
+		Transaction tx = null;
+		try {
+			session = getSession();
+			if (null == session) {
+				session = SessionFactoryUtil.getInstance().openSession();
+				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+			}
+			
+			String result ="from Employee where (day(dateOfBirth) between "+fromday+" and "+today+") and (month(dateOfBirth) between "+frommonth+" and "+tomonth+")";	
+			org.hibernate.Query query = session.createQuery(result);
+			 list  = query.list();
+			
+			if (list.size() == 0) {
+				throw new UserException(ExceptionCodes.NO_BIRTHDAY_FOUND, ExceptionMessages.NO_BIRTHDAY_FOUND);
+						
+			}
+
+		} finally {
+			try {
+				if (tx != null) {
+					tx.commit();
+					if (session.isConnected())
+						session.close();
+				}
+			} catch (HibernateException e) {
+
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+
+	
+	public List<Employee> getTodaysBirthday()  {
+
+		Session session = null;
+		List<Employee> results = null;
+		Transaction tx = null;
+		try {
+			session = getSession();
+			if (null == session) {
+				session = SessionFactoryUtil.getInstance().openSession();
+				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+			}
+			
+	
+    String hql="from Employee where day(dateOfBirth) = day(sysdate()) and month(dateOfBirth)=month(sysdate())";			
+			org.hibernate.Query query = session.createQuery(hql);
+			 results = query.list();
+						 
+			 
+				if (results.size() == 0) {
+					System.out.println("No Aniversary");
+				}
+
+		} finally {
+
+			try {
+				if (tx != null) {
+					tx.commit();
+					if (session.isConnected())
+						session.close();
+				}
+			} catch (HibernateException e) {
+
+				e.printStackTrace();
+			}
+		}
+		return results;
+	}
+	public List<Employee> getTodayWorkAniversary() {
+
+		Session session = null;
+		List<Employee> results = null;
+		Transaction tx = null;
+		try {
+			session = getSession();
+			if (null == session) {
+				session = SessionFactoryUtil.getInstance().openSession();
+				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+			}
+    String hql="from Employee where day(dateOfJoining) = day(sysdate()) and month(dateOfJoining)=month(sysdate()) and year(dateOfJoining)!=year(sysdate())";//				
+			org.hibernate.Query query = session.createQuery(hql);
+			 results = query.list();
+			 
+			 
+			 
+			if (results.size() == 0) {
+				System.out.println("No Aniversary");
+			}
+
+		} finally {
+
+			try {
+				if (tx != null) {
+					tx.commit();
+					if (session.isConnected())
+						session.close();
+				}
+			} catch (HibernateException e) {
+
+				e.printStackTrace();
+			}
+		}
+		return results;
+	}
+
+
+
+
+	@Override
+	public List<Employee> getWelcomeEmployee() throws BusinessException {
+		Session session = null;
+		List<Employee> list = null;
+		Transaction tx = null;
+		try {
+			session = getSession();
+			if (null == session) {
+				session = SessionFactoryUtil.getInstance().openSession();
+				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+			}
+			
+			String hql="from Employee where date(dateOfJoining) between date(sysdate())-6 and date(sysdate())+6";				
+			org.hibernate.Query query = session.createQuery(hql);
+			 list  = query.list();
+			
+			if (list.size() == 0) {
+				System.out.println(" No employee Joined today");
+			}
+
+		} finally {
+
+			try {
+				if (tx != null) {
+					tx.commit();
+					if (session.isConnected())
+						session.close();
+				}
+			} catch (HibernateException e) {
+
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+
 
 	@Override
 	public List<Employee> viewEmployee(Employee employee) {
@@ -237,8 +557,11 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 				session = SessionFactoryUtil.getInstance().openSession();
 				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 			}
-			Criteria createCriteria = session.createCriteria(Employee.class);
-			list = createCriteria.list();
+			//Criteria createCriteria = session.createCriteria(Employee.class);
+			 String hql="from Employee where is_deleted =0";
+			 org.hibernate.Query query = session.createQuery(hql);
+			    list = query.list();
+			//list = createCriteria.list();
 		} finally {
 			try {
 				if (tx != null) {
@@ -254,316 +577,6 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 		return list;
 	}
 
-	@Override
-	public List<Employee> searchEmployee(EmployeeSearchInputDescriptor employee) {
-		Session session = null;
-		List<Employee> list = null;
-		Transaction tx = null;
-		try {
-			session = getSession();
-			if (null == session) {
-				session = SessionFactoryUtil.getInstance().openSession();
-				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
-			}
-			Criteria createCriteria = session.createCriteria(Employee.class);
-			
-			Criterion name = Restrictions.ilike("employeeName", employee.getSearchKey(), MatchMode.ANYWHERE);
-			Criterion email = Restrictions.ilike("email", employee.getSearchKey(), MatchMode.ANYWHERE);
-			Disjunction disjunction = Restrictions.disjunction();
-			disjunction.add(name);
-			disjunction.add(email);
-			createCriteria.add(disjunction);
-					
-			list = (List<Employee>)createCriteria.list();
-		} finally {
-			try {
-				if (tx != null) {
-					tx.commit();
-					if (session.isConnected())
-						session.close();
-				}
-			} catch (HibernateException e) {
-
-				e.printStackTrace();
-			}
-		}
-		return list;
-	}
-	public List<Employee> getBirthday() throws BusinessException {
-
-		  Session session = null;
-		  List<Employee> results = null;
-		  Transaction tx = null;
-		  try {
-		   session = getSession();
-		   if (null == session) {
-		    session = SessionFactoryUtil.getInstance().openSession();
-		    tx = SessionFactoryUtil.getInstance().beginTransaction(session);
-		   }
-		    String hql="from Employee where month(dateOfBirth)=month(sysdate())";//    
-		   org.hibernate.Query query = session.createQuery(hql);
-		    results = query.list();
-		    
-		    
-		    
-		   if (results.size() == 0) {
-		    System.out.println("No Birthday");
-		   }
-
-		  } finally {
-
-		   try {
-		    if (tx != null) {
-		     tx.commit();
-		     if (session.isConnected())
-		      session.close();
-		    }
-		   } catch (HibernateException e) {
-
-		    e.printStackTrace();
-		   }
-		  }
-		  return results;
-		 }
-		 
-		 @Override
-		 public List<Employee> getWorkAniversary() throws BusinessException {
-		  Session session = null;
-		  List<Employee> list = null;
-		  Transaction tx = null;
-		  try {
-		   session = getSession();
-		   if (null == session) {
-		    session = SessionFactoryUtil.getInstance().openSession();
-		    tx = SessionFactoryUtil.getInstance().beginTransaction(session);
-		   }
-		   
-		   String hql="from Employee where month(dateOfJoining)=month(sysdate()) and year(dateOfJoining)!=year(sysdate())";    
-		   org.hibernate.Query query = session.createQuery(hql);
-		    list  = query.list();
-		   
-		   if (list.size() == 0) {
-		    System.out.println("No work Anivarsary");
-		   }
-
-		  } finally {
-
-		   try {
-		    if (tx != null) {
-		     tx.commit();
-		     if (session.isConnected())
-		      session.close();
-		    }
-		   } catch (HibernateException e) {
-
-		    e.printStackTrace();
-		   }
-		  }
-		  return list;
-		 }
-		 @Override
-		 public List<Employee> getWorkAniversarywithdate(NotificationHomeFilterInputDiscriptor filterCriteria) throws BusinessException{
-		  Calendar todate = Calendar.getInstance();
-		  todate.setTime(filterCriteria.getTodate());
-		  int tomonth = todate.get(Calendar.MONTH)+1;
-		  int today = todate.get(Calendar.DATE);  
-		  Calendar fromdate = Calendar.getInstance();
-		  fromdate.setTime(filterCriteria.getFromdate());  
-		  int frommonth = fromdate.get(Calendar.MONTH)+1;
-		  int fromday = fromdate.get(Calendar.DATE);
-		  Session session = null;
-		  List<Employee> list = null;
-		  Transaction tx = null;
-		  try {
-		   session = getSession();
-		   if (null == session) {
-		    session = SessionFactoryUtil.getInstance().openSession();
-		    tx = SessionFactoryUtil.getInstance().beginTransaction(session);
-		   }
-		   
-		   String result ="from Employee where (day(dateOfJoining) between "+fromday+" and "+today+") and (month(dateOfJoining) between "+frommonth+" and "+tomonth+")";    
-		   org.hibernate.Query query = session.createQuery(result);
-		    list  = query.list();
-		   
-		   if (list.size() == 0) {
-		   
-		    throw new UserException(ExceptionCodes.NO_EMPLOYEE_JOINED_TODAY, ExceptionMessages.NO_EMPLOYEE_JOINED_TODAY);
-		   }
-
-		  } finally {
-
-		   try {
-		    if (tx != null) {
-		     tx.commit();
-		     if (session.isConnected())
-		      session.close();
-		    }
-		   } catch (HibernateException e) {
-
-		    e.printStackTrace();
-		   }
-		  }
-		  return list;
-		 }
-		 
-		 @Override
-		 public List<Employee> getBirthdayWithindate(NotificationHomeFilterInputDiscriptor filterCriteria) throws BusinessException{
-		  
-		  
-		  Calendar todate = Calendar.getInstance();
-		  todate.setTime(filterCriteria.getTodate());
-		  int tomonth = todate.get(Calendar.MONTH)+1;
-		  int today = todate.get(Calendar.DATE);  
-		  Calendar fromdate = Calendar.getInstance();
-		  fromdate.setTime(filterCriteria.getFromdate());  
-		  int frommonth = fromdate.get(Calendar.MONTH)+1;
-		  int fromday = fromdate.get(Calendar.DATE);
-		  
-		  Session session = null;
-		  List<Employee> list = null;
-		  Transaction tx = null;
-		  try {
-		   session = getSession();
-		   if (null == session) {
-		    session = SessionFactoryUtil.getInstance().openSession();
-		    tx = SessionFactoryUtil.getInstance().beginTransaction(session);
-		   }
-		   
-		   String result ="from Employee where (day(dateOfBirth) between "+fromday+" and "+today+") and (month(dateOfBirth) between "+frommonth+" and "+tomonth+")"; 
-		   org.hibernate.Query query = session.createQuery(result);
-		    list  = query.list();
-		   
-		   if (list.size() == 0) {
-		    throw new UserException(ExceptionCodes.NO_BIRTHDAY_FOUND, ExceptionMessages.NO_BIRTHDAY_FOUND);
-		      
-		   }
-
-		  } finally {
-		   try {
-		    if (tx != null) {
-		     tx.commit();
-		     if (session.isConnected())
-		      session.close();
-		    }
-		   } catch (HibernateException e) {
-
-		    e.printStackTrace();
-		   }
-		  }
-		  return list;
-		 }
-
-		 
-		 public List<Employee> getTodaysBirthday()  {
-
-		  Session session = null;
-		  List<Employee> results = null;
-		  Transaction tx = null;
-		  try {
-		   session = getSession();
-		   if (null == session) {
-		    session = SessionFactoryUtil.getInstance().openSession();
-		    tx = SessionFactoryUtil.getInstance().beginTransaction(session);
-		   }
-		   
-		 
-		    String hql="from Employee where day(dateOfBirth) = day(sysdate()) and month(dateOfBirth)=month(sysdate())";   
-		   org.hibernate.Query query = session.createQuery(hql);
-		    results = query.list();
-		       
-		    
-		    if (results.size() == 0) {
-		     System.out.println("No Aniversary");
-		    }
-
-		  } finally {
-
-		   try {
-		    if (tx != null) {
-		     tx.commit();
-		     if (session.isConnected())
-		      session.close();
-		    }
-		   } catch (HibernateException e) {
-
-		    e.printStackTrace();
-		   }
-		  }
-		  return results;
-		 }
-		 public List<Employee> getTodayWorkAniversary() {
-
-		  Session session = null;
-		  List<Employee> results = null;
-		  Transaction tx = null;
-		  try {
-		   session = getSession();
-		   if (null == session) {
-		    session = SessionFactoryUtil.getInstance().openSession();
-		    tx = SessionFactoryUtil.getInstance().beginTransaction(session);
-		   }
-		    String hql="from Employee where day(dateOfJoining) = day(sysdate()) and month(dateOfJoining)=month(sysdate()) and year(dateOfJoining)!=year(sysdate())";//    
-		   org.hibernate.Query query = session.createQuery(hql);
-		    results = query.list();
-		    
-		    
-		    
-		   if (results.size() == 0) {
-		    System.out.println("No Aniversary");
-		   }
-
-		  } finally {
-
-		   try {
-		    if (tx != null) {
-		     tx.commit();
-		     if (session.isConnected())
-		      session.close();
-		    }
-		   } catch (HibernateException e) {
-
-		    e.printStackTrace();
-		   }
-		  }
-		  return results;
-		 }
-
-
-
-		 @Override
-		 public List<Employee> getWelcomeEmployee() throws BusinessException {
-		  Session session = null;
-		  List<Employee> list = null;
-		  Transaction tx = null;
-		  try {
-		   session = getSession();
-		   if (null == session) {
-		    session = SessionFactoryUtil.getInstance().openSession();
-		    tx = SessionFactoryUtil.getInstance().beginTransaction(session);
-		   }
-		   
-		   String hql="from Employee where date(dateOfJoining) between date(sysdate())-6 and date(sysdate())+6";    
-		   org.hibernate.Query query = session.createQuery(hql);
-		    list  = query.list();
-		   
-		   if (list.size() == 0) {
-		    System.out.println(" No employee Joined today");
-		   }
-
-		  } finally {
-
-		   try {
-		    if (tx != null) {
-		     tx.commit();
-		     if (session.isConnected())
-		      session.close();
-		    }
-		   } catch (HibernateException e) {
-
-		    e.printStackTrace();
-		   }
-		  }
-		  return list;
-		 }
+	
 
 }

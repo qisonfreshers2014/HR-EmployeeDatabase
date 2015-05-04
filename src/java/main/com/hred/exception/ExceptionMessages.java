@@ -11,6 +11,7 @@ public interface ExceptionMessages {
 	public static final String OBJECT_NOT_FOUND = "Object not found";
 	public static final String FILE_DOESNOT_EXIST = "File does not exist";
 	public static final String FILE_IS_DELETED = "File is deleted";
+	
 	//General exceptions
 	public static final String INVALID_EMAIL_PATTERN = "Invalid email pattern.";
 	public static final String WEAK_PASSWORD = "Weak password.";
@@ -23,7 +24,7 @@ public interface ExceptionMessages {
 	public static final String INTERNAL_ERROR = "Internal Error.";
 	public static final String AUTH_INPUT_NULL = "Authentication error has occurred. Please try again.";
 	
-	
+	//designation related exceptions messages
 	public static final String DESIGNATION_DOESNOT_EXIST="This designation is not existed";
 	public static final String HRPolicy_DOESNOT_EXIST="This HRPolicy is not existed";
 
@@ -51,6 +52,30 @@ public interface ExceptionMessages {
 	public static final String USER_NOT_PART_OF_ANY_PROJECT = "user not associated with any project";
 	public static final String NO_USER_ASSOCIATED_WITH_PROJECT ="No User is associated with this project";
 	
+	//employee related exceptions
+	
+	public static final String EMPLOYEE_SALARY ="salary field should not be empty";
+	public static final String EMPLOYEE_BLOOD_GROUP ="Blood group field cann't be empty";
+	public static final String EMPLOYEE_NUMBER ="Contact number cann't be empty";
+	public static final String EMPLOYEE_DOB_NULL ="Date Birth cann't be empty";
+	public static final String EMPLOYEE_ALREADY_EXIST ="Please use another Email id because Employee already exist with this email id....!!!!";
+	public static final String EMPLOYEE_EMPID_ALREADY_EXIST ="Please use another EID because Employee already exist with this EID....!!!!";
+	
+	public static final String EMPLOYEE_FATHERNAME_NOT_EMPTY ="Please enter father name....!!!!";
+	public static final String EMPLOYEE_GENDER_NOT_EMPTY ="Please select the gender....!!!!";
+	public static final String EMPLOYEE_QUALIFICATION_NOT_EXIST ="Check Qualification Details";
+	public static final String EMPLOYEE_SKILL_NOT_EMPTY ="please enter skill details......!!!!";
+	public static final String EMPLOYEE_CONTACTNUM_NOT_EMPTY ="Please enter contactnumber correctly";
+	public static final String EMPLOYEE_SKYPEID_NOT_EMPTY ="Please enter skypeid.....!!!!";
+	public static final String EMPLOYEE_DOJ_NOT_EMPTY ="Please enter date of joining.....!!!!";
+	public static final String EMPLOYEE_EMERNUM_NOT_EMPTY ="Please enter emergency contact number.....!!!!";
+	public static final String EMPLOYEE_YOE_NOT_EMPTY ="Please enter years of experience....!!!!";
+	
+	public static final String EMPLOYEE_RATING_NOT_EMPTY ="Please enter skill rating.....!!!!";
+	public static final String EMPLOYEE_CURRENTADDR_NOT_EMPTY ="Please enter current address.....!!!!";
+	public static final String EMPLOYEE_EMERNAME_NOT_EMPTY ="Please enter emergency contact name.....!!!!";
+	
+	public static final String EMPLOYEE_PERADDR_NOT_EMPTY ="Please enter permanent address.....!!!!";
 	//Releases Exception Messages
 	public static final String RELEASES_NAME_CANNOT_BE_EMPTY = "Releases Name Cannot Be Empty.";
 	public static final String RELEASES_NAME_CANNOT_CONTAIN_SPECIALCHARS = "Releases Name Format Exception.";
@@ -162,19 +187,47 @@ public interface ExceptionMessages {
 	 
 	 
 	//holidays related Exception Messages
+	public static final String HOLIDAYSID_DOESNOT_EXIST = "Invalid Holiday Id";
+
+
+	
+
+	public static final String AllHANDSMEETINGID_DOESNOT_EXIST = "invalid All Hands Metting Id";
+
+	public static final String EVERY_FIELD_IS_MANDATORY = "every field is mandatory";
+
+	public static final String ALLHANDSMEETING_DATE_ALREADY_EXISTS = "All Hands Meeting date already exists";
+
+	
+	
+
+
+	
+	//skills related Exception messages
+	public static final String Skills_DOESNOT_EXIST = "Invalid skill Name";
+	public static final String SKILLNAME_ALREADY_EXISTS = "Skill name is already exist";
+	
+ 
 	public static final String HOLIDAY_DOESNOT_EXIST = "No Holiday found";
 	public static final String HOLIDAY_DESCRIPTION_NULL = "Description should not be empty";
 	public static final String HOLIDAY_TYPE_NULL = "Type should not be empty";
 	public static final String HOLIDAY_DATE_DOES_NOT_EXIST = "Date field should not be empty";
 	public static final String HOLIDAY_DATE_ALREADY_EXISTS = "Date already exists";
+ 
 
 
 	public static final String NO_WORK_ANNIVERSARY_TODAY = "No Work Anniversary Today";
 	public static final String NO_JOINEE_TODAY = "No Employee Joined Today";
+
+
+	
+	   //Template related Exceptions
 	public static final String TEMPLATE_DOESNOT_EXIST = "No Such Template Exist";
 	public static final String NO_BIRTHDAY_FOUND = " No Bithday Today";
 	public static final String NO_EMPLOYEE_JOINED_TODAY = "NO_EMPLOYEE_JOINED_TODAY" ;
 
 
+	//public static final String EVERY_FIELD_IS_MANDATORY = "every field is mandatory";
+	public static final String TEMPLATE_ALREADY_EXIST = "template with this name is already exist";
 }
 

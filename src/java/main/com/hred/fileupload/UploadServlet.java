@@ -92,10 +92,21 @@ public class UploadServlet extends HttpServlet {
                     String fileNameToSave = basename +"-"+ Long.toString(timeStamp)+"."+ extension;
                     String filePath = actualPath + File.separator + fileNameToSave;
                     File storeFile = new File(filePath);
+                    
+        	 		
+        			File deployFolder = new File(workingDir, "deploy");
+        			File webAppDir = new File(deployFolder, "webapp");
+        			
+        			File tempDir = new File(webAppDir, "FileUpload");
+        	 		String tempPath = tempDir + File.separator + fileNameToSave;
+        	 		File tempStore = new File(tempPath);
+        	 		String tmpPath = File.separator +"FileUpload"+File.separator+fileNameToSave;
+                    
                     file.setName(fileName);
-                    file.setFilePath(filePath); 
+                    file.setFilePath(tmpPath); 
                     // saves the file on disk
                     item.write(storeFile);
+                    item.write(tempStore);
                 }
             }
             request.setAttribute("message", "Upload has been done successfully!");

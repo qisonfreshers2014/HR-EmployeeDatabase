@@ -13,14 +13,9 @@ import com.hred.service.descriptors.output.NotificationHomeFilterInputDiscriptor
 /**
  * jyothi ambepu
  * Venkatesh Chitla
- * @author saisudha
  * 
  */
 public interface EmployeeDAO extends BaseDAO {
-	
-	 public List<Employee> getEmployee();
-
-	 public List<Employee> searchEmployee(EmployeeSearchInputDescriptor employee);
 	
 	List<Employee> viewEmployee(Employee employee);
 
@@ -37,7 +32,6 @@ public interface EmployeeDAO extends BaseDAO {
 
 	public List<Employee> getEmployees();
 
-	
 	public Employee getEmployeeById(long id) throws EmployeeException;
 	 public List<Employee> getWelcomeEmployee() throws BusinessException;
 
@@ -57,4 +51,10 @@ public interface EmployeeDAO extends BaseDAO {
 
 	 List<Employee> getBirthday() throws BusinessException;
 
+	public List<Employee> searchEmployee(EmployeeSearchInputDescriptor employee);
+
+	public List<Employee> getEmployee();
+
+	
+	
 }

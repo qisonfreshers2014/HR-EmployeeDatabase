@@ -1,121 +1,147 @@
 function loadNotificationHomePage(data) {
-	Loader.loadHTML('.leftContainer', 'resources/js/SendNotification/notificationHomePage.html', true, function(){
-		this.handleShow(data);
-	}.ctx(this));
+	Loader.loadHTML('.container',
+			'resources/js/SendNotification/notificationHomePage.html', true,
+			function() {
+				this.handleShow(data);
+			}.ctx(this));
 }
 
-loadNotificationHomePage.prototype.handleShow=function(data) {	
-	console.dir(data);	
-	var data={}	;	
-	RequestManager.getAllEvents(data, function(data, success) {
-		if(success){	
-	  var i;
-	    var out;
-	  	    for(i = 0; i < data.length; i++) {
-	  	    	var item = data[i];
-	    
-	        out =  '<tr><td id="name">'+item.employeeName+'</td><td>'+item.date+'</td>'
-	        +'<td>'+item.event+'</td><td>'+item.employeeEmail+'</td><td>'+item.status+'</td>';
-	        if(item.status=="Not Send")
-      	  {
-	        	 out += '<td><input type="button" value="Send"  class="dynamicSend" id='+item.employeeEmail+'/></td></tr>';
-      	  }
-        else
-      	  {
-      	  out += '<td></td></tr>';
-      	  }
-	        $('.dynamicSend').on('click', function () {
-	            
-	           var employeeName=( $(this).parent().parent().find('td:first').text());
-	            var event=( $(this).parent().parent().find('td:eq(2)').text());
-	            var email=( $(this).parent().parent().find('td:eq(3)').text());
-	            console.log(event);
-	            console.log(email);
-	            console.log(employeeName);
-	            
-	            App.loadManualMail(event,email,employeeName);
-	            
-	        });
-	        	
-	        	
-	        		        	
-	        	
-	        	
-            
-	        $("#displayData").append(out);
-	  	    }	}
-	  			}.ctx(this));
-	   
-	  	    
-	$(".sendMail").click(function(){
-		alert("Send Mail");
-		//this.sendMail();
-	}.ctx(this));		
+loadNotificationHomePage.prototype.handleShow = function(data) {
+	
+		
+	var i;
+	var out;
+	for (i = 0; i < data.length; i++) {
+		var item = data[i];
+		var value = item.date;
+		var res = new Date(value);
+		var year = res.getFullYear();
+		var month = res.getMonth() + 1;
+		var dd = res.getDate();
+		console.log(item.status);
 
-	$("#retriveData").click(function(){
-		this.eventCriteria();
-	}.ctx(this));	
-	$("#fromDate").focusin(function(){
+		out = '<tr><td id="name">' + item.employeeName + '</td><td>' + year
+				+ '-' + month + '-' + dd + '</td>' + '<td>' + item.event
+				+ '</td><td>' + item.employeeEmail + '</td><td>' + item.status
+				+ '</td>';
+		if (item.status == "Not Sent") {
+			out += '<td><input type="button" value="Send"  class="dynamicSend btn btn-primary btn-md"/></td></tr>'
+		} else {
+			out += '<td></td></tr>';
+		}
+	
+		$("#displayDataNotification").append(out);
+	}
+	$('.dynamicSend').on('click', function() {
+		var employeeName = ($(this).parent().parent().find('td:first').text());
+		var event = ($(this).parent().parent().find('td:eq(2)').text());
+		var email = ($(this).parent().parent().find('td:eq(3)').text());
+		console.log(event);
+		console.log(email);
+		console.log(employeeName);
+		App.loadManualMail(event, email, employeeName);
+
+	});
+
+/*	$("#Events").change(function() {
+		this.eventChangeCriteria();
+	}.ctx(this));*/
+	$("#retriveDataNotification").click(function() {
+		this.eventChangeCriteria();
+	}.ctx(this));
+	$("#fromDateNotification").focusin(function() {
 		this.calendar();
 	}.ctx(this));
-	$("#toDate").focusin(function(){
+	$("#toDateNotification").focusin(function() {
 		this.calendar();
-		
+
 	}.ctx(this));
-	    	    	
+
 }
 
-loadNotificationHomePage.prototype.calendar=function()
-{
-	$( ".date" ).datepicker({dateFormat:'yy-mm-dd',showButtonPanel:true,changeMonth:true,changeYear:true,showAnim:'drop'});
-		
+loadNotificationHomePage.prototype.calendar = function() {	
+	$(".date").datepicker({
+		dateFormat : 'yy-mm-dd',
+		showButtonPanel : true,
+		changeMonth : true,
+		changeYear : true,
+		showAnim : 'drop',
+			   
+	});
+
+
 }
 
 
-loadNotificationHomePage.prototype.eventCriteria=function()
-{
-var todate=$("#toDate").val();
-var fromdate=$("#fromDate").val();
+loadNotificationHomePage.prototype.eventChangeCriteria = function() {
 
-var selectedEvent = $("#Events").val();
-var selectedState = $("#States").val();
-var input = {
-		"payload": {
-			"todate": todate,
-			"fromdate": fromdate,
-			"selectedEvent":selectedEvent,
-			"selectedState":selectedState
-		}};
+	var selectedEvent = $("#EventsNotification").val();
+	var fromDate = $("#fromDateNotification").val();
+	var toDate = $("#toDateNotification").val();
+	var input = {
+		"payload" : {"selectedEvent" : selectedEvent,
+			"todate" : toDate,
+				"fromdate" : fromDate,
+					}
+	};
+	console.log(selectedEvent);
+	console.log(fromDate);
+	console.log(toDate);
 
-RequestManager.getNotificationDisplayCriteria(input, function(data, success) {
-	
-	if(success){	
-  var i;
-    var out='<table border="1" style="width:100% height:200px" id="displayData1"><tbody id="displayData"><tr><th>Employee Name</th><th>Event Date</th><th>Event</th><th>Email ID</th><th>Status</th><th>Action</th></tr>'
-  	    for(i = 0; i < data.length; i++) {
-  	    	  	var item = data[i];
-                  out +=  '<tr><td>'+item.employeeName+'</td><td>'+Date+'</td>'
-        +'<td>'+item.event+'</td><td>'+item.employeeEmail+'</td><td>'+item.status+'</td>';
-                  if(item.status=="Not Send")
-                	  {
-                	  out += '<td><input type="button" value="Send"  class="dynamicSend" id='+item.employeeEmail+'/></td></tr>';
-                	  }
-                  else
-                	  {
-                	  out += '<td></td></tr>';
-                	  }
-                  $('.dynamicSend').on('click', function () {
-      	            
-       	           var employeeName=( $(this).parent().parent().find('td:first').text());
-       	            var event=( $(this).parent().parent().find('td:eq(2)').text());
-       	            var email=( $(this).parent().parent().find('td:eq(3)').text());
-       	                   
-       	        });
-                
-                
-        document.getElementById("dataTable").innerHTML=out;
-  	    }	
-    }
-	
-  			}.ctx(this));
+	RequestManager
+			.getNotificationDisplayCriteria(
+					input,
+					function(data, success) {					
+						if (success) {					
+							
+							var i;
+							var out = '<table border="1" class="table table-hover" id="displayData1"><tbody><tr><th>Employee Name</th><th>Event Date</th><th>Event</th><th>Email ID</th><th>Status</th><th>Action</th></tr>'
+							for (i = 0; i < data.length; i++) {
+								var item = data[i];
+								var value = item.date;
+								var res = new Date(value);
+								var year = res.getFullYear();
+								var month = res.getMonth() + 1;
+								var dd = res.getDate();
+								out += '<tr><td id="name">' + item.employeeName
+										+ '</td><td>' + year + '-' + month
+										+ '-' + dd + '</td>' + '<td>'
+										+ item.event + '</td><td>'
+										+ item.employeeEmail + '</td><td>'
+										+ item.status + '</td>';
+								if (item.status == "Not Sent") {
+									out += '<td><input type="button" value="Send"  class="dynamicSend btn btn-primary btn-md"/></td></tr>';
+								} else {
+									out += '<td></td></tr>';
+								}
+
+								document.getElementById("dataTableNotification").innerHTML = out;
+							}
+							$('.dynamicSend').on(
+									'click',
+									function() {
+
+										var employeeName = ($(this).parent()
+												.parent().find('td:first')
+												.text());
+										var event = ($(this).parent().parent()
+												.find('td:eq(2)').text());
+										var email = ($(this).parent().parent()
+												.find('td:eq(3)').text());
+										console.log(event);
+										console.log(email);
+				          				console.log(employeeName);
+										App.loadManualMail(event, email,
+												employeeName);
+
+									});
+						
+							
+						}
+						else
+							{
+							alert("No Records Found")
+							}
+
+					}.ctx(this));
 }

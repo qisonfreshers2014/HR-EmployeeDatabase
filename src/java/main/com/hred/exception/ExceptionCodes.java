@@ -128,10 +128,36 @@ public interface ExceptionCodes {
 	public static final int EVENT_START_DATE_MUST_BE_FUTURE_DATE = 218;
 	public static final int EVENT_IN_LIVE_CONTENT_CANNOT_BE_CHANGED = 219;
 	public static final int CANNOT_AGREE_OR_DISAGREE_FLAGGED_OR_REMOVED_COMMENT = 220;
+	
+	
+	//employee exceptions codes
 	public static final int EMPLOYEE_DOESNOT_EXIST = 221;
-
+	public static final int EMPLOYEE_QUALIFICATION_NOT_EXIST = 290;
+	public static final int EMPLOYEE_SALARY = 291;
+	public static final int EMPLOYEE_BLOOD_GROUP = 292;
+	public static final int EMPLOYEE_NUMBER = 293;
+	public static final int EMPLOYEE_DOB_NULL = 295;
+	public static final int EMPLOYEE_ALREADY_EXIST = 296;
+	public static final int EMPLOYEE_EMPID_ALREADY_EXIST = 297;
+	
+	public static final int EMPLOYEE_FATHERNAME_NOT_EMPTY= 298;
+	
+	public static final int EMPLOYEE_GENDER_NOT_EMPTY= 299;
+	
+	public static final int EMPLOYEE_CONTACTNUM_NOT_EMPTY= 300;
+	public static final int EMPLOYEE_SKYPEID_NOT_EMPTY= 301;
+	public static final int EMPLOYEE_DOJ_NOT_EMPTY= 302;
+	public static final int EMPLOYEE_SKILL_NOT_EMPTY= 303;
+	public static final int EMPLOYEE_RATING_NOT_EMPTY= 304;
+	public static final int EMPLOYEE_YOE_NOT_EMPTY= 305;
+	public static final int EMPLOYEE_EMERNUM_NOT_EMPTY= 306;
+	public static final int EMPLOYEE_EMERNAME_NOT_EMPTY= 307;
+	public static final int EMPLOYEE_CURRENTADDR_NOT_EMPTY= 308;
+	public static final int EMPLOYEE_PERADDR_NOT_EMPTY= 308;
+	
 	public static final int DESIGNATION_DOESNOT_EXIST = 225;
 	public static final int HRPolicy_DOESNOT_EXIST = 226;
+	
 	
 	//Mongo related exception Codes
 	public static final int COULD_NOT_START_MONGO_CLIENT = 1001;
@@ -291,7 +317,6 @@ public interface ExceptionCodes {
 	public static final int TIME_ENTRY_PRESENT = 9008;
 	public static final int RELEASE_ID_NULL = 9009;
 	public static final int DB_EXCEPTION = 9010;
-	public static final int TEMPLATE_DOESNOT_EXIST =9011;
 	
 
 	public static final int FILE_IS_DELETED = 9015;
@@ -300,22 +325,42 @@ public interface ExceptionCodes {
 	
 	
 	//holidays related Exception Codes
+
+	public static final int HOLIDAYSID_DOESNOT_EXIST = 9011;
+
+	public static final int AllHANDSMEETINGID_DOESNOT_EXIST = 202;
+	//public static final int EVERY_FIELD_IS_MANDATORY = 203;
+	public static final int ALLHANDSMEETING_DATE_ALREADY_EXISTS = 204;
+	
+	
+
 	public static final int HOLIDAY_DOESNOT_EXIST = 9011;
 	public static final int HOLIDAY_DESCRIPTION_NULL = 9012;
 	public static final int HOLIDAY_TYPE_NULL = 9013;
 	public static final int HOLIDAY_DATE_DOES_NOT_EXIST = 9014;
 	public static final int HOLIDAY_DATE_MISMATCH = 9015;
 	public static final int HOLIDAY_DATE_ALREADY_EXISTS = 9016;
+
 	
+	//Skills 
+	public static final int Skills_DOESNOT_EXIST = 12000;
+	public static final int SKILLNAME_ALREADY_EXISTS = 120001;
+
 	
+
+	
+	//birthday related  exception
 	public static final int NO_WORK_ANNIVERSARY_TODAY = 9012;
 	public static final int NO_JOINEE_TODAY = 9013;
+
 	public static final int NO_BIRTHDAY_TODAY = 221;
 	public static final int NO_BIRTHDAY_FOUND = 223;
 	public static final int NO_EMPLOYEE_JOINED_TODAY = 224;
 	
-	
-	
-	
 
-}
+	
+	//Template related Exceptions
+	public static final int TEMPLATE_DOESNOT_EXIST =9016;
+	public static final int EVERY_FIELD_IS_MANDATORY = 9017;
+	public static final int TEMPLATE_ALREADY_EXIST =9018;
+	}

@@ -20,6 +20,7 @@ public class JettyServer
 
         Server server = new Server(8080);
 
+
         WebAppContext webapp = new WebAppContext();
         webapp.setContextPath("/");
         webapp.setWar(user_dir+"/hred.war");

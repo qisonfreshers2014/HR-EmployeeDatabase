@@ -1,5 +1,7 @@
 package com.hred.service;
 
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -11,23 +13,29 @@ import javax.ws.rs.core.UriInfo;
 
 import com.hred.common.json.JsonUtil;
 import com.hred.exception.BusinessException;
+ 
 import com.hred.exception.EncryptionException;
 import com.hred.exception.ObjectNotFoundException;
+import com.hred.exception.SkillsException;
+ 
 import com.hred.handler.SkillsHandler;
 import com.hred.handler.user.AuthenticationHandlerFactory;
+ 
 import com.hred.model.Skills;
 import com.hred.model.user.AuthenticationInput;
 import com.hred.model.user.AuthenticationOutput;
 import com.hred.service.annotations.RestService;
 import com.hred.service.annotations.ServiceStatus;
 import com.hred.service.annotations.UnSecure;
-import com.hred.service.common.WebserviceRequest;
+import com.hred.service.common.WebserviceRequest;;
 
 /**
  * @author Jyothi Ambepu
  *
  */
-@Path("/skills")
+ 
+ 
+@Path("/v1/skills/") 
 public class SkillsService extends BaseService {
 	/**
 	 * @param headers
@@ -96,7 +104,49 @@ public class SkillsService extends BaseService {
 		String outputString = "{\"status\": \"SUCCESS\", \"payload\": \"Test Successful\"}";
 		return outputString;
 	}
+	@POST
+	@RestService(input = String.class, output = String.class)
+	@ServiceStatus(value = "complete")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/getSkillsDetails")
+	@UnSecure
+	public String getSkillsDetails(@Context HttpHeaders headers, @Context UriInfo uriInfo,
+			WebserviceRequest request) throws ObjectNotFoundException,
+			BusinessException, EncryptionException, SkillsException {	
+
+		Skills skills = (Skills) JsonUtil.getObject(request.getPayload(),
+				Skills.class);
+		List<Skills> Skills = SkillsHandler.getInstance().getSkillsDetails();
+		//System.out.println("COunt : "+ Skills.size());
+		return JsonUtil.getJsonBasedOnDescriptor(Skills, Skills.class);
+		//String outputString = "{\"status\": \"SUCCESS\", \"payload\": \"COunt\"}";
+		//return outputString;
+		 
+	}
 	
+	@POST
+	@RestService(input = String.class, output = String.class)
+	@ServiceStatus(value = "complete")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/geteditskills")
+	@UnSecure
+	public String getEditSkills(@Context HttpHeaders headers, @Context UriInfo uriInfo,
+			WebserviceRequest request) throws ObjectNotFoundException,
+			BusinessException, EncryptionException, SkillsException {	
+
+		Skills skills = (Skills) JsonUtil.getObject(request.getPayload(),
+				Skills.class);
+	
+		List<Skills> Skills = SkillsHandler.getInstance().getEditSkills(skills);
+		//System.out.println("COunt : "+ Skills.size());
+		return JsonUtil.getJsonBasedOnDescriptor(Skills, Skills.class);
+		//String outputString = "{\"status\": \"SUCCESS\", \"payload\": \"COunt\"}";
+		//return outputString;
+		 
+		
+	}
  
 	 
 

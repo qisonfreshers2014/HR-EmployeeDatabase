@@ -1,0 +1,106 @@
+@CHARSET "ISO-8859-1";
+
+/*-------------------- Header---------------------- */
+
+.list {
+  color: white; 
+    font-size: 20px;
+     margin-left: 5%;
+}
+#fixedheader {
+    background-color: #4c6680;
+    height: 100%;
+  
+}
+#qisonlogo {
+    float: left;
+}
+#namebtn {
+	 color: #ffffff;
+    float: right;
+    font-size: 20px;
+    margin-right: 8%;
+    margin-top: 1%;
+}
+#menudiv {
+    float: left;
+    margin-left: 5%;
+    margin-top: 3%;
+}
+#span1 {
+    margin-top: 8%;
+}
+#logout {
+    margin-bottom: 0%;
+}
+
+/* --------------------container -----------------------*/
+.leftcontainer1 {
+  /*   border: 1px solid #ffffff; */
+    color: #ffffff;
+    margin-left:5%;
+    min-height: 650px;
+    width:90%;
+    font-family:calibri;
+   font-size: 15px;
+}
+/* --------------------footer -----------------------*/
+.site-footer {
+    background-color: #4c6680;
+    text-align: center;
+   color:white;
+  
+   padding:0.5%;
+}
+/* ------------------Edit template& add&edit all ands meeting----------------------- */
+#fieldsaddtemplate,#fieldsaddhandsmeeting {
+ /* border:1px solid black;*/
+ padding:10px; 
+ text_align:center;
+ font-weight:bold;
+ color:black;
+  background-color: lightgray;
+}
+.heading {
+ color:brown;
+margin-top: 3%;
+}
+.red{
+ color:red;
+ font_size:20px;
+}
+ .container{
+   background-color:white;
+   
+  }
+  .submit{
+    margin-left: 50%;
+  }
+  .submit1{
+    margin-left: 25%;
+  }
+/*  view all hands meeting  */
+table,td,th {
+         border:1px solid black;
+         border-collapse:collapse;
+}
+td {
+/*  background-color:lightgary; */
+ color:black;
+}
+
+th {
+ background-color:#7094b8;
+ color:black;
+}
+.inputelement
+{
+ font-size:15px;
+ font-weight: bold;
+}
+#tempsubject{
+	margin-left: 4%;
+}
+.datepicker{
+	margin-left: 6.6%;
+}

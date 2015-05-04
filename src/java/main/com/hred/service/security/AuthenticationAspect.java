@@ -90,62 +90,6 @@ public class AuthenticationAspect {
 
 
 
-	// Secure Call Validations
-	private void secureCallValidations(ProceedingJoinPoint thisJoinPoint)
-			throws NoSuchMethodException, IllegalAccessException,
-			InvocationTargetException {
-
-		String sessionId = getSessionId(thisJoinPoint);
-
-		if (sessionId == null) {
-			throw new SystemException(ExceptionCodes.USER_NOT_AUTHENTICATED,
-					ExceptionMessages.USER_NOT_AUTHENTICATED);
-		}
-
-		// check if session is valid or not
-		Cache cache = CacheManager.getInstance().getCache(
-				CacheRegionType.USER_SESSION_CACHE);
-		System.out.println("Cached : " + cache.getValue(sessionId));
-		UserSessionToken userSessionToken = (UserSessionToken) cache
-				.getValue(sessionId);
-		if (userSessionToken == null) {
-			throw new SystemException(ExceptionCodes.USER_NOT_AUTHENTICATED,
-					ExceptionMessages.USER_NOT_AUTHENTICATED);
-		} else {
-			ServiceRequestContext ctx = ServiceRequestContextHolder
-					.getContext();
-			ctx.setUserSessionToken(userSessionToken);
-		}
-
-	}
-
-	// Unsecure Call Validations
-	private void unSecureCallValidations(ProceedingJoinPoint thisJoinPoint)
-			throws NoSuchMethodException, IllegalAccessException,
-			InvocationTargetException {
-		String sessionId = getSessionId(thisJoinPoint);
-
-		if (sessionId == null) {
-			// this will help us to set the correct creator/modifier id for the
-			// operations performed in insecure apis
-			// and to avoid NPE in case anybody tries to use contents e.g.
-			// userId, userEmail etc. from UserSessionToken whereas it is null.
-			ServiceRequestContextHolder.setContext(getSystemContext());
-		} else {
-			// check if session is valid or not
-			UserSessionToken userSessionToken = (UserSessionToken) CacheManager
-					.getInstance().getCache(CacheRegionType.USER_SESSION_CACHE)
-					.getValue(sessionId);
-			if (userSessionToken == null) {
-				ServiceRequestContextHolder.setContext(getSystemContext());
-			} else {
-				ServiceRequestContext ctx = ServiceRequestContextHolder
-						.getContext();
-				ctx.setUserSessionToken(userSessionToken);
-			}
-		}
-	}
-
 	private String getSessionId(ProceedingJoinPoint thisJoinPoint)
 			throws NoSuchMethodException, IllegalAccessException,
 			InvocationTargetException {

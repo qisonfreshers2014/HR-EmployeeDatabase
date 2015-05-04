@@ -3,13 +3,12 @@ package com.hred.model;
 import java.util.TimerTask;
 
 import org.apache.commons.mail.EmailException;
-
-import com.hred.exception.BusinessException;
 import com.hred.handler.SendNotificationHistoryHandler;
 
 
 
 public class NotificationTimer extends TimerTask implements Runnable {
+
 
  @Override
  public void run() {
@@ -31,3 +30,7 @@ public class NotificationTimer extends TimerTask implements Runnable {
  }
 
 }
+
+
+
+

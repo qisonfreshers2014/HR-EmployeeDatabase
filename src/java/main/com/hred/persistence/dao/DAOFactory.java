@@ -35,11 +35,11 @@ public class DAOFactory {
 		return UserDAOImpl.getInstance();
 	}
 	
-
-	/*public TemplateDAO getTemplateDAO() {
-		  return  TemplateDAOimpl.getInstance();
-		 }*/
-	
+	public EmployeeDAO getEmployeeDAO() {
+		 
+		  return EmployeeDAOImpl.getInstance();
+	}
+	 
 	public HolidayDAO getHolidayDAO() {
 		return HolidayDAOImpl.getInstance();
 	}
@@ -54,22 +54,12 @@ public class DAOFactory {
 	}
 
 
-
-
-	public EmployeeDAO getEmployeeDAO() {
-		return EmployeeDAOImpl.getInstance();
-	}
-	
-	public SkillsDAO getSkillDAO(){
+	 public SkillsDAO getSkillDAO(){
 		return SkillDAOImpl.getInstance();
 	}
 
-
-	public TemplateDAO getTemplateDAO() {
-
+	public TemplateDAO getTemplateDAO(){
 		return TemplateDAOimpl.getInstance();
-
-		
 	}
 	
 	public FileDAO getFileDAO() {
@@ -82,11 +72,14 @@ public class DAOFactory {
 	}
 
 	
-	
 	public DesignationHistoryDAO getDesignationHistoryDAO(){
 			return DesignationHistoryDAOImpl.getInstance();
 	}
-	
+
+
+
+
+
 	public HRPolicyDAO getHRPolicyDAO(){
 		return HRPolicyDAOImpl.getInstance();
 	}
@@ -95,5 +88,7 @@ public class DAOFactory {
 	{
 		return SendNotificationHistoryDAOImpl.getInstance();
 	}
+
+	
 }
 

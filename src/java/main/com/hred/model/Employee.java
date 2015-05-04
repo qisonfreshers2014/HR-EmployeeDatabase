@@ -1,5 +1,6 @@
 package com.hred.model;
 
+
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
@@ -7,13 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import com.hred.persistence.annotations.Increment;
-
-
-
-/**
- * @author Venkatesh Chitla
- *
- */
 
 @Entity
 @Table(name = "EMPLOYEE")

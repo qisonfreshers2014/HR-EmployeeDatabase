@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 public class DisplayNotificationHome {
+
  private String status;
  private String event;
  private Timestamp date;
@@ -17,24 +18,26 @@ public class DisplayNotificationHome {
   
  }
 
+		public DisplayNotificationHome(String event, Timestamp date,
+			String employeeEmail, String employeeName) {		
+		this.event = event;
+		this.date = date;
+		this.employeeEmail = employeeEmail;
+		this.employeeName = employeeName;
+		
+	}
 
-  public DisplayNotificationHome(String event, Timestamp date,
-   String employeeEmail, String employeeName) {  
-  this.event = event;
-  this.date = date;
-  this.employeeEmail = employeeEmail;
-  this.employeeName = employeeName;
-  
- }
 
  @JsonProperty
  public String getModifiedContent() {
   return modifiedContent;
  }
 
- public void setModifiedContent(String modifiedContent) {
-  this.modifiedContent = modifiedContent;
- }
+
+	public void setModifiedContent(String modifiedContent) {
+		this.modifiedContent = modifiedContent;
+	}
+
 
  @JsonProperty
  public String getEmployeeEmail() {
@@ -79,8 +82,4 @@ public class DisplayNotificationHome {
  }
  
 
- 
- 
- 
- 
 }

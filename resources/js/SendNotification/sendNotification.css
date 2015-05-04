@@ -1,30 +1,23 @@
-#SendMail
-{width:100%;
-height:100%;
- border-style: solid;
-    border-width: medium;
-    border-color: #0000ff;
+ 
+#SendMailNotification {
+     height: 100%;
+    width: 100%;
+   
+    background-color:#CCC;
 }
-
-#field
-{
-width:100%;
-height:40%;
-margin-left: 20px;
+#SubmitdivNotification {
+    margin-left: 94%;
+    margin-top: 2%;
 }
-#sendtoDdb
-{
-width:90%;
-margin-left: 20px;
+#sendtoDdbNotification {
+    margin-left: 20px;
+    width: 97%;
 }
-#textfeild
-{
-width:90%;
-margin-left: 20px;
+#textareaNotification {
+    margin-left: 20px;
+    width: 97%;
 }
-
-#Subject
-{
-width:90%;
-margin-left: 20px;
+#SubjectNotification {
+    margin-left: 20px;
+    width: 97%;
 }
