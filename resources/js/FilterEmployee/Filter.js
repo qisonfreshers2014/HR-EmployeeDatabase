@@ -39,18 +39,15 @@ FilterEmp.prototype.handleShow = function() {
 	});
 	
 	$('#Filter').click(function(){
-		
-		/*event.preventDefault();*/
-		
-		this.FilterEmployee();
+		 this.FilterEmployee();
 		//this.Filterdata();
 	}.ctx(this));
 	
 }
 
-/*FilterEmp.prototype.validateFilter=function(){
+FilterEmp.prototype.validateFilter=function(){
 	
-	 var x=document.getElementById("datepicker").value;
+	 /*var x=document.getElementById("datepicker").value;
 	  var error=document.getElementById("derror")
 	  var doj=new Date(x);
 	  var today= new Date();
@@ -59,15 +56,16 @@ FilterEmp.prototype.handleShow = function() {
 	  {
 	  	error.innerHTML="Invalid Date Of Join";
 	  	error.style.visibility = "visible"; 
-	  valid = false;
+	   return false;
 	  }
 	  else
 	  	error.style.visibility="hidden";
-	       
-	  
-	  return true;
+	     return true;*/
+	/*if($('#gender').val()==""||$('#qualification1').val()==""||$('#designation').val()==""||
+			$('#datepicker').val()=="" ||  $('#year1').val()==""|| $('#year2').val()==""){
+	 alert("must select at least one field");
+}*/
 }
-*/
 
 FilterEmp.prototype.FilterEmployee = function(){
 	 
@@ -76,7 +74,11 @@ FilterEmp.prototype.FilterEmployee = function(){
 	 {
 	 inputdate=null;
 	 }
+ 
 	var payload = {};
+	if($('#filter').val() != 0){
+		payload.filterEmployee = $('#filter').val();
+	}
 	if($('#gender').val().trim().length != 0){
 		payload.gender = $('#gender').val();
 	}
@@ -94,6 +96,7 @@ FilterEmp.prototype.FilterEmployee = function(){
 		payload.to = ($('#year2').val());
 	}
 	console.log(payload);
+	
 /*var input={"payload":{"gender":$('#gender').val(),"currentDesignation":$('#designation').val(),
 			"dateOfJoining":$('#datepicker').val()+' 00:00:00',"from":$('#year1').val(),"to":$('#year2').val(),
 			 "highestQualification":$('#qualification1').val(),
@@ -113,7 +116,7 @@ FilterEmp.prototype.FilterEmployee = function(){
 	    RequestManager.getFilterEmployee({"payload" : payload}, function(data, success) {
 	    	 
 		 if(success){
-			 alert("success");
+			 
 			   var i;
 				   for(i = 0; i < data.length; i++) {
 				       var item = data[i];
@@ -137,7 +140,7 @@ FilterEmp.prototype.FilterEmployee = function(){
 					}.ctx(this));
 			 
 	
-	
+ 
 }
  
 

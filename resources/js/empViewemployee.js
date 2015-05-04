@@ -24,7 +24,7 @@ empViewemployee.prototype.viewEmployeedetails=function(){
        
       
 	
-	var input= {"payload":{"employeeId":1200}};
+	var input= {"payload":{"id":21}};
 
 RequestManager.viewEmployeedatails(input, function(data, success) {
 	if(success){

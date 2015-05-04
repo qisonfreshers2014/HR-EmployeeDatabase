@@ -31,42 +31,6 @@ public class TemplateDAOimpl extends BaseDAOImpl implements TemplateDAO {
 		return INSTANCE;
 	}
 
-	@SuppressWarnings("unchecked")
-	public List<Template> getTemplateByName() {
-		Session session = null;
-		List<Template> list = null;
-		Transaction tx = null;
-		try {
-		session = getSession();
-		if (null == session) {
-		session = SessionFactoryUtil.getInstance().openSession();
-		tx = SessionFactoryUtil.getInstance().beginTransaction(session);
-		}
-		Criteria createCriteria = session.createCriteria(Template.class);
-		 
-		//createCriteria.add(Restrictions.eq("id", employee.getId()));
-		 
-		//createCriteria.add(Restrictions.eq("isDeleted",false));
-		list = (List<Template>)createCriteria.list();
-		 } finally {
-		try {
-		if (tx != null) {
-		tx.commit();
-		if (session.isConnected())
-		   session.close();
-		}
-		} catch (HibernateException e) {
-
-		e.printStackTrace();
-		}
-		}
-		return  list;  
-		}
-	
-	
-
-
-
 	 @SuppressWarnings("unchecked")
 	 @Override
 	 public List< Template> viewTemplate( Template  template) throws TemplateException{
@@ -81,7 +45,7 @@ public class TemplateDAOimpl extends BaseDAOImpl implements TemplateDAO {
 	 }
 	 Criteria createCriteria = session.createCriteria(Template.class);
 	  
-	 createCriteria.add(Restrictions.eq("id",  template.getId()));
+	 createCriteria.add(Restrictions.eq("id", template.getId()));
 	  
 	 //createCriteria.add(Restrictions.eq("isDeleted",false));
 	 list = (List<Template>)createCriteria.list();
@@ -124,6 +88,41 @@ public class TemplateDAOimpl extends BaseDAOImpl implements TemplateDAO {
 	
 	return list;	
 	
+	}
+	
+	//This method to retrieve all the templates as a list object
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Template> getTemplates() {
+		Session session = null;
+		List<Template> list = null;
+		Transaction tx = null;
+		try {
+		session = getSession();
+		if (null == session) {
+		session = SessionFactoryUtil.getInstance().openSession();
+		tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+		}
+		Criteria createCriteria = session.createCriteria(Template.class);
+		 
+		//createCriteria.add(Restrictions.eq("id", employee.getId()));
+		 
+		//createCriteria.add(Restrictions.eq("isDeleted",false));
+		list = (List<Template>)createCriteria.list();
+		 } finally {
+		try {
+		if (tx != null) {
+		tx.commit();
+		if (session.isConnected())
+		   session.close();
+		}
+		} catch (HibernateException e) {
+
+		e.printStackTrace();
+		}
+		}
+		return  list; 
 	}
 
 

@@ -71,18 +71,18 @@ public class EmployeeHandler extends AbstractHandler {
 		return employee;
 	}
 
-	/*
-	 * public List<Employee> getEmployees(FilterEmployee employee) throws
-	 * EmployeeException { List<Employee> employees = null; EmployeeDAO
-	 * empDAOImpl = (EmployeeDAO) DAOFactory.getInstance().getEmployeeDAO();
-	 * employees = empDAOImpl.getEmployees(employee); return employees;
-	 * 
-	 * }
-	 */
+	
+	 public List<Employee> getEmployees(FilterEmployee employee) throws	 EmployeeException { 
+		  List<Employee> employees = null; EmployeeDAO
+	 empDAOImpl = (EmployeeDAO) DAOFactory.getInstance().getEmployeeDAO();
+	 employees = empDAOImpl.getEmployees(employee);
+	 return employees;
+	 
+	 }
+	
 	public List<Employee> getEmployees() throws EmployeeException {
 		List<Employee> employees = null;
-		EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
-				.getUserDAO();
+		EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance().getEmployeeDAO();
 		employees = empDAOImpl.getEmployees();
 		return employees;
 	}
@@ -493,14 +493,14 @@ public class EmployeeHandler extends AbstractHandler {
 				.getHistorydata();
 		List<DisplayNotificationHome> displayNotificationHomeList = new ArrayList<DisplayNotificationHome>();
 		welcomeemp = employeeDAOImpl.getWelcomeEmployee();
-		for (Employee welcomeemp : welcomeemp) {
+		for (Employee welemp : welcomeemp) {
 			DisplayNotificationHome displayNotificationHome = new DisplayNotificationHome(
-					"Anivarsary", welcomeemp.getDateOfBirth(),
-					welcomeemp.getEmail(), welcomeemp.getEmployeeName());
+					"Anivarsary", welemp.getDateOfBirth(),
+					welemp.getEmail(), welemp.getEmployeeName());
 
 			if (notificationHistory.size() != 0) {
 				for (SendNotificationHistory checkingHistory : notificationHistory) {
-					if (checkingHistory.getEmployeeId() == welcomeemp
+					if (checkingHistory.getEmployeeId() == welemp
 							.getEmployeeId()
 							&& checkingHistory.getTemplateId().equals("03")) {
 						displayNotificationHome.setStatus("Sent");

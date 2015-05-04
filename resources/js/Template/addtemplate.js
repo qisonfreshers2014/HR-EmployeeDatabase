@@ -8,7 +8,7 @@ AddTemplate.prototype.handleShow = function() {
 	$('.container').show();
 	//new nicEditor({fullPanel : true}).panelInstance("editor1");
 	$('#editor1').ckeditor({
-		filebrowserImageUploadUrl : '/UploadServletForCKEditor',
+		filebrowserImageUploadUrl :'/UploadServletForCKEditor',
 		filebrowserUploadUrl : '/UploadServletForCKEditor'
 	});
 	$('.save').click(function(){

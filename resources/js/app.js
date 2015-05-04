@@ -128,12 +128,7 @@ App.prototype.loadEmployee=function(gender,contactNo){
 			new Notifications();
 		});
 	}
-	App.prototype.loadAddTemplate = function(){
-		Loader.loadCkeditor();
-	Loader.loadAddTemplate(function(){
-		new AddTemplate();
-			});
-		}
+	
 	
 	App.prototype.loadViewEmployee = function() {
 		Loader.loadViewEmployee(function() {
@@ -303,11 +298,6 @@ App.prototype.loadAddTemplate = function(){
 		new AddTemplate();
 	});
 }
-App.prototype.loadempviewemployee=function(){
-	Loader.loadempviewemployee(function(){
-		new empViewemployee();
-	});
-}
 
 
 App.prototype.loadEmpl=function(){
@@ -354,6 +344,13 @@ App.prototype.loadDes=function(){
 }
 */
 
+App.prototype.loadAddTemplate = function(){
+	Loader.loadCkeditor();
+Loader.loadAddTemplate(function(){
+	new AddTemplate();
+		});
+	}
+
 
 App.prototype.loadFilter=function(cb){
 	Loader.loadFilter(function(){
@@ -372,6 +369,7 @@ App.prototype.loadHRHomePage = function(){
 		new HRHomePage();
 	});
 }
+
 
 
 App.prototype.loadSkill=function(cb){
@@ -413,6 +411,16 @@ App.prototype.loadNotifications = function(){
 	});
 }
 
+App.prototype.loadViewEmployee=function(){
+	Loader.loadViewEmployee(function(){
+		new ViewEmployee();
+	});
+}
+App.prototype.loadempviewemployee=function(){
+	Loader.loadempviewemployee(function(){
+		new empViewemployee();
+	});
+}
 
 /*
 =======

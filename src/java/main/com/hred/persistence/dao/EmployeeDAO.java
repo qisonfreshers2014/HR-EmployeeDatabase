@@ -6,6 +6,7 @@ import com.hred.exception.BusinessException;
 import com.hred.exception.EmployeeException;
 import com.hred.exception.UserException;
 import com.hred.model.Employee;
+import com.hred.model.FilterEmployee;
 import com.hred.service.descriptors.output.DisplayNotificationHome;
 import com.hred.service.descriptors.output.NotificationHomeFilterInputDiscriptor;
 
@@ -22,10 +23,7 @@ public interface EmployeeDAO extends BaseDAO {
 
 
 	public String getEmployeeName(long id);
-
-	
-	public List<Employee> getFilterEmployeeDetails(Employee employee) throws EmployeeException;
-	
+ 
 	
 	public Employee getEmployeeById(String id) throws EmployeeException;
 
@@ -51,6 +49,8 @@ public interface EmployeeDAO extends BaseDAO {
 	public Employee getEmployeeById(long id) throws EmployeeException;
 
 	List<Employee> getWelcomeEmployee() throws BusinessException;
+
+	public List<Employee> getEmployees(FilterEmployee filter);
 
 
 

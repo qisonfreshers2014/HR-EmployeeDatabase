@@ -41,7 +41,7 @@ App.loadHRHomeHeader(name);
 App.loadHRHomePage();
 App.loadHRHomeFooter();*/
 
-	var input={};
+	/*var input={};
 	RequestManager.getAllEvents(input, function(data, success) {
 		if (success) {		
 		
@@ -52,11 +52,11 @@ App.loadHRHomeFooter();*/
 		App.loadNotificationHomePage(data);
 		alert("No Data Found");
 				}
-
+*/
 	
-      App.loadAddTemplate();
-	//App.loadViewEmployee();
-	//App.loadempviewemployee();
+     // App.loadAddTemplate();
+	App.loadViewEmployee();
+//	App.loadempviewemployee();
 
 	//App.loadDes();
 	//App.loadPolicy();
@@ -79,7 +79,7 @@ App.loadHRHomeFooter();*/
 
 //App.loadLogin();
 //App.loadFilter();
-//  App.loadSkill();
+ // App.loadSkill();
  
 
 /*var dataId = 3;	*/

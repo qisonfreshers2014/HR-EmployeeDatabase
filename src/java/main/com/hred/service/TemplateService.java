@@ -37,6 +37,9 @@ public class TemplateService extends BaseService {
 	 * @throws EncryptionException
 	 */
 
+
+	// This method is to add new template
+	
 	@POST
 	@RestService(input = String.class, output = String.class)
 	@ServiceStatus(value = "complete")
@@ -56,6 +59,10 @@ public class TemplateService extends BaseService {
 		return JsonUtil.getJsonBasedOnDescriptor(output, Template.class);
 	}
 
+	
+	
+	// This method is to get template from the database to view
+	
 	@POST
 	@RestService(input = String.class, output = String.class)
 	@ServiceStatus(value = "complete")
@@ -86,7 +93,7 @@ public class TemplateService extends BaseService {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/gatTemplate")
 	@UnSecure
-	public String getTemplateByName(@Context HttpHeaders headers,
+	public String getTemplates(@Context HttpHeaders headers,
 			@Context UriInfo uriInfo, WebserviceRequest request)
 			throws ObjectNotFoundException, BusinessException,
 			EncryptionException, TemplateException {
@@ -94,7 +101,7 @@ public class TemplateService extends BaseService {
 		Template template = (Template) JsonUtil.getObject(request.getPayload(),
 				Template.class);
 		List<Template> templates = (List<Template>) TemplateHandler
-				.getInstance().getTemplateByName();
+				.getInstance().getTemplates();
 		System.out.println("COunt : " + templates.size());
 		// String outputString =
 		// "{\"status\": \"SUCCESS\", \"payload\": \"Test Successful\"}";

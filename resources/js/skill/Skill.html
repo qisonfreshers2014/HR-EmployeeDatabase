@@ -10,24 +10,22 @@
 
 <body>
 <br>
-<div class="head"><h1>Employee Skills Details</h1></div><br/><br/><br/><br/>
- 
+<div class="inputelement1"> <h1 style="color:brown" >Employee Skills Details</h1></div><br/><br/>
+<div class="body"><br>
 <div class="div" >
-<b>Skill &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; :</b><input type="text" id="skill" size="15" ><span class="red">*</span>
-<b class="div" >TrainingAttended:</b><input type="text" size="15" id="attended1" onfocusout="training()"/><span class="red">*</span>
+<b>Skill </b><span class="inputelement1">&nbsp; &nbsp;&nbsp; &nbsp; :&nbsp;</span><input type="text" id="skill" size="15" maxlength="15" ><span class="red">*</span>
+<b class="div" >TrainingAttended&nbsp;:</b><input type="text" size="15" id="attended1" onfocusout="training()"  maxlength="15"/><span class="red">*</span>
 <br>
-<span class="e1" id="skillerror1"> </span> &nbsp; &nbsp; &nbsp;&nbsp; <span  class="e1" id="skillerror2"></span><br> 
+<span class="e1" id="skillerror1"> </span><span class="inputelement1"></span><span  class="e1" id="skillerror2"></span><br> 
 </div>
 <div  class="div">
-<b>EmployeeId:</b> <input type="text" id="empid" size="15" onfocusout="empid()"/><span class="red">*</span>  
-<b class="div"> Rating&nbsp; &nbsp; &nbsp;  </b> :  <input type="text"  onfocusout="rating()" size="15" id="rating"/>
+<b>EmployeeId&nbsp;:</b> <input type="text" id="empid" size="15" onfocusout="empid()"  maxlength="15"/><span class="red">*</span>  
+<b class="div"> Rating<span class="inputelement1"></span><span class="inputelement1"></span> &nbsp;&nbsp; &nbsp; : </b> <input type="text"  onfocusout="rating()" size="15" id="rating"  maxlength="15"/>
 <span class="red">*</span><br>
-<span class="e1" id="error1"> </span>&nbsp; &nbsp; &nbsp; &nbsp;  <span  class="e1" id="error2"></span><br> 
-</div><br><br>
-<div  class="div"> 
- <button  type="button" class="btn btn-primary btn-md" id="save" >save</button> </div><br/><br/><br/>
-  
- 
+<span class="e1" id="error1"> </span><span class="inputelement1"></span><span  class="e1" id="error2"></span><br> 
+</div>
+<div  class="div"><button  type="button" class="btn btn-primary btn-md" id="save" >save</button> </div> </br>
+ </div><br>
  <table id="displayData" class="table table-hover"  style="width:70%">
  <tr>
     <th  >Skill</th>

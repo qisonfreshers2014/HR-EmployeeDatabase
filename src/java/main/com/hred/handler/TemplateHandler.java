@@ -56,7 +56,7 @@ public class TemplateHandler extends AbstractHandler {
 				   throw new TemplateException(ExceptionCodes.EVERY_FIELD_IS_MANDATORY,
 				     ExceptionMessages.EVERY_FIELD_IS_MANDATORY);
 				  }
-		  List<Template> data=getTemplateByName();
+		  List<Template> data=getTemplates();
 		  for(int i=0;i<data.size();i++){
 			  
 			  String dbname=data.get(i).getName();
@@ -73,15 +73,6 @@ public class TemplateHandler extends AbstractHandler {
 		  
 	}
 
-
-	
-	public List<Template> getTemplateByName() {
-		List<Template> templates = null;
-		TemplateDAO temDAOImpl = (TemplateDAO) DAOFactory.getInstance().getTemplateDAO();
-		templates = (List<Template>) temDAOImpl.getTemplateByName();
-		return templates;
-
-	}
 
 	
 
@@ -125,6 +116,13 @@ public class TemplateHandler extends AbstractHandler {
 		  Template tempEdited=(Template) DAOFactory.getInstance().getTemplateDAO().update(templateFromDB);
 		  return tempEdited;
 		 }
+
+	public List<Template> getTemplates() {
+		List<Template> templates = null;
+		TemplateDAO temDAOImpl = (TemplateDAO) DAOFactory.getInstance().getTemplateDAO();
+		templates = (List<Template>) temDAOImpl.getTemplates();
+		return templates;
+	}
 		 
 
 		

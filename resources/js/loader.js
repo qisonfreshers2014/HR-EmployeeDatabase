@@ -41,16 +41,15 @@ Loader.prototype.loadCkeditor = function(){
 	 LazyLoad.js('resources/js/ckeditor/ckeditor.js');
 	}
 
-/*Loader.prototype.loadFilter = function(cb){
+Loader.prototype.loadFilter = function(cb){
 	 LazyLoad.css('resources/js/skill/Skill.css');
->>>>>>> b16aa7fae6a76e891d5b7e15ccf172b6d7ebba5c
 	 LazyLoad.js('resources/js/FilterEmployee/Filter.js',cb);
 }
 Loader.prototype.loadSkill = function(cb) {
 	LazyLoad.css('resources/js/skill/Skill.css');
 	LazyLoad.js('resources/js/skill/Skill.js', cb);
 }
-
+/*
 Loader.prototype.loadViewTemplate = function(cb) {
 	//LazyLoad.css('resources/js/HRhome/HRhomeHeader.css');
 	LazyLoad.js('resources/js/HRhome/EditTemplate.js', cb);

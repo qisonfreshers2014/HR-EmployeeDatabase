@@ -4,11 +4,11 @@
             text-decoration: blink;
         }
         .trviewEmployee  {
-            height: 50%;
-            width: 50%;
-            font-size: 100%;
-            font-family: Calibri
-        }
+	           height: 100%;
+	 width: 100%;
+	 font-size: 100%;
+	 font-family: Calibri;
+	        }
         .thviewEmployee  {
             padding:10px;
             color: black;
@@ -36,7 +36,7 @@
 	           font-weight:bold;
              }
            
-     .star {
+     .mandatory {
 	       color:red;
 	         font-size:20px;
           }

@@ -16,6 +16,8 @@ import com.hred.exception.ExceptionMessages;
 import com.hred.exception.ObjectNotFoundException;
 import com.hred.model.AbstractObject;
 import com.hred.model.BaseObject;
+import com.hred.model.Employee;
+import com.hred.model.FilterEmployee;
 import com.hred.model.Objects;
 import com.hred.model.Template;
 import com.hred.persistence.annotations.Increment;
@@ -151,7 +153,7 @@ public class BaseDAOImpl implements BaseDAO{
 			}
 		}
 		return objectList;
-	}
+	} 
 
 	
 }

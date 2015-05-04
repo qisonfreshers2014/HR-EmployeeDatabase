@@ -213,20 +213,19 @@ RequestManager.prototype.hrupdateEmp=function(data,callback){
 	this.sendToServer('employee/hrupdateEmployee', data, callback);
 }
 
-
+RequestManager.prototype.getTemplates = function(data, callback) {
+	 this.sendToServer('template/gatTemplate', data, callback);
+	}
+RequestManager.prototype.addTemplate = function(data, callback) {
+	 this.sendToServer('template/save', data, callback);
+	}
 /*
 RequestManager.prototype.getNotificationDisplayCriteria=function(data,callback){
 	this.sendToServer('employee/getNotificationDisplayCriteria', data, callback);
 }
-RequestManager.prototype.addTemplate = function(data, callback) {
-	 this.sendToServer('template/save', data, callback);
-	}
-RequestManager.prototype.viewEmployeedatails = function(data, callback) {
-	 this.sendToServer('employee/viewEmployee', data, callback);
-	}
-RequestManager.prototype.getTemplates = function(data, callback) {
-	 this.sendToServer('template/gatTemplate', data, callback);
-	}
+
+
+
 RequestManager.prototype.getSentManualMail=function(data,callback){
 	this.sendToServer('SendNotificationHistory/sendMail', data, callback);
 }
@@ -240,8 +239,24 @@ RequestManager.prototype.getAllEvents=function(data,callback){
 <<<<<<< HEAD
 */
 
+RequestManager.prototype.getSkillDetails = function(data, callback) {
+	  this.sendToServer('skills/getSkillsDetails', data, callback);
+	 }  
+RequestManager.prototype.save = function(data, callback) {
+	  this.sendToServer('skills/save', data, callback);
+	 } 
+RequestManager.prototype.getEditSKill = function(data, callback) {
+	  this.sendToServer('skills/geteditskills', data, callback);
+	 }
+ 
+RequestManager.prototype.getFilterEmployee = function(data, callback) {
+	  this.sendToServer('employee/getEmployees', data, callback);
+	 }
 RequestManager.prototype.getContentForMail=function(data,callback){
 	this.sendToServer('template/getContentForMail', data, callback);
 }
+RequestManager.prototype.viewEmployeedatails = function(data, callback) {
+	 this.sendToServer('employee/viewEmployee', data, callback);
+	}
 
 var RequestManager = new RequestManager();

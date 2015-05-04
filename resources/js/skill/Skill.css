@@ -17,15 +17,25 @@ th,td{
 }
 .red{
 	color:red;
-	font-size:10px;
+	font-size:20px;
 }
-.head{
-	 
+.right{
+	margin-left:25px;
+}
+.body{
+background-color: lightgray; 
+width:70%;
+height:180%;
+margin-left:3%;
+font-family:calibri;
+}
+
+.head1{
 	font-weight: bold;
- 	color:brown;
-  	margin-left:10%;
+ 	color:red;
+  	margin-left:5%;
   	font-family: Calibri;
-  	align-text:center;
+  	 
 }
 
 .heading
@@ -33,7 +43,7 @@ th,td{
   font-weight: bold;
   color:brown;
   margin-left:4%; 
-  font-family: Calibri; 
+  font-family:Calibri; 
 }
 .p{
 	margin-left:12%;
@@ -56,33 +66,38 @@ th,td{
 #skillerror1{
 visibility:visible;
 color:red;
-font-size:12px;
+font-size:10px;
 font:calibre;
 }  
 #skillerror2{
 visibility:visible;
 color:red;
-font-size:12px;
+font-size:10px;
 font:calibre;
 }
 #error1{
 visibility:visible;
 color:red;
-font-size:12px;
+font-size:10px;
 font:calibre;
 } 
 #error2{
 visibility:visible;
 color:red;
-font-size:12px;
+font-size:10px;
 font:calibre;
 }
 .inputelement
 {
   font-size:15px;
   font-weight: bold;
-   
   margin-left:7%;
+} 
+.inputelement1
+{
+  
+   
+   margin-left:3%;
 } 
 #herror{
 visibility:visible;
