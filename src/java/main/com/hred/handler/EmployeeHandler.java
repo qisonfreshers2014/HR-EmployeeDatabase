@@ -437,6 +437,7 @@ public class EmployeeHandler extends AbstractHandler {
 							.getEmployeeId()
 							&& checkingHistory.getTemplateId().equals("01")) {
 						displayNotificationHome.setStatus("Sent");
+						break;
 					} else {
 						displayNotificationHome.setStatus("Not Sent");
 					}
@@ -452,14 +453,14 @@ public class EmployeeHandler extends AbstractHandler {
 
 	// This Method will return the Anivarsary list with a selected criteria
 	public List<DisplayNotificationHome> getAnivarsaryList(
-			List<Employee> employeeAnivarsary) {
+			List<Employee> employeeBirthday) {
 		SendNotificationHistoryDAO SendNotificationHistoryDAOImpl = DAOFactory
 				.getInstance().getSendNotificationHistoryDAO();
 		List<SendNotificationHistory> notificationHistory = SendNotificationHistoryDAOImpl
 				.getHistorydata();
 		List<DisplayNotificationHome> displayNotificationHomeList = new ArrayList<DisplayNotificationHome>();
 
-		for (Employee birthday : employeeAnivarsary) {
+		for (Employee birthday : employeeBirthday) {
 			DisplayNotificationHome displayNotificationHome = new DisplayNotificationHome(
 					"Anivarsary", birthday.getDateOfBirth(),
 					birthday.getEmail(), birthday.getEmployeeName());
@@ -470,6 +471,7 @@ public class EmployeeHandler extends AbstractHandler {
 							.getEmployeeId()
 							&& checkingHistory.getTemplateId().equals("02")) {
 						displayNotificationHome.setStatus("Sent");
+						break;
 					} else {
 						displayNotificationHome.setStatus("Not Sent");
 					}
@@ -495,20 +497,24 @@ public class EmployeeHandler extends AbstractHandler {
 				.getHistorydata();
 		List<DisplayNotificationHome> displayNotificationHomeList = new ArrayList<DisplayNotificationHome>();
 		welcomeemp = employeeDAOImpl.getWelcomeEmployee();
-		for (Employee welEmp : welcomeemp) {
+		for (Employee welcomeemp : welcomeemp) {
 			DisplayNotificationHome displayNotificationHome = new DisplayNotificationHome(
-					"Wel Come", welEmp.getDateOfBirth(), welEmp.getEmail(),
-					welEmp.getEmployeeName());
-			for (SendNotificationHistory checkinghistory : notificationHistory) {
-				if (checkinghistory.getEmployeeEmail()
-						.equals(welEmp.getEmail())
-						&& checkinghistory.getTemplateId().equalsIgnoreCase(
-								"03")) {
-					displayNotificationHome.setStatus("Sent");
-					break;
-				} else {
-					displayNotificationHome.setStatus("Not Sent");
+					"Anivarsary", welcomeemp.getDateOfBirth(),
+					welcomeemp.getEmail(), welcomeemp.getEmployeeName());
+
+			if (notificationHistory.size() != 0) {
+				for (SendNotificationHistory checkingHistory : notificationHistory) {
+					if (checkingHistory.getEmployeeId() == welcomeemp
+							.getEmployeeId()
+							&& checkingHistory.getTemplateId().equals("03")) {
+						displayNotificationHome.setStatus("Sent");
+						break;
+					} else {
+						displayNotificationHome.setStatus("Not Sent");
+					}
 				}
+			} else {
+				displayNotificationHome.setStatus("Not Sent");
 			}
 
 			displayNotificationHomeList.add(displayNotificationHome);
