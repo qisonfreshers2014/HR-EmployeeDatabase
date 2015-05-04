@@ -1,0 +1,40 @@
+#name{
+position:absolute;
+margin-left:73px;
+margin-top:56px;		
+}
+#tempName{
+position:absolute;
+margin-left:185px;
+margin-top:69px;	
+font-family: Calibri;
+font-size:15px;	
+}
+#subject{
+position:absolute;
+margin-left:73px;
+margin-top:110px;		
+}
+#tempSubject{
+position:absolute;
+margin-left:185px;
+margin-top:126px;		
+font-family: Calibri;
+font-size:15px;
+}
+#content{
+position:absolute;
+margin-left:73px;
+margin-top:160px;		
+}
+#tempContent{
+position:absolute;
+margin-left:185px;
+margin-top:171px;	
+font-family: Calibri;	
+font-size:15px;
+}
+#tempBackground{
+	height: 439px;
+	background-color:lightgrey;
+}

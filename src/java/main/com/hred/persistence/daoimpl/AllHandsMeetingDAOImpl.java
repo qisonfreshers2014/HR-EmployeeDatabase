@@ -9,6 +9,9 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import com.hred.exception.AllHandsMeetingException;
+import com.hred.exception.ExceptionCodes;
+import com.hred.exception.ExceptionMessages;
+import com.hred.exception.UserException;
 import com.hred.model.AllHandsMeeting;
 import com.hred.persistence.dao.AllHandsMeetingDAO;
 import com.hred.persistence.session.SessionFactoryUtil;
@@ -31,7 +34,7 @@ public class AllHandsMeetingDAOImpl extends BaseDAOImpl implements AllHandsMeeti
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public AllHandsMeeting getAllHandsMeetingById(int id) throws AllHandsMeetingException {
+	public  List<AllHandsMeeting> getAllHandsMeetingById(AllHandsMeeting allhandsmeeting) throws AllHandsMeetingException {
 		Session session = null;
 		List<AllHandsMeeting> list = null;
 		Transaction tx = null;
@@ -42,9 +45,12 @@ public class AllHandsMeetingDAOImpl extends BaseDAOImpl implements AllHandsMeeti
 				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 			}
 			Criteria createCriteria = session.createCriteria(AllHandsMeeting.class);
-			createCriteria.add(Restrictions.eq("id", id));
-			/*createCriteria.add(Restrictions.eq("isDeleted", false));*/
-			list = createCriteria.list();
+			createCriteria.add(Restrictions.eq("id", allhandsmeeting.getId()));
+			//createCriteria.add(Restrictions.eq("isDeleted", false));
+			list = (List<AllHandsMeeting>)createCriteria.list();
+			if (list.size() == 0) {
+				throw new AllHandsMeetingException(ExceptionCodes.AllHANDSMEETINGID_DOESNOT_EXIST, ExceptionMessages.AllHANDSMEETINGID_DOESNOT_EXIST);
+			}
 			
 		} finally {
 
@@ -59,7 +65,7 @@ public class AllHandsMeetingDAOImpl extends BaseDAOImpl implements AllHandsMeeti
 				e.printStackTrace();
 			}
 		}
-		return (AllHandsMeeting) list;
+		return  list;
 
 	}
 	
@@ -67,7 +73,7 @@ public class AllHandsMeetingDAOImpl extends BaseDAOImpl implements AllHandsMeeti
 		
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<AllHandsMeeting> getAllHandsMeeting(AllHandsMeeting allhandsmeeting) {
+	public List<AllHandsMeeting> getAllHandsMeeting() {
 		Session session = null;
 		List<AllHandsMeeting> list = null;
 		Transaction tx = null;
@@ -91,8 +97,7 @@ public class AllHandsMeetingDAOImpl extends BaseDAOImpl implements AllHandsMeeti
 				}
 			}*/
 			Criteria createCriteria = session.createCriteria(AllHandsMeeting.class);
-			//createCriteria.add(Restrictions.eq("type",holiday.getType()));
-			//createCriteria.add(Restrictions.eq("isDeleted", false));
+			
 			list = (List<AllHandsMeeting>)createCriteria.list();
 		} finally {
 			try {
@@ -108,6 +113,17 @@ public class AllHandsMeetingDAOImpl extends BaseDAOImpl implements AllHandsMeeti
 		}
 		return  list;	 
 	}
+
+
+	//@Override
+/*	public AllHandsMeeting getAllHandsMeetingById(int id)
+			throws AllHandsMeetingException {
+		// TODO Auto-generated method stub
+		return null;
+	}*/
+
+	
+
 
 	
 }

@@ -14,10 +14,12 @@ import com.hred.model.Holiday;
  */
 public interface HolidayDAO extends BaseDAO{
 	
-	public Holiday getHolidaysById(int id) throws HolidaysException;
+	public List<Holiday> getHolidayById(Holiday holiday) throws HolidaysException;
 	
-	public List<Holiday> getHolidays(Holiday holiday);
+	public List<Holiday> getHolidays();
+
+	/*public Holiday getHolidayById(long id) throws HolidaysException;*/
 	
-	public Holiday editHoliday(Holiday editedholiday);
 	
+		
 }

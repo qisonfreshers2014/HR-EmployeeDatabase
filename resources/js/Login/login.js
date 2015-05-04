@@ -6,15 +6,17 @@ function Login() {
 
 Login.prototype.handleShow = function() {		
 	$('#userName').focus();	
-	$("#Submit").click(function (event) {
-		//if (event.keyCode == 13){
-		//	 $("#Submit").click();
-			  if(this.validateLogin($('input.username').val(),$('input.password').val())){		
-					this.authenticate();
-		//	  }		
-		  }
-		 }.ctx(this));
-}
+	$("#login").keyup(function (event) {
+		if (event.keyCode == 13){
+		 $("#Submit").trigger('click');
+		 }	
+    }.ctx(this));
+	$("#Submit").click(function(event){
+		 if(this.validateLogin($('input.username').val(),$('input.password').val())){		
+				this.authenticate();
+	 }	
+	}.ctx(this));
+}	
 	Login.prototype.authenticate = function() {	
 		
 		var input = {"payload":{"authType":"REGULAR",
@@ -27,18 +29,14 @@ Login.prototype.handleShow = function() {
 				var  token = data.sessionToken;
 			      setCookie('hredSessionToken', token, null);
 				console.log("************************");
-			//	console.dir(data);
-				//if(data.employee.currentDesignation=="2")
-				//{
-			
 				var name=data.employee.employeeName;
 			    var jobRole=data.employee.currentDesignation;
 			    var gender=data.employee.gender;
 			    var contactNo=data.employee.contactNo;
-				App.loadEmployeePage(name,jobRole);
-				App.loadFooter();
-				App.loadEmployee(gender,contactNo);
-				//App.loadTemplate();
+				//App.loadEmployeePage(name,jobRole);
+				//App.loadFooter();
+				//App.loadEmployee(gender,contactNo);
+				App.loadTemplate();
 			}
 		}.ctx(this));
 	}
@@ -49,32 +47,61 @@ Login.prototype.handleShow = function() {
 	    var isValid = false;
 	    var emailReg = /^[_A-Za-z]+[_A-Za-z0-9-]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$/;
 	  //  var emailVal = email;
+	    var minMaxLength = /^[\s\S]{8,32}$/;
+	    var number = /[0-9]/;
+	    var special = /[ !"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]/;
+	    var upper = /[A-Z]/;
+	    var lower = /[a-z]/;
 	    if(email == "" || email == null) {
-	    	$(".message").show();
-	    	$('.message').focus();
-	    	$('.message').text("email must be filled(?)");
+	    	$(".errormessage1").show();
+	    	$('.errormessage1').focus();
+	    	$('.errormessage1').text("Email must be filled(?)");
 	        isValid = false;
 	    }
 
 	    else if(!emailReg.test(email)) {
-	    	$(".message").show();
-	    	$('.message').focus();
-	    	$('.message').text("enter a valid email(?)");
+	    	$('.errormessage1').show();
+	    	$('.errormessage1').focus();
+	    	$('.errormessage1').text("Enter a valid email(?)");
 	        isValid = false;
 	    }
 	    else if (email.length > 128){
-	    	$(".message").show();
-	    	$('.message').focus();
-	    	$('.message').text("email length is large(?)");
+	    	$(".errormessage1").show();
+	    	$('.errormessage1').focus();
+	    	$('.errormessage1').text("Email length is large(?)");
 	        isValid = false;    	
 	    }
-	    else if(password.length < 1 ){
-	    	$(".message").show();
-	    	$('.message').focus();
-	    	$('.message').text("password cant be empty(?)");
+	    else if(!minMaxLength.test(password) ){
+	    	$(".errormessage").show();
+	    	$('.errormessage').focus();
+	    	$('.errormessage').text("Password is too short(?)");
 	        isValid = false;
 		} 
-		 else if(password.length < 6 ){
+	    else if(!special.test(password) ){
+	    	$(".errormessage").show();
+	    	$('.errormessage').focus();
+	    	$('.errormessage').text("Password has no special character(?)");
+	        isValid = false;
+		} 
+	    else if(!number.test(password) ){
+	    	$(".errormessage").show();
+	    	$('.errormessage').focus();
+	    	$('.errormessage').text("Password has no number(?)");
+	        isValid = false;
+		} 
+	    else if(!upper.test(password) ){
+	    	$(".errormessage").show();
+	    	$('.errormessage').focus();
+	    	$('.errormessage').text("Password has no Uppercase(?)");
+	        isValid = false;
+		}
+	    else if(!lower.test(password) ){
+	    	$(".errormessage").show();
+	    	$('.errormessage').focus();
+	    	$('.errormessage').text("Password has no Lowercase(?)");
+	        isValid = false;
+		}
+		/* else if(password.length < 6 ){
 			$(".message").show();
 			$('.message').focus();
 	    	$('.message').text("password is too short(?)");
@@ -82,13 +109,13 @@ Login.prototype.handleShow = function() {
 		} 
 		else if(password.trim().length  > 128)
 			{
-			$(".message").show();
-			$('.message').focus();
-	    	$('.message').text("password is too large(?)");	
-			}
+			$(".errormessage").show();
+			$('.errormessage').focus();
+	    	$('.errormessage').text("password is too large(?)");	
+			}*/
 		    else
 			{
-			$(".message").empty();
+			$(".errormessage1").empty();
 			isValid = true;    
 			}
 		return isValid; 

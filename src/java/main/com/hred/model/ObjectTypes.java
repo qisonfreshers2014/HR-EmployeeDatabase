@@ -60,8 +60,10 @@ public static final int ALL_HANDS_MEETING = 201;
 
  
  //holiday_master 
- public static final int holiday_master = 171;
- public static final int holidays = 172;
+ public static final int HOLIDAYMASTER = 171;
+ public static final int HOLIDAY = 172;
+ 
+ //employee
 
  
  public static final int SENDNOTIFICATION = 141;

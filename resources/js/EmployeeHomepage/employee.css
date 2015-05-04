@@ -1,35 +1,15 @@
 
-#name{
-position:absolute;
-left:108px;
-top:24px;
+#table{
+	position:absolute;
+	width:60%;
+	 margin-left: 6%;
+    margin-top: 5%;
+	font-size:15px;
+	color:black;
 }
-#gender{
-position:absolute;
-left:319px;
-top:24px;
-}
-#phnNum{
-position:absolute;
-left:543px;
-top:24px;
-}
-#empName{
-position:absolute;
-left:108px;
-top:40px;
-}
-#empGender{
-position:absolute;
-left:319px;
-top:40px;
-}
-#empPhnNum{
-position:absolute;
-left:543px;
-top:40px;
-}
-#image{
-	height:50%;
-	width:50%;
+
+th {
+    background-color: #7094b8;
+    color: #000000;
+    
 }

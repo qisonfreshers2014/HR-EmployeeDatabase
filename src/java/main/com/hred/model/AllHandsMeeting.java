@@ -1,11 +1,15 @@
 package com.hred.model;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.rmi.CORBA.Tie;
 
 import com.hred.persistence.annotations.Increment;
 
+import com.hred.persistence.annotations.Increment;
 
 
 @Entity
@@ -15,19 +19,19 @@ public class AllHandsMeeting extends AbstractObject{
 
 
 	 @Column(name = "date")
-	 private java.util.Date  date;
+	 private Timestamp date;
 	 @Column(name = "employee_of_the_month")
 	 private String employee;
 	 @Column(name = "description")
 	 private String description;
 
-	 public java.util.Date getDate() {
+	 public Timestamp getDate() {
 		return date;
 	}
 
 
 
-	public void setDate(java.util.Date date) {
+	public void setDate(Timestamp date) {
 		this.date = date;
 	}
 

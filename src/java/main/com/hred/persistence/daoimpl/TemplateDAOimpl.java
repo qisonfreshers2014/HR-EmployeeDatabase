@@ -8,7 +8,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
-
+import com.hred.exception.AllHandsMeetingException;
 import com.hred.exception.ExceptionCodes;
 import com.hred.exception.ExceptionMessages;
 import com.hred.exception.TemplateException;
@@ -34,7 +34,7 @@ public class TemplateDAOimpl extends BaseDAOImpl implements TemplateDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Template> getTemplateByName(Template template) {
+	public List<Template> getTemplateByName() {
 		Session session = null;
 		List<Template> list = null;
 		Transaction tx = null;
@@ -72,7 +72,7 @@ public class TemplateDAOimpl extends BaseDAOImpl implements TemplateDAO {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List< Template> viewTemplate( Template  template){
+	public List< Template> viewTemplate( Template  template) throws TemplateException{
 	Session session = null;
 	List<Template> list = null;
 	Transaction tx = null;
@@ -88,6 +88,9 @@ public class TemplateDAOimpl extends BaseDAOImpl implements TemplateDAO {
 	 
 	//createCriteria.add(Restrictions.eq("isDeleted",false));
 	list = (List<Template>)createCriteria.list();
+	if (list.size() == 0) {
+		throw new TemplateException(ExceptionCodes.TEMPLATE_DOESNOT_EXIST, ExceptionMessages.TEMPLATE_DOES_NOT_EXIST);
+	}
 	 } finally {
 	try {
 	if (tx != null) {
@@ -103,9 +106,29 @@ public class TemplateDAOimpl extends BaseDAOImpl implements TemplateDAO {
 	return  list;  
 	}
 
+	public Template getContentForMail(Template template)
+	{
+		Session session = null;
+		Template list = null;
+		Transaction tx = null;
+		
+		session = getSession();
+		if (null == session) {
+		session = SessionFactoryUtil.getInstance().openSession();
+		tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+		}
+		Criteria createCriteria = session.createCriteria(Template.class);
+		createCriteria.add(Restrictions.eq("name",template.getSubject()));
+	/*	createCriteria.add(Restrictions.eq("name",  template.getSubject()));*/
+		list = (Template) createCriteria.uniqueResult();
+	
+	return list;	
 	
 	}
 
+
+	
+}
 	
 		 
 		

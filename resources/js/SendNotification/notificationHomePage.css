@@ -1,39 +1,31 @@
-#head
+#headNotification
 {
-	 border-style: solid;
-    border-width: medium;
-    border-color: #0000ff;
-    background-color:#3399FF;
-}
-#extraActions
-{
-	border-color: #0000ff;
-	border-style: solid;
-    border-width: medium;
-	border-top-style: none;
-	background-color:#3399FF;
-}
-#States
-{
-	margin-left:40%;
-}
-#Events
-{
-	margin-right:5%;
-}
-#fromDate
-{
-	margin-right:0%;
-}
-#toDate
-{
-	margin-right:5%;
+   color:brown;  
+  
 }
 
-.container {
-	height : 600px;
+
+#retriveDataNotification{
+    float: right;
+   margin-top: -4%;
+    margin-right: 2%;
+}
+#datedataNotification
+{
+	float:right;
+	pading:10px;
 }
 
-.leftContainer {
-	height : 500px;
+#EventsNotification {
+    float: left;
+    margin-left: 10px;
+   margin-top: 2%;
 }
+
+
+#Notificationhome {
+    width: 95%;
+    margin-left: 3%;
+     margin-top: 3%;
+}
+

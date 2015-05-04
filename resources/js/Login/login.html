@@ -1,15 +1,16 @@
 
-<div id="image">
-
-<div id="welcome"><strong>Sign in to your account</strong></div>
+<div id="image1">
+<img src="resources/images/HRMS1.jpg" style="width:100%;height:100%" />
+<div id="welcome">Sign in to your account</div>
 <div id="login" >
 
 
-<input type="text" class="username form-control" id="userName" name="userName" placeholder="Email"><br>
-<input type="password" class="password form-control" id="Password" name="password" placeholder="password"><br>
-<input type="button" class="submit btn btn-primary" id="Submit" name="login" value="LOGIN" >
+<input type="text" class="username form-control" id="userName" name="userName" placeholder="Email" required><span class="star">*</span><br>
+<div id="message" class="errormessage1"></div>
+<input type="password" class="password form-control" id="Password" name="password" placeholder="Password" required><span class="star1">*</span><br>
+<button class="submit btn btn-primary submitEmail" id="Submit" type="button">LOGIN</button>
 
-<div id="message" class="message"></div>
+<div id="message" class="errormessage"></div>
 
 
 

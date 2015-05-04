@@ -20,7 +20,7 @@ public class UserSessionToken implements Serializable {
     protected String userSessionId;
     protected String userEmail;
     protected long userId;  
-    protected String nickName; //anil
+    protected String nickName;
     protected String roleName;
     
     

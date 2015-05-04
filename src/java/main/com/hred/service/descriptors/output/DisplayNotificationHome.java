@@ -10,10 +10,19 @@ public class DisplayNotificationHome {
 	private Timestamp date;
 	private String employeeEmail;
 	private String employeeName;
+	private String modifiedContent;
 	
 
 
 
+	@JsonProperty
+	public String getModifiedContent() {
+		return modifiedContent;
+	}
+
+	public void setModifiedContent(String modifiedContent) {
+		this.modifiedContent = modifiedContent;
+	}
 
 	@JsonProperty
 	public String getEmployeeEmail() {

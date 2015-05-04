@@ -1,7 +1,7 @@
 body {
     background-color: #ffffff;
     color: #000000;
-    font-family: serif,sans-serif,cursive,Arial;
+    font-family: calibri;
     width: 100%;
 }
 .header {
@@ -27,7 +27,7 @@ body {
 }
 
  .container {
-    background-color: #FFF;
+    background-color: #ffffff;
     display: block;
     width: 90%;
     height: 100%;
@@ -54,4 +54,3 @@ body {
     height:30px;
     bottom: 10px;
 }
-
