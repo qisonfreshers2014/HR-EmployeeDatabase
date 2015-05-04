@@ -6,18 +6,17 @@ import com.hred.exception.ExceptionCodes;
 import com.hred.exception.ExceptionMessages;
 import com.hred.exception.ObjectNotFoundException;
 import com.hred.exception.TemplateException;
-
 import com.hred.handler.AbstractHandler;
+import com.hred.model.DesignationType;
 import com.hred.model.Employee;
 import com.hred.model.ObjectTypes;
 import com.hred.model.Objects;
 import com.hred.exception.TemplateException;
-
 import com.hred.model.Employee;
 import com.hred.model.ObjectTypes;
-
 import com.hred.model.Template;
 import com.hred.persistence.dao.DAOFactory;
+import com.hred.persistence.dao.DesignationTypeDAO;
 import com.hred.persistence.dao.EmployeeDAO;
 import com.hred.persistence.dao.FileDAO;
 import com.hred.persistence.dao.TemplateDAO;
@@ -118,6 +117,10 @@ public class TemplateHandler extends AbstractHandler {
 		Employee sendNotification=new Employee();
 		EmployeeDAO employeeDAOImpl = DAOFactory.getInstance().getEmployeeDAO();
 		List<Employee> employeeDetails=employeeDAOImpl.getEmployees();
+		DesignationType getDesignationName=new DesignationType();
+		DesignationTypeDAO designationTypeDAOImpl = (DesignationTypeDAO) DAOFactory.getInstance()
+				.getDesignationTypeDAO();
+		
 		
 		for(Employee sendNotificationtoEmp:employeeDetails)
 		{
@@ -128,14 +131,18 @@ public class TemplateHandler extends AbstractHandler {
 				sendNotification.setHighestQualification(sendNotificationtoEmp.getHighestQualification());
 				sendNotification.setCurrentDesignation(sendNotificationtoEmp.getCurrentDesignation());
 				sendNotification.setEmail(sendNotificationtoEmp.getEmail());
-				sendNotification.setSkype(sendNotificationtoEmp.getSkill());
+				sendNotification.setSkype(sendNotificationtoEmp.getSkype());
 				break;
 			}
 			
 		}
+		System.out.println(sendNotification.getCurrentDesignation());
+		getDesignationName=designationTypeDAOImpl.getDesignationByID(sendNotification);
+		String currentDesignation=getDesignationName.getName();
 		if(gettemplate.getEvent().equalsIgnoreCase("WelCome"))
 		{
 	String finalContent="Dear Qisonians,<br/> We take Immense pleasure in welcoming "+ sendNotification.getEmployeeName()+" who has Joined QISON TEAM <br/> ";
+	finalContent +="He is working as "+currentDesignation+"<br/>";
 			 
  finalContent += sendNotification.getEmployeeName()+" as he likes to be called, he has pursued "+ sendNotification.getHighestQualification()+".<br/> He takes keen interest in "+sendNotification.getSkill()+"<br/>";
 			 

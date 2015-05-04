@@ -85,7 +85,7 @@ loadNotificationHomePage.prototype.eventChangeCriteria = function() {
 	   
 	   if(fromdatevalidation>todatevalidation || fromDate =="" || toDate =="" )
 	   {
-	   alert("Invalid Date......To Date.!!!!!")
+	   alert("Invalid Date!!!!!")
 	   }
 	   else
 		   {

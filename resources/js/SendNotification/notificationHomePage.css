@@ -1,43 +1,40 @@
-#headNotification
-{
-   color:brown;  
-  
-}
-#retriveDataNotification{
-    float: right;
-   margin-top: -3%;
-    margin-right: 2%;
-}
-#datedataNotification
-{
-	float:right;
-	pading:10px;
-}
 
+#headNotification {
+    color: brown;
+}
+#retriveDataNotification {
+    margin-left: 32%;
+    margin-top: 0%;
+}
+#datedata {
+    float: left;
+    margin-left: 5%;
+}
 #EventsNotification {
     float: left;
     margin-left: 1%;
-    margin-top: 0%;
+    margin-top: 0;
 }
 #Notificationhome {
     margin-left: 2%;
     margin-top: 3%;
     width: 95%;
 }
-h1
-{
-	color:brown;
-	 margin-left: 35%;
+h1 {
+    color: brown;
+    margin-left: 44%;
 }
-#extraActionsNotification
-{
-padding-top: 3%;
+h3 {
+    color: brown;
+    margin-left: 44%;
 }
-#Notificationhome
-{
-background-color:lightgrey;
+#extraActionsNotification {
+    padding-top: 3%;
 }
-.dynamicSend
-{
-	margin-top: 1px;
+#dataTableNotification {
+    background-color: lightgrey;
+    margin-top: 3%;
+}
+.dynamicSend {
+    margin-top: 1px;
 }
