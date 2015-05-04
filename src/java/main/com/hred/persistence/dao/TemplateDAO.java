@@ -12,8 +12,6 @@ public interface TemplateDAO extends BaseDAO{
 
 	 Template getContentForMail(DisplayNotificationHome template);
 
-
-
 	List<Template> viewTemplate(Template template) throws TemplateException;
 
 }

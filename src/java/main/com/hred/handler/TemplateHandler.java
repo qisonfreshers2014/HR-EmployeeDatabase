@@ -6,11 +6,14 @@ import com.hred.exception.ExceptionCodes;
 import com.hred.exception.ExceptionMessages;
 import com.hred.exception.ObjectNotFoundException;
 import com.hred.exception.TemplateException;
+import com.hred.model.Employee;
 import com.hred.model.ObjectTypes;
 import com.hred.model.Template;
 import com.hred.persistence.dao.DAOFactory;
+import com.hred.persistence.dao.EmployeeDAO;
 import com.hred.persistence.dao.FileDAO;
 import com.hred.persistence.dao.TemplateDAO;
+import com.hred.service.descriptors.output.DisplayNotificationHome;
 
 public class TemplateHandler extends AbstractHandler {
  private static TemplateHandler INSTANCE = null;
@@ -94,28 +97,72 @@ public class TemplateHandler extends AbstractHandler {
 
  }
 
- public Template getContentForMail(Template template) {
-  Template receivedtemplates = null;
-  String url = "";
-  TemplateDAO tempDAOImpl = (TemplateDAO) DAOFactory.getInstance().getTemplateDAO();
-  FileDAO fileDAOimpl = (FileDAO) DAOFactory.getInstance().getFileDAO();
-  receivedtemplates = tempDAOImpl.getContentForMail(template);
-  String finalContent =receivedtemplates.getContent();
-  /*List<File> filelist = fileDAOimpl.getAllFiles();
-  for (File eachfile : filelist) {
-   if (eachfile.getId() == receivedtemplates.getFileId()) {
-    url = eachfile.getFilePath();
+ public Template getContentForMail(DisplayNotificationHome gettemplate) {
+	  Template receivedtemplates = new Template();
+	  String url = "";
+	  Employee sendNotification=new Employee();
+	  EmployeeDAO employeeDAOImpl = DAOFactory.getInstance().getEmployeeDAO();
+	  List<Employee> employeeDetails=employeeDAOImpl.getEmployees();
+	  
+	  for(Employee sendNotificationtoEmp:employeeDetails)
+	  {
+	   if(sendNotificationtoEmp.getEmail().equals(gettemplate.getEmployeeEmail()))
+	   {
+	    sendNotification.setEmployeeName(sendNotificationtoEmp.getEmployeeName());
+	    sendNotification.setSkype(sendNotificationtoEmp.getSkype());
+	    sendNotification.setHighestQualification(sendNotificationtoEmp.getHighestQualification());
+	    sendNotification.setCurrentDesignation(sendNotificationtoEmp.getCurrentDesignation());
+	    sendNotification.setEmail(sendNotificationtoEmp.getEmail());
+	    sendNotification.setSkype(sendNotificationtoEmp.getSkill());
+	    break;
+	   }
+	  }
+	  if(gettemplate.getEvent().equalsIgnoreCase("WelCome"))
+	  {
+	 String finalContent="Dear Qisonians,<br/> We take Immense pleasure in welcoming "+ sendNotification.getEmployeeName()+" who has Joined QISON TEAM <br/> ";
+	    
+	 finalContent += sendNotification.getEmployeeName()+" as he likes to be called, he has pursued "+ sendNotification.getHighestQualification()+".<br/> He takes keen interest in "+sendNotification.getSkill()+"<br/>";
+	    
+	 finalContent += "He can be reached on "+sendNotification.getEmail()+"<br/>";
+	    
+	 finalContent += "His Skype ID "+sendNotification.getSkype()+"<br/>";
+	    
+	 finalContent += "Please join us in welcoming "+sendNotification.getEmployeeName()+" to QISON family and Wish him a Long and Successful career !!!<br/>";
+	                                                                                                     
+	    
+	 finalContent += "Best Regards,<br/>HR Team.";
+	 receivedtemplates.setContent(finalContent);
+	 
+	  }
+	  else
+	  {
+	  TemplateDAO tempDAOImpl = (TemplateDAO) DAOFactory.getInstance().getTemplateDAO();
+	  FileDAO fileDAOimpl = (FileDAO) DAOFactory.getInstance().getFileDAO();
+	  receivedtemplates = tempDAOImpl.getContentForMail(gettemplate);
+	  String finalContent ="Hi "+sendNotification.getEmployeeName()+"<br/>"+receivedtemplates.getContent();
+	  
+	  
+	  /*List<File> filelist = fileDAOimpl.getAllFiles();
+	  for (File eachfile : filelist) {
+	   if (eachfile.getId() == receivedtemplates.getFileId()) {
+	    url = eachfile.getFilePath();
 
-   }  
+	   }  
 
-  }
-  finalContent+="<br/><<img src="+url+" width=\"250\" height=\"95\" border=\"0\" alt="+receivedtemplates.getSubject()+"><br>";
-  template.setContent(finalContent);
-  */  
+	  }
+	  finalContent+="<br/><<img src="+url+" width=\"250\" height=\"95\" border=\"0\" alt="+receivedtemplates.getSubject()+"><br>";
+	  template.setContent(finalContent);
+	  */  
+	  receivedtemplates.setContent(finalContent);
+	  }
+	 
+	  
+	  
+	  
 
-  return receivedtemplates;
+	  return receivedtemplates;
 
- }
+	 }
  public Template update(Template template) throws ObjectNotFoundException {
     // TODO Auto-generated method stub
     Template templateFromDB = (Template)DAOFactory.getInstance().getTemplateDAO().getObjectById(template.getId(), ObjectTypes.TEMPLATE);

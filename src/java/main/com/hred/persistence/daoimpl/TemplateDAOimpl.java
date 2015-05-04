@@ -15,6 +15,7 @@ import com.hred.exception.TemplateException;
 import com.hred.model.Template;
 import com.hred.persistence.dao.TemplateDAO;
 import com.hred.persistence.session.SessionFactoryUtil;
+import com.hred.service.descriptors.output.DisplayNotificationHome;
 
 public class TemplateDAOimpl extends BaseDAOImpl implements TemplateDAO {
 
@@ -105,26 +106,25 @@ public class TemplateDAOimpl extends BaseDAOImpl implements TemplateDAO {
   
   
 
- public Template getContentForMail(Template template)
- {
-  Session session = null;
-  Template list = null;
-  Transaction tx = null;
+  public Template getContentForMail(DisplayNotificationHome template)
+  {
+   Session session = null;
+   Template list = null;
+   Transaction tx = null;
+   
+   session = getSession();
+   if (null == session) {
+   session = SessionFactoryUtil.getInstance().openSession();
+   tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+   }
+   Criteria createCriteria = session.createCriteria(Template.class);
+   createCriteria.add(Restrictions.eq("name",template.getEvent()));
+  /* createCriteria.add(Restrictions.eq("name",  template.getSubject()));*/
+   list = (Template) createCriteria.uniqueResult();
   
-  session = getSession();
-  if (null == session) {
-  session = SessionFactoryUtil.getInstance().openSession();
-  tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+  return list; 
+  
   }
-  Criteria createCriteria = session.createCriteria(Template.class);
-  createCriteria.add(Restrictions.eq("name",template.getSubject()));
- /* createCriteria.add(Restrictions.eq("name",  template.getSubject()));*/
-  list = (Template) createCriteria.uniqueResult();
- 
- return list; 
- 
- }
-
 
  
 }

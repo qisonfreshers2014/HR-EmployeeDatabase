@@ -23,6 +23,7 @@ import com.hred.service.annotations.RestService;
 import com.hred.service.annotations.ServiceStatus;
 import com.hred.service.annotations.UnSecure;
 import com.hred.service.common.WebserviceRequest;
+import com.hred.service.descriptors.output.DisplayNotificationHome;
 
 @Path("/v1/template/")
 public class TemplateService extends BaseService {
@@ -102,11 +103,11 @@ public class TemplateService extends BaseService {
  }
 
 
-
  @POST
  @RestService(input = String.class, output = String.class)
  @ServiceStatus(value = "complete")
  @Consumes(MediaType.APPLICATION_JSON)
+ @Produces(MediaType.APPLICATION_JSON)
  @Path("/getContentForMail")
  @UnSecure
  public String getContentForMail(@Context HttpHeaders headers,
@@ -114,8 +115,8 @@ public class TemplateService extends BaseService {
    throws ObjectNotFoundException, BusinessException,
    EncryptionException {
 
-  Template template = (Template) JsonUtil.getObject(request.getPayload(),
-    Template.class);
+  DisplayNotificationHome template = (DisplayNotificationHome) JsonUtil.getObject(request.getPayload(),
+    DisplayNotificationHome.class);
 
   Template subject = TemplateHandler.getInstance().getContentForMail(
     template);
