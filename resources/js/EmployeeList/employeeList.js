@@ -91,7 +91,7 @@ employeeList.prototype.tableDisplay = function(content, status) {
 						+ "</td>" + "<td>" + obj.email + "</td>" + "<td>"
 						+ obj.currentDesignation + "</td>" + "<td>"
 						+ obj.yearsofexperience + "</td>" + "<td>" + obj.pan
-						+ "</td><td><input type='button' value='Delete' class='del' id='"+ obj.employeeId + "'/></td></tr>");
+						+ "</td></tr>");
 		
 
 	}
@@ -101,11 +101,7 @@ employeeList.prototype.tableDisplay = function(content, status) {
 		 $(releaseId).hide();
 	}.ctx(this));
 	
-	/*$('#'+obj.employeeId+'').click(function(){
-		var releaseId=event.target.id;	  
-        $("td").hide();
-});*/
-	  
+
 
 }
 
@@ -138,7 +134,6 @@ employeeList.prototype.searchOperation = function(data){
 		            content += '<td>' +obj.currentDesignation +'</td>';
 		            content += '<td>' +obj.yearsofexperience +'</td>';
 		            content += '<td>' +obj.pan +'</td>';
-		            content += '<td><input type="button" value="Delete" id='+ obj.employeeId + '/></td>';
 		            content += '</tr>';
 		            }
 	
