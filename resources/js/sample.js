@@ -21,6 +21,7 @@ this.uploadMedia(function() {
 $(thisEle).one('click', UploadClickHandler.ctx(this));
 }.ctx(this));
 }
+
 $('.testService').one('click', UploadClickHandler.ctx(this));
 	
 
@@ -71,7 +72,7 @@ App.loadHRHomeFooter();*/
 				}
 
 	
-      App.loadAddTemplate();
+    //  App.loadAddTemplate();
 	//App.loadViewEmployee();
 	//App.loadempviewemployee();
 
@@ -126,7 +127,5 @@ callback();
 
 }
 
-<<<<<<< HEAD
-=======
 */
 var Sample= new Sample();

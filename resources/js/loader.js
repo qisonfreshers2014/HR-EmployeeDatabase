@@ -304,11 +304,6 @@ Loader.prototype.loadHrPolicyVeiwPage = function(cb) {
 
 
 
-
-
-
-
-
 Loader.prototype.loadNotifArea = function(cb){
 	 LazyLoad.css('resources/js/SendNotification/NotificationArea.css');
 	 LazyLoad.js('resources/js/SendNotification/notificationALinkrea.js',cb);
