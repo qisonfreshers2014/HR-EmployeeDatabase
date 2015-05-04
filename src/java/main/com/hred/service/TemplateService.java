@@ -1,5 +1,6 @@
 package com.hred.service;
 
+
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -13,13 +14,10 @@ import javax.ws.rs.core.UriInfo;
 
 import com.hred.common.json.JsonUtil;
 import com.hred.exception.BusinessException;
-import com.hred.exception.EmployeeException;
 import com.hred.exception.EncryptionException;
 import com.hred.exception.ObjectNotFoundException;
 import com.hred.exception.TemplateException;
-import com.hred.handler.EmployeeHandler;
 import com.hred.handler.TemplateHandler;
-import com.hred.model.Employee;
 import com.hred.model.Template;
 import com.hred.service.annotations.RestService;
 import com.hred.service.annotations.ServiceStatus;
@@ -109,7 +107,6 @@ public class TemplateService extends BaseService {
 	@RestService(input = String.class, output = String.class)
 	@ServiceStatus(value = "complete")
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/getContentForMail")
 	@UnSecure
 	public String getContentForMail(@Context HttpHeaders headers,
