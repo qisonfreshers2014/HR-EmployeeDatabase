@@ -1,5 +1,5 @@
 function AddTemplate() {
-		Loader.loadHTML('.container', 'resources/js/Template/AddTemplate.html', true, function(){
+		Loader.loadHTML('.container', 'resources/js/Template/addTemplate.html', true, function(){
 		this.handleShow();
 	}.ctx(this));
 }
@@ -44,7 +44,15 @@ RequestManager.addTemplate(input, function(data, success) {
 		//var content = data;
 		
 		//$( "input#clear" ).trigger( "click" );
-	}else{
+	}else if(data.code==9017){
+	
+		alert(data.message);
+		
+	}else if(data.code==9018){
+		alert(data.message);
+	}
+	
+	else{
 		
 		alert("failed to add");
 	}
@@ -54,15 +62,25 @@ RequestManager.addTemplate(input, function(data, success) {
 
 AddTemplate.prototype.duplicatevalidation=function(templates){ 
 	
+   var char = /^[A-Za-z]+( [A-Za-z]+)*$/;
+	var name = $('.templatename').val();
+
 	var articleDesc = $('textarea#editor1').val();
 	
 	
 	
-    if($('.templatename').val()==""||$('.subject').val()==""||articleDesc==""){
+    if( $('.templatename').val()==""||$('.subject').val()==""||articleDesc==""){
     	alert("failed to add,since every field is mandatory");
     }
     
-  else{
+    else if(! $('.templatename').val().match(char)){
+    	alert("name should contain alphabets,spaces only and length should not be more than 30 characters")
+    }
+    else if(! $('.subject').val().match(char)){
+    	alert("subject should contain only alphabets,spaces and length should not be more than 50 characters")
+    }
+    
+  else {
 	
 	 
 	for(i=0;i<templates.length;i++){
