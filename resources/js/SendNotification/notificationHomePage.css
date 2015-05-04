@@ -3,11 +3,9 @@
    color:brown;  
   
 }
-
-
 #retriveDataNotification{
     float: right;
-   margin-top: -4%;
+   margin-top: -3%;
     margin-right: 2%;
 }
 #datedataNotification
@@ -18,14 +16,28 @@
 
 #EventsNotification {
     float: left;
-    margin-left: 10px;
-   margin-top: 2%;
+    margin-left: 1%;
+    margin-top: 0%;
 }
-
-
 #Notificationhome {
+    margin-left: 2%;
+    margin-top: 3%;
     width: 95%;
-    margin-left: 3%;
-     margin-top: 3%;
 }
-
+h1
+{
+	color:brown;
+	 margin-left: 35%;
+}
+#extraActionsNotification
+{
+padding-top: 3%;
+}
+#Notificationhome
+{
+background-color:lightgrey;
+}
+.dynamicSend
+{
+	margin-top: 1px;
+}

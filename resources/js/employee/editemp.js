@@ -1,27 +1,28 @@
-function EditEmployee() {
+function EditEmployee(dataId) {
 	Loader.loadHTML(".leftContainer", "resources/js/employee/EditEmp.html",
 			true, function() {
-				this.handleShow();
+				this.handleShow(dataId);
 			}.ctx(this));
 }
-EditEmployee.prototype.handleShow = function() {
+EditEmployee.prototype.handleShow = function(dataId) {
 
 	$('.container').show();
 	$('#edit').click(function(e) {
 		var releaseid = e.target.id;
 		e.preventDefault();
-		this.validateEditEmp(releaseid);
+		this.validateEditEmp(dataId);
 	}.ctx(this));
 	$('#update').click(function(e) {
 		e.preventDefault();
-		this.validateUpdateEmp();
+		this.validateUpdateEmp(dataId);
 	}.ctx(this));
 }
-EditEmployee.prototype.validateEditEmp = function(releaseid) {
+EditEmployee.prototype.validateEditEmp = function(dataId) {
 
+	$('.error').css('visibility', 'hidden');
 	var input = {
 		"payload" : {
-			"id" : 18
+			"id" : dataId
 		}
 	};
 	RequestManager.geteditEmployee(input, function(data, success) {
@@ -46,7 +47,7 @@ EditEmployee.prototype.validateEditEmp = function(releaseid) {
 
 }
 
-EditEmployee.prototype.validateUpdateEmp = function() {
+EditEmployee.prototype.validateUpdateEmp = function(dataId) {
 
 	var char = /^[a-zA-Z."" ]+$/;
 	var qual = /^[a-zA-Z.""]+$/;
@@ -76,9 +77,8 @@ EditEmployee.prototype.validateUpdateEmp = function() {
 	if (contnum == "" || txtemercon == "" || txtemname == "" || password == ""
 			|| peraddr == "" || relation == "" || skype == "" || email == ""
 			|| currentaddr == "") {
-
-		alert("google");
-
+		$('.error').css('visibility', 'visible');
+		
 		if (contnum == "") {
 			$(cnumerr).text("required field");
 			$(cnumerr).css("color", "red");
@@ -194,7 +194,7 @@ EditEmployee.prototype.validateUpdateEmp = function() {
 
 		var input = {
 			"payload" : {
-				"id" : 18,
+				"id" : dataId,
 				"contactNo" : contnum,
 				"currentAddress" : currentaddr,
 				"permanentAddress" : peraddr,

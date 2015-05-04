@@ -12,8 +12,20 @@ public class DisplayNotificationHome {
 	private String employeeName;
 	private String modifiedContent;
 	
+	public DisplayNotificationHome()
+	{
+		
+	}
 
 
+		public DisplayNotificationHome(String event, Timestamp date,
+			String employeeEmail, String employeeName) {		
+		this.event = event;
+		this.date = date;
+		this.employeeEmail = employeeEmail;
+		this.employeeName = employeeName;
+		
+	}
 
 	@JsonProperty
 	public String getModifiedContent() {

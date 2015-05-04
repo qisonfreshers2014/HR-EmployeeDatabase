@@ -18,17 +18,18 @@ loadNotificationHomePage.prototype.handleShow = function(data) {
 		var year = res.getFullYear();
 		var month = res.getMonth() + 1;
 		var dd = res.getDate();
+		console.log(item.status);
 
 		out = '<tr><td id="name">' + item.employeeName + '</td><td>' + year
 				+ '-' + month + '-' + dd + '</td>' + '<td>' + item.event
 				+ '</td><td>' + item.employeeEmail + '</td><td>' + item.status
 				+ '</td>';
-		if (item.status == "Not Send") {
+		if (item.status == "Not Sent") {
 			out += '<td><input type="button" value="Send"  class="dynamicSend btn btn-primary btn-md"/></td></tr>'
 		} else {
 			out += '<td></td></tr>';
 		}
-
+	
 		$("#displayDataNotification").append(out);
 	}
 	$('.dynamicSend').on('click', function() {
@@ -83,15 +84,16 @@ loadNotificationHomePage.prototype.eventChangeCriteria = function() {
 				"fromdate" : fromDate,
 					}
 	};
+	console.log(selectedEvent);
+	console.log(fromDate);
+	console.log(toDate);
 
 	RequestManager
 			.getNotificationDisplayCriteria(
 					input,
-					function(data, success) {
-						
-						if (success) {
-							if(data!="No Data Found")
-							{
+					function(data, success) {					
+						if (success) {					
+							
 							var i;
 							var out = '<table border="1" class="table table-hover" id="displayData1"><tbody><tr><th>Employee Name</th><th>Event Date</th><th>Event</th><th>Email ID</th><th>Status</th><th>Action</th></tr>'
 							for (i = 0; i < data.length; i++) {
@@ -107,15 +109,15 @@ loadNotificationHomePage.prototype.eventChangeCriteria = function() {
 										+ item.event + '</td><td>'
 										+ item.employeeEmail + '</td><td>'
 										+ item.status + '</td>';
-								if (item.status == "Not Send") {
-									out += '<td><input type="button" value="Send"  class="dynamicSend1 btn btn-primary btn-md"/></td></tr>';
+								if (item.status == "Not Sent") {
+									out += '<td><input type="button" value="Send"  class="dynamicSend btn btn-primary btn-md"/></td></tr>';
 								} else {
 									out += '<td></td></tr>';
 								}
 
 								document.getElementById("dataTableNotification").innerHTML = out;
 							}
-							$('.dynamicSend1').on(
+							$('.dynamicSend').on(
 									'click',
 									function() {
 
@@ -128,17 +130,18 @@ loadNotificationHomePage.prototype.eventChangeCriteria = function() {
 												.find('td:eq(3)').text());
 										console.log(event);
 										console.log(email);
-										console.log(employeeName);
+				          				console.log(employeeName);
 										App.loadManualMail(event, email,
 												employeeName);
 
 									});
+						
+							
 						}
-							else
-								{
-								alert("No Data Found")
-								}
-						}
+						else
+							{
+							alert("No Records Found")
+							}
 
 					}.ctx(this));
 }

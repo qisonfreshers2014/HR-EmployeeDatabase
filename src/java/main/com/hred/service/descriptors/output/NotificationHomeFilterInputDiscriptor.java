@@ -44,5 +44,5 @@ public class NotificationHomeFilterInputDiscriptor {
 	public void setSelectedEvent(String selectedEvent) {
 		this.selectedEvent = selectedEvent;
 	}
-
+ 
 }

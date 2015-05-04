@@ -1,5 +1,6 @@
 package com.hred.model;
 
+
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
@@ -8,27 +9,18 @@ import javax.persistence.Table;
 
 import com.hred.persistence.annotations.Increment;
 
-
-
-/**
- * @author Venkatesh Chitla
- *
- */
-
 @Entity
 @Table(name = "EMPLOYEE")
 @Increment
 public class Employee extends AbstractObject {
-	
 
  
 
-	
  public static final String AUTH_TYPE_REGULAR = "REGULAR";
  public static final int AUTH_STATUS_EXISTING = 0;
  public static final int AUTH_STATUS_NEW = 1;
  public static final int AUTH_STATUS_NONE = 2;
-	
+
  @Column(name = "employee_id")
  private int employeeId;
  @Column(name = "name")
@@ -41,8 +33,6 @@ public class Employee extends AbstractObject {
  //@Temporal(TemporalType.DATE)
  @Column(name = "DOJ")
  private Timestamp dateOfJoining;
-		
-
  @Column(name = "years_of_experience")
  private int yearsofexperience;
  @Column(name = "contact_number")
@@ -80,12 +70,22 @@ public class Employee extends AbstractObject {
  @Column(name = "Skill")
  private String skill;
  @Column(name = "Rating")
- private int rating;
+ private String rating;
  @Column(name="variable_component")
  private String variableComponent;
  @Column(name="Salary")
  private String salary;
+ @Column(name="File_Path")
+ private String filePath;
  
+ public String getFilePath() {
+  return filePath;
+ }
+
+ public void setFilePath(String filePath) {
+  this.filePath = filePath;
+ }
+
  public String getSkill() {
   return skill;
  }
@@ -94,10 +94,6 @@ public class Employee extends AbstractObject {
   this.skill = skill;
  }
 
-	
-	public int getEmployeeId() {
-		return employeeId;
-	}
  public String getSalary() {
   return salary;
  }
@@ -117,31 +113,22 @@ public class Employee extends AbstractObject {
  }
 
  
+ public int getEmployeeId() {
+  return employeeId;
+ }
 
-	public Timestamp getDateOfBirth() {
-		return dateOfBirth;
-	}
  public void setEmployeeId(int employeeId) {
   this.employeeId = employeeId;
  }
 
-	public void setDateOfBirth(Timestamp dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
-	}
  public String getEmployeeName() {
   return employeeName;
  }
 
-	public Timestamp getDateOfJoining() {
-		return dateOfJoining;
-	}
  public void setEmployeeName(String employeeName) {
   this.employeeName = employeeName;
  }
 
-	public void setDateOfJoining(Timestamp dateOfJoining) {
-		this.dateOfJoining = dateOfJoining;
-	}
  public String getGender() {
   return gender;
  }
@@ -151,9 +138,22 @@ public class Employee extends AbstractObject {
  }
 
 
+ public Timestamp getDateOfBirth() {
+  return dateOfBirth;
+ }
 
+ public void setDateOfBirth(Timestamp dateOfBirth) {
+  this.dateOfBirth = dateOfBirth;
+ }
 
- 
+ public Timestamp getDateOfJoining() {
+  return dateOfJoining;
+ }
+
+ public void setDateOfJoining(Timestamp dateOfJoining) {
+  this.dateOfJoining = dateOfJoining;
+ }
+
  public int getYearsofexperience() {
   return yearsofexperience;
  }
@@ -290,13 +290,12 @@ public class Employee extends AbstractObject {
  public void setSkype(String skype) {
   this.skype = skype;
  }
-
  
- public int getRating() {
+ public String getRating() {
   return rating;
  }
 
- public void setRating(int rating) {
+ public void setRating(String rating) {
   this.rating = rating;
  }
 
@@ -314,4 +313,3 @@ public class Employee extends AbstractObject {
  }
 
 }
-
