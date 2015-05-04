@@ -150,17 +150,13 @@ public class EmployeeHandler extends AbstractHandler {
 
 	private void validateEmp(String name, long id, String email,
 			String password, long descid, String qualification, String salary,
-			String blood, long num, Timestamp date, String fatherName,
-			String gender, long contactNum, String skypeid, Timestamp doj,
-			String skill, String rating, int YOE, long emercontnum,
-			String emercontname, String currentaddr, String peraddr)
-			throws BusinessException {
 
-		if (peraddr == null || peraddr.isEmpty()) {
-			throw new EmployeeException(
-					ExceptionCodes.EMPLOYEE_PERADDR_NOT_EMPTY,
-					ExceptionMessages.EMPLOYEE_PERADDR_NOT_EMPTY);
-		}
+			String blood, long num, Timestamp date, String fatherName, String gender,
+			long contactNum, String skypeid, Timestamp doj, String skill, String rating, int YOE,
+			long emercontnum, String emercontname, String currentaddr, String peraddr ) throws BusinessException {
+		
+
+
 
 		if (currentaddr == null || currentaddr.isEmpty()) {
 			throw new EmployeeException(
@@ -533,6 +529,7 @@ public List<DisplayNotificationHome> getWelcomeEmployeeList()
  }
  return displayNotificationHomeList;
 }
+
 
 public boolean logout() {
  boolean isLogout = false;

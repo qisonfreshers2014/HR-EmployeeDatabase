@@ -64,7 +64,7 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 //This Method will be used for sending the automated mail by the server
  
  public String SentAutomatedMailMail() throws EmailException {
-  Template requiredContent = new Template();
+  DisplayNotificationHome requiredContent = new DisplayNotificationHome();
    Template template = new Template();
   TemplateDAO tempDAOImpl = (TemplateDAO) DAOFactory.getInstance()
     .getTemplateDAO();
@@ -88,7 +88,7 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
   AllEmployeesData = empDAOImpl.getEmployees(); 
   
   if (todaysBithday.size() != 0) {
-   requiredContent.setSubject("Birthday");
+   requiredContent.setEvent("Birthday");
    Template birthdayTemplate=tempDAOImpl.getContentForMail(requiredContent);
    
    for (Employee birthday : todaysBithday) {
@@ -126,7 +126,7 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
    }
   }
   if (todaysWorkAniversay.size() != 0) {
-   requiredContent.setSubject("Aniversary");
+   requiredContent.setEvent("Aniversary");
    Template anivarsaryTemplate=tempDAOImpl.getContentForMail(requiredContent);
    
    for (Employee aniversary : todaysWorkAniversay) {

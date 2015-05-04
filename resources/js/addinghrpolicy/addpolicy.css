@@ -1,6 +1,31 @@
-div { margin: 20px; }
-#fields{margin-top:35px;}
-#addPolicy{ font-size:19px;  border:1px solid black}
-#policyNameDiv,#fileDiv,#saveDiv,#salaryDiv{ font-size:13px;}
-#isPEmpty,#Plen,#Pletter,#isFEmpty{color:red; font-size:12px;}
-.red{color:red;}
+h3
+{
+ color:brown;
+ margin-left:3%;
+}
+
+.alignInput
+{margin-left:10%;}
+
+.alignInputSave
+{margin-left:40%;}
+
+#addPolicy{
+	background-color: lightgray;
+	width:100%;
+	height:100%;
+	margin-left:3%;
+	font-family:calibri;
+}
+.star{color:red; font-size:20px;}
+
+.inputelement
+{
+	font-size:12px;
+	font-weight: bold;
+}
+
+.errorMessage
+{
+	color:red; font-size:11px;
+}

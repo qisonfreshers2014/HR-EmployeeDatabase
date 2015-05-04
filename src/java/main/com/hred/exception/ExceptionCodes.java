@@ -132,6 +132,7 @@ public interface ExceptionCodes {
 	
 	//employee exceptions codes
 	public static final int EMPLOYEE_DOESNOT_EXIST = 221;
+
 	public static final int EMPLOYEE_QUALIFICATION_NOT_EXIST = 290;
 	public static final int EMPLOYEE_SALARY = 291;
 	public static final int EMPLOYEE_BLOOD_GROUP = 292;
@@ -153,10 +154,11 @@ public interface ExceptionCodes {
 	public static final int EMPLOYEE_EMERNUM_NOT_EMPTY= 306;
 	public static final int EMPLOYEE_EMERNAME_NOT_EMPTY= 307;
 	public static final int EMPLOYEE_CURRENTADDR_NOT_EMPTY= 308;
-	public static final int EMPLOYEE_PERADDR_NOT_EMPTY= 308;
+
 	
 	public static final int DESIGNATION_DOESNOT_EXIST = 225;
 	public static final int HRPolicy_DOESNOT_EXIST = 226;
+	public static final int DESIGNATIONDETAILS_ALREADY_EXISTS=227;
 	
 	
 	//Mongo related exception Codes

@@ -21,24 +21,22 @@ Loader.prototype.loadHTML = function(container, filePath, empty, callback) {
 				// console.log(container)
 				$(container).msgkey();
 			}
-			/*
-			 * var compiledTemplate = Ember.Handlebars.compile(data);
-			 * Ember.View.create({ template: compiledTemplate
-			 * }).appendTo(container);
-			 */
+
 		}
 	});
+
 
 }
 
 Loader.prototype.loadFilter = function(cb){
 	 LazyLoad.css('resources/js/FilterEmployee/FilterEmployee.css');
+
 }
 Loader.prototype.loadCkeditor = function(){
 	 LazyLoad.js('resources/js/ckeditor/ckeditor.js');
 	}
 
-Loader.prototype.loadFilter = function(cb){
+/*Loader.prototype.loadFilter = function(cb){
 	 LazyLoad.css('resources/js/skill/Skill.css');
 
 	 LazyLoad.js('resources/js/FilterEmployee/Filter.js',cb);
@@ -246,15 +244,6 @@ Loader.prototype.loadempviewemployee = function(cb){
 	LazyLoad.js('resources/js/empViewemployee.js', cb);
 }
 
-Loader.prototype.loadDes = function(cb){
-		// LazyLoad.css('resources/js/designation/cssfile.css');
-		 LazyLoad.js('resources/js/designation/EmpDes.js',cb);
-}
-
-Loader.prototype.loadPolicy = function(cb){
-	 LazyLoad.css('resources/js/designation/cssfile.css');
-	 LazyLoad.js('resources/js/addinghrpolicy/addpolicy.js',cb);
-}
 
 Loader.prototype.loadNotifArea = function(cb){
 	 LazyLoad.css('resources/js/SendNotification/NotificationArea.css');
@@ -268,6 +257,18 @@ Loader.prototype.loadNotificationHomePage = function(cb){
 	 LazyLoad.css('resources/js/SendNotification/notificationHomePage.css');
    LazyLoad.js('resources/js/SendNotification/notificationHomePage.js',cb);
 }
+*/
+
+Loader.prototype.loadDesignation = function(cb){
+	 LazyLoad.css('resources/js/editdesignation/editdesignation.css');
+	 LazyLoad.js('resources/js/editdesignation/editdesignation.js',cb);
+}
+
+Loader.prototype.loadPolicy = function(cb){
+LazyLoad.css('resources/js/addinghrpolicy/addpolicy.css');
+LazyLoad.js('resources/js/addinghrpolicy/addpolicy.js',cb);
+}
+
 
 
 var Loader = new Loader();

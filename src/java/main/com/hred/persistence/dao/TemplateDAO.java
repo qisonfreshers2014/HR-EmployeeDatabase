@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.hred.exception.TemplateException;
 import com.hred.model.Template;
+import com.hred.service.descriptors.output.DisplayNotificationHome;
 
 public interface TemplateDAO extends BaseDAO{
 
@@ -16,9 +17,9 @@ public interface TemplateDAO extends BaseDAO{
 
 
 
-		Template getContentForMail(Template template);
+	 Template getContentForMail(DisplayNotificationHome template);
 
-;
+
 
 
 
