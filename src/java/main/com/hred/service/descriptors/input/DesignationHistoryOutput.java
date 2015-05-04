@@ -1,4 +1,4 @@
-package com.hred.service.descriptors.Input;
+package com.hred.service.descriptors.input;
 
 
 

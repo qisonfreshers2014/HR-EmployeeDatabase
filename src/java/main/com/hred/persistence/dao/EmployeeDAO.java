@@ -31,19 +31,27 @@ public interface EmployeeDAO extends BaseDAO {
 
 	public List<Employee> getEmployees();
 
-	public List<Employee> getBirthday() throws BusinessException;
 
+	public List<Employee> getTodaysBirthday() throws BusinessException;
 
-	public List<Employee> getWorkAniversary() throws BusinessException;
+	public List<Employee> getTodayWorkAniversary() throws BusinessException;
 
+	public List<Employee> getBirthdayWithindate(
+			NotificationHomeFilterInputDiscriptor filterCriteria)
+			throws BusinessException;
 
+	public List<Employee> getWorkAniversarywithdate(
+			NotificationHomeFilterInputDiscriptor filterCriteria)
+			throws BusinessException;
 
-	public List<DisplayNotificationHome> getEventWithinDate(NotificationHomeFilterInputDiscriptor filterCriteria);
+	List<Employee> getWorkAniversary() throws BusinessException;
 
-	public List<Employee> getTodayWorkAniversary();
+	List<Employee> getBirthday() throws BusinessException;
 	
 	public Employee getEmployeeById(long id) throws EmployeeException;
 
+	List<Employee> getWelcomeEmployee() throws BusinessException;
 
-	public List<Employee> getTodaysBirthday() throws BusinessException;
+
+
 }
