@@ -209,6 +209,7 @@ public class EmployeeService extends BaseService {
 	}
 	
 
+
 	
 	@POST
 	@RestService(input = String.class, output = DisplayNotificationHome.class)
@@ -248,6 +249,7 @@ public class EmployeeService extends BaseService {
 		return JsonUtil.getJsonForListBasedOnDescriptor(displayoutput,
 				DisplayNotificationHome.class, DisplayNotificationHome.class);
 	}
+
 	
 	@POST
 	@RestService(input=String.class,output=String.class)
