@@ -43,8 +43,11 @@ public class InitializationServlet extends HttpServlet {
 		}
 		if (initializeAllServices) {
 			// Initialize all Services one by one
+
 		initializeServices();
 			sendAutomatedNotificationMail();
+
+	
 		
 		}
 	}
@@ -94,6 +97,15 @@ public class InitializationServlet extends HttpServlet {
 
 	
 	public void sendAutomatedNotificationMail()
+
+	 {
+	  Calendar sentAutomatedMailFrom = Calendar.getInstance();
+	   sentAutomatedMailFrom.set(2015, 05, 8, 8, 30, 00);  
+	  NotificationTimer mailTimer=new NotificationTimer();
+	  Timer notificationTimer = new Timer();
+	  notificationTimer.schedule(mailTimer, sentAutomatedMailFrom.getTime(), 24*60*60*1000);
+	 }
+
 	{
 		Calendar sentAutomatedMailFrom = Calendar.getInstance();
 		 sentAutomatedMailFrom.set(2015, 05, 8, 8, 30, 00);		
@@ -118,5 +130,5 @@ public class InitializationServlet extends HttpServlet {
  		FileUtils.copyDirectory(actualPath, tempDir);
 		
 	}
-	
+
 }

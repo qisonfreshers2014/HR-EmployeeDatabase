@@ -87,6 +87,24 @@ public class DesignationHistoryService extends BaseService{
 		}
 		
 		@POST
+		@RestService(input = DesignationHistory.class, output = DesignationHistory.class)
+		@ServiceStatus(value = "complete")
+		@Consumes(MediaType.APPLICATION_JSON)
+		@Produces(MediaType.APPLICATION_JSON)
+		@Path("/getAllDesignations")
+		@UnSecure
+		public String getAllDesignationDetails(@Context HttpHeaders headers, @Context UriInfo uriInfo,
+		WebserviceRequest request) throws ObjectNotFoundException,
+		BusinessException, EncryptionException, DesignationHistoryException {
+		 
+		List<DesignationHistory> designations = DesignationHistoryHandler.getInstance().getAllDesignationDetails();
+		System.out.println("Count : "+ designations.size());
+
+		return JsonUtil.getJsonForListBasedOnDescriptor(designations, DesignationHistory.class, DesignationHistory.class);
+		 
+		}
+		
+		@POST
 		@RestService(input = DesignationType.class, output = DesignationType.class)
 		@ServiceStatus(value = "complete")
 		@Consumes(MediaType.APPLICATION_JSON)

@@ -3,7 +3,7 @@ var nameValidate = 0;
 var fileValidate = 0;
 
 function addpolicy() {
-Loader.loadHTML('.leftContainer','resources/js/addinghrpolicy/addpolicy.html', true, function() {
+Loader.loadHTML('.container','resources/js/addinghrpolicy/addpolicy.html', true, function() {
 				this.handleShow();
 			}.ctx(this));
 }
@@ -17,7 +17,9 @@ addpolicy.prototype.handleShow = function() {
 			this.saveToDatabase();
 		}
 	}.ctx(this));
-
+	$('#reset_policy').click(function(){
+			$('#policyName').val("");			
+	});
 	function UploadClickHandler(event) {
 		var thisEle = event.target;
 		this.uploadMedia(function() {
@@ -114,7 +116,7 @@ addpolicy.prototype.saveToDatabase = function() {
 	RequestManager.savePolicy(input, function(data, success) {
 		if (success) {
 			$('#policyName').val("");
-			$('#fileUpload').val("");
+		
 			alert("Successfully added");
 		} else {
 			alert("Failed to add");

@@ -26,7 +26,6 @@ sendNotificationMail.prototype.handleShow = function(event, email, employeeName)
 
 	RequestManager.getContentForMail(inputForContent, function(data, success) {
 		if (success) {
-			
 		
 		    
 			content=data.content;			

@@ -7,6 +7,9 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Disjunction;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 import com.hred.exception.BusinessException;
@@ -14,9 +17,11 @@ import com.hred.exception.EmployeeException;
 import com.hred.exception.ExceptionCodes;
 import com.hred.exception.ExceptionMessages;
 import com.hred.exception.UserException;
+import com.hred.model.AbstractObject;
 import com.hred.model.Employee;
 import com.hred.persistence.dao.EmployeeDAO;
 import com.hred.persistence.session.SessionFactoryUtil;
+import com.hred.service.descriptors.input.EmployeeSearchInputDescriptor;
 import com.hred.service.descriptors.output.NotificationHomeFilterInputDiscriptor;
 
 public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
@@ -186,6 +191,45 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 	}
 
 
+	@Override
+	public List<Employee> searchEmployee(EmployeeSearchInputDescriptor employee) {
+		Session session = null;
+		List<Employee> list = null;
+		Transaction tx = null;
+		try {
+			session = getSession();
+			if (null == session) {
+				session = SessionFactoryUtil.getInstance().openSession();
+				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+			}
+			Criteria createCriteria = session.createCriteria(Employee.class);
+			createCriteria.add(Restrictions.eq("isDeleted", "0")); 
+			
+			Criterion name = Restrictions.ilike("employeeName", employee.getSearchKey(), MatchMode.ANYWHERE);
+			Criterion email = Restrictions.ilike("email", employee.getSearchKey(), MatchMode.ANYWHERE);
+			
+			Disjunction disjunction = Restrictions.disjunction();
+			disjunction.add(name);
+			disjunction.add(email);
+			createCriteria.add(disjunction);
+					
+			list = (List<Employee>)createCriteria.list();
+		} finally {
+			try {
+				if (tx != null) {
+					tx.commit();
+					if (session.isConnected())
+						session.close();
+				}
+			} catch (HibernateException e) {
+
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Employee> getBirthday() throws BusinessException {
@@ -429,6 +473,7 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 
 
 
+
 	@Override
 	public List<Employee> getWelcomeEmployee() throws BusinessException {
 		Session session = null;
@@ -466,12 +511,6 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 	}
 
 
-	
-
-
-	
-
-
 	@Override
 	public List<Employee> viewEmployee(Employee employee) {
 		Session session = null;
@@ -506,5 +545,38 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List<Employee> getEmployee() {
+		Session session = null;
+		List<Employee> list = null;
+		Transaction tx = null;
+		try {
+			session = getSession();
+			if (null == session) {
+				session = SessionFactoryUtil.getInstance().openSession();
+				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+			}
+			//Criteria createCriteria = session.createCriteria(Employee.class);
+			 String hql="from Employee where is_deleted =0";
+			 org.hibernate.Query query = session.createQuery(hql);
+			    list = query.list();
+			//list = createCriteria.list();
+		} finally {
+			try {
+				if (tx != null) {
+					tx.commit();
+					if (session.isConnected())
+						session.close();
+				}
+			} catch (HibernateException e) {
+
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+
+	
 
 }

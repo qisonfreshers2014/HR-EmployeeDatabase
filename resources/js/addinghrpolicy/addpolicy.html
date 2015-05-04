@@ -1,21 +1,23 @@
 
+
+<h3>Add New Policy</h3>
 <div id="addPolicy">
+<br>
 
-<div><h4>Add New Policy</h4></div>
-<hr>
-
-<div id="fields">
-<div id="policyNameDiv">
-<b>Policy Name</b><span class="red">*</span><input type="text" id="policyName"><div id="isPEmpty"></div> <div id="Plen"></div> <div id="Pletter"></div>
+<div class="inputelement">
+Policy Name:
+<input type="text" id="policyName"><span class="star"><sup>*</sup></span>
+<div class="errorMessage" id="isPEmpty"></div> <div class="errorMessage" id="Plen"></div> <div class="errorMessage" id="Pletter"></div>
 </div>
 
-<div id="fileDiv">
-<b>Upload Policy</b><span class="red">*</span><input type="button" class=".btn-default" id="fileUpload" value="Select Files"> <div id="isFEmpty"></div>
+<div class="inputelement">
+Upload Policy:
+<input type="button" class=".btn-default" id="fileUpload" value="Select Files"><span class="star"><sup>*</sup></span> <div class="errorMessage" id="isFEmpty"></div>
 </div>
-
-<div id="saveDiv"> 
-<input type="button" id="savePolicy" value="Save"> 
-</div>
-
+<br>
+<div class="inputelement"> 
+<span class="alignInputSave"><input class="btn btn-primary btn-md" type="button" id="savePolicy" value="Upload Image"></span>
+&nbsp;<input class="btn btn-primary btn-md" type="button" id="reset_policy" value="Reset">
 </div>
 </div>	
+

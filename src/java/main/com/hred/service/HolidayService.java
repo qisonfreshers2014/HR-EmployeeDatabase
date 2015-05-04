@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.hred.service;
 
 import java.util.List;
@@ -32,7 +29,7 @@ import com.hred.service.common.WebserviceRequest;
 @Path("/v1/holiday/")
 public class HolidayService extends BaseService {
 	
-	
+	//save service for Holiday
 	@POST
 	@RestService(input = Holiday.class, output = Holiday.class)
 	@ServiceStatus(value = "complete")
@@ -49,6 +46,7 @@ public class HolidayService extends BaseService {
 		return JsonUtil.getJsonBasedOnDescriptor(output,Holiday.class);
 	}
 	
+	//test service
 	@POST
 	@RestService(input = String.class, output = String.class)
 	@ServiceStatus(value = "complete")
@@ -68,6 +66,7 @@ public class HolidayService extends BaseService {
 	}
 
 
+	//update service method for Holiday
 	@POST
 	@RestService(input = Holiday.class, output = Holiday.class)
 	@ServiceStatus(value = "complete")
@@ -84,7 +83,8 @@ public class HolidayService extends BaseService {
 		return JsonUtil.getJsonBasedOnDescriptor(output,Holiday.class);
 	}
 	
-	@POST
+	 //service for getting Holiday by Id
+	 @POST
 	 @RestService(input = String.class, output = Holiday.class)
 	 @ServiceStatus(value = "complete")
 	 @Consumes(MediaType.APPLICATION_JSON)
@@ -103,24 +103,23 @@ public class HolidayService extends BaseService {
 	 }
 	
 	
-
-@POST
-@RestService(input = String.class, output = Holiday.class)
-@ServiceStatus(value = "complete")
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
-@Path("/getHolidays")
-@UnSecure
-public String getHolidays(@Context HttpHeaders headers, @Context UriInfo uriInfo,
+	 //service for getting List of Holidays
+	 @POST
+	 @RestService(input = String.class, output = Holiday.class)
+	 @ServiceStatus(value = "complete")
+	 @Consumes(MediaType.APPLICATION_JSON)
+	 @Produces(MediaType.APPLICATION_JSON)
+	 @Path("/getHolidays")
+	 @UnSecure
+	 public String getHolidays(@Context HttpHeaders headers, @Context UriInfo uriInfo,
 		WebserviceRequest request) throws ObjectNotFoundException,
 		BusinessException, EncryptionException {		
-	Holiday holiday = (Holiday) JsonUtil.getObject(
-			request.getPayload(), Holiday.class);
-	List<Holiday> holidays = HolidayHandler.getInstance().getHolidays();
-	System.out.println("Count : "+ holidays.size());
-	return JsonUtil.getJsonForListBasedOnDescriptor(holidays, Holiday.class, Holiday.class);
+		 Holiday holiday = (Holiday) JsonUtil.getObject(request.getPayload(), Holiday.class);
+		 List<Holiday> holidays = HolidayHandler.getInstance().getHolidays();
+		 System.out.println("Count : "+ holidays.size());
+		 return JsonUtil.getJsonForListBasedOnDescriptor(holidays, Holiday.class, Holiday.class);
 
-}
+	 }
 
-}
+	}
 

@@ -12,6 +12,7 @@ import com.hred.model.DesignationType;
 public interface DesignationHistoryDAO extends BaseDAO{
 	
 	List<DesignationHistory> getDesignationDetails(DesignationHistory designationhistory);
+	List<DesignationHistory> getAllDesignationDetails();
 	List<DesignationType> getDesignationName(DesignationType designationhistory);
 
 }

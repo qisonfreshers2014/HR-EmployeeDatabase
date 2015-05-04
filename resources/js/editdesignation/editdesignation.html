@@ -1,20 +1,18 @@
-<div id="div1">
-<div><h3>Edit Designation Details</h3></div>
-<hr>
 
-<div id="empNameDiv"><b>Employee Name</b>:<input type="text" value="" id="employeeName" readonly></div>
 
-<div id="dojDiv"><b>DOJ</b> :<input type="text" value="" id="doj" readonly></div>
-
-<div id="dateDiv">
-<b>Date</b><span class="red">*</span><input type="text" id="datepicker" required><div id="isDEmpty"></div>
+<br>
+<h3>Edit Designation Details</h3>
+<div id="desigantionform">
+<div class="inputelement"> 
+Name <input type="text" size="23%" value="" id="employeeName" readonly><span class="alignInputName"></span>
+DOJ  <span class="alignInputDOJ"></span> <input type="text" value="" size="23%" id="doj" readonly>
 </div>
+<br>
 
-<div id="salaryDiv"><b>Salary</b><span class="red">*</span><input type="text" id="salary" > <div id="isSEmpty"></div></div>
-
-<div id="designationDiv">
-<b>Designation</b><span class="red">*</span> 
-<select id="designation">
+<div class="inputelement">
+Date &nbsp;&nbsp;<input type="text" size="23%" id="datepicker"><span class="star"><sup>*</sup></span>
+<span class="alignInput" style="margin-left:20%;"></span>
+Designation <select id="designation">
 <option value="0">Select Designation</option>
 <option value="1">CEO</option>
 <option value="2">COO</option>
@@ -25,22 +23,36 @@
 <option value="7">Senior Software Engineer</option>
 <option value="8">Software Engineer</option>
 <option value="9">Trainee Software Engineer</option>
-</select>
-<div id="isDesignationEmpty"> </div>
+</select><span class="star"><sup>*</sup></span>  
+<br>
+<span class="errorMessage" id="isDEmpty"></span> <span  class="errorMessage" id="isDesignationEmpty"></span>
 </div>
+<br>
 
-<div id="variblepayDiv"><b>VariablePay</b><span class="red">*</span><input type="text" id="variablePay"> <div id="isVPEmpty"></div></div>
 
-<div> <input type="button" id="save_designations" value="Save"> </div>
+
+<div class="inputelement">
+Salary <input type="text" id="salary" size="23%" maxlength="15"><span class="star"><sup>*</sup></span>
+<span class="alignInput"></span>
+VariablePay <input type="text" id="variablePay" size="23%" maxlength="15"><span class="star"><sup>*</sup></span>
+<br>
+<span class="errorMessage" id="isSEmpty"></span> <span class="errorMessage"  id="isVPEmpty"></span>
+</div>
+<br>
+
+<div> 
+<span class="alignInputSave"><input class="btn btn-primary btn-md" type="button" id="save_designations" value="Save"></span>
+&nbsp;<input class="btn btn-primary btn-md" type="button" id="reset_designations" value="Reset">
+<br>
+</div>
 </div>	
 
-<div id="div2">
-<div><h3>Appraisal History</h3></div>
-<hr>
-
-<table class="table">
+<br>
+<h3>Appraisal History</h3>
+<div id="appraisal">
+<table class="table table-hover" border="1">
 <tr><th>Designation</th><th>Salary</th><th>Variable Pay</th><th>Date</th></tr>
 </table><br>
-
 </div>
+
 

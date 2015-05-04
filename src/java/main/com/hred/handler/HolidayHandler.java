@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.hred.handler;
 
 import java.sql.Timestamp;
@@ -41,9 +38,10 @@ public class HolidayHandler extends AbstractHandler {
 		holidays = (List<Holiday>)HolidaysDAOImpl.getHolidayById(holiday);
 
 		return holidays;
+	
 	}
 	
-	//Getting list of holiday
+	//Getting list of holidays
 	public List<Holiday> getHolidays()throws HolidaysException {
 		
 		List<Holiday> holidayslist = null;
@@ -53,17 +51,17 @@ public class HolidayHandler extends AbstractHandler {
 	
 	}
 	
-	
+	//save method for Holiday 
 	public Holiday save(Holiday holidayInput)throws HolidaysException{
 		
 		List<Holiday> data = getHolidays();
 		
 		Timestamp fromDate = holidayInput.getFromDate();
-		Timestamp toDate = holidayInput.getToDate();
+		Timestamp toDate = holidayInput.getFromDate();
 		String description = holidayInput.getDescription();
 		String type = holidayInput.getType();
 		
-		validationFunc(data,fromDate,toDate,description,type,holidayInput);
+		holidayValidationFunc(data,fromDate,toDate,description,type,holidayInput);
 		
 		
 		Holiday holidaysSaved = (Holiday) DAOFactory.getInstance().getHolidayDAO().saveObject(holidayInput);
@@ -72,9 +70,10 @@ public class HolidayHandler extends AbstractHandler {
 	}
 
 	
-	private void validationFunc(List<Holiday> data,Timestamp fromDate, Timestamp toDate,String description, String type,Holiday holidayInput) throws HolidaysException {
+	//validations before saving holidays data
+	private void holidayValidationFunc(List<Holiday> data,Timestamp fromDate, Timestamp toDate,String description, String type,Holiday holidayInput) throws HolidaysException {
 		
-		if(fromDate.toString() == null || fromDate.toString().isEmpty()){
+		if(fromDate.toString() == null){
 			
 			throw new HolidaysException(ExceptionCodes.HOLIDAY_DATE_DOES_NOT_EXIST,
 			         ExceptionMessages.HOLIDAY_DATE_DOES_NOT_EXIST);			
@@ -82,7 +81,7 @@ public class HolidayHandler extends AbstractHandler {
 		}else{
 			
 			for (int i = 0; i < data.size(); i++) {
-				
+								
 				Timestamp dbdate = data.get(i).getFromDate();
 			   	if(dbdate.compareTo(fromDate) == 0){
 			   	 throw new HolidaysException(ExceptionCodes.HOLIDAY_DATE_ALREADY_EXISTS,
@@ -107,16 +106,61 @@ public class HolidayHandler extends AbstractHandler {
 		
 	}
 
-	public Holiday updateHoliday(Holiday holidayInput) throws ObjectNotFoundException{
+	//update method for Holiday
+	public Holiday updateHoliday(Holiday holidayInput) throws ObjectNotFoundException, HolidaysException{
+		
+		List<Holiday> data = getHolidays();
+		
+		Timestamp fromDate = holidayInput.getFromDate();
+		Timestamp toDate = holidayInput.getFromDate();
+		String description = holidayInput.getDescription();
+		String type = holidayInput.getType();
+		long id = holidayInput.getId();
+		
+		holidayupdateValidationFunc(data,fromDate,toDate,description,type,id);
+		
 		Holiday holidayFromDB = (Holiday)DAOFactory.getInstance().getHolidayDAO().getObjectById(holidayInput.getId(), ObjectTypes.HOLIDAY);
-		holidayFromDB.setFromDate(holidayInput.getFromDate());
-		holidayFromDB.setToDate(holidayInput.getFromDate());
-		holidayFromDB.setDescription(holidayInput.getDescription());
-		holidayFromDB.setType(holidayInput.getType());
+		holidayFromDB.setFromDate(fromDate);
+		holidayFromDB.setToDate(toDate);
+		holidayFromDB.setDescription(description);
+		holidayFromDB.setType(type);
 		
 		Holiday holidaysEdited = (Holiday) DAOFactory.getInstance().getHolidayDAO().update(holidayFromDB);
 		return holidaysEdited;
 	}
+
+	
+	//validations before update
+	private void holidayupdateValidationFunc(List<Holiday> data,
+			Timestamp fromDate, Timestamp toDate, String description,
+			String type, long id) throws HolidaysException {
+		
+		for (int i = 0; i < data.size(); i++) {
+			Timestamp dbdate = data.get(i).getFromDate();
+			if(data.get(i).getId() != id){
+					if(dbdate.compareTo(fromDate) == 0){
+						
+						throw new HolidaysException(ExceptionCodes.HOLIDAY_DATE_ALREADY_EXISTS,
+						         ExceptionMessages.HOLIDAY_DATE_ALREADY_EXISTS);
+						
+					}
+			}
+			
+			
+		}
+		if (description == null || description.isEmpty() || description.trim().isEmpty()) {
+		       throw new HolidaysException(ExceptionCodes.HOLIDAY_DESCRIPTION_NULL,
+		         ExceptionMessages.HOLIDAY_DESCRIPTION_NULL);
+		      }
+		   
+		if (type == null || type.isEmpty() || type.trim().isEmpty()) {
+	       throw new HolidaysException(ExceptionCodes.HOLIDAY_TYPE_NULL,
+	         ExceptionMessages.HOLIDAY_TYPE_NULL);
+	      }
+		
+	 }
+
+	
 
 
 }

@@ -1,5 +1,5 @@
 function policyList() {
-	Loader.loadHTML('.leftContainer', 'resources/js/HRPolicy/Policy.html', true, function(){
+	Loader.loadHTML('.container', 'resources/js/HRPolicy/policy.html', true, function(){
 		this.handleShow();
 	}.ctx(this));
 }
@@ -8,12 +8,12 @@ policyList.prototype.handleShow = function() {
 
 	$('.container').show();
 	var contentinput = {"payload":{} };
-	RequestManager.getHrPolicy(contentinput, function(data, success) {
+	RequestManager.getPolicy(contentinput, function(data, success) {
 		 if(success){
 			 var content = data;
 			 var status = success;
 			 this.policyDisplay(content, status);
-			alert("successfully added");
+			
 		 	
 		}else{
 		  
@@ -26,11 +26,12 @@ policyList.prototype.handleShow = function() {
 
 policyList.prototype.policyDisplay = function(content, status) {
 	if(status){
+		var j=0;
 		for(var i=0;i<content.length;i++){
 			
 			var obj = content[i];
 			
-			$("#policylist").append("<a href='"+obj.fileId+"'>"+obj.policyName+"</a><br>");
+			$("#policylist").append(++j +" .<a href='"+obj.fileId+"'>"+obj.policyName+"</a><br>");
 						
 		}
 	}else{

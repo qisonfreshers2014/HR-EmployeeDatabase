@@ -6,11 +6,16 @@ import com.hred.exception.ExceptionCodes;
 import com.hred.exception.ExceptionMessages;
 import com.hred.exception.ObjectNotFoundException;
 import com.hred.exception.TemplateException;
+
 import com.hred.handler.AbstractHandler;
 import com.hred.model.Employee;
 import com.hred.model.ObjectTypes;
 import com.hred.model.Objects;
 import com.hred.exception.TemplateException;
+
+import com.hred.model.Employee;
+import com.hred.model.ObjectTypes;
+
 import com.hred.model.Template;
 import com.hred.persistence.dao.DAOFactory;
 import com.hred.persistence.dao.EmployeeDAO;
@@ -19,98 +24,70 @@ import com.hred.persistence.dao.TemplateDAO;
 import com.hred.service.descriptors.output.DisplayNotificationHome;
 
 public class TemplateHandler extends AbstractHandler {
-	
-	private static TemplateHandler INSTANCE = null;
+ private static TemplateHandler INSTANCE = null;
 
-	private TemplateHandler() {
-	}
+ private TemplateHandler() {
+ }
 
-	/**TemplateDAO
-	 * @return instance of UserHandler
-	 */
-	public static TemplateHandler getInstance() {
-		if (INSTANCE == null)
-			INSTANCE = new TemplateHandler();
-		return INSTANCE;
-	}
-/*	private void validationFunc(String name, String subject, String content,Template template)  throws TemplateException{
-	    if (name == null || name.isEmpty()
-	        || name.trim().isEmpty()) {
-	       throw new TemplateException(ExceptionCodes.EVERY_FIELD_IS_MANDATORY,
-	         ExceptionMessages.EVERY_FIELD_IS_MANDATORY);
-	      }
-	    if (subject == null || subject.isEmpty()
-	        || subject.trim().isEmpty()) {
-	       throw new TemplateException(ExceptionCodes.EVERY_FIELD_IS_MANDATORY,
-	         ExceptionMessages.EVERY_FIELD_IS_MANDATORY);
-	      }
-	    if (content == null || content.isEmpty()
-	        || content.trim().isEmpty()) {
-	       throw new TemplateException(ExceptionCodes.EVERY_FIELD_IS_MANDATORY,
-	         ExceptionMessages.EVERY_FIELD_IS_MANDATORY);
-	      }
-	    List<Template> data=viewTemplate();
-	    for(int i=0;i<data.size();i++){
-	    
-	     String dbname=data.get(i).getName();
-	     if(dbname.compareTo(name)==0){
-	      throw new TemplateException(ExceptionCodes.TEMPLATE_ALREADY_EXIST,
-	                 ExceptionMessages.TEMPLATE_ALREADY_EXIST);
-	            
-	     }
-	          
-	    }
-	  
-	 }*/
+ /**
+  * TemplateDAO
+  * 
+  * @return instance of UserHandler
+  */
+ public static TemplateHandler getInstance() {
+  if (INSTANCE == null)
+   INSTANCE = new TemplateHandler();
+  return INSTANCE;
+ }
 
-	//public Template update(Template template) throws ObjectNotFoundException {
+ public Template save(Template template) throws TemplateException {
+   String name=template.getName();
+    String subject=template.getSubject();
+    String content=template.getContent();
+   
+   validationFunc(name,subject,content,template);
+
+  Template tempSaved = (Template) DAOFactory.getInstance()
+    .getTemplateDAO().saveObject(template);
+  return tempSaved;
+ }
+ private void validationFunc(String name, String subject, String content,Template template)  throws TemplateException{
+    if (name == null || name.isEmpty()
+        || name.trim().isEmpty()) {
+       throw new TemplateException(ExceptionCodes.EVERY_FIELD_IS_MANDATORY,
+         ExceptionMessages.EVERY_FIELD_IS_MANDATORY);
+      }
+    if (subject == null || subject.isEmpty()
+        || subject.trim().isEmpty()) {
+       throw new TemplateException(ExceptionCodes.EVERY_FIELD_IS_MANDATORY,
+         ExceptionMessages.EVERY_FIELD_IS_MANDATORY);
+      }
+    if (content == null || content.isEmpty()
+        || content.trim().isEmpty()) {
+       throw new TemplateException(ExceptionCodes.EVERY_FIELD_IS_MANDATORY,
+         ExceptionMessages.EVERY_FIELD_IS_MANDATORY);
+      }
+    List<Template> data=getTemplateByName();
+    for(int i=0;i<data.size();i++){
+     
+     String dbname=data.get(i).getName();
+     
+    if((dbname.equals(name))){
+     
+      throw new TemplateException(ExceptionCodes.TEMPLATE_ALREADY_EXIST,
+                 ExceptionMessages.TEMPLATE_ALREADY_EXIST);
+            
+     }
+     
+     
+    }
+    
+ }
 
 
-	public Template save(Template template) throws TemplateException{
-		  String name=template.getName();
-		  String subject=template.getSubject();
-		  String content=template.getContent();
-		 
-			validationFunc(name,subject,content,template);
-		
-		Template tempSaved=(Template) DAOFactory.getInstance().getTemplateDAO().saveObject(template);
-		return tempSaved;
-		}
 
-	
 
-	private void validationFunc(String name, String subject, String content,Template template)  throws TemplateException{
-		  if (name == null || name.isEmpty()
-				    || name.trim().isEmpty()) {
-				   throw new TemplateException(ExceptionCodes.EVERY_FIELD_IS_MANDATORY,
-				     ExceptionMessages.EVERY_FIELD_IS_MANDATORY);
-				  }
-		  if (subject == null || subject.isEmpty()
-				    || subject.trim().isEmpty()) {
-				   throw new TemplateException(ExceptionCodes.EVERY_FIELD_IS_MANDATORY,
-				     ExceptionMessages.EVERY_FIELD_IS_MANDATORY);
-				  }
-		  if (content == null || content.isEmpty()
-				    || content.trim().isEmpty()) {
-				   throw new TemplateException(ExceptionCodes.EVERY_FIELD_IS_MANDATORY,
-				     ExceptionMessages.EVERY_FIELD_IS_MANDATORY);
-				  }
-		  List<Template> data=getTemplateByName();
-		  for(int i=0;i<data.size();i++){
-			 
-			  String dbname=data.get(i).getName();
-			  if(dbname.compareTo(name)==0){
-				  throw new TemplateException(ExceptionCodes.TEMPLATE_ALREADY_EXIST,
-				             ExceptionMessages.TEMPLATE_ALREADY_EXIST);
-				        
-			  }
-			  
-			  
-		  }
-		  
-	}
-
-	public List<Template> getTemplateByName() {
+ public List<Template> getTemplateByName() {
 		List<Template> templates = null;
 		TemplateDAO temDAOImpl = (TemplateDAO) DAOFactory.getInstance().getTemplateDAO();
 		templates = (List<Template>) temDAOImpl.getTemplateByName();
@@ -135,7 +112,8 @@ public class TemplateHandler extends AbstractHandler {
 		return templates;
 	}
 	public Template getContentForMail(DisplayNotificationHome gettemplate) {
-		Template receivedtemplates = new Template();
+		Template receivedtemplatesfromdb = new Template();
+		Template templatescontenttoDisplay = new Template();
 		String url = "";
 		Employee sendNotification=new Employee();
 		EmployeeDAO employeeDAOImpl = DAOFactory.getInstance().getEmployeeDAO();
@@ -153,6 +131,7 @@ public class TemplateHandler extends AbstractHandler {
 				sendNotification.setSkype(sendNotificationtoEmp.getSkill());
 				break;
 			}
+			
 		}
 		if(gettemplate.getEvent().equalsIgnoreCase("WelCome"))
 		{
@@ -168,43 +147,32 @@ public class TemplateHandler extends AbstractHandler {
 			                                                                                                  
 			 
  finalContent += "Best Regards,<br/>HR Team.";
- receivedtemplates.setContent(finalContent);
+ templatescontenttoDisplay.setContent(finalContent);
  
 		}
 		else
 		{
 		TemplateDAO tempDAOImpl = (TemplateDAO) DAOFactory.getInstance().getTemplateDAO();
 		FileDAO fileDAOimpl = (FileDAO) DAOFactory.getInstance().getFileDAO();
-		receivedtemplates = tempDAOImpl.getContentForMail(gettemplate);
-		String finalContent ="Hi "+sendNotification.getEmployeeName()+"<br/>"+receivedtemplates.getContent();
+		receivedtemplatesfromdb = tempDAOImpl.getContentForMail(gettemplate);
+		String finalContent="";
 		
+		 finalContent ="Hi "+sendNotification.getEmployeeName()+"<br/>"+receivedtemplatesfromdb.getContent();
+		System.out.println(sendNotification.getEmployeeName());
+		System.out.println(finalContent);
 		
-		/*List<File> filelist = fileDAOimpl.getAllFiles();
-		for (File eachfile : filelist) {
-			if (eachfile.getId() == receivedtemplates.getFileId()) {
-				url = eachfile.getFilePath();
-
-			}		
-
-		}
-		finalContent+="<br/><<img src="+url+" width=\"250\" height=\"95\" border=\"0\" alt="+receivedtemplates.getSubject()+"><br>";
-		template.setContent(finalContent);
-		*/		
-		receivedtemplates.setContent(finalContent);
+		templatescontenttoDisplay.setContent(finalContent);
+		System.out.println(templatescontenttoDisplay.getContent());
 		}
 	
 		
 		
 		
 
-		return receivedtemplates;
+		return templatescontenttoDisplay;
 
 	}
-	}
 
 
 
-	
-		
-	
-
+}
