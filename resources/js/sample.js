@@ -1,7 +1,6 @@
 function Sample() {
 
-	Loader.loadHTML('.container','sample.html', true, function(){
-
+	Loader.loadHTML('.container', 'sample.html', true, function(){
 		this.handleShow();
 	}.ctx(this));
 }
@@ -14,7 +13,7 @@ Sample.prototype.handleShow = function() {
 
 	
 }
-function UploadClickHandler(event){
+/*function UploadClickHandler(event){
 
 var thisEle = event.target;
 this.uploadMedia(function() {
@@ -25,12 +24,12 @@ $(thisEle).one('click', UploadClickHandler.ctx(this));
 $('.testService').one('click', UploadClickHandler.ctx(this));
 	
 
-}
+}*/
 
 Sample.prototype.testService = function() {
 
-	
-	App.loadHoliday();
+	App.listEmployeePolicy();
+	//App.loadHoliday();
 	
 	//App.loadEmployeeHoliday();
 	
@@ -57,7 +56,7 @@ App.loadViewTemplate(dataid);*/
 /*var name="vasavi";
 App.loadHRHomeHeader(name);
 App.loadHRHomePage();
-App.loadHRHomeFooter();*/
+App.loadHRHomeFooter();
 
 	var input={};
 	RequestManager.getAllEvents(input, function(data, success) {
@@ -108,7 +107,6 @@ App.loadHRHomeFooter();*/
 	//App.loadLogin();
 
 
-}
  
 
 /*Sample.prototype.uploadMedia = function(callback) {
@@ -128,4 +126,8 @@ callback();
 }
 
 */
+	
+
+}
+	
 var Sample= new Sample();

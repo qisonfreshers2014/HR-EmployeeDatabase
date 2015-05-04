@@ -101,22 +101,28 @@ RequestManager.prototype.authenticate=function(data,callback){
  this.sendToServer('employee/authenticate', data, callback);
 }
  
-
 RequestManager.prototype.holidaysData=function(data,callback){
- this.sendToServer('holidays/save', data, callback);
+	this.sendToServer('holiday/save', data, callback);
 }
- 
 RequestManager.prototype.getHolidaysData=function(data,callback){
- this.sendToServer('holidays/getHolidays', data, callback);
+ this.sendToServer('holiday/getHolidays', data, callback);
 }
-
+RequestManager.prototype.getHoliday=function(data,callback){
+	this.sendToServer('holiday/getHolidayId', data, callback);
+}
  
 RequestManager.prototype.dynamicallyEdit=function(data,callback){
- this.sendToServer('holidays/editHoliday', data, callback);
+ this.sendToServer('holiday/updateHoliday', data, callback);
 
 }
 
+RequestManager.prototype.getEmployee=function(data,callback){
+	 this.sendToServer('employee/getEmployeeDetails', data, callback);
+	}
 
+RequestManager.prototype.getSearchEmp=function(data,callback){
+	 this.sendToServer('employee/searchEmployee', data, callback);
+	}
 
 
 
@@ -161,6 +167,11 @@ RequestManager.prototype.getDesName=function(data,callback){
 RequestManager.prototype.savePolicy=function(data,callback){
  this.sendToServer('hr_policy/save', data, callback);
 }
+
+RequestManager.prototype.getPolicy=function(data,callback){
+	this.sendToServer('hr_policy/getPolicy', data, callback);
+}
+
 
 RequestManager.prototype.getNotificationDisplayCriteria=function(data,callback){
  this.sendToServer('employee/getNotificationDisplayCriteria', data, callback);

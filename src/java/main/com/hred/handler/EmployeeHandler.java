@@ -544,7 +544,7 @@ public boolean logout() {
 
 public List<Employee> searchEmployee(EmployeeSearchInputDescriptor employee) {
 	List<Employee> employeelist = null;
-	EmployeeDAO EmployeeDAOImpl = (EmployeeDAO) DAOFactory.getInstance().searchEmployeeDAO();
+	EmployeeDAO EmployeeDAOImpl = (EmployeeDAO) DAOFactory.getInstance().getEmployeeDAO();
 	employeelist = (List<Employee>)EmployeeDAOImpl.searchEmployee(employee);
 	return employeelist;
 }

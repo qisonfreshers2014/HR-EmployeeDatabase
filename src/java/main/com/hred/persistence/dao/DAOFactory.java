@@ -49,12 +49,7 @@ public class DAOFactory {
 		return HRPolicyDAOImpl.getInstance();
 	}
 
-	public EmployeeDAO searchEmployeeDAO() {
-		return EmployeeDAOImpl.getInstance();
-	}
-
-
-	 public SkillsDAO getSkillDAO(){
+	public SkillsDAO getSkillDAO(){
 		return SkillDAOImpl.getInstance();
 	}
 

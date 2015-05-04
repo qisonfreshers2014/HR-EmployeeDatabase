@@ -38,7 +38,6 @@ Loader.prototype.loadFilter = function(cb){
 
 }
 
-}
 Loader.prototype.loadFilter = function(cb){
 	 LazyLoad.css('resources/js/FilterEmployee/FilterEmployee.css');
 
@@ -168,10 +167,15 @@ Loader.prototype.listEmployee = function(){
 	LazyLoad.js('resources/js/EmployeeList/employeeList.js');
 
 }
+Loader.prototype.listEmployeePolicy = function(){
+    LazyLoad.css('resources/js/Holidays/holidays.css');
+    LazyLoad.js('resources/js/HRPolicy/employeeHRPolicy.js');
+   }
+
 Loader.prototype.loadHoliday = function(){
 	 LazyLoad.css('resources/js/Holidays/holidays.css');
 	 LazyLoad.js('resources/js/Holidays/holidays.js');
-
+}
 
 Loader.prototype.loadhrEditEmp = function(f) {
 	LazyLoad.js('resources/js/employee/hreditemp.js', f);
