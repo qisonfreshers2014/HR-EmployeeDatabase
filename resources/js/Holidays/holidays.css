@@ -1,5 +1,4 @@
-@CHARSET "ISO-8859-1";
-
+@charset "ISO-8859-1";
 
 .holidayhead, .emphead, .hrhead, .empholidayhead {
      color: brown;
@@ -7,107 +6,99 @@
      margin-top: 3%;
 }
 
-h3{
-	color : brown; 
-
+h3 {
+     color: brown;
 }
+
 p {
-    font-family: Verdana, Arial, sans-serif;
-    font-size: 1em;
+     font-family: Verdana,Arial,sans-serif;
+     font-size: 1em;
 }
 
 .left {
-	margin-top: 4%;
-	position: relative;
-	float: left;
-	
-	
+     float: left;
+     margin-top: 4%;
+     position: relative;
 }
-#update{
-	visibility: hidden;
+
+#update {
+     visibility: hidden;
 }
 
 .descrpdiv {
-	
-	position: absolute;
-    margin-top: 4%;;
-	float:left;
-	
-
+     float: left;
+     margin-top: 7%;
+     position: absolute;
 }
 
-#display{
-  padding-left:3%;
-  padding-right:3%;
-
+#display {
+     padding-left: 3%;
+     padding-right: 3%;
+     padding-top: 3%;
 }
+
 #main {
-	margin-right: 100px;
-	margin-top: 4%;
-	position: relative;
-	float: right;
-	
+     float: right;
+     margin-right: 100px;
+     margin-top: 4%;
+     position: relative;
 }
-
 
 .ui-datepicker {
-    background: #CCC;
-    border: 1px solid #66F;
-    color: #000;
+     background: none repeat scroll 0% 0% #cccccc;
+     border: 1px solid #6666ff;
+     color: #000000;
 }
 
-.holidayerror{
-	visibility:hidden;
-	color:red;
-	font-style: italic;
-	font-size: 12px;
+.holidayerror {
+     color: red;
+     font-size: 12px;
+     font-style: italic;
+     visibility: hidden;
 }
 
 #fields {
      background: none repeat scroll 0% 0% #cccccc;
-     margin-bottom: 3%;
+     height: 230px;
      margin-left: 2%;
-     margin-top: 6%;
+     margin-top: 2%;
+     padding-left: 1%;
      width: 72em;
-  	padding-left:1%;
- 
 }
-.inputelement{
-	 font-size:15px;
+
+.inputelement {
+     font-size: 15px;
      font-weight: bold;
-    
 }
 
+.holidaystar {
+     color: red;
+     font-size: 20px;
+}
 
-.star{
-	color:red;
-	font-size: 20px;
-	}
-#policylist,#holidaylist,#listemp{
-	
-	padding-top: 8%;
-	background:white;
-	padding-left: 3%;
-	padding-right:3%;
-	border: 1px  black;
-		
+#policylist, #holidaylist, #listemp {
+     background: none repeat scroll 0% 0% white;
+     border: 1px none black;
+     padding-left: 3%;
+     padding-right: 3%;
+     padding-top: 8%;
 }
 
 #searchdiv {
      float: right;
      height: 60%;
+     padding-left: 60%;
+     padding-right: 2%;
      padding-top: 2%;
-	  padding-left:60%;
-    padding-right:2%;
      width: 20%;
 }
 
 .navbuttons {
-	padding-top:1%;
-  padding-bottom:2%;
-  padding-right:3%;
-  float:right;
-     
+     float: right;
+     padding-bottom: 2%;
+     padding-right: 3%;
+     padding-top: 1%;
 }
-
-
+.buttons{
+    margin-top:20%;  
+}

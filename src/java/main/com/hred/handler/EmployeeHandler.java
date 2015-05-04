@@ -531,10 +531,11 @@ public List<DisplayNotificationHome> getWelcomeEmployeeList()
 	return displayNotificationHomeList;
 }
 public List<Employee> searchEmployee(EmployeeSearchInputDescriptor employee) {
-List<Employee> employeelist = null;
-EmployeeDAO EmployeeDAOImpl = (EmployeeDAO) DAOFactory.getInstance().searchEmployeeDAO();
-employeelist = (List<Employee>)EmployeeDAOImpl.searchEmployee(employee);
-return employeelist;
+
+	List<Employee> employeelist = null;
+	EmployeeDAO EmployeeDAOImpl = (EmployeeDAO) DAOFactory.getInstance().getEmployeeDAO();
+	employeelist = (List<Employee>)EmployeeDAOImpl.searchEmployee(employee);
+	return employeelist;
 }
 
 public Employee deleteEmployee(Employee employee) throws EmployeeException {

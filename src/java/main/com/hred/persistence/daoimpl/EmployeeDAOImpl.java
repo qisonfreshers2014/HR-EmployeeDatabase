@@ -7,6 +7,7 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Conjunction;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.MatchMode;
@@ -17,7 +18,6 @@ import com.hred.exception.EmployeeException;
 import com.hred.exception.ExceptionCodes;
 import com.hred.exception.ExceptionMessages;
 import com.hred.exception.UserException;
-import com.hred.model.AbstractObject;
 import com.hred.model.Employee;
 import com.hred.persistence.dao.EmployeeDAO;
 import com.hred.persistence.session.SessionFactoryUtil;
@@ -203,16 +203,25 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 			}
 			Criteria createCriteria = session.createCriteria(Employee.class);
-			createCriteria.add(Restrictions.eq("isDeleted", "0")); 
+		
 			
 			Criterion name = Restrictions.ilike("employeeName", employee.getSearchKey(), MatchMode.ANYWHERE);
 			Criterion email = Restrictions.ilike("email", employee.getSearchKey(), MatchMode.ANYWHERE);
+			Criterion active = Restrictions.eq("isDeleted",Boolean.FALSE);
+			Criterion search = Restrictions.and(Restrictions.or(name,email), active);
 			
-			Disjunction disjunction = Restrictions.disjunction();
+			/*Disjunction disjunction = Restrictions.disjunction();
+			Conjunction conjunction = Restrictions.conjunction();
+			conjunction.add(active);
+			
 			disjunction.add(name);
 			disjunction.add(email);
-			createCriteria.add(disjunction);
-					
+			
+			disjunction.add(conjunction);*/
+			
+			createCriteria.add(search);
+			//createCriteria.add(Restrictions.eq("isDeleted", 0)); 
+			
 			list = (List<Employee>)createCriteria.list();
 		} finally {
 			try {
