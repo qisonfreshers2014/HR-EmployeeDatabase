@@ -91,7 +91,7 @@ RequestManager.prototype.logout=function(data,callback){
 }
 
 
-} 
+
 
 RequestManager.prototype.getTemplateById = function(data, callback) {
    this.sendToServer('template/viewTemplate', data, callback);
@@ -185,5 +185,8 @@ RequestManager.prototype.getSentMailContent=function(data,callback){
 RequestManager.prototype.getAllEvents=function(data,callback){
 	this.sendToServer('employee/getAllEvents', data, callback);
 } 
+RequestManager.prototype.getContentForMail=function(data,callback){
+	this.sendToServer('template/getContentForMail', data, callback);
+}
 
 var RequestManager = new RequestManager();

@@ -12,9 +12,11 @@ function sendNotificationMail(event, email, employeeName) {
 sendNotificationMail.prototype.handleShow = function(event, email, employeeName) 
 {   
 	$('#contentfieldNotification').ckeditor();
+	var sendbutton = $('#SubmitNotification');
+
+		
 	
-	
-	//Requesting the Temp[late Content from the Template table in HRMS database
+	//Requesting the Template Content from the Template table in HRMS database
 	var inputForContent = {
 		"payload" : {
 			"subject" : event
@@ -42,6 +44,8 @@ sendNotificationMail.prototype.handleShow = function(event, email, employeeName)
 
        //sending the payload to the server
 	$("#SubmitNotification").click(function() {
+		alert("Sending Mail..........")
+		sendbutton[0].disabled = true;
 		var modifiedcontent =$('#contentfieldNotification').val();
 		var input = {
 			"payload" : {
@@ -55,14 +59,20 @@ console.log(modifiedcontent);
 		RequestManager.getSentManualMail(input, function(data, success) {
 			if (success) {
 				alert("Mail Succesfully Send");
-				var data={};
-				RequestManager.getAllEvents(data, function(data, success) {
-					if(success){
+				var input={};
+				RequestManager.getAllEvents(input, function(data, success) {
+					if (success) {	
 								App.loadNotificationHomePage(data);
-					}});
+					}
+					else
+					{
+					App.loadNotificationHomePage(data);
+					alert("No Data Found");
+							}});
 			}
 
 		});
+	
 	
 	}.ctx(this));
 

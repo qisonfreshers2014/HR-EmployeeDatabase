@@ -42,17 +42,31 @@ Sample.prototype.testService = function() {
 App.loadViewTemplate(dataid);*/
 	//App.loadLogin();
 //App.loadAllHandsMeeting();
-var name="vasavi";
+/*var name="vasavi";
 App.loadHRHomeHeader(name);
 App.loadHRHomePage();
-App.loadHRHomeFooter();
-
+App.loadHRHomeFooter();*/
+	var input={};
+	RequestManager.getAllEvents(input, function(data, success) {
+		if (success) {		
+		
+							App.loadNotificationHomePage(data);
+				}
+	else
+		{
+		App.loadNotificationHomePage(data);
+		alert("No Data Found");
+				}
+	
+	}
+	
+	);
  
 //App.loadLogin();
 //App.loadFilter();
 //  App.loadSkill();
  
-var dataId = 3;	
+//var dataId = 3;	
 	//App.loadLogin();
 	//App.loadEmpl();
 	//App.loadEditEmp(dataId);
