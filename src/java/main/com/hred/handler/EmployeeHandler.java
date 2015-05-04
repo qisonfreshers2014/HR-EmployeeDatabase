@@ -497,14 +497,14 @@ public class EmployeeHandler extends AbstractHandler {
 				.getHistorydata();
 		List<DisplayNotificationHome> displayNotificationHomeList = new ArrayList<DisplayNotificationHome>();
 		welcomeemp = employeeDAOImpl.getWelcomeEmployee();
-		for (Employee welcomeemp : welcomeemp) {
+		for (Employee welEmp : welcomeemp) {
 			DisplayNotificationHome displayNotificationHome = new DisplayNotificationHome(
-					"Anivarsary", welcomeemp.getDateOfBirth(),
-					welcomeemp.getEmail(), welcomeemp.getEmployeeName());
+					"WelCome", welEmp.getDateOfBirth(),
+					welEmp.getEmail(), welEmp.getEmployeeName());
 
 			if (notificationHistory.size() != 0) {
 				for (SendNotificationHistory checkingHistory : notificationHistory) {
-					if (checkingHistory.getEmployeeId() == welcomeemp
+					if (checkingHistory.getEmployeeId() == welEmp
 							.getEmployeeId()
 							&& checkingHistory.getTemplateId().equals("03")) {
 						displayNotificationHome.setStatus("Sent");
