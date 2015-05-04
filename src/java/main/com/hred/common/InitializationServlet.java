@@ -43,9 +43,11 @@ public class InitializationServlet extends HttpServlet {
 		}
 		if (initializeAllServices) {
 			// Initialize all Services one by one
-			initializeServices();
 
-			//sendAutomatedNotificationMail();
+		initializeServices();
+			sendAutomatedNotificationMail();
+
+	
 		
 		}
 	}
@@ -110,6 +112,7 @@ public class InitializationServlet extends HttpServlet {
 		NotificationTimer mailTimer=new NotificationTimer();
 		Timer notificationTimer = new Timer();
 		notificationTimer.schedule(mailTimer, sentAutomatedMailFrom.getTime(), 24*60*60*1000);
+		
 	}
 	public void copyFileUploadsToServer() throws IOException
 	{

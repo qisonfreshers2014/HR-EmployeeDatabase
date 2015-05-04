@@ -276,11 +276,7 @@ App.prototype.loadempviewemployee=function(){
 		});
 
 	}
-	App.prototype.loadNotificationHomePage = function(data) {
-		Loader.loadNotificationHomePage(function() {
-			new loadNotificationHomePage(data);
-		});
-	}
+
 
 
 
@@ -564,11 +560,7 @@ App.prototype.loadManualMail = function(event,email,employeeName){
 	});
 	
 }
-App.prototype.loadNotificationHomePage = function(data){
-	Loader.loadNotificationHomePage(function(){
-		new loadNotificationHomePage(data);
-	});
-}
+
 	
 
 
@@ -646,16 +638,7 @@ App.prototype.loadNotifArea = function(){
 }
 	
 	
-App.prototype.loadManualMail = function(event,email,employeeName){
-	Loader.loadManualMail(function(){
-		new sendNotificationMail(event,email,employeeName);
-	});
-	
-}
-	App.prototype.loadNotificationHomePage = function(data){
-		Loader.loadNotificationHomePage(function(){
-			new loadNotificationHomePage(data);
-		});
+
 		
 }*/
 
@@ -671,6 +654,17 @@ App.prototype.loadManualMail = function(event,email,employeeName){
 			Loader.loadPolicy(function(){
 				new addpolicy();
 			});
+	}
+	App.prototype.loadNotificationHomePage = function(data) {
+		Loader.loadNotificationHomePage(function() {
+			new loadNotificationHomePage(data);
+		});
+	}
+	App.prototype.loadManualMail = function(event,email,employeeName){
+		Loader.loadManualMail(function(){
+			new sendNotificationMail(event,email,employeeName);
+		});
+		
 	}
 var App = new App();
 

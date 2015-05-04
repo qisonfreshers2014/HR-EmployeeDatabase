@@ -21,16 +21,32 @@ $(thisEle).one('click', UploadClickHandler.ctx(this));
 }.ctx(this));
 }
 
-$('.testService').one('click', UploadClickHandler.ctx(this));
-	
 
+<<<<<<< HEAD
 }*/
 
 Sample.prototype.testService = function() {
 
 	App.listEmployeePolicy();
 	//App.loadHoliday();
+
 	
+	var input={};
+	RequestManager.getAllEvents(input, function(data, success) {
+		if (success) {		
+		
+							App.loadNotificationHomePage(data);
+				}
+	else
+		{
+		App.loadNotificationHomePage(data);
+		alert("No Data Found");
+				}
+	
+	}
+	
+	);
+
 	//App.loadEmployeeHoliday();
 	
 	//App.listEmployee();
@@ -58,17 +74,7 @@ App.loadHRHomeHeader(name);
 App.loadHRHomePage();
 App.loadHRHomeFooter();
 
-	var input={};
-	RequestManager.getAllEvents(input, function(data, success) {
-		if (success) {		
-		
-							App.loadNotificationHomePage(data);
-				}
-	else
-		{
-		App.loadNotificationHomePage(data);
-		alert("No Data Found");
-				}
+	
 
 	
     //  App.loadAddTemplate();

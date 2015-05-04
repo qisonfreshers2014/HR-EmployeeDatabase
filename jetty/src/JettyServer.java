@@ -19,7 +19,7 @@ public class JettyServer
 
 		String user_dir = System.getProperty("user.dir");
 
-        Server server = new Server(8080);
+        Server server = new Server(9090);
 
 
         WebAppContext webapp = new WebAppContext();

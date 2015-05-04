@@ -38,12 +38,6 @@ Loader.prototype.loadFilter = function(cb){
 
 }
 
-Loader.prototype.loadFilter = function(cb){
-	 LazyLoad.css('resources/js/FilterEmployee/FilterEmployee.css');
-
-}
-
-
 Loader.prototype.loadCkeditor = function(){
 	 LazyLoad.js('resources/js/ckeditor/ckeditor.js');
 	}

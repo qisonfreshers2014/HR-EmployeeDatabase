@@ -1,4 +1,4 @@
-package com.hred.persistence.daoimpl;
+ package com.hred.persistence.daoimpl;
 
 
 import java.util.List;
@@ -104,27 +104,25 @@ public class TemplateDAOimpl extends BaseDAOImpl implements TemplateDAO {
   }
 
   
-  
-
   public Template getContentForMail(DisplayNotificationHome template)
-  {
-   Session session = null;
-   Template list = null;
-   Transaction tx = null;
-   
-   session = getSession();
-   if (null == session) {
-   session = SessionFactoryUtil.getInstance().openSession();
-   tx = SessionFactoryUtil.getInstance().beginTransaction(session);
-   }
-   Criteria createCriteria = session.createCriteria(Template.class);
-   createCriteria.add(Restrictions.eq("name",template.getEvent()));
-  /* createCriteria.add(Restrictions.eq("name",  template.getSubject()));*/
-   list = (Template) createCriteria.uniqueResult();
-  
-  return list; 
-  
-  }
+	{
+		Session session = null;
+		Template list = null;
+		Transaction tx = null;
+		
+		session = getSession();
+		if (null == session) {
+		session = SessionFactoryUtil.getInstance().openSession();
+		tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+		}
+		Criteria createCriteria = session.createCriteria(Template.class);
+		createCriteria.add(Restrictions.eq("name",template.getEvent()));
+	/*	createCriteria.add(Restrictions.eq("name",  template.getSubject()));*/
+		list = (Template) createCriteria.uniqueResult();
+	
+	return list;	
+	
+	}
 
  
 }

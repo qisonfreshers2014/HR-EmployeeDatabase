@@ -425,124 +425,113 @@ public List<DisplayNotificationHome> getNotificationDisplayCriteria(
 
 }
 
+
 // This Method will return the birthday list with a selected criteria
 public List<DisplayNotificationHome> getBirthdaysList(
-  List<Employee> employeeBirthday) {
- SendNotificationHistoryDAO SendNotificationHistoryDAOImpl = DAOFactory
-   .getInstance().getSendNotificationHistoryDAO();
- List<SendNotificationHistory> notificationHistory = SendNotificationHistoryDAOImpl
-   .getHistorydata();
- List<DisplayNotificationHome> displayNotificationHomeList = new ArrayList<DisplayNotificationHome>();
+		List<Employee> employeeBirthday) {
+	SendNotificationHistoryDAO SendNotificationHistoryDAOImpl = DAOFactory
+			.getInstance().getSendNotificationHistoryDAO();
+	List<SendNotificationHistory> notificationHistory = SendNotificationHistoryDAOImpl
+			.getHistorydata();
+	List<DisplayNotificationHome> displayNotificationHomeList = new ArrayList<DisplayNotificationHome>();
 
- for (Employee birthday : employeeBirthday) {
-  DisplayNotificationHome displayNotificationHome = new DisplayNotificationHome(
-    "Birthday", birthday.getDateOfBirth(), birthday.getEmail(),
-    birthday.getEmployeeName());
+	for (Employee birthday : employeeBirthday) {
+		DisplayNotificationHome displayNotificationHome = new DisplayNotificationHome(
+				"Birthday", birthday.getDateOfBirth(), birthday.getEmail(),
+				birthday.getEmployeeName());
 
-  if (notificationHistory.size() != 0) {
-   for (SendNotificationHistory checkingHistory : notificationHistory) {
-    if (checkingHistory.getEmployeeId() == birthday
-      .getEmployeeId()
-      && checkingHistory.getTemplateId().equals("01")) {
-     displayNotificationHome.setStatus("Sent");
-     break;
-    } else {
-     displayNotificationHome.setStatus("Not Sent");
-    }
-   }
-  } else {
-   displayNotificationHome.setStatus("Not Sent");
-  }
+		if (notificationHistory.size() != 0) {
+			for (SendNotificationHistory checkingHistory : notificationHistory) {
+				if (checkingHistory.getEmployeeId() == birthday
+						.getEmployeeId()
+						&& checkingHistory.getTemplateId().equals("01")) {
+					displayNotificationHome.setStatus("Sent");
+					break;
+				} else {
+					displayNotificationHome.setStatus("Not Sent");
+				}
+			}
+		} else {
+			displayNotificationHome.setStatus("Not Sent");
+		}
 
-  displayNotificationHomeList.add(displayNotificationHome);
- }
- return displayNotificationHomeList;
+		displayNotificationHomeList.add(displayNotificationHome);
+	}
+	return displayNotificationHomeList;
 }
 
 // This Method will return the Anivarsary list with a selected criteria
 public List<DisplayNotificationHome> getAnivarsaryList(
-  List<Employee> employeeBirthday) {
- SendNotificationHistoryDAO SendNotificationHistoryDAOImpl = DAOFactory
-   .getInstance().getSendNotificationHistoryDAO();
- List<SendNotificationHistory> notificationHistory = SendNotificationHistoryDAOImpl
-   .getHistorydata();
- List<DisplayNotificationHome> displayNotificationHomeList = new ArrayList<DisplayNotificationHome>();
+		List<Employee> employeeBirthday) {
+	SendNotificationHistoryDAO SendNotificationHistoryDAOImpl = DAOFactory
+			.getInstance().getSendNotificationHistoryDAO();
+	List<SendNotificationHistory> notificationHistory = SendNotificationHistoryDAOImpl
+			.getHistorydata();
+	List<DisplayNotificationHome> displayNotificationHomeList = new ArrayList<DisplayNotificationHome>();
 
- for (Employee birthday : employeeBirthday) {
-  DisplayNotificationHome displayNotificationHome = new DisplayNotificationHome(
-    "Anivarsary", birthday.getDateOfBirth(),
-    birthday.getEmail(), birthday.getEmployeeName());
+	for (Employee birthday : employeeBirthday) {
+		DisplayNotificationHome displayNotificationHome = new DisplayNotificationHome(
+				"Anivarsary", birthday.getDateOfBirth(),
+				birthday.getEmail(), birthday.getEmployeeName());
 
-  if (notificationHistory.size() != 0) {
-   for (SendNotificationHistory checkingHistory : notificationHistory) {
-    if (checkingHistory.getEmployeeId() == birthday
-      .getEmployeeId()
-      && checkingHistory.getTemplateId().equals("02")) {
-     displayNotificationHome.setStatus("Sent");
-     break;
-    } else {
-     displayNotificationHome.setStatus("Not Sent");
-    }
-   }
-  } else {
-   displayNotificationHome.setStatus("Not Sent");
-  }
+		if (notificationHistory.size() != 0) {
+			for (SendNotificationHistory checkingHistory : notificationHistory) {
+				if (checkingHistory.getEmployeeId() == birthday
+						.getEmployeeId()
+						&& checkingHistory.getTemplateId().equals("02")) {
+					displayNotificationHome.setStatus("Sent");
+					break;
+				} else {
+					displayNotificationHome.setStatus("Not Sent");
+				}
+			}
+		} else {
+			displayNotificationHome.setStatus("Not Sent");
+		}
 
-  displayNotificationHomeList.add(displayNotificationHome);
- }
- return displayNotificationHomeList;
+		displayNotificationHomeList.add(displayNotificationHome);
+	}
+	return displayNotificationHomeList;
 }
 
 // This Method will return the birthday list with a selected criteria
 public List<DisplayNotificationHome> getWelcomeEmployeeList()
-  throws BusinessException
+		throws BusinessException
 
 {
- EmployeeDAO employeeDAOImpl = DAOFactory.getInstance().getEmployeeDAO();
- SendNotificationHistoryDAO SendNotificationHistoryDAOImpl = DAOFactory
-   .getInstance().getSendNotificationHistoryDAO();
- List<SendNotificationHistory> notificationHistory = SendNotificationHistoryDAOImpl
-   .getHistorydata();
- List<DisplayNotificationHome> displayNotificationHomeList = new ArrayList<DisplayNotificationHome>();
- welcomeemp = employeeDAOImpl.getWelcomeEmployee();
- for (Employee welEmp : welcomeemp) {
-  DisplayNotificationHome displayNotificationHome = new DisplayNotificationHome(
-    "Anivarsary", welEmp.getDateOfBirth(),
-    welEmp.getEmail(), welEmp.getEmployeeName());
+	EmployeeDAO employeeDAOImpl = DAOFactory.getInstance().getEmployeeDAO();
+	SendNotificationHistoryDAO SendNotificationHistoryDAOImpl = DAOFactory
+			.getInstance().getSendNotificationHistoryDAO();
+	List<SendNotificationHistory> notificationHistory = SendNotificationHistoryDAOImpl
+			.getHistorydata();
+	List<DisplayNotificationHome> displayNotificationHomeList = new ArrayList<DisplayNotificationHome>();
+	welcomeemp = employeeDAOImpl.getWelcomeEmployee();
+	for (Employee welEmp : welcomeemp) {
+		DisplayNotificationHome displayNotificationHome = new DisplayNotificationHome(
+				"WelCome", welEmp.getDateOfBirth(),
+				welEmp.getEmail(), welEmp.getEmployeeName());
 
-  if (notificationHistory.size() != 0) {
-   for (SendNotificationHistory checkingHistory : notificationHistory) {
-    if (checkingHistory.getEmployeeId() == welEmp
-      .getEmployeeId()
-      && checkingHistory.getTemplateId().equals("03")) {
-     displayNotificationHome.setStatus("Sent");
-     break;
-    } else {
-     displayNotificationHome.setStatus("Not Sent");
-    }
-   }
-  } else {
-   displayNotificationHome.setStatus("Not Sent");
-  }
+		if (notificationHistory.size() != 0) {
+			for (SendNotificationHistory checkingHistory : notificationHistory) {
+				if (checkingHistory.getEmployeeId() == welEmp
+						.getEmployeeId()
+						&& checkingHistory.getTemplateId().equals("03")) {
+					displayNotificationHome.setStatus("Sent");
+					break;
+				} else {
+					displayNotificationHome.setStatus("Not Sent");
+				}
+			}
+		} else {
+			displayNotificationHome.setStatus("Not Sent");
+		}
 
-  displayNotificationHomeList.add(displayNotificationHome);
- }
- return displayNotificationHomeList;
+		displayNotificationHomeList.add(displayNotificationHome);
+	}
+	return displayNotificationHomeList;
 }
-
-
-public boolean logout() {
- boolean isLogout = false;
- String userSessionId = ServiceRequestContextHolder.getContext()
-   .getUserSessionToken().getUserSessionId();
-
- isLogout = CacheManager.getInstance()
-   .getCache(CacheRegionType.USER_SESSION_CACHE)
-   .remove(userSessionId);
- return isLogout;
-}
-
 public List<Employee> searchEmployee(EmployeeSearchInputDescriptor employee) {
+
 	List<Employee> employeelist = null;
 	EmployeeDAO EmployeeDAOImpl = (EmployeeDAO) DAOFactory.getInstance().getEmployeeDAO();
 	employeelist = (List<Employee>)EmployeeDAOImpl.searchEmployee(employee);
@@ -558,6 +547,15 @@ public Employee deleteEmployee(Employee employee) throws EmployeeException {
 		  employee = (Employee) empDAOImpl.update(empFromDB);
 		  return employee;
 }
+public boolean logout() {
+	boolean isLogout = false;
+	String userSessionId = ServiceRequestContextHolder.getContext()
+			.getUserSessionToken().getUserSessionId();
 
+	isLogout = CacheManager.getInstance()
+			.getCache(CacheRegionType.USER_SESSION_CACHE)
+			.remove(userSessionId);
+	return isLogout;
+}
 
 }

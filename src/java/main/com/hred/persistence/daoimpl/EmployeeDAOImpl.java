@@ -252,7 +252,7 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 				session = SessionFactoryUtil.getInstance().openSession();
 				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 			}
-    String hql="from Employee where month(dateOfBirth)=month(sysdate())";//				
+    String hql="from Employee where is_deleted =0 and month(dateOfBirth)=month(sysdate())";//				
 			org.hibernate.Query query = session.createQuery(hql);
 			 results = query.list();
 			 
@@ -290,7 +290,7 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 			}
 			
-			String hql="from Employee where month(dateOfJoining)=month(sysdate()) and year(dateOfJoining)!=year(sysdate())";				
+			String hql="from Employee where is_deleted=0 and  month(dateOfJoining)=month(sysdate()) and year(dateOfJoining)!=year(sysdate())";				
 			org.hibernate.Query query = session.createQuery(hql);
 			 list  = query.list();
 			
@@ -333,7 +333,7 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 			}
 			
-			String result ="from Employee where (day(dateOfJoining) between "+fromday+" and "+today+") and (month(dateOfJoining) between "+frommonth+" and "+tomonth+")";				
+			String result ="from Employee where is_deleted=0 and  (day(dateOfJoining) between "+fromday+" and "+today+") and (month(dateOfJoining) between "+frommonth+" and "+tomonth+")";				
 			org.hibernate.Query query = session.createQuery(result);
 			 list  = query.list();
 			
@@ -381,7 +381,7 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 			}
 			
-			String result ="from Employee where (day(dateOfBirth) between "+fromday+" and "+today+") and (month(dateOfBirth) between "+frommonth+" and "+tomonth+")";	
+			String result ="from Employee where is_deleted=0 and   (day(dateOfBirth) between "+fromday+" and "+today+") and (month(dateOfBirth) between "+frommonth+" and "+tomonth+")";	
 			org.hibernate.Query query = session.createQuery(result);
 			 list  = query.list();
 			
@@ -419,7 +419,7 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 			}
 			
 	
-    String hql="from Employee where day(dateOfBirth) = day(sysdate()) and month(dateOfBirth)=month(sysdate())";			
+    String hql="from Employee where is_deleted=0 and  day(dateOfBirth) = day(sysdate()) and month(dateOfBirth)=month(sysdate())";			
 			org.hibernate.Query query = session.createQuery(hql);
 			 results = query.list();
 						 
@@ -454,7 +454,7 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 				session = SessionFactoryUtil.getInstance().openSession();
 				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 			}
-    String hql="from Employee where day(dateOfJoining) = day(sysdate()) and month(dateOfJoining)=month(sysdate()) and year(dateOfJoining)!=year(sysdate())";//				
+    String hql="from Employee where is_deleted=0 and  day(dateOfJoining) = day(sysdate()) and month(dateOfJoining)=month(sysdate()) and year(dateOfJoining)!=year(sysdate())";//				
 			org.hibernate.Query query = session.createQuery(hql);
 			 results = query.list();
 			 
@@ -495,7 +495,7 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 			}
 			
-			String hql="from Employee where date(dateOfJoining) between date(sysdate())-6 and date(sysdate())+6";				
+			String hql="from Employee where is_deleted=0 and   date(dateOfJoining) between date(sysdate())-6 and date(sysdate())+6";				
 			org.hibernate.Query query = session.createQuery(hql);
 			 list  = query.list();
 			
