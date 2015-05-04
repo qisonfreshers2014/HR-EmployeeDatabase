@@ -17,9 +17,7 @@ public class JettyServer
     public static void main(String[] args) throws Exception
     {
 		String user_dir = System.getProperty("user.dir");
-
-        Server server = new Server(9090);
-
+        Server server = new Server(9923);
         WebAppContext webapp = new WebAppContext();
         webapp.setContextPath("/");
         webapp.setWar(user_dir+"/hred.war");

@@ -17,7 +17,7 @@ import com.hred.persistence.annotations.Increment;
 public class DesignationHistory extends AbstractObject{
 	
 	@Column(name="emp_id")
-	private String empId;
+	private int empId;
 
 /*	@Temporal(TemporalType.DATE)
 	@Column(name="date")
@@ -39,16 +39,19 @@ public class DesignationHistory extends AbstractObject{
 	@Column(name="variable_pay")	
 	private double variablePay;
 	
-	
-	public String getEmpId() {
+
+
+	public int getEmpId() {
 		return empId;
 	}
 
 
 
-	public void setEmpId(String empId) {
+	public void setEmpId(int empId) {
 		this.empId = empId;
 	}
+
+
 
 	public int getDesignationId() {
 		return designationId;

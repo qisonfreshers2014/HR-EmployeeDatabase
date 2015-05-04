@@ -1,5 +1,9 @@
 function Sample() {
-	Loader.loadHTML('.container', 'sample.html', true, function(){
+
+	
+
+	Loader.loadHTML('.container','sample.html', true, function(){
+
 		this.handleShow();
 	}.ctx(this));
 }
@@ -22,11 +26,38 @@ $('.testService').one('click', UploadClickHandler.ctx(this));
 }*/
 
 Sample.prototype.testService = function() {
+
+
+	//App.loadDesignation();
+	//App.loadPolicy();
+
+	/*var dataid="14";
+App.loadViewTemplate(dataid);*/
+
+	//App.loadLogin();
+//App.loadAllHandsMeeting();
+/*var name="vasavi";
+App.loadHRHomeHeader(name);
+App.loadHRHomePage();
+App.loadHRHomeFooter();*/
+
+	var input={};
+	RequestManager.getAllEvents(input, function(data, success) {
+		if (success) {		
+		
+							App.loadNotificationHomePage(data);
+				}
+	else
+		{
+		App.loadNotificationHomePage(data);
+		alert("No Data Found");
+				}
+
 	
       App.loadAddTemplate();
 	//App.loadViewEmployee();
 	//App.loadempviewemployee();
-	
+
 	//App.loadDes();
 	//App.loadPolicy();
 /*	var input = {"payload":{}};
@@ -44,6 +75,17 @@ Sample.prototype.testService = function() {
 			alert("failed");
 		}
 	}.ctx(this));*/
+	//);
+
+//App.loadLogin();
+//App.loadFilter();
+//  App.loadSkill();
+ 
+
+/*var dataId = 3;	*/
+
+//var dataId = 3;	
+
 
 	//App.loadLogin();
 

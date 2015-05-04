@@ -21,6 +21,7 @@ Loader.prototype.loadHTML = function(container, filePath, empty, callback) {
 				// console.log(container)
 				//$(container).msgkey();
 			}
+
 			
 			/* var compiledTemplate = Ember.Handlebars.compile(data);
 			 Ember.View.create({ template: compiledTemplate
@@ -32,6 +33,17 @@ Loader.prototype.loadHTML = function(container, filePath, empty, callback) {
 }
 Loader.prototype.loadFilter = function(cb){
 	 LazyLoad.css('resources/js/FilterEmployee/FilterEmployee.css');
+
+}
+
+
+Loader.prototype.loadCkeditor = function(){
+	 LazyLoad.js('resources/js/ckeditor/ckeditor.js');
+	}
+
+/*Loader.prototype.loadFilter = function(cb){
+	 LazyLoad.css('resources/js/skill/Skill.css');
+>>>>>>> b16aa7fae6a76e891d5b7e15ccf172b6d7ebba5c
 	 LazyLoad.js('resources/js/FilterEmployee/Filter.js',cb);
 }
 Loader.prototype.loadSkill = function(cb) {
@@ -104,19 +116,18 @@ Loader.prototype.listEmployee = function() {
 
 
 Loader.prototype.loadHRPolicyVeiwPage = function(cb){
-	/* LazyLoad.css('resources/js/designation/cssfile.css');*/
+	/* LazyLoad.css('resources/js/designation/cssfile.css');
 	LazyLoad.js('resources/js/addinghrpolicy/Policy.js', cb);
 
 }
+*/
 
 
-Loader.prototype.listPolicy = function(){
-	LazyLoad.js('resources/js/HRPolicy/Policy.js');
-}
 Loader.prototype.loadEmpl = function(e) {
 
 	LazyLoad.js('resources/js/employee/addemp.js', e);
 	LazyLoad.css('resources/js/employee/addemp.css');
+
 
 }
 
@@ -167,11 +178,6 @@ Loader.prototype.loadNotificationHomePage = function(cb) {
 	LazyLoad.js('resources/js/SendNotification/notificationHomePage.js', cb);
 }
 
-Loader.prototype.loadDes = function(cb) {
-	LazyLoad.css('resources/js/editdesignation/editdesignation.css');
-	LazyLoad.js('resources/js/editdesignation/editdesignation.js', cb);
-}
-
 
 
 
@@ -187,5 +193,25 @@ Loader.prototype.loadHrPolicyVeiwPage = function(cb) {
 
 	LazyLoad.js('resources/js/veiwHRPolicy/Policy.js', cb);
 }
+
+
+
+
+
+
+
+
+Loader.prototype.loadNotifArea = function(cb){
+	 LazyLoad.css('resources/js/SendNotification/NotificationArea.css');
+	 LazyLoad.js('resources/js/SendNotification/notificationALinkrea.js',cb);
+}
+
+
+Loader.prototype.loadDesignation = function(cb){
+	 LazyLoad.css('resources/js/editdesignation/editdesignation.css');
+	 LazyLoad.js('resources/js/editdesignation/editdesignation.js',cb);
+}
+
+
 
 var Loader = new Loader();
