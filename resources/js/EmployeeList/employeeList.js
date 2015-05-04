@@ -1,6 +1,5 @@
 function employeeList() {
-	Loader.loadHTML('.leftContainer',
-			'resources/js/EmployeeList/EmployeeList.html', true, function() {
+	Loader.loadHTML('.container','resources/js/EmployeeList/employeeList.html', true, function() {
 				this.handleShow();
 			}.ctx(this));
 	
@@ -18,7 +17,7 @@ employeeList.prototype.handleShow = function() {
 			var content = data;
 			var status = success;
 			this.tableDisplay(content, status);
-			/* alert(content.pan); */
+			
 
 		} else {
 
@@ -28,7 +27,13 @@ employeeList.prototype.handleShow = function() {
 	}.ctx(this));
 
 	$('#search').click(function() {
-
+		
+		if($("#searchelement").val() == ""){
+			
+			alert("Please provide data to search");
+			
+		}else{
+		
 		var contentinput = {
 								"payload" : {"searchKey":$('#searchelement').val()}
 							};
@@ -53,23 +58,15 @@ employeeList.prototype.handleShow = function() {
 			
 		}.ctx(this));
 		
-		/*RequestManager.getEmployee(contentinput, function(data, success) {
-			if (success) {
-				var keyword = $('#searchelement').val();
-				this.searchOperation(keyword, data);
-			}else{
-				alert("No record found");
-			}
-									
-
-		}.ctx(this));*/
-
+		}
+		
 	}.ctx(this));
 
 }
 
 employeeList.prototype.tableDisplay = function(content, status) {
 	
+
 	
 	for (var i = 0; i < content.length; i++) {
 		var obj = content[i];
@@ -84,7 +81,7 @@ employeeList.prototype.tableDisplay = function(content, status) {
 		var jmonth = dojformat.getMonth()+1;
 		var jdate = dojformat.getDate();
 
-		$('#employeelist').append('<table><tbody></tbody></table>');
+		$('#employeelist').append('<table class="paginated"><tbody></tbody></table>');
 		$('#employeelist tr:last').after(
 				"<tr class='info'><td><a href='viewemp1'>" + obj.employeeId
 						+ "</a></td>" + "<td>" + obj.employeeName + "</td>"
@@ -94,10 +91,16 @@ employeeList.prototype.tableDisplay = function(content, status) {
 						+ "</td>" + "<td>" + obj.email + "</td>" + "<td>"
 						+ obj.currentDesignation + "</td>" + "<td>"
 						+ obj.yearsofexperience + "</td>" + "<td>" + obj.pan
-						+ "</td><td><input type='button' value='Delete' id='"+ obj.employeeId + "'/></td></tr>");
+						+ "</td></tr>");
 		
 
 	}
+	
+	$("#listemp").on("click",".del",function(event){
+		var releaseId=event.target.id;	    
+		 $(releaseId).hide();
+	}.ctx(this));
+	
 
 
 }
@@ -131,7 +134,6 @@ employeeList.prototype.searchOperation = function(data){
 		            content += '<td>' +obj.currentDesignation +'</td>';
 		            content += '<td>' +obj.yearsofexperience +'</td>';
 		            content += '<td>' +obj.pan +'</td>';
-		            content += '<td><input type="button" value="Delete" id='+ obj.employeeId + '/></td>';
 		            content += '</tr>';
 		            }
 	
@@ -141,37 +143,6 @@ employeeList.prototype.searchOperation = function(data){
 	
 }
 
-/*employeeList.prototype.searchOperation = function(keyword, data) {
-	var content = '';
-	content += '<tr><th>EID</th><th>EmployeeName</th><th>DOB</th><th>DOJ</th><th>ContactNo</th><th>EmergencyContactNo</th><th>EmailID</th><th>CurrentDesignation</th><th>CurrentYearsExperience</th><th>PAN</th>';
-	for (var i = 0; i < data.length; i++) {
-		var obj = data[i];
-		if ((keyword == obj.employeeId) || (keyword == obj.employeeName) 
-										|| (keyword == obj.email) 
-										||	(keyword == obj.yearsofexperience)
-										|| (keyword == obj.currentDesignation)) {
-						
-			        content += '<tr>';
-		            content += '<td><a href="viewemp1">' + obj.employeeId+ '</a></td>';
-		            content += '<td>' + obj.employeeName + '</td>';
-		            content += '<td>' + obj.DOB +  '</td>';
-		            content += '<td>' + obj.DOJ +  '</td>';
-		            content += '<td>' + obj.contactNo + '</td>';
-		            content += '<td>' + obj.emergencycontactnumber +'</td>';
-		            content += '<td>' + obj.email +  '</td>';
-		            content += '<td>' + obj.currentDesignation +'</td>';
-		            content += '<td>' + obj.yearsofexperience +  '</td>';
-		            content += '<td>' + obj.pan +  '</td>';
-		            content += '<td><input type="button" value="Delete" id='+ obj.employeeId + '/></td>';
-		            content += '</tr>';
-		            }
-			
-		}
-		
-	$('#employeelist').html(content);
 
-
-}
-			*/
 
 var employeeList = new employeeList();

@@ -6,7 +6,11 @@ import com.hred.exception.BusinessException;
 import com.hred.exception.EmployeeException;
 import com.hred.exception.UserException;
 import com.hred.model.Employee;
+
 import com.hred.model.FilterEmployee;
+
+import com.hred.service.descriptors.input.EmployeeSearchInputDescriptor;
+
 import com.hred.service.descriptors.output.DisplayNotificationHome;
 import com.hred.service.descriptors.output.NotificationHomeFilterInputDiscriptor;
 
@@ -29,29 +33,34 @@ public interface EmployeeDAO extends BaseDAO {
 
 	public List<Employee> getEmployees();
 
-
-	public List<Employee> getTodaysBirthday() throws BusinessException;
-
-	public List<Employee> getTodayWorkAniversary() throws BusinessException;
-
-	public List<Employee> getBirthdayWithindate(
-			NotificationHomeFilterInputDiscriptor filterCriteria)
-			throws BusinessException;
-
-	public List<Employee> getWorkAniversarywithdate(
-			NotificationHomeFilterInputDiscriptor filterCriteria)
-			throws BusinessException;
-
-	List<Employee> getWorkAniversary() throws BusinessException;
-
-	List<Employee> getBirthday() throws BusinessException;
-	
 	public Employee getEmployeeById(long id) throws EmployeeException;
+	 public List<Employee> getWelcomeEmployee() throws BusinessException;
 
-	List<Employee> getWelcomeEmployee() throws BusinessException;
+	 public List<Employee> getTodaysBirthday() throws BusinessException;
+
+	 public List<Employee> getTodayWorkAniversary() throws BusinessException;
+
+	 public List<Employee> getBirthdayWithindate(
+	   NotificationHomeFilterInputDiscriptor filterCriteria)
+	   throws BusinessException;
+
+	 public List<Employee> getWorkAniversarywithdate(
+	   NotificationHomeFilterInputDiscriptor filterCriteria)
+	   throws BusinessException;
+
+	 List<Employee> getWorkAniversary() throws BusinessException;
+
+	 List<Employee> getBirthday() throws BusinessException;
+
 
 	public List<Employee> getEmployees(FilterEmployee filter);
 
 
+	public List<Employee> searchEmployee(EmployeeSearchInputDescriptor employee);
 
+
+	public List<Employee> getEmployee();
+
+	
+	
 }

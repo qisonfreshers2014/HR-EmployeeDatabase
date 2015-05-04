@@ -78,12 +78,29 @@ loadNotificationHomePage.prototype.eventChangeCriteria = function() {
 	var selectedEvent = $("#EventsNotification").val();
 	var fromDate = $("#fromDateNotification").val();
 	var toDate = $("#toDateNotification").val();
+	
+	
+	   var fromdatevalidation=new Date(fromDate);
+	   var todatevalidation=new Date(toDate);
+	   
+	   if(fromdatevalidation>todatevalidation || fromDate =="" || toDate =="" )
+	   {
+	   alert("Invalid Date......To Date.!!!!!")
+	   }
+	   else
+		   {
+	
+	
 	var input = {
 		"payload" : {"selectedEvent" : selectedEvent,
 			"todate" : toDate,
 				"fromdate" : fromDate,
 					}
 	};
+	
+	
+	
+	
 	console.log(selectedEvent);
 	console.log(fromDate);
 	console.log(toDate);
@@ -144,4 +161,5 @@ loadNotificationHomePage.prototype.eventChangeCriteria = function() {
 							}
 
 					}.ctx(this));
+		   }
 }

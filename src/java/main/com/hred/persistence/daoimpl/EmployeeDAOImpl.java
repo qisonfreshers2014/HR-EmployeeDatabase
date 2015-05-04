@@ -12,6 +12,10 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Conjunction;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Disjunction;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 import com.hred.exception.BusinessException;
@@ -23,7 +27,11 @@ import com.hred.model.Employee;
 import com.hred.model.FilterEmployee;
 import com.hred.persistence.dao.EmployeeDAO;
 import com.hred.persistence.session.SessionFactoryUtil;
+
 import com.hred.service.descriptors.output.DisplayNotificationHome;
+
+import com.hred.service.descriptors.input.EmployeeSearchInputDescriptor;
+
 import com.hred.service.descriptors.output.NotificationHomeFilterInputDiscriptor;
 public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 
@@ -153,6 +161,54 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 	}
 
 
+	@Override
+	public List<Employee> searchEmployee(EmployeeSearchInputDescriptor employee) {
+		Session session = null;
+		List<Employee> list = null;
+		Transaction tx = null;
+		try {
+			session = getSession();
+			if (null == session) {
+				session = SessionFactoryUtil.getInstance().openSession();
+				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+			}
+			Criteria createCriteria = session.createCriteria(Employee.class);
+		
+			
+			Criterion name = Restrictions.ilike("employeeName", employee.getSearchKey(), MatchMode.ANYWHERE);
+			Criterion email = Restrictions.ilike("email", employee.getSearchKey(), MatchMode.ANYWHERE);
+			Criterion active = Restrictions.eq("isDeleted",Boolean.FALSE);
+			Criterion search = Restrictions.and(Restrictions.or(name,email), active);
+			
+			/*Disjunction disjunction = Restrictions.disjunction();
+			Conjunction conjunction = Restrictions.conjunction();
+			conjunction.add(active);
+			
+			disjunction.add(name);
+			disjunction.add(email);
+			
+			disjunction.add(conjunction);*/
+			
+			createCriteria.add(search);
+			//createCriteria.add(Restrictions.eq("isDeleted", 0)); 
+			
+			list = (List<Employee>)createCriteria.list();
+		} finally {
+			try {
+				if (tx != null) {
+					tx.commit();
+					if (session.isConnected())
+						session.close();
+				}
+			} catch (HibernateException e) {
+
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Employee> getBirthday() throws BusinessException {
@@ -166,7 +222,7 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 				session = SessionFactoryUtil.getInstance().openSession();
 				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 			}
-    String hql="from Employee where month(dateOfBirth)=month(sysdate())";//				
+    String hql="from Employee where is_deleted =0 and month(dateOfBirth)=month(sysdate())";//				
 			org.hibernate.Query query = session.createQuery(hql);
 			 results = query.list();
 			 
@@ -204,7 +260,7 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 			}
 			
-			String hql="from Employee where month(dateOfJoining)=month(sysdate()) and year(dateOfJoining)!=year(sysdate())";				
+			String hql="from Employee where is_deleted=0 and  month(dateOfJoining)=month(sysdate()) and year(dateOfJoining)!=year(sysdate())";				
 			org.hibernate.Query query = session.createQuery(hql);
 			 list  = query.list();
 			
@@ -247,7 +303,7 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 			}
 			
-			String result ="from Employee where (day(dateOfJoining) between "+fromday+" and "+today+") and (month(dateOfJoining) between "+frommonth+" and "+tomonth+")";				
+			String result ="from Employee where is_deleted=0 and  (day(dateOfJoining) between "+fromday+" and "+today+") and (month(dateOfJoining) between "+frommonth+" and "+tomonth+")";				
 			org.hibernate.Query query = session.createQuery(result);
 			 list  = query.list();
 			
@@ -295,7 +351,7 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 			}
 			
-			String result ="from Employee where (day(dateOfBirth) between "+fromday+" and "+today+") and (month(dateOfBirth) between "+frommonth+" and "+tomonth+")";	
+			String result ="from Employee where is_deleted=0 and   (day(dateOfBirth) between "+fromday+" and "+today+") and (month(dateOfBirth) between "+frommonth+" and "+tomonth+")";	
 			org.hibernate.Query query = session.createQuery(result);
 			 list  = query.list();
 			
@@ -333,7 +389,7 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 			}
 			
 	
-    String hql="from Employee where day(dateOfBirth) = day(sysdate()) and month(dateOfBirth)=month(sysdate())";			
+    String hql="from Employee where is_deleted=0 and  day(dateOfBirth) = day(sysdate()) and month(dateOfBirth)=month(sysdate())";			
 			org.hibernate.Query query = session.createQuery(hql);
 			 results = query.list();
 						 
@@ -368,7 +424,7 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 				session = SessionFactoryUtil.getInstance().openSession();
 				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 			}
-    String hql="from Employee where day(dateOfJoining) = day(sysdate()) and month(dateOfJoining)=month(sysdate()) and year(dateOfJoining)!=year(sysdate())";//				
+    String hql="from Employee where is_deleted=0 and  day(dateOfJoining) = day(sysdate()) and month(dateOfJoining)=month(sysdate()) and year(dateOfJoining)!=year(sysdate())";//				
 			org.hibernate.Query query = session.createQuery(hql);
 			 results = query.list();
 			 
@@ -479,6 +535,7 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 	  return  list;  
 	 }
 
+
 	@Override
 	public List<Employee> getWelcomeEmployee() throws BusinessException {
 		Session session = null;
@@ -491,7 +548,7 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 			}
 			
-			String hql="from Employee where date(dateOfJoining) between date(sysdate())-6 and date(sysdate())+6";				
+			String hql="from Employee where is_deleted=0 and   date(dateOfJoining) between date(sysdate())-6 and date(sysdate())+6";				
 			org.hibernate.Query query = session.createQuery(hql);
 			 list  = query.list();
 			
@@ -516,6 +573,7 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 	}
 
 
+
 	
 
 
@@ -523,6 +581,7 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 
 
 	@SuppressWarnings("unchecked")
+
 	@Override
 	public List<Employee> viewEmployee(Employee employee) {
 		Session session = null;
@@ -557,5 +616,38 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List<Employee> getEmployee() {
+		Session session = null;
+		List<Employee> list = null;
+		Transaction tx = null;
+		try {
+			session = getSession();
+			if (null == session) {
+				session = SessionFactoryUtil.getInstance().openSession();
+				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+			}
+			//Criteria createCriteria = session.createCriteria(Employee.class);
+			 String hql="from Employee where is_deleted =0";
+			 org.hibernate.Query query = session.createQuery(hql);
+			    list = query.list();
+			//list = createCriteria.list();
+		} finally {
+			try {
+				if (tx != null) {
+					tx.commit();
+					if (session.isConnected())
+						session.close();
+				}
+			} catch (HibernateException e) {
+
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+
+	
 
 }

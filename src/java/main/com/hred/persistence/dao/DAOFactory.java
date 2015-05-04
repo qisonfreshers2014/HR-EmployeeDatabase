@@ -1,6 +1,7 @@
 package com.hred.persistence.dao;
 import com.hred.persistence.daoimpl.AllHandsMeetingDAOImpl;
 import com.hred.persistence.daoimpl.DesignationHistoryDAOImpl;
+import com.hred.persistence.daoimpl.DesignationTypeDAOImpl;
 import com.hred.persistence.daoimpl.EmployeeDAOImpl;
 import com.hred.persistence.daoimpl.FileDAOImpl;
 import com.hred.persistence.daoimpl.HRPolicyDAOImpl;
@@ -49,12 +50,7 @@ public class DAOFactory {
 		return HRPolicyDAOImpl.getInstance();
 	}
 
-	public EmployeeDAO searchEmployeeDAO() {
-		return EmployeeDAOImpl.getInstance();
-	}
-
-
-	 public SkillsDAO getSkillDAO(){
+	public SkillsDAO getSkillDAO(){
 		return SkillDAOImpl.getInstance();
 	}
 
@@ -87,6 +83,10 @@ public class DAOFactory {
 	public SendNotificationHistoryDAO getSendNotificationHistoryDAO()
 	{
 		return SendNotificationHistoryDAOImpl.getInstance();
+	}
+
+	public DesignationTypeDAO getDesignationTypeDAO() {
+		  return DesignationTypeDAOImpl.getInstance();
 	}
 
 	

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.hred.persistence.daoimpl;
 
 import java.util.List;

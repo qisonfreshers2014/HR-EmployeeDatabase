@@ -1,9 +1,6 @@
 function Sample() {
 
-	
-
-	Loader.loadHTML('.container','sample.html', true, function(){
-
+	Loader.loadHTML('.container', 'sample.html', true, function(){
 		this.handleShow();
 	}.ctx(this));
 }
@@ -13,19 +10,55 @@ Sample.prototype.handleShow = function() {
 	$('.testService').click(function(){
         this.testService();
 	}.ctx(this));
+
+	
 }
-	/*function UploadClickHandler(event){
+/*function UploadClickHandler(event){
+
 var thisEle = event.target;
 this.uploadMedia(function() {
 $(thisEle).one('click', UploadClickHandler.ctx(this));
 }.ctx(this));
 }
-$('.testService').one('click', UploadClickHandler.ctx(this));
-	
 
+
+<<<<<<< HEAD
 }*/
 
 Sample.prototype.testService = function() {
+
+	App.listEmployeePolicy();
+	//App.loadHoliday();
+
+	
+	var input={};
+	RequestManager.getAllEvents(input, function(data, success) {
+		if (success) {		
+		
+							App.loadNotificationHomePage(data);
+				}
+	else
+		{
+		App.loadNotificationHomePage(data);
+		alert("No Data Found");
+				}
+	
+	}
+	
+	);
+
+	//App.loadEmployeeHoliday();
+	
+	//App.listEmployee();
+	
+	//App.listPolicy();
+
+	//App.loadAddTemplate();
+	// App.loadViewEmployee();
+	 //App.loadempviewemployee();
+	 
+	 //App.loadDes();
+	 //App.loadPolicy();
 
 
 	//App.loadDesignation();
@@ -39,8 +72,9 @@ App.loadViewTemplate(dataid);*/
 /*var name="vasavi";
 App.loadHRHomeHeader(name);
 App.loadHRHomePage();
-App.loadHRHomeFooter();*/
+App.loadHRHomeFooter();
 
+<<<<<<< HEAD
 	/*var input={};
 	RequestManager.getAllEvents(input, function(data, success) {
 		if (success) {		
@@ -57,6 +91,14 @@ App.loadHRHomeFooter();*/
      // App.loadAddTemplate();
 	App.loadViewEmployee();
 //	App.loadempviewemployee();
+
+	
+
+	
+    //  App.loadAddTemplate();
+	//App.loadViewEmployee();
+	//App.loadempviewemployee();
+
 
 	//App.loadDes();
 	//App.loadPolicy();
@@ -90,7 +132,6 @@ App.loadHRHomeFooter();*/
 	//App.loadLogin();
 
 
-}
  
 
 /*Sample.prototype.uploadMedia = function(callback) {
@@ -110,4 +151,8 @@ callback();
 }
 
 */
+	
+
+}
+	
 var Sample= new Sample();

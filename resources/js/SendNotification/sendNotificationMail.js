@@ -13,22 +13,22 @@ sendNotificationMail.prototype.handleShow = function(event, email, employeeName)
 {   
 	$('#contentfieldNotification').ckeditor();
 	var sendbutton = $('#SubmitNotification');
-
+ console.log(email);
 		
 	
 	//Requesting the Template Content from the Template table in HRMS database
 	var inputForContent = {
 		"payload" : {
-			"subject" : event
+			"event" : event,
+			"employeeEmail":email
 		}
 	};
 
 	RequestManager.getContentForMail(inputForContent, function(data, success) {
 		if (success) {
-			
-			var content="Hi "+employeeName+"</br>";
+		
 		    
-			content+=data.content;			
+			content=data.content;			
 			$('#contentfieldNotification').ckeditor();
 			$('#contentfieldNotification').val(content);
 			

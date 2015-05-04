@@ -3,7 +3,6 @@ package com.hred.model;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 

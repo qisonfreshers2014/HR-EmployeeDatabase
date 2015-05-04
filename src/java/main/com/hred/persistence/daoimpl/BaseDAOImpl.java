@@ -50,91 +50,91 @@ public class BaseDAOImpl implements BaseDAO{
         return criteria;
     }
 
-	@Override
-	public BaseObject saveObject(BaseObject persistentObject) {
-		Session session = checkSession();
-		Transaction tx = null;
-		if (session == null) {
-			session = SessionFactoryUtil.getInstance().getCurrentSession();
-			tx = SessionFactoryUtil.getInstance().beginTransaction(session);
-		}
-		long id = 0;
-		Increment incrementAnnotation = persistentObject.getClass()
-				.getAnnotation(Increment.class);
-		String tableName = persistentObject.getClass()
-				.getAnnotation(Table.class).name();
-		if (incrementAnnotation != null) {
-			id = IdGeneratorDAOImpl.getInstance().getNewId(tableName, session);
-			persistentObject.setId(id);
-		}
-		try {
-			long userId = ServiceRequestContextHolder.getContext()
-					.getUserSessionToken().getUserId();
-			persistentObject.setCreatorId(userId);
-			persistentObject.setModifierId(userId);
-		} catch (Exception e) {
-		}
-		Timestamp timestamp = new Timestamp(com.hred.common.DateUtils
-				.getCurrentTimeInGMT());
-		persistentObject.setCts(timestamp);
-		persistentObject.setMts(timestamp);
-		timestamp = null;
-		session.save(persistentObject);
-		IdCounter counter = IdGeneratorDAOImpl.getInstance().getObjectById(tableName, session);
-		counter.setCounter(id);
-		session.update(counter);
-		if (tx != null) {
-			tx.commit();
-		}
-		return persistentObject;
-	}
+    @Override
+    public BaseObject saveObject(BaseObject persistentObject) {
+     Session session = checkSession();
+     Transaction tx = null;
+     if (session == null) {
+      session = SessionFactoryUtil.getInstance().getCurrentSession();
+      tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+     }
+     long id = 0;
+     Increment incrementAnnotation = persistentObject.getClass()
+       .getAnnotation(Increment.class);
+     String tableName = persistentObject.getClass()
+       .getAnnotation(Table.class).name();
+     if (incrementAnnotation != null) {
+      id = IdGeneratorDAOImpl.getInstance().getNewId(tableName, session);
+      persistentObject.setId(id);
+     }
+     try {
+      long userId = ServiceRequestContextHolder.getContext()
+        .getUserSessionToken().getUserId();
+      persistentObject.setCreatorId(userId);
+      persistentObject.setModifierId(userId);
+     } catch (Exception e) {
+     }
+     Timestamp timestamp = new Timestamp(com.hred.common.DateUtils
+       .getCurrentTimeInGMT());
+     persistentObject.setCts(timestamp);
+     persistentObject.setMts(timestamp);
+     timestamp = null;
+     session.save(persistentObject);
+     IdCounter counter = IdGeneratorDAOImpl.getInstance().getObjectById(tableName, session);
+     counter.setCounter(id);
+     session.update(counter);
+     if (tx != null) {
+      tx.commit();
+     }
+     return persistentObject;
+    }
+    
+    @Override
+    public BaseObject update(BaseObject persistentObject) {
+     Session session = checkSession();
+     Transaction tx = null;
+     if (session == null) {
+      session = SessionFactoryUtil.getInstance().getCurrentSession();
+      tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+     }
+     try {
+      long userId = ServiceRequestContextHolder.getContext()
+        .getUserSessionToken().getUserId();
+      persistentObject.setModifierId(userId);
+     } catch (Exception e) {
+     }
+     Timestamp timestamp = new Timestamp(com.hred.common.DateUtils
+       .getCurrentTimeInGMT());
+     persistentObject.setMts(timestamp);
+     timestamp = null;
+     session.update(persistentObject);
+           if (tx != null) {
+               tx.commit();
+           }
+     return persistentObject;
+    }
 
-	@Override
-	public BaseObject update(BaseObject persistentObject) {
-		Session session = checkSession();
-		Transaction tx = null;
-		if (session == null) {
-			session = SessionFactoryUtil.getInstance().getCurrentSession();
-			tx = SessionFactoryUtil.getInstance().beginTransaction(session);
-		}
-		try {
-			long userId = ServiceRequestContextHolder.getContext()
-					.getUserSessionToken().getUserId();
-			persistentObject.setModifierId(userId);
-		} catch (Exception e) {
-		}
-		Timestamp timestamp = new Timestamp(com.hred.common.DateUtils
-				.getCurrentTimeInGMT());
-		persistentObject.setMts(timestamp);
-		timestamp = null;
-		session.update(persistentObject);
-        if (tx != null) {
-            tx.commit();
-        }
-		return persistentObject;
-	}
-
-	@Override
-	public BaseObject getObjectById(long id, int objectType)
-			throws ObjectNotFoundException {
-		BaseObject persistentObject = null;
-		Session session = checkSession();
-		Transaction tx = null;
-		if (session == null) {
-			session = SessionFactoryUtil.getInstance().getCurrentSession();
-			tx = SessionFactoryUtil.getInstance().beginTransaction(session);
-		}
-		Class dbname = Objects.getInstance().getObjectName(objectType);
-		persistentObject = (BaseObject)session.get(dbname, id);//(BaseObject) criteria.uniqueResult();
-		if (tx != null) {
-			tx.commit();
-		}
-		if (persistentObject == null) {
-			throw new ObjectNotFoundException(ExceptionCodes.OBJECT_NOT_FOUND,
-					ExceptionMessages.OBJECT_NOT_FOUND);
-		}
-		return persistentObject;
-	}
+    @Override
+    public BaseObject getObjectById(long id, int objectType)
+      throws ObjectNotFoundException {
+     BaseObject persistentObject = null;
+     Session session = checkSession();
+     Transaction tx = null;
+     if (session == null) {
+      session = SessionFactoryUtil.getInstance().getCurrentSession();
+      tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+     }
+     Class dbname = Objects.getInstance().getObjectName(objectType);
+     persistentObject = (BaseObject)session.get(dbname, id);//(BaseObject) criteria.uniqueResult();
+     if (tx != null) {
+      tx.commit();
+     }
+     if (persistentObject == null) {
+      throw new ObjectNotFoundException(ExceptionCodes.OBJECT_NOT_FOUND,
+        ExceptionMessages.OBJECT_NOT_FOUND);
+     }
+     return persistentObject;
+    }
 
 
 	@Override
@@ -155,5 +155,7 @@ public class BaseDAOImpl implements BaseDAO{
 		return objectList;
 	} 
 
+
+  
 	
 }

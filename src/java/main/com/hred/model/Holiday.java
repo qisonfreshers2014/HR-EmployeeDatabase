@@ -1,18 +1,10 @@
-/**
- * 
- */
 package com.hred.model;
 
 
 import java.sql.Timestamp;
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
 import com.hred.persistence.annotations.Increment;
 
 /**
@@ -25,11 +17,9 @@ import com.hred.persistence.annotations.Increment;
 @Increment
 public class Holiday  extends AbstractObject{
 
-	// @Temporal(TemporalType.DATE)
 	 @Column(name = "from_date")
 	 private Timestamp  fromDate; 
 	 
-	 //@Temporal(TemporalType.DATE)	
 	 @Column(name = "to_date")
 	 private Timestamp  toDate;
 	 
@@ -45,35 +35,11 @@ public class Holiday  extends AbstractObject{
 		// TODO Auto-generated constructor stub
 	}
 
-	/*public Holiday(HolidayInput holiday) {
-		super();
-		this.from_date = holiday.getFromDate();
-		this.to_date = holiday.getToDate();
-		this.description =  holiday.getDescription();
-		this.type = holiday.getType();
-	}*/
-
 	
-
 	public Holiday(AbstractObject abstractObject) {
 		super(abstractObject);
 		// TODO Auto-generated constructor stub
 	}
-
-
-
-	/*public Holiday( java.util.Date from_date, java.util.Date to_date, String description, String type) {
-		super();
-		
-		this.from_date = from_date;
-		this.to_date = to_date;
-		this.description = description;
-		this.type = type;
-	}
-*/
-
-	
-
 
 
 	public String getDescription() {

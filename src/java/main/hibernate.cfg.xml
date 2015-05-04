@@ -21,27 +21,21 @@
 		 <property name="hibernate.connection.zeroDateTimeBehavior">convertToNull</property>
 
 
+		<mapping class="com.hred.model.Employee" />
+		<mapping class="com.hred.model.HRPolicy" />
+		<mapping class="com.hred.model.Holiday" />
 
 		<mapping class="com.hred.model.User" />
 		<mapping class="com.hred.model.Template" />
 		<mapping class="com.hred.model.AllHandsMeeting" />
-
-
-		<mapping class="com.hred.model.Holiday" />
-
-		<mapping class="com.hred.model.Employee"/>
-		<mapping class="com.hred.persistence.model.IdCounter"/>
+        <mapping class="com.hred.persistence.model.IdCounter"/>
 		
 
 
- 	
- 
- 	
-		<mapping class="com.hred.model.HRPolicy" />
-		
+		<!-- <mapping class="com.hred.persistence.dao.model.IdCounter"/>  -->
 
-	
-      	<mapping class="com.hred.model.Skills"/>
+
+	   	<mapping class="com.hred.model.Skills"/>
 		<mapping class="com.hred.model.File" />
 		<mapping class="com.hred.model.SendNotificationHistory" />
 		<mapping class="com.hred.model.DesignationHistory"/>

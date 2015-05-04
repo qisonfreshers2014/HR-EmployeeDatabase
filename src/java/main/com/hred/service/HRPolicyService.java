@@ -58,46 +58,45 @@ public class HRPolicyService extends BaseService {
 				AuthenticationOutput.class);
 	}
 
-	@POST
-	@RestService(input = HRPolicy.class, output = HRPolicy.class)
-	@ServiceStatus(value = "complete")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/save")
-	@UnSecure
-	public String save(@Context HttpHeaders headers, @Context UriInfo uriInfo,
-			WebserviceRequest request) throws ObjectNotFoundException,
-			BusinessException, EncryptionException {
 
-		HRPolicy hrpolicy = (HRPolicy) JsonUtil.getObject(request.getPayload(),
-				HRPolicy.class);
+		@POST
+		@RestService(input = HRPolicy.class, output = HRPolicy.class)
+		@ServiceStatus(value = "complete")
+		@Consumes(MediaType.APPLICATION_JSON)
+		@Produces(MediaType.APPLICATION_JSON)
+		@Path("/save")
+		@UnSecure
+		public String save(@Context HttpHeaders headers, @Context UriInfo uriInfo,
+				WebserviceRequest request) throws ObjectNotFoundException,
+				BusinessException, EncryptionException {
 
-		HRPolicy output = (HRPolicy) HRPolicyHandler.getInstance().save(
-				hrpolicy);
+			HRPolicy hrpolicy = (HRPolicy) JsonUtil.getObject(request.getPayload(),
+					HRPolicy.class);
 
-		return JsonUtil.getJsonBasedOnDescriptor(output, HRPolicy.class);
-	}
+			HRPolicy output = (HRPolicy) HRPolicyHandler.getInstance().save(hrpolicy);
 
-	// view
-	@POST
-	@RestService(input = String.class, output = VeiwHRPolicies.class)
-	@ServiceStatus(value = "complete")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/getPolicy")
-	@UnSecure
-	public String getPolicy(@Context HttpHeaders headers,
-			@Context UriInfo uriInfo, WebserviceRequest request)
-			throws ObjectNotFoundException, BusinessException,
-			EncryptionException {
-		HRPolicy policy = (HRPolicy) JsonUtil.getObject(request.getPayload(),
-				HRPolicy.class);
-		List<VeiwHRPolicies> policies = HRPolicyHandler.getInstance()
-				.getPolicy();
-		System.out.println("Count : " + policies.size());
-		return JsonUtil.getJsonForListBasedOnDescriptor(policies,
-				VeiwHRPolicyDiscriptor.class, VeiwHRPolicies.class);
+			return JsonUtil.getJsonBasedOnDescriptor(output, HRPolicy.class);
+		}
+		
+		//view HR Policies
+		@POST
+		@RestService(input = String.class, output = VeiwHRPolicies.class)
+		@ServiceStatus(value = "complete")
+		@Consumes(MediaType.APPLICATION_JSON)
+		@Produces(MediaType.APPLICATION_JSON)
+		@Path("/getPolicy")
+		@UnSecure
+		public String getPolicy(@Context HttpHeaders headers, @Context UriInfo uriInfo,
+				WebserviceRequest request) throws ObjectNotFoundException,
+				BusinessException, EncryptionException {		
+			HRPolicy policy = (HRPolicy) JsonUtil.getObject(request.getPayload(), HRPolicy.class);
+			List<VeiwHRPolicies> policies = HRPolicyHandler.getInstance().getPolicy();
+			System.out.println("Count : "+ policies.size());
+			return JsonUtil.getJsonForListBasedOnDescriptor(policies, VeiwHRPolicyDiscriptor.class, VeiwHRPolicies.class);
 
-	}
+		}
+
+
+
 
 }
