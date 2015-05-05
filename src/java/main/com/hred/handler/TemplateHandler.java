@@ -11,9 +11,7 @@ import com.hred.model.DesignationType;
 import com.hred.model.Employee;
 import com.hred.model.ObjectTypes;
 import com.hred.model.Objects;
-import com.hred.exception.TemplateException;
-import com.hred.model.Employee;
-import com.hred.model.ObjectTypes;
+
 import com.hred.model.Template;
 import com.hred.persistence.dao.DAOFactory;
 import com.hred.persistence.dao.DesignationTypeDAO;
@@ -23,73 +21,74 @@ import com.hred.persistence.dao.TemplateDAO;
 import com.hred.service.descriptors.output.DisplayNotificationHome;
 
 public class TemplateHandler extends AbstractHandler {
- private static TemplateHandler INSTANCE = null;
 
- private TemplateHandler() {
- }
+	private static TemplateHandler INSTANCE = null;
 
- /**
-  * TemplateDAO
-  * 
-  * @return instance of UserHandler
-  */
- public static TemplateHandler getInstance() {
-  if (INSTANCE == null)
-   INSTANCE = new TemplateHandler();
-  return INSTANCE;
- }
+	private TemplateHandler() {
+	}
 
- public Template save(Template template) throws TemplateException {
-   String name=template.getName();
-    String subject=template.getSubject();
-    String content=template.getContent();
-   
-   validationFunc(name,subject,content,template);
+	/**
+	 * TemplateDAO
+	 * 
+	 * @return instance of UserHandler
+	 */
+	public static TemplateHandler getInstance() {
+		if (INSTANCE == null)
+			INSTANCE = new TemplateHandler();
+		return INSTANCE;
+	}
 
-  Template tempSaved = (Template) DAOFactory.getInstance()
-    .getTemplateDAO().saveObject(template);
-  return tempSaved;
- }
- private void validationFunc(String name, String subject, String content,Template template)  throws TemplateException{
-    if (name == null || name.isEmpty()
-        || name.trim().isEmpty()) {
-       throw new TemplateException(ExceptionCodes.EVERY_FIELD_IS_MANDATORY,
-         ExceptionMessages.EVERY_FIELD_IS_MANDATORY);
-      }
-    if (subject == null || subject.isEmpty()
-        || subject.trim().isEmpty()) {
-       throw new TemplateException(ExceptionCodes.EVERY_FIELD_IS_MANDATORY,
-         ExceptionMessages.EVERY_FIELD_IS_MANDATORY);
-      }
-    if (content == null || content.isEmpty()
-        || content.trim().isEmpty()) {
-       throw new TemplateException(ExceptionCodes.EVERY_FIELD_IS_MANDATORY,
-         ExceptionMessages.EVERY_FIELD_IS_MANDATORY);
-      }
-    List<Template> data=getTemplateByName();
-    for(int i=0;i<data.size();i++){
-     
-     String dbname=data.get(i).getName();
-     
-    if((dbname.equals(name))){
-     
-      throw new TemplateException(ExceptionCodes.TEMPLATE_ALREADY_EXIST,
-                 ExceptionMessages.TEMPLATE_ALREADY_EXIST);
-            
-     }
-     
-     
-    }
-    
- }
+	public Template save(Template template) throws TemplateException {
+		 String name=template.getName();
+		  String subject=template.getSubject();
+		  String content=template.getContent();
+		 
+			validationFunc(name,subject,content,template);
+
+		Template tempSaved = (Template) DAOFactory.getInstance()
+				.getTemplateDAO().saveObject(template);
+		return tempSaved;
+	}
+	private void validationFunc(String name, String subject, String content,Template template)  throws TemplateException{
+		  if (name == null || name.isEmpty()
+				    || name.trim().isEmpty()) {
+				   throw new TemplateException(ExceptionCodes.EVERY_FIELD_IS_MANDATORY,
+				     ExceptionMessages.EVERY_FIELD_IS_MANDATORY);
+				  }
+		  if (subject == null || subject.isEmpty()
+				    || subject.trim().isEmpty()) {
+				   throw new TemplateException(ExceptionCodes.EVERY_FIELD_IS_MANDATORY,
+				     ExceptionMessages.EVERY_FIELD_IS_MANDATORY);
+				  }
+		  if (content == null || content.isEmpty()
+				    || content.trim().isEmpty()) {
+				   throw new TemplateException(ExceptionCodes.EVERY_FIELD_IS_MANDATORY,
+				     ExceptionMessages.EVERY_FIELD_IS_MANDATORY);
+				  }
+		  List<Template> data=getTemplates();
+		  for(int i=0;i<data.size();i++){
+			  
+			  String dbname=data.get(i).getName();
+			  
+			 if((dbname.equals(name))){
+				 
+				  throw new TemplateException(ExceptionCodes.TEMPLATE_ALREADY_EXIST,
+				             ExceptionMessages.TEMPLATE_ALREADY_EXIST);
+				        
+			  }
+			  
+			  
+		  }
+		  
+	}
 
 
+ 
 
-
- public List<Template> getTemplateByName() {
+public List<Template> getTemplates() {
 		List<Template> templates = null;
 		TemplateDAO temDAOImpl = (TemplateDAO) DAOFactory.getInstance().getTemplateDAO();
-		templates = (List<Template>) temDAOImpl.getTemplateByName();
+		templates = (List<Template>) temDAOImpl.getTemplates();
 		return templates;
 	}
 	public Template update(Template template) throws ObjectNotFoundException {
@@ -102,6 +101,7 @@ public class TemplateHandler extends AbstractHandler {
 		Template tempEdited=(Template) DAOFactory.getInstance().getTemplateDAO().update(templateFromDB);
 		return tempEdited;
 	}
+
 	
 
 	public List<Template> viewTemplate(Template template) throws TemplateException {

@@ -159,7 +159,6 @@ body {
   margin: 0;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 13px;
-  line-height: 0px;
   color: #333333;
   background-color: #87B5E2;
 }
@@ -480,7 +479,8 @@ h2 small {
 }
 
 h3 {
-  font-size: 15px;
+  color:brown;
+  font-size: 20px;
   line-height: 27px;
 }
 

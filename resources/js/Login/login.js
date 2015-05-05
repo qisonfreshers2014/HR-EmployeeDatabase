@@ -33,10 +33,12 @@ Login.prototype.handleShow = function() {
 			    var jobRole=data.employee.currentDesignation;
 			    var gender=data.employee.gender;
 			    var contactNo=data.employee.contactNo;
-				//App.loadEmployeePage(name,jobRole);
-				//App.loadFooter();
-				//App.loadEmployee(gender,contactNo);
-				App.loadTemplate();
+			    var employeeId=data.employee.employeeId;
+				App.loadEmployeePage(name,jobRole);
+				App.loadFooter();
+				App.loadEmployee(gender,contactNo);
+				App.loadempviewemployee(employeeId);
+				//App.loadTemplate();
 			}
 		}.ctx(this));
 	}
@@ -101,7 +103,7 @@ Login.prototype.handleShow = function() {
 	    	$('.errormessage').text("Password has no Lowercase(?)");
 	        isValid = false;
 		}
-		/* else if(password.length < 6 ){
+		/*ï¿½else if(password.length < 6 ){
 			$(".message").show();
 			$('.message').focus();
 	    	$('.message').text("password is too short(?)");
@@ -113,10 +115,10 @@ Login.prototype.handleShow = function() {
 			$('.errormessage').focus();
 	    	$('.errormessage').text("password is too large(?)");	
 			}*/
-		    else
+		else
 			{
 			$(".errormessage1").empty();
-			isValid = true;    
+			isValid = true;
 			}
 		return isValid; 
 	}

@@ -34,6 +34,8 @@ Loader.prototype.loadHTML = function(container, filePath, empty, callback) {
 
 }
 
+
+
 Loader.prototype.loadManualMail = function(cb) {
 	LazyLoad.css('resources/js/SendNotification/sendNotification.css');
 	LazyLoad.js('resources/js/SendNotification/sendNotificationMail.js', cb);
@@ -72,22 +74,21 @@ Loader.prototype.loadCkeditor = function(){
 
 Loader.prototype.loadAddTemplate = function(cb){ 
  LazyLoad.css('resources/css/addtemp&viewEmp.css');
- // LazyLoad.css('resources/js/Template/addtemplate.css');
+ //LazyLoad.css('resources/js/Template/addtemplate.css');
  LazyLoad.js('resources/js/Template/addtemplate.js', cb);
  
 }
 
 Loader.prototype.loadViewEmployee = function(cb) {
  LazyLoad.css('resources/css/addtemp&viewEmp.css');
- // LazyLoad.css('resources/css/viewEmployee.css');
+ //LazyLoad.css('resources/css/viewEmployee.css');
  LazyLoad.js('resources/js/viewEmployee.js', cb);
 }
  Loader.prototype.loadempviewemployee = function(cb) {
      LazyLoad.css('resources/css/addtemp&viewEmp.css');
- // LazyLoad.css('resources/css/empviewemployee.css');
+ //LazyLoad.css('resources/css/empviewemployee.css');
  LazyLoad.js('resources/js/empViewemployee.js', cb);
 }
-
 
 Loader.prototype.loadViewTemplate = function (cb) {
  
@@ -132,6 +133,7 @@ Loader.prototype.loadHRHomeFooter = function (cb) {
   LazyLoad.js('resources/js/HRhome/hRhomeFooter.js', cb);
  }
 
+
  Loader.prototype.loadDesignation = function(cb){
 	 LazyLoad.css('resources/js/editdesignation/editdesignation.css');
 	 LazyLoad.js('resources/js/editdesignation/editdesignation.js',cb);
@@ -148,7 +150,7 @@ Loader.prototype.loadFooter = function(){
   LazyLoad.js('resources/js/EmployeeHomepage/footer.js');
 
 }
-[7:00:33 PM] Aditya Dade: Loader.prototype.loadEmployeePage = function(){
+ Loader.prototype.loadEmployeePage = function(){
   LazyLoad.css('resources/js/EmployeeHomepage/empHomePage.css');
   LazyLoad.js('resources/js/EmployeeHomepage/empHomePage.js');
 }
@@ -163,8 +165,6 @@ Loader.prototype.loadTemplate = function(){
    LazyLoad.js('resources/js/Templates/template.js');
   }
 
-
-
 Loader.prototype.loadFilter = function(cb){
   LazyLoad.css('resources/js/skill/Skill.css');
   LazyLoad.js('resources/js/FilterEmployee/Filter.js',cb);
@@ -174,7 +174,6 @@ Loader.prototype.loadSkill = function(cb){
   LazyLoad.js('resources/js/skill/Skill.js',cb);
 }
 
-Chita:-
 Loader.prototype.loadEditEmp = function(dataId){
 	LazyLoad.js('resources/js/employee/editemp.js', dataId);
 	LazyLoad.css('resources/js/employee/addemp.css');

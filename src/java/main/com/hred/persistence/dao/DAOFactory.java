@@ -88,8 +88,10 @@ public class DAOFactory {
 	}
 
 	public DesignationTypeDAO getDesignationTypeDAO() {
+
 		// TODO Auto-generated method stub
 		return DesignationTypeDAOImpl.getInstance();
+
 	}
 
 	

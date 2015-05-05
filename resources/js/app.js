@@ -1,196 +1,174 @@
-
-
-
 function App() {
 
 	this.handleShow();
 }
-App.prototype.handleShow = function () {
-	 this.userName = "";
-	 this.jobRole = "";
-	 this.contactNo = "";
-	 this.gender = "";
+App.prototype.handleShow = function() {
+	this.userName = "";
+	this.jobRole = "";
+	this.contactNo = "";
+	this.gender = "";
+	this.employeeId = "";
 }
 
-
-
-
-App.prototype.loadTemplate=function(){
-  Loader.loadTemplate();
- }
-
-App.prototype.loadEmployee=function(gender,contactNo){
- this.gender = gender;
- this.contactNo = contactNo;
- Loader.loadEmployee();
-}
-App.prototype.loadFooter=function(){
- Loader.loadFooter(function(){
-  new footer();
- });
-}
-App.prototype.loadEmployeePage=function(name,jobRole){
- this.userName = name;
- this.jobRole=jobRole;
- Loader.loadEmployeePage();
+App.prototype.loadTemplate = function() {
+	Loader.loadTemplate();
 }
 
-
-
- App.prototype.loadAddTemplate = function(){
- Loader.loadCkeditor();
-Loader.loadAddTemplate(function(){
- new AddTemplate();
-  });
- }
-
- App.prototype.loadViewEmployee=function(){
- Loader.loadViewEmployee(function(){
-  new ViewEmployee();
- });
+App.prototype.loadEmployee = function(gender, contactNo) {
+	this.gender = gender;
+	this.contactNo = contactNo;
+	Loader.loadEmployee();
+}
+App.prototype.loadFooter = function() {
+	Loader.loadFooter(function() {
+		new footer();
+	});
+}
+App.prototype.loadEmployeePage = function(name, jobRole) {
+	this.userName = name;
+	this.jobRole = jobRole;
+	Loader.loadEmployeePage();
 }
 
-App.prototype.loadempviewemployee=function(){
- Loader.loadempviewemployee(function(){
-  new empViewemployee();
- });
+App.prototype.loadAddTemplate = function() {
+	Loader.loadCkeditor();
+	Loader.loadAddTemplate(function() {
+		new AddTemplate();
+	});
 }
 
+App.prototype.loadViewEmployee = function() {
+	Loader.loadViewEmployee(function() {
+		new ViewEmployee();
+	});
+}
+
+App.prototype.loadempviewemployee = function() {
+	
+	Loader.loadempviewemployee(function() {
+		new empViewemployee();});
+}
 
 App.prototype.listPolicy = function() {
- Loader.listPolicy(function() {
-  new policyList();
- });
+	Loader.listPolicy(function() {
+		new policyList();
+	});
 }
-
 
 App.prototype.listEmployee = function() {
- Loader.listEmployee(function() {
-  new employeeList();
- });
+	Loader.listEmployee(function() {
+		new employeeList();
+	});
 }
 
-
-App.prototype.loadEmployeeHoliday=function(){
- Loader.loadEmployeeHoliday(function(){
-  new employeeHolidayList();
- });
+App.prototype.loadEmployeeHoliday = function() {
+	Loader.loadEmployeeHoliday(function() {
+		new employeeHolidayList();
+	});
 }
-\App.prototype.loadHoliday = function(){
-   Loader.loadHoliday(function(){
-    new listHoliday();
- });
-}
-
-
-
-App.prototype.loadFilter=function(cb){
- Loader.loadFilter(function(){
-  new FilterEmp(cb);
- });
-}
-App.prototype.loadSkill=function(cb){
- Loader.loadSkill(function(){
-  new skill(cb);
- });
+App.prototype.loadHoliday = function() {
+	Loader.loadHoliday(function() {
+		new listHoliday();
+	});
 }
 
-App.prototype.loadDesignation=function(){
-		Loader.loadDesignation(function(){
-			new editdesignation();
+App.prototype.loadFilter = function(cb) {
+	Loader.loadFilter(function() {
+		new FilterEmp(cb);
+	});
+}
+App.prototype.loadSkill = function(cb) {
+	Loader.loadSkill(function() {
+		new skill(cb);
+	});
+}
 
-		});
+App.prototype.loadDesignation = function() {
+	Loader.loadDesignation(function() {
+		new editdesignation();
 
-	}
+	});
 
-	App.prototype.loadPolicy=function(){
-			Loader.loadPolicy(function(){
-				new addpolicy();
-			});
+}
 
+App.prototype.loadPolicy = function() {
+	Loader.loadPolicy(function() {
+		new addpolicy();
+	});
+}
 
 App.prototype.loadNotificationHomePage = function(data) {
-		Loader.loadNotificationHomePage(function() {
-			new loadNotificationHomePage(data);
-		});
-	}
-	App.prototype.loadManualMail = function(event,email,employeeName){
-		Loader.loadManualMail(function(){
-			new sendNotificationMail(event,email,employeeName);
-		});
-		
-	}
+	Loader.loadNotificationHomePage(function() {
+		new loadNotificationHomePage(data);
+	});
+}
+App.prototype.loadManualMail = function(event, email, employeeName) {
+	Loader.loadManualMail(function() {
+		new sendNotificationMail(event, email, employeeName);
+	});
 
+}
 
-App.prototype.loadEmpl=function(){
-	Loader.loadEmpl(function(){
+App.prototype.loadEmpl = function() {
+	Loader.loadEmpl(function() {
 		new AddEmployee();
 	});
 }
 
-App.prototype.loadEditEmp=function(dataId){
-	Loader.loadEditEmp(function(){
+App.prototype.loadEditEmp = function(dataId) {
+	Loader.loadEditEmp(function() {
 		new EditEmployee(dataId);
 	});
 }
 
-App.prototype.loadhrEditEmp=function(){
-	Loader.loadhrEditEmp(function(){
+App.prototype.loadhrEditEmp = function() {
+	Loader.loadhrEditEmp(function() {
 		new HrEditEmployee();
 	});
-	
-App.prototype.loadtemplateList=function(){
-		Loader.loadtemplateList(function(){
-			new TemplateList();
-		});
-	}
-
-
-App.prototype.loadViewTemplate = function(dataid){
-  Loader.loadCkeditor();
- Loader.loadViewTemplate(function(){
-  new editTemplate(dataid);
- });
 }
-App.prototype.loadAllHandsMeeting = function(){
- Loader.loadAllHandsMeeting(function(){
-  new viewAllHandsMeeting();
- });
-}
-App.prototype.loadAllhandmeeting = function(){
- Loader.loadAllhandmeeting(function(){
-  new allHandMeeting();
- });
-}
-App.prototype.loadAllhandmeetings = function(dataid){
- Loader.loadAllhandmeetings(function(){
-  new editHandMeeting(dataid);
- });
+App.prototype.loadtemplateList = function() {
+	Loader.loadtemplateList(function() {
+		new TemplateList();
+	});
 }
 
-
-
-App.prototype.loadHRHomeHeader = function(name){
- Loader.loadHRHomeHeader(function(){
-  new hRHomeHeader(name);
- });
+App.prototype.loadViewTemplate = function(dataid) {
+	Loader.loadCkeditor();
+	Loader.loadViewTemplate(function() {
+		new editTemplate(dataid);
+	});
 }
-App.prototype.loadHRHomePage = function(){
- Loader.loadHRHomePage(function(){
-  new hRHomePage();
- });
+App.prototype.loadAllHandsMeeting = function() {
+	Loader.loadAllHandsMeeting(function() {
+		new viewAllHandsMeeting();
+	});
+}
+App.prototype.loadAllhandmeeting = function() {
+	Loader.loadAllhandmeeting(function() {
+		new allHandMeeting();
+	});
+}
+App.prototype.loadAllhandmeetings = function(dataid) {
+	Loader.loadAllhandmeetings(function() {
+		new editHandMeeting(dataid);
+	});
 }
 
-App.prototype.loadHRHomeFooter = function(){
- Loader.loadHRHomeFooter(function(){
-  new hRHomeFooter();
- });
+App.prototype.loadHRHomeHeader = function(name) {
+	this.userName = name;
+	Loader.loadHRHomeHeader();
 }
 
+App.prototype.loadHRHomePage = function() {
+	Loader.loadHRHomePage(function() {
+		new hRHomePage();
+	});
+}
 
-
-
-
+App.prototype.loadHRHomeFooter = function() {
+	Loader.loadHRHomeFooter(function() {
+		new hRHomeFooter();
+	});
+}
 
 var App = new App();
-

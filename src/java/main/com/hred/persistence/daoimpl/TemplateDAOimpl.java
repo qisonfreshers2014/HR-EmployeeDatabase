@@ -19,17 +19,18 @@ import com.hred.service.descriptors.output.DisplayNotificationHome;
 
 public class TemplateDAOimpl extends BaseDAOImpl implements TemplateDAO {
 
- private static TemplateDAO INSTANCE = null;
 
- private TemplateDAOimpl() {
- }
+	private static TemplateDAO INSTANCE = null;
 
- public static TemplateDAO getInstance() {
-  if (INSTANCE == null) {
-   INSTANCE = new TemplateDAOimpl();
-  }
-  return INSTANCE;
- }
+	private TemplateDAOimpl() {
+	}
+
+	public static TemplateDAO getInstance() {
+		if (INSTANCE == null) {
+			INSTANCE = new TemplateDAOimpl();
+		}
+		return INSTANCE;
+	}
 
  @SuppressWarnings("unchecked")
  public List<Template> getTemplateByName() {
@@ -105,6 +106,7 @@ public class TemplateDAOimpl extends BaseDAOImpl implements TemplateDAO {
 
   
   public Template getContentForMail(DisplayNotificationHome template)
+
 	{
 		Session session = null;
 		Template list = null;
@@ -123,6 +125,42 @@ public class TemplateDAOimpl extends BaseDAOImpl implements TemplateDAO {
 	return list;	
 	
 	}
+	
+	//This method to retrieve all the templates as a list object
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Template> getTemplates() {
+		Session session = null;
+		List<Template> list = null;
+		Transaction tx = null;
+		try {
+		session = getSession();
+		if (null == session) {
+		session = SessionFactoryUtil.getInstance().openSession();
+		tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+		}
+		Criteria createCriteria = session.createCriteria(Template.class);
+		 
+		//createCriteria.add(Restrictions.eq("id", employee.getId()));
+		 
+		//createCriteria.add(Restrictions.eq("isDeleted",false));
+		list = (List<Template>)createCriteria.list();
+		 } finally {
+		try {
+		if (tx != null) {
+		tx.commit();
+		if (session.isConnected())
+		   session.close();
+		}
+		} catch (HibernateException e) {
+
+		e.printStackTrace();
+		}
+		}
+		return  list; 
+	}
+
 
  
 }

@@ -1,11 +1,10 @@
-
 #table{
-	position:absolute;
-	width:60%;
-	 margin-left: 6%;
+ position:absolute;
+ width:60%;
+  margin-left: 6%;
     margin-top: 5%;
-	font-size:15px;
-	color:black;
+ font-size:15px;
+ color:black;
 }
 
 th {

@@ -4,7 +4,6 @@ package com.hred.service;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -24,6 +23,8 @@ import com.hred.model.Employee;
 import com.hred.model.FilterEmployee;
 import com.hred.model.user.AuthenticationInput;
 import com.hred.model.user.AuthenticationOutput;
+import com.hred.persistence.dao.DAOFactory;
+import com.hred.persistence.dao.EmployeeDAO;
 import com.hred.service.annotations.RestService;
 import com.hred.service.annotations.ServiceStatus;
 import com.hred.service.annotations.UnSecure;
@@ -52,6 +53,30 @@ public class EmployeeService extends BaseService {
 
 	@POST
 	@RestService(input = String.class, output = String.class)
+	 @ServiceStatus(value = "complete")
+	 @Consumes(MediaType.APPLICATION_JSON)
+	 @Produces(MediaType.APPLICATION_JSON)
+	 @Path("/authenticate")
+	 @UnSecure
+	 public String authenticate(@Context HttpHeaders headers,
+	   @Context UriInfo uriInfo, WebserviceRequest request)
+	   throws ObjectNotFoundException, BusinessException,
+	   EncryptionException {
+
+	  AuthenticationInput input = (AuthenticationInput) JsonUtil.getObject(
+	    request.getPayload(), AuthenticationInput.class);
+
+	  AuthenticationOutput output = AuthenticationHandlerFactory
+	    .getAuthenticationHandler(input.getAuthType()).authenticate(
+	      input);
+
+	  return JsonUtil.getJsonBasedOnDescriptor(output,
+	    AuthenticationOutput.class);
+	 }
+	
+	
+	/*@POST
+	@RestService(input = String.class, output = String.class)
 	@ServiceStatus(value = "complete")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -71,7 +96,7 @@ public class EmployeeService extends BaseService {
 		return JsonUtil.getJsonBasedOnDescriptor(output,
 				AuthenticationOutput.class);
 	}
-	
+	*/
 
 	/*@POST
 	@RestService(input = String.class, output = String.class)
@@ -92,7 +117,21 @@ public class EmployeeService extends BaseService {
 
 		return JsonUtil.getJsonBasedOnDescriptor(output, Employee.class);
 	}*/
-
+	@POST
+	 @RestService(input = String.class, output = String.class)
+	 @ServiceStatus(value = "complete")
+	 @Consumes(MediaType.APPLICATION_JSON)
+	 @Produces(MediaType.APPLICATION_JSON)
+	 @Path("/getEmployees")
+	 @UnSecure
+	  public String getEmployees(@Context HttpHeaders headers, @Context UriInfo uriInfo,
+	   WebserviceRequest request) throws ObjectNotFoundException,
+	   BusinessException, EncryptionException { 
+	  FilterEmployee employee = (FilterEmployee) JsonUtil.getObject(request.getPayload(), FilterEmployee.class);
+	  List<Employee> employees = EmployeeHandler.getInstance().getEmployees(employee);
+	  return JsonUtil.getJsonForListBasedOnDescriptor(employees, Employee.class, EmployeeListOutputDescriptors.class);
+	  //return outputString;
+	 }
 	
 	@POST
 	@RestService(input = String.class, output = String.class)
@@ -226,22 +265,8 @@ public class EmployeeService extends BaseService {
 		return outputString;
 	}
 	
-/*	@POST
-	@RestService(input = String.class, output = String.class)
-	@ServiceStatus(value = "complete")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/getEmployees")
-	@UnSecure
- 	public String getEmployees(@Context HttpHeaders headers, @Context UriInfo uriInfo,
-			WebserviceRequest request) throws ObjectNotFoundException,
-			BusinessException, EncryptionException {	
-		FilterEmployee employee = (FilterEmployee) JsonUtil.getObject(request.getPayload(),	FilterEmployee.class);
-		List<Employee> employees = EmployeeHandler.getInstance().getEmployees(employee);
- 	return JsonUtil.getJsonForListBasedOnDescriptor(employees, Employee.class, EmployeeListOutputDescriptors.class);
-		//return outputString;
-	}*/
-
+ 
+		
 	@POST
 	@RestService(input = String.class, output = Employee.class)
 	@ServiceStatus(value = "complete")

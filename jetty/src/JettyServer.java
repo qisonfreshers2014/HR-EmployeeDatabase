@@ -16,10 +16,8 @@ public class JettyServer
  
     public static void main(String[] args) throws Exception
     {
-
 		String user_dir = System.getProperty("user.dir");
-
-        Server server = new Server(9090);
+        Server server = new Server(8080);
 
 
         WebAppContext webapp = new WebAppContext();

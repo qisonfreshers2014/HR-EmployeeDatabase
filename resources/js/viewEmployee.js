@@ -33,12 +33,13 @@ ViewEmployee.prototype.viewEmployeedetails=function(){
        
       
 	
-	var input= {"payload":{"employeeId":1200}};
+	var input= {"payload":{"id":21}};
 
 RequestManager.viewEmployeedatails(input, function(data, success) {
 	if(success){
-	
+    alert(data);
 	var obj=data[0]
+	alert()
 	
 	var dobformat = new Date(obj.dateOfBirth);
 	  var byear = dobformat.getFullYear();

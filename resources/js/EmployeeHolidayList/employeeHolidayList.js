@@ -1,5 +1,5 @@
 function employeeHolidayList() {
-	Loader.loadHTML('.container', 'resources/js/EmployeeHolidayList/employeeHolidayList.html', true, function(){
+	Loader.loadHTML('.container', 'resources/js/EmployeeHolidayList/EmployeeHolidayList.html', true, function(){
 		this.handleShow();
 	}.ctx(this));
 }

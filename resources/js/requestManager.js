@@ -1,7 +1,7 @@
 function RequestManager() {
     this.apiPrefix = '/services/v1/';
 }
-;
+
 
 
 
@@ -65,7 +65,6 @@ RequestManager.prototype.getNotificationDisplayCriteria=function(data,callback){
  this.sendToServer('employee/getNotificationDisplayCriteria', data, callback);
 }
 
-
  RequestManager.prototype.getTemplates = function(data, callback) {
   this.sendToServer('template/gatTemplate', data, callback);
  }
@@ -86,8 +85,6 @@ RequestManager.prototype.getTemplateById = function(data, callback) {
    this.sendToServer('template/viewTemplate', data, callback);
   }
 
-
-
 RequestManager.prototype.saveDesignation=function(data,callback){
 	this.sendToServer('designation_history/save', data, callback);
 }
@@ -107,7 +104,7 @@ RequestManager.prototype.saveEmp=function(data,callback){
 RequestManager.prototype.getHreditEmployee=function(data,callback){
  this.sendToServer('employee/getEmployee', data, callback);
 }
-[RequestManager.prototype.geteditEmployee=function(data,callback){
+RequestManager.prototype.geteditEmployee=function(data,callback){
  this.sendToServer('employee/getEmployee', data, callback);
 }
 RequestManager.prototype.updateEmp=function(data,callback){
@@ -136,8 +133,6 @@ RequestManager.prototype.getFilterEmployee = function(data, callback) {
    this.sendToServer('employee/getEmployees', data, callback);
   }
 
-
-Vasavi:-
 RequestManager.prototype.addAllHands = function(data, callback) {
     this.sendToServer('allhandsmeeting/save', data, callback);
    }
@@ -156,8 +151,6 @@ RequestManager.prototype.getTemplateById = function(data, callback) {
 RequestManager.prototype.editTemplateDetails = function(data, callback) {
     this.sendToServer('template/updateTemplate', data, callback);
    }
-
-
 
 RequestManager.prototype.holidaysData=function(data,callback){
  this.sendToServer('holiday/save', data, callback);

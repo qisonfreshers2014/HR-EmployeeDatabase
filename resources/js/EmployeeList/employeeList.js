@@ -1,5 +1,5 @@
 function employeeList() {
-	Loader.loadHTML('.container','resources/js/EmployeeList/employeeList.html', true, function() {
+	Loader.loadHTML('.container','resources/js/EmployeeList/EmployeeList.html', true, function() {
 				this.handleShow();
 			}.ctx(this));
 	

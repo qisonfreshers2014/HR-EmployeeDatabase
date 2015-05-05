@@ -28,6 +28,8 @@ import com.hred.service.descriptors.output.DisplayNotificationHome;
 @Path("/v1/template/")
 public class TemplateService extends BaseService {
 
+
+
  /**
   * @param headers
   * @param uriInfo
@@ -57,6 +59,27 @@ public class TemplateService extends BaseService {
   return JsonUtil.getJsonBasedOnDescriptor(output, Template.class);
  }
 
+	@POST
+	@RestService(input = String.class, output = String.class)
+	@ServiceStatus(value = "complete")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/gatTemplate")
+	@UnSecure
+	public String getTemplates(@Context HttpHeaders headers,
+			@Context UriInfo uriInfo, WebserviceRequest request)
+			throws ObjectNotFoundException, BusinessException,
+			EncryptionException, TemplateException {
+
+		Template template = (Template) JsonUtil.getObject(request.getPayload(),
+				Template.class);
+		List<Template> templates = (List<Template>) TemplateHandler
+				.getInstance().getTemplates();
+		System.out.println("COunt : " + templates.size());
+		// String outputString =
+		// "{\"status\": \"SUCCESS\", \"payload\": \"Test Successful\"}";
+		return JsonUtil.getJsonBasedOnDescriptor(templates, Template.class);
+	}
  @POST
  @RestService(input = String.class, output = String.class)
  @ServiceStatus(value = "complete")
@@ -79,28 +102,6 @@ public class TemplateService extends BaseService {
   return JsonUtil.getJsonBasedOnDescriptor(templates, Template.class);
  }
 
-
- @POST
- @RestService(input = String.class, output = String.class)
- @ServiceStatus(value = "complete")
- @Consumes(MediaType.APPLICATION_JSON)
- @Produces(MediaType.APPLICATION_JSON)
- @Path("/gatTemplate")
- @UnSecure
- public String getTemplateByName(@Context HttpHeaders headers,
-   @Context UriInfo uriInfo, WebserviceRequest request)
-   throws ObjectNotFoundException, BusinessException,
-   EncryptionException, TemplateException {
-
-  Template template = (Template) JsonUtil.getObject(request.getPayload(),
-    Template.class);
-  List<Template> templates = (List<Template>) TemplateHandler
-    .getInstance().getTemplateByName();
-  System.out.println("COunt : " + templates.size());
-  // String outputString =
-  // "{\"status\": \"SUCCESS\", \"payload\": \"Test Successful\"}";
-  return JsonUtil.getJsonBasedOnDescriptor(templates, Template.class);
- }
 
 
  @POST
@@ -145,3 +146,4 @@ public class TemplateService extends BaseService {
   
 
 }
+

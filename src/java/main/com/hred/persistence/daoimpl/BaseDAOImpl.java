@@ -16,6 +16,8 @@ import com.hred.exception.ExceptionMessages;
 import com.hred.exception.ObjectNotFoundException;
 import com.hred.model.AbstractObject;
 import com.hred.model.BaseObject;
+import com.hred.model.Employee;
+import com.hred.model.FilterEmployee;
 import com.hred.model.Objects;
 import com.hred.model.Template;
 import com.hred.persistence.annotations.Increment;
@@ -135,22 +137,25 @@ public class BaseDAOImpl implements BaseDAO{
     }
 
 
-    @Override
-    public List<BaseObject> save(List<BaseObject> objectList) {
-     Session session = checkSession();
-     if (null != objectList && objectList.size() > 0) {
-      short count = 0;
-      for (BaseObject object : objectList) {
-       saveObject(object);
-       count++;
-       if (count == 1000) {// batch update for each 30 records
-        session.flush();
-        session.clear();
-        count = 0;
-       }
-      }
-     }
-     return objectList;
-    }
+	@Override
+	public List<BaseObject> save(List<BaseObject> objectList) {
+		Session session = checkSession();
+		if (null != objectList && objectList.size() > 0) {
+			short count = 0;
+			for (BaseObject object : objectList) {
+				saveObject(object);
+				count++;
+				if (count == 1000) {// batch update for each 30 records
+					session.flush();
+					session.clear();
+					count = 0;
+				}
+			}
+		}
+		return objectList;
+	} 
+
+
+  
 	
 }

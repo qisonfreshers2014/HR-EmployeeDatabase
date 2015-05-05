@@ -51,19 +51,19 @@ skill.prototype.viewSkillDetails=function(){
 
 
 skill.prototype.validateSkill=function(){
- 
+         var char=/^[A-Za-z]+([A-Za-z]+)*$/;
  	     var skill= $("#skill").val();
 		 if(skill==""){
              $("#skillerror1").text("you cannot leave this empty");
              return false;
 			  }
-		 else if(skill.match('[0-9-+]+$')){
-			   $("#skillerror1").text("Enter only characters only");
-			   return false;
+		 else if(skill.match(char)){
+			   $("#skillerror1").text("nice format");
+			   return true;
 			  }
 			  else{
-			   $("#skillerror1").text("");
-               
+			   $("#skillerror1").text("Enter only one space&characters only");
+               return false;
 			  }
 	}
 skill.prototype.validateTrainingAttended=function(){ 
@@ -79,7 +79,7 @@ skill.prototype.validateTrainingAttended=function(){
 		  }
 		  else{
 		   $("#skillerror2").text("");
-          
+          return true;
 		  }
 }
 
@@ -95,7 +95,7 @@ skill.prototype.validateEmpId=function(){
 		  }
 		  else{
 		   $("#error1").text("Enter only numbers only");
-           
+           return true;
 		  }
 	 
 }
@@ -113,13 +113,15 @@ skill.prototype.validateRating=function(){
 		  else{
 		   $("#error2").text("Enter only numbers only");
           
+		  
+	 return true;
 		  }
-	 
 }
 	 
 skill.prototype.addSkill = function(){
 	 
- 
+// if(this.validateSkill() || this.validateTrainingAttended() || this.validateEmpId() || this.validateRating()){
+//	 alert("sucess");
 	  var input={"payload":{"skills":$('#skill').val(),"trainingAttended":$('#attended1').val(),
 			"empId":$('#empid').val(),"rating":$('#rating').val(),
 			  
@@ -152,7 +154,7 @@ skill.prototype.addSkill = function(){
 				 
 				}
 		}.ctx(this));
-	
+ 
 } 
 skill.prototype.editSkill = function(obj1){
 	 var input = { "payload" : {"id" : obj1} };

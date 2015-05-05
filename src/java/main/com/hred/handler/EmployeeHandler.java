@@ -64,16 +64,6 @@ public class EmployeeHandler extends AbstractHandler {
 		return employees;
 	}
 	
-	public List<Employee> getFilterEmployeeDetails(Employee employee)
-			   throws EmployeeException {
-			  List<Employee> employees = null;
-			  EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
-			    .getEmployeeDAO();
-			  employees = (List<Employee>) empDAOImpl
-			    .getFilterEmployeeDetails(employee);
-			  return employees;
-			 }
-
 	public Employee getEmployeeById(String id) throws EmployeeException {
 		Employee employee = null;
 		EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
@@ -83,6 +73,15 @@ public class EmployeeHandler extends AbstractHandler {
 		return employee;
 	}
 
+
+	
+	 public List<Employee> getEmployees(FilterEmployee employee) throws	 EmployeeException { 
+		  List<Employee> employees = null; EmployeeDAO
+	 empDAOImpl = (EmployeeDAO) DAOFactory.getInstance().getEmployeeDAO();
+	 employees = empDAOImpl.getEmployees(employee);
+	 return employees;
+	 
+	 }
 	/*
 	  public List<Employee> getEmployees(FilterEmployee employee) throws
 	  EmployeeException { List<Employee> employees = null; EmployeeDAO
@@ -91,10 +90,10 @@ public class EmployeeHandler extends AbstractHandler {
 	  
 	  }
 	 */
+
 	public List<Employee> getEmployees() throws EmployeeException {
 		List<Employee> employees = null;
-		EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
-				.getUserDAO();
+		EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance().getEmployeeDAO();
 		employees = empDAOImpl.getEmployees();
 		return employees;
 	}
@@ -520,6 +519,7 @@ public List<DisplayNotificationHome> getWelcomeEmployeeList()
 					break;
 				} else {
 					displayNotificationHome.setStatus("Not Sent");
+
 				}
 			}
 		} else {

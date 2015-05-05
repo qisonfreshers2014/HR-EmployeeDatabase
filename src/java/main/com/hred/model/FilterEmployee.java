@@ -10,63 +10,80 @@ private Timestamp dateOfJoining;
 private String from;
 private String to;
 private String highestQualification;
+private boolean isDeleted;
+private int filterEmployee;
 
 
 public FilterEmployee(String gender, int currentDesignation, Timestamp dateOfJoining,
-		String from, String to, String highestQualification) {
-	super();
-	this.gender = gender;
-	this.currentDesignation = currentDesignation;
-	this.dateOfJoining = dateOfJoining;
-	this.from = from;
-	this.to = to;
-	this.highestQualification = highestQualification;
+  String from, String to, String highestQualification, boolean isDeleted,int filterEmployee ) {
+ super();
+ this.gender = gender;
+ this.currentDesignation = currentDesignation;
+ this.dateOfJoining = dateOfJoining;
+ this.from = from;
+ this.to = to;
+ this.highestQualification = highestQualification;
+ this.isDeleted=isDeleted;
+ this.filterEmployee=filterEmployee;
 }
 public FilterEmployee() {
-	super();
-	// TODO Auto-generated constructor stub
+ super();
+ // TODO Auto-generated constructor stub
 }
 public String getGender() {
-	return gender;
+ return gender;
 }
 public void setGender(String gender) {
-	this.gender = gender;
+ this.gender = gender;
 }
 public int getCurrentDesignation() {
-	return currentDesignation;
+ return currentDesignation;
 }
 public void setCurrentDesignation(int currentDesignation) {
-	this.currentDesignation = currentDesignation;
+ this.currentDesignation = currentDesignation;
 }
 public Timestamp getDateOfJoining() {
-	return this.dateOfJoining;
+ return this.dateOfJoining;
 }
 public void setDateOfJoining(Timestamp dOJ) {
-	this.dateOfJoining = dOJ;
+ this.dateOfJoining = dOJ;
 }
 public String getFrom() {
-	return from;
+ return from;
 }
 public void setFrom(String from) {
-	this.from = from;
+ this.from = from;
 }
 public String getTo() {
-	return to;
+ return to;
 }
 public void setTo(String to) {
-	this.to = to;
+ this.to = to;
 }
 public String getHighestQualification() {
-	return highestQualification;
+ return highestQualification;
 }
 public void setHighestQualification(String highestQualification) {
-	this.highestQualification = highestQualification;
+ this.highestQualification = highestQualification;
 }
 
+public boolean getDeleted() {
+   return isDeleted;
+  }
+
+ public void setDeleted(boolean deleted) {
+   isDeleted = deleted;
+  }
+ 
+ public int getFilterEmployee() {
+  return filterEmployee;
+   
+ }
+ public void setFilterEmployee( int filterEmployee){
+  this.filterEmployee=filterEmployee;
+ }
+
 
 
 
 }
- 
-
- 

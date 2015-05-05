@@ -16,8 +16,6 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 public abstract class AbstractObject implements BaseObject{
 
-	
-
  @Id
  @Column(name = "id")
  private long id;
