@@ -1,6 +1,4 @@
 package com.hred.model;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -16,12 +14,9 @@ import com.hred.persistence.annotations.Increment;
 @Increment
 public class HRPolicy extends AbstractObject{
 
-
-	
-	@Column(name="file_id")
 	private long fileId;
 
-	@Column(name="policy_name")
+
 	private String policyName;
 	
 	public String getPolicyName() {

@@ -13,7 +13,7 @@ sendNotificationMail.prototype.handleShow = function(event, email, employeeName)
 {   
 	$('#contentfieldNotification').ckeditor();
 	var sendbutton = $('#SubmitNotification');
- console.log(email);
+
 		
 	
 	//Requesting the Template Content from the Template table in HRMS database
@@ -37,10 +37,6 @@ sendNotificationMail.prototype.handleShow = function(event, email, employeeName)
 	});
 
 
-
-	   console.log(event);
-       console.log(email);
-       console.log(employeeName);	
 
        //sending the payload to the server
 	$("#SubmitNotification").click(function() {
@@ -107,7 +103,7 @@ console.log(modifiedcontent);
 			  $("#sendSubjectNotification").append(subject);
 		}
 		
-		console.log(event);
+	
 
 
 }

@@ -3,7 +3,7 @@ table,tr,th, td {
     border: 1px solid black;
 	border-collapse:collapse;
 	text-align:center;
-	margin-left:5%;
+	margin-left:2%;
 	font-family: Calibri;
  font-size:12px;
 	
@@ -42,7 +42,7 @@ font-family:calibri;
 {
   font-weight: bold;
   color:brown;
-  margin-left:4%; 
+  margin-left:5%; 
   font-family:Calibri; 
 }
 .p{

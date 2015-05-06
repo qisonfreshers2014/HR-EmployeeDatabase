@@ -1,6 +1,6 @@
 var fileId;
 function AddEmployee() {
-	Loader.loadHTML(".leftContainer", "resources/js/employee/addemp.html",
+	Loader.loadHTML(".container", "resources/js/employee/addemp.html",
 			true, function() {
 				this.handleShow();
 			}.ctx(this));

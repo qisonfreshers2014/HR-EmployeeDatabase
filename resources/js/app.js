@@ -37,17 +37,6 @@ App.prototype.loadAddTemplate = function() {
 	});
 }
 
-App.prototype.loadViewEmployee = function() {
-	Loader.loadViewEmployee(function() {
-		new ViewEmployee();
-	});
-}
-
-App.prototype.loadempviewemployee = function() {
-	
-	Loader.loadempviewemployee(function() {
-		new empViewemployee();});
-}
 
 App.prototype.listPolicy = function() {
 	Loader.listPolicy(function() {
@@ -83,17 +72,17 @@ App.prototype.loadSkill = function(cb) {
 	});
 }
 
-App.prototype.loadDesignation = function() {
-	Loader.loadDesignation(function() {
-		new editdesignation();
 
-	});
-
-}
 
 App.prototype.loadPolicy = function() {
 	Loader.loadPolicy(function() {
 		new addpolicy();
+	});
+}
+
+App.prototype.listEmployeePolicy = function() {
+	Loader.listEmployeePolicy(function() {
+		new employeePolicyList();
 	});
 }
 
@@ -115,15 +104,9 @@ App.prototype.loadEmpl = function() {
 	});
 }
 
-App.prototype.loadEditEmp = function(dataId) {
-	Loader.loadEditEmp(function() {
-		new EditEmployee(dataId);
-	});
-}
-
-App.prototype.loadhrEditEmp = function() {
+App.prototype.loadhrEditEmp = function(empid) {
 	Loader.loadhrEditEmp(function() {
-		new HrEditEmployee();
+		new HrEditEmployee(empid);
 	});
 }
 App.prototype.loadtemplateList = function() {
@@ -170,5 +153,29 @@ App.prototype.loadHRHomeFooter = function() {
 		new hRHomeFooter();
 	});
 }
+App.prototype.loadempviewemployee = function(employeeId) {
+	Loader.loadempviewemployee(function() {
+		new empViewemployee(employeeId);
+	});
+}
+App.prototype.loadEditEmp = function(employeeId) {
+	Loader.loadEditEmp(function() {
+		new EditEmployee(employeeId);
+	});
+}
+
+App.prototype.loadDesignation=function(empid,name,doj){
+	  Loader.loadDesignation(function(){
+	   new editdesignation(empid,name,doj);
+
+	  });
+
+	 }
+App.prototype.loadViewEmployee=function(empid){
+	 Loader.loadViewEmployee(function(){
+	  new ViewEmployee(empid);
+	 });
+	}
+
 
 var App = new App();

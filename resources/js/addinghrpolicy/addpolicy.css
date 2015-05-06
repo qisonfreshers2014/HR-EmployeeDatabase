@@ -1,31 +1,36 @@
-h3
-{
- color:brown;
- margin-left:3%;
+h3 {
+	color: brown;
+	margin-left: 3%;
+	margin-top: 1%;
 }
 
-.alignInput
-{margin-left:10%;}
+.alignInput {
+	margin-left: 10%;
+}
 
-.alignInputSave
-{margin-left:40%;}
+.alignInputSave {
+	margin-left: 40%;
+}
 
-#addPolicy{
+#addPolicy {
 	background-color: lightgray;
-	width:100%;
-	height:100%;
-	margin-left:3%;
-	font-family:calibri;
+	width: 60%;
+	height: 150px;
+	margin-left: 3%;
+	font-family: calibri;
 }
-.star{color:red; font-size:20px;}
 
-.inputelement
-{
-	font-size:12px;
+.mandatoryStar {
+	color: red;
+	font-size: 20px;
+}
+
+.inputelement {
+	font-size: 12px;
 	font-weight: bold;
 }
 
-.errorMessage
-{
-	color:red; font-size:11px;
+.errorMessage {
+	color: red;
+	font-size: 11px;
 }

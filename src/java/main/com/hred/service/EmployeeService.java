@@ -1,4 +1,3 @@
- 
 package com.hred.service;
 
 import java.util.List;
@@ -53,34 +52,11 @@ public class EmployeeService extends BaseService {
 
 	@POST
 	@RestService(input = String.class, output = String.class)
-	 @ServiceStatus(value = "complete")
-	 @Consumes(MediaType.APPLICATION_JSON)
-	 @Produces(MediaType.APPLICATION_JSON)
-	 @Path("/authenticate")
-	 @UnSecure
-	 public String authenticate(@Context HttpHeaders headers,
-	   @Context UriInfo uriInfo, WebserviceRequest request)
-	   throws ObjectNotFoundException, BusinessException,
-	   EncryptionException {
-
-	  AuthenticationInput input = (AuthenticationInput) JsonUtil.getObject(
-	    request.getPayload(), AuthenticationInput.class);
-
-	  AuthenticationOutput output = AuthenticationHandlerFactory
-	    .getAuthenticationHandler(input.getAuthType()).authenticate(
-	      input);
-
-	  return JsonUtil.getJsonBasedOnDescriptor(output,
-	    AuthenticationOutput.class);
-	 }
-	
-	
-	/*@POST
-	@RestService(input = String.class, output = String.class)
 	@ServiceStatus(value = "complete")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/addemployee")
+	@Path("/authenticate")
+	@UnSecure
 	public String authenticate(@Context HttpHeaders headers,
 			@Context UriInfo uriInfo, WebserviceRequest request)
 			throws ObjectNotFoundException, BusinessException,
@@ -96,9 +72,8 @@ public class EmployeeService extends BaseService {
 		return JsonUtil.getJsonBasedOnDescriptor(output,
 				AuthenticationOutput.class);
 	}
-	*/
 
-	/*@POST
+	@POST
 	@RestService(input = String.class, output = String.class)
 	@ServiceStatus(value = "complete")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -116,84 +91,91 @@ public class EmployeeService extends BaseService {
 				employee);
 
 		return JsonUtil.getJsonBasedOnDescriptor(output, Employee.class);
-	}*/
+	}
+
 	@POST
-	 @RestService(input = String.class, output = String.class)
-	 @ServiceStatus(value = "complete")
-	 @Consumes(MediaType.APPLICATION_JSON)
-	 @Produces(MediaType.APPLICATION_JSON)
-	 @Path("/getEmployees")
-	 @UnSecure
-	  public String getEmployees(@Context HttpHeaders headers, @Context UriInfo uriInfo,
-	   WebserviceRequest request) throws ObjectNotFoundException,
-	   BusinessException, EncryptionException { 
-	  FilterEmployee employee = (FilterEmployee) JsonUtil.getObject(request.getPayload(), FilterEmployee.class);
-	  List<Employee> employees = EmployeeHandler.getInstance().getEmployees(employee);
-	  return JsonUtil.getJsonForListBasedOnDescriptor(employees, Employee.class, EmployeeListOutputDescriptors.class);
-	  //return outputString;
-	 }
-	
+	@RestService(input = String.class, output = String.class)
+	@ServiceStatus(value = "complete")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/getEmployees")
+	@UnSecure
+	public String getEmployees(@Context HttpHeaders headers,
+			@Context UriInfo uriInfo, WebserviceRequest request)
+			throws ObjectNotFoundException, BusinessException,
+			EncryptionException {
+		FilterEmployee employee = (FilterEmployee) JsonUtil.getObject(
+				request.getPayload(), FilterEmployee.class);
+		List<Employee> employees = EmployeeHandler.getInstance().getEmployees(
+				employee);
+		return JsonUtil.getJsonForListBasedOnDescriptor(employees,
+				Employee.class, EmployeeListOutputDescriptors.class);
+		// return outputString;
+	}
+
 	@POST
 	@RestService(input = String.class, output = String.class)
 	@ServiceStatus(value = "complete")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/updateEmployee")
-	@UnSecure
-	public String updateEmployee(@Context HttpHeaders headers, @Context UriInfo uriInfo,
-			WebserviceRequest request) throws ObjectNotFoundException,
-			BusinessException, EncryptionException {
+	 @UnSecure
+	public String updateEmployee(@Context HttpHeaders headers,
+			@Context UriInfo uriInfo, WebserviceRequest request)
+			throws ObjectNotFoundException, BusinessException,
+			EncryptionException {
 
 		Employee employee = (Employee) JsonUtil.getObject(request.getPayload(),
 				Employee.class);
 
-		Employee output = (Employee) EmployeeHandler.getInstance().updateEmployee(
-				employee);
+		Employee output = (Employee) EmployeeHandler.getInstance()
+				.updateEmployee(employee);
 
 		return JsonUtil.getJsonBasedOnDescriptor(output, Employee.class);
 	}
-	
-	
+
 	@POST
 	@RestService(input = String.class, output = String.class)
 	@ServiceStatus(value = "complete")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/hrupdateEmployee")
-	@UnSecure
-	public String hrupdateEmployee(@Context HttpHeaders headers, @Context UriInfo uriInfo,
-			WebserviceRequest request) throws ObjectNotFoundException,
-			BusinessException, EncryptionException {
+	 @UnSecure
+	public String hrupdateEmployee(@Context HttpHeaders headers,
+			@Context UriInfo uriInfo, WebserviceRequest request)
+			throws ObjectNotFoundException, BusinessException,
+			EncryptionException {
 
 		Employee employee = (Employee) JsonUtil.getObject(request.getPayload(),
 				Employee.class);
-		
 
-		Employee output = (Employee) EmployeeHandler.getInstance().hrUpdateEmployee(
-				employee);
+		Employee output = (Employee) EmployeeHandler.getInstance()
+				.hrUpdateEmployee(employee);
 
 		return JsonUtil.getJsonBasedOnDescriptor(output, Employee.class);
 	}
-	
+
 	@POST
-	 @RestService(input = String.class, output = String.class)
-	 @ServiceStatus(value = "complete")
-	 @Consumes(MediaType.APPLICATION_JSON)
-	 @Produces(MediaType.APPLICATION_JSON)
-	 @Path("/deleteEmployee")
+	@RestService(input = String.class, output = String.class)
+	@ServiceStatus(value = "complete")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/deleteEmployee")
 	 @UnSecure
-	 public String deleteEmployee(@Context HttpHeaders headers, @Context UriInfo uriInfo,
-	   WebserviceRequest request) throws ObjectNotFoundException,
-	   BusinessException, EncryptionException {
+	public String deleteEmployee(@Context HttpHeaders headers,
+			@Context UriInfo uriInfo, WebserviceRequest request)
+			throws ObjectNotFoundException, BusinessException,
+			EncryptionException {
 
-	  Employee employee = (Employee) JsonUtil.getObject(request.getPayload(),
-	    Employee.class);
+		Employee employee = (Employee) JsonUtil.getObject(request.getPayload(),
+				Employee.class);
 
-	  Employee output = (Employee) EmployeeHandler.getInstance().deleteEmployee(
-	    employee);
+		Employee output = (Employee) EmployeeHandler.getInstance()
+				.deleteEmployee(employee);
 
-	  return JsonUtil.getJsonBasedOnDescriptor(output, Employee.class);
-	 }
+		return JsonUtil.getJsonBasedOnDescriptor(output, Employee.class);
+	}
+
 	@POST
 	@RestService(input = String.class, output = Employee.class)
 	@ServiceStatus(value = "complete")
@@ -201,34 +183,40 @@ public class EmployeeService extends BaseService {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/getEmployeeDetails")
 	@UnSecure
-	public String getEmployee(@Context HttpHeaders headers, @Context UriInfo uriInfo,
-			WebserviceRequest request) throws ObjectNotFoundException,
-			BusinessException, EncryptionException {		
-		Employee employee = (Employee) JsonUtil.getObject(request.getPayload(), Employee.class);
+	public String getEmployee(@Context HttpHeaders headers,
+			@Context UriInfo uriInfo, WebserviceRequest request)
+			throws ObjectNotFoundException, BusinessException,
+			EncryptionException {
+		Employee employee = (Employee) JsonUtil.getObject(request.getPayload(),
+				Employee.class);
 		List<Employee> employees = EmployeeHandler.getInstance().getEmployee();
-		System.out.println("Count : "+ employees.size());
-		return JsonUtil.getJsonForListBasedOnDescriptor(employees, Employee.class, Employee.class);
+		System.out.println("Count : " + employees.size());
+		return JsonUtil.getJsonForListBasedOnDescriptor(employees,
+				Employee.class, Employee.class);
 
 	}
-	
-	
+
 	@POST
 	@RestService(input = String.class, output = Employee.class)
 	@ServiceStatus(value = "complete")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/searchEmployee")
-	@UnSecure
-	public String searchEmployee(@Context HttpHeaders headers, @Context UriInfo uriInfo,
-			WebserviceRequest request) throws ObjectNotFoundException,
-			BusinessException, EncryptionException {		
-		EmployeeSearchInputDescriptor employee = (EmployeeSearchInputDescriptor) JsonUtil.getObject(request.getPayload(), EmployeeSearchInputDescriptor.class);
-		List<Employee> employees = EmployeeHandler.getInstance().searchEmployee(employee);
-		System.out.println("Count : "+ employees.size());		
-		return JsonUtil.getJsonForListBasedOnDescriptor(employees, EmployeeSearchInputDescriptor.class, Employee.class);
+	 @UnSecure
+	public String searchEmployee(@Context HttpHeaders headers,
+			@Context UriInfo uriInfo, WebserviceRequest request)
+			throws ObjectNotFoundException, BusinessException,
+			EncryptionException {
+		EmployeeSearchInputDescriptor employee = (EmployeeSearchInputDescriptor) JsonUtil
+				.getObject(request.getPayload(),
+						EmployeeSearchInputDescriptor.class);
+		List<Employee> employees = EmployeeHandler.getInstance()
+				.searchEmployee(employee);
+		System.out.println("Count : " + employees.size());
+		return JsonUtil.getJsonForListBasedOnDescriptor(employees,
+				EmployeeSearchInputDescriptor.class, Employee.class);
 	}
-	
-	
+
 	@POST
 	@RestService(input = String.class, output = String.class)
 	@ServiceStatus(value = "complete")
@@ -257,16 +245,13 @@ public class EmployeeService extends BaseService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/test")
-	@UnSecure
 	public String test(@Context HttpHeaders headers, @Context UriInfo uriInfo,
 			WebserviceRequest request) throws ObjectNotFoundException,
 			BusinessException, EncryptionException {
 		String outputString = "{\"status\": \"SUCCESS\", \"payload\": \"Test Successful\"}";
 		return outputString;
 	}
-	
- 
-		
+
 	@POST
 	@RestService(input = String.class, output = Employee.class)
 	@ServiceStatus(value = "complete")
@@ -274,21 +259,20 @@ public class EmployeeService extends BaseService {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/getEmployee")
 	@UnSecure
-	public String getEmployeeById(
-			@Context HttpHeaders headers, @Context UriInfo uriInfo,
-			WebserviceRequest request) throws ObjectNotFoundException,
-			BusinessException, EncryptionException {
+	public String getEmployeeById(@Context HttpHeaders headers,
+			@Context UriInfo uriInfo, WebserviceRequest request)
+			throws ObjectNotFoundException, BusinessException,
+			EncryptionException {
 		Employee employee = (Employee) JsonUtil.getObject(request.getPayload(),
 				Employee.class);
-		Employee output = (Employee) EmployeeHandler.getInstance().getEmployeeById(
-				 employee.getId());
+		Employee output = (Employee) EmployeeHandler.getInstance()
+				.getEmployeeById(employee.getEmployeeId());
 		return JsonUtil.getJsonBasedOnDescriptor(output, Employee.class);
-		//return JsonUtil.getJsonForListBasedOnDescriptor(employee,
-				//Employee.class, Employee.class);
- 
+		// return JsonUtil.getJsonForListBasedOnDescriptor(employee,
+		// Employee.class, Employee.class);
+
 	}
 
-	
 	@POST
 	@RestService(input = String.class, output = DisplayNotificationHome.class)
 	@ServiceStatus(value = "complete")
@@ -328,18 +312,18 @@ public class EmployeeService extends BaseService {
 				DisplayNotificationHome.class, DisplayNotificationHome.class);
 	}
 
-	
 	@POST
-	@RestService(input=String.class,output=String.class)
-	@ServiceStatus(value="complete")
+	@RestService(input = String.class, output = String.class)
+	@ServiceStatus(value = "complete")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/logout")
-	public String logut(@Context HttpHeaders headers,
-			@Context UriInfo uriInfo, WebserviceRequest request){
-		
-		boolean isLogout = EmployeeHandler.getInstance().logout();	
-		return JsonUtil.getJsonBasedOnDescriptor(isLogout,Boolean.class);
+	 @UnSecure
+	public String logout(@Context HttpHeaders headers,
+			@Context UriInfo uriInfo, WebserviceRequest request) {
+
+		boolean isLogout = EmployeeHandler.getInstance().logout();
+		return JsonUtil.getJsonBasedOnDescriptor(isLogout, Boolean.class);
 	}
 
 }

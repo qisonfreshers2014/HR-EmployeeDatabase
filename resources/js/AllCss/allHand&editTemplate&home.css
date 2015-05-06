@@ -19,18 +19,18 @@
 	 color: #ffffff;
     float: right;
     font-size: 20px;
-    margin-right: 8%;
+    margin-right: 6%;
     margin-top: 1%;
 }
 #menudiv {
     float: left;
-    margin-left: -10%;
-    margin-top: -7%;
+    margin-left: -11%;
+    margin-top: -1%;
 }
 #span1 {
     margin-top: 8%;
 }
-#logout {
+#logout1 {
     margin-bottom: 0%;
 }
 
@@ -65,15 +65,30 @@
  color:brown;
 margin-top: 3%;
 }
-.red{
- color:red;
- font_size:20px;
+.star1{
+	  color: red;
+    font-size: 15px;
+    position: absolute;
+    top: 95px;
+}
+.star2{ 
+	color: red;
+    font-size: 15px;
+    position: absolute;
+    margin-top: -5px;
+	
+}
+.star3{
+	color: red;
+    font-size: 15px;
+      position: absolute;
+        margin-top: -5px;
 }
  .container{
    background-color:white;
    
   }
-  .submit{
+  .submit2{
     margin-left: 50%;
   }
   .submit1{
@@ -104,3 +119,4 @@ th {
 .datepicker{
 	margin-left: 6.6%;
 }
+

@@ -1,12 +1,12 @@
-var fileID;
-var nameValidate = 0;
-var fileValidate = 0;
 
 function addpolicy() {
 Loader.loadHTML('.container','resources/js/addinghrpolicy/addpolicy.html', true, function() {
 				this.handleShow();
 			}.ctx(this));
 }
+var fileID;
+var nameValidate = 0;
+var fileValidate = 0;
 
 addpolicy.prototype.handleShow = function() {
 	$('.container').show();
@@ -18,8 +18,12 @@ addpolicy.prototype.handleShow = function() {
 		}
 	}.ctx(this));
 	$('#reset_policy').click(function(){
-			$('#policyName').val("");			
-	});
+		$("#policyName").val("");
+	//for error messages	
+		$('#Plen').text("");
+		$('#Pletter').text("");
+		$('#isFEmpty').text("");
+		});
 	function UploadClickHandler(event) {
 		var thisEle = event.target;
 		this.uploadMedia(function() {
@@ -51,25 +55,6 @@ addpolicy.prototype.validatePolicyInfo = function() {
 addpolicy.prototype.policyNameVal = function() {
 
 	var policyName = $('#policyName').val();
-	var lengthx = policyName.length;
-	if (policyName == "") {
-		$('#isPEmpty').text("You can't leave policy name empty.");
-		nameValidate = 0;
-		return false;
-
-	} else {
-		$('#isPEmpty').text("");
-		nameValidate = 1;
-	}
-
-	if (lengthx > 20) {
-		$('#Plen').text("Are you sure you entered policy name correctly?");
-		nameValidate = 0;
-		return false;
-	} else {
-		$('#Plen').text("");
-		nameValidate = 1;
-	}
 	var letters = /^[A-z0-9 ]+$/;
 	if (!(policyName.match(letters))) {
 		$('#Pletter').text("Policy name can have alphabet,numbers and spaces only");

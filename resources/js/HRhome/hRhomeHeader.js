@@ -5,15 +5,15 @@ function hRHomeHeader() {
 }
 
 hRHomeHeader.prototype.handleShow = function() {
- 
+	 App.listEmployee();
  $('.empName').text(App.userName);
  $('.container').show();
 
 
  $('#template').click(function(){
-  var dataid="34";
-  App.loadViewTemplate(dataid);
-    }.ctx(this));
+ App.loadtemplateList();
+ }.ctx(this));
+
  
  $('#hrpolicy').click(function(){
   App.listPolicy();

@@ -76,20 +76,26 @@ p {
      font-size: 20px;
 }
 
-#policylist, #holidaylist, #listemp {
+#policylist, #holidaylist{
      background: none repeat scroll 0% 0% white;
      border: 1px none black;
      padding-left: 3%;
      padding-right: 3%;
      padding-top: 8%;
 }
-
+ #listemp {
+     background: none repeat scroll 0% 0% white;
+     border: 1px none black;
+     padding-left: 3%;
+     padding-right: 3%;
+     padding-top:3%;
+} 
 #searchdiv {
      float: right;
      height: 60%;
      padding-left: 60%;
      padding-right: 2%;
-     padding-top: 2%;
+     padding-top: 0%;
      width: 20%;
 }
 

@@ -95,21 +95,51 @@ public class AllHandsMeetingHandler extends AbstractHandler {
 	
 	public AllHandsMeeting update(AllHandsMeeting allhandsmeeting) throws ObjectNotFoundException, AllHandsMeetingException {
 		// TODO Auto-generated method stub
+		List<AllHandsMeeting> allhands = getAllHandsMeeting();
+		Timestamp date=allhandsmeeting.getDate();
+		String employee=allhandsmeeting.getEmployee();
+		String description=allhandsmeeting.getDescription();
+		long id=allhandsmeeting.getId();
+		validationFuncupdate(id,date,employee,description,allhands);
+			
 		
+				
 		AllHandsMeeting allhandsmeetingFromDB = (AllHandsMeeting)DAOFactory.getInstance().getAllHandsMeetingDAO().getObjectById(allhandsmeeting.getId(), ObjectTypes.ALL_HANDS_MEETING);
 	allhandsmeetingFromDB.setDate(allhandsmeeting.getDate());
 		allhandsmeetingFromDB.setEmployee(allhandsmeeting.getEmployee());
 		allhandsmeetingFromDB.setDescription(allhandsmeeting.getDescription());
-	/*List<AllHandsMeeting> allhands = getAllHandsMeeting();
-	Timestamp date=allhandsmeeting.getDate();
-	String employee=allhandsmeeting.getEmployee();
-	String description=allhandsmeeting.getDescription();
-		
-	validationFunc(date,employee,description,allhands);*/
-		
+	
 		AllHandsMeeting allhandsmeetingEdited = (AllHandsMeeting) DAOFactory.getInstance().getAllHandsMeetingDAO().update(allhandsmeetingFromDB);
 		return allhandsmeetingEdited;
 	}
 
+	private void validationFuncupdate(long id,Timestamp date, String employee,String description, List<AllHandsMeeting> allhands) throws AllHandsMeetingException {
+		 
+		  for (int i = 0; i < allhands.size(); i++) {
+			  Timestamp dbdate = allhands.get(i).getDate();
+		   if(allhands.get(i).getId() != id){
+		     if(dbdate.compareTo(date) == 0){
+		      
+		    	 throw new AllHandsMeetingException(ExceptionCodes.ALLHANDSMEETING_DATE_ALREADY_EXISTS,
+		                 ExceptionMessages.ALLHANDSMEETING_DATE_ALREADY_EXISTS);
+		      
+		     }
+		   }
+		   
+		   
+		  }
+		  if (employee == null || employee.isEmpty()
+			        || employee.trim().isEmpty()) {
+			       throw new AllHandsMeetingException(ExceptionCodes.EVERY_FIELD_IS_MANDATORY,
+			         ExceptionMessages.EVERY_FIELD_IS_MANDATORY);
+			      }
+			    if (description == null || description.isEmpty()) {
+			       throw new AllHandsMeetingException(ExceptionCodes.EVERY_FIELD_IS_MANDATORY,
+			         ExceptionMessages.EVERY_FIELD_IS_MANDATORY);
+			      }
+		
+	}
+
 	
 }
+

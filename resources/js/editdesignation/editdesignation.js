@@ -1,20 +1,20 @@
-function editdesignation() {
+function editdesignation(empid, name, doj) {
 	Loader.loadHTML('.container',
 			'resources/js/editdesignation/editdesignation.html', true,
 			function() {
-				this.handleShow();
+				this.handleShow(empid, name, doj);
 			}.ctx(this));
 }
 var salaryVal = 0;
 var dateVal = 0;
 var dropDownVal = 0;
 var variablePayVal = 0;
-editdesignation.prototype.handleShow = function() {
+editdesignation.prototype.handleShow = function(empid, name, dojoin) {
 	$('.container').show();
-	var empId =94;
-	var empName1 = "Bhargavi";
-	var doj1 = "2015-04-01";
-	$('#employeeName').val(empName1);
+	var empId = empid;
+	var empName1 = name;
+	var doj1 = dojoin;
+	$('#employeeName1').val(empName1);
 	$('#doj').val(doj1);
 	$("#datepicker").datepicker({
 		dateFormat : 'yy-mm-dd',
@@ -25,30 +25,31 @@ editdesignation.prototype.handleShow = function() {
 		minDate : new Date(1993, 12, 31),
 		maxDate : new Date(2050, 12, 31)
 	});
-	this.getDesignationHistory();
+	$("#datepicker").datepicker("setDate", new Date());
+	this.getDesignationHistory(empid);
 
 	$('#save_designations').click(
 			function() {
 				this.validateDesignation();
 				if (salaryVal == 1 & dateVal == 1 & dropDownVal == 1
 						& variablePayVal == 1) {
-					this.sendJson();
+					this.sendJson(empid);
 				}
 
 			}.ctx(this));
-	
-	$('#reset_designations').click(function(){
-	$("#datepicker").val("");
-	$("#designation").val("");
-	$("#salary").val("");
-	$("#variablePay").val("");
-//for error messages	
-	$('#isSEmpty').text("");
-	$('#isDEmpty').text("");
-	$('#isVPEmpty').text("");
-	$('#isDesignationEmpty').text("");
+
+	$('#reset_designations').click(function() {
+		$("#datepicker").val("");
+		$("#designation").val("");
+		$("#salary").val("");
+		$("#variablePay").val("");
+		// for error messages
+		$('#isSEmpty').text("");
+		$('#isDEmpty').text("");
+		$('#isVPEmpty').text("");
+		$('#isDesignationEmpty').text("");
 	});
-	
+
 }
 editdesignation.prototype.validateDesignation = function() {
 
@@ -69,9 +70,7 @@ editdesignation.prototype.salaryValidate = function() {
 		$('#isSEmpty').text("");
 		salaryVal = 1;
 	} else {
-		$('#isSEmpty')
-				.text(
-						"Enter only numbers");
+		$('#isSEmpty').text("Enter only numbers");
 		salaryVal = 0;
 		return false;
 
@@ -98,9 +97,7 @@ editdesignation.prototype.variablePayValidate = function() {
 		$('#isVPEmpty').text("");
 		variablePayVal = 1;
 	} else {
-		$('#isVPEmpty')
-				.text(
-						"Enter only numbers");
+		$('#isVPEmpty').text("Enter only numbers");
 		variablePayVal = 0;
 		return false;
 
@@ -120,10 +117,8 @@ editdesignation.prototype.dropDownValidate = function() {
 	}
 }
 
-editdesignation.prototype.sendJson = function() {
-	var empId = 94;
-	var empName1 = "Bhargavi";
-	var doj1 = "2015-04-01";
+editdesignation.prototype.sendJson = function(empid) {
+	var empId = empid;
 	var date1 = $("#datepicker").val() + ' 00:00:00';
 	var designationId1 = $("#designation").val();
 	var salary1 = $("#salary").val();
@@ -164,9 +159,7 @@ editdesignation.prototype.sendJson = function() {
 
 											}.ctx(this));
 
-						} 
-						else if(data.code == 227)
-						{
+						} else if (data.code == 227) {
 							alert("This record was saved already");
 
 						}
@@ -205,10 +198,10 @@ editdesignation.prototype.appendDesTable = function(data, data1, status) {
 
 }
 
-editdesignation.prototype.getDesignationHistory = function() {
+editdesignation.prototype.getDesignationHistory = function(empid) {
 	var input = {
 		"payload" : {
-			"empId" : 94
+			"empId" : empid
 		// rahul's view page
 		}
 	};

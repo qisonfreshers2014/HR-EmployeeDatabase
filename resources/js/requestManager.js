@@ -13,7 +13,7 @@ RequestManager.prototype.sendToServer = function (api, data, callback, options) 
         dataType:'json',
         type:'POST',
         success:function(data) {
-            console.log(data)
+            //console.log(data)
             if (data.status && data.status == 'SUCCESS') {
                 callback(data.payload, true);
             } else {
@@ -28,7 +28,7 @@ RequestManager.prototype.sendToServer = function (api, data, callback, options) 
         data:JSON.stringify(data),
         error:function (xhr, error, exception) {
             //TODO remove console.log
-            console.log(xhr, error, exception);
+           // console.log(xhr, error, exception);
         }
     });
 
@@ -116,7 +116,9 @@ RequestManager.prototype.hrupdateEmp=function(data,callback){
 RequestManager.prototype.hrDeleteEmployee=function(data,callback){
 	this.sendToServer('employee/deleteEmployee', data, callback);
 }
-
+RequestManager.prototype.saveSkill=function(data,callback){
+	 this.sendToServer('skills/save', data, callback);
+	}
 
 RequestManager.prototype.getSkillDetails = function(data, callback) {
    this.sendToServer('skills/getSkillsDetails', data, callback);
@@ -176,7 +178,11 @@ RequestManager.prototype.getSearchEmp=function(data,callback){
  RequestManager.prototype.getPolicy=function(data,callback){
  this.sendToServer('hr_policy/getPolicy', data, callback);
 }
-
-
+ RequestManager.prototype.viewEmployeedetails = function(data, callback) {
+	  this.sendToServer('employee/viewEmployee', data, callback);
+	 }
+ RequestManager.prototype.getTemplatename = function(data, callback) {
+	   this.sendToServer('template/gatTemplate', data, callback);
+	  }
 
 var RequestManager = new RequestManager();

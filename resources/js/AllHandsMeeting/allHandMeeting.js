@@ -1,5 +1,5 @@
 function allHandMeeting() {
-	Loader.loadHTML('.leftcontainer1', 'resources/js/AllHandsMeeting/allHandsMeeting.html', true, function(){
+	Loader.loadHTML('.container', 'resources/js/AllHandsMeeting/allHandsMeeting.html', true, function(){
 		this.handleShow();
 	}.ctx(this));
 }
@@ -17,22 +17,27 @@ $('#save').click(function(){
 }
 allHandMeeting.prototype.addAllHandsMeeting=function(){
 	//var dateformat=/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/;
-	//var regex = /^[A-Za-z]+( [A-Za-z]+){3,15}$/;
+	var regex = /^[A-Za-z]+( [A-Za-z]+)*$/;
 	 if($('#datepicker').val()==""||$('#employee').val()==""||$('#description').val()==""){
      	alert("failed to add,since every field is mandatory");
-     }/*else
+     }else
 	 
 	 if(!($('#employee').val()).match(regex))
 		 {
-		 alert("date format should must yyyy/MM/dd HH:mm:ss ");
-		 }*/
+		 alert("Enter valid name ");
+		 }
 	 else{
-		// alert(1);
+		 
+		 if($('#employee').val().length<2){
+			 alert("Invalid length -minimum 2 characters needed!(Upto 30) ");
+		 }
+		 
+		 else{
     var input ={"payload":{"date":$('#datepicker').val() + ' 03:00:00',"employee":$('#employee').val(),"description":$('#description').val()}};
-  // alert(2);
+
     RequestManager.addAllHands(input, function(data, success)
     {
-    	//alert(3);
+    	
         if(success){
          alert("Successfully Inserted");
         }else if(data.code == 204){
@@ -43,7 +48,7 @@ allHandMeeting.prototype.addAllHandsMeeting=function(){
         }
     }.ctx(this));
     
-    
+		 }
     
     
 	 }

@@ -47,14 +47,14 @@ public class EmployeeHandler extends AbstractHandler {
 		return INSTANCE;
 	}
 
-	public Employee getEmployeeById(long id) throws EmployeeException {
-		Employee employee = null;
-		EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
-				.getEmployeeDAO();
-		employee = (Employee) empDAOImpl.getEmployeeById(id);
+	 public Employee getEmployeeById(int id) throws EmployeeException {
+		  Employee employee = null;
+		  EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
+		    .getEmployeeDAO();
+		  employee = (Employee) empDAOImpl.getEmployeeById(id);
 
-		return employee;
-	}
+		  return employee;
+		 }
 
 	public List<Employee> viewEmployee(Employee employee) {
 		List<Employee> employees = null;
@@ -106,46 +106,57 @@ public class EmployeeHandler extends AbstractHandler {
 		return employeelist;
 	
 	}
-	/*
-	 * public Employee save(Employee employee) throws
-	 * EncryptionException,BusinessException { employee.setDeleted(false);
-	 * employee.setPassword(Utils.encrypt(employee.getPassword())); String name
-	 * = employee.getEmployeeName(); long id = employee.getEmployeeId(); String
-	 * email = employee.getEmail(); String password = employee.getPassword();
-	 * long descid = employee.getCurrentDesignation(); String qualification =
-	 * employee.getHighestQualification(); String salary = employee.getSalary();
-	 * String blood = employee.getBloodGroup(); long num =
-	 * employee.getContactNo(); Timestamp date = employee.getDateOfBirth();
-	 * String fatherName = employee.getFathersName(); String gender =
-	 * employee.getGender(); long contactNum = employee.getContactNo(); String
-	 * skypeid = employee.getSkype(); Timestamp doj =
-	 * employee.getDateOfJoining(); String skill = employee.getSkill(); String
-	 * rating = employee.getRating(); int YOE = employee.getYearsofexperience();
-	 * long emercontnum = employee.getEmergencycontactnumber(); String
-	 * emercontname = employee.getEmergencyContactName(); String currentaddr =
-	 * employee.getCurrentAddress(); String peraddr =
-	 * employee.getPermanentAddress();
-	 * 
-	 * 
-	 * validateEmp(name, id, email, password, descid, qualification, salary,
-	 * blood, num, date, fatherName, gender, contactNum, skypeid, doj, skill,
-	 * rating, YOE, emercontnum, emercontname, currentaddr, peraddr);
-	 * 
-	 * 
-	 * Boolean isempidExist = DAOFactory.getInstance().getEmployeeDAO()
-	 * .getEmployeeByEmpId(employee.getEmployeeId());
-	 * 
-	 * Boolean isemailExist = DAOFactory.getInstance().getEmployeeDAO()
-	 * .getEmployeeByEmail(employee.getEmail()); if (isempidExist) { throw new
-	 * EmployeeException(ExceptionCodes.EMPLOYEE_EMPID_ALREADY_EXIST,
-	 * ExceptionMessages.EMPLOYEE_EMPID_ALREADY_EXIST); }
-	 * 
-	 * else if (isemailExist) { throw new
-	 * EmployeeException(ExceptionCodes.EMPLOYEE_ALREADY_EXIST,
-	 * ExceptionMessages.EMPLOYEE_ALREADY_EXIST); } Employee empSaved =
-	 * (Employee) DAOFactory.getInstance()
-	 * .getEmployeeDAO().saveObject(employee); return empSaved; }
-	 */
+	
+	public Employee save(Employee employee) throws EncryptionException, BusinessException {
+	employee.setDeleted(false);
+	employee.setPassword(Utils.encrypt(employee.getPassword()));
+	String name = employee.getEmployeeName();
+	long id = employee.getEmployeeId();
+	String email = employee.getEmail();
+	String password = employee.getPassword();
+	long descid = employee.getCurrentDesignation();
+	String qualification = employee.getHighestQualification();
+	String salary = employee.getSalary();
+	String blood = employee.getBloodGroup();
+	long num = employee.getContactNo();
+	Timestamp date = employee.getDateOfBirth();
+	String fatherName = employee.getFathersName();
+	String gender = employee.getGender();
+	long contactNum = employee.getContactNo();
+	String skypeid = employee.getSkype();
+	Timestamp doj = employee.getDateOfJoining();
+	String skill = employee.getSkill();
+	String rating = employee.getRating();
+	int YOE = employee.getYearsofexperience();
+	long emercontnum = employee.getEmergencycontactnumber();
+	String emercontname = employee.getEmergencyContactName();
+	String currentaddr = employee.getCurrentAddress();
+	String peraddr = employee.getPermanentAddress();
+
+	validateEmp(name, id, email, password, descid, qualification, salary,
+			blood, num, date, fatherName, gender, contactNum, skypeid, doj,
+			skill, rating, YOE, emercontnum, emercontname, currentaddr,
+			peraddr);
+
+	Boolean isempidExist = DAOFactory.getInstance().getEmployeeDAO()
+			.getEmployeeByEmpId(employee.getEmployeeId());
+
+	Boolean isemailExist = DAOFactory.getInstance().getEmployeeDAO()
+			.isEmployeeEmailExist(employee.getEmail());
+	if (isempidExist) {
+		throw new EmployeeException(
+				ExceptionCodes.EMPLOYEE_EMPID_ALREADY_EXIST,
+				ExceptionMessages.EMPLOYEE_EMPID_ALREADY_EXIST);
+	}
+
+	else if (isemailExist) {
+		throw new EmployeeException(ExceptionCodes.EMPLOYEE_ALREADY_EXIST,
+				ExceptionMessages.EMPLOYEE_ALREADY_EXIST);
+	}
+	Employee empSaved = (Employee) DAOFactory.getInstance()
+			.getEmployeeDAO().saveObject(employee);
+	return empSaved;
+}
 
 	private void validateEmp(String name, long id, String email,
 			String password, long descid, String qualification, String salary,
@@ -283,13 +294,14 @@ public class EmployeeHandler extends AbstractHandler {
 					ExceptionMessages.EMPLOYEE_DOB_NULL);
 		}
 	}
-
+	
+	// updating the details of employee
 	public Employee updateEmployee(Employee employee)
 			   throws ObjectNotFoundException, EmployeeException,
 			   EncryptionException {
 
 			  Employee empFromDB = (Employee) DAOFactory.getInstance()
-			    .getEmployeeDAO().getEmployeeById(employee.getId());
+			    .getEmployeeDAO().getEmployeeById(employee.getEmployeeId());
 			  empFromDB.setContactNo(employee.getContactNo());
 			  empFromDB.setEmail(employee.getEmail());
 			  empFromDB.setCurrentAddress(employee.getCurrentAddress());
@@ -307,12 +319,14 @@ public class EmployeeHandler extends AbstractHandler {
 			  return employee;
 			 }
 
+
+	// updating the details of employee by hr
 			 public Employee hrUpdateEmployee(Employee employee)
 			   throws ObjectNotFoundException, EmployeeException,
 			   EncryptionException {
 
 			  Employee empFromDB = (Employee) DAOFactory.getInstance()
-			    .getEmployeeDAO().getEmployeeById(employee.getId());
+			    .getEmployeeDAO().getEmployeeById(employee.getEmployeeId());
 			  empFromDB.setContactNo(employee.getContactNo());
 			  empFromDB.setEmail(employee.getEmail());
 			  empFromDB.setCurrentAddress(employee.getCurrentAddress());
@@ -332,7 +346,7 @@ public class EmployeeHandler extends AbstractHandler {
 			  empFromDB.setSalary(employee.getSalary());
 			  empFromDB.setGender(employee.getGender());
 			  empFromDB.setBloodGroup(employee.getBloodGroup());
-			  empFromDB.setEmployeeId(employee.getEmployeeId());
+			//  empFromDB.setEmployeeId(employee.getEmployeeId());
 			  empFromDB.setEmployeeName(employee.getEmployeeName());
 			  empFromDB.setVariableComponent(employee.getVariableComponent());
 			  EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
@@ -468,14 +482,14 @@ public List<DisplayNotificationHome> getAnivarsaryList(
 			.getHistorydata();
 	List<DisplayNotificationHome> displayNotificationHomeList = new ArrayList<DisplayNotificationHome>();
 
-	for (Employee birthday : employeeBirthday) {
+	for (Employee anivarsary : employeeBirthday) {
 		DisplayNotificationHome displayNotificationHome = new DisplayNotificationHome(
-				"Anivarsary", birthday.getDateOfBirth(),
-				birthday.getEmail(), birthday.getEmployeeName());
+				"Anivarsary", anivarsary.getDateOfJoining(),
+				anivarsary.getEmail(), anivarsary.getEmployeeName());
 
 		if (notificationHistory.size() != 0) {
 			for (SendNotificationHistory checkingHistory : notificationHistory) {
-				if (checkingHistory.getEmployeeId() == birthday
+				if (checkingHistory.getEmployeeId() == anivarsary
 						.getEmployeeId()
 						&& checkingHistory.getTemplateId().equals("02")) {
 					displayNotificationHome.setStatus("Sent");
@@ -507,7 +521,7 @@ public List<DisplayNotificationHome> getWelcomeEmployeeList()
 	welcomeemp = employeeDAOImpl.getWelcomeEmployee();
 	for (Employee welEmp : welcomeemp) {
 		DisplayNotificationHome displayNotificationHome = new DisplayNotificationHome(
-				"WelCome", welEmp.getDateOfBirth(),
+				"WelCome", welEmp.getDateOfJoining(),
 				welEmp.getEmail(), welEmp.getEmployeeName());
 
 		if (notificationHistory.size() != 0) {
@@ -538,23 +552,23 @@ public List<Employee> searchEmployee(EmployeeSearchInputDescriptor employee) {
 	return employeelist;
 }
 
+//hr delete operation
+
 public Employee deleteEmployee(Employee employee) throws EmployeeException {
 	Employee empFromDB = (Employee) DAOFactory.getInstance()
-		    .getEmployeeDAO().getEmployeeById(employee.getId());
+		    .getEmployeeDAO().getEmployeeById(employee.getEmployeeId());
 		  empFromDB.setDeleted(true);
 		  EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
 		    .getEmployeeDAO();
 		  employee = (Employee) empDAOImpl.update(empFromDB);
 		  return employee;
 }
-public boolean logout() {
+public boolean logout(){
 	boolean isLogout = false;
 	String userSessionId = ServiceRequestContextHolder.getContext()
 			.getUserSessionToken().getUserSessionId();
-
-	isLogout = CacheManager.getInstance()
-			.getCache(CacheRegionType.USER_SESSION_CACHE)
-			.remove(userSessionId);
+	
+	isLogout = CacheManager.getInstance().getCache(CacheRegionType.USER_SESSION_CACHE).remove(userSessionId);
 	return isLogout;
 }
 

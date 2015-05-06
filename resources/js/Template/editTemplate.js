@@ -1,5 +1,5 @@
 function editTemplate(dataid) {
-	Loader.loadHTML('.leftcontainer1', 'resources/js/Template/editTemplate.html', true, function(){
+	Loader.loadHTML('.container', 'resources/js/Template/editTemplate.html', true, function(){
 		this.handleShow(dataid);
 }.ctx(this));
 }
@@ -20,7 +20,7 @@ editTemplate.prototype.handleShow=function(dataid){
 
 
 editTemplate.prototype.EditTemplateDetails=function(dataid){
-//alert(1);
+alert(dataid);
 	 var input = {"payload":{"id":dataid}};
 	 RequestManager.getTemplateById(input, function(data, success) {
 		//alert(2);

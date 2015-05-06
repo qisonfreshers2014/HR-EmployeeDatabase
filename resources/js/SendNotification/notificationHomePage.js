@@ -36,16 +36,11 @@ loadNotificationHomePage.prototype.handleShow = function(data) {
 		var employeeName = ($(this).parent().parent().find('td:first').text());
 		var event = ($(this).parent().parent().find('td:eq(2)').text());
 		var email = ($(this).parent().parent().find('td:eq(3)').text());
-		console.log(event);
-		console.log(email);
-		console.log(employeeName);
 		App.loadManualMail(event, email, employeeName);
 
 	});
 
-/*	$("#Events").change(function() {
-		this.eventChangeCriteria();
-	}.ctx(this));*/
+
 	$("#retriveDataNotification").click(function() {
 		this.eventChangeCriteria();
 	}.ctx(this));
@@ -98,12 +93,7 @@ loadNotificationHomePage.prototype.eventChangeCriteria = function() {
 					}
 	};
 	
-	
-	
-	
-	console.log(selectedEvent);
-	console.log(fromDate);
-	console.log(toDate);
+
 
 	RequestManager
 			.getNotificationDisplayCriteria(

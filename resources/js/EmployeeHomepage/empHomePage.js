@@ -22,7 +22,7 @@ empHomePage.prototype.handleShow = function() {
  
  $('#myProfile').click(function(event){
  
-  App.loadempviewemployee();
+	 App.loadempviewemployee(App.employeeId);
  });
  
  
@@ -36,7 +36,7 @@ empHomePage.prototype.handleShow = function() {
  
  $('#hrpolicy').click(function(event){
   
-  App.listPolicy();
+	 App.listEmployeePolicy(); 
  });
  
  

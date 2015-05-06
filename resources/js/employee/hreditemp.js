@@ -1,48 +1,31 @@
-function HrEditEmployee(dataId) {
-	Loader.loadHTML(".leftContainer", "resources/js/employee/hreditemp.html",
-			true, function() {
-				this.handleShow(dataId);
+var fileId;
+function HrEditEmployee(empid) {
+	Loader.loadHTML(".container", "resources/js/employee/hreditemp.html", true,
+			function() {
+				this.handleShow(empid);
 			}.ctx(this));
 }
-HrEditEmployee.prototype.handleShow = function(dataId) {
+HrEditEmployee.prototype.handleShow = function(empid) {
 
 	$('.container').show();
-
-	/*
-	 * $('.date').datepicker({ //dateFormat : $.datepicker.TIMESTAMP, dateFormat :
-	 * 'yy-mm-dd', showButtonPanel : true, changeMonth : true, changeYear :
-	 * true, showAnim : 'bounce', minDate : new Date(1980, 12, 31), maxDate :
-	 * new Date(2015, 5, 31) })
-	 */
-	$('#hredit').click(function(e) {
-		e.preventDefault();
-		this.validatehrEditEmp(dataId);
-	}.ctx(this));
-
-	$('#hrupdate').click(function(e) {
-		e.preventDefault();
-		this.validateUpdatehrEmp(dataId);
-	}.ctx(this));
-}
-
-HrEditEmployee.prototype.validatehrEditEmp = function(dataId) {
-	$('.error').css('visibility', 'hidden');
-
 	var eid = $("#eid").val();
 	var input = {
 		"payload" : {
-			"id" : dataId
-		// "employeeId" : eid
+			"employeeId" : empid
 		}
 	};
 	RequestManager.geteditEmployee(input, function(data, success) {
 		if (success) {
 			var object = data;
 			console.dir(data);
+			var dobformat = new Date(object.dateOfBirth);
+			var byear = dobformat.getFullYear();
+			var bmonth = dobformat.getMonth() + 1;
+			var bdate = dobformat.getDate();
 			$("#emal").val(object.email);
 			$("#eid").val(object.employeeId);
 			$("#name").val(object.employeeName);
-			$("#dob").val(object.dateOfBirth);
+			$("#dob").val(byear+"-"+bmonth+"-"+bdate);
 			$("#blood").val(object.bloodGroup);
 			$("#qual").val(object.highestQualification);
 			$("#fathername").val(object.fathersName);
@@ -64,13 +47,104 @@ HrEditEmployee.prototype.validatehrEditEmp = function(dataId) {
 		}
 
 	}.ctx(this));
+	
+	this.validatehrEditEmp(empid);
+	$('#dob').datepicker({
+		// dateFormat : $.datepicker.TIMESTAMP,
+		dateFormat : 'yy-mm-dd',
+		showButtonPanel : true,
+		changeMonth : true,
+		changeYear : true,
+		showAnim : 'drop',
+		minDate : new Date(1980, 12, 31),
+		maxDate : new Date(1994, 12, 31)
+	})
+	$('#filename').on('click', UploadClickHandler.ctx(this));
+	function UploadClickHandler(event) {
+		var thisEle = event.target;
+		this.uploadMedia(function() {
+			$(thisEle).on('click', UploadClickHandler.ctx(this));
+		}.ctx(this));
+	}
+/*
+	$('#hredit').click(function(e) {
+		e.preventDefault();
+		this.validatehrEditEmp(dataId);
+	}.ctx(this));*/
+
+	$('#hrupdate').click(function(e) {
+		e.preventDefault();
+		this.validateUpdatehrEmp(empid);
+	}.ctx(this));
+
+	$('#hrdelete').click(function(e) {
+		e.preventDefault();
+		this.deleteEmployee(empid);
+	}.ctx(this));
+
+	/*
+	 * $('#filename').focusout(function(e) { if (file == "") {
+	 * $('#fileerr').text('please upload image only').css('color', 'red'); }
+	 * else { $('#fileerr').text('ok').css('color', 'green'); } });
+	 */
+	/*
+	 * var pannum = $("#pannum").val(); var panerr = $("#panerr"); var letters =
+	 * /^[0-9a-zA-Z]+$/; $("#pannum").focusout(function() { if (pannum == "") {
+	 * $(panerr).text("required field"); $(panerr).css("color", "red"); } else
+	 * if (pannum == isNaN || !(pannum.match(letters))) { $(panerr).text("PAN
+	 * accepts both char and numbers"); $(panerr).css("color", "red"); } else if
+	 * (!(pannum.length == 10)) { $(panerr).text("please enter 10 letters
+	 * only"); $(panerr).css("color", "red"); } else { $(panerr).text("ok");
+	 * $(panerr).css("color", "green"); } });
+	 * 
+	 * var pferr = $("#pferr"); var pfnum = $("#pfnum").val();
+	 * $("#pfnum").focusout(function() { if (pfnum == "") {
+	 * $(pferr).text("required field"); $(pferr).css("color", "red"); } else if
+	 * (pfnum == isNaN || !(pfnum.match(letters))) { $(pferr).text("PF accepts
+	 * both char and numbers"); $(pferr).css("color", "red"); } else if
+	 * (!(pfnum.length == 18)) { $(pferr).text("please enter 18 letters only");
+	 * $(pferr).css("color", "red"); } else { $(pferr).text("ok");
+	 * $(pferr).css("color", "green"); } });
+	 * 
+	 * var acterr = $("#acterr"); var accountnum = $("#accountnum").val(); var
+	 * id = /^[0-9]+$/; $("#accountnum").focusout(function() { if (accountnum ==
+	 * "") { $(acterr).text("required field"); $(acterr).css("color", "red"); }
+	 * else if (accountnum == isNaN || !(accountnum.match(id))) {
+	 * $(acterr).text("only numbers allowed"); $(acterr).css("color", "red"); }
+	 * else if (!(accountnum.length == 15)) { $(acterr).text("please enter 15
+	 * digits only"); $(acterr).css("color", "red"); } else {
+	 * $(acterr).text("ok"); $(acterr).css("color", "green"); } });
+	 */
+
+}
+HrEditEmployee.prototype.uploadMedia = function(callback) {
+	var allowedFileType = "image";
+	var uploader = new Uploader(allowedFileType, function(data) {
+		if (data.filePath) {
+			var imageSrc = data.filePath;
+			this.fileId = data.id;
+			fileId = this.fileId;
+			$('.mediaForProfileImage').attr('src', imageSrc);
+			if (imageSrc != null) {
+				$('.mediaForProfileImage').lightBox();
+			}
+		}
+	}.ctx(this));
+	callback();
 
 }
 
-HrEditEmployee.prototype.validateUpdatehrEmp = function(dataId) {
+HrEditEmployee.prototype.validatehrEditEmp = function(empid) {
+	$('.error').css('visibility', 'hidden');
 
-	var char = /^[a-zA-Z."" ]+$/;
-	var qual = /^[a-zA-Z.""]+$/;
+	
+
+}
+
+HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
+
+	var char = /^[A-Za-z]+( [A-Za-z]+)*$/;
+	var qual = /^[A-Za-z]+(.[A-Za-z]+)*$/;
 	var num = /^[0-9]+$/;
 	var mail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 	var letters = /^[0-9a-zA-Z]+$/;
@@ -100,7 +174,7 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(dataId) {
 	var name = $("#name").val();
 	var nameerr = $("#nameerr");
 	var qualification = $("#qual").val();
-	var nerr = $("#qualerr"); 
+	var nerr = $("#qualerr");
 	var email = $("#emal").val();
 	var fathername = $("#fathername").val();
 	var fathererr = $("#fathererr");
@@ -112,16 +186,24 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(dataId) {
 	var dob = $('#dob').val();
 	var variable = $('#variable').val();
 	var Gender = $("#gender option:selected").val();
-	
+
 	var flag = true;
 
 	if (blood == "" || eid == "" || name == "" || qualification == ""
 			|| email == "" || fathername == "" || contnum == ""
 			|| txtemercon == "" || txtemname == "" || password == ""
 			|| currentaddr == "" || peraddr == "" || relation == ""
-			|| skype == "" || Gender == "" || nameerr == "" || blood == "" ||
-			nerr =="" || fathererr == "" || salerr == "") {
+			|| skype == "" || Gender == "" || nameerr == "" || blood == ""
+			|| nerr == "" || fathererr == "" || salerr == "" || dob == "") {
 		$('.error').css('visibility', 'visible');
+
+		if (dob == "") {
+			$('.dateerr').text('please pick the DOB').css('color', 'red');
+		} else {
+			$('.dateerr').text("ok");
+			$('.dateerr').css("color", "green");
+			
+		}
 
 		if (qualification == "") {
 			$(nerr).text("required field");
@@ -132,8 +214,9 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(dataId) {
 		} else {
 			$(nerr).text("nice qualification");
 			$(nerr).css("color", "green");
+			
 		}
-		
+
 		if (fathername == "") {
 			$(fathererr).text("required field");
 			$(fathererr).css("color", "red");
@@ -143,8 +226,9 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(dataId) {
 		} else {
 			$(fathererr).text("nice name");
 			$(fathererr).css("color", "green");
+			
 		}
-		
+
 		if (salary == "") {
 			$(salerr).text("required field");
 			$(salerr).css("color", "red");
@@ -154,8 +238,9 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(dataId) {
 		} else {
 			$(salerr).text("ok");
 			$(salerr).css("color", "green");
+			
 		}
-		
+
 		if (blood == "") {
 			$(blodderr).text("required field");
 			$(blodderr).css("color", "red");
@@ -168,8 +253,9 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(dataId) {
 		} else {
 			$(blodderr).text("ok");
 			$(blodderr).css("color", "green");
+			
 		}
-		
+
 		if (name == "") {
 			$(nameerr).text("required field");
 			$(nameerr).css("color", "red");
@@ -179,6 +265,7 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(dataId) {
 		} else {
 			$(nameerr).text("name looks Great");
 			$(nameerr).css("color", "green");
+			
 
 		}
 
@@ -192,12 +279,10 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(dataId) {
 			$(cnumerr).text("please enter 10 digits only");
 			$(cnumerr).css("color", "red");
 
-		}
-
-		else {
+		} else {
 			$(cnumerr).text("ok");
 			$(cnumerr).css("color", "green");
-
+		
 		}
 
 		if (txtemercon == "") {
@@ -209,12 +294,10 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(dataId) {
 		} else if (!(txtemercon.length == 10)) {
 			$(emnumerr).text("please enter 10 digits only");
 			$(emnumerr).css("color", "red");
-		}
-
-		else {
+		} else {
 			$(emnumerr).text("ok");
 			$(emnumerr).css("color", "green");
-
+			
 		}
 		if (email == "") {
 			$(emlerr).text("required field");
@@ -225,7 +308,7 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(dataId) {
 		} else {
 			$(emlerr).text("nice email id");
 			$(emlerr).css("color", "green");
-
+			
 		}
 
 		if (txtemname == "") {
@@ -237,7 +320,7 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(dataId) {
 		} else {
 			$(emnameerr).text("nice name");
 			$(emnameerr).css("color", "green");
-
+			
 		}
 
 		if (password == "") {
@@ -253,7 +336,7 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(dataId) {
 		else {
 			$(pwderr).text("ok");
 			$(pwderr).css("color", "green");
-
+			
 		}
 
 		if (currentaddr == "") {
@@ -262,7 +345,7 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(dataId) {
 		} else {
 			$(currentaddrerr).text("ok");
 			$(currentaddrerr).css("color", "green");
-
+			
 		}
 
 		if (peraddr == "") {
@@ -271,7 +354,7 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(dataId) {
 		} else {
 			$(peraddrerr).text("ok");
 			$(peraddrerr).css("color", "green");
-
+			
 		}
 
 		if (relation == "") {
@@ -283,9 +366,9 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(dataId) {
 		} else {
 			$(relationerr).text("ok");
 			$(relationerr).css("color", "green");
-
+			
 		}
-
+		flag = true;
 		if (skype == "") {
 			$(skypeerr).text("required field");
 			$(skypeerr).css("color", "red");
@@ -298,17 +381,15 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(dataId) {
 		} else {
 			$(skypeerr).text("ok");
 			$(skypeerr).css("color", "green");
-
 		}
 		this.GenderValidate();
 
 	} else {
-		
+
 		$('.error').css('visibility', 'hidden');
 		var input = {
 			"payload" : {
-				"id" : dataId,
-				"employeeId" : eid,
+				"employeeId" : empid,
 				"employeeName" : name,
 				"gender" : Gender,
 				"fathersName" : fathername,
@@ -327,7 +408,8 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(dataId) {
 				"emergencycontactnumber" : txtemercon,
 				"emergencyContactName" : txtemname,
 				"relationWithEmergencyConatact" : relation,
-				"skype" : skype
+				"skype" : skype,
+				"filePath" : fileId
 			}
 		};
 		RequestManager.hrupdateEmp(input, function(data, success) {
@@ -335,7 +417,7 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(dataId) {
 				console.dir(data);
 				alert("Employee ID:" + eid + " Details Successfully Updated");
 			} else {
-				alert("failed to add");
+				alert("failed to Update the Details");
 			}
 		}.ctx(this));
 
@@ -353,4 +435,46 @@ HrEditEmployee.prototype.GenderValidate = function() {
 		$(error).css("color", "green");
 		flag = 1;
 	}
+}
+
+HrEditEmployee.prototype.deleteEmployee = function(empid) {
+	var input = {
+		"payload" : {
+			"employeeId" : empid
+		}
+	};
+	RequestManager.hrDeleteEmployee(input, function(data, success) {
+		if (success) {
+			console.dir(data);
+			alert("EmployeeID: " + $("#eid").val()
+					+ " Details Successfully Deleted");
+			$("#eid").val("");
+			$("#name").val("");
+			$("#qual").val("");
+			$("#fathername").val("");
+			$("#pfnum").val("");
+			$("#pannum").val("");
+			$("#accountnum").val("");
+			$("#contnum").val("");
+			$("#txtemercon").val("");
+			$("#txtemname").val("");
+			$("#currentaddr").val("");
+			$("#peraddr").val("");
+			$("#relation").val("");
+			$('#dob').val("");
+			$('#doj').val("");
+			$("#emal").val("");
+			$("#password").val("");
+			$('#blood').val("");
+			$("#salary").val("");
+			$('#variable').val("");
+			$('#gender').val("");
+			$('#skype').val("");
+			//document.getElementById("hredit").disabled = true;
+			document.getElementById("hrupdate").disabled = true;
+			document.getElementById("hrdelete").disabled = true;
+		} else {
+			alert("failed to Delete");
+		}
+	}.ctx(this));
 }

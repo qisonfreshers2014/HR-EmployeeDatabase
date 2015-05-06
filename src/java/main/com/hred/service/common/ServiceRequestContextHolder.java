@@ -7,7 +7,6 @@ public class ServiceRequestContextHolder {
 
     private static ThreadLocal<ServiceRequestContext> contextHolder = new ThreadLocal<ServiceRequestContext>();
 
-    //~ Methods ========================================================================================================
 
     public static void clearContext() {
         contextHolder.set(null);

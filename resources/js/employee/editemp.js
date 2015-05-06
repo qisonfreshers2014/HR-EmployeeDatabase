@@ -1,34 +1,34 @@
-function EditEmployee(dataId) {
-	Loader.loadHTML(".leftContainer", "resources/js/employee/EditEmp.html",
-			true, function() {
-				this.handleShow(dataId);
+function EditEmployee(employeeId) {
+	Loader.loadHTML(".container", "resources/js/employee/EditEmp.html", true,
+			function() {
+				this.handleShow(employeeId);
 			}.ctx(this));
 }
-EditEmployee.prototype.handleShow = function(dataId) {
+EditEmployee.prototype.handleShow = function(employeeId) {
 
 	$('.container').show();
-	$('#edit').click(function(e) {
-		var releaseid = e.target.id;
-		e.preventDefault();
-		this.validateEditEmp(dataId);
-	}.ctx(this));
+	this.validateEditEmp(employeeId);
+	/*
+	 * $('#edit').click(function(e) { var releaseid = e.target.id;
+	 * e.preventDefault(); this.validateEditEmp(employeeId); }.ctx(this));
+	 */
 	$('#update').click(function(e) {
 		e.preventDefault();
-		this.validateUpdateEmp(dataId);
+		this.validateUpdateEmp(employeeId);
 	}.ctx(this));
 }
-EditEmployee.prototype.validateEditEmp = function(dataId) {
+EditEmployee.prototype.validateEditEmp = function(employeeId) {
 
 	$('.error').css('visibility', 'hidden');
 	var input = {
 		"payload" : {
-			"id" : dataId
+			"employeeId" : employeeId
 		}
 	};
 	RequestManager.geteditEmployee(input, function(data, success) {
 		if (success) {
 			var object = data;
-		console.dir(data);
+			console.dir(data);
 			$("#contnum").val(object.contactNo);
 			$("#emal").val(object.email);
 			$("#password").val(object.password);
@@ -40,14 +40,13 @@ EditEmployee.prototype.validateEditEmp = function(dataId) {
 			$("#skype").val(object.skype);
 		} else {
 			console.dir(data);
-			//alert("failed to edit");
+			// alert("failed to edit");
 		}
 
 	}.ctx(this));
 
 }
-
-EditEmployee.prototype.validateUpdateEmp = function(dataId) {
+EditEmployee.prototype.validateUpdateEmp = function(employeeId) {
 
 	var char = /^[a-zA-Z."" ]+$/;
 	var qual = /^[a-zA-Z.""]+$/;
@@ -78,7 +77,7 @@ EditEmployee.prototype.validateUpdateEmp = function(dataId) {
 			|| peraddr == "" || relation == "" || skype == "" || email == ""
 			|| currentaddr == "") {
 		$('.error').css('visibility', 'visible');
-		
+
 		if (contnum == "") {
 			$(cnumerr).text("required field");
 			$(cnumerr).css("color", "red");
@@ -188,13 +187,11 @@ EditEmployee.prototype.validateUpdateEmp = function(dataId) {
 			$(skypeerr).css("color", "green");
 		}
 
-	}
-	else {
-		
+	} else {
 
 		var input = {
 			"payload" : {
-				"id" : dataId,
+				"employeeId" : employeeId,
 				"contactNo" : contnum,
 				"currentAddress" : currentaddr,
 				"permanentAddress" : peraddr,
@@ -208,12 +205,12 @@ EditEmployee.prototype.validateUpdateEmp = function(dataId) {
 		};
 		RequestManager.updateEmp(input, function(data, success) {
 			if (success) {
-				 console.dir(data);
+				console.dir(data);
 				alert("successfully updated");
 			} else {
 				alert("failed to add");
 			}
 		}.ctx(this));
 	}
-	
+
 }

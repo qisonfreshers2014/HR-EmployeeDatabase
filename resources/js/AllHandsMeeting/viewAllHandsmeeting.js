@@ -1,5 +1,5 @@
 function viewAllHandsMeeting() {
-	Loader.loadHTML('.leftcontainer1', 'resources/js/AllHandsMeeting/viewAllHandsMeeting.html', true, function(){
+	Loader.loadHTML('.container', 'resources/js/AllHandsMeeting/viewAllHandsMeeting.html', true, function(){
 		this.handleShow();
 	}.ctx(this));
 }
