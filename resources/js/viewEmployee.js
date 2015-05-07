@@ -1,5 +1,4 @@
 function ViewEmployee(empid) {
-	alert(empid);
  Loader.loadHTML('.container', 'resources/viewEmployee.html', true, function(){
   this.handleShow(empid);
  }.ctx(this));
@@ -35,8 +34,7 @@ RequestManager.viewEmployeedatails(input, function(data, success) {
  if(success){
 	 
  
- var obj=data[0]
- alert(obj);
+ var obj=data[0];
  
  var dobformat = new Date(obj.dateOfBirth);
    var byear = dobformat.getFullYear();

@@ -13,7 +13,11 @@ App.prototype.handleShow = function() {
 App.prototype.loadTemplate = function() {
 	Loader.loadTemplate();
 }
-
+App.prototype.loadempviewemployee=function(employeeId){
+	 Loader.loadempviewemployee(function(){
+	  new empViewemployee(employeeId);
+	 });
+	 }
 App.prototype.loadEmployee = function(gender, contactNo) {
 	this.gender = gender;
 	this.contactNo = contactNo;
@@ -153,11 +157,7 @@ App.prototype.loadHRHomeFooter = function() {
 		new hRHomeFooter();
 	});
 }
-App.prototype.loadempviewemployee = function(employeeId) {
-	Loader.loadempviewemployee(function() {
-		new empViewemployee(employeeId);
-	});
-}
+
 App.prototype.loadEditEmp = function(employeeId) {
 	Loader.loadEditEmp(function() {
 		new EditEmployee(employeeId);

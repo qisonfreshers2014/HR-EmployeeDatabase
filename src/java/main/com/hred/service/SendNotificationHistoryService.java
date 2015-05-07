@@ -109,7 +109,7 @@ public class SendNotificationHistoryService extends BaseService {
 		
 		DisplayNotificationHome sentMailToEmployee= (DisplayNotificationHome) JsonUtil.getObject(
 				request.getPayload(), DisplayNotificationHome.class);
-		String output = SendNotificationHistoryHandler.getInstance().SentMail(sentMailToEmployee);
+		String output = SendNotificationHistoryHandler.getInstance().sentMailAOP(sentMailToEmployee);
 		
 		
 		return "{\"status\": \"SUCCESS\", \"payload\": \"Test Successful\"}";

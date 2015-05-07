@@ -87,7 +87,7 @@ public class EmployeeService extends BaseService {
 		Employee employee = (Employee) JsonUtil.getObject(request.getPayload(),
 				Employee.class);
 
-		Employee output = (Employee) EmployeeHandler.getInstance().save(
+		Employee output = (Employee) EmployeeHandler.getInstance().saveAOP(
 				employee);
 
 		return JsonUtil.getJsonBasedOnDescriptor(output, Employee.class);
@@ -284,7 +284,7 @@ public class EmployeeService extends BaseService {
 			@Context UriInfo uriInfo, WebserviceRequest request)
 			throws BusinessException {
 		List<DisplayNotificationHome> getAllEvents = EmployeeHandler
-				.getInstance().getAllEvents();
+				.getInstance().getAllEventsAOP();
 		return JsonUtil.getJsonForListBasedOnDescriptor(getAllEvents,
 				DisplayNotificationHome.class, DisplayNotificationHome.class);
 	}
@@ -306,7 +306,7 @@ public class EmployeeService extends BaseService {
 						NotificationHomeFilterInputDiscriptor.class);
 
 		List<DisplayNotificationHome> displayoutput = EmployeeHandler
-				.getInstance().getNotificationDisplayCriteria(filterCriteria);
+				.getInstance().getNotificationDisplayCriteriaAOP(filterCriteria);
 
 		return JsonUtil.getJsonForListBasedOnDescriptor(displayoutput,
 				DisplayNotificationHome.class, DisplayNotificationHome.class);

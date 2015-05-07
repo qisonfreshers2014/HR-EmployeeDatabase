@@ -14,7 +14,9 @@ import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
 
+import com.hred.common.Constants;
 import com.hred.exception.BusinessException;
+import com.hred.handler.annotations.AuthorizeEntity;
 import com.hred.model.Employee;
 import com.hred.model.SendNotificationHistory;
 import com.hred.model.Template;
@@ -63,7 +65,7 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 	
 //This Method will be used for sending the automated mail by the server
 	
-	public String SentAutomatedMailMail() throws EmailException {
+	public String sentAutomatedMailMail() throws EmailException {
 		DisplayNotificationHome requiredContent = new DisplayNotificationHome();
 		 Template template = new Template();
 		TemplateDAO tempDAOImpl = (TemplateDAO) DAOFactory.getInstance()
@@ -173,7 +175,8 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 			
 
 	// This function will be used to send the mail Mail from the Notification Page
-	public String SentMail(DisplayNotificationHome sentMailToEmployee)
+	@AuthorizeEntity(roles={Constants.HR})
+	public String sentMailAOP(DisplayNotificationHome sentMailToEmployee)
 			throws EmailException {
 		{
 			

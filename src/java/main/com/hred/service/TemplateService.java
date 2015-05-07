@@ -53,7 +53,7 @@ public class TemplateService extends BaseService {
   Template template = (Template) JsonUtil.getObject(request.getPayload(),
     Template.class);
 
-  Template output = (Template) TemplateHandler.getInstance().save(
+  Template output = (Template) TemplateHandler.getInstance().saveAOP(
     template);
 
   return JsonUtil.getJsonBasedOnDescriptor(output, Template.class);

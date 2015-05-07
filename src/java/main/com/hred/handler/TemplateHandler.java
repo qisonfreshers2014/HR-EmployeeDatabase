@@ -2,16 +2,17 @@ package com.hred.handler;
 
 import java.util.List;
 
+import com.hred.common.Constants;
 import com.hred.exception.ExceptionCodes;
 import com.hred.exception.ExceptionMessages;
 import com.hred.exception.ObjectNotFoundException;
 import com.hred.exception.TemplateException;
 import com.hred.handler.AbstractHandler;
+import com.hred.handler.annotations.AuthorizeEntity;
 import com.hred.model.DesignationType;
 import com.hred.model.Employee;
 import com.hred.model.ObjectTypes;
 import com.hred.model.Objects;
-
 import com.hred.model.Template;
 import com.hred.persistence.dao.DAOFactory;
 import com.hred.persistence.dao.DesignationTypeDAO;
@@ -38,7 +39,8 @@ public class TemplateHandler extends AbstractHandler {
 		return INSTANCE;
 	}
 
-	public Template save(Template template) throws TemplateException {
+	@AuthorizeEntity(roles={Constants.HR})
+	public Template saveAOP(Template template) throws TemplateException {
 		 String name=template.getName();
 		  String subject=template.getSubject();
 		  String content=template.getContent();
@@ -171,12 +173,7 @@ public List<Template> getTemplates() {
 		templatescontenttoDisplay.setContent(finalContent);
 		System.out.println(templatescontenttoDisplay.getContent());
 		}
-	
-		
-		
-		
-
-		return templatescontenttoDisplay;
+	return templatescontenttoDisplay;
 
 	}
 

@@ -74,7 +74,7 @@ public class HRPolicyHandler extends AbstractHandler {
 					VeiwHRPolicies eachpolicyveiw = new VeiwHRPolicies();
 					eachpolicyveiw.setUrl(eachfile.getFilePath());
 					eachpolicyveiw.setFileID(eachfile.getId());
-					eachpolicyveiw.setPolicyName(eachfile.getName());
+					eachpolicyveiw.setPolicyName(eachpolicy.getPolicyName());
 					veiwHRPolicieslist.add(eachpolicyveiw);
 				
 			}

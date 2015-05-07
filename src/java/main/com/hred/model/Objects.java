@@ -34,6 +34,12 @@ public class Objects {
             case ObjectTypes.FILE:
                 persistentObjectName = File.class;
                 break;
+            case ObjectTypes.EMPLOYEE:
+                persistentObjectName = Employee.class;
+                break;
+            case ObjectTypes.NOTIFICATIONHISTORY:
+                persistentObjectName = SendNotificationHistory.class;
+                break;
 
             default:
                 break;

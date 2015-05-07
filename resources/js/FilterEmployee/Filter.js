@@ -93,7 +93,7 @@ FilterEmp.prototype.FilterEmployee = function(){
 			    $("#year2").val("");
 			    $("#qualification1").val("");
 			    $("#filter").val("");
-			    $('#displayData thead').empty();
+			    $('#displayData tbody').empty();
 	   
 	    }
 	   

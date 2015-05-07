@@ -15,7 +15,7 @@ public class NotificationTimer extends TimerTask implements Runnable {
   // TODO Auto-generated method stub
  
    try {
-    SendNotificationHistoryHandler.getInstance().SentAutomatedMailMail();
+    SendNotificationHistoryHandler.getInstance().sentAutomatedMailMail();
    } catch (EmailException e) {
     // TODO Auto-generated catch block
    

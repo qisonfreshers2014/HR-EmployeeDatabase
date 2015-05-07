@@ -8,10 +8,12 @@
 	 width: 100%;
 	 font-size: 100%;
 	 font-family: Calibri;
+	 backgroung-color:#CCC;
 	        }
         .thviewEmployee  {
             padding:10px;
             color: black;
+            backgroung-color:#CCC;
         }
         .heading {
             margin-left:2%;

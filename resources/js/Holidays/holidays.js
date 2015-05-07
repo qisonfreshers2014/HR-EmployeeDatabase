@@ -5,151 +5,151 @@ function listHoliday() {
 }
 
 listHoliday.prototype.handleShow = function() {
-	
-	$('.container').show();
-	var contentinput = {"payload":{} };
-	RequestManager.getHolidaysData(contentinput, function(data, success) {
-		 if(success){
-			 var content = data;
-			 var status = success;
-			 this.tableDisplay(content, status);
-			 			 		 	
-		}else{
-		  
-		  alert("failed to add");
-		 }		
-		  
-		}.ctx(this));
-	
-	$('#start_from').focusin(function(){
-		
-		var currentYear = (new Date).getFullYear();
-		$( ".date" ).datepicker({dateFormat:'yy-mm-dd',showButtonPanel:true,changeMonth:true,changeYear:true,showAnim:'drop',minDate:(new Date((currentYear - 2), 12, 1)),maxDate:new Date((currentYear + 1), 11, 31)});
-		
-		$("#fromDate").hide();
-		
-	}.ctx(this));
-	
-	$('#description').focusout(function(){
-		if($("#description").val() == ""){
-			$("#descrp").css("visibility","visible");
-			return false;
-		}else if(!($("#description").val().match('^[a-zA-Z ]{4,25}$') || $("#description").val() == isNaN)) {
-			$("#descrp").css("visibility","visible");
-			$("#descrp").html("Only space with minimum 4 characters are allowed");
-			return false;
-		}else
-			$("#descrp").hide();
-		
-	}.ctx(this));
-	
-	$('#dropdown').focusout(function(){
-		if($('select').val() == "Select"){
-			$("#type").css("visibility","visible");	
-			return false;
-		
-		}else{
-			$("#type").hide();
-		}
-		
-	}.ctx(this));
-	
-	
-	$('#save').click(function(){
-		
-		this.validateHolidays();
-		
-	}.ctx(this));
-	
-/*	$('#add').click(function(){
-		$("#start_from").val("");
-		$('#ends_at').val("");
-		$("#description").val("");
-		$('#dropdown').val("");
-		
-	}.ctx(this));
-	*/
+	 
+	 $('.container').show();
+	 var contentinput = {"payload":{} };
+	 RequestManager.getHolidaysData(contentinput, function(data, success) {
+	   if(success){
+	    var content = data;
+	    var status = success;
+	    this.tableDisplay(content, status);
+	            
+	  }else{
+	    
+	    alert("failed to add");
+	   }  
+	    
+	  }.ctx(this));
+	 
+	 $('#start_from').focusin(function(){
+	  
+	  var currentYear = (new Date).getFullYear();
+	  $( ".date" ).datepicker({dateFormat:'yy-mm-dd',showButtonPanel:true,changeMonth:true,changeYear:true,showAnim:'drop',minDate:(new Date((currentYear - 2), 12, 1)),maxDate:new Date((currentYear + 1), 11, 31)});
+	  
+	  
+	  
+	 }.ctx(this));
+	 
+	 $('#description').focusout(function(){
+	  if($("#description").val() == ""){
+	   $("#descrp").css("visibility","visible");
+	   return false;
+	  }else if(!($("#description").val().match('^[A-Za-z]+( [A-Za-z]+)*$') || $("#description").val() == isNaN)) {
+	   $("#descrp").css("visibility","visible");
+	   $("#descrp").html("Only space and characters are allowed");
+	   return false;
+	  }else
+	   $("#descrp").css("visibility","hidden");
+	  
+	 }.ctx(this));
+	 
+	 $('#dropdown').focusout(function(){
+	  if($('select').val() == "Select"){
+	   $("#type").css("visibility","visible"); 
+	   return false;
+	  
+	  }else{
+	   $("#type").css("visibility","hidden");
+	  }
+	  
+	 }.ctx(this));
+	 
+	 
+	 $('#save').click(function(){
+	  
+	  this.validateHolidays();
+	  
+	 }.ctx(this));
+	 
 
-
-}
+	}
 
 
 
-//function to validate and save 
-listHoliday.prototype.validateHolidays = function(){
-	var currentYear = (new Date).getFullYear();
-	var month = (new Date).getMonth()+1;
-	var date = (new Date).getDate();
-	var char = /^[a-zA-Z ]{4,25}$/;
-	$( ".date" ).datepicker({dateFormat:'yy-mm-dd',showButtonPanel:true,changeMonth:true,changeYear:true,showAnim:'drop',minDate:(new Date((currentYear - 2), 12, 1)),maxDate:new Date((currentYear + 1), 11, 31)});
-	
-if($("#start_from").val() == "" || $("#description").val() == "" || $("select").val() == "Select"){
-	
-	if($("#start_from").val() == "" ){
-		$("#fromDate").css("visibility","visible");
-		return false;
+	//function to validate and save 
+	listHoliday.prototype.validateHolidays = function(){
+	 var currentYear = (new Date).getFullYear();
+	 var month = (new Date).getMonth()+1;
+	 var date = (new Date).getDate();
+
+	 $( ".date" ).datepicker({dateFormat:'yy-mm-dd',showButtonPanel:true,changeMonth:true,changeYear:true,showAnim:'drop',minDate:(new Date((currentYear - 2), 12, 1)),maxDate:new Date((currentYear + 1), 11, 31)});
+	 
+	if($("#start_from").val() == "" || $("#description").val() == "" || $("select").val() == "Select"){
+	 
+	 if($("#start_from").val() == "" ){
+	  $("#fromDate").css("visibility","visible");
+	  return false;
+	 }else{
+	  $("#fromDate").css("visibility","hidden");
+	 }
+	  
+	 if($('select').val() == "Select"){
+	  $("#type").css("visibility","visible"); 
+	  return false;
+	 }
+	 else{
+	  $("#type").css("visibility","hidden");
+	 }
+	 
+	 if($("#description").val() == ""){
+	  $("#descrp").css("visibility","visible");
+	  
+	 }else
+	  $("#descrp").css("visibility","hidden");
+	 
+	 
+	}else if(!($("#description").val().match('^[A-Za-z]+( [A-Za-z]+)*$'))){
+	 if(!($("#description").val() == isNaN)){
+	  
+	  $("#descrp").css("visibility","visible");
+	  $("#descrp").html("Only space and characters are allowed");
+	 
+	 }else{
+	  $("#descrp").css("visibility","hidden");
+	  
+	 }
+	   
+
 	}else{
-		$("#fromDate").hide();
-	}
-		
-	if($('select').val() == "Select"){
-		$("#type").css("visibility","visible");	
-		return false;
-	}
-	else{
-		$("#type").hide();
-	}
-	
-	if($("#description").val() == ""){
-		$("#descrp").css("visibility","visible");
-		
-	}else if(!($("#description").val().match('^[a-zA-Z ]{4,25}$') || $("#description").val() == isNaN)) {
-		$("#descrp").css("visibility","visible");
-		$("#descrp").html("Only space with minimum 4 characters are allowed");
-		
-	}else{
-		$("#descrp").hide();
-	}
-	
-	
-	
-}else{
-	
-		var input = {"payload":{"fromDate":$("#start_from").val()+' 00:00:00',
-	        "toDate":$("#start_from").val()+' 00:00:00',
-	        "description":$('#description').val(),
-	        "type":$("#dropdown").val()}
-	        };
-		
-		$("#start_from").val("");
-		//$('#ends_at').val("");
-		$("#description").val("");
-		$('#dropdown').val("");
-		
-		RequestManager.holidaysData(input, function(data, success) {
-			 if(success){
-				 var content = data;
-				 var status = success;
-				 this.contentDisplay(content, status);
-				 alert("Successfully saved");
-			 	
-			 }else if(data.code == 9016){
-				
-				 alert(" Date already exists ");
-				
-			 }else{
-			  
-			  alert("Failed to save");
-			 
-			 }		
-			  
-			}.ctx(this)); 
-		
-	}	
-	
+	 
+	  var input = {"payload":{"fromDate":$("#start_from").val()+' 00:00:00',
+	         "toDate":$("#start_from").val()+' 00:00:00',
+	         "description":$('#description').val(),
+	         "type":$("#dropdown").val()}
+	         };
+	  
+	  $("#start_from").val("");
+	  //$('#ends_at').val("");
+	  $("#description").val("");
+	  $('#dropdown').val("");
+	  
+	  RequestManager.holidaysData(input, function(data, success) {
+	    if(success){
+	     var content = data;
+	     var status = success;
+	     this.contentDisplay(content, status);
+	     alert("Successfully saved");
+	     
+	    }else if(data.code == 9016){
+	    
+	     alert(" Date already exists ");
+	    
+	    }else{
+	     
+	     alert("Failed to save");
+	    
+	    }  
+	     
+	   }.ctx(this)); 
+	  
+	 } 
+	 
 
 
-}
+	}
+
+
+
 
 //function to display whole Holidays data in a table and update call back
 listHoliday.prototype.tableDisplay = function(content, status){
@@ -169,7 +169,7 @@ listHoliday.prototype.tableDisplay = function(content, status){
 				$("#fromDate").css("visibility","visible");
 				return false;
 			}else{
-				$("#fromDate").hide();
+				$("#fromDate").css("visibility","hidden");
 			}
 			
 					
@@ -178,23 +178,29 @@ listHoliday.prototype.tableDisplay = function(content, status){
 				return false;
 			}
 			else{
-				$("#type").hide();
+				$("#type").css("visibility","hidden");
 			}
 				
-			if($("#description").val() == ""){
-				$("#descrp").css("visibility","visible");
-				return false;
-			}else if(!($("#description").val().match('^[a-zA-Z ]{4,25}$') || $("#description").val() == isNaN)) {
-				$("#descrp").css("visibility","visible");
-				$("#descrp").html("Only space with minimum 4 characters are allowed");
-				return false;
-			}else{
-				$("#descrp").hide();
-			}
-			
-			
-			
-		}else{
+			 if($("#description").val() == ""){
+				  $("#descrp").css("visibility","visible");
+				  
+				 }else
+				  $("#descrp").css("visibility","hidden");
+				 
+				 
+				}else if(!($("#description").val().match('^[A-Za-z]+( [A-Za-z]+)*$'))){
+				 if(!($("#description").val() == isNaN)){
+				  
+				  $("#descrp").css("visibility","visible");
+				  $("#descrp").html("Only space and characters are allowed");
+				 
+				 }else{
+				  $("#descrp").css("visibility","hidden");
+				  
+				 }
+				   
+
+				}else{
 		
 			var id = $("#holidayID").text();
 		

@@ -135,7 +135,7 @@ skill.prototype.addSkill = function(){
 			+data.trainingAttended+"</td><td>"+data.empId+"</td><td>"
 			+data.rating+"</td><td><input type='button' value='Edit' id='"+data.id+"' class='dynamicEdit btn-primary btn-md'></td></tr>");
 	  		$("#skill").val("");
-		    $("#attened1").val("");
+		    $("#attended1").val("");
 		    $("#empid").val("");
 		    $("#rating").val("");
 	  		var obj1=data.id;
@@ -162,7 +162,7 @@ skill.prototype.editSkill = function(obj1){
 		 
 		 if(success){
 			$('#skill').val(data[0].skills);
-		    $('#attened1').val(data[0].trainingAttended);
+		    $('#attended1').val(data[0].trainingAttended);
 		    $('#empid').val(data[0].empId);
 		    $('#rating').val(data[0].rating);
 		 }

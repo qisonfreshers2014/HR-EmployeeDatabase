@@ -27,19 +27,24 @@ Login.prototype.handleShow = function() {
 		RequestManager.authenticate(input, function(data, success) {
 			if(success){
 				var  token = data.sessionToken;
-			      setCookie('hredSessionToken', token, null);
+			    setCookie('hredSessionToken', token, null);
 				console.log("************************");
 				var name=data.employee.employeeName;
 			    var jobRole=data.employee.currentDesignation;
 			    var gender=data.employee.gender;
 			    var contactNo=data.employee.contactNo;
 			    var employeeId=data.employee.employeeId;
-				App.loadEmployeePage(name,jobRole);
+			    App.loadEmployeePage(name,jobRole,employeeId);
 				App.loadFooter();
 				App.loadEmployee(gender,contactNo);
-				App.loadempviewemployee(employeeId);
+				//App.loadempviewemployee(employeeId);
 				//App.loadTemplate();
 			}
+			else
+			{
+			alert(data.code+" "+data.message)
+			}
+
 		}.ctx(this));
 	}
 	

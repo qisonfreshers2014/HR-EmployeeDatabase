@@ -53,6 +53,22 @@ alert(dataid);
 editTemplate.prototype.editTemplateDetailsById=function(dataid){
 //	alert(4);
 	var articleDesc = $('textarea#templateContent').val();//CKEDITOR.instances.templateContent.getData();
+	var regex = /^[A-Za-z]+( [A-Za-z]+)*$/;
+	 if($('.templatename').val()==""||$('.subject').val()==""||articleDesc=="")
+	 {
+    	alert("failed to add,since every field is mandatory");
+    }else
+	 
+	 if(!($('.templatename').val()).match(regex))
+		 {
+		 alert("Enter valid name ");
+		 }
+	 else{
+		 
+		 if($('.templatename').val().length<2){
+			 alert("Invalid length -minimum 2 characters needed!(Upto 40) ");
+		 }
+		 else{
     var input ={"payload":{"id":dataid,"name":$('.templatename').val(),"subject":$('.subject').val(),"content":articleDesc}};
     RequestManager.editTemplateDetails(input, function(data, success)
     {
@@ -64,6 +80,7 @@ editTemplate.prototype.editTemplateDetailsById=function(dataid){
          alert("Failed to Add");
         }
     }.ctx(this));
+		 }
 }
 
-
+}

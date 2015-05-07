@@ -306,10 +306,14 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 			String result ="from Employee where is_deleted=0 and  (day(dateOfJoining) between "+fromday+" and "+today+") and (month(dateOfJoining) between "+frommonth+" and "+tomonth+")";				
 			org.hibernate.Query query = session.createQuery(result);
 			 list  = query.list();
+			 for(Employee emp:list)
+			 {
+				 System.out.println(emp.getEmployeeName());
+			 }
 			
 			if (list.size() == 0) {
 			
-				throw new UserException(ExceptionCodes.NO_EMPLOYEE_JOINED_TODAY, ExceptionMessages.NO_EMPLOYEE_JOINED_TODAY);
+				System.out.println(" No anivarsary");
 			}
 
 		} finally {
@@ -356,7 +360,7 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 			 list  = query.list();
 			
 			if (list.size() == 0) {
-				throw new UserException(ExceptionCodes.NO_BIRTHDAY_FOUND, ExceptionMessages.NO_BIRTHDAY_FOUND);
+				System.out.println(" No Birthday");
 						
 			}
 
@@ -395,7 +399,7 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 						 
 			 
 				if (results.size() == 0) {
-					System.out.println("No Aniversary");
+					System.out.println("No Birthday");
 				}
 
 		} finally {

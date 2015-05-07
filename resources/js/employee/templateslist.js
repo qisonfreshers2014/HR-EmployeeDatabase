@@ -23,8 +23,8 @@ TemplateList.prototype.getTemplateName=function(){
 			  $.each(data,function(obj, value){
 					//  var obj = data[i];
 
-						$('#displayData').append('<table></table>');
-						$('#displayData ').after("<tr><td>"+value.name+"</td><td><input type='button' value='Edit' id='"+value.id+"' class='dynamicEdit'></td><td><input type='button' value='View' id='"+value.id+"' class='dynamicView'></td></tr>");
+						//$('#displayData').append('<table></table>');
+						$('#displayData ').after("<td>"+value.name+"</td><td><input type='button' value='Edit' id='"+value.id+"' class='dynamicEdit'  class='btn btn-primary btn-md'></td><td><input type='button' value='View' id='"+value.id+"' class='dynamicView' class='btn btn-primary btn-md'></td>");
 			  });	
 		$('.dynamicEdit').click(function(event){
 			//console.log(event);

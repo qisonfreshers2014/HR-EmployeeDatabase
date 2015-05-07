@@ -12,6 +12,7 @@ import com.hred.exception.BusinessException;
 import com.hred.exception.ObjectNotFoundException;
 import com.hred.handler.annotations.AuthorizeCategory;
 import com.hred.handler.annotations.AuthorizeEntity;
+import com.hred.model.Employee;
 import com.hred.model.ObjectTypes;
 import com.hred.model.User;
 import com.hred.persistence.dao.DAOFactory;
@@ -63,7 +64,8 @@ public class HandlerAspect {
 		//Role role = daoFactory.getRoleDAO().getRole(userRoleId);
 		long userId = Utils.getUserId();
 
-		User user = (User)daoFactory.getUserDAO().getObjectById(ServiceRequestContextHolder.getContext().getUserSessionToken().getUserId(), ObjectTypes.USER);
+		Employee user = (Employee)daoFactory.getEmployeeDAO().getObjectById(ServiceRequestContextHolder.getContext().getUserSessionToken().getUserId(), ObjectTypes.EMPLOYEE);
+		
 //Check whether the designation of the logged in user is HR		
 //		if(user.){
 //			

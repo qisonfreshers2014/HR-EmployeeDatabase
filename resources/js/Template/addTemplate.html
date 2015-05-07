@@ -1,13 +1,12 @@
-						
 <div>
 <div class="heading">
 <h3>Add Template</h3>
 </div>
 <p id="fileId" class="hide"></p>
 <div id="fieldsaddTemplate" class="inputelement">
-Template Name<input type="text" class="templatename" maxlength="25" minlength="3"/><span class="mandatory"><sup>*</sup></span><br><br>
+Template Name<input type="text" class="templatename" maxlength="30" minlength="3"/><span class="mandatory"><sup>*</sup></span><span id="name" class="templateError"></span><br><br>
 
-Subject<span id="align"></span><input type="text" class="subject" maxlength="50" minlength="3"/><span class="mandatory"><sup>*</sup></span><br><br>
+Subject<span id="align"></span><input type="text" class="subject" maxlength="100" minlength="3"/><span class="mandatory" class="templateError"><sup>*</sup></span><span id="subject" class="templateError"></span><br><br>
 
 content<br><br>
   <textarea rows="15" cols="50" class="content" id="editor1" name="editor1"></textarea><br><br>
@@ -15,4 +14,3 @@ content<br><br>
  <input type="button" class="save btn btn-primary btn-md" value="save">
 </div>
 </div>
-

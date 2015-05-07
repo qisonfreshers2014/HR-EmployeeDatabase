@@ -70,21 +70,24 @@ loadNotificationHomePage.prototype.calendar = function() {
 
 loadNotificationHomePage.prototype.eventChangeCriteria = function() {
 
-	var selectedEvent = $("#EventsNotification").val();
+	var selectedEvent = $("#eventsNotification").val();
 	var fromDate = $("#fromDateNotification").val();
 	var toDate = $("#toDateNotification").val();
-	
 	
 	   var fromdatevalidation=new Date(fromDate);
 	   var todatevalidation=new Date(toDate);
 	   
-	   if(fromdatevalidation>todatevalidation || fromDate =="" || toDate =="" )
+	   if(fromdatevalidation>todatevalidation )
 	   {
-	   alert("Invalid Date!!!!!")
+	   alert("To date should not be greater than the from date")
+	   }
+	   else if(fromDate =="" || toDate =="")
+	     {
+	   alert("Enter the Criteria dates")
 	   }
 	   else
-		   {
-	
+		   { 
+			
 	
 	var input = {
 		"payload" : {"selectedEvent" : selectedEvent,
@@ -147,7 +150,7 @@ loadNotificationHomePage.prototype.eventChangeCriteria = function() {
 						}
 						else
 							{
-							alert("No Records Found")
+							alert(data.code+" "+data.message)
 							}
 
 					}.ctx(this));

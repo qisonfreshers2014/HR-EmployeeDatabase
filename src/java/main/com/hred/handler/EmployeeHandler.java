@@ -8,6 +8,11 @@ import java.util.List;
 
 
 
+
+
+
+
+import com.hred.common.Constants;
 import com.hred.common.Utils;
 import com.hred.common.cache.CacheManager;
 import com.hred.common.cache.CacheRegionType;
@@ -17,6 +22,8 @@ import com.hred.exception.EncryptionException;
 import com.hred.exception.ExceptionCodes;
 import com.hred.exception.ExceptionMessages;
 import com.hred.exception.ObjectNotFoundException;
+import com.hred.exception.UserException;
+import com.hred.handler.annotations.AuthorizeEntity;
 import com.hred.model.Employee;
 import com.hred.model.FilterEmployee;
 import com.hred.model.SendNotificationHistory;
@@ -107,7 +114,8 @@ public class EmployeeHandler extends AbstractHandler {
 	
 	}
 	
-	public Employee save(Employee employee) throws EncryptionException, BusinessException {
+	@AuthorizeEntity(roles={Constants.HR})
+	public Employee saveAOP(Employee employee) throws EncryptionException, BusinessException {
 	employee.setDeleted(false);
 	employee.setPassword(Utils.encrypt(employee.getPassword()));
 	String name = employee.getEmployeeName();
@@ -358,7 +366,8 @@ public class EmployeeHandler extends AbstractHandler {
 	
 @SuppressWarnings("null")
 // This method will return all the event of the company within one month
-public List<DisplayNotificationHome> getAllEvents()
+@AuthorizeEntity(roles={Constants.HR})
+public List<DisplayNotificationHome> getAllEventsAOP()
   throws BusinessException {
 
  List<DisplayNotificationHome> displayNotificationHomeList = new ArrayList<DisplayNotificationHome>();
@@ -382,7 +391,8 @@ public List<DisplayNotificationHome> getAllEvents()
 
 // This method will return the event which are satisfying the criteria
 // conditions
-public List<DisplayNotificationHome> getNotificationDisplayCriteria(
+@AuthorizeEntity(roles={Constants.HR})
+public List<DisplayNotificationHome> getNotificationDisplayCriteriaAOP(
   NotificationHomeFilterInputDiscriptor filterCriteria)
   throws BusinessException {
  List<DisplayNotificationHome> displayNotificationHomeList = new ArrayList<DisplayNotificationHome>();
@@ -390,6 +400,7 @@ public List<DisplayNotificationHome> getNotificationDisplayCriteria(
  List<Employee> empBirthdayWithDates = null;
  List<Employee> empWorkAniversayWithdates = null;
  String selectedEvent = filterCriteria.getSelectedEvent();
+ System.out.println(selectedEvent);
  EmployeeDAO employeeDAOImpl = DAOFactory.getInstance().getEmployeeDAO();
  if (filterCriteria.getFromdate() == null
    || filterCriteria.getTodate() == null) {
@@ -407,28 +418,32 @@ public List<DisplayNotificationHome> getNotificationDisplayCriteria(
     .getWorkAniversarywithdate(filterCriteria);
  }
 
- // getting the history Data from the database
- SendNotificationHistoryDAO SendNotificationHistoryDAOImpl = DAOFactory
-   .getInstance().getSendNotificationHistoryDAO();
- List<SendNotificationHistory> notificationHistory = SendNotificationHistoryDAOImpl
-   .getHistorydata();
 
  // Entering Birthdays Records To be displayed along with the
  // notification status
  if (selectedEvent.equalsIgnoreCase("birthDay")) {
   displayNotificationHomeList = getBirthdaysList(empBirthdayWithDates);
+  if(displayNotificationHomeList.size() ==0)
+  {
+	  throw new UserException(ExceptionCodes.NO_BIRTHDAY_FOUND, ExceptionMessages.NO_BIRTHDAY_FOUND);
+  }
  }
  // Entering Aniversary Records To be displayed along with the
  // notification status
  else if (selectedEvent.equalsIgnoreCase("workAniversary")) {
 
-  displayNotificationHomeList = getAnivarsaryList(empBirthdayWithDates);
+  displayNotificationHomeList = getAnivarsaryList(empWorkAniversayWithdates);
+	
+  if(displayNotificationHomeList.size() ==0)
+  {
+	  throw new UserException(ExceptionCodes.NO_EMPLOYEE_JOINED_TODAY, ExceptionMessages.NO_EMPLOYEE_JOINED_TODAY);
+  }
  }
  // If no date criteria is selected this else will return the events in
  // the current month
  else {
   displayNotificationHomeList
-    .addAll(getAnivarsaryList(empBirthdayWithDates));
+    .addAll(getAnivarsaryList(empWorkAniversayWithdates));
   displayNotificationHomeList
     .addAll(getBirthdaysList(empBirthdayWithDates));
 
@@ -484,7 +499,7 @@ public List<DisplayNotificationHome> getAnivarsaryList(
 
 	for (Employee anivarsary : employeeBirthday) {
 		DisplayNotificationHome displayNotificationHome = new DisplayNotificationHome(
-				"Anivarsary", anivarsary.getDateOfJoining(),
+				"Aniversary", anivarsary.getDateOfJoining(),
 				anivarsary.getEmail(), anivarsary.getEmployeeName());
 
 		if (notificationHistory.size() != 0) {

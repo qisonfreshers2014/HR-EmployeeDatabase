@@ -17,13 +17,6 @@ addpolicy.prototype.handleShow = function() {
 			this.saveToDatabase();
 		}
 	}.ctx(this));
-	$('#reset_policy').click(function(){
-		$("#policyName").val("");
-	//for error messages	
-		$('#Plen').text("");
-		$('#Pletter').text("");
-		$('#isFEmpty').text("");
-		});
 	function UploadClickHandler(event) {
 		var thisEle = event.target;
 		this.uploadMedia(function() {
@@ -55,9 +48,19 @@ addpolicy.prototype.validatePolicyInfo = function() {
 addpolicy.prototype.policyNameVal = function() {
 
 	var policyName = $('#policyName').val();
+	var lengthx = policyName.length;
+	if (policyName == "") {
+		$('#isPEmpty').text("You can't leave empty.");
+		nameValidate = 0;
+		return false;
+
+	} else {
+		$('#isPEmpty').text("");
+		nameValidate = 1;
+	}
 	var letters = /^[A-z0-9 ]+$/;
 	if (!(policyName.match(letters))) {
-		$('#Pletter').text("Policy name can have alphabet,numbers and spaces only");
+		$('#Pletter').text("Enter alphabet,numbers and spaces only");
 		nameValidate = 0;
 		return false;
 
