@@ -7,14 +7,15 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 
-import com.hred.common.Utils;
 import com.hred.exception.BusinessException;
+import com.hred.exception.ExceptionCodes;
+import com.hred.exception.ExceptionMessages;
 import com.hred.exception.ObjectNotFoundException;
 import com.hred.handler.annotations.AuthorizeCategory;
 import com.hred.handler.annotations.AuthorizeEntity;
+import com.hred.model.DesignationType;
 import com.hred.model.Employee;
 import com.hred.model.ObjectTypes;
-import com.hred.model.User;
 import com.hred.persistence.dao.DAOFactory;
 import com.hred.service.common.ServiceRequestContext;
 import com.hred.service.common.ServiceRequestContextHolder;
@@ -33,6 +34,7 @@ public class HandlerAspect {
 		checkIsUserAuthorized(thisJoinPoint);
 		Object ob = thisJoinPoint.proceed();
 		return ob;
+
 	}
 
 	private void checkIsUserAuthorized(ProceedingJoinPoint thisJoinPoint)
@@ -58,18 +60,21 @@ public class HandlerAspect {
 		AuthorizeEntity authorizeEntity = signature.getMethod().getAnnotation(
 				AuthorizeEntity.class);
 		String[] roles = authorizeEntity.roles();
+		String roleName = roles[0];
 		//String action = authorizeEntity.action();
 		//String entity = authorizeEntity.entity();
 		DAOFactory daoFactory = DAOFactory.getInstance();
 		//Role role = daoFactory.getRoleDAO().getRole(userRoleId);
-		long userId = Utils.getUserId();
 
 		Employee user = (Employee)daoFactory.getEmployeeDAO().getObjectById(ServiceRequestContextHolder.getContext().getUserSessionToken().getUserId(), ObjectTypes.EMPLOYEE);
+
+//Check whether the designation of the logged in user is HR	
 		
-//Check whether the designation of the logged in user is HR		
-//		if(user.){
-//			
-//		}
+		DesignationType desig = (DesignationType)daoFactory.getDesignationTypeDAO().getDesignationByID(user);
+		if(!desig.getName().equalsIgnoreCase(roleName)){
+			throw new BusinessException(ExceptionCodes.USER_NOT_AUTHORIZED,
+					ExceptionMessages.USER_NOT_AUTHORIZED);
+		}
 		
 		/*long affinityId = context.getAffinityId();
 		long userRoleId = context.getUserSessionToken().getRoleId();
