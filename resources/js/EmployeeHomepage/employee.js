@@ -1,10 +1,10 @@
- function empHomePage() { 
+function empBasicDetails() { 
  Loader.loadHTML('.container', 'resources/js/EmployeeHomepage/employee.html', true, function(){
   this.handleShow();
  }.ctx(this));
 }
 
-empHomePage.prototype.handleShow= function(){
+ empBasicDetails.prototype.handleShow= function(){
  
  $('.name').text(App.userName);
  $('.gender').text(App.gender);
@@ -13,4 +13,4 @@ empHomePage.prototype.handleShow= function(){
  
 }
 
-var empHomePage=new empHomePage();
+var empBasicDetails=new empBasicDetails();

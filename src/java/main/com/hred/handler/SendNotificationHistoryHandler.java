@@ -89,6 +89,9 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 				.getEmployeeDAO();
 		AllEmployeesData = empDAOImpl.getEmployees();	
 		
+	
+		
+		
 		if (todaysBithday.size() != 0) {
 			requiredContent.setEvent("Birthday");
 			Template birthdayTemplate=tempDAOImpl.getContentForMail(requiredContent);
@@ -107,6 +110,10 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 					email.setSubject("Happy Birth Day "+birthday.getEmployeeName());
 					email.addTo(birthday.getEmail());
 					email.setContent(body, "text/html");
+					for(Employee addcctomail:AllEmployeesData)
+					{
+					email.addBcc(addcctomail.getEmail());
+					}
 					email.send();
 					
 						// send message
@@ -128,7 +135,7 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 			}
 		}
 		if (todaysWorkAniversay.size() != 0) {
-			requiredContent.setEvent("Aniversary");
+			requiredContent.setEvent("Anniversary");
 			Template anivarsaryTemplate=tempDAOImpl.getContentForMail(requiredContent);
 			
 			for (Employee aniversary : todaysWorkAniversay) {
@@ -142,9 +149,12 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 							"hrmsqison@gmail.com", "Qison123"));
 					email.setSSLOnConnect(true);
 					email.setFrom("hrmsqison@gmail.com");
-					email.setSubject("Happy Work Anivarsary  "+aniversary.getEmployeeName());
+					email.setSubject("Happy Work Anniversary  "+aniversary.getEmployeeName());
 					email.addTo(aniversary.getEmail());
-					
+					for(Employee addcctomail:AllEmployeesData)
+					{
+					email.addBcc(addcctomail.getEmail());
+					}
 					email.setContent(body, "text/html");
 					email.send();
 					
@@ -196,6 +206,11 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 			email.setFrom("hrmsqison@gmail.com");
 			String subjectMail = sentMailToEmployee.getEvent() + " "
 					+ sentMailToEmployee.getEmployeeName();
+			for(Employee addcctomail:AllEmployeesData)
+			{
+			email.addBcc(addcctomail.getEmail());
+			}
+			
 			try {
 				email.setSubject(subjectMail);
 				email.addTo(sentMailToEmployee.getEmployeeEmail());
@@ -203,7 +218,7 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 					entry.setTemplateId("01");
 								
 				
-				} else if (sentMailToEmployee.getEvent().equalsIgnoreCase("Aniversary")) {
+				} else if (sentMailToEmployee.getEvent().equalsIgnoreCase("Anniversary")) {
 					entry.setTemplateId("02");
 					
 							}

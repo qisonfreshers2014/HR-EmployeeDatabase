@@ -1,14 +1,46 @@
 #table{
- position:absolute;
- width:60%;
-  margin-left: 6%;
-    margin-top: 5%;
- font-size:15px;
- color:black;
+ 	color: black;
+  bottom: 280px;
+    font-size: 15px;
+    left: 202px;
+    margin-left: 6px;
+    margin-top: 390px;
+    position: relative;
+    width: 60%;
 }
 
-th {
+.tableHeading{
     background-color: #7094b8;
     color: #000000;
+    border: 1px solid black;
+    border-collapse:collapse;
+     height: 21px;
+  width: 30%;
     
+}
+#tableColumn{
+	 border: 1px solid black;
+	 
+	  
+	   border-collapse:collapse;
+}
+
+#tableColumn1{
+	 border: 1px solid black;
+	  
+	 
+	   border-collapse:collapse;
+}
+
+#tableColumn2{
+	 border: 1px solid black;
+	 
+	  border-collapse:collapse; 
+}
+
+.container{
+	background-color:#ffffff;
+}
+.tableEmployee{
+	 border: 1px solid black;
 }

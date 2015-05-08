@@ -4,4 +4,4 @@ function footer() {
  }.ctx(this));
 }
 
-var footer=new footer();	
+var footer=new footer();

@@ -324,7 +324,7 @@ public interface ExceptionCodes {
 	public static final int FILE_IS_DELETED = 9015;
 	public static final int EMPLOYEE_DOES_NOT_EXIST = 10001;
 
-	
+	public static final int POLICYNAME_ALREADY_EXISTS=228;	
 	
 	//holidays related Exception Codes
 
@@ -365,4 +365,6 @@ public interface ExceptionCodes {
 	public static final int TEMPLATE_DOESNOT_EXIST =9016;
 	public static final int EVERY_FIELD_IS_MANDATORY = 9017;
 	public static final int TEMPLATE_ALREADY_EXIST =9018;
+	public static final int NO_EVENT_FOUND = 9019;
+	public static final int NO_WELCOME_EMPLOYEE = 9020;
 	}

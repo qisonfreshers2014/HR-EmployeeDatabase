@@ -25,7 +25,7 @@ HrEditEmployee.prototype.handleShow = function(empid) {
 			$("#emal").val(object.email);
 			$("#eid").val(object.employeeId);
 			$("#name").val(object.employeeName);
-			$("#dob").val(byear+"-"+bmonth+"-"+bdate);
+			$("#dob").val(byear + "-" + bmonth + "-" + bdate);
 			$("#blood").val(object.bloodGroup);
 			$("#qual").val(object.highestQualification);
 			$("#fathername").val(object.fathersName);
@@ -47,8 +47,6 @@ HrEditEmployee.prototype.handleShow = function(empid) {
 		}
 
 	}.ctx(this));
-	
-	this.validatehrEditEmp(empid);
 	$('#dob').datepicker({
 		// dateFormat : $.datepicker.TIMESTAMP,
 		dateFormat : 'yy-mm-dd',
@@ -66,12 +64,6 @@ HrEditEmployee.prototype.handleShow = function(empid) {
 			$(thisEle).on('click', UploadClickHandler.ctx(this));
 		}.ctx(this));
 	}
-/*
-	$('#hredit').click(function(e) {
-		e.preventDefault();
-		this.validatehrEditEmp(dataId);
-	}.ctx(this));*/
-
 	$('#hrupdate').click(function(e) {
 		e.preventDefault();
 		this.validateUpdatehrEmp(empid);
@@ -81,41 +73,6 @@ HrEditEmployee.prototype.handleShow = function(empid) {
 		e.preventDefault();
 		this.deleteEmployee(empid);
 	}.ctx(this));
-
-	/*
-	 * $('#filename').focusout(function(e) { if (file == "") {
-	 * $('#fileerr').text('please upload image only').css('color', 'red'); }
-	 * else { $('#fileerr').text('ok').css('color', 'green'); } });
-	 */
-	/*
-	 * var pannum = $("#pannum").val(); var panerr = $("#panerr"); var letters =
-	 * /^[0-9a-zA-Z]+$/; $("#pannum").focusout(function() { if (pannum == "") {
-	 * $(panerr).text("required field"); $(panerr).css("color", "red"); } else
-	 * if (pannum == isNaN || !(pannum.match(letters))) { $(panerr).text("PAN
-	 * accepts both char and numbers"); $(panerr).css("color", "red"); } else if
-	 * (!(pannum.length == 10)) { $(panerr).text("please enter 10 letters
-	 * only"); $(panerr).css("color", "red"); } else { $(panerr).text("ok");
-	 * $(panerr).css("color", "green"); } });
-	 * 
-	 * var pferr = $("#pferr"); var pfnum = $("#pfnum").val();
-	 * $("#pfnum").focusout(function() { if (pfnum == "") {
-	 * $(pferr).text("required field"); $(pferr).css("color", "red"); } else if
-	 * (pfnum == isNaN || !(pfnum.match(letters))) { $(pferr).text("PF accepts
-	 * both char and numbers"); $(pferr).css("color", "red"); } else if
-	 * (!(pfnum.length == 18)) { $(pferr).text("please enter 18 letters only");
-	 * $(pferr).css("color", "red"); } else { $(pferr).text("ok");
-	 * $(pferr).css("color", "green"); } });
-	 * 
-	 * var acterr = $("#acterr"); var accountnum = $("#accountnum").val(); var
-	 * id = /^[0-9]+$/; $("#accountnum").focusout(function() { if (accountnum ==
-	 * "") { $(acterr).text("required field"); $(acterr).css("color", "red"); }
-	 * else if (accountnum == isNaN || !(accountnum.match(id))) {
-	 * $(acterr).text("only numbers allowed"); $(acterr).css("color", "red"); }
-	 * else if (!(accountnum.length == 15)) { $(acterr).text("please enter 15
-	 * digits only"); $(acterr).css("color", "red"); } else {
-	 * $(acterr).text("ok"); $(acterr).css("color", "green"); } });
-	 */
-
 }
 HrEditEmployee.prototype.uploadMedia = function(callback) {
 	var allowedFileType = "image";
@@ -134,87 +91,89 @@ HrEditEmployee.prototype.uploadMedia = function(callback) {
 
 }
 
-HrEditEmployee.prototype.validatehrEditEmp = function(empid) {
-	$('.error').css('visibility', 'hidden');
-
-	
-
-}
-
 HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
-
 	var char = /^[A-Za-z]+( [A-Za-z]+)*$/;
-	var qual = /^[A-Za-z]+(.[A-Za-z]+)*$/;
+	var qual = /^[a-zA-Z.""]+$/;
 	var num = /^[0-9]+$/;
 	var mail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+	var illegalChars = /\W/
 	var letters = /^[0-9a-zA-Z]+$/;
-	var cnumerr = $("#cnumerr");
-	var contnum = $("#contnum").val();
-	var mail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+//	var pfchar = /^[0-9]+(/[0-9]+)*$/;
+	var err = $("#eiderr");
+	var eid = $("#eid").val();
+	var nameerr = $("#nameerr");
+	var name = $("#name").val();
+	var nerr = $("#qualerr");
+	var qualification = $("#qual").val();
 	var emlerr = $("#emlerr");
 	var email = $("#emal").val();
-	var pwepattern = /^[a-zA-Z0-9_-]{8,15}$/;
-	var pwderr = $("#pwderr");
-	var password = $("#password").val();
-	var emnumerr = $("#emnumerr");
-	var txtemercon = $("#txtemercon").val();
+	var fathererr = $("#fathererr");
+	var fathername = $("#fathername").val();
+	var panerr = $("#panerr");
+	var pannum = $("#pannum").val();
+	var pferr = $("#pferr");
+	var pfnum = $("#pfnum").val();
+	var acterr = $("#acterr");
+	var accountnum = $("#accountnum").val();
+	var cnumerr = $("#cnumerr");
+	var contnum = $("#contnum").val();
 	var txtemname = $("#txtemname").val();
 	var emnameerr = $("#emnameerr");
-	var relationerr = $("#relationerr");
-	var relation = $("#relation").val();
+	var mail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+	var pwepattern = /^[a-zA-Z0-9_-]{8,15}$/;
+	var pwderr = $("#pwderr");
+	var salerr = $("#salerr");
+	var salary = $("#salary").val();
+	var emnumerr = $("#emnumerr");
+	var txtemercon = $("#txtemercon").val();
+	var password = $("#password").val();
 	var currentaddrerr = $("#currentaddrerr");
 	var currentaddr = $("#currentaddr").val();
 	var peraddrerr = $("#peraddrerr");
 	var peraddr = $("#peraddr").val();
-	var skype = $('#skype').val();
-	var skypeerr = $('#skypeerr');
-	var salary = $("#salary").val();
-	var salerr = $("#salerr");
-	var eid = $("#eid").val();
-	var name = $("#name").val();
-	var nameerr = $("#nameerr");
-	var qualification = $("#qual").val();
-	var nerr = $("#qualerr");
-	var email = $("#emal").val();
-	var fathername = $("#fathername").val();
-	var fathererr = $("#fathererr");
-	var pannum = $("#pannum").val();
-	var pfnum = $("#pfnum").val();
-	var accountnum = $("#accountnum").val();
+	var relationerr = $("#relationerr");
+	var relation = $("#relation").val();
 	var blood = $('#blood').val();
 	var blodderr = $('#blooderr');
+	var skype = $('#skype').val();
+	var skypeerr = $('#skypeerr');
 	var dob = $('#dob').val();
+	var file = $('#filename').val();
 	var variable = $('#variable').val();
+	var variableerr = $('#variableerr');
 	var Gender = $("#gender option:selected").val();
-
-	var flag = true;
+	var bloodGroup = /^(A|B|AB|O|0)(\+|-)+$/;
+	var salry = /^\d{0,10}(?:\.\d{0,2})?$/;
+	var dateformat = /^(19|20)\d\d-(0\d|1[012])-(0\d|1\d|2\d|3[01])$/;
 
 	if (blood == "" || eid == "" || name == "" || qualification == ""
-			|| email == "" || fathername == "" || contnum == ""
-			|| txtemercon == "" || txtemname == "" || password == ""
+			|| fathername == "" || contnum == ""
+			|| txtemercon == "" || txtemname == "" 
 			|| currentaddr == "" || peraddr == "" || relation == ""
 			|| skype == "" || Gender == "" || nameerr == "" || blood == ""
-			|| nerr == "" || fathererr == "" || salerr == "" || dob == "") {
+			|| nerr == "" || fathererr == "" || salerr == "" || dob == "" || salary == "") {
 		$('.error').css('visibility', 'visible');
 
 		if (dob == "") {
-			$('.dateerr').text('please pick the DOB').css('color', 'red');
-		} else {
-			$('.dateerr').text("ok");
-			$('.dateerr').css("color", "green");
-			
+			$('#dateerr').text('please enter the DOB').css('color', 'red');
+		}/*else if (!(dob.match(dateformat))) {
+			$('#dateerr').text('please enter in the format of YYYY-MM-DD').css(
+					'color', 'red');
+		}*/
+		else {
+			$('#dateerr').text("");
 		}
 
 		if (qualification == "") {
 			$(nerr).text("required field");
 			$(nerr).css("color", "red");
-		} else if (!(qualification.match(qual) || qualification == isNaN)) {
+		} else if (!(qualification.match(qual) || qualification.match(char))) {
 			$(nerr).text("please check the qualification");
 			$(nerr).css("color", "red");
 		} else {
-			$(nerr).text("nice qualification");
-			$(nerr).css("color", "green");
-			
+			$(nerr).text("");
+			// $(nerr).css("color", "green");
+
 		}
 
 		if (fathername == "") {
@@ -223,37 +182,51 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 		} else if (!(fathername.match(char) || fathername == isNaN)) {
 			$(fathererr).text("enter characters only");
 			$(fathererr).css("color", "red");
+		} else if (fathername < 5) {
+			$(fathererr).text("please enter min 6 characters ");
+			$(fathererr).css("color", "red");
 		} else {
-			$(fathererr).text("nice name");
-			$(fathererr).css("color", "green");
-			
+			$(fathererr).text("");
+			// $(fathererr).css("color", "green");
+
 		}
 
 		if (salary == "") {
 			$(salerr).text("required field");
 			$(salerr).css("color", "red");
-		} else if (salary == isNaN || !(salary.match(num))) {
-			$(salerr).text("only numbers allowed");
+		} else if (salary == isNaN || !(salary.match(salry))) {
+			$(salerr).text("please enter a valid value ex: 100.00");
 			$(salerr).css("color", "red");
 		} else {
-			$(salerr).text("ok");
-			$(salerr).css("color", "green");
-			
+			$(salerr).text("");
+			// $(salerr).css("color", "green");
+
+		}
+		if (variable == "") {
+			$(variableerr).text("");
+		} else if (variable == isNaN || !(variable.match(salry))) {
+			$(variableerr)
+					.text("please enter a valid decimal value ex: 100.00");
+			$(variableerr).css("color", "red");
+		} else {
+			$(variableerr).text("");
+			// $(salerr).css("color", "green");
+
 		}
 
 		if (blood == "") {
 			$(blodderr).text("required field");
 			$(blodderr).css("color", "red");
-		} else if (!(blood.match(char))) {
-			$(blodderr).text("please check blood group");
+		} else if (!(blood.match(bloodGroup))) {
+			$(blodderr).text("please check blood group ex: AB+, AB-");
 			$(blodderr).css("color", "red");
 		} else if (!(blood.length < 4)) {
 			$(blodderr).text("it will accept 3 char only");
 			$(blodderr).css("color", "red");
 		} else {
-			$(blodderr).text("ok");
-			$(blodderr).css("color", "green");
-			
+			$(blodderr).text("");
+			// $(blodderr).css("color", "green");
+
 		}
 
 		if (name == "") {
@@ -262,11 +235,50 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 		} else if (!(name.match(char) || name == isNaN)) {
 			$(nameerr).text("min length 6, accept char only");
 			$(nameerr).css("color", "red");
+		} else if (name.length < 2) {
+			$(nameerr).text("please enter min 3 chars");
+			$(nameerr).css("color", "red");
 		} else {
-			$(nameerr).text("name looks Great");
-			$(nameerr).css("color", "green");
-			
+			$(nameerr).text("");
+			// $(nameerr).css("color", "green");
 
+		}
+
+		if (pannum == "") {
+			$(panerr).text("");
+		} else if (pannum == isNaN || !(pannum.match(letters))) {
+			$(panerr).text("please enter a valid pan");
+			$(panerr).css("color", "red");
+		} else if (!(pannum.length == 10)) {
+			$(panerr).text("please enter 10 letters only");
+			$(panerr).css("color", "red");
+		} else {
+			$(panerr).text("");
+			// $(panerr).css("color", "green");
+		}
+		if (pfnum == "") {
+			$(pferr).text("");
+		} else if (pfnum == isNaN || !(pfnum.match(num))) {
+			$(pferr).text("please enter a valid pf number");
+			$(pferr).css("color", "red");
+		} else if (!(pfnum.length == 16)) {
+			$(pferr).text("please check the pf format");
+			$(pferr).css("color", "red");
+		} else {
+			$(pferr).text("");
+			// $(pferr).css("color", "green");
+		}
+		if (accountnum == "") {
+			$(acterr).text("");
+		} else if (accountnum == isNaN || !(accountnum.match(num))) {
+			$(acterr).text("please enter a valid account number");
+			$(acterr).css("color", "red");
+		} else if (!(accountnum.length == 15)) {
+			$(acterr).text("please enter 15 digits only");
+			$(acterr).css("color", "red");
+		} else {
+			$(acterr).text("");
+			// $(acterr).css("color", "green");
 		}
 
 		if (contnum == "") {
@@ -278,11 +290,10 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 		} else if (!(contnum.length == 10)) {
 			$(cnumerr).text("please enter 10 digits only");
 			$(cnumerr).css("color", "red");
-
 		} else {
-			$(cnumerr).text("ok");
-			$(cnumerr).css("color", "green");
-		
+			$(cnumerr).text("");
+			// $(cnumerr).css("color", "green");
+
 		}
 
 		if (txtemercon == "") {
@@ -295,21 +306,22 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 			$(emnumerr).text("please enter 10 digits only");
 			$(emnumerr).css("color", "red");
 		} else {
-			$(emnumerr).text("ok");
-			$(emnumerr).css("color", "green");
-			
+			$(emnumerr).text("");
+			// $(emnumerr).css("color", "green");
+
 		}
-		if (email == "") {
+
+		/*if (email == "") {
 			$(emlerr).text("required field");
 			$(emlerr).css("color", "red");
 		} else if (!(email.match(mail) || email == isNaN)) {
-			$(emlerr).text("enter correct mail id");
+			$(emlerr).text("please enter a valid email address");
 			$(emlerr).css("color", "red");
 		} else {
-			$(emlerr).text("nice email id");
-			$(emlerr).css("color", "green");
-			
-		}
+			$(emlerr).text("");
+			// $(emlerr).css("color", "green");
+
+		}*/
 
 		if (txtemname == "") {
 			$(emnameerr).text("required field");
@@ -317,44 +329,44 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 		} else if (!(txtemname.match(char) || txtemname == isNaN)) {
 			$(emnameerr).text("enter characters only");
 			$(emnameerr).css("color", "red");
+		} else if (txtemname.length < 2) {
+			$(emnameerr).text("please enter min 3 characters");
+			$(emnameerr).css("color", "red");
 		} else {
-			$(emnameerr).text("nice name");
-			$(emnameerr).css("color", "green");
-			
+			$(emnameerr).text("");
+			// $(emnameerr).css("color", "green");
+
 		}
 
-		if (password == "") {
+		/*if (password == "") {
 			$(pwderr).text("required field");
 			$(pwderr).css("color", "red");
-		} else if ((password.match(pwepattern))) {
+		} else if (!(password.match(pwepattern))) {
 			$(pwderr)
 					.text(
 							"Must be at least 8 characters,At least 1 number, 1 lowercase, 1 uppercase letter, At least 1 special character from @#$%&");
 			$(pwderr).css("color", "red");
-		}
-
-		else {
-			$(pwderr).text("ok");
-			$(pwderr).css("color", "green");
-			
-		}
+		} else {
+			$(pwderr).text("");
+			// $(pwderr).css("color", "green");
+		}*/
 
 		if (currentaddr == "") {
 			$(currentaddrerr).text("required field");
 			$(currentaddrerr).css("color", "red");
 		} else {
-			$(currentaddrerr).text("ok");
-			$(currentaddrerr).css("color", "green");
-			
+			$(currentaddrerr).text("");
+			// $(currentaddrerr).css("color", "green");
+
 		}
 
 		if (peraddr == "") {
 			$(peraddrerr).text("required field");
 			$(peraddrerr).css("color", "red");
 		} else {
-			$(peraddrerr).text("ok");
-			$(peraddrerr).css("color", "green");
-			
+			$(peraddrerr).text("");
+			// $(peraddrerr).css("color", "green");
+
 		}
 
 		if (relation == "") {
@@ -364,23 +376,21 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 			$(relationerr).text("enter characters only");
 			$(relationerr).css("color", "red");
 		} else {
-			$(relationerr).text("ok");
-			$(relationerr).css("color", "green");
-			
+			$(relationerr).text("");
+			// $(relationerr).css("color", "green");
 		}
-		flag = true;
+
 		if (skype == "") {
 			$(skypeerr).text("required field");
 			$(skypeerr).css("color", "red");
-		} else if (skype == isNaN || !(skype.match(char))) {
-			$(skypeerr).text("please check skype account name");
+		} else if (!(skype.match(qual) || skype.match(letters))) {
+			$(skypeerr).text("please enter a valid skype ID");
 			$(skypeerr).css("color", "red");
-		} else if (!(skype.length > 6)) {
+		} else if (!(skype.length > 5)) {
 			$(skypeerr).text("please enter minimum 6 letters");
 			$(skypeerr).css("color", "red");
 		} else {
-			$(skypeerr).text("ok");
-			$(skypeerr).css("color", "green");
+			$(skypeerr).text("");
 		}
 		this.GenderValidate();
 
@@ -431,9 +441,8 @@ HrEditEmployee.prototype.GenderValidate = function() {
 		error.innerHTML = "required field";
 		$(error).css("color", "red");
 	} else {
-		$(error).text("ok");
-		$(error).css("color", "green");
-		flag = 1;
+		$(error).text("");
+		//$(error).css("color", "green");
 	}
 }
 
@@ -470,7 +479,7 @@ HrEditEmployee.prototype.deleteEmployee = function(empid) {
 			$('#variable').val("");
 			$('#gender').val("");
 			$('#skype').val("");
-			//document.getElementById("hredit").disabled = true;
+			// document.getElementById("hredit").disabled = true;
 			document.getElementById("hrupdate").disabled = true;
 			document.getElementById("hrdelete").disabled = true;
 		} else {

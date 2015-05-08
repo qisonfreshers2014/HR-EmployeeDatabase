@@ -1,21 +1,16 @@
 @CHARSET "ISO-8859-1";
-body {
-background-image: url(http://teambuilding.pt/wp-content/uploads/2015/02/gestao-competencias1.jpg?cb6f58);
-background-repeat: no-repeat;
-}
 
 strong {
 font-weight: bold;
 }
 
 #image1{
-	 background-repeat: no-repeat;
+  background-repeat: no-repeat;
     background-size: cover;
     border-radius: 3px;
-    left: 1%;
     position: relative;
     top: 0;
-    width: 88%;
+    width: 1229px;
     z-index: 0;
 		border-radius: 3px;
 -moz-border-radius: 5px!important;
@@ -25,53 +20,53 @@ font-weight: bold;
 
 #welcome{
 
- color: black;
-    font-size: 25px;
-    position: absolute;
-    right: 9%;
-    top: 29%;
+   color: black;
+  font-size: 31px;
+  font-weight: bolder;
+  position: absolute;
+  right: 103px;
+  top: 155px;
 
 }
 .username{
-	
-    height: 14.5% !important;
-    left: 2.3%;
+
+    height: 31.5px !important;
+    left: 6.3px;
     min-width: 50px;
     padding: 8px;
     position: relative;
-    top: 5%;
-    width: 92%;
+    top: 13px;
+    width: 338px;
 -moz-border-radius: 3px;
 -webkit-border-radius: 3px;
  font-size:15px;
-  font-weight: bold; color:brown background-color:lightgray; 
+  font-weight: bold; color:brown; background-color:lightgray; 
 	
 }
 .password{
-font-weight: bold;
-    height: 14.5% !important;
-    left: 2.3%;
+  font-size: 15px;
+    height: 30.5px !important;
+    left: 6.3px;
     padding: 8px;
     position: relative;
-    top: 18%;
-    width: 92%;
+    top: 40px;
+    width: 338px;
 -moz-border-radius: 3px;
 -webkit-border-radius: 3px;
  font-size:15px;
-  font-weight: bold; color:brown background-color:lightgray; 
+  font-weight: bold; color:brown; background-color:lightgray; 
 }
 
 .submit{
-position: absolute;
-	 background-color: #008dde;
+pbackground-color: #008dde;
     border: medium none;
-    border-radius: 3%;
-    bottom: 9%;
+    border-radius: 3px;
+    bottom: 20px;
     color: #f4f4f4;
-    left: 6%;
-    padding: 3.6%;
+    left: 21.6px;
+    padding: 13.6px;
     position: absolute;
-    width: 87.5%;
+    width: 347.5px;
 -moz-border-radius: 3px;
 -webkit-border-radius: 3px;
 }
@@ -80,40 +75,39 @@ position: absolute;
 {
 background-color: #323b55;
     border-radius: 3px;
-    height: 48%;
+    height: 225px;
     min-width: 29.5%;
     padding: 15px;
     position: absolute;
-    right: 5%;
-    top: 33%;
-    width: 29.5%;
+    right: 48px;
+    top: 197px;
 -moz-border-radius: 3px;
 -webkit-border-radius: 3px;
 }
 .errormessage{
   position: relative;
-    left: 3%;
-    top: 22%;
+    left: 10px;
+    top: 40px;
     color: rgb(237, 53, 81);
 }
 .errormessage1{
   position: relative;
-    left: 3%;
-    top: 9%;
+      left: 10px;
+  top: 22px;
     color: rgb(237, 53, 81);
 }
 .star{
 	  color: red;
     font-size: 20px;
-    left: 2.5%;
+    left: 7.5px;
     position: relative;
 	
 	}
 	.star1{
 	  color: red;
     font-size: 20px;
-    left: 2.5%;
+    left: 7.5px;
     position: relative;
-    top: 12%;
+    top: 27px;
 	 
 	}

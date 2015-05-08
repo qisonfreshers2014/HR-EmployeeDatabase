@@ -1,5 +1,6 @@
 package com.hred.persistence.daoimpl;
 
+import java.util.ArrayList;
 import java.util.Calendar;
   
  
@@ -27,11 +28,8 @@ import com.hred.model.Employee;
 import com.hred.model.FilterEmployee;
 import com.hred.persistence.dao.EmployeeDAO;
 import com.hred.persistence.session.SessionFactoryUtil;
-
 import com.hred.service.descriptors.output.DisplayNotificationHome;
-
 import com.hred.service.descriptors.input.EmployeeSearchInputDescriptor;
-
 import com.hred.service.descriptors.output.NotificationHomeFilterInputDiscriptor;
 public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 
@@ -162,51 +160,68 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 
 
 	@Override
-	public List<Employee> searchEmployee(EmployeeSearchInputDescriptor employee) {
-		Session session = null;
-		List<Employee> list = null;
-		Transaction tx = null;
-		try {
-			session = getSession();
-			if (null == session) {
-				session = SessionFactoryUtil.getInstance().openSession();
-				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
-			}
-			Criteria createCriteria = session.createCriteria(Employee.class);
-		
-			
-			Criterion name = Restrictions.ilike("employeeName", employee.getSearchKey(), MatchMode.ANYWHERE);
-			Criterion email = Restrictions.ilike("email", employee.getSearchKey(), MatchMode.ANYWHERE);
-			Criterion active = Restrictions.eq("isDeleted",Boolean.FALSE);
-			Criterion search = Restrictions.and(Restrictions.or(name,email), active);
-			
-			/*Disjunction disjunction = Restrictions.disjunction();
-			Conjunction conjunction = Restrictions.conjunction();
-			conjunction.add(active);
-			
-			disjunction.add(name);
-			disjunction.add(email);
-			
-			disjunction.add(conjunction);*/
-			
-			createCriteria.add(search);
-			//createCriteria.add(Restrictions.eq("isDeleted", 0)); 
-			
-			list = (List<Employee>)createCriteria.list();
-		} finally {
-			try {
-				if (tx != null) {
-					tx.commit();
-					if (session.isConnected())
-						session.close();
-				}
-			} catch (HibernateException e) {
+	 public List<Employee> searchEmployee(EmployeeSearchInputDescriptor employee) {
+	  Session session = null;
+	  List<Employee> list = null;
+	  Transaction tx = null;
+	  try {
+	   session = getSession();
+	   if (null == session) {
+	    session = SessionFactoryUtil.getInstance().openSession();
+	    tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+	   }
+	   Criteria createCriteria = session.createCriteria(Employee.class);
+	   
+	   //session.createQuery("from EMPLOYEE where str(employee_id) like :employeeId").setString("employeeId", "%"+employee.getSearchKey()+"%");
+	   
+	   if(employee.getSearchKey().matches("[0-9]*")){
+	    
+	    int emp = Integer.parseInt(employee.getSearchKey());
 
-				e.printStackTrace();
-			}
-		}
-		return list;
-	}
+	    Criterion id = Restrictions.eq("employeeId", emp);
+	    Criterion years = Restrictions.eq("yearsofexperience", emp);
+	    Criterion active = Restrictions.eq("isDeleted",Boolean.FALSE);
+	    Criterion search = Restrictions.and(Restrictions.or(id,years), active);
+	    createCriteria.add(search);
+	    list = (List<Employee>)createCriteria.list();
+	    
+	   }else{
+	   
+	   Criterion name = Restrictions.ilike("employeeName", employee.getSearchKey(),MatchMode.ANYWHERE);
+	   Criterion email = Restrictions.ilike("email", employee.getSearchKey(), MatchMode.ANYWHERE);
+	   //Criterion id = Restrictions.eq("employeeId", empid);
+	   Criterion active = Restrictions.eq("isDeleted",Boolean.FALSE);
+	   Criterion search = Restrictions.and(Restrictions.or(name,email), active);
+	   
+	  
+	   /*Disjunction disjunction = Restrictions.disjunction();
+	   Conjunction conjunction = Restrictions.conjunction();
+	   conjunction.add(active);
+	   
+	   disjunction.add(name);
+	   disjunction.add(email);
+	   
+	   disjunction.add(conjunction);*/
+	   
+	   createCriteria.add(search);
+	   list = (List<Employee>)createCriteria.list();
+	   }
+	   
+	  // list = (List<Employee>)createCriteria.list();
+	  } finally {
+	   try {
+	    if (tx != null) {
+	     tx.commit();
+	     if (session.isConnected())
+	      session.close();
+	    }
+	   } catch (HibernateException e) {
+
+	    e.printStackTrace();
+	   }
+	  }
+	  return list;
+	 }
 	
 	
 	@SuppressWarnings("unchecked")
@@ -288,13 +303,16 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 		Calendar todate = Calendar.getInstance();
 		todate.setTime(filterCriteria.getTodate());
 		int tomonth = todate.get(Calendar.MONTH)+1;
-		int today = todate.get(Calendar.DATE);		
+		int today = todate.get(Calendar.DATE)+1;		
 		Calendar fromdate = Calendar.getInstance();
 		fromdate.setTime(filterCriteria.getFromdate());		
 		int frommonth = fromdate.get(Calendar.MONTH)+1;
 		int fromday = fromdate.get(Calendar.DATE);
 		Session session = null;
-		List<Employee> list = null;
+		List<Employee> list = new ArrayList<Employee>();
+		List<Employee> list1 = null;
+		List<Employee> list2 = null;
+	
 		Transaction tx = null;
 		try {
 			session = getSession();
@@ -303,13 +321,38 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 			}
 			
-			String result ="from Employee where is_deleted=0 and  (day(dateOfJoining) between "+fromday+" and "+today+") and (month(dateOfJoining) between "+frommonth+" and "+tomonth+")";				
+			if(frommonth>tomonth)
+			{
+				String result1 ="from Employee where is_deleted=0 and  (((day(dateOfJoining) between "+fromday+" and 30 ) or  (day(dateOfJoining) between 1 and "+today+")) and (month(dateOfJoining) between "+frommonth+" and 12)) and year(dateOfJoining)!=year(sysdate())";				
+				org.hibernate.Query query1 = session.createQuery(result1);
+				 list1  = query1.list();
+				 
+				 String result2 ="from Employee where is_deleted=0 and  (((day(dateOfJoining) between "+fromday+" and 30 ) or  (day(dateOfJoining) between 1 and "+today+")) and (month(dateOfJoining) between 1  and "+tomonth+")) and year(dateOfJoining)!=year(sysdate())";				
+					org.hibernate.Query query2 = session.createQuery(result2);
+					 list2  = query2.list();
+					
+					 if(list1.size()!=0)
+					 {
+					 list.addAll(list1);
+					 }
+					 if(list2.size()!=0)
+					 {
+					 list.addAll(list2);
+					 }
+			}
+			else if(frommonth==tomonth)
+			{
+				String result ="from Employee where is_deleted=0 and  ((day(dateOfJoining) between "+fromday+" and "+today+" ) and (month(dateOfJoining) = "+tomonth+")) and year(dateOfJoining)!=year(sysdate())";	
+				org.hibernate.Query query = session.createQuery(result);
+				 list  = query.list();
+			}
+			else
+			{
+			String result ="from Employee where is_deleted=0 and  (((day(dateOfJoining) between "+fromday+" and 30 ) or  (day(dateOfJoining) between 1 and "+today+")) and (month(dateOfJoining) between "+frommonth+" and "+tomonth+")) and year(dateOfJoining)!=year(sysdate())";				
 			org.hibernate.Query query = session.createQuery(result);
 			 list  = query.list();
-			 for(Employee emp:list)
-			 {
-				 System.out.println(emp.getEmployeeName());
-			 }
+			
+			}
 			
 			if (list.size() == 0) {
 			
@@ -338,15 +381,20 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 		
 		Calendar todate = Calendar.getInstance();
 		todate.setTime(filterCriteria.getTodate());
+		
 		int tomonth = todate.get(Calendar.MONTH)+1;
-		int today = todate.get(Calendar.DATE);		
+		int today = todate.get(Calendar.DATE)+1;		
 		Calendar fromdate = Calendar.getInstance();
 		fromdate.setTime(filterCriteria.getFromdate());		
 		int frommonth = fromdate.get(Calendar.MONTH)+1;
 		int fromday = fromdate.get(Calendar.DATE);
-		
+
+		System.out.println(" To date-"+tomonth+" "+today);
+		System.out.println(" From date-"+frommonth+" "+fromday);
 		Session session = null;
-		List<Employee> list = null;
+		List<Employee> list = new ArrayList<Employee>();
+		List<Employee> list1 = null;
+		List<Employee> list2 = null;
 		Transaction tx = null;
 		try {
 			session = getSession();
@@ -355,9 +403,37 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 			}
 			
-			String result ="from Employee where is_deleted=0 and   (day(dateOfBirth) between "+fromday+" and "+today+") and (month(dateOfBirth) between "+frommonth+" and "+tomonth+")";	
+			if(frommonth>tomonth)
+			{
+				String result1 ="from Employee where is_deleted=0 and  (((day(dateOfBirth) between "+fromday+" and 30 ) or  (day(dateOfBirth) between 1 and "+today+")) and (month(dateOfBirth) between "+frommonth+" and 12))";				
+				org.hibernate.Query query1 = session.createQuery(result1);
+				 list1  = query1.list();
+				 
+				 String result2 ="from Employee where is_deleted=0 and  ((day(dateOfBirth) between "+fromday+" and 30 ) or  (day(dateOfBirth) between 1 and "+today+")) and (month(dateOfBirth) between 1  and "+tomonth+"))";				
+					org.hibernate.Query query2 = session.createQuery(result2);
+					 list2  = query2.list();
+					
+					 if(list1.size()!=0)
+					 {
+					 list.addAll(list1);
+					 }
+					 if(list2.size()!=0)
+					 {
+					 list.addAll(list2);
+					 }
+			}
+			else if(frommonth==tomonth)
+			{
+				String result ="from Employee where is_deleted=0 and  ((day(dateOfBirth) between "+fromday+" and "+today+" ) and (month(dateOfBirth) = "+tomonth+"))";	
+				org.hibernate.Query query = session.createQuery(result);
+				 list  = query.list();
+			}
+			else
+			{
+			String result ="from Employee where is_deleted=0 and  (((day(dateOfBirth) between "+fromday+" and 30 ) or  (day(dateOfBirth) between 1 and "+today+")) and (month(dateOfBirth) between "+frommonth+" and "+tomonth+"))";	
 			org.hibernate.Query query = session.createQuery(result);
 			 list  = query.list();
+			}
 			
 			if (list.size() == 0) {
 				System.out.println(" No Birthday");
@@ -552,7 +628,7 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 			}
 			
-			String hql="from Employee where is_deleted=0 and   date(dateOfJoining) between date(sysdate())-6 and date(sysdate())+6";				
+			String hql="from Employee where is_deleted=0 and   date(dateOfJoining) between date(sysdate())-6 and date(sysdate())";				
 			org.hibernate.Query query = session.createQuery(hql);
 			 list  = query.list();
 			

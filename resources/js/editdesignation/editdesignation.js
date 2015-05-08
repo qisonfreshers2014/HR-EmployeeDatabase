@@ -65,21 +65,35 @@ editdesignation.prototype.validateDesignation = function() {
 // salary validations
 editdesignation.prototype.salaryValidate = function() {
 	var salary = $('#salary').val();
-	var letters = /^\d{1,10}(?:\.\d{0,2})?$/;
+	var letters = /^\d{0,10}(?:\.\d{0,2})?$/;
+	if(salary=="")
+	{
+		$('#isSEmpty').text("Please enter salary");
+		salaryVal=0;
+	    return false;
+
+	}
+	else
+	{
+		$('#isSEmpty').text("");
+		salaryVal=1;
+	}
 	if (salary.match(letters)) {
 		$('#isSEmpty').text("");
 		salaryVal = 1;
 	} else {
-		$('#isSEmpty').text("Enter only numbers");
+		$('#isSEmpty').text("Please enter numbers only");
 		salaryVal = 0;
 		return false;
 
 	}
 }
+
 // date validations
 editdesignation.prototype.dateValidate = function() {
-	if ($("#datepicker").val() == "") {
-		$('#isDEmpty').text("Enter date");
+	var date1=$("#datepicker").val();
+	if (date1 == "") {
+		$('#isDEmpty').text("Please enter date");
 		dateVal = 0;
 		return false;
 
@@ -87,21 +101,45 @@ editdesignation.prototype.dateValidate = function() {
 		$('#isDEmpty').text("");
 		dateVal = 1;
 	}
+	var letters = /^(19|20)\d\d-(0\d|1[012])-(0\d|1\d|2\d|3[01])$/;
+	if(date1.match(letters))//format for date picker
+	{
+		$('#isDEmpty').text("");
+		dateVal = 1;
+	}
+	else
+	{
+		$('#isDEmpty').text("Please enter date in yyyy-mm-dd format");
+		dateVal = 0;
+		return false;
+	}
 }
 
 // variable pay validations
 editdesignation.prototype.variablePayValidate = function() {
 	var varPay = $("#variablePay").val();
-	var letters = /^\d{1,10}(?:\.\d{0,2})?$/;
+	if(varPay=="")//empty
+	{
+		$('#isVPEmpty').text("Please enter variable pay");
+		variablePayVal=0;
+     	return false;
+
+	}
+	else
+	{
+		$('#isVPEmpty').text("");
+		variablePayVal=1;
+	}
+	var letters = /^\d{0,10}(?:\.\d{0,2})?$/;
 	if (varPay.match(letters)) {
 		$('#isVPEmpty').text("");
 		variablePayVal = 1;
 	} else {
-		$('#isVPEmpty').text("Enter only numbers");
+		$('#isVPEmpty').text("Please enter numbers only");
 		variablePayVal = 0;
 		return false;
-
 	}
+	
 }
 
 // dropdown validations
@@ -195,7 +233,7 @@ editdesignation.prototype.appendDesTable = function(data, data1, status) {
 	$("#designation").val("");
 	$("#salary").val("");
 	$("#variablePay").val("");
-
+	$("#datepicker").datepicker("setDate", new Date());
 }
 
 editdesignation.prototype.getDesignationHistory = function(empid) {

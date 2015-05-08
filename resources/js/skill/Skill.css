@@ -3,9 +3,9 @@ table,tr,th, td {
     border: 1px solid black;
 	border-collapse:collapse;
 	text-align:center;
-	margin-left:2%;
+	margin-left:3%;
 	font-family: Calibri;
- font-size:12px;
+ 	font-size:12px;
 	
 }
 th{
@@ -17,7 +17,7 @@ th,td{
 }
 .red{
 	color:red;
-	font-size:20px;
+	font-size:15px;
 }
 .right{
 	margin-left:25px;
@@ -38,12 +38,11 @@ font-family:calibri;
   	 
 }
 
-.heading
+.heading1
 {
-  font-weight: bold;
-  color:brown;
-  margin-left:5%; 
-  font-family:Calibri; 
+  
+  margin-left:3%; 
+  visibility:hidden;
 }
 .p{
 	margin-left:12%;
@@ -91,6 +90,7 @@ font:calibre;
 {
   font-size:15px;
   font-weight: bold;
+  font-family: Calibri;
   margin-left:7%;
 } 
 .inputelement1

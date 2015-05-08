@@ -406,7 +406,12 @@ public List<DisplayNotificationHome> getNotificationDisplayCriteriaAOP(
    || filterCriteria.getTodate() == null) {
   empBirthdayWithDates = employeeDAOImpl.getBirthday();
   empWorkAniversayWithdates = employeeDAOImpl.getWorkAniversary();
- } else {
+  if (selectedEvent.equalsIgnoreCase("Welcome")) {
+	  displayNotificationHomeList=getWelcomeEmployeeList();
+  }
+  }
+  
+ else {
 
   // Retriving the Birthday from the database which lies within the
   // the selected dates
@@ -428,6 +433,17 @@ public List<DisplayNotificationHome> getNotificationDisplayCriteriaAOP(
 	  throw new UserException(ExceptionCodes.NO_BIRTHDAY_FOUND, ExceptionMessages.NO_BIRTHDAY_FOUND);
   }
  }
+ 
+ 
+ else if (selectedEvent.equalsIgnoreCase("Welcome"))
+ {
+	 if(displayNotificationHomeList.size()==0)
+	  {
+	 throw new UserException(ExceptionCodes.NO_WELCOME_EMPLOYEE, ExceptionMessages.NO_WELCOME_EMPLOYEE);
+	  }
+ }
+ 
+ 
  // Entering Aniversary Records To be displayed along with the
  // notification status
  else if (selectedEvent.equalsIgnoreCase("workAniversary")) {
@@ -446,6 +462,10 @@ public List<DisplayNotificationHome> getNotificationDisplayCriteriaAOP(
     .addAll(getAnivarsaryList(empWorkAniversayWithdates));
   displayNotificationHomeList
     .addAll(getBirthdaysList(empBirthdayWithDates));
+  if(displayNotificationHomeList.size()==0)
+  {
+	  throw new UserException(ExceptionCodes.NO_EVENT_FOUND, ExceptionMessages.NO_EVENT_FOUND); 
+  }
 
  }
 
@@ -490,16 +510,16 @@ public List<DisplayNotificationHome> getBirthdaysList(
 
 // This Method will return the Anivarsary list with a selected criteria
 public List<DisplayNotificationHome> getAnivarsaryList(
-		List<Employee> employeeBirthday) {
+		List<Employee> employeeAniversary) {
 	SendNotificationHistoryDAO SendNotificationHistoryDAOImpl = DAOFactory
 			.getInstance().getSendNotificationHistoryDAO();
 	List<SendNotificationHistory> notificationHistory = SendNotificationHistoryDAOImpl
 			.getHistorydata();
 	List<DisplayNotificationHome> displayNotificationHomeList = new ArrayList<DisplayNotificationHome>();
 
-	for (Employee anivarsary : employeeBirthday) {
+	for (Employee anivarsary : employeeAniversary) {
 		DisplayNotificationHome displayNotificationHome = new DisplayNotificationHome(
-				"Aniversary", anivarsary.getDateOfJoining(),
+				"Anniversary", anivarsary.getDateOfJoining(),
 				anivarsary.getEmail(), anivarsary.getEmployeeName());
 
 		if (notificationHistory.size() != 0) {

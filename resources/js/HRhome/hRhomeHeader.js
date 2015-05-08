@@ -50,10 +50,23 @@ hRHomeHeader.prototype.handleShow = function() {
   App.loadAllHandsMeeting();
     }.ctx(this));
  
+ $('#logout1').click(function(event){
+	  this.logout();
+	 }.ctx(this));
+	  
 
 }
 
-
+hRHomeHeader.prototype.logout=function(){
+	 var input={"payload":{}};
+	 RequestManager.logout(input, function(data,success){
+	  if(success){   
+	   document.location.reload();
+	  }
+	 }.ctx(this));
+	  
+	 
+	}
 
 
 

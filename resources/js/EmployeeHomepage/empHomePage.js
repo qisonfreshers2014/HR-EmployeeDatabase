@@ -22,7 +22,7 @@ empHomePage.prototype.handleShow = function() {
  
  $('#myProfile').click(function(event){
  
-	 App.loadempviewemployee(App.employeeId);
+	App.loadempviewemployee(App.employeeId);
  });
  
  
@@ -48,10 +48,9 @@ empHomePage.prototype.handleShow = function() {
 
 empHomePage.prototype.checkUser = function(jobRole){
  
- $("#hr").hide();
  
- if(jobRole == "1")
- $("#hr").show();
+ if(Boolean(App.hr)&&(!Boolean(App.isDeleted)))
+ $("#menudiv").append(' <a href="#" id="hr" class="tabColor">Admin</a>');
  return true;
 }
 

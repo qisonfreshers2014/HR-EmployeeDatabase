@@ -1,6 +1,6 @@
 #fixedheader {
     background-color: #4c6680;;
-    height: 99%;
+    height: 100%;
     width: 100%;
 }
 
@@ -22,23 +22,20 @@
     top: 56px;
 }
 
-#logout {
+.logoutCorner {
 /*   position:absolute;
     left:1028px;
     top:51px; */
-    color: #0088cc;
     
-    font-size: 20px;
-    left: 920px;
-    position: relative;
-    top: 18px;
+   color: #0088cc;
+  font-size: 20px;
+  left: 910px;
+  position: relative;
+  top: -2px;
 }
-
-#employeeName{
-   color: #ffffff;
-    font-size: 15px;
-    left: 893px;
-    position: relative;
-    top: 11px;
-    
+.tabColor{
+	color:#ffffff;
+}
+.empName{
+     color: #ffffff;  
 }

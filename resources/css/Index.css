@@ -3,6 +3,7 @@ body {
     color: #000000;
     font-family: calibri;
     width: 100%;
+      overflow-x: hidden;
 }
 .header {
 

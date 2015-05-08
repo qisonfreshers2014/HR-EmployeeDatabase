@@ -10,11 +10,11 @@ skill.prototype.handleShow = function() {
 	this.viewSkillDetails();
 	$('#save').click(function(){
 		this.validateSkill();
-		this.validateTrainingAttended();
+		/*this.validateTrainingAttended();
 		this.validateEmpId();
 		this.validateRating();	
 		this.addSkill();
-	 
+	*/ 
 		}.ctx(this));
 	 }
 
@@ -51,78 +51,52 @@ skill.prototype.viewSkillDetails=function(){
 
 
 skill.prototype.validateSkill=function(){
-         var char=/^[A-Za-z]+([A-Za-z]+)*$/;
- 	     var skill= $("#skill").val();
-		 if(skill==""){
-             $("#skillerror1").text("you cannot leave this empty");
-             return false;
+	  var text = document.getElementById("skill").value;
+	  var regex = /^[A-Za-z.]+( [A-Za-z.]+)*$/;
+      var char1=/^[a-zA-Z.]+$/;
+      var char2=/^[a-z A-Z]+$/;
+      var num	= /^[0-9-+]+$/;
+ 	  var skill= $("#skill").val();
+ 	  var empId= $("#empid").val();
+ 	  var training= $("#attended1").val();
+ 	  var rating= $("#rating").val();
+ 	 
+ 		 
+ 		if(skill=="" && training=="" && empId=="" && rating=="" ){
+ 			 alert("Failed to save,since every field is mandatory");
+ 		 }
+ 		 else if(text.charAt(0)==" ")
+		    {
+ 	    	alert("First letter should not enter space");
+		    }
+ 	     else if(skill==""){
+            alert("please enter skill");
+            	  }
+ 	     else if(training==""){
+ 	    	alert("please enter trainingAttended (true/false)");
+ 	     }
+ 	     else if(empId==""){
+ 	    	 alert("please enter Id");
+ 	     }
+ 	    else if(rating==""){
+            alert("please enter rating");
+            	  }
+  	   else if(!(skill.match(regex))){
+			alert("please enter charcter with one space for skill");
 			  }
-		 else if(skill.match(char)){
-			   $("#skillerror1").text("nice format");
-			   return true;
-			  }
-			  else{
-			   $("#skillerror1").text("Enter only one space&characters only");
-               return false;
-			  }
-	}
-skill.prototype.validateTrainingAttended=function(){ 
-	
-	var training= $("#attended1").val();
-	 if(training==""){
-        $("#skillerror2").text("you cannot leave this empty");
-        return false;
-		  }
-	 else if(training.match('[0-9-+]+$')){
-		   $("#skillerror2").text("Enter only characters(true/false) only");
-		   return false;
-		  }
-		  else{
-		   $("#skillerror2").text("");
-          return true;
-		  }
-}
-
-skill.prototype.validateEmpId=function(){ 
-	 var empId= $("#empid").val();
-	 if(empId==""){
-         $("#error1").text("you cannot leave this empty");
-         return false;
-		  }
-	 else if(empId.match('[0-9-+]+$')){
-		   $("#error1").text("");
-		   return false;
-		  }
-		  else{
-		   $("#error1").text("Enter only numbers only");
-           return true;
-		  }
+ 	   else if (!(empId.match(num))){
+ 		   alert("Please enter only numbers for EmpID");
+ 	   }
+ 	   else if(!(rating.match(num))){
+ 		  alert("Please enter only numbers for rating");
+ 	   }
+ 	   else if(!(training.match(char2))){
+ 		   alert("please enter only (true/fase)");
+ 	   }
+ 	
 	 
-}
-
-skill.prototype.validateRating=function(){ 
-	 var rating= $("#rating").val();
-	 if(rating==""){
-        $("#error2").text("you cannot leave this empty");
-        return false;
-		  }
-	 else if(rating.match('[0-9-+]+$')){
-		   $("#error2").text("");
-		   return false;
-		  }
-		  else{
-		   $("#error2").text("Enter only numbers only");
-          
-		  
-	 return true;
-		  }
-}
-	 
-skill.prototype.addSkill = function(){
-	 
-// if(this.validateSkill() || this.validateTrainingAttended() || this.validateEmpId() || this.validateRating()){
-//	 alert("sucess");
-	  var input={"payload":{"skills":$('#skill').val(),"trainingAttended":$('#attended1').val(),
+else{
+	 	  var input={"payload":{"skills":$('#skill').val(),"trainingAttended":$('#attended1').val(),
 			"empId":$('#empid').val(),"rating":$('#rating').val(),
 			  
 			}};
@@ -156,6 +130,7 @@ skill.prototype.addSkill = function(){
 		}.ctx(this));
  
 } 
+}
 skill.prototype.editSkill = function(obj1){
 	 var input = { "payload" : {"id" : obj1} };
 	 RequestManager.getEditSKill(input,function(data,success){

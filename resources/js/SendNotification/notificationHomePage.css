@@ -3,8 +3,8 @@
     color: brown;
 }
 #retriveDataNotification{
-    margin-left: 32%;
-    margin-top: 0%;
+    margin-left: 89%;
+    margin-top: -5%;
 }
 #datedata {
     float: left;
@@ -42,3 +42,8 @@ h3 {
         color:red;
           font-size:20px;
           }
+          
+.thNotification
+{
+	
+}

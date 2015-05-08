@@ -1,11 +1,11 @@
-function Template() {	
+function Template(dataid) {	
 	Loader.loadHTML('.container', 'resources/js/Templates/template.html', true, function(){
-		this.handleShow();
+		this.handleShow(dataid);
 	}.ctx(this));
 }
 
-Template.prototype.handleShow = function() {		
-	var input = {"payload":{"id":34}};
+Template.prototype.handleShow = function(dataid) {		
+	var input = {"payload":{"id":dataid}};
 	RequestManager.getTemplateById(input, function(data, success) {
 
 		if(success){

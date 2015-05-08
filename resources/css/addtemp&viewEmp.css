@@ -1,50 +1,63 @@
 .tableviewEmployee {   margin-left:2%;
-            width: 50%;
-            text-align: left;
-            text-decoration: blink;
+           border: 1px solid white;
+ width: 80%;
+  font-size: 15px;
+ 
+ text-decoration: blink;
         }
         .trviewEmployee  {
-	           height: 100%;
-	 width: 100%;
-	 font-size: 100%;
-	 font-family: Calibri;
-	 backgroung-color:#CCC;
-	        }
+           border: 1px solid #CCC;
+     color: black;
+     font-size: 100%;
+     height: 100%;
+     width: 100%;
+   background-color:#CCC;
+         }
         .thviewEmployee  {
             padding:10px;
-            color: black;
-            backgroung-color:#CCC;
+            border: 1px solid #CCC;
+            background-color:#CCC;
         }
+        .td{
+        border: 1px solid #CCC;
+        background-color:#CCC;
+       }
         .heading {
             margin-left:2%;
             color: brown;
         }
        
-		.editviewEmployee { margin-top:1%;
-		      position:relative;
-			  right:2px;
-			  left:700px;
-			  }
-	  .container{
-                 background-color:lightgray;
+  .editviewEmployee { margin-top:1%;
+        position:relative;
+     right:2px;
+     left:700px;
+     }
+   .container{
+                  background-color: #FFF; 
                 }
      
-            
+            .leftContainer {
+  background-color: #FFF; 
+
+}
+          .rightContainer{
+ background-color: #FFF; 
+}
             
      #fieldsaddTemplate {
-	          border:1px solid black;
-	         padding:10px;
-	         text_align=center;
-	           font-weight:bold;
+          
+          padding:10px;
+          text_align=center;
+            font-weight:bold;
              }
            
-     .mandatory {
-	       color:red;
-	         font-size:20px;
+     .startemplate {
+        color:red;
+          font-size:20px;
           }
           
      #align {
-           margin-left:4%;
+           margin-left:4.3%;
      }
     
    .inputelement
@@ -52,4 +65,3 @@
            font-size:15px;
              font-weight: bold;
             }
-          

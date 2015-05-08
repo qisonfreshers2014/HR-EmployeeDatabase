@@ -6,6 +6,7 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import com.hred.exception.AllHandsMeetingException;
@@ -84,20 +85,9 @@ public class AllHandsMeetingDAOImpl extends BaseDAOImpl implements AllHandsMeeti
 				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 			}
 			
-			/*String hql = "SELECT fromDate, toDate, description FROM Holiday WHERE type ="+ holiday.getType();
-			Query query = session.createQuery(hql);
-			list = query.list();
 			
-			if(list.size()==0){
-				try {
-					throw new BusinessException(ExceptionCodes.HOLIDAYSID_DOESNOT_EXIST,ExceptionMessages.HOLIDAYSID_DOESNOT_EXIST);
-				} catch (BusinessException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}*/
 			Criteria createCriteria = session.createCriteria(AllHandsMeeting.class);
-			
+			createCriteria.addOrder(Order.desc("date"));
 			list = (List<AllHandsMeeting>)createCriteria.list();
 		} finally {
 			try {
@@ -115,16 +105,9 @@ public class AllHandsMeetingDAOImpl extends BaseDAOImpl implements AllHandsMeeti
 	}
 
 
-	//@Override
-/*	public AllHandsMeeting getAllHandsMeetingById(int id)
-			throws AllHandsMeetingException {
-		// TODO Auto-generated method stub
-		return null;
-	}*/
 
 	
 
 
 	
 }
-

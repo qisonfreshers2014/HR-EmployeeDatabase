@@ -1,11 +1,19 @@
-h3{
- 	color:brown;
- 	margin-left:3%;
+#desHeading
+{
+  font-size:20px;
+  color:brown;
+  font-weigt:bold;
+  margin-left:3%;
+  margin-top:1%;
+  margin-bottom:1%;
+  font-family:calibri;
+
 }
-#desigantionform
+
+.desigantionform
 {
 	background-color: lightgray; 
-	width:60%;
+	width:57%;
 	height:100%;
 	margin-left:3%;
 	font-family:calibri;
@@ -18,46 +26,39 @@ h3{
 	margin-left:3%;
 	font-family:calibri;
 }
-.star1{color:red; font-size:20px;}
+.mandatoryStar{color:red; font-size:12px;}
 
 .ui-datepicker {
     background: #CCC;
     border: 1px solid #66F;
     color: #000;
 }
-.inputelement
-{
-	font-size:12px;
-	font-weight: bold;
-	width:100%;
+.desTable {
+  border: 0px solid black ;
+  border-collapse: separate;
+  background-color: lightgray;
 }
+
+.desColumn {
+  border: 0px solid black ;
+  background-color: lightgray;
+  padding: 19px;
+}
+.desHead
+{
+ text-align:left;
+ background-color: lightgray;
+ border: 0px solid black ;
+}
+
 .errorMessage
 {color:red; font-size:11px;}
 
-.alignInputDOJ
-{margin-left:8%;}
-
-.alignInputName
-{margin-left:21%;}
-
-.alignInput
-{margin-left:20%;}
-
-#isDesignationEmpty
-{
-	float:right;
-	margin-right:23%;
+.container {
+    background-color: #fff;
 }
-.alignInputSave
-{margin-left:40%;}
-
-#isVPEmpty
-{
-	float:right;
-	margin-right:28%;
-}
-table
+.appraisalTable
 {font-size:12px}
-th{
+.DesHeadColr{
  background-color:#7094b8;
 }

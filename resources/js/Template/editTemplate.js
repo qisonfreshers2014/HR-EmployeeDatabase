@@ -6,6 +6,11 @@ function editTemplate(dataid) {
 editTemplate.prototype.handleShow=function(dataid){
 	$('.container').show();
 	
+	
+	$('textarea#templateContent').ckeditor({
+		  filebrowserImageUploadUrl :'/UploadServletForCKEditor',
+		  filebrowserUploadUrl : '/UploadServletForCKEditor'
+		 });
 	$('textarea#templateContent').ckeditor(function(){
 		
 		this.EditTemplateDetails(dataid);
@@ -54,20 +59,34 @@ editTemplate.prototype.editTemplateDetailsById=function(dataid){
 //	alert(4);
 	var articleDesc = $('textarea#templateContent').val();//CKEDITOR.instances.templateContent.getData();
 	var regex = /^[A-Za-z]+( [A-Za-z]+)*$/;
-	 if($('.templatename').val()==""||$('.subject').val()==""||articleDesc=="")
-	 {
-    	alert("failed to add,since every field is mandatory");
-    }else
+	
+	var subjectRegex=/^[A-Za-z0-9.,"]+( [A-Za-z]+)*$/;
+	
+	
+	 if($('.templatename').val()==""){
+		 alert("Please Enter Template Name");
+	 }else if($('.subject').val()==""){
+		 alert("Please Enter Subject");
+	 }
+	 else if(articleDesc==""){
+		 alert("Please Enter Description");
+	 }	 
 	 
-	 if(!($('.templatename').val()).match(regex))
+	 
+	 else if($('.templatename').val().charAt(0)==" "||$('.subject').val().charAt(0)==" "){
+		 alert("Please don't enter space as First letter");
+	 }
+	 else if(!($('.templatename').val()).match(regex))
 		 {
-		 alert("Enter valid name ");
+		 alert("Please enter only characters with one space for templatename");
 		 }
-	 else{
-		 
-		 if($('.templatename').val().length<2){
+	 	 
+	 else if($('.templatename').val().length<2){
 			 alert("Invalid length -minimum 2 characters needed!(Upto 40) ");
 		 }
+	 else if(!($('.subject').val()).match(subjectRegex)){
+		 alert("Please enter only Characters and Numbers with one space for subject");
+	 }
 		 else{
     var input ={"payload":{"id":dataid,"name":$('.templatename').val(),"subject":$('.subject').val(),"content":articleDesc}};
     RequestManager.editTemplateDetails(input, function(data, success)
@@ -75,12 +94,14 @@ editTemplate.prototype.editTemplateDetailsById=function(dataid){
     	//alert(5);
         if(success){
          alert("Successfully Inserted");
+         $('.templatename').val("");
+         $('.subject').val("");
+         $('textarea#templateContent').val("");
+        
         }
         else{
          alert("Failed to Add");
         }
     }.ctx(this));
 		 }
-}
-
 }

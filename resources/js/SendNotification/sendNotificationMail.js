@@ -74,7 +74,7 @@ console.log(modifiedcontent);
 
 
 		//Checking the event and accordingly displaying the data 
-		if (event == "Aniversary") {
+		if (event == "Anniversary") {
 			var send = '<select  id="sendtoDdbNotification"><option>'+employeeName+' (' + email + ') </option></select>';
 //Apending the name in the To drop  down
 		 $("#sendToNotification").append(send);

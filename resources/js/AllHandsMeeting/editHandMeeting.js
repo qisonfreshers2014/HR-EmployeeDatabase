@@ -12,7 +12,7 @@ editHandMeeting.prototype.handleShow=function(dataid){
 			   maxDate:new Date(2050,12,31)});
 
 		
-		$('#update').click(function(){
+		$('#updateAllHand').click(function(){
 			//alert(1);
 			
 			this.editAllHandsMeetingById(dataid);
@@ -56,22 +56,33 @@ editHandMeeting.prototype.EditHandMeetingDetails=function(dataid){
 	 
 }
 editHandMeeting.prototype.editAllHandsMeetingById=function(dataid){
-	
+	var dateformat=/^\d{4}-\d{2}-\d{2}$/;
 	var regex = /^[A-Za-z]+( [A-Za-z]+)*$/;
-	 if($('#datepicker').val()==""||$('#editemployee').val()==""||$('#editdescription').val()==""){
-	     	alert("failed to add,since every field is mandatory");
-	     }else
-	    	 
-	    	 if(!($('#editemployee').val()).match(regex))
+	
+	
+	
+	
+	if($('#datepicker').val()==""){
+		 alert("Please Enter Date");
+	 }else if($('#editemployee').val()==""){
+		 alert("Please Enter Employee Of the Month");
+	 }
+	 else if($('#editdescription').val()==""){
+		 alert("Please Enter Description");
+	 }
+	 else if(!($('#datepicker').val()).match(dateformat)){
+    	 alert("Please enter Date in yyyy-mm-dd Format");
+     }
+	
+	else  if(!($('#editemployee').val()).match(regex))
 	    		 {
-	    		 alert("Enter valid name ");
+	    		 alert("Please enter only characters and one space between two words for Employee Of the Month");
 	    		 }
 	    	 else 
-	    		 {
 	    		 if($('#editemployee').val().length<2)
 	    		 {
 	    		
-		 alert("Invalid length -minimum 2 characters needed!(Upto 30) ");
+		 alert("Invalid length minimum 2 characters needed!(Upto 30)");
 	    	 	}
 	 
 	 	 else{
@@ -82,6 +93,9 @@ editHandMeeting.prototype.editAllHandsMeetingById=function(dataid){
     	//alert(5);
         if(success){
          alert("Successfully Updated");
+         $('#datepicker').val("");
+         $('#editemployee').val("");
+         $('#editdescription').val("");
         }else if(data.code == 204){
         	alert("Failed to update..Date already exists");
         }
@@ -91,4 +105,3 @@ editHandMeeting.prototype.editAllHandsMeetingById=function(dataid){
     }.ctx(this));
 	 }	
 	    		 }
-}

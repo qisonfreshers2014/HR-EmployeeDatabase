@@ -8,19 +8,22 @@ App.prototype.handleShow = function() {
 	this.contactNo = "";
 	this.gender = "";
 	this.employeeId = "";
+	 this.hr = "";
+	 this.isDeleted = "";
 }
 
-App.prototype.loadTemplate = function() {
-	Loader.loadTemplate();
-}
+App.prototype.loadTemplate = function(dataid) {
+	 Loader.loadTemplate();
+	}
 App.prototype.loadempviewemployee=function(employeeId){
 	 Loader.loadempviewemployee(function(){
 	  new empViewemployee(employeeId);
 	 });
 	 }
-App.prototype.loadEmployee = function(gender, contactNo) {
+App.prototype.loadEmployee = function(gender, contactNo,employeeId) {
 	this.gender = gender;
 	this.contactNo = contactNo;
+	this.employeeId=employeeId;
 	Loader.loadEmployee();
 }
 App.prototype.loadFooter = function() {
@@ -28,11 +31,12 @@ App.prototype.loadFooter = function() {
 		new footer();
 	});
 }
-App.prototype.loadEmployeePage = function(name, jobRole) {
-	this.userName = name;
-	this.jobRole = jobRole;
-	Loader.loadEmployeePage();
-}
+App.prototype.loadEmployeePage = function(name, hr,isDeleted) {
+	 this.userName = name;
+	 this.hr = hr;
+	 this.isDeleted=isDeleted;
+	 Loader.loadEmployeePage();
+	}
 
 App.prototype.loadAddTemplate = function() {
 	Loader.loadCkeditor();

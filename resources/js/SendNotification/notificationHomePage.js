@@ -18,8 +18,7 @@ loadNotificationHomePage.prototype.handleShow = function(data) {
 		var year = res.getFullYear();
 		var month = res.getMonth() + 1;
 		var dd = res.getDate();
-		console.log(item.status);
-
+		
 		out = '<tr><td id="name">' + item.employeeName + '</td><td>' + year
 				+ '-' + month + '-' + dd + '</td>' + '<td>' + item.event
 				+ '</td><td>' + item.employeeEmail + '</td><td>' + item.status
@@ -41,6 +40,14 @@ loadNotificationHomePage.prototype.handleShow = function(data) {
 	});
 
 
+	$("#eventsNotification").change(function() {
+		var selectedEvent = $("#eventsNotification").val();
+		var input = {
+				"payload" : {"selectedEvent" : selectedEvent,
+				
+							}	};
+		this.getdisplayedata(input);
+	}.ctx(this));
 	$("#retriveDataNotification").click(function() {
 		this.eventChangeCriteria();
 	}.ctx(this));
@@ -73,22 +80,37 @@ loadNotificationHomePage.prototype.eventChangeCriteria = function() {
 	var selectedEvent = $("#eventsNotification").val();
 	var fromDate = $("#fromDateNotification").val();
 	var toDate = $("#toDateNotification").val();
-	
+	console.log(fromDate);
+	console.log(toDate);
+
+
+
+	var dateformat = /^(19|20)\d\d-(0\d|1[012])-(0\d|1\d|2\d|3[01])$/;
+
+	  
 	   var fromdatevalidation=new Date(fromDate);
 	   var todatevalidation=new Date(toDate);
 	   
 	   if(fromdatevalidation>todatevalidation )
 	   {
-	   alert("To date should not be greater than the from date")
+	   alert("From date should not be greater than the To date")
+	   this.currentMonthEvents();
 	   }
 	   else if(fromDate =="" || toDate =="")
 	     {
 	   alert("Enter the Criteria dates")
+	   this.currentMonthEvents();
+	     }
+	
+	    else if(!fromDate.match(dateformat) || !toDate.match(dateformat) )
+	   {
+	  alert("Invalid Date,Date Formate should be yyyy-mm-dd")
+	   this.currentMonthEvents();
 	   }
 	   else
 		   { 
 			
-	
+
 	var input = {
 		"payload" : {"selectedEvent" : selectedEvent,
 			"todate" : toDate,
@@ -96,63 +118,93 @@ loadNotificationHomePage.prototype.eventChangeCriteria = function() {
 					}
 	};
 	
+this.getdisplayedata(input);
 
 
-	RequestManager
-			.getNotificationDisplayCriteria(
-					input,
-					function(data, success) {					
-						if (success) {					
-							
-							var i;
-							var out = '<table border="1" class="table table-hover" id="displayData1"><tbody><tr><th>Employee Name</th><th>Event Date</th><th>Event</th><th>Email ID</th><th>Status</th><th>Action</th></tr>'
-							for (i = 0; i < data.length; i++) {
-								var item = data[i];
-								var value = item.date;
-								var res = new Date(value);
-								var year = res.getFullYear();
-								var month = res.getMonth() + 1;
-								var dd = res.getDate();
-								out += '<tr><td id="name">' + item.employeeName
-										+ '</td><td>' + year + '-' + month
-										+ '-' + dd + '</td>' + '<td>'
-										+ item.event + '</td><td>'
-										+ item.employeeEmail + '</td><td>'
-										+ item.status + '</td>';
-								if (item.status == "Not Sent") {
-									out += '<td><input type="button" value="Send"  class="dynamicSend btn btn-primary btn-md"/></td></tr>';
-								} else {
-									out += '<td></td></tr>';
-								}
-
-								document.getElementById("dataTableNotification").innerHTML = out;
-							}
-							$('.dynamicSend').on(
-									'click',
-									function() {
-
-										var employeeName = ($(this).parent()
-												.parent().find('td:first')
-												.text());
-										var event = ($(this).parent().parent()
-												.find('td:eq(2)').text());
-										var email = ($(this).parent().parent()
-												.find('td:eq(3)').text());
-										console.log(event);
-										console.log(email);
-				          				console.log(employeeName);
-										App.loadManualMail(event, email,
-												employeeName);
-
-									});
-						
-							
-						}
-						else
-							{
-							alert(data.code+" "+data.message)
-							}
-
-					}.ctx(this));
 		   }
 }
+
+
+
+loadNotificationHomePage.prototype.currentMonthEvents = function() {
+	var input={};
+	RequestManager.getAllEvents(input, function(data, success) {
+		if (success) {		
+		
+							App.loadNotificationHomePage(data);
+				}
+	else
+		{
+		App.loadNotificationHomePage(data);
+		alert("No Data Found");
+				}
+	
+	}.ctx(this));
+	
+	
+	
+}
+
+
+
+loadNotificationHomePage.prototype.getdisplayedata = function(input) {
+	RequestManager
+	.getNotificationDisplayCriteria(
+			input,
+			function(data, success) {					
+				if (success) {					
+					
+					var i;
+					var out = '<table border="1" class="table table-hover" id="displayData1"><tbody><tr><th class="thNotification">Employee Name</th><th class="thNotification">Event Date</th><th class="thNotification">Event</th><th class="thNotification">Email ID</th><th class="thNotification">Status</th><th class="thNotification">Action</th></tr>'
+					for (i = 0; i < data.length; i++) {
+						var item = data[i];
+						var value = item.date;
+						var res = new Date(value);
+						var year = res.getFullYear();
+						var month = res.getMonth() + 1;
+						var dd = res.getDate();
+						out += '<tr><td id="name">' + item.employeeName
+								+ '</td><td>' + year + '-' + month
+								+ '-' + dd + '</td>' + '<td>'
+								+ item.event + '</td><td>'
+								+ item.employeeEmail + '</td><td>'
+								+ item.status + '</td>';
+						if (item.status == "Not Sent") {
+							out += '<td><input type="button" value="Send"  class="dynamicSend btn btn-primary btn-md"/></td></tr>';
+						} else {
+							out += '<td></td></tr>';
+						}
+
+						document.getElementById("dataTableNotification").innerHTML = out;
+					}
+					$('.dynamicSend').on(
+							'click',
+							function() {
+
+								var employeeName = ($(this).parent()
+										.parent().find('td:first')
+										.text());
+								var event = ($(this).parent().parent()
+										.find('td:eq(2)').text());
+								var email = ($(this).parent().parent()
+										.find('td:eq(3)').text());
+								console.log(event);
+								console.log(email);
+		          				console.log(employeeName);
+								App.loadManualMail(event, email,
+										employeeName);
+
+							});
+				
+					
+				}
+				else
+					{
+					alert(data.code+" "+data.message);
+				this.currentMonthEvents();
+					}
+
+			}.ctx(this));
+	
+}
+

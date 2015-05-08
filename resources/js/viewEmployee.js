@@ -3,10 +3,14 @@ function ViewEmployee(empid) {
   this.handleShow(empid);
  }.ctx(this));
 }
-
+$('.container').show();
 ViewEmployee.prototype.handleShow = function(empid) {
- $('.container').show();
-this.viewEmployeedetails(empid);
+ var contentinput= {"payload":{}};
+ RequestManager.getDesignationName(contentinput,function(desdata, success) {
+      if (success) {
+       this.viewEmployeedetails(empid,content, status,desdata);
+      }
+ }.ctx(this));
 
  $('#Editdetails').click(function(){
   
@@ -25,15 +29,14 @@ this.viewEmployeedetails(empid);
   
 
  }
-ViewEmployee.prototype.viewEmployeedetails=function(empid){
- 
-       
+ViewEmployee.prototype.viewEmployeedetails=function(empid,content, status,desdata){
+
  var input= {"payload":{"employeeId":empid}};
 
 RequestManager.viewEmployeedatails(input, function(data, success) {
  if(success){
-	 
- 
+  
+ alert(data.filePath);
  var obj=data[0];
  
  var dobformat = new Date(obj.dateOfBirth);
@@ -46,6 +49,18 @@ RequestManager.viewEmployeedatails(input, function(data, success) {
    var dojmonth = dojformat.getMonth()+1;
    var dojdate = dojformat.getDate();
   
+   // Retrieving designation 
+   var desName;
+   var desId = obj.currentDesignation;
+   
+   for (var j = 0; j < desdata.length; j++) {
+    var desTypeObj = desdata[j];
+     if (desId == desTypeObj.id) {
+      desName = desTypeObj.name;
+      break;
+     }
+   }
+   
  $('#eid').val(obj.employeeId);
  $('#name').val(obj.employeeName);
  $('#gender').val(obj.gender);
@@ -61,7 +76,7 @@ RequestManager.viewEmployeedatails(input, function(data, success) {
  $('#contactname').val(obj.emergencyContactName);
  $('#relation').val(obj.relationWithEmergencyConatact);
  $('#blood').val(obj.bloodGroup);
- $('#designation').val(obj.currentDesignation);
+ $('#designation').val(desName);
  $('#variable').val(obj.variableComponent);
  $('#qual').val(obj.highestQualification);                            
  $('#pannum').val(obj.pan);

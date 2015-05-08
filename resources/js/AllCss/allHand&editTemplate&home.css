@@ -56,7 +56,7 @@
 #fieldsaddtemplate,#fieldsaddhandsmeeting {
  /* border:1px solid black;*/
  padding:10px; 
- text_align:center;
+
  font-weight:bold;
  color:black;
   background-color: lightgray;
@@ -65,24 +65,30 @@
  color:brown;
 margin-top: 3%;
 }
-.star1{
+
+.tableHeading {
+  margin-left: 4%;
+   color:brown;
+margin-top: 3%;
+}
+.mandatoryStar{
 	  color: red;
-    font-size: 15px;
-    position: absolute;
-    top: 95px;
+    font-size: 21px;
+ 
 }
-.star2{ 
-	color: red;
-    font-size: 15px;
-    position: absolute;
-    margin-top: -5px;
-	
+.editAllHand{
+	margin-top:0.5%;
 }
-.star3{
-	color: red;
-    font-size: 15px;
-      position: absolute;
-        margin-top: -5px;
+
+.templatename{
+	margin-left: 0.9%;
+}
+
+#tempsubject{
+	margin-left:6.5%;
+}
+.templateContent{
+	width:80%;
 }
  .container{
    background-color:white;
@@ -90,21 +96,26 @@ margin-top: 3%;
   }
   .submit2{
     margin-left: 50%;
+     margin-bottom: 2%;
   }
   .submit1{
     margin-left: 25%;
   }
 /*  view all hands meeting  */
-table,td,th {
-         border:1px solid black;
+.displayData{
+	
+      margin-left: 5%;
+    width: 90%;
+     border:1px solid black;
          border-collapse:collapse;
 }
-td {
-/*  background-color:lightgary; */
- color:black;
+
+
+td{
+	 color:black;
 }
 
-th {
+.theader {
  background-color:#7094b8;
  color:black;
 }
@@ -113,10 +124,11 @@ th {
  font-size:15px;
  font-weight: bold;
 }
-#tempsubject{
-	margin-left: 4%;
-}
+
 .datepicker{
-	margin-left: 6.6%;
+	margin-left: 9.5%;
 }
 
+#editdescription,#description{
+	margin-left: 8.5%;
+}

@@ -75,18 +75,18 @@ public class Employee extends AbstractObject {
  private String variableComponent;
  @Column(name="Salary")
  private String salary;
- @Column(name="File_Path")
- private String filePath;
- 
- public String getFilePath() {
-  return filePath;
- }
+ @Column(name="file_id")
+ private int fileId;
 
- public void setFilePath(String filePath) {
-  this.filePath = filePath;
- }
+public int getFileId() {
+	return fileId;
+}
 
- public String getSkill() {
+public void setFileId(int fileId) {
+	this.fileId = fileId;
+}
+
+public String getSkill() {
   return skill;
  }
 

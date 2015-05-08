@@ -6,7 +6,9 @@ function TemplateList() {
 TemplateList.prototype.handleShow = function() {
 
 	
-	$("#add").click(function(){ 
+	
+	$("#btnadd").click(function(){ 
+		alert("fxbxfb");
 		
 		App.loadAddTemplate();
 		
@@ -23,8 +25,8 @@ TemplateList.prototype.getTemplateName=function(){
 			  $.each(data,function(obj, value){
 					//  var obj = data[i];
 
-						//$('#displayData').append('<table></table>');
-						$('#displayData ').after("<td>"+value.name+"</td><td><input type='button' value='Edit' id='"+value.id+"' class='dynamicEdit'  class='btn btn-primary btn-md'></td><td><input type='button' value='View' id='"+value.id+"' class='dynamicView' class='btn btn-primary btn-md'></td>");
+						$('#displayData').append('<table><tbody></tbody></table>');
+						$('#displayData tr:last').after("<tr class='tr'><td>"+value.name+"</td><td><input type='button' value='Edit' id='"+value.id+"' class='dynamicEdit'  class='btn btn-primary btn-md'></td><td><input type='button' value='View' id='"+value.id+"' class='dynamicView' class='btn btn-primary btn-md'></td></tr></table>");
 			  });	
 		$('.dynamicEdit').click(function(event){
 			//console.log(event);

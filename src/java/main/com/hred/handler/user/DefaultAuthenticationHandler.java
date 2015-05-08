@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.TimeZone;
 import java.util.regex.Pattern;
 
+import com.hred.common.Constants;
 import com.hred.common.EncryptionFactory;
 import com.hred.common.Utils;
 import com.hred.common.cache.Cache;
@@ -19,6 +20,7 @@ import com.hred.exception.ObjectNotFoundException;
 import com.hred.exception.SystemException;
 import com.hred.exception.UserException;
  
+import com.hred.model.DesignationType;
 import com.hred.model.Employee;
 import com.hred.model.User;
 import com.hred.model.UserSessionToken;
@@ -99,17 +101,19 @@ public class DefaultAuthenticationHandler implements AuthenticationHandler {
 		userSessionToken.setUserEmail(emp.getEmail());
 		userSessionToken.setUserId(emp.getId());
 		userSessionToken.setUserSessionId(sessionToken);
+		DesignationType desig = (DesignationType)daoFactory.getDesignationTypeDAO().getDesignationByID(emp);
 		
+		Boolean roleHr=desig.getName().equalsIgnoreCase(Constants.ALL_VIEW);
 		
 		//userSessionToken.setRoleName(emp.getCurrentDesignation());  //set the role here
 		//////////////////////////////////////////
-		
+	
 		////////////////////////////////////////////
 		Cache cache = CacheManager.getInstance().getCache(CacheRegionType.USER_SESSION_CACHE);
 		cache.put(sessionToken, userSessionToken);
 		System.out.println("Session Token : "+sessionToken);		
 		System.out.println("Cached : "+cache.getValue(sessionToken));
-		AuthenticationOutput authenticationOutput = new AuthenticationOutput(sessionToken, authStatus, emp);
+		AuthenticationOutput authenticationOutput = new AuthenticationOutput(sessionToken, authStatus, emp,roleHr);
 	return authenticationOutput;
 	}
 	else

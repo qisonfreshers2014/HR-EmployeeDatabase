@@ -1,7 +1,7 @@
 var fileId;
 function AddEmployee() {
-	Loader.loadHTML(".container", "resources/js/employee/addemp.html",
-			true, function() {
+	Loader.loadHTML(".container", "resources/js/employee/addemp.html", true,
+			function() {
 				this.handleShow();
 			}.ctx(this));
 }
@@ -43,13 +43,43 @@ AddEmployee.prototype.handleShow = function() {
 		this.validateEmp();
 
 	}.ctx(this));
-	
+
 	$('#reset').click(function(e) {
 		e.preventDefault();
 		$('.error').css('visibility', 'hidden');
+		$("#eid").val("");
+		$("#name").val("");
+		$("#qual").val("");
+		$("#fathername").val("");
+		$("#pfnum").val("");
+		$("#pannum").val("");
+		$("#accountnum").val("");
+		$("#contnum").val("");
+		$("#txtemercon").val("");
+		$("#txtemname").val("");
+		$("#currentaddr").val("");
+		$("#peraddr").val("");
+		$("#relation").val("");
+		$("#yearexp").val("");
+		$("#skill").val("");
+		$("#rating").val("");
+		$("#skype").val("");
+		$('designation').val("");
+		$('#dob').val("");
+		$('#doj').val("");
+		$("#emal").val("");
+		$("#password").val("");
+		$('#blood').val("");
+		$("#salary").val("");
+		$('#variable').val("");
+		$('#designation').val("");
+		$('#gender').val("");
 
 	}.ctx(this));
 
+	var pannum = $("#pannum").val();
+	var panerr = $("#panerr");
+	var letters = /^[0-9a-zA-Z]+$/;
 }
 AddEmployee.prototype.uploadMedia = function(callback) {
 	var allowedFileType = "image";
@@ -71,11 +101,12 @@ AddEmployee.prototype.uploadMedia = function(callback) {
 // validating each employee field
 AddEmployee.prototype.validateEmp = function() {
 	var char = /^[A-Za-z]+( [A-Za-z]+)*$/;
-	var qual = /^[a-zA-Z.""]+$/;
+	var qual = /^[a-zA-Z0-9.""]+$/;
 	var num = /^[0-9]+$/;
 	var mail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 	var illegalChars = /\W/
 	var letters = /^[0-9a-zA-Z]+$/;
+	// var pfchar = /^[0-9]+(/[0-9]+)*$/;
 	var err = $("#eiderr");
 	var eid = $("#eid").val();
 	var nameerr = $("#nameerr");
@@ -97,7 +128,7 @@ AddEmployee.prototype.validateEmp = function() {
 	var txtemname = $("#txtemname").val();
 	var emnameerr = $("#emnameerr");
 	var mail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-	var pwepattern = /^[a-zA-Z0-9_-]{8,15}$/;
+	var pwepattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}/;
 	var pwderr = $("#pwderr");
 	var salerr = $("#salerr");
 	var salary = $("#salary").val();
@@ -123,13 +154,14 @@ AddEmployee.prototype.validateEmp = function() {
 	var skype = $('#skype').val();
 	var skypeerr = $('#skypeerr');
 	var dob = $('#dob').val();
-	// var adob = $('#adob').val();
 	var doj = $('#doj').val();
 	var file = $('#filename').val();
 	var variable = $('#variable').val();
+	var variableerr = $('#variableerr');
 	var Gender = $("#gender option:selected").val();
 	var bloodGroup = /^(A|B|AB|O|0)(\+|-)+$/;
-
+	var salry = /^\d{0,10}(?:\.\d{0,2})?$/;
+	var dateformat = /^(19|20)\d\d-(0\d|1[012])-(0\d|1\d|2\d|3[01])$/;
 	var flag = true;
 
 	if (blood == "" || eid == "" || name == "" || qualification == ""
@@ -141,24 +173,42 @@ AddEmployee.prototype.validateEmp = function() {
 		$('.error').css('visibility', 'visible');
 
 		/*
-		 * if (file == "") { $('#fileerr').text('please upload image
-		 * only').css('color', 'red'); } else {
-		 * $('#fileerr').text('ok').css('color', 'green'); }
+		 * if (file == "") { $('#fileerr').text(""); } else {
+		 * $('#fileerr').text('please upload image only').css('color', 'red'); }
 		 */
 
-		// $('.dateerr').text('please input the date').css('color', 'red');
+		if (dob == "") {
+			$('#dateerr').text('please enter the DOB').css('color', 'red');
+		} else if (!(dob.match(dateformat))) {
+			$('#dateerr').text('please enter in the format of YYYY-MM-DD').css(
+					'color', 'red');
+		} else {
+			$('#dateerr').text("");
+			// $('#dateerr').css("color", "green");
+		}
+		if (doj == "") {
+			$('#dojerr').text('please enter the DOJ').css('color', 'red');
+
+		} else if (!(doj.match(dateformat))) {
+			$('#dojerr').text('please enter in the format of YYYY-MM-DD').css(
+					'color', 'red');
+		} else {
+			$('#dojerr').text("");
+			// $('.dojerr').css("color", "green");
+		}
+
 		if (skype == "") {
 			$(skypeerr).text("required field");
 			$(skypeerr).css("color", "red");
-		} else if (!(skype.match(char))) {
+		} else if (!(skype.match(qual) || skype.match(letters))) {
 			$(skypeerr).text("please enter a valid skype ID");
 			$(skypeerr).css("color", "red");
-		} else if (!(skype.length > 6)) {
+		} else if (!(skype.length > 5)) {
 			$(skypeerr).text("please enter minimum 6 letters");
 			$(skypeerr).css("color", "red");
 		} else {
-			$(skypeerr).text("ok");
-			$(skypeerr).css("color", "green");
+			$(skypeerr).text("");
+			// $(skypeerr).css("color", "green");
 
 		}
 
@@ -166,26 +216,26 @@ AddEmployee.prototype.validateEmp = function() {
 			$(blodderr).text("required field");
 			$(blodderr).css("color", "red");
 		} else if (!(blood.match(bloodGroup))) {
-			$(blodderr).text("please enter a valid blood group");
+			$(blodderr).text("please enter a valid blood group ex:AB+, AB-");
 			$(blodderr).css("color", "red");
 		} else if (!(blood.length < 4)) {
 			$(blodderr).text("please enter 3 char only");
 			$(blodderr).css("color", "red");
 		} else {
-			$(blodderr).text("ok");
-			$(blodderr).css("color", "green");
+			$(blodderr).text("");
+			// $(blodderr).css("color", "green");
 
 		}
 
 		if (eid == "") {
-			$(err).text("required field").show();
+			$(err).text("required field");
 			$(err).css("color", "red");
 		} else if (!(eid.match(num) || eid == isNaN)) {
 			$(err).text("EID accepts numbers only");
 			$(err).css("color", "red");
 		} else {
-			$(err).text("ID looks great");
-			$(err).css("color", "green");
+			$(err).text("");
+			// $(err).css("color", "green");
 
 		}
 
@@ -195,24 +245,24 @@ AddEmployee.prototype.validateEmp = function() {
 		} else if (!(name.match(char) || name == isNaN)) {
 			$(nameerr).text("min length 6, accept char only");
 			$(nameerr).css("color", "red");
-		} else if (name < 5) {
+		} else if (name.length < 5) {
 			$(nameerr).text("please enter min 6 chars");
 			$(nameerr).css("color", "red");
 		} else {
-			$(nameerr).text("name looks Great");
-			$(nameerr).css("color", "green");
+			$(nameerr).text("");
+			// $(nameerr).css("color", "green");
 
 		}
 
 		if (qualification == "") {
 			$(nerr).text("required field");
 			$(nerr).css("color", "red");
-		} else if (!(qualification.match(qual) || qualification == isNaN)) {
+		} else if (!(qualification.match(qual) || qualification.match(char))) {
 			$(nerr).text("please check the qualification");
 			$(nerr).css("color", "red");
 		} else {
-			$(nerr).text("nice qualification");
-			$(nerr).css("color", "green");
+			$(nerr).text("");
+			// $(nerr).css("color", "green");
 
 		}
 
@@ -223,8 +273,8 @@ AddEmployee.prototype.validateEmp = function() {
 			$(emlerr).text("please enter a valid email address");
 			$(emlerr).css("color", "red");
 		} else {
-			$(emlerr).text("nice email id");
-			$(emlerr).css("color", "green");
+			$(emlerr).text("");
+			// $(emlerr).css("color", "green");
 
 		}
 
@@ -234,41 +284,51 @@ AddEmployee.prototype.validateEmp = function() {
 		} else if (!(fathername.match(char) || fathername == isNaN)) {
 			$(fathererr).text("enter characters only");
 			$(fathererr).css("color", "red");
-		}else if (fathername < 5) {
+		} else if (fathername < 5) {
 			$(fathererr).text("please enter min 6 characters ");
 			$(fathererr).css("color", "red");
-		}
-		else {
-			$(fathererr).text("nice name");
-			$(fathererr).css("color", "green");
+		} else {
+			$(fathererr).text("");
+			// $(fathererr).css("color", "green");
 
 		}
 
-		/*
-		 * if (pannum == "") { $(panerr).text("required field");
-		 * $(panerr).css("color", "red"); } else if (pannum == isNaN ||
-		 * !(pannum.match(letters))) { $(panerr).text("PAN accepts both char and
-		 * numbers"); $(panerr).css("color", "red"); } else if (!(pannum.length ==
-		 * 10)) { $(panerr).text("please enter 10 letters only");
-		 * $(panerr).css("color", "red"); } else { $(panerr).text("ok");
-		 * $(panerr).css("color", "green"); }
-		 * 
-		 * if (pfnum == "") { $(pferr).text("required field");
-		 * $(pferr).css("color", "red"); } else if (pfnum == isNaN ||
-		 * !(pfnum.match(letters))) { $(pferr).text("PF accepts both char and
-		 * numbers"); $(pferr).css("color", "red"); } else if (!(pfnum.length ==
-		 * 18)) { $(pferr).text("please enter 18 letters only");
-		 * $(pferr).css("color", "red"); } else { $(pferr).text("ok");
-		 * $(pferr).css("color", "green"); }
-		 * 
-		 * if (accountnum == "") { $(acterr).text("required field");
-		 * $(acterr).css("color", "red"); } else if (accountnum == isNaN ||
-		 * !(accountnum.match(num))) { $(acterr).text("only numbers allowed");
-		 * $(acterr).css("color", "red"); } else if (!(accountnum.length == 15)) {
-		 * $(acterr).text("please enter 15 digits only"); $(acterr).css("color",
-		 * "red"); } else { $(acterr).text("ok"); $(acterr).css("color",
-		 * "green"); }
-		 */
+		if (pannum == "") {
+			$(panerr).text("");
+		} else if (pannum == isNaN || !(pannum.match(letters))) {
+			$(panerr).text("please enter a valid pan");
+			$(panerr).css("color", "red");
+		} else if (!(pannum.length == 10)) {
+			$(panerr).text("please enter 10 letters only");
+			$(panerr).css("color", "red");
+		} else {
+			$(panerr).text("");
+			// $(panerr).css("color", "green");
+		}
+		if (pfnum == "") {
+			$(pferr).text("");
+		} else if (pfnum == isNaN || !(pfnum.match(num))) {
+			$(pferr).text("please enter a valid pf number");
+			$(pferr).css("color", "red");
+		} else if (!(pfnum.length == 16)) {
+			$(pferr).text("please check the pf format");
+			$(pferr).css("color", "red");
+		} else {
+			$(pferr).text("");
+			// $(pferr).css("color", "green");
+		}
+		if (accountnum == "") {
+			$(acterr).text("");
+		} else if (accountnum == isNaN || !(accountnum.match(num))) {
+			$(acterr).text("please enter a valid account number");
+			$(acterr).css("color", "red");
+		} else if (!(accountnum.length == 15)) {
+			$(acterr).text("please enter 15 digits only");
+			$(acterr).css("color", "red");
+		} else {
+			$(acterr).text("");
+			// $(acterr).css("color", "green");
+		}
 
 		if (contnum == "") {
 			$(cnumerr).text("required field");
@@ -280,8 +340,8 @@ AddEmployee.prototype.validateEmp = function() {
 			$(cnumerr).text("please enter 10 digits only");
 			$(cnumerr).css("color", "red");
 		} else {
-			$(cnumerr).text("ok");
-			$(cnumerr).css("color", "green");
+			$(cnumerr).text("");
+			// $(cnumerr).css("color", "green");
 
 		}
 
@@ -295,8 +355,8 @@ AddEmployee.prototype.validateEmp = function() {
 			$(emnumerr).text("please enter 10 digits only");
 			$(emnumerr).css("color", "red");
 		} else {
-			$(emnumerr).text("ok");
-			$(emnumerr).css("color", "green");
+			$(emnumerr).text("");
+			// $(emnumerr).css("color", "green");
 
 		}
 
@@ -306,39 +366,51 @@ AddEmployee.prototype.validateEmp = function() {
 		} else if (!(txtemname.match(char) || txtemname == isNaN)) {
 			$(emnameerr).text("enter characters only");
 			$(emnameerr).css("color", "red");
-		}else if (txtemname < 5) {
-			$(emnameerr).text("please enter min 6 characters");
+		} else if (txtemname.length < 2) {
+			$(emnameerr).text("please enter min 3 characters");
 			$(emnameerr).css("color", "red");
-		}
-		else {
-			$(emnameerr).text("nice name");
-			$(emnameerr).css("color", "green");
+		} else {
+			$(emnameerr).text("");
+			// $(emnameerr).css("color", "green");
 
 		}
 
 		if (password == "") {
 			$(pwderr).text("required field");
 			$(pwderr).css("color", "red");
-		} else if ((password.match(pwepattern))) {
+		} else if (!(password.match(pwepattern))) {
 			$(pwderr)
 					.text(
-							"Must be at least 8 characters,At least 1 number, 1 lowercase, 1 uppercase letter, At least 1 special character from @#$%&");
+							"Must be at least 8 characters,At least 1 number, 1 lowercase, 1 uppercase letter, At least 1 special character");
 			$(pwderr).css("color", "red");
 		} else {
-			$(pwderr).text("ok");
-			$(pwderr).css("color", "green");
+			$(pwderr).text("");
+			// $(pwderr).css("color", "green");
 
 		}
 
 		if (salary == "") {
 			$(salerr).text("required field");
 			$(salerr).css("color", "red");
-		} else if (salary == isNaN || !(salary.match(num))) {
-			$(salerr).text("only numbers allowed");
+		} else if (salary == isNaN || !(salary.match(salry))) {
+			$(salerr).text("please enter a valid value ex: 100.00");
 			$(salerr).css("color", "red");
 		} else {
-			$(salerr).text("ok");
-			$(salerr).css("color", "green");
+			$(salerr).text("");
+			// $(salerr).css("color", "green");
+
+		}
+
+		if (variable == "") {
+			$(variableerr).text("");
+			$(variableerr).css("color", "red");
+		} else if (variable == isNaN || !(variable.match(salry))) {
+			$(variableerr)
+					.text("please enter a valid decimal value ex: 100.00");
+			$(variableerr).css("color", "red");
+		} else {
+			$(variableerr).text("");
+			// $(salerr).css("color", "green");
 
 		}
 
@@ -346,8 +418,8 @@ AddEmployee.prototype.validateEmp = function() {
 			$(currentaddrerr).text("required field");
 			$(currentaddrerr).css("color", "red");
 		} else {
-			$(currentaddrerr).text("ok");
-			$(currentaddrerr).css("color", "green");
+			$(currentaddrerr).text("");
+			// $(currentaddrerr).css("color", "green");
 
 		}
 
@@ -355,8 +427,8 @@ AddEmployee.prototype.validateEmp = function() {
 			$(peraddrerr).text("required field");
 			$(peraddrerr).css("color", "red");
 		} else {
-			$(peraddrerr).text("ok");
-			$(peraddrerr).css("color", "green");
+			$(peraddrerr).text("");
+			// $(peraddrerr).css("color", "green");
 
 		}
 
@@ -367,8 +439,8 @@ AddEmployee.prototype.validateEmp = function() {
 			$(relationerr).text("enter characters only");
 			$(relationerr).css("color", "red");
 		} else {
-			$(relationerr).text("ok");
-			$(relationerr).css("color", "green");
+			$(relationerr).text("");
+			// $(relationerr).css("color", "green");
 
 		}
 
@@ -378,12 +450,12 @@ AddEmployee.prototype.validateEmp = function() {
 		} else if (yearexp == isNaN || !(yearexp.match(num))) {
 			$(yearexperr).text("only numbers allowed");
 			$(yearexperr).css("color", "red");
-		} else if (!(yearexp.length < 3)) {
-			$(yearexperr).text("max 2 digits allowed");
-			$(yearexperr).css("color", "red");
-		} else {
-			$(yearexperr).text("ok");
-			$(yearexperr).css("color", "green");
+		}/*
+			 * else if (!(yearexp.length < 3)) { $(yearexperr).text("max 2
+			 * digits allowed"); $(yearexperr).css("color", "red"); }
+			 */else {
+			$(yearexperr).text("");
+			// $(yearexperr).css("color", "green");
 
 		}
 
@@ -395,8 +467,8 @@ AddEmployee.prototype.validateEmp = function() {
 		 * else if (!(skill == isNaN)) { $(skillerr).text("skill type not
 		 * supported"); $(skillerr).css("color","red"); }
 		 */else {
-			$(skillerr).text("ok");
-			$(skillerr).css("color", "green");
+			$(skillerr).text("");
+			// $(skillerr).css("color", "green");
 
 		}
 
@@ -405,14 +477,14 @@ AddEmployee.prototype.validateEmp = function() {
 			$(ratingerr).css("color", "red");
 		}
 
-		else if (!(rating == isNaN)) {
+		else if (!(rating == isNaN || rating.match(num))) {
 			$(ratingerr).text("please enter between 1 to 10 ");
 			$(ratingerr).css("color", "red");
 		}
 
 		else {
-			$(ratingerr).text("ok");
-			$(ratingerr).css("color", "green");
+			$(ratingerr).text("");
+			// $(ratingerr).css("color", "green");
 
 		}
 
@@ -477,10 +549,10 @@ AddEmployee.prototype.validateEmp = function() {
 
 		RequestManager.saveSkill(input3, function(data, success) {
 			if (success) {
-				alert("Employee ID: " + $("#eid").val()
-						+ " Details Successfully Added to Skills");
+				return true;
+				//alert("Employee ID: " + $("#eid").val()+ " Details Successfully Added to Skills");
 			} else {
-				alert("failed to add");
+				return false;
 			}
 		}.ctx(this));
 
@@ -489,11 +561,10 @@ AddEmployee.prototype.validateEmp = function() {
 						input2,
 						function(data, success) {
 							if (success) {
-								alert("Employee ID: "
-										+ $("#eid").val()
-										+ " Details Successfully Added to Designation History");
+								return true;
+								//alert("Employee ID: "+ $("#eid").val()+ " Details Successfully Added to Designation History");
 							} else {
-								alert("failed to add");
+								return false;
 							}
 						}.ctx(this));
 
@@ -521,16 +592,24 @@ AddEmployee.prototype.validateEmp = function() {
 				$("#skype").val("");
 				$('designation').val("");
 				$('#dob').val("");
-				$('#adob').val("");
 				$('#doj').val("");
 				$("#emal").val("");
 				$("#password").val("");
 				$('#blood').val("");
 				$("#salary").val("");
 				$('#variable').val("");
-				$('#designation option:selected').val("");
+				$('#designation').val("");
+				$('#gender').val("");
+			} else if (data.code == 297) {
+
+				alert(data.message);
+
+			} else if (data.code == 296) {
+
+				alert(data.message);
+
 			} else {
-				alert("failed to add");
+				alert("Failed to add");
 			}
 		}.ctx(this));
 	}
@@ -542,8 +621,8 @@ AddEmployee.prototype.GenderValidate = function() {
 		error.innerHTML = "required field";
 		$(error).css("color", "red");
 	} else {
-		$(error).text("ok");
-		$(error).css("color", "green");
+		$(error).text("");
+
 	}
 }
 AddEmployee.prototype.ValidateDrpn = function() {
@@ -553,8 +632,8 @@ AddEmployee.prototype.ValidateDrpn = function() {
 		descerr.innerHTML = "please select designation";
 		$(descerr).css("color", "red");
 	} else {
-		$(descerr).text("ok");
-		$(descerr).css("color", "green");
+		$(descerr).text("");
+
 	}
 }
 

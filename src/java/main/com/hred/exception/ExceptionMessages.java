@@ -15,8 +15,8 @@ public interface ExceptionMessages {
 	//General exceptions
 	public static final String INVALID_EMAIL_PATTERN = "Invalid email pattern.";
 	public static final String WEAK_PASSWORD = "Weak password.";
-	public static final String EMAIL_DOESNOT_EXIST = "Wrong email or password.";
-	public static final String INVALID_PASSWORD = "Wrong email or password.";//need change
+	public static final String EMAIL_DOESNOT_EXIST = "Invalid email";
+	public static final String INVALID_PASSWORD = "Invalid password.";//need change
 	public static final String EMAIL_CANNOT_BE_EMPTY = "Email cannot be empty.";
 	public static final String PASSWORD_CANNOT_BE_EMPTY = "Password cannot be empty.";
 	public static final String INVALID_NAME = "Invalid name.";
@@ -185,7 +185,7 @@ public interface ExceptionMessages {
 	public static final String NO_BIRTHDAY_TODAY = "No birthday today";
 	public static final String TEMPLATE_DOES_NOT_EXIST = "This template does not exist";
 	public static final String EMPLOYEE_DOES_NOT_EXIST = "Employee does not exist";
-	 
+	public static final String POLICYNAME_ALREADY_EXISTS="Policy name was already existed";	 
 	 
 	//holidays related Exception Messages
 	public static final String HOLIDAYSID_DOESNOT_EXIST = "Invalid Holiday Id";
@@ -230,5 +230,7 @@ public interface ExceptionMessages {
 
 	//public static final String EVERY_FIELD_IS_MANDATORY = "every field is mandatory";
 	public static final String TEMPLATE_ALREADY_EXIST = "template with this name is already exist";
+	public static final String NO_EVENT_FOUND = "No event in the selected criteria";
+	public static final String NO_WELCOME_EMPLOYEE = "No Data Found";
 }
 
