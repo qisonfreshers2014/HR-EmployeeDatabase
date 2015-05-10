@@ -312,6 +312,8 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 		List<Employee> list = new ArrayList<Employee>();
 		List<Employee> list1 = null;
 		List<Employee> list2 = null;
+		List<Employee> list3 = null;
+		List<Employee> list4 = null;
 	
 		Transaction tx = null;
 		try {
@@ -323,14 +325,22 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 			
 			if(frommonth>tomonth)
 			{
-				String result1 ="from Employee where is_deleted=0 and  (((day(dateOfJoining) between "+fromday+" and 30 ) or  (day(dateOfJoining) between 1 and "+today+")) and (month(dateOfJoining) between "+frommonth+" and 12)) and year(dateOfJoining)!=year(sysdate())";				
+				String result1 ="from Employee where is_deleted=0 and  ((day(dateOfJoining) between "+fromday+" and 31 ) and (month(dateOfJoining) ="+frommonth+")) and year(dateOfJoining)!=year(sysdate())";				
 				org.hibernate.Query query1 = session.createQuery(result1);
 				 list1  = query1.list();
 				 
-				 String result2 ="from Employee where is_deleted=0 and  (((day(dateOfJoining) between "+fromday+" and 30 ) or  (day(dateOfJoining) between 1 and "+today+")) and (month(dateOfJoining) between 1  and "+tomonth+")) and year(dateOfJoining)!=year(sysdate())";				
+				 String result2 ="from Employee where is_deleted=0 and  ((day(dateOfJoining) between 1 and 31 )  and (month(dateOfJoining) between "+(frommonth+1)+"  and 13)) and year(dateOfJoining)!=year(sysdate())";				
 					org.hibernate.Query query2 = session.createQuery(result2);
 					 list2  = query2.list();
+					 
+					 String result3 ="from Employee where is_deleted=0 and  ((day(dateOfJoining) between 1 and 31 )  and (month(dateOfJoining) between 1  and "+(tomonth-1)+")) and year(dateOfJoining)!=year(sysdate())";				
+						org.hibernate.Query query3= session.createQuery(result3);
+						 list3  = query3.list();
 					
+					 String result4 ="from Employee where is_deleted=0 and  ((day(dateOfJoining) between 1 and "+today+"  ) and (month(dateOfJoining) ="+tomonth+")) and year(dateOfJoining)!=year(sysdate())";	
+						org.hibernate.Query query4 = session.createQuery(result4);
+						 list4  = query4.list();
+						 
 					 if(list1.size()!=0)
 					 {
 					 list.addAll(list1);
@@ -338,6 +348,14 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 					 if(list2.size()!=0)
 					 {
 					 list.addAll(list2);
+					 }
+					 if(list3.size()!=0)
+					 {
+					 list.addAll(list3);
+					 }
+					 if(list4.size()!=0)
+					 {
+					 list.addAll(list4);
 					 }
 			}
 			else if(frommonth==tomonth)
@@ -348,18 +366,39 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 			}
 			else
 			{
-			String result ="from Employee where is_deleted=0 and  (((day(dateOfJoining) between "+fromday+" and 30 ) or  (day(dateOfJoining) between 1 and "+today+")) and (month(dateOfJoining) between "+frommonth+" and "+tomonth+")) and year(dateOfJoining)!=year(sysdate())";				
-			org.hibernate.Query query = session.createQuery(result);
-			 list  = query.list();
+				String result1 ="from Employee where is_deleted=0 and  ((day(dateOfJoining) between "+fromday+" and 31 ) and (month(dateOfJoining) ="+frommonth+")) and year(dateOfJoining)!=year(sysdate())";				
+				org.hibernate.Query query1 = session.createQuery(result1);
+				 list1  = query1.list();
+				 
+				 String result2 ="from Employee where is_deleted=0 and  ((day(dateOfJoining) between 1 and 31 )  and (month(dateOfJoining) between "+(frommonth+1)+"  and "+(tomonth-1)+")) and year(dateOfJoining)!=year(sysdate())";				
+					org.hibernate.Query query2 = session.createQuery(result2);
+					 list2  = query2.list();
+					
+					 String result3 ="from Employee where is_deleted=0 and  ((day(dateOfJoining) between 1 and "+today+"  ) and (month(dateOfJoining) ="+tomonth+")) and year(dateOfJoining)!=year(sysdate())";	
+						org.hibernate.Query query3 = session.createQuery(result3);
+						 list3  = query3.list();
+						 
+					 if(list1.size()!=0)
+					 {
+					 list.addAll(list1);
+					 }
+					 if(list2.size()!=0)
+					 {
+					 list.addAll(list2);
+					 }
+					 if(list3.size()!=0)
+					 {
+					 list.addAll(list3);
 			
 			}
-			
+			}
 			if (list.size() == 0) {
 			
 				System.out.println(" No anivarsary");
 			}
 
-		} finally {
+		
+		}finally {
 
 			try {
 				if (tx != null) {
@@ -395,6 +434,8 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 		List<Employee> list = new ArrayList<Employee>();
 		List<Employee> list1 = null;
 		List<Employee> list2 = null;
+		List<Employee> list3 = null;
+		List<Employee> list4 = null;
 		Transaction tx = null;
 		try {
 			session = getSession();
@@ -405,14 +446,22 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 			
 			if(frommonth>tomonth)
 			{
-				String result1 ="from Employee where is_deleted=0 and  (((day(dateOfBirth) between "+fromday+" and 30 ) or  (day(dateOfBirth) between 1 and "+today+")) and (month(dateOfBirth) between "+frommonth+" and 12))";				
+				String result1 ="from Employee where is_deleted=0 and  ((day(dateOfBirth) between "+fromday+" and 31 ) and (month(dateOfBirth) ="+frommonth+")) ";				
 				org.hibernate.Query query1 = session.createQuery(result1);
 				 list1  = query1.list();
 				 
-				 String result2 ="from Employee where is_deleted=0 and  ((day(dateOfBirth) between "+fromday+" and 30 ) or  (day(dateOfBirth) between 1 and "+today+")) and (month(dateOfBirth) between 1  and "+tomonth+"))";				
+				 String result2 ="from Employee where is_deleted=0 and  ((day(dateOfBirth) between 1 and 31 )  and (month(dateOfBirth) between "+(frommonth+1)+" and 13)) ";				
 					org.hibernate.Query query2 = session.createQuery(result2);
 					 list2  = query2.list();
+					 
+					 String result3 ="from Employee where is_deleted=0 and  ((day(dateOfBirth) between 1 and 31 )  and (month(dateOfBirth) between 1  and "+(tomonth-1)+")) ";				
+						org.hibernate.Query query3= session.createQuery(result3);
+						 list3  = query3.list();
 					
+					 String result4 ="from Employee where is_deleted=0 and  ((day(dateOfBirth) between 1 and "+today+"  ) and (month(dateOfBirth) ="+tomonth+"))";	
+						org.hibernate.Query query4 = session.createQuery(result4);
+						 list4  = query4.list();
+						 
 					 if(list1.size()!=0)
 					 {
 					 list.addAll(list1);
@@ -420,6 +469,14 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 					 if(list2.size()!=0)
 					 {
 					 list.addAll(list2);
+					 }
+					 if(list3.size()!=0)
+					 {
+					 list.addAll(list3);
+					 }
+					 if(list4.size()!=0)
+					 {
+					 list.addAll(list4);
 					 }
 			}
 			else if(frommonth==tomonth)
@@ -430,11 +487,32 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 			}
 			else
 			{
-			String result ="from Employee where is_deleted=0 and  (((day(dateOfBirth) between "+fromday+" and 30 ) or  (day(dateOfBirth) between 1 and "+today+")) and (month(dateOfBirth) between "+frommonth+" and "+tomonth+"))";	
-			org.hibernate.Query query = session.createQuery(result);
-			 list  = query.list();
-			}
+				String result1 ="from Employee where is_deleted=0 and  ((day(dateOfBirth) between "+fromday+" and 31 ) and (month(dateOfBirth) ="+frommonth+"))";				
+				org.hibernate.Query query1 = session.createQuery(result1);
+				 list1  = query1.list();
+				 
+				 String result2 ="from Employee where is_deleted=0 and  ((day(dateOfBirth) between 1 and 31 )  and (month(dateOfBirth) between "+(frommonth+1)+"  and "+(tomonth-1)+"))";				
+					org.hibernate.Query query2 = session.createQuery(result2);
+					 list2  = query2.list();
+					
+					 String result3 ="from Employee where is_deleted=0 and  ((day(dateOfBirth) between 1 and "+today+"  ) and (month(dateOfBirth) ="+tomonth+"))";	
+						org.hibernate.Query query3 = session.createQuery(result3);
+						 list3  = query3.list();
+						 
+					 if(list1.size()!=0)
+					 {
+					 list.addAll(list1);
+					 }
+					 if(list2.size()!=0)
+					 {
+					 list.addAll(list2);
+					 }
+					 if(list3.size()!=0)
+					 {
+					 list.addAll(list3);
 			
+			}
+			}
 			if (list.size() == 0) {
 				System.out.println(" No Birthday");
 						

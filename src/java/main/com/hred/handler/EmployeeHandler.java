@@ -373,9 +373,12 @@ public List<DisplayNotificationHome> getAllEventsAOP()
  List<DisplayNotificationHome> displayNotificationHomeList = new ArrayList<DisplayNotificationHome>();
  List<SendNotificationHistory> notificationHistory = new ArrayList<SendNotificationHistory>();
 
- SendNotificationHistoryDAO SendNotificationHistoryDAOImpl = DAOFactory
+ SendNotificationHistoryHandler sendnotificationHandler= SendNotificationHistoryHandler.getInstance();
+ notificationHistory = sendnotificationHandler.getHistorydata();
+ 
+/* SendNotificationHistoryDAO SendNotificationHistoryDAOImpl = DAOFactory
    .getInstance().getSendNotificationHistoryDAO();
- notificationHistory = SendNotificationHistoryDAOImpl.getHistorydata();
+ notificationHistory = SendNotificationHistoryDAOImpl.getHistorydata();*/
  EmployeeDAO employeeDAOImpl = DAOFactory.getInstance().getEmployeeDAO();
  empBirthday = employeeDAOImpl.getBirthday();
  empWorkAniversay = employeeDAOImpl.getWorkAniversary();
@@ -476,11 +479,14 @@ public List<DisplayNotificationHome> getNotificationDisplayCriteriaAOP(
 
 // This Method will return the birthday list with a selected criteria
 public List<DisplayNotificationHome> getBirthdaysList(
-		List<Employee> employeeBirthday) {
-	SendNotificationHistoryDAO SendNotificationHistoryDAOImpl = DAOFactory
+		List<Employee> employeeBirthday) throws BusinessException {
+	/*SendNotificationHistoryDAO SendNotificationHistoryDAOImpl = DAOFactory
 			.getInstance().getSendNotificationHistoryDAO();
 	List<SendNotificationHistory> notificationHistory = SendNotificationHistoryDAOImpl
-			.getHistorydata();
+			.getHistorydata();*/
+	 List<SendNotificationHistory> notificationHistory = new ArrayList<SendNotificationHistory>();
+	 SendNotificationHistoryHandler sendnotificationHandler= SendNotificationHistoryHandler.getInstance();
+	 notificationHistory = sendnotificationHandler.getHistorydata();
 	List<DisplayNotificationHome> displayNotificationHomeList = new ArrayList<DisplayNotificationHome>();
 
 	for (Employee birthday : employeeBirthday) {
@@ -510,11 +516,14 @@ public List<DisplayNotificationHome> getBirthdaysList(
 
 // This Method will return the Anivarsary list with a selected criteria
 public List<DisplayNotificationHome> getAnivarsaryList(
-		List<Employee> employeeAniversary) {
-	SendNotificationHistoryDAO SendNotificationHistoryDAOImpl = DAOFactory
+		List<Employee> employeeAniversary) throws BusinessException {
+	/*SendNotificationHistoryDAO SendNotificationHistoryDAOImpl = DAOFactory
 			.getInstance().getSendNotificationHistoryDAO();
 	List<SendNotificationHistory> notificationHistory = SendNotificationHistoryDAOImpl
-			.getHistorydata();
+			.getHistorydata();*/
+	 List<SendNotificationHistory> notificationHistory = new ArrayList<SendNotificationHistory>();
+	 SendNotificationHistoryHandler sendnotificationHandler= SendNotificationHistoryHandler.getInstance();
+	 notificationHistory = sendnotificationHandler.getHistorydata();
 	List<DisplayNotificationHome> displayNotificationHomeList = new ArrayList<DisplayNotificationHome>();
 
 	for (Employee anivarsary : employeeAniversary) {
@@ -548,10 +557,13 @@ public List<DisplayNotificationHome> getWelcomeEmployeeList()
 
 {
 	EmployeeDAO employeeDAOImpl = DAOFactory.getInstance().getEmployeeDAO();
-	SendNotificationHistoryDAO SendNotificationHistoryDAOImpl = DAOFactory
+/*	SendNotificationHistoryDAO SendNotificationHistoryDAOImpl = DAOFactory
 			.getInstance().getSendNotificationHistoryDAO();
 	List<SendNotificationHistory> notificationHistory = SendNotificationHistoryDAOImpl
-			.getHistorydata();
+			.getHistorydata();*/
+	 List<SendNotificationHistory> notificationHistory = new ArrayList<SendNotificationHistory>();
+	 SendNotificationHistoryHandler sendnotificationHandler= SendNotificationHistoryHandler.getInstance();
+	 notificationHistory = sendnotificationHandler.getHistorydata();
 	List<DisplayNotificationHome> displayNotificationHomeList = new ArrayList<DisplayNotificationHome>();
 	welcomeemp = employeeDAOImpl.getWelcomeEmployee();
 	for (Employee welEmp : welcomeemp) {
