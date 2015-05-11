@@ -16,7 +16,18 @@ skill.prototype.handleShow = function() {
 		this.addSkill();
 	*/ 
 		}.ctx(this));
-	 }
+	
+	$('#reset').click(function() {
+		//e.preventDefault();
+		//$('.error').css('visibility', 'hidden');
+		$("#skill").val("");
+		$("#attended1").val("");
+		$("#rating").val("");
+		$("#qualification1").val("");
+		$("#empid").val("");
+		 
+			}.ctx(this));
+}
 
 
 skill.prototype.viewSkillDetails=function(){
@@ -52,7 +63,8 @@ skill.prototype.viewSkillDetails=function(){
 
 skill.prototype.validateSkill=function(){
 	  var text = document.getElementById("skill").value;
-	  var regex = /^[A-Za-z.]+( [A-Za-z.]+)*$/;
+	  var text1 = document.getElementById("attended1").value;
+	  var regex = /^[A-Za-z.0-9]+( [A-Za-z.0-9]+)*$/;
       var char1=/^[a-zA-Z.]+$/;
       var char2=/^[a-z A-Z]+$/;
       var num	= /^[0-9-+]+$/;
@@ -60,42 +72,70 @@ skill.prototype.validateSkill=function(){
  	  var empId= $("#empid").val();
  	  var training= $("#attended1").val();
  	  var rating= $("#rating").val();
- 	 
+ 	   
  		 
  		if(skill=="" && training=="" && empId=="" && rating=="" ){
  			 alert("Failed to save,since every field is mandatory");
+ 			 return;
  		 }
  		 else if(text.charAt(0)==" ")
 		    {
- 	    	alert("First letter should not enter space");
+ 	    	alert("First letter should not enter space for skill");
+ 	    	 return;
 		    }
+ 		else if(text1.charAt(0)==" ")
+	    {
+	    	alert("First letter should not enter space for training");
+	    	 return;
+	    }
  	     else if(skill==""){
             alert("please enter skill");
+            return;
             	  }
  	     else if(training==""){
  	    	alert("please enter trainingAttended (true/false)");
+ 	    	 return;
  	     }
  	     else if(empId==""){
  	    	 alert("please enter Id");
+ 	    	 return;
  	     }
  	    else if(rating==""){
             alert("please enter rating");
+            return;
             	  }
   	   else if(!(skill.match(regex))){
 			alert("please enter charcter with one space for skill");
+			 return;
 			  }
  	   else if (!(empId.match(num))){
- 		   alert("Please enter only numbers for EmpID");
+ 		   alert("Please enter only numbers with out space EmpID");
+ 		  return;
  	   }
  	   else if(!(rating.match(num))){
  		  alert("Please enter only numbers for rating");
+ 		 return;
  	   }
+ 	  else  if(rating.length>2){
+ 		    alert("Invalid rating minimum 2 numbers only accepted ");
+ 		    return;
+ 		   }
+ 	  else if(!(rating>0 && rating<=10)){
+ 		  alert("enter rating b/w 1 to 10");
+ 		  return;
+ 	  }
+ 		
  	   else if(!(training.match(char2))){
+ 		   alert("please enter only chacters");
+ 		  return;
+ 	   }
+ 	 else if(!(training=="true" || training=="false")){
  		   alert("please enter only (true/fase)");
+ 		   return;
  	   }
  	
 	 
-else{
+
 	 	  var input={"payload":{"skills":$('#skill').val(),"trainingAttended":$('#attended1').val(),
 			"empId":$('#empid').val(),"rating":$('#rating').val(),
 			  
@@ -120,9 +160,9 @@ else{
 		    }.ctx(this));
 		      //$( "input#clear" ).trigger( "click" );		
 			}
-	  		else if(data.code == 120001){
+	  		/*else if(data.code == 120001){
 		         alert("Skill Name & EmpId already exist");
-		        }
+		        }*/
 			else{
 				  alert("failed to inserted");
 				 
@@ -130,7 +170,7 @@ else{
 		}.ctx(this));
  
 } 
-}
+
 skill.prototype.editSkill = function(obj1){
 	 var input = { "payload" : {"id" : obj1} };
 	 RequestManager.getEditSKill(input,function(data,success){
@@ -140,6 +180,7 @@ skill.prototype.editSkill = function(obj1){
 		    $('#attended1').val(data[0].trainingAttended);
 		    $('#empid').val(data[0].empId);
 		    $('#rating').val(data[0].rating);
+		    
 		 }
 		 else{
 			 alert("failed to edit");

@@ -62,7 +62,7 @@ editdesignation.prototype.validateDesignation = function() {
 
 }
 
-// salary validations
+//salary validations
 editdesignation.prototype.salaryValidate = function() {
 	var salary = $('#salary').val();
 	var letters = /^\d{0,10}(?:\.\d{0,2})?$/;
@@ -71,7 +71,6 @@ editdesignation.prototype.salaryValidate = function() {
 		$('#isSEmpty').text("Please enter salary");
 		salaryVal=0;
 	    return false;
-
 	}
 	else
 	{
@@ -118,18 +117,6 @@ editdesignation.prototype.dateValidate = function() {
 // variable pay validations
 editdesignation.prototype.variablePayValidate = function() {
 	var varPay = $("#variablePay").val();
-	if(varPay=="")//empty
-	{
-		$('#isVPEmpty').text("Please enter variable pay");
-		variablePayVal=0;
-     	return false;
-
-	}
-	else
-	{
-		$('#isVPEmpty').text("");
-		variablePayVal=1;
-	}
 	var letters = /^\d{0,10}(?:\.\d{0,2})?$/;
 	if (varPay.match(letters)) {
 		$('#isVPEmpty').text("");
@@ -198,7 +185,7 @@ editdesignation.prototype.sendJson = function(empid) {
 											}.ctx(this));
 
 						} else if (data.code == 227) {
-							alert("This record was saved already");
+							alert("This record already exists");
 
 						}
 
@@ -228,7 +215,7 @@ editdesignation.prototype.appendDesTable = function(data, data1, status) {
 	var apprDate = year + "-" + month + "-" + date;
 	table.append("<tr><td>" + desName + "</td><td>" + data.salary + "</td><td>"
 			+ data.variablePay + "</td><td>" + apprDate + "</td></tr>");
-	alert("Sucessfully saved the details");
+	alert("Sucessfully saved");
 	$("#datepicker").val("");
 	$("#designation").val("");
 	$("#salary").val("");

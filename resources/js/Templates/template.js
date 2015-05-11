@@ -18,4 +18,4 @@ Template.prototype.handleShow = function(dataid) {
 		 }.ctx(this));
 }
 
-var Template=new Template();
+var Template=new Template(dataid);

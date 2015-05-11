@@ -93,7 +93,10 @@ public List<Template> getTemplates() {
 		templates = (List<Template>) temDAOImpl.getTemplates();
 		return templates;
 	}
-	public Template update(Template template) throws ObjectNotFoundException {
+
+
+@AuthorizeEntity(roles={Constants.HR})
+	public Template updateAOP(Template template) throws ObjectNotFoundException {
 
 		// TODO Auto-generated method stub
 		Template templateFromDB = (Template)DAOFactory.getInstance().getTemplateDAO().getObjectById(template.getId(), ObjectTypes.TEMPLATE);
@@ -112,7 +115,9 @@ public List<Template> getTemplates() {
 		templates = (List<Template>) tempDAOImpl.viewTemplate(template);
 		return templates;
 	}
-	public Template getContentForMail(DisplayNotificationHome gettemplate) {
+	
+	@AuthorizeEntity(roles={Constants.HR})
+	public Template getContentForMailAOP(DisplayNotificationHome gettemplate) {
 		Template receivedtemplatesfromdb = new Template();
 		Template templatescontenttoDisplay = new Template();
 		String url = "";
@@ -138,7 +143,7 @@ public List<Template> getTemplates() {
 			}
 			
 		}
-		System.out.println(sendNotification.getCurrentDesignation());
+		
 		getDesignationName=designationTypeDAOImpl.getDesignationByID(sendNotification);
 		String currentDesignation=getDesignationName.getName();
 		if(gettemplate.getEvent().equalsIgnoreCase("WelCome"))
@@ -146,7 +151,7 @@ public List<Template> getTemplates() {
 	String finalContent="Dear Qisonians,<br/> We take Immense pleasure in welcoming "+ sendNotification.getEmployeeName()+" who has Joined QISON TEAM <br/> ";
 	finalContent +="He is working as "+currentDesignation+"<br/>";
 			 
- finalContent += sendNotification.getEmployeeName()+" as he likes to be called, he has pursued "+ sendNotification.getHighestQualification()+".<br/> He takes keen interest in "+sendNotification.getSkill()+"<br/>";
+ finalContent += sendNotification.getEmployeeName()+" as he likes to be called, he has pursued "+ sendNotification.getHighestQualification()+".<br/> He takes keen interest in "+sendNotification.getSkype()+"<br/>";
 			 
  finalContent += "He can be reached on "+sendNotification.getEmail()+"<br/>";
 			 

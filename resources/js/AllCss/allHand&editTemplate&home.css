@@ -5,7 +5,8 @@
 .list {
   color: white; 
     font-size: 20px;
-     margin-left: 5%;
+    margin-left: 15%;
+    margin-top: 4%;;
 }
 #fixedheader {
     background-color: #4c6680;
@@ -66,7 +67,7 @@
 margin-top: 3%;
 }
 
-.tableHeading {
+.tableHeadingAll {
   margin-left: 4%;
    color:brown;
 margin-top: 3%;
@@ -129,6 +130,6 @@ td{
 	margin-left: 9.5%;
 }
 
-#editdescription,#description{
+#editdescription,#descriptionhand{
 	margin-left: 8.5%;
 }

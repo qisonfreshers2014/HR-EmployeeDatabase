@@ -367,4 +367,5 @@ public interface ExceptionCodes {
 	public static final int TEMPLATE_ALREADY_EXIST =9018;
 	public static final int NO_EVENT_FOUND = 9019;
 	public static final int NO_WELCOME_EMPLOYEE = 9020;
+	public static final int INVALID_NEW_PASSWORD = 9021;
 	}

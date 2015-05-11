@@ -12,6 +12,8 @@ import java.util.List;
 
 
 
+
+
 import com.hred.common.Constants;
 import com.hred.common.Utils;
 import com.hred.common.cache.CacheManager;
@@ -31,6 +33,7 @@ import com.hred.persistence.dao.DAOFactory;
 import com.hred.persistence.dao.EmployeeDAO;
 import com.hred.persistence.dao.SendNotificationHistoryDAO;
 import com.hred.service.common.ServiceRequestContextHolder;
+import com.hred.service.descriptors.input.ChangePassword;
 import com.hred.service.descriptors.input.EmployeeSearchInputDescriptor;
 import com.hred.service.descriptors.output.DisplayNotificationHome;
 import com.hred.service.descriptors.output.NotificationHomeFilterInputDiscriptor;
@@ -63,13 +66,13 @@ public class EmployeeHandler extends AbstractHandler {
 		  return employee;
 		 }
 
-	public List<Employee> viewEmployee(Employee employee) {
-		List<Employee> employees = null;
-		EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
-				.getEmployeeDAO();
-		employees = (List<Employee>) empDAOImpl.viewEmployee(employee);
-		return employees;
-	}
+	 public List<Employee> viewEmployee(Employee employee) {
+		  List<Employee> employees = null;
+		  EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
+		    .getEmployeeDAO();
+		  employees = (List<Employee>) empDAOImpl.viewEmployee(employee);
+		  return employees;
+		 }
 	
 	public Employee getEmployeeById(String id) throws EmployeeException {
 		Employee employee = null;
@@ -81,8 +84,8 @@ public class EmployeeHandler extends AbstractHandler {
 	}
 
 
-	
-	 public List<Employee> getEmployees(FilterEmployee employee) throws	 EmployeeException { 
+	@AuthorizeEntity(roles={Constants.HR})
+	 public List<Employee> getEmployeesAOP(FilterEmployee employee) throws	 EmployeeException { 
 		  List<Employee> employees = null; EmployeeDAO
 	 empDAOImpl = (EmployeeDAO) DAOFactory.getInstance().getEmployeeDAO();
 	 employees = empDAOImpl.getEmployees(employee);
@@ -319,7 +322,7 @@ public class EmployeeHandler extends AbstractHandler {
 			  empFromDB.setEmergencyContactName(employee.getEmergencyContactName());
 			  empFromDB.setRelationWithEmergencyConatact(employee
 			    .getRelationWithEmergencyConatact());
-			  empFromDB.setPassword(Utils.encrypt(employee.getPassword()));
+			//  empFromDB.setPassword(Utils.encrypt(employee.getPassword()));
 			  empFromDB.setSkype(employee.getSkype());
 			  EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
 			    .getEmployeeDAO();
@@ -329,7 +332,8 @@ public class EmployeeHandler extends AbstractHandler {
 
 
 	// updating the details of employee by hr
-			 public Employee hrUpdateEmployee(Employee employee)
+	@AuthorizeEntity(roles={Constants.HR})
+			 public Employee hrUpdateEmployeeAOP(Employee employee)
 			   throws ObjectNotFoundException, EmployeeException,
 			   EncryptionException {
 
@@ -610,6 +614,48 @@ public Employee deleteEmployee(Employee employee) throws EmployeeException {
 		  employee = (Employee) empDAOImpl.update(empFromDB);
 		  return employee;
 }
+
+public void changePassword(ChangePassword changePasswordEmployee) throws EncryptionException, BusinessException
+{
+	System.out.println(changePasswordEmployee.getId());
+	Employee empFromDB = (Employee) DAOFactory.getInstance()
+		    .getEmployeeDAO().getEmployeeById(changePasswordEmployee.getId());
+	String passwordFromDB=empFromDB.getPassword();
+	String oldpassword =changePasswordEmployee.getOldPassword();
+	String newPassword=changePasswordEmployee.getNewPassword();
+	String confirmNewPassword=changePasswordEmployee.getConfirmNewPassword();
+	
+	System.out.println(changePasswordEmployee.getOldPassword());
+	System.out.println(changePasswordEmployee.getNewPassword());
+	System.out.println(changePasswordEmployee.getConfirmNewPassword());
+	
+	String encryptedOldPassword=Utils.encrypt(oldpassword.trim());
+	System.out.println(changePasswordEmployee.getId());
+	
+	if (newPassword == null || newPassword.isEmpty() || newPassword.trim().isEmpty() || confirmNewPassword == null || confirmNewPassword.isEmpty() || confirmNewPassword.trim().isEmpty() ) {
+		throw new BusinessException(
+				ExceptionCodes.PASSWORD_CANNOT_BE_EMPTY,
+				ExceptionMessages.PASSWORD_CANNOT_BE_EMPTY);
+	}
+	
+	boolean passwordValidity = passwordFromDB.equals(encryptedOldPassword);
+	boolean newPasswordValidity = newPassword.equals(confirmNewPassword);
+	if(passwordValidity && newPasswordValidity)
+	{
+		empFromDB.setPassword(Utils.encrypt(newPassword));
+		updateEmployee(empFromDB);
+	}
+	else if(!passwordValidity)
+	{
+		throw new UserException(ExceptionCodes.INVALID_PASSWORD, ExceptionMessages.INVALID_PASSWORD);
+	}
+	else if(!newPasswordValidity)
+	{
+		throw new UserException(ExceptionCodes.INVALID_NEW_PASSWORD, ExceptionMessages.INVALID_NEW_PASSWORD);
+	}
+}
+
+
 public boolean logout(){
 	boolean isLogout = false;
 	String userSessionId = ServiceRequestContextHolder.getContext()
@@ -617,6 +663,22 @@ public boolean logout(){
 	
 	isLogout = CacheManager.getInstance().getCache(CacheRegionType.USER_SESSION_CACHE).remove(userSessionId);
 	return isLogout;
+}
+
+public List<Employee> getTodaysBirthday() throws BusinessException
+{
+	List<Employee> employeeTodaysBirthday = null;
+	EmployeeDAO employeeDAOImpl = (EmployeeDAO) DAOFactory.getInstance().getEmployeeDAO();
+	employeeTodaysBirthday=employeeDAOImpl.getTodaysBirthday();
+	return employeeTodaysBirthday;
+}
+
+public List<Employee> getTodayWorkAniversary() throws BusinessException
+{
+	List<Employee> employeeTodayWorkAniversary = null;
+	EmployeeDAO employeeDAOImpl = (EmployeeDAO) DAOFactory.getInstance().getEmployeeDAO();
+	employeeTodayWorkAniversary=employeeDAOImpl.getTodayWorkAniversary();
+	return employeeTodayWorkAniversary;
 }
 
 }

@@ -97,7 +97,7 @@ editTemplate.prototype.editTemplateDetailsById=function(dataid){
          $('.templatename').val("");
          $('.subject').val("");
          $('textarea#templateContent').val("");
-        
+         App.loadtemplateList();
         }
         else{
          alert("Failed to Add");

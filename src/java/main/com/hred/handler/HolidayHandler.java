@@ -3,10 +3,12 @@ package com.hred.handler;
 import java.sql.Timestamp;
 import java.util.List;
 
+import com.hred.common.Constants;
 import com.hred.exception.ExceptionCodes;
 import com.hred.exception.ExceptionMessages;
 import com.hred.exception.HolidaysException;
 import com.hred.exception.ObjectNotFoundException;
+import com.hred.handler.annotations.AuthorizeEntity;
 import com.hred.model.Holiday;
 import com.hred.model.ObjectTypes;
 import com.hred.persistence.dao.DAOFactory;
@@ -52,7 +54,8 @@ public class HolidayHandler extends AbstractHandler {
 	}
 	
 	//save method for Holiday 
-	public Holiday save(Holiday holidayInput)throws HolidaysException{
+	@AuthorizeEntity(roles={Constants.HR})
+	public Holiday saveAOP(Holiday holidayInput)throws HolidaysException{
 		
 		List<Holiday> data = getHolidays();
 		
@@ -107,7 +110,8 @@ public class HolidayHandler extends AbstractHandler {
 	}
 
 	//update method for Holiday
-	public Holiday updateHoliday(Holiday holidayInput) throws ObjectNotFoundException, HolidaysException{
+	@AuthorizeEntity(roles={Constants.HR})
+	public Holiday updateHolidayAOP(Holiday holidayInput) throws ObjectNotFoundException, HolidaysException{
 		
 		List<Holiday> data = getHolidays();
 		

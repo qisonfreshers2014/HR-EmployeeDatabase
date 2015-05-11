@@ -200,7 +200,7 @@ loadNotificationHomePage.prototype.getdisplayedata = function(input) {
 				}
 				else
 					{
-					alert(data.code+" "+data.message);
+					alert(" "+data.message);
 				this.currentMonthEvents();
 					}
 

@@ -101,7 +101,9 @@ AddEmployee.prototype.uploadMedia = function(callback) {
 // validating each employee field
 AddEmployee.prototype.validateEmp = function() {
 	var char = /^[A-Za-z]+( [A-Za-z]+)*$/;
-	var qual = /^[a-zA-Z0-9.""]+$/;
+	var qual = /^[A-Za-z]+(.[A-Za-z]+)*$/;
+	var skp = /^[A-Za-z0-9]+(.[A-Za-z0-9]+)*$/;
+	var sklr = /^[a-zA-Z0-9.""]+$/;
 	var num = /^[0-9]+$/;
 	var mail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 	var illegalChars = /\W/
@@ -200,7 +202,7 @@ AddEmployee.prototype.validateEmp = function() {
 		if (skype == "") {
 			$(skypeerr).text("required field");
 			$(skypeerr).css("color", "red");
-		} else if (!(skype.match(qual) || skype.match(letters))) {
+		} else if (!(skype.match(skp))) {
 			$(skypeerr).text("please enter a valid skype ID");
 			$(skypeerr).css("color", "red");
 		} else if (!(skype.length > 5)) {
@@ -242,6 +244,9 @@ AddEmployee.prototype.validateEmp = function() {
 		if (name == "") {
 			$(nameerr).text("required field");
 			$(nameerr).css("color", "red");
+		} else if (name.charAt(0) == " ") {
+			$(nameerr).text("first letter shouldn't be space");
+			$(nameerr).css("color", "red");
 		} else if (!(name.match(char) || name == isNaN)) {
 			$(nameerr).text("min length 6, accept char only");
 			$(nameerr).css("color", "red");
@@ -257,8 +262,11 @@ AddEmployee.prototype.validateEmp = function() {
 		if (qualification == "") {
 			$(nerr).text("required field");
 			$(nerr).css("color", "red");
+		} else if (qualification.charAt(0) == " ") {
+			$(nerr).text("first letter shouldn't be space");
+			$(nerr).css("color", "red");
 		} else if (!(qualification.match(qual) || qualification.match(char))) {
-			$(nerr).text("please check the qualification");
+			$(nerr).text("please check the qualification ");
 			$(nerr).css("color", "red");
 		} else {
 			$(nerr).text("");
@@ -363,6 +371,9 @@ AddEmployee.prototype.validateEmp = function() {
 		if (txtemname == "") {
 			$(emnameerr).text("required field");
 			$(emnameerr).css("color", "red");
+		} else if (txtemname.charAt(0) == " ") {
+			$(emnameerr).text("first letter shouldn't be space");
+			$(emnameerr).css("color", "red");
 		} else if (!(txtemname.match(char) || txtemname == isNaN)) {
 			$(emnameerr).text("enter characters only");
 			$(emnameerr).css("color", "red");
@@ -450,10 +461,12 @@ AddEmployee.prototype.validateEmp = function() {
 		} else if (yearexp == isNaN || !(yearexp.match(num))) {
 			$(yearexperr).text("only numbers allowed");
 			$(yearexperr).css("color", "red");
-		}/*
-			 * else if (!(yearexp.length < 3)) { $(yearexperr).text("max 2
-			 * digits allowed"); $(yearexperr).css("color", "red"); }
-			 */else {
+		}
+		/*
+		 * else if (!(yearexp.length < 3)) { $(yearexperr).text("max 2 digits
+		 * allowed"); $(yearexperr).css("color", "red"); }
+		 */
+		else {
 			$(yearexperr).text("");
 			// $(yearexperr).css("color", "green");
 
@@ -462,11 +475,10 @@ AddEmployee.prototype.validateEmp = function() {
 		if (skill == "") {
 			$(skillerr).text("required field");
 			$(skillerr).css("color", "red");
-		}
-		/*
-		 * else if (!(skill == isNaN)) { $(skillerr).text("skill type not
-		 * supported"); $(skillerr).css("color","red"); }
-		 */else {
+		} else if (!(skill.match(sklr))) {
+			$(skillerr).text("please enter a valid skill");
+			$(skillerr).css("color", "red");
+		} else {
 			$(skillerr).text("");
 			// $(skillerr).css("color", "green");
 
@@ -478,11 +490,12 @@ AddEmployee.prototype.validateEmp = function() {
 		}
 
 		else if (!(rating == isNaN || rating.match(num))) {
+			$(ratingerr).text("please enter only number ");
+			$(ratingerr).css("color", "red");
+		} else if (!(rating > 0 && rating <= 10)) {
 			$(ratingerr).text("please enter between 1 to 10 ");
 			$(ratingerr).css("color", "red");
-		}
-
-		else {
+		} else {
 			$(ratingerr).text("");
 			// $(ratingerr).css("color", "green");
 
@@ -550,23 +563,22 @@ AddEmployee.prototype.validateEmp = function() {
 		RequestManager.saveSkill(input3, function(data, success) {
 			if (success) {
 				return true;
-				//alert("Employee ID: " + $("#eid").val()+ " Details Successfully Added to Skills");
+				// alert("Employee ID: " + $("#eid").val()+ " Details
+				// Successfully Added to Skills");
 			} else {
 				return false;
 			}
 		}.ctx(this));
 
-		RequestManager
-				.saveDesignation(
-						input2,
-						function(data, success) {
-							if (success) {
-								return true;
-								//alert("Employee ID: "+ $("#eid").val()+ " Details Successfully Added to Designation History");
-							} else {
-								return false;
-							}
-						}.ctx(this));
+		RequestManager.saveDesignation(input2, function(data, success) {
+			if (success) {
+				return true;
+				// alert("Employee ID: "+ $("#eid").val()+ " Details
+				// Successfully Added to Designation History");
+			} else {
+				return false;
+			}
+		}.ctx(this));
 
 		RequestManager.saveEmp(input, function(data, success) {
 			if (success) {

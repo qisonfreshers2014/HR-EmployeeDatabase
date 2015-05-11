@@ -56,7 +56,7 @@ editHandMeeting.prototype.EditHandMeetingDetails=function(dataid){
 	 
 }
 editHandMeeting.prototype.editAllHandsMeetingById=function(dataid){
-	var dateformat=/^\d{4}-\d{2}-\d{2}$/;
+	var dateformat=/^\d{4}-\d{1,2}-\d{1,2}$/;
 	var regex = /^[A-Za-z]+( [A-Za-z]+)*$/;
 	
 	
@@ -96,6 +96,7 @@ editHandMeeting.prototype.editAllHandsMeetingById=function(dataid){
          $('#datepicker').val("");
          $('#editemployee').val("");
          $('#editdescription').val("");
+         App.loadAllHandsMeeting();
         }else if(data.code == 204){
         	alert("Failed to update..Date already exists");
         }

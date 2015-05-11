@@ -1,5 +1,5 @@
  function empViewemployee(employeeId) {
-	 alert("hsvc");
+	
   
  Loader.loadHTML('.container','resources/empviewemployee.html', true, function(){
   this.handleShow(employeeId);
@@ -14,6 +14,10 @@ empViewemployee.prototype.handleShow = function(employeeId) {
  
  App.loadEditEmp(employeeId);
 }.ctx(this));
+$('#changepwd').click(function(){
+	 
+	 App.loadchangePassword(employeeId);
+	}.ctx(this));
 
   
  }

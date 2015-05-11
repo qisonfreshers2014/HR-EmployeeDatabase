@@ -6,9 +6,11 @@ import org.codehaus.jackson.annotate.JsonProperty;
 
 
 
+
 import com.hred.model.Employee;
 import com.hred.model.User;
 import com.hred.service.annotations.SerializationDescriptor;
+import com.hred.service.descriptors.output.EmployeeDetails;
 
 /**
  * @author RAMMOHAN
@@ -18,14 +20,14 @@ public class AuthenticationOutput {
 
  private String sessionToken;
  private int authStatus;
- private Employee emp;
+ private EmployeeDetails empDetails;
  private Boolean roleHr;
 
-public AuthenticationOutput(String sessionToken, int authStatus, Employee emp, Boolean roleHr) {
+public AuthenticationOutput(String sessionToken, int authStatus, EmployeeDetails empDetails, Boolean roleHr) {
 	// TODO Auto-generated constructor stub
 	 this.sessionToken = sessionToken;
 	  this.authStatus = authStatus;
-	  this.emp = emp;
+	  this.empDetails = empDetails;
 	  this.roleHr=roleHr;
 }
 
@@ -50,7 +52,7 @@ public void setRoleHr(Boolean roleHr) {
  
  @SerializationDescriptor(value = User.class)
     @JsonProperty
- public Employee getEmployee() {
-  return emp;
+ public EmployeeDetails getemployeeDetails() {
+  return empDetails;
  }
 }

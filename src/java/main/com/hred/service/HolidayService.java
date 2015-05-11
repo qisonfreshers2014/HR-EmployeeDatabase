@@ -42,7 +42,7 @@ public class HolidayService extends BaseService {
 			throws ObjectNotFoundException, BusinessException,
 			EncryptionException {		
 		Holiday holiday = (Holiday) JsonUtil.getObject(request.getPayload(), Holiday.class);
-		Holiday output=(Holiday) HolidayHandler.getInstance().save(holiday);		
+		Holiday output=(Holiday) HolidayHandler.getInstance().saveAOP(holiday);		
 		return JsonUtil.getJsonBasedOnDescriptor(output,Holiday.class);
 	}
 	
@@ -79,7 +79,7 @@ public class HolidayService extends BaseService {
 			throws ObjectNotFoundException, BusinessException,
 			EncryptionException {		
 		Holiday holiday = (Holiday) JsonUtil.getObject(request.getPayload(), Holiday.class);
-		Holiday output=(Holiday) HolidayHandler.getInstance().updateHoliday(holiday);		
+		Holiday output=(Holiday) HolidayHandler.getInstance().updateHolidayAOP(holiday);		
 		return JsonUtil.getJsonBasedOnDescriptor(output,Holiday.class);
 	}
 	

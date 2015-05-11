@@ -13,17 +13,19 @@
 <div class="inputelement1"> <h1 style="color:brown" >Employee Skills Details</h1></div><br/><br/>
 <div class="body"><br>
 <div class="div" >
-<b>Skill </b><span class="inputelement1">&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; :&nbsp;</span><input type="text" id="skill" size="15" maxlength="15" ><sup class="red">*</sup>
+
+<b>Skill </b><span class="inputelement1">&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; :&nbsp;</span><input type="text" id="skill" size="15" maxlength="30" ><sup class="red">*</sup>
 <b class="div" >Training Attended&nbsp;:&nbsp;</b><input type="text" size="15" id="attended1" onfocusout="training()"  maxlength="15"/><sup class="red">*</sup>
 <br>
 <span class="e1" id="skillerror1"> </span><span class="inputelement1"></span><span  class="e1" id="skillerror2"></span><br> 
 </div>
 <div  class="div">
 <b>Employee Id&nbsp;:</b> <input type="text" id="empid" size="15" onfocusout="empid()"  maxlength="15"/><sup class="red">*</sup>  
-<b class="div"> Rating<span class="inputelement1"></span><span class="inputelement1"></span> &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp; : </b> <input type="text"  maxlength="2" min="1" max="10" onfocusout="rating()" size="15" id="rating"/><sup class="red">*</sup><br>
+<b class="div"> Rating<span class="inputelement1"></span><span class="inputelement1"></span> &nbsp;&nbsp; &nbsp;&nbsp;: </b> <input type="text"  maxlength="2" min="1" max="10" onfocusout="rating()" size="15" id="rating"/><sup class="red">*</sup><br>
 <span class="e1" id="error1"> </span><span class="inputelement1"></span><span  class="e1" id="error2"></span><br> 
 </div>
-<div  class="div"><button  type="button" class="btn btn-primary btn-md" id="save" >save</button> </div> </br>
+<div  class="div"><button  type="button" class="btn btn-primary btn-md" id="save" >save</button>
+<button type="reset" value="Reset" class="btn btn-primary btn-md" id="reset">Reset</button></div> </br>
  </div><br>
  <table id="displayData" class="table table-hover"  style="width:70%">
  <tr>
@@ -38,4 +40,8 @@
 
   </body>
 </html>
- 
+ skills);
+		return skill;
+	}
+
+}

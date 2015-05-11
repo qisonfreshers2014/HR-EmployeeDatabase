@@ -40,7 +40,7 @@ public class SkillsHandler extends AbstractHandler {
  private void validationFunc( String skillName,boolean trainingAttended,int empId, String rating,List<Skills> skill )  throws SkillsException{
      
     // List<AllHandsMeeting> data=save();
-      for (int i = 0; i < skill.size(); i++) {
+      /*for (int i = 0; i < skill.size(); i++) {
        
           String dbSkill = skill.get(i).getSkills();
           int dbEmpid = skill.get(i).getEmpId();
@@ -48,7 +48,7 @@ public class SkillsHandler extends AbstractHandler {
               throw new SkillsException(ExceptionCodes.SKILLNAME_ALREADY_EXISTS,
                    ExceptionMessages.SKILLNAME_ALREADY_EXISTS);
                 }    
-      }   
+      }   */
       if(skillName == null || skillName.isEmpty()|| skillName.trim().isEmpty()) {
   		throw new SkillsException(ExceptionCodes.Skills_DOESNOT_EXIST,ExceptionMessages.Skills_DOESNOT_EXIST);
   		}

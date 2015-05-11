@@ -16,6 +16,7 @@ import org.apache.commons.mail.SimpleEmail;
 
 import com.hred.common.Constants;
 import com.hred.exception.BusinessException;
+import com.hred.exception.EmployeeException;
 import com.hred.handler.annotations.AuthorizeEntity;
 import com.hred.model.Employee;
 import com.hred.model.SendNotificationHistory;
@@ -70,14 +71,14 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 		 Template template = new Template();
 		TemplateDAO tempDAOImpl = (TemplateDAO) DAOFactory.getInstance()
 				.getTemplateDAO();
+		EmployeeHandler employeeHandler=EmployeeHandler.getInstance();
 
-		EmployeeDAO employeeDAOImpl = DAOFactory.getInstance().getEmployeeDAO();
+		
 		List<Employee> todaysBithday=null;;
 		List<Employee> todaysWorkAniversay=null;
 		try {
-			todaysBithday = employeeDAOImpl.getTodaysBirthday();
-			 todaysWorkAniversay = employeeDAOImpl
-					.getTodayWorkAniversary();
+			todaysBithday = employeeHandler.getTodaysBirthday();
+			 todaysWorkAniversay = employeeHandler.getTodayWorkAniversary();
 		} catch (BusinessException e1) {
 			// TODO Auto-generated catch block
 			System.out.println("No event found");
@@ -85,9 +86,13 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 		
 		List<Employee> AllEmployeesData = new ArrayList<Employee>();
 		SendNotificationHistory entry = new SendNotificationHistory();
-		EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
-				.getEmployeeDAO();
-		AllEmployeesData = empDAOImpl.getEmployees();	
+	
+		try {
+			AllEmployeesData = employeeHandler.getEmployees();
+		} catch (EmployeeException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}	
 		
 	
 		
@@ -194,8 +199,13 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 
 			SendNotificationHistory entry = new SendNotificationHistory();
 			List<Employee> AllEmployeesData = new ArrayList<Employee>();
-			EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance().getEmployeeDAO();
-			AllEmployeesData = empDAOImpl.getEmployees();
+			EmployeeHandler employeeHandler=EmployeeHandler.getInstance();
+			try {
+				AllEmployeesData = employeeHandler.getEmployees();
+			} catch (EmployeeException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 
 			Email email = new SimpleEmail();
 			email.setHostName("smtp.gmail.com");

@@ -8,7 +8,7 @@ TemplateList.prototype.handleShow = function() {
 	
 	
 	$("#btnadd").click(function(){ 
-		alert("fxbxfb");
+		
 		
 		App.loadAddTemplate();
 		

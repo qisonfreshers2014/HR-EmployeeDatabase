@@ -200,6 +200,9 @@ Loader.prototype.loadViewEmployee = function(cb) {
 	 LazyLoad.css('resources/css/addtemp&viewEmp.css');
 	 LazyLoad.js('resources/js/viewEmployee.js', cb);
 	}
-
+Loader.prototype.loadchangePassword = function(dataId){
+	LazyLoad.js('resources/js/employee/changePassword.js', dataId);
+	LazyLoad.css('resources/js/employee/addemp.css');
+}
 
 var Loader = new Loader();

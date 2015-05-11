@@ -35,8 +35,7 @@ ViewEmployee.prototype.viewEmployeedetails=function(empid,content, status,desdat
 
 RequestManager.viewEmployeedatails(input, function(data, success) {
  if(success){
-  
- alert(data.filePath);
+
  var obj=data[0];
  
  var dobformat = new Date(obj.dateOfBirth);

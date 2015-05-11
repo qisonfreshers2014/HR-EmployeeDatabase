@@ -77,12 +77,23 @@ FilterEmp.prototype.handleShow = function() {
 	*/
 	$('#Filter').click(function(){
 		$('.heading1').css("visibility","visible");
-		
-		 this.FilterEmployee();
-		
+		this.FilterEmployee();
 		//this.Filterdata();
 	}.ctx(this));
 	
+	$('#reset').click(function() {
+		//e.preventDefault();
+		//$('.error').css('visibility', 'hidden');
+		$("#gender").val("");
+		$("#datepicker").val("");
+		$("#filter").val("");
+		$("#qualification1").val("");
+		$("#year1").val("");
+		$("#year2").val("");
+		$("#designation").val("");
+	
+
+	}.ctx(this));
 }
 
 
@@ -105,7 +116,7 @@ FilterEmp.prototype.FilterEmployee = function(){
 		 
 		}
 	} 
-				
+   //validations for date of join
 	var x=document.getElementById("datepicker").value;
 	var doj=new Date(x);
 	var today= new Date();
@@ -117,6 +128,7 @@ FilterEmp.prototype.FilterEmployee = function(){
 		return;
 	}
 
+	 //validations for qualification
       var text = document.getElementById("qualification1").value;
 	 
 		if($('#qualification1').val()!="" ){
@@ -133,22 +145,23 @@ FilterEmp.prototype.FilterEmployee = function(){
 			 }
 		 
 		 else if(!(qual.match(regex))){
-					  alert("please enter chacter and only one space");
+					  alert("please enter chacter and only one space is allowed");
 					  return;
-		}
+		 			}
 		}
 		  
+		//validations for year of experience
 		if($('#year1').val()!="" ){
 		var year=	$('#year1').val();
-			var num	= /^[0-9-+]+$/;
+			var num	= /^[0-9.]+$/;
 			if(!(year.match(num))){
 				alert("enter only numbers for FROM");
 				return;
+				}
 			}
-		}
 		if($('#year2').val()!="" ){
 			var year1=	$('#year2').val();
-				var num	= /^[0-9-+]+$/;
+				var num	= /^[0-9.]+$/;
 				if(!(year1.match(num))){
 					alert("enter only numbers for TO");
 					return;
@@ -204,12 +217,12 @@ FilterEmp.prototype.FilterEmployee = function(){
 	    }
 	   
 			  		  
-			   var i;
-				   for(i = 0; i < data.length; i++) {
-				       var item = data[i];
+	   var i;
+	   for(i = 0; i < data.length; i++) {
+        var item = data[i];
 				       
 	 					 
-			//$('#displayData').append('<table></table>');
+	//$('#displayData').append('<table></table>');
 			$('#displayData').append("<tr><td>"+item.employeeId+"</td><td>"+item.employeeName+"</td><td>"+item.gender+"</td><td>"
 			+new Date(item.dateOfBirth).getFullYear()+"-"+(new Date(item.dateOfBirth).getMonth()+1)+"-"+new Date(item.dateOfBirth).getDate()+"</td><td>"
 			+new Date(item.dateOfJoining).getFullYear()+"-"+(new Date(item.dateOfJoining).getMonth()+1)+"-"+new Date(item.dateOfJoining).getDate()+"</td><td>"+item.email+"</td><td>"+item.fathersName+"</td><td>"

@@ -3,11 +3,13 @@ package com.hred.handler;
 import java.sql.Timestamp;
 import java.util.List;
 
+import com.hred.common.Constants;
 import com.hred.exception.AllHandsMeetingException;
 import com.hred.exception.ExceptionCodes;
 import com.hred.exception.ExceptionMessages;
 import com.hred.exception.ObjectNotFoundException;
 import com.hred.exception.TemplateException;
+import com.hred.handler.annotations.AuthorizeEntity;
 import com.hred.model.AllHandsMeeting;
 import com.hred.model.ObjectTypes;
 import com.hred.model.Template;
@@ -35,7 +37,7 @@ public class AllHandsMeetingHandler extends AbstractHandler {
 		return INSTANCE;
 	}
 	
-
+	
 	public List<AllHandsMeeting> getAllHandsMeeting()throws AllHandsMeetingException {
 		List<AllHandsMeeting> allhandsmeetinglist = null;
 		AllHandsMeetingDAO AllHandsMeetingDAOImpl = (AllHandsMeetingDAO) DAOFactory.getInstance().getAllHandsMeetingDAO();
@@ -70,7 +72,8 @@ public class AllHandsMeetingHandler extends AbstractHandler {
 		      }
 		 
 	 }
-	public AllHandsMeeting save(AllHandsMeeting allhandsmeetingInput) throws AllHandsMeetingException{
+	 @AuthorizeEntity(roles={Constants.HR})
+	public AllHandsMeeting saveAOP(AllHandsMeeting allhandsmeetingInput) throws AllHandsMeetingException{
 		List<AllHandsMeeting> allhands = getAllHandsMeeting();
 		  
 		Timestamp date=allhandsmeetingInput.getDate();
@@ -83,8 +86,8 @@ public class AllHandsMeetingHandler extends AbstractHandler {
 	}
 
 	
-	
-	public List<AllHandsMeeting> getAllHandsMeetingById(AllHandsMeeting allhandsmeeting) throws AllHandsMeetingException{
+	@AuthorizeEntity(roles={Constants.HR})
+	public List<AllHandsMeeting> getAllHandsMeetingByIdAOP(AllHandsMeeting allhandsmeeting) throws AllHandsMeetingException{
 		List<AllHandsMeeting> allhandsmeetings = null;
 		AllHandsMeetingDAO allhandsmeetingDAOImpl = (AllHandsMeetingDAO) DAOFactory.getInstance().getAllHandsMeetingDAO();
 		allhandsmeetings = (List<AllHandsMeeting>)allhandsmeetingDAOImpl.getAllHandsMeetingById(allhandsmeeting);
@@ -92,8 +95,8 @@ public class AllHandsMeetingHandler extends AbstractHandler {
 		
 	}
 	
-	
-	public AllHandsMeeting update(AllHandsMeeting allhandsmeeting) throws ObjectNotFoundException, AllHandsMeetingException {
+	@AuthorizeEntity(roles={Constants.HR})
+	public AllHandsMeeting updateAOP(AllHandsMeeting allhandsmeeting) throws ObjectNotFoundException, AllHandsMeetingException {
 		// TODO Auto-generated method stub
 		List<AllHandsMeeting> allhands = getAllHandsMeeting();
 		Timestamp date=allhandsmeeting.getDate();

@@ -184,5 +184,13 @@ RequestManager.prototype.getSearchEmp=function(data,callback){
  RequestManager.prototype.getTemplatename = function(data, callback) {
 	   this.sendToServer('template/gatTemplate', data, callback);
 	  }
+ 
+ RequestManager.prototype.changePassword = function(data, callback) {
+	   this.sendToServer('employee/changePassword', data, callback);
+	  }
+ 
+ 
+ 
+ 
 
 var RequestManager = new RequestManager();

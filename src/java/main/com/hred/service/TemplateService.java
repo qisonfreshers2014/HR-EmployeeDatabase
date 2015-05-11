@@ -119,7 +119,7 @@ public class TemplateService extends BaseService {
   DisplayNotificationHome template = (DisplayNotificationHome) JsonUtil.getObject(request.getPayload(),
     DisplayNotificationHome.class);
 
-  Template subject = TemplateHandler.getInstance().getContentForMail(
+  Template subject = TemplateHandler.getInstance().getContentForMailAOP(
     template);
   return JsonUtil.getJsonBasedOnDescriptor(subject, Template.class);
  }
@@ -138,7 +138,7 @@ public class TemplateService extends BaseService {
    Template template = (Template) JsonUtil.getObject(
      request.getPayload(), Template.class);
 
-   Template output=(Template) TemplateHandler.getInstance().update(template);
+   Template output=(Template) TemplateHandler.getInstance().updateAOP(template);
 
    return JsonUtil.getJsonBasedOnDescriptor(output,Template.class);
   }

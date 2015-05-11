@@ -20,11 +20,11 @@
     margin-top: 3%;
     width: 95%;
 }
-h1 {
+#h1Notification{
     color: brown;
     margin-left: 44%;
 }
-h3 {
+#h3Notification {
     color: brown;
     margin-left: 44%;
 }
@@ -45,5 +45,5 @@ h3 {
           
 .thNotification
 {
-	
+	background-color: #7094b8;
 }

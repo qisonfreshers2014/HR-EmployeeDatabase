@@ -38,7 +38,7 @@ public class AllHandsMeetingService  extends BaseService {
 			throws ObjectNotFoundException, BusinessException,
 			EncryptionException {		
 		AllHandsMeeting allhandsmeeting = (AllHandsMeeting) JsonUtil.getObject(request.getPayload(), AllHandsMeeting.class);
-		AllHandsMeeting output=(AllHandsMeeting) AllHandsMeetingHandler.getInstance().save(allhandsmeeting);		
+		AllHandsMeeting output=(AllHandsMeeting) AllHandsMeetingHandler.getInstance().saveAOP(allhandsmeeting);		
 		return JsonUtil.getJsonBasedOnDescriptor(output,AllHandsMeeting.class);
 	}
 	
@@ -75,7 +75,7 @@ public class AllHandsMeetingService  extends BaseService {
 			EncryptionException {		
 		AllHandsMeeting allhandsmeeting = (AllHandsMeeting) JsonUtil.getObject(request.getPayload(), AllHandsMeeting.class);
 		//AllHandsMeeting output=(AllHandsMeeting) AllHandsMeetingHandler.getInstance().getAllHandsMeetingById(allhandsmeeting);
-		List<AllHandsMeeting> allhandsmeetings = AllHandsMeetingHandler.getInstance().getAllHandsMeetingById(allhandsmeeting);
+		List<AllHandsMeeting> allhandsmeetings = AllHandsMeetingHandler.getInstance().getAllHandsMeetingByIdAOP(allhandsmeeting);
 		return JsonUtil.getJsonBasedOnDescriptor(allhandsmeetings, AllHandsMeeting.class);
 		
 	}
@@ -92,7 +92,7 @@ public class AllHandsMeetingService  extends BaseService {
 			throws ObjectNotFoundException, BusinessException,
 			EncryptionException {		
 		AllHandsMeeting allhandsmeeting = (AllHandsMeeting) JsonUtil.getObject(request.getPayload(), AllHandsMeeting.class);
-		AllHandsMeeting output=(AllHandsMeeting) AllHandsMeetingHandler.getInstance().update(allhandsmeeting);		
+		AllHandsMeeting output=(AllHandsMeeting) AllHandsMeetingHandler.getInstance().updateAOP(allhandsmeeting);		
 		return JsonUtil.getJsonBasedOnDescriptor(output,AllHandsMeeting.class);
 	}
 	

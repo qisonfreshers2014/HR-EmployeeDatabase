@@ -16,10 +16,10 @@ $('#saveAllHand').click(function(){
 
 }
 allHandMeeting.prototype.addAllHandsMeeting=function(){
-	var dateformat=/^\d{4}-\d{2}-\d{2}$/;
+	var dateformat=/^\d{4}-\d{1,2}-\d{1,2}$/;
 	var regex = /^[A-Za-z]+( [A-Za-z]+)*$/;
 	
-	 if($('#datepicker').val()==""&&$('#employee').val()==""&&$('#description').val()==""){
+	 if($('#datepicker').val()==""&&$('#employee').val()==""&&$('#descriptionhand').val()==""){
      	alert("Failed to add,since every field is mandatory");
      }
 	 else if($('#datepicker').val()==""){
@@ -27,7 +27,7 @@ allHandMeeting.prototype.addAllHandsMeeting=function(){
 	 }else if($('#employee').val()==""){
 		 alert("Please Enter Employee Of the Month");
 	 }
-	 else if($('#description').val()==""){
+	 else if($('#descriptionhand').val()==""){
 		 alert("Please Enter Description");
 	 }
 	  	 
@@ -45,7 +45,7 @@ allHandMeeting.prototype.addAllHandsMeeting=function(){
 		 }
 		 
 		 else{
-    var input ={"payload":{"date":$('#datepicker').val() + ' 03:00:00',"employee":$('#employee').val(),"description":$('#description').val()}};
+    var input ={"payload":{"date":$('#datepicker').val() + ' 03:00:00',"employee":$('#employee').val(),"description":$('#descriptionhand').val()}};
 
     RequestManager.addAllHands(input, function(data, success)
     {
@@ -54,8 +54,8 @@ allHandMeeting.prototype.addAllHandsMeeting=function(){
          alert("Successfully Inserted");
          $('#datepicker').val("");
          $('#employee').val("");
-         $('#description').val("");
-           
+         $('#descriptionhand').val("");
+         App.loadAllHandsMeeting();
       
         }else if(data.code == 204){
         	alert("Failed to Add..Date already exists");

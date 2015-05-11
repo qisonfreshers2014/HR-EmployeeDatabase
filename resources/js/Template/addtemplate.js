@@ -45,6 +45,7 @@ RequestManager.addTemplate(input, function(data, success) {
   $('.subject').val("");
   $('.content').val("");
   parseInt($('#fileId').text(""));
+  App.loadtemplateList();
  }else if(data.code==9017){
  
   alert(data.message);
@@ -63,8 +64,8 @@ RequestManager.addTemplate(input, function(data, success) {
 
 AddTemplate.prototype.duplicatevalidation=function(templates){ 
  
-   var char = /^[A-Za-z0-9]+( [A-Za-z]+)*$/;
-   var char1 = /^[A-Za-z0-9.,"]+( [A-Za-z]+)*$/;
+   var char = /^[A-Za-z0-9_]+( [A-Za-z]+)*$/;
+   var char1 = /^[A-Za-z0-9.,"_]+( [A-Za-z]+)*$/;
  var name = $('.templatename').val();
 
  var articleDesc = $('textarea#editor1').val();

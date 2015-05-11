@@ -50,7 +50,7 @@ empHomePage.prototype.checkUser = function(jobRole){
  
  
  if(Boolean(App.hr)&&(!Boolean(App.isDeleted)))
- $("#menudiv").append(' <a href="#" id="hr" class="tabColor">Admin</a>');
+ $("#menudiv1").append(' <a href="#" id="hr" class="tabColor">Admin</a>');
  return true;
 }
 

@@ -28,6 +28,7 @@ import com.hred.service.annotations.RestService;
 import com.hred.service.annotations.ServiceStatus;
 import com.hred.service.annotations.UnSecure;
 import com.hred.service.common.WebserviceRequest;
+import com.hred.service.descriptors.input.ChangePassword;
 import com.hred.service.descriptors.input.EmployeeSearchInputDescriptor;
 import com.hred.service.descriptors.output.DisplayNotificationHome;
 import com.hred.service.descriptors.output.NotificationHomeFilterInputDiscriptor;
@@ -106,7 +107,7 @@ public class EmployeeService extends BaseService {
 			EncryptionException {
 		FilterEmployee employee = (FilterEmployee) JsonUtil.getObject(
 				request.getPayload(), FilterEmployee.class);
-		List<Employee> employees = EmployeeHandler.getInstance().getEmployees(
+		List<Employee> employees = EmployeeHandler.getInstance().getEmployeesAOP(
 				employee);
 		return JsonUtil.getJsonForListBasedOnDescriptor(employees,
 				Employee.class, EmployeeListOutputDescriptors.class);
@@ -150,7 +151,7 @@ public class EmployeeService extends BaseService {
 				Employee.class);
 
 		Employee output = (Employee) EmployeeHandler.getInstance()
-				.hrUpdateEmployee(employee);
+				.hrUpdateEmployeeAOP(employee);
 
 		return JsonUtil.getJsonBasedOnDescriptor(output, Employee.class);
 	}
@@ -216,28 +217,27 @@ public class EmployeeService extends BaseService {
 		return JsonUtil.getJsonForListBasedOnDescriptor(employees,
 				EmployeeSearchInputDescriptor.class, Employee.class);
 	}
-
 	@POST
-	@RestService(input = String.class, output = String.class)
-	@ServiceStatus(value = "complete")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/viewEmployee")
-	@UnSecure
-	public String viewEmployee(@Context HttpHeaders headers,
-			@Context UriInfo uriInfo, WebserviceRequest request)
-			throws ObjectNotFoundException, BusinessException,
-			EncryptionException, EmployeeException {
+	 @RestService(input = String.class, output = String.class)
+	 @ServiceStatus(value = "complete")
+	 @Consumes(MediaType.APPLICATION_JSON)
+	 @Produces(MediaType.APPLICATION_JSON)
+	 @Path("/viewEmployee")
+	 @UnSecure
+	 public String viewEmployee(@Context HttpHeaders headers,
+	   @Context UriInfo uriInfo, WebserviceRequest request)
+	   throws ObjectNotFoundException, BusinessException,
+	   EncryptionException, EmployeeException {
 
-		Employee employee = (Employee) JsonUtil.getObject(request.getPayload(),
-				Employee.class);
-		List<Employee> employees = (List<Employee>) EmployeeHandler
-				.getInstance().viewEmployee(employee);
-		System.out.println("COunt : " + employees.size());
-		// String outputString =
-		// "{\"status\": \"SUCCESS\", \"payload\": \"Test Successful\"}";
-		return JsonUtil.getJsonBasedOnDescriptor(employees, Employee.class);
-	}
+	  Employee employee = (Employee) JsonUtil.getObject(request.getPayload(),
+	    Employee.class);
+	  List<Employee> employees = (List<Employee>) EmployeeHandler
+	    .getInstance().viewEmployee(employee);
+	  System.out.println("COunt : " + employees.size());
+	  // String outputString =
+	  // "{\"status\": \"SUCCESS\", \"payload\": \"Test Successful\"}";
+	  return JsonUtil.getJsonBasedOnDescriptor(employees, Employee.class);
+	 }
 
 	@POST
 	@RestService(input = String.class, output = String.class)
@@ -312,6 +312,25 @@ public class EmployeeService extends BaseService {
 				DisplayNotificationHome.class, DisplayNotificationHome.class);
 	}
 
+	@POST
+	@RestService(input = String.class, output = String.class)
+	@ServiceStatus(value = "complete")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/changePassword")
+	 @UnSecure
+	public String changePassword(@Context HttpHeaders headers,
+			@Context UriInfo uriInfo, WebserviceRequest request) throws EncryptionException, BusinessException {
+
+		ChangePassword changePasswordEmployee = (ChangePassword) JsonUtil.getObject(request.getPayload(),
+				ChangePassword.class);
+		EmployeeHandler
+		.getInstance().changePassword(changePasswordEmployee);
+		return JsonUtil.getJsonBasedOnDescriptor(changePasswordEmployee, ChangePassword.class);
+	
+	}
+	
+	
 	@POST
 	@RestService(input = String.class, output = String.class)
 	@ServiceStatus(value = "complete")

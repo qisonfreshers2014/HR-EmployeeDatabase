@@ -30,12 +30,12 @@ Login.prototype.handleShow = function() {
     var  token = data.sessionToken;
          setCookie('hredSessionToken', token, null);
     console.log("************************");
-    var name=data.employee.employeeName;
-       var gender=data.employee.gender;
-       var contactNo=data.employee.contactNo;
-       var employeeId=data.employee.employeeId;
+    var name=data.employeeDetails.employeeName;
+       var gender=data.employeeDetails.gender;
+       var contactNo=data.employeeDetails.contactNo;
+       var employeeId=data.employeeDetails.employeeId;
        var hr=data.roleHr;
-       var isDeleted=data.employee.deleted;
+       var isDeleted=data.employeeDetails.deleted;
     App.loadEmployeePage(name,hr,isDeleted);
     App.loadFooter();
     App.loadEmployee(gender,contactNo,employeeId);

@@ -181,5 +181,9 @@ App.prototype.loadViewEmployee=function(empid){
 	 });
 	}
 
-
+App.prototype.loadchangePassword = function(employeeId) {
+	Loader.loadchangePassword(function() {
+		new changePassword(employeeId);
+	});
+}
 var App = new App();
