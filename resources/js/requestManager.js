@@ -163,7 +163,10 @@ RequestManager.prototype.getHolidaysData=function(data,callback){
 RequestManager.prototype.getHoliday=function(data,callback){
  this.sendToServer('holiday/getHolidayId', data, callback);
 }
- 
+RequestManager.prototype.getHolidayByDate=function(data,callback){
+	 this.sendToServer('holiday/holidayByDate', data, callback);
+
+	}
 RequestManager.prototype.dynamicallyEdit=function(data,callback){
  this.sendToServer('holiday/updateHoliday', data, callback);
 
@@ -189,7 +192,9 @@ RequestManager.prototype.getSearchEmp=function(data,callback){
 	   this.sendToServer('employee/changePassword', data, callback);
 	  }
  
- 
+ RequestManager.prototype.updateDesignationDetails=function(data,callback){
+	 this.sendToServer('employee/updateDesignation', data, callback);
+} 
  
  
 

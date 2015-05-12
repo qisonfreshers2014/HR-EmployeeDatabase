@@ -27,7 +27,7 @@ EditEmployee.prototype.validateEditEmp = function(employeeId) {
 			console.dir(data);
 			$("#contnum").val(object.contactNo);
 			$("#emal").val(object.email);
-			$("#password").val(object.password);
+			// $("#password").val(object.password);
 			$("#txtemercon").val(object.emergencycontactnumber);
 			$("#txtemname").val(object.emergencyContactName);
 			$("#relation").val(object.relationWithEmergencyConatact);
@@ -76,13 +76,13 @@ EditEmployee.prototype.validateUpdateEmp = function(employeeId) {
 		$('.error').css('visibility', 'visible');
 
 		if (contnum == "") {
-			$(cnumerr).text("required field");
+			$(cnumerr).text("Required field");
 			$(cnumerr).css("color", "red");
 		} else if (contnum == isNaN || !(contnum.match(num))) {
-			$(cnumerr).text("only numbers allowed");
+			$(cnumerr).text("Only numbers allowed");
 			$(cnumerr).css("color", "red");
 		} else if (!(contnum.length == 10)) {
-			$(cnumerr).text("please enter 10 digits only");
+			$(cnumerr).text("Please enter 10 digits only");
 			$(cnumerr).css("color", "red");
 		} else {
 			$(cnumerr).text("");
@@ -91,13 +91,13 @@ EditEmployee.prototype.validateUpdateEmp = function(employeeId) {
 		}
 
 		if (txtemercon == "") {
-			$(emnumerr).text("required field");
+			$(emnumerr).text("Required field");
 			$(emnumerr).css("color", "red");
 		} else if (txtemercon == isNaN || !(txtemercon.match(num))) {
-			$(emnumerr).text("only numbers allowed");
+			$(emnumerr).text("Only numbers allowed");
 			$(emnumerr).css("color", "red");
 		} else if (!(txtemercon.length == 10)) {
-			$(emnumerr).text("please enter 10 digits only");
+			$(emnumerr).text("Please enter 10 digits only");
 			$(emnumerr).css("color", "red");
 		} else {
 			$(emnumerr).text("");
@@ -114,13 +114,13 @@ EditEmployee.prototype.validateUpdateEmp = function(employeeId) {
 		 */
 
 		if (txtemname == "") {
-			$(emnameerr).text("required field");
+			$(emnameerr).text("Required field");
 			$(emnameerr).css("color", "red");
 		} else if (!(txtemname.match(char) || txtemname == isNaN)) {
-			$(emnameerr).text("enter characters only");
+			$(emnameerr).text("Enter characters only");
 			$(emnameerr).css("color", "red");
 		} else if (txtemname.length < 2) {
-			$(emnameerr).text("please enter min 3 characters");
+			$(emnameerr).text("Please enter min 3 characters");
 			$(emnameerr).css("color", "red");
 		} else {
 			$(emnameerr).text("");
@@ -128,21 +128,8 @@ EditEmployee.prototype.validateUpdateEmp = function(employeeId) {
 
 		}
 
-		if (password == "") {
-			$(pwderr).text("required field");
-			$(pwderr).css("color", "red");
-		} else if (!(password.match(pwepattern))) {
-			$(pwderr)
-					.text(
-							"Must be at least 8 characters,At least 1 number, 1 lowercase, 1 uppercase letter, At least 1 special character");
-			$(pwderr).css("color", "red");
-		} else {
-			$(pwderr).text("");
-			// $(pwderr).css("color", "green");
-		}
-
 		if (currentaddr == "") {
-			$(currentaddrerr).text("required field");
+			$(currentaddrerr).text("Required field");
 			$(currentaddrerr).css("color", "red");
 		} else {
 			$(currentaddrerr).text("");
@@ -151,7 +138,7 @@ EditEmployee.prototype.validateUpdateEmp = function(employeeId) {
 		}
 
 		if (peraddr == "") {
-			$(peraddrerr).text("required field");
+			$(peraddrerr).text("Required field");
 			$(peraddrerr).css("color", "red");
 		} else {
 			$(peraddrerr).text("");
@@ -160,10 +147,10 @@ EditEmployee.prototype.validateUpdateEmp = function(employeeId) {
 		}
 
 		if (relation == "") {
-			$(relationerr).text("required field");
+			$(relationerr).text("Required field");
 			$(relationerr).css("color", "red");
 		} else if (!(relation.match(char) || relation == isNaN)) {
-			$(relationerr).text("enter characters only");
+			$(relationerr).text("Enter characters only");
 			$(relationerr).css("color", "red");
 		} else {
 			$(relationerr).text("");
@@ -171,20 +158,51 @@ EditEmployee.prototype.validateUpdateEmp = function(employeeId) {
 		}
 
 		if (skype == "") {
-			$(skypeerr).text("required field");
+			$(skypeerr).text("Required field");
 			$(skypeerr).css("color", "red");
 		} else if (!(skype.match(qual) || skype.match(letters))) {
-			$(skypeerr).text("please enter a valid skype ID");
+			$(skypeerr).text("Please enter a valid skype ID");
 			$(skypeerr).css("color", "red");
 		} else if (!(skype.length > 5)) {
-			$(skypeerr).text("please enter minimum 6 letters");
+			$(skypeerr).text("Please enter minimum 6 letters");
 			$(skypeerr).css("color", "red");
 		} else {
 			$(skypeerr).text("");
 		}
 
-	} else {
+	} else if (contnum == isNaN || !(contnum.match(num))) {
+		$(cnumerr).text("Only numbers allowed");
+		$(cnumerr).css("color", "red");
+	} else if (!(contnum.length == 10)) {
+		$(cnumerr).text("Please enter 10 digits only");
+		$(cnumerr).css("color", "red");
+	} else if (!(txtemname.match(char) || txtemname == isNaN)) {
+		$('.error').css('visibility', 'visible');
+		$(emnumerr).text("");
+		$(emnameerr).text("Enter characters only");
+		$(emnameerr).css("color", "red");
+	} else if (!(txtemercon.length == 10)) {
+		$(emnumerr).text("Please enter 10 digits only");
+		$(emnumerr).css("color", "red");
+	} else if (!(skype.match(qual) || skype.match(letters))) {
+		$('.error').css('visibility', 'visible');
+		$(relationerr).text("");
+		$(blodderr).text("");
+		$(skypeerr).text("Please enter a valid skype ID");
+		$(skypeerr).css("color", "red");
+	} else if (!(relation.match(char) || relation == isNaN)) {
+		$('.error').css('visibility', 'visible');
+		$(emnameerr).text("");
+		$(relationerr).text("Enter characters only");
+		$(relationerr).css("color", "red");
+	} else if (txtemercon == isNaN || !(txtemercon.match(num))) {
+		$('.error').css('visibility', 'visible');
+		$(emnumerr).text("Only numbers allowed");
+		$(emnumerr).css("color", "red");
+	}
 
+	else {
+		$('.error').css('visibility', 'hidden');
 		var input = {
 			"payload" : {
 				"employeeId" : employeeId,
@@ -192,7 +210,7 @@ EditEmployee.prototype.validateUpdateEmp = function(employeeId) {
 				"currentAddress" : currentaddr,
 				"permanentAddress" : peraddr,
 				"email" : email,
-				"password" : password,
+				// "password" : password,
 				"emergencycontactnumber" : txtemercon,
 				"emergencyContactName" : txtemname,
 				"relationWithEmergencyConatact" : relation,
@@ -202,7 +220,8 @@ EditEmployee.prototype.validateUpdateEmp = function(employeeId) {
 		RequestManager.updateEmp(input, function(data, success) {
 			if (success) {
 				console.dir(data);
-				alert("Your Details Successfully Updated");
+				alert("Employee Details Successfully Updated");
+				App.loadempviewemployee(employeeId);
 			} else {
 				alert("failed to Update the Details");
 			}

@@ -1,12 +1,15 @@
 package com.hred.handler;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.hred.exception.EmployeeException;
 import com.hred.exception.ExceptionCodes;
 import com.hred.exception.ExceptionMessages;
 import com.hred.exception.SkillsException;
  
+import com.hred.model.Employee;
 import com.hred.model.Skills;
 import com.hred.persistence.dao.DAOFactory;
  
@@ -49,6 +52,10 @@ public class SkillsHandler extends AbstractHandler {
                    ExceptionMessages.SKILLNAME_ALREADY_EXISTS);
                 }    
       }   */
+	 
+	  
+	 
+	 
       if(skillName == null || skillName.isEmpty()|| skillName.trim().isEmpty()) {
   		throw new SkillsException(ExceptionCodes.Skills_DOESNOT_EXIST,ExceptionMessages.Skills_DOESNOT_EXIST);
   		}
@@ -63,10 +70,18 @@ public class SkillsHandler extends AbstractHandler {
       
       }
 	
-	public Skills save(Skills skills) throws SkillsException{
+	public Skills save(Skills skills) throws SkillsException, EmployeeException{
 	List<Skills> skill = getSkillsDetails();
-	//List<Skills> skill = getSkillsDetails(skills);
-		  String skillName = skills.getSkills();
+	Employee emp=new Employee();
+	EmployeeHandler emphandler=EmployeeHandler.getInstance();
+	emp=emphandler.getEmployeeById(skills.getEmpId());
+	if(emp==null)
+	{
+		throw new EmployeeException(ExceptionCodes. EMPLOYEE_DOESNOT_EXIST,ExceptionMessages. EMPLOYEE_DOESNOT_EXIST);
+	}
+	else
+	{
+		 String skillName = skills.getSkills();
 		  boolean trainingAttended = skills.isTrainingAttended();
 		  int empId = skills.getEmpId();
 		  String rating =skills.getRating();
@@ -79,6 +94,8 @@ public class SkillsHandler extends AbstractHandler {
 		return skillssaved;
 	}
 	 
+	}
+	 
 
 	public List<Skills> getEditSkills(Skills skills) throws SkillsException {
 		List<Skills> skill = null;
@@ -86,5 +103,12 @@ public class SkillsHandler extends AbstractHandler {
 		skill = (List<Skills>) skillsDAOImpl.getEditSkills(skills);
 		return skill;
 	}
-
+	
+	 public List<com.hred.model.Skills> getSkillsById(int empId) {
+		  List<Skills> skill = null;
+		  SkillsDAO skillsDAOImpl = (SkillsDAO) DAOFactory.getInstance().getSkillDAO();
+		  skill = (List<Skills>) skillsDAOImpl.getSkillsById(empId);
+		  
+		  return skill;
+		 }
 }

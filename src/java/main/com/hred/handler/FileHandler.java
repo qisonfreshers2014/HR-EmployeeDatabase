@@ -79,11 +79,9 @@ public class FileHandler extends AbstractHandler {
     } 
     
     
-     public File getFiles(String file_id) throws ObjectNotFoundException{
-             File veiwFile= new File();
-            if(null!=file_id && file_id.length()>0){
-            	veiwFile =DAOFactory.getInstance().getFileDAO().getFiles(file_id);
-            }
+     public File getFiles(int file_id) throws ObjectNotFoundException{
+             File veiwFile= new File();           
+            	veiwFile =DAOFactory.getInstance().getFileDAO().getFiles(file_id);            
             return veiwFile;
         }
 

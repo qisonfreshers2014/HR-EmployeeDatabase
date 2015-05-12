@@ -97,21 +97,13 @@ public class InitializationServlet extends HttpServlet {
 
 	
 	public void sendAutomatedNotificationMail()
-
-	 {
-	  Calendar sentAutomatedMailFrom = Calendar.getInstance();
-	   sentAutomatedMailFrom.set(2015, 05, 8, 8, 30, 00);  
-	  NotificationTimer mailTimer=new NotificationTimer();
-	  Timer notificationTimer = new Timer();
-	  notificationTimer.schedule(mailTimer, sentAutomatedMailFrom.getTime(), 24*60*60*1000);
-	 }
-
 	{
 		Calendar sentAutomatedMailFrom = Calendar.getInstance();
 		 sentAutomatedMailFrom.set(2015, 05, 8, 8, 30, 00);		
 		NotificationTimer mailTimer=new NotificationTimer();
 		Timer notificationTimer = new Timer();
 		notificationTimer.schedule(mailTimer, sentAutomatedMailFrom.getTime(), 24*60*60*1000);
+		//notificationTimer.schedule(mailTimer, 0, 24*60*60*1000);
 		
 	}
 	public void copyFileUploadsToServer() throws IOException

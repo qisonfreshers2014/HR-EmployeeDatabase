@@ -83,6 +83,27 @@ public class HolidayService extends BaseService {
 		return JsonUtil.getJsonBasedOnDescriptor(output,Holiday.class);
 	}
 	
+	//service for getting Holiday by date
+	  @POST
+	  @RestService(input = String.class, output = Holiday.class)
+	  @ServiceStatus(value = "complete")
+	  @Consumes(MediaType.APPLICATION_JSON)
+	  @Produces(MediaType.APPLICATION_JSON)
+	  @Path("/holidayByDate")
+	  @UnSecure
+	  public String getHolidayByDate(
+	    @Context HttpHeaders headers, @Context UriInfo uriInfo,
+	    WebserviceRequest request) throws ObjectNotFoundException,
+	    BusinessException, EncryptionException {
+	  Holiday holiday = (Holiday) JsonUtil.getObject(request.getPayload(),Holiday.class);
+	  Holiday  holidays = (Holiday) HolidayHandler.getInstance().getHolidayByDateAOP(holiday);
+	  return JsonUtil.getJsonBasedOnDescriptor(holidays,Holiday.class);
+	  
+	  }
+	
+	
+	
+	
 	 //service for getting Holiday by Id
 	 @POST
 	 @RestService(input = String.class, output = Holiday.class)

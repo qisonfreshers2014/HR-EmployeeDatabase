@@ -16,18 +16,19 @@ editdesignation.prototype.handleShow = function(empid, name, dojoin) {
 	var doj1 = dojoin;
 	$('#employeeName1').val(empName1);
 	$('#doj').val(doj1);
+	var currentYear = (new Date).getFullYear();
 	$("#datepicker").datepicker({
 		dateFormat : 'yy-mm-dd',
 		showButtonPanel : true,
 		changeMonth : true,
 		changeYear : true,
 		showAnim : 'drop',
-		minDate : new Date(1993, 12, 31),
-		maxDate : new Date(2050, 12, 31)
+		minDate : new Date((currentYear-1),1,1),
+		maxDate : new Date()
 	});
 	$("#datepicker").datepicker("setDate", new Date());
 	this.getDesignationHistory(empid);
-
+	
 	$('#save_designations').click(
 			function() {
 				this.validateDesignation();
@@ -43,103 +44,87 @@ editdesignation.prototype.handleShow = function(empid, name, dojoin) {
 		$("#designation").val("");
 		$("#salary").val("");
 		$("#variablePay").val("");
+		$("#datepicker").datepicker("setDate", new Date());
 		// for error messages
 		$('#isSEmpty').text("");
 		$('#isDEmpty').text("");
 		$('#isVPEmpty').text("");
 		$('#isDesignationEmpty').text("");
 	});
+	$('#backDes').click(function(){
+		App.loadViewEmployee(empid);
+	});
 
 }
+
 editdesignation.prototype.validateDesignation = function() {
-
-	this.salaryValidate();
-
-	this.dateValidate();
-
-	this.variablePayValidate();
-	this.dropDownValidate();
-
-}
-
-//salary validations
-editdesignation.prototype.salaryValidate = function() {
 	var salary = $('#salary').val();
-	var letters = /^\d{0,10}(?:\.\d{0,2})?$/;
-	if(salary=="")
-	{
-		$('#isSEmpty').text("Please enter salary");
-		salaryVal=0;
-	    return false;
-	}
-	else
-	{
-		$('#isSEmpty').text("");
-		salaryVal=1;
-	}
-	if (salary.match(letters)) {
-		$('#isSEmpty').text("");
-		salaryVal = 1;
-	} else {
-		$('#isSEmpty').text("Please enter numbers only");
-		salaryVal = 0;
+	var desId = $("#designation").val();
+	var varPay = $("#variablePay").val();
+	var date1=$("#datepicker").val();
+	if ((desId == "0")&&(salary=="")) {
+		alert("Please enter all the mandatory fields");
+		dateVal = 0;
 		return false;
 
 	}
-}
-
-// date validations
-editdesignation.prototype.dateValidate = function() {
-	var date1=$("#datepicker").val();
 	if (date1 == "") {
-		$('#isDEmpty').text("Please enter date");
+		alert("Please enter date");
 		dateVal = 0;
 		return false;
 
 	} else {
-		$('#isDEmpty').text("");
 		dateVal = 1;
 	}
 	var letters = /^(19|20)\d\d-(0\d|1[012])-(0\d|1\d|2\d|3[01])$/;
 	if(date1.match(letters))//format for date picker
 	{
-		$('#isDEmpty').text("");
 		dateVal = 1;
 	}
 	else
 	{
-		$('#isDEmpty').text("Please enter date in yyyy-mm-dd format");
+		alert("Please enter date in yyyy-mm-dd format");
 		dateVal = 0;
 		return false;
 	}
-}
+	
+	if (desId == "0") {
+		alert("Please Select Designation");
+		dropDownVal = 0;
+		return false;
+	} else {
+		dropDownVal = 1;
+	}
+	var letters = /^\d{0,10}(?:\.\d{0,2})?$/;	
+	if(salary=="")
+	{
+		alert("Please enter salary");
+		salaryVal=0;
+	    return false;
+	}
+	else
+	{
+		salaryVal=1;
+	}
+	if (salary.match(letters)) {
+		salaryVal = 1;
+	} else {
+		alert("Salary accepts numbers only");
+		salaryVal = 0;
+		return false;
 
-// variable pay validations
-editdesignation.prototype.variablePayValidate = function() {
-	var varPay = $("#variablePay").val();
+	}
+
 	var letters = /^\d{0,10}(?:\.\d{0,2})?$/;
 	if (varPay.match(letters)) {
 		$('#isVPEmpty').text("");
 		variablePayVal = 1;
 	} else {
-		$('#isVPEmpty').text("Please enter numbers only");
+		alert("Variable Pay accepts numbers only");
 		variablePayVal = 0;
 		return false;
 	}
-	
-}
 
-// dropdown validations
-editdesignation.prototype.dropDownValidate = function() {
-	var desId = $("#designation").val();
-	if (desId == "0") {
-		$('#isDesignationEmpty').text("Please Select Designation");
-		dropDownVal = 0;
-		return false;
-	} else {
-		$('#isDesignationEmpty').text("");
-		dropDownVal = 1;
-	}
 }
 
 editdesignation.prototype.sendJson = function(empid) {
@@ -148,6 +133,10 @@ editdesignation.prototype.sendJson = function(empid) {
 	var designationId1 = $("#designation").val();
 	var salary1 = $("#salary").val();
 	var variablePay1 = $("#variablePay").val();
+	if(variablePay1=="")
+	{
+		variablePay1=0;
+	}
 	var input = {
 		"payload" : {
 			"empId" : empId,
@@ -157,35 +146,36 @@ editdesignation.prototype.sendJson = function(empid) {
 			"variablePay" : variablePay1
 		}
 	};
-	RequestManager
-			.saveDesignation(
-					input,
-					function(data, success) {
+	RequestManager.saveDesignation(input,function(data, success) {
 
 						if (success) {
 
 							console.log("Successfully added to database");
+							RequestManager.updateDesignationDetails(input,function(data2,success){
+							if(success)
+							{
+								console.log("updated in employee table");
+							}
+							else
+							{
+								console.log("failed to update in employee table");
+							}
+							}.ctx(this));
 							var input1 = {
 								"payload" : {}
 							};
-							RequestManager
-									.getDesignationName(
-											input1,
-											function(data1, success) {
+							RequestManager.getDesignationName(input1,function(data1, success) {
 												if (success) {
-													console
-															.log("Successfully retrieved  from DesType .........");
-													this.appendDesTable(data,
-															data1, status);
+													console.log("Successfully retrieved  from DesType .........");
+													this.appendDesTable(data,data1, status);
 												} else {
-													console
-															.log("Failed to retrieved  from DesType .........");
+													console.log("Failed to retrieved  from DesType .........");
 												}
 
 											}.ctx(this));
 
 						} else if (data.code == 227) {
-							alert("This record already exists");
+							alert("Designation details already exists");
 
 						}
 
@@ -215,7 +205,7 @@ editdesignation.prototype.appendDesTable = function(data, data1, status) {
 	var apprDate = year + "-" + month + "-" + date;
 	table.append("<tr><td>" + desName + "</td><td>" + data.salary + "</td><td>"
 			+ data.variablePay + "</td><td>" + apprDate + "</td></tr>");
-	alert("Sucessfully saved");
+	alert("Sucessfully saved the designation details");
 	$("#datepicker").val("");
 	$("#designation").val("");
 	$("#salary").val("");
@@ -231,32 +221,22 @@ editdesignation.prototype.getDesignationHistory = function(empid) {
 		}
 	};
 
-	RequestManager
-			.getDesignation(
-					input,
+	RequestManager.getDesignation(input,
 					function(data, success) {
 						if (success) {
-							console
-									.log("successfully retrieved  from DesHistory .........");
+							console.log("successfully retrieved  from DesHistory .........");
 							var content = data;
 							var status = success;
 
 							var input1 = {
 								"payload" : {}
 							};
-							RequestManager
-									.getDesignationName(
-											input1,
-											function(data1, success) {
+							RequestManager.getDesignationName(input1,function(data1, success) {
 												if (success) {
-													console
-															.log("successfully retrieved  from DesType .........");
-													this.contentDisplay(
-															content, data1,
-															status);
+													console.log("successfully retrieved  from DesType .........");
+													this.contentDisplay(content, data1,status);
 												} else {
-													console
-															.log("failed to retrieved from DesType");
+													console.log("failed to retrieved from DesType");
 												}
 											}.ctx(this));
 						} else {

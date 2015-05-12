@@ -706,7 +706,7 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 			}
 			
-			String hql="from Employee where is_deleted=0 and   date(dateOfJoining) between date(sysdate())-6 and date(sysdate())";				
+			String hql="from Employee where is_deleted=0 and   date(dateOfJoining) between date(sysdate()) and date(sysdate())-6";				
 			org.hibernate.Query query = session.createQuery(hql);
 			 list  = query.list();
 			
@@ -812,36 +812,44 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 	
 
 
+	
+
 	@SuppressWarnings("unchecked")
 
-	@Override
-	public List<Employee> viewEmployee(Employee employee) {
-		Session session = null;
-		List<Employee> list = null;
-		Transaction tx = null;
-		try {
-			session = getSession();
-			if (null == session) {
-				session = SessionFactoryUtil.getInstance().openSession();
-				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
-			}
-			Criteria createCriteria = session.createCriteria(Employee.class);
-			createCriteria.add(Restrictions.eq("employeeId", employee.getEmployeeId()));
-			list = createCriteria.list();
-		} finally {
-			try {
-				if (tx != null) {
-					tx.commit();
-					if (session.isConnected())
-						session.close();
-				}
-			} catch (HibernateException e) {
+	  @Override
+	  public Employee viewEmployee(int EmployeeId) throws EmployeeException {
+	    Session session = null;
+	     List<Employee> list = null;
+	     Transaction tx = null;
+	     try {
+	      session = getSession();
+	      if (null == session) {
+	       session = SessionFactoryUtil.getInstance().openSession();
+	       tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+	      }
+	      Criteria createCriteria = session.createCriteria(Employee.class);
+	      /*String hql="from Employee where id="+id+"";  
+	      org.hibernate.Query query = session.createQuery(hql);
+	       list  = query.list();*/
+	      createCriteria.add(Restrictions.eq("employeeId", EmployeeId));
+	      list = createCriteria.list();
+	      if (list.size() == 0) {
+	       throw new EmployeeException(ExceptionCodes.EMPLOYEE_DOESNOT_EXIST, ExceptionMessages.EMPLOYEE_DOESNOT_EXIST);
+	        } 
+	     }finally {
+	        try {
+	         if (tx != null) {
+	          tx.commit();
+	          if (session.isConnected())
+	           session.close();
+	         }
+	        } catch (HibernateException e) {
 
-				e.printStackTrace();
-			}
-		}
-		return list;
-	}
+	         e.printStackTrace();
+	        }
+	        }
+	       return list.iterator().next();
+	  }
 
 	@Override
 	public Employee getEmployeeById(String id) throws EmployeeException {

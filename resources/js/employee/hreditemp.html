@@ -1,21 +1,20 @@
-<fieldset class="span4">
-	<table class="table" border="0">
+<fieldset class="span4" style="margin-top:2%;">
+	<table class="table" border="0" style="margin-left:2% ;width:1130px">
 		<tr class="tr">
-			<legend>
-				<h3 class="bar">Personal Details</h3>
-			</legend>
+			
+				<h3 class="bar" style="margin-left:2%;">Personal Details</h3>
+			
 			<th class="th">EID<span class="error">*</span>
 			</th>
 			<td class="td"><input type="text" value="" id="eid"
-				maxlength="8" readonly><br> <span class="error"
-				id="eiderr"></span></td>
+				maxlength="8" readonly><br> <span class="error" id="eiderr"></span></td>
 			<th class="th">Name<span class="error">*</span>
 			</th>
 			<td class="td"><input type="text" value="" id="name"
 				maxlength="40"><br> <span class="error" id="nameerr"></span></td>
 			<th class="th">Gender<span class="error">*</span>
 			</th>
-			<td class="td"><select name="gender" id="gender">
+			<td class="td"><select name="gender" id="gender" style="width:88%">
 					<option value="">Select Gender</option>
 					<option value="Male">Male</option>
 					<option value="Female">Female</option>
@@ -28,18 +27,18 @@
 			<td class="td"><input type="text" class="date" id="dob"
 				placeholder="YYYY-MM-DD" maxlength="16"><br> <span
 				class="error" id="dateerr"></span></td>
-			<th class="th">Blood<span class="error">*</span> Group
+			<th class="th">Blood Group<span class="error">*</span> 
 			</th>
 			<td class="td"><input type="text" name="bloodgroup" id="blood"
-				maxlength="16"><span class="error" id="blooderr"></span></td>
-			<th class="th">Highest<span class="error">*</span> Qualification
+				maxlength="16"><br><span class="error" id="blooderr"></span></td>
+			<th class="th">Highest Qualification<span class="error">*</span>
 			</th>
 			<td class="td"><input type="text" name="highqualification"
-				id="qual" size="29%" maxlength="40"><span class="error"
+				id="qual" size="29%" maxlength="40"><br> <span class="error"
 				id="qualerr"></span></td>
 		</tr>
 		<tr class="tr">
-			<th class="th">Father's<span class="error">*</span> Name
+			<th class="th">Father's Name<span class="error">*</span>
 			</th>
 			<td class="td"><input type="text" name="fathersname"
 				id="fathername" maxlength="40"><br> <span class="error"
@@ -47,98 +46,90 @@
 			<th class="th">Salary<span class="error">*</span>
 			</th>
 			<td class="td"><input type="text" name="salary" id="salary"
-				maxlength="16"><span class="error" id="salerr"></span></td>
+				maxlength="16"><br><span class="error" id="salerr"></span></td>
 			<th class="th">Variable Component</th>
 			<td class="td"><input type="text" name="variable" id="variable"
-				size="29%" maxlength="16"><span class="error"
+				size="29%" maxlength="16"><br><span class="error"
 				id="variableerr"></span></td>
 		</tr>
 		<tr class="tr">
 			<th class="th">Upload File</th>
 			<td colspan="6" class="td"><input type="button" name="file"
-				id="filename" value="Upload Image"><span class="error"
-				id="fileerr"></span></td>
+				id="filename" value="Upload Image"><span id="filepath"></span></td>
 
 		</tr>
 	</table>
 </fieldset>
 
-<fieldset class="span4">
-	<table class="table" border="0">
+<fieldset class="span4" style="margin-top:2%;">
+	<table class="table" border="0" style="margin-left:2% ;width:1130px">
 		<tr class="tr">
-			<legend>
-				<h3 class="bar">Account Details</h3>
-			</legend>
+				<h3 class="bar" style="margin-left:2%;">Account Details</h3>
 			<th class="th">PAN</th>
 			<td class="td"><input type="text" name="pan" id="pannum"
-				maxlength="16"><span class="error" id="panerr"></span></td>
+				maxlength="10"><br><span class="error" id="panerr"></span></td>
 			<th class="th">PF Number</th>
 			<td class="td"><input type="text" name="pf" id="pfnum"
-				maxlength="16"><span class="error" id="pferr"></span></td>
+				maxlength="16"><br><span class="error" id="pferr"></span></td>
 			<th class="th">Bank Account Number</th>
 			<td class="td"><input type="text" name="account" id="accountnum"
-				size="38%" maxlength="16"><span class="error" id="acterr"></span></td>
+				size="38%" maxlength="15"><br><span class="error" id="acterr"></span></td>
 		</tr>
 	</table>
 </fieldset>
 
-<fieldset class="span4">
-	<table class="table" border="0">
-		<legend>
-			<h3 class="bar">Contact Details</h3>
-		</legend>
+<fieldset class="span4" style="margin-top:2%;"> 
+	<table class="table" border="0" style="margin-left:2% ;width:1130px">
+		
+			<h3 class="bar" style="margin-left:2%;">Contact Details</h3>
+		
 		<tr class="tr">
-			<th class="th">Contact<span class="error">*</span> Number
+			<th class="th">Contact Number<span class="error">*</span> 
 			</th>
 			<td class="td"><input type="text" name="num" id="contnum"
-				maxlength="10"><span class="error" id="cnumerr"></span></td>
+				maxlength="10"><br><span class="error" id="cnumerr"></span></td>
 
-			<th class="th">Current<span class="error">*</span> Address
+			<th class="th">Current Address<span class="error">*</span>
 			</th>
 			<td class="td"><textarea rows="5" id="currentaddr"></textarea><br>
 				<span class="error" id="currentaddrerr"></span></td>
-			<th class="th">Permanent<span class="error">*</span> Address
+			<th class="th">Permanent Address<span class="error">*</span>
 			</th>
 			<td class="td"><textarea rows="5" id="peraddr"></textarea><br>
 				<span class="error" id="peraddrerr"></span></td>
 		</tr>
 		<tr class="tr">
-			<th class="th">Emergency<span class="error">*</span> Contact
+			<th class="th">Emergency Contact<span class="error">*</span>
 				Number
 			</th>
 			<td class="td"><input type="text" name="emergency"
-				id="txtemercon" maxlength="10"><span class="error"
+				id="txtemercon" maxlength="10"><br><span class="error"
 				id="emnumerr"></span></td>
-			<th class="th">Emergency<span class="error">*</span> Contact
+			<th class="th">Emergency Contact<span class="error">*</span> 
 				Name
 			</th>
 			<td class="td"><input type="text" name="conname"
-				class="contactname" id="txtemname" maxlength="30"><span
+				class="contactname" id="txtemname" maxlength="30"><br><span
 				class="error" id="emnameerr"></span></td>
-			<th class="th">Relation<span class="error">*</span> with
-				Emergency Contact
+			<th class="th">Relation with
+				Emergency<span class="error">*</span> Contact
 			</th>
 			<td class="td"><input type="text" name="relation"
-				class="relation" id="relation" maxlength="20"><span
+				class="relation" id="relation" maxlength="20"><br><span
 				class="error" id="relationerr"></span></td>
 		</tr>
 		<tr class="tr">
 			<th class="th">Email<span class="error">*</span>
 			</th>
 			<td class="td"><input type="email" name="email" id="emal"
-				maxlength="40" readonly><span class="error" id="emlerr"></span></td>
-			<th class="th">Password<span class="error">*</span>
+				maxlength="40" readonly><br><span class="error" id="emlerr"></span></td>
+			<th class="th">Skype ID<span class="error">*</span>
 			</th>
-			<td class="td"><input type="password" name="password"
-				id="password" maxlength="25" readonly><span class="error"
-				id="pwderr"></span></td>
-			<th class="th">Skype<span class="error">*</span> Account ID
-			</th>
-			<td class="td"><input type="text" name="skype" id="skype"
-				maxlength="30"><span class="error" id="skypeerr"></span></td>
+			<td class="td" colspan="3"><input type="text" name="skype" id="skype"
+				maxlength="30"><br><span class="error" id="skypeerr"></span></td>
 		</tr>
 	</table>
 	<!-- <button type="submit" class="btn btn-primary btn-md" id="hredit">Edit</button> -->
-	<button class="btn btn-primary btn-md" id="hrupdate">Update</button>
-	<button class="btn btn-primary btn-md" id="hrdelete">Delete</button>
+	<center><button class="btn btn-primary btn-md" id="hrupdate">Update</button>
+	<button class="btn btn-primary btn-md" id="hrdelete">Delete</button></center>
 </fieldset>

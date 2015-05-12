@@ -1,18 +1,17 @@
-
-
 <br>
-<h3 id="desHeading">Edit Designation Details</h3>
+<center><h3 id="desHeading">Edit Designation Details</h3></center>
 <br>
+<div id="designationD">
 <div class="desigantionform">
 
 <table class="desTable">
 <tr>
 <th class="desHead">Name</th><td class="desColumn"><input type="text" size="23%" value="" id="employeeName1" readonly></td>
 <th class="desHead">DOJ</th><td class="desColumn"><input type="text" value="" size="23%" id="doj" readonly></td>
+<th class="desHead">Date<span class="mandatoryStar">*</span></th><td class="desColumn"><input type="text" size="23%" id="datepicker"></td>
 </tr>
 
 <tr>
-<th class="desHead">Date<span class="mandatoryStar">*</span></th><td class="desColumn"><input type="text" size="23%" id="datepicker"><br><span class="errorMessage" id="isDEmpty"></span></td>
 <th class="desHead">Designation<span class="mandatoryStar">*</span></th><td class="desColumn"><select id="designation">
 <option value="0">Select Designation</option>
 <option value="1">CEO</option>
@@ -24,28 +23,26 @@
 <option value="7">Senior Software Engineer</option>
 <option value="8">Software Engineer</option>
 <option value="9">Trainee Software Engineer</option>
-</select><br><span  class="errorMessage" id="isDesignationEmpty"></span></td>
+</select></td>
+<th class="desHead">Salary<span class="mandatoryStar">*</span></th> <td class="desColumn"><input type="text" id="salary" size="23%" maxlength="15"></td>
+<th class="desHead">Variable Pay</th> <td class="desColumn"><input type="text" id="variablePay" size="23%" maxlength="15"></td>
 </tr>
 
 <tr>
-<th class="desHead">Salary<span class="mandatoryStar">*</span></th> <td class="desColumn"><input type="text" id="salary" size="23%" maxlength="15"> <br><span class="errorMessage" id="isSEmpty"></span></td>
-<th class="desHead">Variable Pay</th> <td class="desColumn"><input type="text" value="0" id="variablePay" size="23%" maxlength="15"><br><span class="errorMessage"  id="isVPEmpty"></span></td>
-</tr>
-
-<tr>
-<td class="desBColumn" colspan="4" align="center"><input class="btn btn-primary btn-md" type="button" id="save_designations" value="Save">&nbsp;<input class="btn btn-primary btn-md" type="button" id="reset_designations" value="Reset"></td>
+<td class="desBColumn" colspan="6"><input class="btn btn-primary btn-md" type="button" id="save_designations" value="Save">&nbsp;<input class="btn btn-primary btn-md" type="button" id="reset_designations" value="Reset"></td>
 </tr>
 
 </table>
 </div>	
-
+</div>
 <br>
-<h3 id="desHeading">Appraisal History</h3>
+<center><h3 id="desHeading">Appraisal History</h3></center>
 <br>
 <div id="appraisal">
 <table id="appraisalTable" class="table table-hover" border="1">
 <tr><th class="DesHeadColr">Designation</th> <th class="DesHeadColr">Salary</th><th class="DesHeadColr">Variable Pay</th><th class="DesHeadColr">Date</th></tr>
 </table><br>
+<input type="button" class="btn btn-primary btn-md" value="Back" id="backDes">
 </div>
 
 

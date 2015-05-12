@@ -40,8 +40,9 @@ sendNotificationMail.prototype.handleShow = function(event, email, employeeName)
 
        //sending the payload to the server
 	$("#SubmitNotification").click(function() {
-		alert("Sending Mail..........")
+		
 		sendbutton[0].disabled = true;
+		
 		var modifiedcontent =$('#contentfieldNotification').val();
 		var input = {
 			"payload" : {
@@ -51,10 +52,10 @@ sendNotificationMail.prototype.handleShow = function(event, email, employeeName)
 				"modifiedContent":modifiedcontent
 			}
 		};
-console.log(modifiedcontent);
+		alert("Sending Mail..........");
 		RequestManager.getSentManualMail(input, function(data, success) {
 			if (success) {
-				alert("Mail Succesfully Send");
+				alert("Mail succesfully send");
 				var input={};
 				RequestManager.getAllEvents(input, function(data, success) {
 					if (success) {	
@@ -63,9 +64,23 @@ console.log(modifiedcontent);
 					else
 					{
 					App.loadNotificationHomePage(data);
-					alert("No Data Found");
+					alert("No event in the current month");
 							}});
 			}
+			else
+				{
+				alert(" "+data.message);
+				var input={};
+				RequestManager.getAllEvents(input, function(data, success) {
+					if (success) {	
+								App.loadNotificationHomePage(data);
+					}
+					else
+					{
+					App.loadNotificationHomePage(data);
+					alert("No event in the current month");
+							}});
+				}
 
 		});
 	

@@ -4,16 +4,6 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
-
-
-
-
-
-
-
-
 import com.hred.common.Constants;
 import com.hred.common.Utils;
 import com.hred.common.cache.CacheManager;
@@ -26,12 +16,16 @@ import com.hred.exception.ExceptionMessages;
 import com.hred.exception.ObjectNotFoundException;
 import com.hred.exception.UserException;
 import com.hred.handler.annotations.AuthorizeEntity;
+import com.hred.model.DesignationHistory;
+import com.hred.model.DesignationType;
 import com.hred.model.Employee;
+import com.hred.model.EmployeeOutFile;
+import com.hred.model.File;
 import com.hred.model.FilterEmployee;
 import com.hred.model.SendNotificationHistory;
+import com.hred.model.Skills;
 import com.hred.persistence.dao.DAOFactory;
 import com.hred.persistence.dao.EmployeeDAO;
-import com.hred.persistence.dao.SendNotificationHistoryDAO;
 import com.hred.service.common.ServiceRequestContextHolder;
 import com.hred.service.descriptors.input.ChangePassword;
 import com.hred.service.descriptors.input.EmployeeSearchInputDescriptor;
@@ -66,13 +60,42 @@ public class EmployeeHandler extends AbstractHandler {
 		  return employee;
 		 }
 
-	 public List<Employee> viewEmployee(Employee employee) {
-		  List<Employee> employees = null;
-		  EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
-		    .getEmployeeDAO();
-		  employees = (List<Employee>) empDAOImpl.viewEmployee(employee);
-		  return employees;
-		 }
+	 public Employee viewEmployee(int EmployeeId) throws NumberFormatException, BusinessException {
+		   Employee employee = null;
+		   DesignationHistory desgId=null;
+		   DesignationType desgn=null;
+		   EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
+		     .getEmployeeDAO();
+		   employee= (Employee) empDAOImpl.viewEmployee(EmployeeId);
+		   long pathid =employee.getFileId();
+		   File file = FileHandler.getInstance().getFile(pathid);
+		   List<Skills> skill=SkillsHandler.getInstance(). getSkillsById(EmployeeId);
+		   String finalSkills=employee.getSkill();
+		   for(Skills sk:skill){
+		    System.out.println(sk.getSkills());
+		    finalSkills+=" , "+sk.getSkills();
+		   }
+		   System.out.println(finalSkills);
+		   List<DesignationType> desg=DesignationHistoryHandler.getInstance().getDesignationName(desgn);
+		   
+		   String desgName="";
+		   for(DesignationType dg:desg ){
+		   if(dg.getId()==employee.getCurrentDesignation()){
+		    
+		    
+		    desgName +=dg.getName();
+		    
+		   }
+		   }
+		   
+		   EmployeeOutFile employeeout=new EmployeeOutFile(employee);
+		    
+		   employeeout.setDesignationName(desgName);
+		    employeeout.setFilePath(file.getFilePath());
+		    employeeout.setSkill(finalSkills);
+		   return employeeout;
+		   
+		  }
 	
 	public Employee getEmployeeById(String id) throws EmployeeException {
 		Employee employee = null;
@@ -197,11 +220,11 @@ public class EmployeeHandler extends AbstractHandler {
 					ExceptionMessages.EMPLOYEE_EMERNUM_NOT_EMPTY);
 		}
 
-		if (YOE == 0) {
+	/*	if (YOE == 0) {
 			throw new EmployeeException(
 					ExceptionCodes.EMPLOYEE_RATING_NOT_EMPTY,
 					ExceptionMessages.EMPLOYEE_RATING_NOT_EMPTY);
-		}
+		}*/
 
 		if (rating == null || rating.isEmpty()) {
 			throw new EmployeeException(
@@ -348,7 +371,8 @@ public class EmployeeHandler extends AbstractHandler {
 			  empFromDB.setEmergencyContactName(employee.getEmergencyContactName());
 			  empFromDB.setRelationWithEmergencyConatact(employee
 			    .getRelationWithEmergencyConatact());
-			  empFromDB.setPassword(Utils.encrypt(employee.getPassword()));
+			  empFromDB.setDateOfBirth(employee.getDateOfBirth());
+			 // empFromDB.setPassword(Utils.encrypt(employee.getPassword()));
 			  empFromDB.setSkype(employee.getSkype());
 			  empFromDB.setBankAccountNo(employee.getBankAccountNo());
 			  empFromDB.setFathersName(employee.getFathersName());
@@ -572,7 +596,7 @@ public List<DisplayNotificationHome> getWelcomeEmployeeList()
 	welcomeemp = employeeDAOImpl.getWelcomeEmployee();
 	for (Employee welEmp : welcomeemp) {
 		DisplayNotificationHome displayNotificationHome = new DisplayNotificationHome(
-				"WelCome", welEmp.getDateOfJoining(),
+				"Welcome", welEmp.getDateOfJoining(),
 				welEmp.getEmail(), welEmp.getEmployeeName());
 
 		if (notificationHistory.size() != 0) {
@@ -647,7 +671,7 @@ public void changePassword(ChangePassword changePasswordEmployee) throws Encrypt
 	}
 	else if(!passwordValidity)
 	{
-		throw new UserException(ExceptionCodes.INVALID_PASSWORD, ExceptionMessages.INVALID_PASSWORD);
+		throw new UserException(ExceptionCodes.INVALID_OLD_PASSWORD, ExceptionMessages.INVALID_OLD_PASSWORD);
 	}
 	else if(!newPasswordValidity)
 	{
@@ -680,5 +704,25 @@ public List<Employee> getTodayWorkAniversary() throws BusinessException
 	employeeTodayWorkAniversary=employeeDAOImpl.getTodayWorkAniversary();
 	return employeeTodayWorkAniversary;
 }
+
+//updating designation details
+	public Employee updateDesigantionDetails(DesignationHistory desHistory)
+			   throws ObjectNotFoundException, EmployeeException,
+			   EncryptionException {
+
+			  Employee empFromDB = (Employee) DAOFactory.getInstance()
+			    .getEmployeeDAO().getEmployeeById(desHistory.getEmpId());
+			  String salary=""+desHistory.getSalary();
+			  String variablePay=""+desHistory.getVariablePay();
+			  
+			  empFromDB.setSalary(salary);
+			  empFromDB.setCurrentDesignation(desHistory.getDesignationId());
+			  empFromDB.setVariableComponent(variablePay);
+			  EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
+			    .getEmployeeDAO();
+			  Employee employee = (Employee) empDAOImpl.update(empFromDB);
+			  return employee;
+			 }
+
 
 }

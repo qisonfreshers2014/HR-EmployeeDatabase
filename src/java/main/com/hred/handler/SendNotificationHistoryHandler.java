@@ -6,17 +6,28 @@ package com.hred.handler;
  *         
  */
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
+
+import javassist.bytecode.stackmap.BasicBlock.Catch;
 
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
 
+import com.hred.common.ConfigReader;
 import com.hred.common.Constants;
 import com.hred.exception.BusinessException;
 import com.hred.exception.EmployeeException;
+import com.hred.exception.ExceptionCodes;
+import com.hred.exception.ExceptionMessages;
+import com.hred.exception.UserException;
 import com.hred.handler.annotations.AuthorizeEntity;
 import com.hred.model.Employee;
 import com.hred.model.SendNotificationHistory;
@@ -30,7 +41,8 @@ import com.hred.service.descriptors.output.DisplayNotificationHome;
 public class SendNotificationHistoryHandler extends AbstractHandler {
 
 	private static SendNotificationHistoryHandler INSTANCE = null;
-
+	
+	
 	private SendNotificationHistoryHandler() {
 	}
 
@@ -67,12 +79,33 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 //This Method will be used for sending the automated mail by the server
 	
 	public String sentAutomatedMailMail() throws EmailException {
+		
+		String hostName=null;
+		String smtpPort=null;
+		String authenticatorMail=null;
+		String authenticatorPassword=null;
+		String from=null;
+		
+		
 		DisplayNotificationHome requiredContent = new DisplayNotificationHome();
 		 Template template = new Template();
 		TemplateDAO tempDAOImpl = (TemplateDAO) DAOFactory.getInstance()
 				.getTemplateDAO();
 		EmployeeHandler employeeHandler=EmployeeHandler.getInstance();
-
+		
+		try
+		{
+			Properties props = ConfigReader.getProperties(Constants.MAIL_CONFIGURATION_SETTING);
+			hostName=props.getProperty(Constants.HOST_NAME);
+		 smtpPort=props.getProperty(Constants.HOST_NAME);
+		 authenticatorMail=props.getProperty(Constants.AUTHENTICATOR_MAIL);
+		 authenticatorPassword=props.getProperty(Constants.AUTHENTICATOR_PASSWORD);
+		 from=props.getProperty(Constants.SEND_FROM);
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
+		}
 		
 		List<Employee> todaysBithday=null;;
 		List<Employee> todaysWorkAniversay=null;
@@ -106,12 +139,12 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 
 				try {	
 					Email email = new SimpleEmail();
-					email.setHostName("smtp.gmail.com");
+					email.setHostName(hostName);
 					email.setSmtpPort(465);
 					email.setAuthenticator(new DefaultAuthenticator(
-							"hrmsqison@gmail.com", "Qison123"));
+							authenticatorMail, authenticatorPassword));
 					email.setSSLOnConnect(true);
-					email.setFrom("hrmsqison@gmail.com");
+					email.setFrom(from);
 					email.setSubject("Happy Birth Day "+birthday.getEmployeeName());
 					email.addTo(birthday.getEmail());
 					email.setContent(body, "text/html");
@@ -123,6 +156,7 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 					
 						// send message
 										entry.setTemplateId("01");
+										entry.setEventName("Birthday");
 					entry.setEmployeeEmail(birthday.getEmail());
 					entry.setEmployeeName(birthday.getEmployeeName());
 					entry.setDeleted(false);
@@ -148,12 +182,12 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 				String aniversarytext = null;
 				try {
 					Email email = new SimpleEmail();
-					email.setHostName("smtp.gmail.com");
+					email.setHostName(hostName);
 					email.setSmtpPort(465);
 					email.setAuthenticator(new DefaultAuthenticator(
-							"hrmsqison@gmail.com", "Qison123"));
+							authenticatorMail, authenticatorPassword));
 					email.setSSLOnConnect(true);
-					email.setFrom("hrmsqison@gmail.com");
+					email.setFrom(from);
 					email.setSubject("Happy Work Anniversary  "+aniversary.getEmployeeName());
 					email.addTo(aniversary.getEmail());
 					for(Employee addcctomail:AllEmployeesData)
@@ -165,6 +199,7 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 					
 					entry.setEmployeeEmail(aniversary.getEmail());
 					entry.setEmployeeName(aniversary.getEmployeeName());
+					entry.setEventName("Anniversary");
 					entry.setDeleted(false);
 					entry.setTemplateId("02");
 					for (Employee allemployee : AllEmployeesData) {
@@ -192,8 +227,27 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 	// This function will be used to send the mail Mail from the Notification Page
 	@AuthorizeEntity(roles={Constants.HR})
 	public String sentMailAOP(DisplayNotificationHome sentMailToEmployee)
-			throws EmailException {
+			throws EmailException, UserException {
 		{
+			String hostName=null;
+			String smtpPort=null;
+			String authenticatorMail=null;
+			String authenticatorPassword=null;
+			String from=null;
+		
+			try
+			{
+				Properties props = ConfigReader.getProperties(Constants.MAIL_CONFIGURATION_SETTING);
+				hostName=props.getProperty(Constants.HOST_NAME);
+			 smtpPort=props.getProperty(Constants.HOST_NAME);
+			 authenticatorMail=props.getProperty(Constants.AUTHENTICATOR_MAIL);
+			 authenticatorPassword=props.getProperty(Constants.AUTHENTICATOR_PASSWORD);
+			 from=props.getProperty(Constants.SEND_FROM);
+			}
+			catch(IOException e)
+			{
+				e.printStackTrace();
+			}
 			
 				String body=sentMailToEmployee.getModifiedContent();
 
@@ -206,14 +260,15 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+	
 
 			Email email = new SimpleEmail();
-			email.setHostName("smtp.gmail.com");
+			email.setHostName(hostName);
 			email.setSmtpPort(465);
 			email.setAuthenticator(new DefaultAuthenticator(
-					"hrmsqison@gmail.com", "Qison123"));
+					authenticatorMail, authenticatorPassword));
 			email.setSSLOnConnect(true);
-			email.setFrom("hrmsqison@gmail.com");
+			email.setFrom(from);
 			String subjectMail = sentMailToEmployee.getEvent() + " "
 					+ sentMailToEmployee.getEmployeeName();
 			for(Employee addcctomail:AllEmployeesData)
@@ -226,15 +281,18 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 				email.addTo(sentMailToEmployee.getEmployeeEmail());
 				if (sentMailToEmployee.getEvent().equalsIgnoreCase("birthday")) {
 					entry.setTemplateId("01");
+					entry.setEventName("Birthday");
 								
 				
 				} else if (sentMailToEmployee.getEvent().equalsIgnoreCase("Anniversary")) {
 					entry.setTemplateId("02");
+					entry.setEventName("Anniversary");
 					
 							}
 				else
 				{
 					entry.setTemplateId("03");
+					entry.setEventName("Welcome");
 				
 				
 				}
@@ -254,7 +312,9 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 						.getInstance().getSendNotificationHistoryDAO()
 						.saveObject(entry);
 			} catch (EmailException e) {
-				System.out.println("Unable to Send Msg");
+				//System.out.println("Unable to Send Msg");
+				e.printStackTrace();
+				 throw new UserException(ExceptionCodes.UNABLE_TO_SEND_MAIL, ExceptionMessages.UNABLE_TO_SEND_MAIL);
 			}
 			return "{\"status\": \"SUCCESS\", \"payload\": \"Mail Send\"}";
 		}

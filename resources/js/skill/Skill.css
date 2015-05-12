@@ -1,13 +1,21 @@
-
-table,tr,th, td {
-    border: 1px solid black;
+.tble,th,td,tr{
+	border: 1px solid black;
 	border-collapse:collapse;
 	text-align:center;
-	margin-left:3%;
+	margin-left:2%;
 	font-family: Calibri;
  	font-size:12px;
-	
+
 }
+.data1,th,td,tr{
+	border: 1px solid black;
+	border-collapse:collapse;
+	text-align:center;
+	margin-left:2%;
+	font-family: Calibri;
+ 	font-size:12px;
+
+} 
 th{
 	  background-color:#7094b8;
 }
@@ -22,11 +30,13 @@ th,td{
 .right{
 	margin-left:25px;
 }
-.body{
+.body1{
 background-color: lightgray; 
-width:70%;
-height:180%;
-margin-left:3%;
+width:96%;
+height:190%;
+margin-left:2%;
+text-align:center;
+
 font-family:calibri;
 }
 
@@ -40,9 +50,10 @@ font-family:calibri;
 
 .heading1
 {
+	text-align:center;
+	color:#00246B;
+    visibility:hidden;
   
-  margin-left:3%; 
-  visibility:hidden;
 }
 .p{
 	margin-left:12%;
@@ -54,7 +65,11 @@ font-family:calibri;
 	color:red;
 	
 }
- 
+.align{
+	text-align:center;
+	color:#00246B;
+}
+
 .div{
 	margin-left:8%;
 	font-family: Calibri;
@@ -62,65 +77,24 @@ font-family:calibri;
 	font-weight: bold;
 }  
 
-#skillerror1{
-visibility:visible;
-color:red;
-font-size:10px;
-font:calibre;
-}  
-#skillerror2{
-visibility:visible;
-color:red;
-font-size:10px;
-font:calibre;
-}
-#error1{
-visibility:visible;
-color:red;
-font-size:10px;
-font:calibre;
-} 
-#error2{
-visibility:visible;
-color:red;
-font-size:10px;
-font:calibre;
-}
-.inputelement
+
+.element
 {
   font-size:15px;
   font-weight: bold;
   font-family: Calibri;
-  margin-left:7%;
+  margin-left:4%;
 } 
 .inputelement1
 {
-  
-   
+	 font-size:15px;
+ font-weight: bold;
    margin-left:3%;
 } 
-#herror{
-visibility:visible;
-color:red;	
-font-size:12px;
-font:calibre;
-}
-#rerror{
-visibility:visible;
-color:red;
-font-size:12px;
-font:calibre;
+.inputelement2
+{
+	 font-size:15px;
+ font-weight: bold;
+   margin-left:1%;
 } 
-#derror{
-	visibility:hidden;
-	color:red;
-	font-size:12px;
-font:calibre;
-}
-#yerror{
-	visibility:visible;
-	color:red;
-	font-size:12px;
-	margin-left:8%;
-font:calibre;
 } 

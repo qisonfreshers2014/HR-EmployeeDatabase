@@ -1,55 +1,54 @@
-<fieldset class="span4">
-	<table class="table" border="0">
-		<legend>
-			<h3 class="bar">Contact Details</h3>
-		</legend>
+<fieldset class="span4" style="margin-top:2%; height:500px">
+	<table class="table" border="0" style="margin-left:2%; margin-top:1% ;width:1130px">
+		
+			<h3 class="bar" style="margin-left:2%;">Contact Details</h3>
+		
 		<tr class="tr">
-			<th class="th">Contact<span class="error">*</span> Number
+			<th class="th">Contact Number<span class="error">*</span> 
 			</th>
 			<td class="td"><input type="text" name="num" id="contnum"
-				maxlength="10"><span class="error" id="cnumerr"></span></td>
+				maxlength="10"><br><span class="error" id="cnumerr"></span></td>
 
-			<th class="th">Current<span class="error">*</span> Address
+			<th class="th">Current Address<span class="error">*</span>
 			</th>
 			<td class="td"><textarea rows="5" id="currentaddr"></textarea><br>
 				<span class="error" id="currentaddrerr"></span></td>
-			<th class="th">Permanent<span class="error">*</span> Address
+			<th class="th">Permanent Address<span class="error">*</span>
 			</th>
 			<td class="td"><textarea rows="5" id="peraddr"></textarea><br>
 				<span class="error" id="peraddrerr"></span></td>
 		</tr>
 		<tr class="tr">
-			<th class="th">Emergency<span class="error">*</span> Contact
+			<th class="th">Emergency Contact<span class="error">*</span>
 				Number
 			</th>
 			<td class="td"><input type="text" name="emergency"
-				id="txtemercon" maxlength="10"><span class="error"
+				id="txtemercon" maxlength="10"><br><span class="error"
 				id="emnumerr"></span></td>
-			<th class="th">Emergency<span class="error">*</span> Contact
+			<th class="th">Emergency Contact<span class="error">*</span> 
 				Name
 			</th>
 			<td class="td"><input type="text" name="conname"
-				class="contactname" id="txtemname" maxlength="30"><span
+				class="contactname" id="txtemname" maxlength="30"><br><span
 				class="error" id="emnameerr"></span></td>
-			<th class="th">Relation<span class="error">*</span> with
-				Emergency Contact
+			<th class="th">Relation with
+				Emergency<span class="error">*</span> Contact
 			</th>
 			<td class="td"><input type="text" name="relation"
-				class="relation" id="relation" maxlength="20"><span
+				class="relation" id="relation" maxlength="20"><br><span
 				class="error" id="relationerr"></span></td>
 		</tr>
 		<tr class="tr">
 			<th class="th">Email<span class="error">*</span>
 			</th>
 			<td class="td"><input type="email" name="email" id="emal"
-				maxlength="40" readonly><span class="error" id="emlerr"></span></td>
-		
-			<th class="th">Skype<span class="error">*</span> Account ID
+				maxlength="40" readonly><br><span class="error" id="emlerr"></span></td>
+			<th class="th">Skype ID<span class="error">*</span>
 			</th>
-			<td class="td"><input type="text" name="skype" id="skype"
-				maxlength="30"><span class="error" id="skypeerr"></span></td>
+			<td class="td" colspan="3"><input type="text" name="skype" id="skype"
+				maxlength="30"><br><span class="error" id="skypeerr"></span></td>
 		</tr>
 	</table>
 	<!-- <button id="edit" class="btn btn-primary btn-md" type="submit">Edit</button> -->
-	<button id="update" class="btn btn-primary btn-md">Update</button>
+	<center><button id="update" class="btn btn-primary btn-md">Update</button></center>
 </fieldset>

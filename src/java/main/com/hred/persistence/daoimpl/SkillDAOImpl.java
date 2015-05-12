@@ -94,7 +94,36 @@ public class SkillDAOImpl extends BaseDAOImpl implements SkillsDAO{
 	}
 	 
  
-	 
+	@Override
+	 public List<Skills> getSkillsById(int empId) {
+	  Session session = null;
+	  List<Skills> list = null;
+	  Transaction tx = null;
+	  try {
+	   session = getSession();
+	   if (null == session) {
+	    session = SessionFactoryUtil.getInstance().openSession();
+	    tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+	   }
+	   Criteria createCriteria = session.createCriteria(Skills.class);
+	   
+	    createCriteria.add(Restrictions.eq("empId",empId));
+	   list = (List<Skills>)createCriteria.list();
+	   
+	    } finally {
+	    try {
+	     if (tx != null) {
+	      tx.commit();
+	      if (session.isConnected())
+	       session.close();
+	     }
+	    } catch (HibernateException e) {
+
+	     e.printStackTrace();
+	    }
+	    }
+	  return  list;
+	 }	 
 	 
 	 
 	 

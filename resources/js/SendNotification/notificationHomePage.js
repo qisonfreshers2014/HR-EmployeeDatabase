@@ -19,7 +19,7 @@ loadNotificationHomePage.prototype.handleShow = function(data) {
 		var month = res.getMonth() + 1;
 		var dd = res.getDate();
 		
-		out = '<tr><td id="name">' + item.employeeName + '</td><td>' + year
+		out = '<tr><td id="notificationempname">' + item.employeeName + '</td><td>' + year
 				+ '-' + month + '-' + dd + '</td>' + '<td>' + item.event
 				+ '</td><td>' + item.employeeEmail + '</td><td>' + item.status
 				+ '</td>';
@@ -93,18 +93,22 @@ loadNotificationHomePage.prototype.eventChangeCriteria = function() {
 	   
 	   if(fromdatevalidation>todatevalidation )
 	   {
-	   alert("From date should not be greater than the To date")
+	   alert("From date should not be greater than the to date")
 	   this.currentMonthEvents();
 	   }
-	   else if(fromDate =="" || toDate =="")
+	   else if(fromDate =="")
 	     {
-	   alert("Enter the Criteria dates")
-	   this.currentMonthEvents();
-	     }
+	   alert("Please enter from date");
 	
+	     }
+	   else if(toDate =="")
+	     {
+	   alert("Please enter to date");
+	  
+	     }
 	    else if(!fromDate.match(dateformat) || !toDate.match(dateformat) )
 	   {
-	  alert("Invalid Date,Date Formate should be yyyy-mm-dd")
+	  alert("Invalid date,date format should be yyyy-mm-dd")
 	   this.currentMonthEvents();
 	   }
 	   else
@@ -136,7 +140,7 @@ loadNotificationHomePage.prototype.currentMonthEvents = function() {
 	else
 		{
 		App.loadNotificationHomePage(data);
-		alert("No Data Found");
+		alert("No event in current month");
 				}
 	
 	}.ctx(this));

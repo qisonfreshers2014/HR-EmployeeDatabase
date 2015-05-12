@@ -1,15 +1,17 @@
 <div>
-<div class="heading">
-<h3 >Edit Template</h3>
+<div >
+<h3 class="headingAll"><center>Edit Template</center></h3>
 </div>
 <p id="fileId" class="hide"></p>
 <div id="fieldsaddtemplate"  class="inputelement">
-Template Name:<input type="text" class="templatename" maxlength="40" minlength="2"/><span class="mandatoryStar"><sup>*</sup></span><br><br>
+<table id="viewAllTemp">
+<tr><th>Template Name<span class="mandatoryStar"><sup>*</sup></span></th><td class="theadereditAll"><input type="text" class="templatename" id="templatename" maxlength="40" minlength="2"/></td></tr>
 
-Subject :<input type="text" class="subject" id="tempsubject" /><span class="mandatoryStar"><sup>*</sup></span><br><br>
+<tr><th>Subject<span class="mandatoryStar"><sup>*</sup></span></th><td class="theadereditAll"><input type="text" class="subject" id="tempsubject" /></td></tr>
 
-Description :<br>
-  <textarea rows="15" cols="50" name="templateContent" id="templateContent" class="templateContent"></textarea><br><br>
-  <input type="button" class="submit2 btn btn-primary btn-md" value="update" id="updtae" class="updtae"/>
+<tr><th>Description<span class="mandatoryStar"><sup>*</sup></span></th><td class="theadereditAll"><textarea rows="15" cols="50" name="templateContent" id="templateContent" class="templateContent"></textarea></td></tr>
+  </table>
+  <br>
+  <input type="button" class="submit2 btn btn-primary btn-md" value="Update" id="updtae" class="updtae"/>
 </div>
 </div>

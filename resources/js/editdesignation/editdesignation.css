@@ -1,19 +1,18 @@
 #desHeading
 {
   font-size:20px;
-  color:brown;
-  font-weigt:bold;
+  color:#00246B;
+  font-weight:bold;
   margin-left:3%;
   margin-top:1%;
   margin-bottom:1%;
   font-family:calibri;
 
 }
-
 .desigantionform
 {
 	background-color: lightgray; 
-	width:57%;
+	width:94%;
 	height:100%;
 	margin-left:3%;
 	font-family:calibri;
@@ -21,7 +20,7 @@
 #appraisal
 {
 	background-color: white; 
-	width:70%;
+	width:94%;
 	height:100%;
 	margin-left:3%;
 	font-family:calibri;
@@ -33,10 +32,13 @@
     border: 1px solid #66F;
     color: #000;
 }
+
 .desTable {
   border: 0px solid black ;
   border-collapse: separate;
   background-color: lightgray;
+  margin-left:5%;
+  width: 94%;
 }
 
 .desColumn {
@@ -45,17 +47,21 @@
   padding: 19px;
   text-align:left;
 }
+
 .desBColumn
 {
   border: 0px solid black ;
   background-color: lightgray;
   padding: 19px;	
+  text-align:center;
 }
+
 .desHead
 {
  text-align:left;
  background-color: lightgray;
  border: 0px solid black ;
+
 }
 
 .errorMessage
@@ -64,8 +70,9 @@
 .container {
     background-color: #fff;
 }
-.appraisalTable
-{font-size:12px}
+#appraisalTable
+{font-size:12px;
+ width: 100%;}
 .DesHeadColr{
  background-color:#7094b8;
 }

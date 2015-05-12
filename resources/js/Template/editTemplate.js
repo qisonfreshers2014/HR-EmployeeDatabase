@@ -25,7 +25,7 @@ editTemplate.prototype.handleShow=function(dataid){
 
 
 editTemplate.prototype.EditTemplateDetails=function(dataid){
-alert(dataid);
+
 	 var input = {"payload":{"id":dataid}};
 	 RequestManager.getTemplateById(input, function(data, success) {
 		//alert(2);
@@ -64,17 +64,17 @@ editTemplate.prototype.editTemplateDetailsById=function(dataid){
 	
 	
 	 if($('.templatename').val()==""){
-		 alert("Please Enter Template Name");
+		 alert("Please enter template name");
 	 }else if($('.subject').val()==""){
-		 alert("Please Enter Subject");
+		 alert("Please enter subject");
 	 }
 	 else if(articleDesc==""){
-		 alert("Please Enter Description");
+		 alert("Please enter description");
 	 }	 
 	 
 	 
 	 else if($('.templatename').val().charAt(0)==" "||$('.subject').val().charAt(0)==" "){
-		 alert("Please don't enter space as First letter");
+		 alert("Please don't enter space as first letter");
 	 }
 	 else if(!($('.templatename').val()).match(regex))
 		 {
@@ -85,7 +85,7 @@ editTemplate.prototype.editTemplateDetailsById=function(dataid){
 			 alert("Invalid length -minimum 2 characters needed!(Upto 40) ");
 		 }
 	 else if(!($('.subject').val()).match(subjectRegex)){
-		 alert("Please enter only Characters and Numbers with one space for subject");
+		 alert("Please enter only characters and numbers with one space for subject");
 	 }
 		 else{
     var input ={"payload":{"id":dataid,"name":$('.templatename').val(),"subject":$('.subject').val(),"content":articleDesc}};
@@ -93,14 +93,14 @@ editTemplate.prototype.editTemplateDetailsById=function(dataid){
     {
     	//alert(5);
         if(success){
-         alert("Successfully Inserted");
+         alert("Template successfully updated");
          $('.templatename').val("");
          $('.subject').val("");
          $('textarea#templateContent').val("");
          App.loadtemplateList();
         }
         else{
-         alert("Failed to Add");
+         alert("Template failed to update");
         }
     }.ctx(this));
 		 }

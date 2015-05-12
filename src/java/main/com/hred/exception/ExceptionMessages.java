@@ -233,5 +233,7 @@ public interface ExceptionMessages {
 	public static final String NO_EVENT_FOUND = "No event in the selected criteria";
 	public static final String NO_WELCOME_EMPLOYEE = "No Data Found";
 	public static final String INVALID_NEW_PASSWORD = "Unable to Save New Password...New password and confirm password should match";
+	public static final String UNABLE_TO_SEND_MAIL = "Unable To Send Mail";
+	public static final String INVALID_OLD_PASSWORD = "The entered password is not matched with the old saved password";
 }
 

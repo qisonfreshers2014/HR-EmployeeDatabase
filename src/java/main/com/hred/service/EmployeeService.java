@@ -18,12 +18,11 @@ import com.hred.exception.EncryptionException;
 import com.hred.exception.ObjectNotFoundException;
 import com.hred.handler.EmployeeHandler;
 import com.hred.handler.user.AuthenticationHandlerFactory;
+import com.hred.model.DesignationHistory;
 import com.hred.model.Employee;
 import com.hred.model.FilterEmployee;
 import com.hred.model.user.AuthenticationInput;
 import com.hred.model.user.AuthenticationOutput;
-import com.hred.persistence.dao.DAOFactory;
-import com.hred.persistence.dao.EmployeeDAO;
 import com.hred.service.annotations.RestService;
 import com.hred.service.annotations.ServiceStatus;
 import com.hred.service.annotations.UnSecure;
@@ -135,6 +134,9 @@ public class EmployeeService extends BaseService {
 		return JsonUtil.getJsonBasedOnDescriptor(output, Employee.class);
 	}
 
+
+	
+	
 	@POST
 	@RestService(input = String.class, output = String.class)
 	@ServiceStatus(value = "complete")
@@ -231,9 +233,9 @@ public class EmployeeService extends BaseService {
 
 	  Employee employee = (Employee) JsonUtil.getObject(request.getPayload(),
 	    Employee.class);
-	  List<Employee> employees = (List<Employee>) EmployeeHandler
-	    .getInstance().viewEmployee(employee);
-	  System.out.println("COunt : " + employees.size());
+	  Employee employees = (Employee) EmployeeHandler
+	    .getInstance().viewEmployee(employee.getEmployeeId());
+	  //System.out.println("COunt : " + employees.size());
 	  // String outputString =
 	  // "{\"status\": \"SUCCESS\", \"payload\": \"Test Successful\"}";
 	  return JsonUtil.getJsonBasedOnDescriptor(employees, Employee.class);
@@ -344,5 +346,27 @@ public class EmployeeService extends BaseService {
 		boolean isLogout = EmployeeHandler.getInstance().logout();
 		return JsonUtil.getJsonBasedOnDescriptor(isLogout, Boolean.class);
 	}
+	
+	//update designation details	
+			@POST
+			@RestService(input = DesignationHistory.class, output = String.class)
+			@ServiceStatus(value = "complete")
+			@Consumes(MediaType.APPLICATION_JSON)
+			@Produces(MediaType.APPLICATION_JSON)
+			@Path("/updateDesignation")
+			@UnSecure
+			public String updateDesigantionDetails(@Context HttpHeaders headers,
+					@Context UriInfo uriInfo, WebserviceRequest request)
+					throws ObjectNotFoundException, BusinessException,
+					EncryptionException {
+
+				DesignationHistory desHistory = (DesignationHistory) JsonUtil.getObject(request.getPayload(),
+						DesignationHistory.class);
+
+				Employee output = (Employee) EmployeeHandler.getInstance().updateDesigantionDetails(desHistory);
+
+				return JsonUtil.getJsonBasedOnDescriptor(output, Employee.class);
+			}	
+	
 
 }

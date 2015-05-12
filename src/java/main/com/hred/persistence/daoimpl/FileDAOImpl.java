@@ -59,9 +59,9 @@ public class FileDAOImpl extends BaseDAOImpl implements FileDAO {
 		return fileList;
 	}
 
-	public File getFiles(String file_id) throws ObjectNotFoundException {
+	public File getFiles(int file_id) throws ObjectNotFoundException {
 
-		return (File) getObjectById(Integer.parseInt(file_id), ObjectTypes.FILE);
+		return (File) getObjectById(file_id, ObjectTypes.FILE);
 
 	}
 

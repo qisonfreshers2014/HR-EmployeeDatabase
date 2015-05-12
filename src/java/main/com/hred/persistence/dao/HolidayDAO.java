@@ -18,6 +18,8 @@ public interface HolidayDAO extends BaseDAO{
 	
 	public List<Holiday> getHolidays();
 
+	Holiday getHolidayByDate(Holiday holiday);
+
 	/*public Holiday getHolidayById(long id) throws HolidaysException;*/
 	
 	

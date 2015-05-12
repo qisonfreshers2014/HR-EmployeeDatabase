@@ -2,48 +2,45 @@
 #headNotification {
     color: brown;
 }
-#retriveDataNotification{
-    margin-left: 89%;
+#retriveDataNotification {
+   margin-left: 88%;
     margin-top: -5%;
 }
 #datedata {
     float: left;
-    margin-left: 5%;
+    margin-left: 2%;
+    margin-top: -2%;
 }
 #eventsNotification {
     float: left;
-    margin-left: 1%;
-    margin-top: 0;
+    margin-left: 10%;
+    margin-top: -2%;
 }
-#notificationhome {
-    margin-left: 2%;
-    margin-top: 3%;
-    width: 95%;
+
+#h1Notification {
+    color: #00246B;
+     text-align: center;
 }
-#h1Notification{
-    color: brown;
-    margin-left: 44%;
-}
-#h3Notification {
-    color: brown;
-    margin-left: 44%;
-}
+
 #extraActionsNotification {
     padding-top: 3%;
 }
-#dataTableNotification {
-    background-color: lightgrey;
-    margin-top: 3%;
+#dataTableNotification {	
+   
+    margin-top: 2%;
+    margin-left: 2%;
+    margin-right: 2%;
 }
 .dynamicSend {
     margin-top: 1px;
 }
 .mandatory {
-        color:red;
-          font-size:20px;
-          }
-          
-.thNotification
-{
-	background-color: #7094b8;
+    color: red;
+    font-size: 12px;
+}
+.thNotification {
+    background-color: #7094b8;
+}
+#selectevent {
+    margin-left: 2%;
 }

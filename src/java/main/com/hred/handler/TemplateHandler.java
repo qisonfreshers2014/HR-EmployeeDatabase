@@ -3,6 +3,7 @@ package com.hred.handler;
 import java.util.List;
 
 import com.hred.common.Constants;
+import com.hred.exception.BusinessException;
 import com.hred.exception.ExceptionCodes;
 import com.hred.exception.ExceptionMessages;
 import com.hred.exception.ObjectNotFoundException;
@@ -11,6 +12,7 @@ import com.hred.handler.AbstractHandler;
 import com.hred.handler.annotations.AuthorizeEntity;
 import com.hred.model.DesignationType;
 import com.hred.model.Employee;
+import com.hred.model.File;
 import com.hred.model.ObjectTypes;
 import com.hred.model.Objects;
 import com.hred.model.Template;
@@ -117,10 +119,11 @@ public List<Template> getTemplates() {
 	}
 	
 	@AuthorizeEntity(roles={Constants.HR})
-	public Template getContentForMailAOP(DisplayNotificationHome gettemplate) {
+	public Template getContentForMailAOP(DisplayNotificationHome gettemplate) throws BusinessException {
 		Template receivedtemplatesfromdb = new Template();
 		Template templatescontenttoDisplay = new Template();
 		String url = "";
+		long file_id=0;
 		Employee sendNotification=new Employee();
 		EmployeeDAO employeeDAOImpl = DAOFactory.getInstance().getEmployeeDAO();
 		List<Employee> employeeDetails=employeeDAOImpl.getEmployees();
@@ -138,20 +141,24 @@ public List<Template> getTemplates() {
 				sendNotification.setHighestQualification(sendNotificationtoEmp.getHighestQualification());
 				sendNotification.setCurrentDesignation(sendNotificationtoEmp.getCurrentDesignation());
 				sendNotification.setEmail(sendNotificationtoEmp.getEmail());
-				sendNotification.setSkype(sendNotificationtoEmp.getSkype());
+				sendNotification.setSkill(sendNotificationtoEmp.getSkill());
+				file_id=sendNotificationtoEmp.getFileId();
 				break;
 			}
 			
 		}
-		
+		// FileHandler fileHandler=FileHandler.getInstance();
+		// File requiredImg=fileHandler.getFile(file_id);
 		getDesignationName=designationTypeDAOImpl.getDesignationByID(sendNotification);
 		String currentDesignation=getDesignationName.getName();
+
 		if(gettemplate.getEvent().equalsIgnoreCase("WelCome"))
 		{
-	String finalContent="Dear Qisonians,<br/> We take Immense pleasure in welcoming "+ sendNotification.getEmployeeName()+" who has Joined QISON TEAM <br/> ";
+	//	String finalContent="<img src='"+requiredImg.getFilePath()+"' alt='"+sendNotification.getEmployeeName()+"'><br/>";
+		String finalContent ="Dear Qisonians,<br/> We take Immense pleasure in welcoming "+ sendNotification.getEmployeeName()+" who has Joined QISON TEAM <br/> ";
 	finalContent +="He is working as "+currentDesignation+"<br/>";
 			 
- finalContent += sendNotification.getEmployeeName()+" as he likes to be called, he has pursued "+ sendNotification.getHighestQualification()+".<br/> He takes keen interest in "+sendNotification.getSkype()+"<br/>";
+ finalContent += sendNotification.getEmployeeName()+" as he likes to be called, he has pursued "+ sendNotification.getHighestQualification()+".<br/> He has technical knowledge in  "+sendNotification.getSkill()+"<br/>";
 			 
  finalContent += "He can be reached on "+sendNotification.getEmail()+"<br/>";
 			 

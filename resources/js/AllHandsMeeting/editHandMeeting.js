@@ -7,7 +7,7 @@ editHandMeeting.prototype.handleShow=function(dataid){
 	$('.container').show();
 		this.EditHandMeetingDetails(dataid);
 	//click event for update have to write
-		$( "#datepicker" ).datepicker({dateFormat:'yy-mm-dd',showButtonPanel:
+		$( "#editdatepicker" ).datepicker({dateFormat:'yy-mm-dd',showButtonPanel:
 			   true,changeMonth:true,changeYear:true,showAnim:'drop',minDate:new Date(1993,12,31),
 			   maxDate:new Date(2050,12,31)});
 
@@ -44,7 +44,7 @@ editHandMeeting.prototype.EditHandMeetingDetails=function(dataid){
 			  var month = res.getMonth()+1 ;
 			  var date = res.getDate ();
 				   
-			 $('.datepicker').val(year+"-"+month+"-"+date);
+			 $('.editdatepicker').val(year+"-"+month+"-"+date);
 			   $('.editemployee').val(obj.employee);
 			   $('.editdescription').val(obj.description);
 		    //$( "input#clear" ).trigger( "click" );
@@ -59,24 +59,30 @@ editHandMeeting.prototype.editAllHandsMeetingById=function(dataid){
 	var dateformat=/^\d{4}-\d{1,2}-\d{1,2}$/;
 	var regex = /^[A-Za-z]+( [A-Za-z]+)*$/;
 	
+
+	var x=$('#editdatepicker').val();
+	var date=new Date(x);
+	var today= new Date();
 	
 	
-	
-	if($('#datepicker').val()==""){
+	if($('#editdatepicker').val()==""){
 		 alert("Please Enter Date");
-	 }else if($('#editemployee').val()==""){
-		 alert("Please Enter Employee Of the Month");
+	 }else if(date<today){
+		 alert("Please don't enter previous date");
+	 } 
+	else if($('#editemployee').val()==""){
+		 alert("Please enter employee of the month");
 	 }
 	 else if($('#editdescription').val()==""){
-		 alert("Please Enter Description");
+		 alert("Please enter description");
 	 }
-	 else if(!($('#datepicker').val()).match(dateformat)){
-    	 alert("Please enter Date in yyyy-mm-dd Format");
+	 else if(!($('#editdatepicker').val()).match(dateformat)){
+    	 alert("Please enter date in yyyy-mm-dd Format");
      }
 	
 	else  if(!($('#editemployee').val()).match(regex))
 	    		 {
-	    		 alert("Please enter only characters and one space between two words for Employee Of the Month");
+	    		 alert("Please enter only characters and one space between two words for employee of the month");
 	    		 }
 	    	 else 
 	    		 if($('#editemployee').val().length<2)
@@ -86,22 +92,22 @@ editHandMeeting.prototype.editAllHandsMeetingById=function(dataid){
 	    	 	}
 	 
 	 	 else{
-    var input ={"payload":{"id":dataid,"date":$('#datepicker').val() +" 03:00:00" ,"employee":$('#editemployee').val(),"description":$('#editdescription').val()}};
+    var input ={"payload":{"id":dataid,"date":$('#editdatepicker').val() +" 03:00:00" ,"employee":$('#editemployee').val(),"description":$('#editdescription').val()}};
     //alert(4);
     RequestManager.editAllHands(input, function(data, success)
     {
     	//alert(5);
         if(success){
-         alert("Successfully Updated");
-         $('#datepicker').val("");
+         alert("All Hands Meeting Schedule successfully updated");
+         $('#editdatepicker').val("");
          $('#editemployee').val("");
          $('#editdescription').val("");
          App.loadAllHandsMeeting();
         }else if(data.code == 204){
-        	alert("Failed to update..Date already exists");
+        	alert("Date already exists");
         }
         else{
-         alert("Failed to Update");
+         alert("All Hands Meeting Schedule failed to update");
         }
     }.ctx(this));
 	 }	

@@ -73,67 +73,56 @@ skill.prototype.validateSkill=function(){
  	  var training= $("#attended1").val();
  	  var rating= $("#rating").val();
  	   
- 		 
+ 		
  		if(skill=="" && training=="" && empId=="" && rating=="" ){
- 			 alert("Failed to save,since every field is mandatory");
+ 			 alert("Please enter Employee Id");
  			 return;
  		 }
- 		 else if(text.charAt(0)==" ")
+ 		 if(text.charAt(0)==" ")
 		    {
- 	    	alert("First letter should not enter space for skill");
+ 	    	alert("First letter should not be a space");
  	    	 return;
 		    }
- 		else if(text1.charAt(0)==" ")
-	    {
-	    	alert("First letter should not enter space for training");
-	    	 return;
-	    }
+ 		 else if(empId==""){
+ 	    	 alert("Please enter employee Id");
+ 	    	 return;
+ 	     }
  	     else if(skill==""){
-            alert("please enter skill");
+            alert("Please enter skill");
             return;
-            	  }
- 	     else if(training==""){
- 	    	alert("please enter trainingAttended (true/false)");
+           	  }
+ 	   else if(training=="0"){
+ 	    	alert("Please enter trainingAttended");
  	    	 return;
  	     }
- 	     else if(empId==""){
- 	    	 alert("please enter Id");
- 	    	 return;
- 	     }
+ 	    
  	    else if(rating==""){
-            alert("please enter rating");
+            alert("Please enter Rating");
             return;
             	  }
   	   else if(!(skill.match(regex))){
-			alert("please enter charcter with one space for skill");
+			alert("Please enter characters with one space for skill");
 			 return;
 			  }
  	   else if (!(empId.match(num))){
- 		   alert("Please enter only numbers with out space EmpID");
+ 		   alert("Please enter only numbers for EmployeeID");
  		  return;
  	   }
  	   else if(!(rating.match(num))){
- 		  alert("Please enter only numbers for rating");
+ 		  alert("Please enter only numbers for Rating");
  		 return;
  	   }
- 	  else  if(rating.length>2){
- 		    alert("Invalid rating minimum 2 numbers only accepted ");
+ 	  /*else  if(rating.length>2){
+ 		    alert("Enter only two digits ");
  		    return;
- 		   }
+ 		   }*/
  	  else if(!(rating>0 && rating<=10)){
- 		  alert("enter rating b/w 1 to 10");
+ 		  alert("Enter rating between 1 to 10");
  		  return;
  	  }
- 		
- 	   else if(!(training.match(char2))){
- 		   alert("please enter only chacters");
- 		  return;
- 	   }
- 	 else if(!(training=="true" || training=="false")){
- 		   alert("please enter only (true/fase)");
- 		   return;
- 	   }
- 	
+ 		 
+ 	  
+ 		 
 	 
 
 	 	  var input={"payload":{"skills":$('#skill').val(),"trainingAttended":$('#attended1').val(),
@@ -143,7 +132,7 @@ skill.prototype.validateSkill=function(){
 	  	 RequestManager.save(input, function(data, success) {
 	  	 
 	  		if(success){
-	  	 alert("successfully inserted");
+	  	 alert("Skills successfully inserted");
 	  		//$('#displayData').append("<table></table>");
 	  		$('#displayData').append("<tr><td>"+data.skills+"</td><td>"
 			+data.trainingAttended+"</td><td>"+data.empId+"</td><td>"
@@ -160,11 +149,11 @@ skill.prototype.validateSkill=function(){
 		    }.ctx(this));
 		      //$( "input#clear" ).trigger( "click" );		
 			}
-	  		/*else if(data.code == 120001){
-		         alert("Skill Name & EmpId already exist");
-		        }*/
+	  		else if(data.code == 221){
+		         alert("Employee ID doesnot  exist");
+		        }
 			else{
-				  alert("failed to inserted");
+				  alert("Failed to inserted");
 				 
 				}
 		}.ctx(this));

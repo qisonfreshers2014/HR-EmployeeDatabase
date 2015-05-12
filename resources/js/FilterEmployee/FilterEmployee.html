@@ -1,31 +1,29 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<!-- <link rel="stylesheet" href="FilterEmployee.css" > </link>
-<script src="FilterEmployee.js"> 
-</script> -->
+ 
 </head> 
 <br>
 
-<div  class="inputelement1"><h1 style="color:brown"  >Filter Employee</h1></div><br/><br>
-<div class="body"><br>
-<div  class="inputelement">
-<b>Gender <span class="inputelement"></span><span class="inputelement1"></span>&nbsp;:</b> <select id="gender" style="width:20%">
-<option value="" selected>select </option>
+<div class="align"><h1>Filter Employee</h1></div><br/><br>
+<div class="body1"><br>
+<div  class="inputelement1">
+&nbsp;&nbsp;<b>Gender <span class="inputelement1"></span><span class="element"></span>&nbsp;&nbsp;&nbsp;</b> <select id="gender" style="width:19%">
+<option value="" selected>Select </option>
 <option value="Female">Female</option>
 <option value="Male">Male</option> 
-</select>&nbsp;
-<b  class="inputelement">DOJ</b><span class="inputelement"></span><span class="inputelement1"></span><span class="inputelement1"></span>&nbsp; :&nbsp;<input type="text" id="datepicker" size="18"> 
+</select>&nbsp;&nbsp;
+<b  class="element">Date Of Joining</b><span class="inputelement1"></span>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="datepicker" size="25"> 
 <p id="derror"></p> 
 </div>
 
-<div class="inputelement">
-<b>Filter Employees<span class="inputelement1"></span>&nbsp;&nbsp;:&nbsp;</b><select id="filter" style="width:20%">
+<div class="inputelement1">
+<b>&nbsp;&nbsp;Filter Employees<span class="inputelement1"></span>&nbsp;&nbsp;</b><select id="filter" style="width:19%">
 <option value="0">Select Filter</option>
-<option value="1">Active Filter</option>
-<option value="2">InActive Filter</option>
+<option value="1">Active User</option>
+<option value="2">Inactive User</option>
 </select>
-<b class="inputelement">Current Designation&nbsp;&nbsp;&nbsp;&nbsp;:</b> <select id="designation" style="width:20%">
+<b class="element">&nbsp;&nbsp;Current Designation&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b> <select id="designation" style="width:19%">
 <option value="0">Select Designation</option>
 <option value="1">CEO</option>
 <option value="2">COO</option>
@@ -40,35 +38,21 @@
 </div>
 
 <div>
-<b class="inputelement">Highest Qualification&nbsp;:</b> <input type="text" name="qualification" size="18"  id="qualification1" onfocusout="highest_qualification()" maxlength="30"/> 
-<b class="inputelement">Year Of Experience&nbsp; &nbsp;&nbsp;&nbsp;:</b><b style="font-size:15px">&nbsp;From</b> <input type="text" id="year1" maxlength="4" size="4"><b style="font-size:15px">To</b> <input type="text" size="4" id="year2" maxlength="3"><br>
+<b class="element">Highest Qualification<span class="inputelement2"></span></b> <input type="text" name="qualification" size="25"  id="qualification1" onfocusout="highest_qualification()" maxlength="30"/> 
+<b class="element">&nbsp;&nbsp;&nbsp;&nbsp;Year Of Experience&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b><b style="font-size:15px">&nbsp;From</b> <input type="text" id="year1" maxlength="4" size="7"><b style="font-size:15px">To</b> <input type="text" size="7" id="year2" maxlength="3"><br>
 <span  class="p" id="herror"></span> <span class="inputelement"></span><span  class="p" id="yerror"></span>
 </div>
 
-<div  class="inputelement"><span class="right"></span><button type="button"  id="Filter" class="btn btn-primary btn-md">Filter</button>
+<div  class="element"><span class="right"></span><button type="button"  id="Filter" class="btn btn-primary btn-md">Filter</button>
 <button type="reset" value="Reset" class="btn btn-primary btn-md" id="reset">Reset</button></div>
  <br/> 
 </div></br>
 
-<div class="heading1"><h3 style="color:brown"  >Filter Employee Details</h3> </div><br>
-<table id="displayData" class="table table-hover" style="width:60%" >
-
-<!-- <tr>
-<th>Employee Id</th>
-<th>Employee Name</th>
-<th>Gender</th>
-<th>DOB</th>
-<th>DOJ</th>
-<th>Email</th>
-<th>Fathers Name</th>
-<th>Designation</th>
-<th>Highest Qualification</th>
-<th>Skype Id</th>
-<th>Contact No</th>
-<th>Years Of Experience</th>
-
+<div class="heading1"><h3 style="color:#00246B">Filter Employee Details</h3> </div><br>
+ 
+<table id="displayData" class="tble table table-hover" style="width:96%">
+<tr>
 </tr>
- -->
  </table>
 </body>
 </html>

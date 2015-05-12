@@ -9,7 +9,6 @@ TemplateList.prototype.handleShow = function() {
 	
 	$("#btnadd").click(function(){ 
 		
-		
 		App.loadAddTemplate();
 		
 	}.ctx(this));
@@ -26,7 +25,7 @@ TemplateList.prototype.getTemplateName=function(){
 					//  var obj = data[i];
 
 						$('#displayData').append('<table><tbody></tbody></table>');
-						$('#displayData tr:last').after("<tr class='tr'><td>"+value.name+"</td><td><input type='button' value='Edit' id='"+value.id+"' class='dynamicEdit'  class='btn btn-primary btn-md'></td><td><input type='button' value='View' id='"+value.id+"' class='dynamicView' class='btn btn-primary btn-md'></td></tr></table>");
+						$('#displayData tr:last').after("<tr class='tr'><td>"+value.name+"</td><td><input type='button' value='Edit' id='"+value.id+"' class='dynamicEdit btn btn-primary'></td><td><input type='button' value='View' id='"+value.id+"' class='dynamicView btn btn-primary'></td></tr></table>");
 			  });	
 		$('.dynamicEdit').click(function(event){
 			//console.log(event);
@@ -53,8 +52,6 @@ TemplateList.prototype.getTemplateName=function(){
 	 
 }
 TemplateList.prototype.editTemplate=function(dataid){
-	alert(dataid);
-	
 	App.loadViewTemplate(dataid);
 
 }

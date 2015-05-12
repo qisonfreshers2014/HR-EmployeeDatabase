@@ -5,8 +5,7 @@
 .list {
   color: white; 
     font-size: 20px;
-    margin-left: 15%;
-    margin-top: 4%;;
+     margin-left: 5%;
 }
 #fixedheader {
     background-color: #4c6680;
@@ -25,8 +24,8 @@
 }
 #menudiv {
     float: left;
-    margin-left: -11%;
-    margin-top: -1%;
+     margin-left: -4%;
+    margin-top: -2%;
 }
 #span1 {
     margin-top: 8%;
@@ -56,61 +55,68 @@
 /* ------------------Edit template& add&edit all ands meeting----------------------- */
 #fieldsaddtemplate,#fieldsaddhandsmeeting {
  /* border:1px solid black;*/
- padding:10px; 
-
- font-weight:bold;
- color:black;
-  background-color: lightgray;
+  background-color: #d3d3d3;
+    color: #000000;
+    font-weight: bold;
+    margin-left: 3%;
+    margin-right: 3%;
+    margin-top: 2%;
+    padding: 10px;
 }
-.heading {
- color:brown;
+.headingAll {
+ color:#00246B;
 margin-top: 3%;
+ /*  margin-left: 10%; */
 }
 
 .tableHeadingAll {
-  margin-left: 4%;
-   color:brown;
+  /* margin-left: 4%; */
+   color:#00246B;
 margin-top: 3%;
 }
 .mandatoryStar{
 	  color: red;
-    font-size: 21px;
+    font-size: 18px;
  
 }
 .editAllHand{
 	margin-top:0.5%;
 }
 
-.templatename{
+/* .templatename{
 	margin-left: 0.9%;
-}
+}*/
 
-#tempsubject{
-	margin-left:6.5%;
-}
-.templateContent{
+#templateContent{
 	width:80%;
-}
- .container{
+} 
+/* #templateContent,#templatename,#tempsubject{
+	margin-left:4.1%;
+
+} */
+ /* .container{
    background-color:white;
+   min-height:100px;
    
-  }
+  } */
   .submit2{
-    margin-left: 50%;
+    margin-left: 45%;
      margin-bottom: 2%;
   }
   .submit1{
-    margin-left: 25%;
+    margin-left: 45%;
   }
 /*  view all hands meeting  */
 .displayData{
 	
-      margin-left: 5%;
-    width: 90%;
+      margin-left: 2%;
+    width: 96%;
      border:1px solid black;
          border-collapse:collapse;
 }
-
+.allHandMeeting{
+	margin-top: 2%;
+}
 
 td{
 	 color:black;
@@ -119,17 +125,33 @@ td{
 .theader {
  background-color:#7094b8;
  color:black;
+  font-size: 14px;
 }
+/* .theadereditAll{
+	margin-left:45%
+} */
 .inputelement
 {
- font-size:15px;
+ font-size:18px;
  font-weight: bold;
 }
-
-.datepicker{
-	margin-left: 9.5%;
+#viewAll{
+	background-color: lightgray;
+	border: 0;
+	text-align: left;
+	 width:80%;
+	  margin-left: 20%;
 }
-
-#editdescription,#descriptionhand{
-	margin-left: 8.5%;
+#viewAllTemp{
+background-color: lightgray;
+	border: 0;
+	text-align: left;
+	 width:80%;
+	  margin-left: 9%;	
 }
+/* #editdescription,#editemployee,#editdatepicker{
+	margin-left: 0%;
+}
+#employeeAll,#description,#datepicker{
+	margin-left: 0%;
+} */

@@ -9,6 +9,11 @@ hRHomeHeader.prototype.handleShow = function() {
  $('.empName').text(App.userName);
  $('.container').show();
 
+ $('[data-toggle=tab]').click(function(){
+	  if ($(this).parent().hasClass('active')){
+		$($(this).attr("href")).toggleClass('active');
+	  }
+	})
 
  $('#template').click(function(){
  App.loadtemplateList();
@@ -54,8 +59,14 @@ hRHomeHeader.prototype.handleShow = function() {
 	  this.logout();
 	 }.ctx(this));
 	  
+ $('#homeHr').click(function(){
+	  App.loadEmployeePage(App.userName,App.hr,App.isDeleted);
+	     App.loadFooter();
+	     App.loadEmployee(App.contactNo,App.gender,App.employeeId); 
+	  }.ctx(this));
 
 }
+
 
 hRHomeHeader.prototype.logout=function(){
 	 var input={"payload":{}};

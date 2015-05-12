@@ -17,8 +17,8 @@ public class SendNotificationHistory extends AbstractObject {
 	private String employeeName;
 	@Column(name = "employee_id")
 	private int employeeId;
-	@Column(name = "file_id")
-	private int fileId;
+	@Column(name = "event_name")
+	private String eventName;
 	@Column(name = "template_id")
 	private String templateId;
 	
@@ -47,15 +47,18 @@ public class SendNotificationHistory extends AbstractObject {
 
 
 
+
+
+
+
 	public SendNotificationHistory(String employeeEmail, String employeeName,
-			int employeeId, int fileId, String templateId) {
+			int employeeId, String eventName, String templateId) {
 		super();
 		this.employeeEmail = employeeEmail;
 		this.employeeName = employeeName;
 		this.employeeId = employeeId;
-		this.fileId = fileId;
+		this.eventName = eventName;
 		this.templateId = templateId;
-		//this.enteredTime = enteredTime;
 	}
 
 
@@ -110,16 +113,19 @@ public class SendNotificationHistory extends AbstractObject {
 
 
 
-	public int getFileId() {
-		return fileId;
+
+
+
+	public String getEventName() {
+		return eventName;
 	}
 
 
 
 
 
-	public void setFileId(int fileId) {
-		this.fileId = fileId;
+	public void setEventName(String eventName) {
+		this.eventName = eventName;
 	}
 
 

@@ -18,7 +18,7 @@ import com.hred.service.descriptors.output.NotificationHomeFilterInputDiscriptor
  */
 public interface EmployeeDAO extends BaseDAO {
 	
-	List<Employee> viewEmployee(Employee employee);
+	public Employee viewEmployee(int EmployeeId) throws EmployeeException;
 
 	public Employee getUserByEmail(String email) throws UserException;
 

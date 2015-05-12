@@ -14,7 +14,7 @@ import com.hred.model.Skills;
 public interface SkillsDAO extends BaseDAO{
 	
 	 
-
+	public List<Skills> getSkillsById(int empId);
 	public List<Skills> getEditSkills(Skills skills) throws SkillsException;
 
 	 

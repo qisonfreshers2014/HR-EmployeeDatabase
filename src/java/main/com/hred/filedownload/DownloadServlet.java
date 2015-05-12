@@ -56,7 +56,8 @@ public class DownloadServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
-		String file_id = request.getParameter("fileId");
+	/*	String file_id = request.getParameter("fileId");
+		Integer file=file_id.
 		FileDAO fileDAOimpl = (FileDAO) DAOFactory.getInstance().getFileDAO();
 		com.hred.model.File veiwedFile = null;
 		try {
@@ -98,7 +99,7 @@ public class DownloadServlet extends HttpServlet {
 		byte[] readFileToByteArray = FileUtils.readFileToByteArray(file);
 	
 		
-		out.write(readFileToByteArray);
+		out.write(readFileToByteArray);*/
 		
 	}
 

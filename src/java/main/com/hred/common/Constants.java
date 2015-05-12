@@ -19,6 +19,13 @@ public interface Constants {
     public static String UNHANDLED_EXCEPTION_LOGGER = "appunhandledexception";
     public static String BUSINESS_INFODUMPS_LOGGER = "infodumps";
     
+	public static String MAIL_CONFIGURATION_SETTING = "mailConfiguration.properties";
+	public static String HOST_NAME = "hostName";
+	public static String AUTHENTICATOR_MAIL = "authenticatorMail";
+	public static String AUTHENTICATOR_PASSWORD = "authenticatorPassword";
+	public static String SEND_FROM = "from";
+    
+    
     public static final Short NOT_DELETED = 0;
     public static final Short DELETED = 1;
     
