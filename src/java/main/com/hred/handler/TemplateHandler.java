@@ -1,5 +1,6 @@
 package com.hred.handler;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.hred.common.Constants;
@@ -119,21 +120,22 @@ public List<Template> getTemplates() {
 	}
 	
 	@AuthorizeEntity(roles={Constants.HR})
-	public Template getContentForMailAOP(DisplayNotificationHome gettemplate) throws BusinessException {
+	public Template getContentForMailAOP(DisplayNotificationHome gettemplate) {
 		Template receivedtemplatesfromdb = new Template();
 		Template templatescontenttoDisplay = new Template();
-		String url = "";
-		long file_id=0;
+		String finalContent = "";
 		Employee sendNotification=new Employee();
+		File requiredImg=new File();
 		EmployeeDAO employeeDAOImpl = DAOFactory.getInstance().getEmployeeDAO();
-		List<Employee> employeeDetails=employeeDAOImpl.getEmployees();
+		List<Employee> employeeDetails =new ArrayList<Employee>();
+		employeeDetails=employeeDAOImpl.getEmployees();
 		DesignationType getDesignationName=new DesignationType();
 		DesignationTypeDAO designationTypeDAOImpl = (DesignationTypeDAO) DAOFactory.getInstance()
 				.getDesignationTypeDAO();
 		
-		
 		for(Employee sendNotificationtoEmp:employeeDetails)
 		{
+			
 			if(sendNotificationtoEmp.getEmail().equals(gettemplate.getEmployeeEmail()))
 			{
 				sendNotification.setEmployeeName(sendNotificationtoEmp.getEmployeeName());
@@ -141,24 +143,38 @@ public List<Template> getTemplates() {
 				sendNotification.setHighestQualification(sendNotificationtoEmp.getHighestQualification());
 				sendNotification.setCurrentDesignation(sendNotificationtoEmp.getCurrentDesignation());
 				sendNotification.setEmail(sendNotificationtoEmp.getEmail());
-				sendNotification.setSkill(sendNotificationtoEmp.getSkill());
-				file_id=sendNotificationtoEmp.getFileId();
+				sendNotification.setSkype(sendNotificationtoEmp.getSkype());
+				sendNotification.setFileId(sendNotificationtoEmp.getFileId());
+				
 				break;
 			}
 			
 		}
-		// FileHandler fileHandler=FileHandler.getInstance();
-		// File requiredImg=fileHandler.getFile(file_id);
+		FileHandler filehandler=FileHandler.getInstance();
+		if(sendNotification.getFileId()!=0)
+		{
+		try {
+			 requiredImg=filehandler.getFile(sendNotification.getFileId());
+		
+		} catch (BusinessException e) {
+			
+		}	
+		}
 		getDesignationName=designationTypeDAOImpl.getDesignationByID(sendNotification);
 		String currentDesignation=getDesignationName.getName();
-
 		if(gettemplate.getEvent().equalsIgnoreCase("WelCome"))
 		{
-	//	String finalContent="<img src='"+requiredImg.getFilePath()+"' alt='"+sendNotification.getEmployeeName()+"'><br/>";
-		String finalContent ="Dear Qisonians,<br/> We take Immense pleasure in welcoming "+ sendNotification.getEmployeeName()+" who has Joined QISON TEAM <br/> ";
+			
+			if(sendNotification.getFileId()!=0)
+			{
+				 finalContent +="<img src='"+requiredImg.getFilePath()+"' alt='"+sendNotification.getEmployeeName()+"' width='150' height='150'><br/>";
+				   
+			}
+			 System.out.println(requiredImg.getFilePath());
+	 finalContent +="Dear Qisonians,<br/> We take Immense pleasure in welcoming "+ sendNotification.getEmployeeName()+" who has Joined QISON TEAM <br/> ";
 	finalContent +="He is working as "+currentDesignation+"<br/>";
 			 
- finalContent += sendNotification.getEmployeeName()+" as he likes to be called, he has pursued "+ sendNotification.getHighestQualification()+".<br/> He has technical knowledge in  "+sendNotification.getSkill()+"<br/>";
+ finalContent += sendNotification.getEmployeeName()+" as he likes to be called, he has pursued "+ sendNotification.getHighestQualification()+".<br/> He takes keen interest in "+sendNotification.getSkype()+"<br/>";
 			 
  finalContent += "He can be reached on "+sendNotification.getEmail()+"<br/>";
 			 
@@ -176,7 +192,7 @@ public List<Template> getTemplates() {
 		TemplateDAO tempDAOImpl = (TemplateDAO) DAOFactory.getInstance().getTemplateDAO();
 		FileDAO fileDAOimpl = (FileDAO) DAOFactory.getInstance().getFileDAO();
 		receivedtemplatesfromdb = tempDAOImpl.getContentForMail(gettemplate);
-		String finalContent="";
+		 finalContent="";
 		
 		 finalContent ="Hi "+sendNotification.getEmployeeName()+"<br/>"+receivedtemplatesfromdb.getContent();
 		System.out.println(sendNotification.getEmployeeName());

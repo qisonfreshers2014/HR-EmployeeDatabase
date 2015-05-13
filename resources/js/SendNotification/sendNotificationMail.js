@@ -23,6 +23,7 @@ sendNotificationMail.prototype.handleShow = function(event, email, employeeName)
 			"employeeEmail":email
 		}
 	};
+	console.log(email);
 
 	RequestManager.getContentForMail(inputForContent, function(data, success) {
 		if (success) {

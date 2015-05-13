@@ -114,7 +114,7 @@ public interface ExceptionMessages {
 	 public static final String USER_ID_NULL = "User Id can not be null";
 	 public static final String USER_ID_AND_PASSWORD_INVALID = "User id/password does not exist";
 	 public static final String PASSWORD_NULL = "password can not be null";
-	 public static final String USER_DOESNOT_EXIST = "user not existing with this id";
+	 public static final String USER_DOESNOT_EXIST = "Invalid email";
 	 public static final String EMPLOYEE_DOESNOT_EXIST = "employee not existing with this id";
 	 public static final String USER_CAN_NOT_ADDED = "user can not be added";
 	 public static final String LOCATION_INVALID = "Invalid location";

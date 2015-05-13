@@ -89,7 +89,9 @@ AddEmployee.prototype.uploadMedia = function(callback) {
 			var imageSrc = data.filePath;
 			this.fileId = data.id;
 			fileId = this.fileId;
-			$('#filepath').text(imageSrc);
+			var index = imageSrc.lastIndexOf("/") + 1;
+			var filename = imageSrc.substr(index);
+			$('#filepath').text(filename);
 			/*$('.mediaForProfileImage').attr('src', imageSrc);
 			if (imageSrc != null) {
 				$('.mediaForProfileImage').lightBox();
@@ -601,7 +603,7 @@ AddEmployee.prototype.validateEmp = function() {
 			if (success) {
 				// $('success').val("Successfully Added")
 				alert("Employee ID: " + $("#eid").val()
-						+ " Details Successfully Added to EmployeeList");
+						+ " Details Successfully Added to Employee List");
 				$("#eid").val("");
 				$("#name").val("");
 				$("#qual").val("");

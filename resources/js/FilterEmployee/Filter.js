@@ -34,6 +34,12 @@ FilterEmp.prototype.handleShow = function(empid) {
 	
 
 	}.ctx(this));
+
+	$('#backfilter').click(function() {
+		App.listEmployee();
+	}.ctx(this));
+	
+	
 }
 
 

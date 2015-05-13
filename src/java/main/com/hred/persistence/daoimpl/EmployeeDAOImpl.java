@@ -26,6 +26,8 @@ import com.hred.exception.ExceptionMessages;
 import com.hred.exception.UserException;
 import com.hred.model.Employee;
 import com.hred.model.FilterEmployee;
+import com.hred.pagination.NotificationPaginationInput;
+import com.hred.pagination.Paginator;
 import com.hred.persistence.dao.EmployeeDAO;
 import com.hred.persistence.session.SessionFactoryUtil;
 import com.hred.service.descriptors.output.DisplayNotificationHome;
@@ -706,7 +708,7 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 			}
 			
-			String hql="from Employee where is_deleted=0 and   date(dateOfJoining) between date(sysdate()) and date(sysdate())-6";				
+			String hql="from Employee where is_deleted=0 and   date(dateOfJoining) between  date(sysdate())-6 and date(sysdate())";				
 			org.hibernate.Query query = session.createQuery(hql);
 			 list  = query.list();
 			
@@ -888,6 +890,30 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 		return list;
 	}
 
-	
+	@Override
+	public Paginator<NotificationPaginationInput> getEmployeesPaginated(
+			NotificationPaginationInput employee) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
+	 /*@Override
+	 public Paginator<NotificationPaginationInput> getEmployeesPaginated(
+			 NotificationPaginationInput employee) {
+	  int pageNo = employee.getPageNo();
+	  int pageSize = employee.getPageSize();
+	  
+	  int skipCount = (pageNo - 1) * pageSize;  
+	  Criteria criteria=createCustomCriteria(Employee.class);
+
+	        criteria.setFirstResult(skipCount).setMaxResults(pageSize);
+	  List<Employee> consultantList=criteria.list();
+	  
+	  Criteria countCriteria=createCustomCriteria(Employee.class); 
+	 Long totalCount = (long) consultantList.size();
+
+	  Paginator<NotificationPaginationInput> employeePaginator = new Paginator<>(consultantList, totalCount);
+	  return employeePaginator;
+	 }
+*/
 }

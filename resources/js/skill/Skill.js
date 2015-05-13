@@ -1,20 +1,16 @@
-function skill() {
+function skill(empid) {
+	
 	Loader.loadHTML('.container', 'resources/js/skill/Skill.html', true, function(){
-	this.handleShow();
+	this.handleShow(empid);
 	}.ctx(this));
 }
 
 
-skill.prototype.handleShow = function() {
+skill.prototype.handleShow = function(empid) {
 	$('.container').show();
-	this.viewSkillDetails();
-	$('#save').click(function(){
+	this.viewSkillDetails(empid);
+	$('#save1').click(function(){
 		this.validateSkill();
-		/*this.validateTrainingAttended();
-		this.validateEmpId();
-		this.validateRating();	
-		this.addSkill();
-	*/ 
 		}.ctx(this));
 	
 	$('#reset').click(function() {
@@ -27,21 +23,27 @@ skill.prototype.handleShow = function() {
 		$("#empid").val("");
 		 
 			}.ctx(this));
+
+	$('#backskill').click(function() {
+		App.loadViewEmployee(empid);
+	}.ctx(this));
 }
 
 
-skill.prototype.viewSkillDetails=function(){
+skill.prototype.viewSkillDetails=function(empid){
+	 
+	var input={"payload":{"empId":empid}};
+	$('#empid').val(empid);
 	
-	var input={"payload":{}};
 	 
 	RequestManager.getSkillDetails(input, function(data, success) {
-		
-  		if(success){
-  	    
-  	    
+	 	if(success){
+  			 
+  	     	    
   		for( var i=0;i<data.length;i++){
   		 
   		var skill = data[i];
+  		
   		//$('#displayData').append('<table></table>');
 		 
 		$('#displayData').append("<tr><td>"+skill.skills+"</td><td>"
@@ -54,7 +56,7 @@ skill.prototype.viewSkillDetails=function(){
 		this.editSkill($(event.target).attr("id"));
 		}.ctx(this));
   		}else{
-  			alert("no view details");
+  			alert("No view details");
   		}
 	}.ctx(this));
 }
@@ -120,11 +122,9 @@ skill.prototype.validateSkill=function(){
  		  alert("Enter rating between 1 to 10");
  		  return;
  	  }
+ 		  
  		 
- 	  
- 		 
-	 
-
+	
 	 	  var input={"payload":{"skills":$('#skill').val(),"trainingAttended":$('#attended1').val(),
 			"empId":$('#empid').val(),"rating":$('#rating').val(),
 			  
@@ -139,7 +139,7 @@ skill.prototype.validateSkill=function(){
 			+data.rating+"</td><td><input type='button' value='Edit' id='"+data.id+"' class='dynamicEdit btn-primary btn-md'></td></tr>");
 	  		$("#skill").val("");
 		    $("#attended1").val("");
-		    $("#empid").val("");
+		   // $("#empid").val("");
 		    $("#rating").val("");
 	  		var obj1=data.id;
 			$('.dynamicEdit').bind("click", function(event){

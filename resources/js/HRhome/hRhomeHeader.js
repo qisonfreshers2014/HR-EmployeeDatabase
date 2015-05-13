@@ -62,7 +62,7 @@ hRHomeHeader.prototype.handleShow = function() {
  $('#homeHr').click(function(){
 	  App.loadEmployeePage(App.userName,App.hr,App.isDeleted);
 	     App.loadFooter();
-	     App.loadEmployee(App.contactNo,App.gender,App.employeeId); 
+	     App.loadEmployee(App.gender,App.contactNo,App.employeeId); 
 	  }.ctx(this));
 
 }

@@ -121,7 +121,7 @@ RequestManager.prototype.saveSkill=function(data,callback){
 	}
 
 RequestManager.prototype.getSkillDetails = function(data, callback) {
-   this.sendToServer('skills/getSkillsDetails', data, callback);
+   this.sendToServer('skills/getSkillsById', data, callback);
   }  
 RequestManager.prototype.save = function(data, callback) {
    this.sendToServer('skills/save', data, callback);

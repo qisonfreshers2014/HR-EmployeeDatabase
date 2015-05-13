@@ -24,6 +24,9 @@ import com.hred.model.File;
 import com.hred.model.FilterEmployee;
 import com.hred.model.SendNotificationHistory;
 import com.hred.model.Skills;
+import com.hred.pagination.NotificationPaginationInput;
+import com.hred.pagination.PaginationOutput;
+import com.hred.pagination.Paginator;
 import com.hred.persistence.dao.DAOFactory;
 import com.hred.persistence.dao.EmployeeDAO;
 import com.hred.service.common.ServiceRequestContextHolder;
@@ -62,20 +65,25 @@ public class EmployeeHandler extends AbstractHandler {
 
 	 public Employee viewEmployee(int EmployeeId) throws NumberFormatException, BusinessException {
 		   Employee employee = null;
-		   DesignationHistory desgId=null;
 		   DesignationType desgn=null;
+		  
 		   EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
 		     .getEmployeeDAO();
 		   employee= (Employee) empDAOImpl.viewEmployee(EmployeeId);
-		   long pathid =employee.getFileId();
-		   File file = FileHandler.getInstance().getFile(pathid);
+		   EmployeeOutFile  employeeout=new EmployeeOutFile(employee);
+		  
+		   if(employee.getFileId()!=0){
+		    File file = FileHandler.getInstance().getFile(employee.getFileId());
+		     employeeout.setFilePath(file.getFilePath());
+		   }
+		   
 		   List<Skills> skill=SkillsHandler.getInstance(). getSkillsById(EmployeeId);
 		   String finalSkills=employee.getSkill();
 		   for(Skills sk:skill){
-		    System.out.println(sk.getSkills());
+		    
 		    finalSkills+=" , "+sk.getSkills();
 		   }
-		   System.out.println(finalSkills);
+		   
 		   List<DesignationType> desg=DesignationHistoryHandler.getInstance().getDesignationName(desgn);
 		   
 		   String desgName="";
@@ -88,10 +96,8 @@ public class EmployeeHandler extends AbstractHandler {
 		   }
 		   }
 		   
-		   EmployeeOutFile employeeout=new EmployeeOutFile(employee);
-		    
 		   employeeout.setDesignationName(desgName);
-		    employeeout.setFilePath(file.getFilePath());
+		   
 		    employeeout.setSkill(finalSkills);
 		   return employeeout;
 		   
@@ -345,7 +351,6 @@ public class EmployeeHandler extends AbstractHandler {
 			  empFromDB.setEmergencyContactName(employee.getEmergencyContactName());
 			  empFromDB.setRelationWithEmergencyConatact(employee
 			    .getRelationWithEmergencyConatact());
-			//  empFromDB.setPassword(Utils.encrypt(employee.getPassword()));
 			  empFromDB.setSkype(employee.getSkype());
 			  EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
 			    .getEmployeeDAO();
@@ -363,7 +368,7 @@ public class EmployeeHandler extends AbstractHandler {
 			  Employee empFromDB = (Employee) DAOFactory.getInstance()
 			    .getEmployeeDAO().getEmployeeById(employee.getEmployeeId());
 			  empFromDB.setContactNo(employee.getContactNo());
-			  empFromDB.setEmail(employee.getEmail());
+			 // empFromDB.setEmail(employee.getEmail());
 			  empFromDB.setCurrentAddress(employee.getCurrentAddress());
 			  empFromDB.setPermanentAddress(employee.getPermanentAddress());
 			  empFromDB.setEmergencycontactnumber(employee
@@ -373,6 +378,7 @@ public class EmployeeHandler extends AbstractHandler {
 			    .getRelationWithEmergencyConatact());
 			  empFromDB.setDateOfBirth(employee.getDateOfBirth());
 			 // empFromDB.setPassword(Utils.encrypt(employee.getPassword()));
+			  empFromDB.setFileId(employee.getFileId());
 			  empFromDB.setSkype(employee.getSkype());
 			  empFromDB.setBankAccountNo(employee.getBankAccountNo());
 			  empFromDB.setFathersName(employee.getFathersName());
@@ -508,10 +514,7 @@ public List<DisplayNotificationHome> getNotificationDisplayCriteriaAOP(
 // This Method will return the birthday list with a selected criteria
 public List<DisplayNotificationHome> getBirthdaysList(
 		List<Employee> employeeBirthday) throws BusinessException {
-	/*SendNotificationHistoryDAO SendNotificationHistoryDAOImpl = DAOFactory
-			.getInstance().getSendNotificationHistoryDAO();
-	List<SendNotificationHistory> notificationHistory = SendNotificationHistoryDAOImpl
-			.getHistorydata();*/
+
 	 List<SendNotificationHistory> notificationHistory = new ArrayList<SendNotificationHistory>();
 	 SendNotificationHistoryHandler sendnotificationHandler= SendNotificationHistoryHandler.getInstance();
 	 notificationHistory = sendnotificationHandler.getHistorydata();
@@ -545,10 +548,7 @@ public List<DisplayNotificationHome> getBirthdaysList(
 // This Method will return the Anivarsary list with a selected criteria
 public List<DisplayNotificationHome> getAnivarsaryList(
 		List<Employee> employeeAniversary) throws BusinessException {
-	/*SendNotificationHistoryDAO SendNotificationHistoryDAOImpl = DAOFactory
-			.getInstance().getSendNotificationHistoryDAO();
-	List<SendNotificationHistory> notificationHistory = SendNotificationHistoryDAOImpl
-			.getHistorydata();*/
+
 	 List<SendNotificationHistory> notificationHistory = new ArrayList<SendNotificationHistory>();
 	 SendNotificationHistoryHandler sendnotificationHandler= SendNotificationHistoryHandler.getInstance();
 	 notificationHistory = sendnotificationHandler.getHistorydata();
@@ -585,10 +585,7 @@ public List<DisplayNotificationHome> getWelcomeEmployeeList()
 
 {
 	EmployeeDAO employeeDAOImpl = DAOFactory.getInstance().getEmployeeDAO();
-/*	SendNotificationHistoryDAO SendNotificationHistoryDAOImpl = DAOFactory
-			.getInstance().getSendNotificationHistoryDAO();
-	List<SendNotificationHistory> notificationHistory = SendNotificationHistoryDAOImpl
-			.getHistorydata();*/
+
 	 List<SendNotificationHistory> notificationHistory = new ArrayList<SendNotificationHistory>();
 	 SendNotificationHistoryHandler sendnotificationHandler= SendNotificationHistoryHandler.getInstance();
 	 notificationHistory = sendnotificationHandler.getHistorydata();
@@ -724,5 +721,18 @@ public List<Employee> getTodayWorkAniversary() throws BusinessException
 			  return employee;
 			 }
 
-
+	public PaginationOutput <NotificationPaginationInput> getEmployeesPaginated(NotificationPaginationInput employee) {
+			 
+			 Paginator<NotificationPaginationInput> paginator = new Paginator<>();
+			 
+			 
+			 paginator = DAOFactory.getInstance().getEmployeeDAO().getEmployeesPaginated(employee);
+			 
+			 
+			 
+			 PaginationOutput<NotificationPaginationInput> empPaginationOutput = new PaginationOutput<NotificationPaginationInput>(paginator, employee.getPageNo(), employee.getPageSize());
+			 
+		
+			 return empPaginationOutput;
+			}
 }

@@ -48,6 +48,7 @@ EditEmployee.prototype.validateUpdateEmp = function(employeeId) {
 	var qual = /^[a-zA-Z.""]+$/;
 	var num = /^[0-9]+$/;
 	var mail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+	var skp = /^[A-Za-z0-9]+(.[A-Za-z0-9]+)*$/;
 	var illegalChars = /\W/
 	var letters = /^[0-9a-zA-Z]+$/;
 	var cnumerr = $("#cnumerr");
@@ -160,7 +161,7 @@ EditEmployee.prototype.validateUpdateEmp = function(employeeId) {
 		if (skype == "") {
 			$(skypeerr).text("Required field");
 			$(skypeerr).css("color", "red");
-		} else if (!(skype.match(qual) || skype.match(letters))) {
+		} else if (!(skype.match(skp))) {
 			$(skypeerr).text("Please enter a valid skype ID");
 			$(skypeerr).css("color", "red");
 		} else if (!(skype.length > 5)) {
@@ -184,7 +185,7 @@ EditEmployee.prototype.validateUpdateEmp = function(employeeId) {
 	} else if (!(txtemercon.length == 10)) {
 		$(emnumerr).text("Please enter 10 digits only");
 		$(emnumerr).css("color", "red");
-	} else if (!(skype.match(qual) || skype.match(letters))) {
+	} else if (!(skype.match(skp))) {
 		$('.error').css('visibility', 'visible');
 		$(relationerr).text("");
 		$(blodderr).text("");

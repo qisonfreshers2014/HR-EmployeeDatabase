@@ -30,7 +30,6 @@ TemplateList.prototype.getTemplateName=function(){
 		$('.dynamicEdit').click(function(event){
 			//console.log(event);
 			dataid = event.target.id;
-			alert(dataid);
 			console.log(dataid);
 			this.editTemplate(dataid);
 			

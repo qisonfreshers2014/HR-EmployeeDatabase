@@ -67,8 +67,8 @@ editHandMeeting.prototype.editAllHandsMeetingById=function(dataid){
 	
 	if($('#editdatepicker').val()==""){
 		 alert("Please Enter Date");
-	 }else if(date<today){
-		 alert("Please don't enter previous date");
+	 }else if(date<=today){
+		 alert("All Hands can be organized for future dates only");
 	 } 
 	else if($('#editemployee').val()==""){
 		 alert("Please enter employee of the month");

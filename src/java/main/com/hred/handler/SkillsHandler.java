@@ -40,6 +40,14 @@ public class SkillsHandler extends AbstractHandler {
 		return skill;
 	}
 	
+	 public List<com.hred.model.Skills> getSkillsById(int empId) throws SkillsException {
+		  List<Skills> skill = null;
+		  SkillsDAO skillsDAOImpl = (SkillsDAO) DAOFactory.getInstance().getSkillDAO();
+		  skill = (List<Skills>) skillsDAOImpl.getSkillsById(empId);
+		  
+		  return skill;
+		 }
+	
  private void validationFunc( String skillName,boolean trainingAttended,int empId, String rating,List<Skills> skill )  throws SkillsException{
      
     // List<AllHandsMeeting> data=save();
@@ -52,10 +60,7 @@ public class SkillsHandler extends AbstractHandler {
                    ExceptionMessages.SKILLNAME_ALREADY_EXISTS);
                 }    
       }   */
-	 
-	  
-	 
-	 
+	 	   
       if(skillName == null || skillName.isEmpty()|| skillName.trim().isEmpty()) {
   		throw new SkillsException(ExceptionCodes.Skills_DOESNOT_EXIST,ExceptionMessages.Skills_DOESNOT_EXIST);
   		}
@@ -104,11 +109,5 @@ public class SkillsHandler extends AbstractHandler {
 		return skill;
 	}
 	
-	 public List<com.hred.model.Skills> getSkillsById(int empId) {
-		  List<Skills> skill = null;
-		  SkillsDAO skillsDAOImpl = (SkillsDAO) DAOFactory.getInstance().getSkillDAO();
-		  skill = (List<Skills>) skillsDAOImpl.getSkillsById(empId);
-		  
-		  return skill;
-		 }
+	
 }

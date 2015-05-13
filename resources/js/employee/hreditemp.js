@@ -81,7 +81,9 @@ HrEditEmployee.prototype.uploadMedia = function(callback) {
 			var imageSrc = data.filePath;
 			this.fileId = data.id;
 			fileId = this.fileId;
-			$('#filepath').text(imageSrc);
+			var index = imageSrc.lastIndexOf("/") + 1;
+			var filename = imageSrc.substr(index);
+			$('#filepath').text(filename);
 			/*
 			 * $('.mediaForProfileImage').attr('src', imageSrc); if (imageSrc !=
 			 * null) { $('.mediaForProfileImage').lightBox(); }
@@ -94,8 +96,9 @@ HrEditEmployee.prototype.uploadMedia = function(callback) {
 
 HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 	var char = /^[A-Za-z]+( [A-Za-z]+)*$/;
-	var qual = /^[a-zA-Z.""]+$/;
+	var qual = /^[A-Za-z]+(.[A-Za-z]+)*$/;
 	var num = /^[0-9]+$/;
+	var skp = /^[A-Za-z0-9]+(.[A-Za-z0-9]+)*$/;
 	var mail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 	var illegalChars = /\W/
 	var letters = /^[0-9a-zA-Z]+$/;
@@ -374,7 +377,7 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 		if (skype == "") {
 			$(skypeerr).text("Required field");
 			$(skypeerr).css("color", "red");
-		} else if (!(skype.match(qual) || skype.match(letters))) {
+		} else if (!(skype.match(skp))) {
 			$(skypeerr).text("Please enter a valid skype ID");
 			$(skypeerr).css("color", "red");
 		} else if (!(skype.length > 5)) {
@@ -409,7 +412,7 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 		$(emnumerr).text("");
 		$(emnameerr).text("Enter characters only");
 		$(emnameerr).css("color", "red");
-	} else if (!(skype.match(qual) || skype.match(letters))) {
+	} else if (!(skype.match(skp))) {
 		$(relationerr).text("");
 		$(blodderr).text("");
 		$(skypeerr).text("Please enter a valid skype ID");
@@ -446,7 +449,7 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 				"contactNo" : contnum,
 				"currentAddress" : currentaddr,
 				"permanentAddress" : peraddr,
-				// "email" : email,
+				 "email" : email,
 				// "password" : password,
 				"pan" : pannum,
 				"pfNo" : pfnum,
