@@ -24,8 +24,15 @@ public interface Constants {
 	public static String AUTHENTICATOR_MAIL = "authenticatorMail";
 	public static String AUTHENTICATOR_PASSWORD = "authenticatorPassword";
 	public static String SEND_FROM = "from";
-    
-    
+	public static  String SEND_BCC = "bcc";
+	
+	
+	public static  String FILE_PATH_VARIABLES = "filePath.properties";	
+	public static  String STAGE_ENVIRONMENT = "stage";
+	public static  String LOCAL_PATH = "localpath";
+	public static  String PRODUCTION_PATH = "productionpath";
+	public static  String STAGE_PATH = "stagepath";
+	
     public static final Short NOT_DELETED = 0;
     public static final Short DELETED = 1;
     
@@ -65,6 +72,9 @@ public interface Constants {
 	
 	public static final String HR = "HR";
 	public static final String ALL_VIEW = HR;
+
+
+	
 
 
 }

@@ -32,7 +32,7 @@ public class AllHandsMeetingService  extends BaseService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/save")
-	@UnSecure
+	
 	public String save(@Context HttpHeaders headers,
 			@Context UriInfo uriInfo, WebserviceRequest request)
 			throws ObjectNotFoundException, BusinessException,
@@ -48,7 +48,7 @@ public class AllHandsMeetingService  extends BaseService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/test")
-	@UnSecure
+	
 	public String test(@Context HttpHeaders headers,
 			@Context UriInfo uriInfo, WebserviceRequest request)
 			throws ObjectNotFoundException, BusinessException,
@@ -68,7 +68,7 @@ public class AllHandsMeetingService  extends BaseService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/editAllHandsMeeting")
-	@UnSecure
+	
 	public String getAllHandsMeetingById(@Context HttpHeaders headers,
 			@Context UriInfo uriInfo, WebserviceRequest request)
 			throws ObjectNotFoundException, BusinessException,
@@ -108,7 +108,7 @@ public String getAllHandsMeeting(@Context HttpHeaders headers, @Context UriInfo 
 		BusinessException, EncryptionException {		
 AllHandsMeeting allhandsmeeting = (AllHandsMeeting) JsonUtil.getObject(
 			request.getPayload(),AllHandsMeeting.class);
-	List<AllHandsMeeting> allhandsmeetings = AllHandsMeetingHandler.getInstance().getAllHandsMeeting();
+	List<AllHandsMeeting> allhandsmeetings = AllHandsMeetingHandler.getInstance().getAllHandsMeetingAOP();
 	System.out.println("Count : "+ allhandsmeetings.size());
 	return JsonUtil.getJsonForListBasedOnDescriptor(allhandsmeetings, AllHandsMeeting.class, AllHandsMeeting.class);
 

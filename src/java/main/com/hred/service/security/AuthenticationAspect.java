@@ -58,6 +58,7 @@ public class AuthenticationAspect {
 		// Object key = null;
 		Transaction tx = null;
 		try {
+			
 			authenticateUser(thisJoinPoint);
 			RequestId id = this.createRequestId();
 			ServiceRequestContextHolder.getContext().setRequestId(
@@ -313,6 +314,7 @@ public class AuthenticationAspect {
 
 			//check if session is valid or not
 			UserSessionToken userSessionToken = (UserSessionToken) CacheManager.getInstance().getCache(CacheRegionType.USER_SESSION_CACHE).getValue(sessionId);
+			
 			if(userSessionToken == null){
 				throw new SystemException(ExceptionCodes.USER_NOT_AUTHENTICATED, ExceptionMessages.USER_NOT_AUTHENTICATED);
 			} else {
@@ -329,12 +331,17 @@ public class AuthenticationAspect {
 			}
 			else {
 				//check if session is valid or not
+			
 				UserSessionToken userSessionToken = (UserSessionToken) CacheManager.getInstance().getCache(CacheRegionType.USER_SESSION_CACHE).getValue(sessionId);
+			
 				if(userSessionToken == null){
+					
 					ServiceRequestContextHolder.setContext(getSystemContext());
 				} else {
+					
 					ServiceRequestContext ctx = ServiceRequestContextHolder.getContext();
 					ctx.setUserSessionToken(userSessionToken);
+				
 				}
 			}
 		}

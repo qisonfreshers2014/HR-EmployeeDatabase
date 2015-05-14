@@ -74,7 +74,7 @@ public class SkillsService extends BaseService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/save")
-	@UnSecure
+	
 	public String save(@Context HttpHeaders headers, @Context UriInfo uriInfo,
 			WebserviceRequest request) throws ObjectNotFoundException,
 			BusinessException, EncryptionException {
@@ -93,7 +93,7 @@ public class SkillsService extends BaseService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/test")
-	@UnSecure
+
 	public String test(@Context HttpHeaders headers, @Context UriInfo uriInfo,
 			WebserviceRequest request) throws ObjectNotFoundException,
 			BusinessException, EncryptionException {
@@ -110,7 +110,7 @@ public class SkillsService extends BaseService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/getSkillsDetails")
-	@UnSecure
+	
 	public String getSkillsDetails(@Context HttpHeaders headers, @Context UriInfo uriInfo,
 			WebserviceRequest request) throws ObjectNotFoundException,
 			BusinessException, EncryptionException, SkillsException {	
@@ -131,7 +131,7 @@ public class SkillsService extends BaseService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/geteditskills")
-	@UnSecure
+	
 	public String getEditSkills(@Context HttpHeaders headers, @Context UriInfo uriInfo,
 			WebserviceRequest request) throws ObjectNotFoundException,
 			BusinessException, EncryptionException, SkillsException {	
@@ -153,7 +153,7 @@ public class SkillsService extends BaseService {
 	 @Consumes(MediaType.APPLICATION_JSON)
 	 @Produces(MediaType.APPLICATION_JSON)
 	 @Path("/getSkillsById")
-	 @UnSecure
+
 	 public String getSkillsById(@Context HttpHeaders headers, @Context UriInfo uriInfo,
 	   WebserviceRequest request) throws ObjectNotFoundException,
 	   BusinessException, EncryptionException, SkillsException { 

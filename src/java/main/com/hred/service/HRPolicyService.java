@@ -65,7 +65,7 @@ public class HRPolicyService extends BaseService {
 		@Consumes(MediaType.APPLICATION_JSON)
 		@Produces(MediaType.APPLICATION_JSON)
 		@Path("/save")
-		@UnSecure
+		
 		public String save(@Context HttpHeaders headers, @Context UriInfo uriInfo,
 				WebserviceRequest request) throws ObjectNotFoundException,
 				BusinessException, EncryptionException {
@@ -73,7 +73,7 @@ public class HRPolicyService extends BaseService {
 			HRPolicy hrpolicy = (HRPolicy) JsonUtil.getObject(request.getPayload(),
 					HRPolicy.class);
 
-			HRPolicy output = (HRPolicy) HRPolicyHandler.getInstance().save(hrpolicy);
+			HRPolicy output = (HRPolicy) HRPolicyHandler.getInstance().saveAOP(hrpolicy);
 
 			return JsonUtil.getJsonBasedOnDescriptor(output, HRPolicy.class);
 		}
@@ -85,7 +85,7 @@ public class HRPolicyService extends BaseService {
 		@Consumes(MediaType.APPLICATION_JSON)
 		@Produces(MediaType.APPLICATION_JSON)
 		@Path("/getPolicy")
-		@UnSecure
+	
 		public String getPolicy(@Context HttpHeaders headers, @Context UriInfo uriInfo,
 				WebserviceRequest request) throws ObjectNotFoundException,
 				BusinessException, EncryptionException {		

@@ -58,7 +58,7 @@ public class EmployeeService extends BaseService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/authenticate")
-	@UnSecure
+	
 	public String authenticate(@Context HttpHeaders headers,
 			@Context UriInfo uriInfo, WebserviceRequest request)
 			throws ObjectNotFoundException, BusinessException,
@@ -81,7 +81,7 @@ public class EmployeeService extends BaseService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/save")
-	@UnSecure
+	
 	public String save(@Context HttpHeaders headers, @Context UriInfo uriInfo,
 			WebserviceRequest request) throws ObjectNotFoundException,
 			BusinessException, EncryptionException {
@@ -101,7 +101,7 @@ public class EmployeeService extends BaseService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/getEmployees")
-	@UnSecure
+	
 	public String getEmployees(@Context HttpHeaders headers,
 			@Context UriInfo uriInfo, WebserviceRequest request)
 			throws ObjectNotFoundException, BusinessException,
@@ -121,7 +121,7 @@ public class EmployeeService extends BaseService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/updateEmployee")
-	 @UnSecure
+	
 	public String updateEmployee(@Context HttpHeaders headers,
 			@Context UriInfo uriInfo, WebserviceRequest request)
 			throws ObjectNotFoundException, BusinessException,
@@ -145,7 +145,7 @@ public class EmployeeService extends BaseService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/hrupdateEmployee")
-	 @UnSecure
+
 	public String hrupdateEmployee(@Context HttpHeaders headers,
 			@Context UriInfo uriInfo, WebserviceRequest request)
 			throws ObjectNotFoundException, BusinessException,
@@ -166,7 +166,7 @@ public class EmployeeService extends BaseService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/deleteEmployee")
-	 @UnSecure
+	
 	public String deleteEmployee(@Context HttpHeaders headers,
 			@Context UriInfo uriInfo, WebserviceRequest request)
 			throws ObjectNotFoundException, BusinessException,
@@ -176,7 +176,7 @@ public class EmployeeService extends BaseService {
 				Employee.class);
 
 		Employee output = (Employee) EmployeeHandler.getInstance()
-				.deleteEmployee(employee);
+				.deleteEmployeeAOP(employee);
 
 		return JsonUtil.getJsonBasedOnDescriptor(output, Employee.class);
 	}
@@ -187,7 +187,7 @@ public class EmployeeService extends BaseService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/getEmployeeDetails")
-	@UnSecure
+	
 	public String getEmployee(@Context HttpHeaders headers,
 			@Context UriInfo uriInfo, WebserviceRequest request)
 			throws ObjectNotFoundException, BusinessException,
@@ -207,7 +207,7 @@ public class EmployeeService extends BaseService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/searchEmployee")
-	 @UnSecure
+	
 	public String searchEmployee(@Context HttpHeaders headers,
 			@Context UriInfo uriInfo, WebserviceRequest request)
 			throws ObjectNotFoundException, BusinessException,
@@ -216,7 +216,7 @@ public class EmployeeService extends BaseService {
 				.getObject(request.getPayload(),
 						EmployeeSearchInputDescriptor.class);
 		List<Employee> employees = EmployeeHandler.getInstance()
-				.searchEmployee(employee);
+				.searchEmployeeAOP(employee);
 		System.out.println("Count : " + employees.size());
 		return JsonUtil.getJsonForListBasedOnDescriptor(employees,
 				EmployeeSearchInputDescriptor.class, Employee.class);
@@ -227,7 +227,7 @@ public class EmployeeService extends BaseService {
 	 @Consumes(MediaType.APPLICATION_JSON)
 	 @Produces(MediaType.APPLICATION_JSON)
 	 @Path("/viewEmployee")
-	 @UnSecure
+	
 	 public String viewEmployee(@Context HttpHeaders headers,
 	   @Context UriInfo uriInfo, WebserviceRequest request)
 	   throws ObjectNotFoundException, BusinessException,
@@ -262,7 +262,7 @@ public class EmployeeService extends BaseService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/getEmployee")
-	@UnSecure
+	
 	public String getEmployeeById(@Context HttpHeaders headers,
 			@Context UriInfo uriInfo, WebserviceRequest request)
 			throws ObjectNotFoundException, BusinessException,
@@ -283,7 +283,7 @@ public class EmployeeService extends BaseService {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/getAllEvents")
-	@UnSecure
+	
 	public String getAllEvents(@Context HttpHeaders headers,
 			@Context UriInfo uriInfo, WebserviceRequest request)
 			throws BusinessException {
@@ -299,7 +299,7 @@ public class EmployeeService extends BaseService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/getNotificationDisplayCriteria")
-	@UnSecure
+	
 	public String getNotificationDisplayCriteria(@Context HttpHeaders headers,
 			@Context UriInfo uriInfo, WebserviceRequest request)
 			throws ObjectNotFoundException, BusinessException,
@@ -322,7 +322,7 @@ public class EmployeeService extends BaseService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/changePassword")
-	 @UnSecure
+	
 	public String changePassword(@Context HttpHeaders headers,
 			@Context UriInfo uriInfo, WebserviceRequest request) throws EncryptionException, BusinessException {
 
@@ -341,7 +341,7 @@ public class EmployeeService extends BaseService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/logout")
-	 @UnSecure
+	
 	public String logout(@Context HttpHeaders headers,
 			@Context UriInfo uriInfo, WebserviceRequest request) {
 
@@ -356,7 +356,7 @@ public class EmployeeService extends BaseService {
 			@Consumes(MediaType.APPLICATION_JSON)
 			@Produces(MediaType.APPLICATION_JSON)
 			@Path("/updateDesignation")
-			@UnSecure
+			
 			public String updateDesigantionDetails(@Context HttpHeaders headers,
 					@Context UriInfo uriInfo, WebserviceRequest request)
 					throws ObjectNotFoundException, BusinessException,
@@ -365,7 +365,7 @@ public class EmployeeService extends BaseService {
 				DesignationHistory desHistory = (DesignationHistory) JsonUtil.getObject(request.getPayload(),
 						DesignationHistory.class);
 
-				Employee output = (Employee) EmployeeHandler.getInstance().updateDesigantionDetails(desHistory);
+				Employee output = (Employee) EmployeeHandler.getInstance().updateDesigantionDetailsAOP(desHistory);
 
 				return JsonUtil.getJsonBasedOnDescriptor(output, Employee.class);
 			}	
@@ -375,7 +375,7 @@ public class EmployeeService extends BaseService {
 			 @Consumes(MediaType.APPLICATION_JSON)
 			 @Produces(MediaType.APPLICATION_JSON)
 			 @Path("/getEmployeesPaginated")
-			 @UnSecure
+			
 			 public String getEmployeesPaginated(@Context HttpHeaders headers,
 			   @Context UriInfo uriInfo, WebserviceRequest request)
 			   throws ObjectNotFoundException, BusinessException,

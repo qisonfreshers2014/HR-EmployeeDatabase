@@ -5,6 +5,8 @@ package com.hred.handler;
  * @author Rizwan Khan
  *         
  */
+import com.hred.common.Constants;
+import com.hred.handler.annotations.AuthorizeEntity;
 import com.hred.model.DesignationType;
 import com.hred.model.Employee;
 import com.hred.persistence.dao.DAOFactory;
@@ -29,7 +31,8 @@ public static DesignationTypeHandler getInstance() {
 }
 //This method can be used to map the employee table with the designation type table 
 //to get the Designation Name from the Designation id
-public DesignationType getDesignationByID(Employee getDesignationNameByID)
+@AuthorizeEntity(roles={Constants.HR})
+public DesignationType getDesignationByIDAOP(Employee getDesignationNameByID)
 {
 	DesignationType getDesignationName=null;
 	DesignationTypeDAO designationTypeDAOImpl = (DesignationTypeDAO) DAOFactory.getInstance()

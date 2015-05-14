@@ -36,7 +36,7 @@ public class HolidayService extends BaseService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/save")
-	@UnSecure
+	
 	public String save(@Context HttpHeaders headers,
 			@Context UriInfo uriInfo, WebserviceRequest request)
 			throws ObjectNotFoundException, BusinessException,
@@ -53,7 +53,7 @@ public class HolidayService extends BaseService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/test")
-	@UnSecure
+	
 	public String test(@Context HttpHeaders headers,
 			@Context UriInfo uriInfo, WebserviceRequest request)
 			throws ObjectNotFoundException, BusinessException,
@@ -73,7 +73,7 @@ public class HolidayService extends BaseService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/updateHoliday")
-	@UnSecure
+
 	public String updateHoliday(@Context HttpHeaders headers,
 			@Context UriInfo uriInfo, WebserviceRequest request)
 			throws ObjectNotFoundException, BusinessException,
@@ -90,7 +90,7 @@ public class HolidayService extends BaseService {
 	  @Consumes(MediaType.APPLICATION_JSON)
 	  @Produces(MediaType.APPLICATION_JSON)
 	  @Path("/holidayByDate")
-	  @UnSecure
+	  
 	  public String getHolidayByDate(
 	    @Context HttpHeaders headers, @Context UriInfo uriInfo,
 	    WebserviceRequest request) throws ObjectNotFoundException,
@@ -111,13 +111,13 @@ public class HolidayService extends BaseService {
 	 @Consumes(MediaType.APPLICATION_JSON)
 	 @Produces(MediaType.APPLICATION_JSON)
 	 @Path("/getHolidayId")
-	 @UnSecure
+	
 	 public String getHolidayById(
 	   @Context HttpHeaders headers, @Context UriInfo uriInfo,
 	   WebserviceRequest request) throws ObjectNotFoundException,
 	   BusinessException, EncryptionException {
 		Holiday holiday = (Holiday) JsonUtil.getObject(request.getPayload(),Holiday.class);
-		List<Holiday>  holidays = (List<Holiday>) HolidayHandler.getInstance().getHolidayById(holiday);
+		List<Holiday>  holidays = (List<Holiday>) HolidayHandler.getInstance().getHolidayByIdAOP(holiday);
 		System.out.println("Count : "+ holidays.size());
 	  return JsonUtil.getJsonForListBasedOnDescriptor(holidays, Holiday.class,Holiday.class);
 	 
@@ -131,7 +131,7 @@ public class HolidayService extends BaseService {
 	 @Consumes(MediaType.APPLICATION_JSON)
 	 @Produces(MediaType.APPLICATION_JSON)
 	 @Path("/getHolidays")
-	 @UnSecure
+	
 	 public String getHolidays(@Context HttpHeaders headers, @Context UriInfo uriInfo,
 		WebserviceRequest request) throws ObjectNotFoundException,
 		BusinessException, EncryptionException {		

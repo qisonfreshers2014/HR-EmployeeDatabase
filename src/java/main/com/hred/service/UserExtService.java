@@ -29,7 +29,7 @@ public class UserExtService extends BaseService{
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/testService")
-	@UnSecure
+	
 	public String testService(@Context HttpHeaders headers, @Context UriInfo uriInfo,
 			WebserviceRequest request) {
 		return "{\"status\":\"SUCCESS\", \"payload\":\"Hurry its working !!!!\"}";

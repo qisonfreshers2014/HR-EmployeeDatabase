@@ -51,7 +51,7 @@ public class DesignationHistoryService extends BaseService{
 		@Consumes(MediaType.APPLICATION_JSON)
 		@Produces(MediaType.APPLICATION_JSON)
 		@Path("/save")
-		@UnSecure
+		
 		public String save(@Context HttpHeaders headers, @Context UriInfo uriInfo,
 				WebserviceRequest request) throws ObjectNotFoundException,
 				BusinessException, EncryptionException {
@@ -59,7 +59,7 @@ public class DesignationHistoryService extends BaseService{
 			DesignationHistory designationmaster = (DesignationHistory) JsonUtil.getObject(request.getPayload(),
 					DesignationHistory.class);
 
-			DesignationHistory output = (DesignationHistory) DesignationHistoryHandler.getInstance().save(
+			DesignationHistory output = (DesignationHistory) DesignationHistoryHandler.getInstance().saveAOP(
 					designationmaster);
 
 			return JsonUtil.getJsonBasedOnDescriptor(output, DesignationHistory.class);
@@ -71,7 +71,7 @@ public class DesignationHistoryService extends BaseService{
 		@Consumes(MediaType.APPLICATION_JSON)
 		@Produces(MediaType.APPLICATION_JSON)
 		@Path("/getDesignations")
-		@UnSecure
+	
 		public String getDesignationDetails(@Context HttpHeaders headers, @Context UriInfo uriInfo,
 		WebserviceRequest request) throws ObjectNotFoundException,
 		BusinessException, EncryptionException, DesignationHistoryException {
@@ -79,7 +79,7 @@ public class DesignationHistoryService extends BaseService{
 		DesignationHistory designation = (DesignationHistory) JsonUtil.getObject(request.getPayload(),
 		DesignationHistory.class);
 		 
-		List<DesignationHistory> designations = DesignationHistoryHandler.getInstance().getDesignationDetails(designation);
+		List<DesignationHistory> designations = DesignationHistoryHandler.getInstance().getDesignationDetailsAOP(designation);
 		System.out.println("Count : "+ designations.size());
 
 		return JsonUtil.getJsonForListBasedOnDescriptor(designations, DesignationHistory.class, DesignationHistory.class);
@@ -92,12 +92,12 @@ public class DesignationHistoryService extends BaseService{
 		@Consumes(MediaType.APPLICATION_JSON)
 		@Produces(MediaType.APPLICATION_JSON)
 		@Path("/getAllDesignations")
-		@UnSecure
+
 		public String getAllDesignationDetails(@Context HttpHeaders headers, @Context UriInfo uriInfo,
 		WebserviceRequest request) throws ObjectNotFoundException,
 		BusinessException, EncryptionException, DesignationHistoryException {
 		 
-		List<DesignationHistory> designations = DesignationHistoryHandler.getInstance().getAllDesignationDetails();
+		List<DesignationHistory> designations = DesignationHistoryHandler.getInstance().getAllDesignationDetailsAOP();
 		System.out.println("Count : "+ designations.size());
 
 		return JsonUtil.getJsonForListBasedOnDescriptor(designations, DesignationHistory.class, DesignationHistory.class);
@@ -110,7 +110,7 @@ public class DesignationHistoryService extends BaseService{
 		@Consumes(MediaType.APPLICATION_JSON)
 		@Produces(MediaType.APPLICATION_JSON)
 		@Path("/getDesignationName")
-		@UnSecure
+	
 		public String getDesignationName(@Context HttpHeaders headers, @Context UriInfo uriInfo,
 		WebserviceRequest request) throws ObjectNotFoundException,
 		BusinessException, EncryptionException, DesignationHistoryException {
@@ -118,7 +118,7 @@ public class DesignationHistoryService extends BaseService{
 		DesignationType designation = (DesignationType) JsonUtil.getObject(request.getPayload(),
 		DesignationType.class);
 		 
-		List<DesignationType> designationName = DesignationHistoryHandler.getInstance().getDesignationName(designation);
+		List<DesignationType> designationName = DesignationHistoryHandler.getInstance().getDesignationNameAOP(designation);
 		System.out.println("Count : "+ designationName.size());
 
 		return JsonUtil.getJsonForListBasedOnDescriptor(designationName, DesignationType.class, DesignationType.class);

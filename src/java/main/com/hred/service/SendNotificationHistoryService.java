@@ -38,7 +38,7 @@ public class SendNotificationHistoryService extends BaseService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/save")
-	@UnSecure
+	
 	public String save(@Context HttpHeaders headers,
 			@Context UriInfo uriInfo, WebserviceRequest request)
 			throws ObjectNotFoundException, BusinessException,
@@ -47,7 +47,7 @@ public class SendNotificationHistoryService extends BaseService {
 		SendNotificationHistory entry = (SendNotificationHistory) JsonUtil.getObject(request.getPayload(),
 				SendNotificationHistory.class);
 
-		SendNotificationHistory output=(SendNotificationHistory) SendNotificationHistoryHandler.getInstance().save(entry);
+		SendNotificationHistory output=(SendNotificationHistory) SendNotificationHistoryHandler.getInstance().saveAOP(entry);
 		
 		return JsonUtil.getJsonBasedOnDescriptor(output,SendNotificationHistory.class);
 	}
@@ -58,7 +58,7 @@ public class SendNotificationHistoryService extends BaseService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/add")
-	@UnSecure
+	
 	public String authenticate(@Context HttpHeaders headers,
 			@Context UriInfo uriInfo, WebserviceRequest request)
 			throws ObjectNotFoundException, BusinessException,
@@ -81,7 +81,7 @@ public class SendNotificationHistoryService extends BaseService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/test")
-	@UnSecure
+	
 	public String test(@Context HttpHeaders headers,
 			@Context UriInfo uriInfo, WebserviceRequest request)
 			throws ObjectNotFoundException, BusinessException,
@@ -101,7 +101,7 @@ public class SendNotificationHistoryService extends BaseService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/sendMail")
-	@UnSecure
+	
 	public String sendMail(@Context HttpHeaders headers,
 			@Context UriInfo uriInfo, WebserviceRequest request)
 			throws ObjectNotFoundException, BusinessException,

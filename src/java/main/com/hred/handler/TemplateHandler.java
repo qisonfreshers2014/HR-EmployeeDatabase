@@ -1,14 +1,18 @@
 package com.hred.handler;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
+import com.hred.common.ConfigReader;
 import com.hred.common.Constants;
 import com.hred.exception.BusinessException;
 import com.hred.exception.ExceptionCodes;
 import com.hred.exception.ExceptionMessages;
 import com.hred.exception.ObjectNotFoundException;
 import com.hred.exception.TemplateException;
+import com.hred.exception.UserException;
 import com.hred.handler.AbstractHandler;
 import com.hred.handler.annotations.AuthorizeEntity;
 import com.hred.model.DesignationType;
@@ -70,7 +74,7 @@ public class TemplateHandler extends AbstractHandler {
 				   throw new TemplateException(ExceptionCodes.EVERY_FIELD_IS_MANDATORY,
 				     ExceptionMessages.EVERY_FIELD_IS_MANDATORY);
 				  }
-		  List<Template> data=getTemplates();
+		  List<Template> data=getTemplatesAOP();
 		  for(int i=0;i<data.size();i++){
 			  
 			  String dbname=data.get(i).getName();
@@ -89,8 +93,8 @@ public class TemplateHandler extends AbstractHandler {
 
 
  
-
-public List<Template> getTemplates() {
+	@AuthorizeEntity(roles={Constants.HR})
+public List<Template> getTemplatesAOP() {
 		List<Template> templates = null;
 		TemplateDAO temDAOImpl = (TemplateDAO) DAOFactory.getInstance().getTemplateDAO();
 		templates = (List<Template>) temDAOImpl.getTemplates();
@@ -99,8 +103,17 @@ public List<Template> getTemplates() {
 
 
 @AuthorizeEntity(roles={Constants.HR})
-	public Template updateAOP(Template template) throws ObjectNotFoundException {
-
+	public Template updateAOP(Template template) throws ObjectNotFoundException, TemplateException {
+	  
+	  List<Template> templist = getTemplatesAOP();
+	  long id=template.getId();
+	 
+	    String name=template.getName();
+	     String subject=template.getSubject();
+	     String content=template.getContent();
+	    
+	  validationFuncupdate(id,name,subject,content,templist);
+	   
 		// TODO Auto-generated method stub
 		Template templateFromDB = (Template)DAOFactory.getInstance().getTemplateDAO().getObjectById(template.getId(), ObjectTypes.TEMPLATE);
 		templateFromDB.setContent(template.getContent());
@@ -110,9 +123,28 @@ public List<Template> getTemplates() {
 		return tempEdited;
 	}
 
-	
 
-	public List<Template> viewTemplate(Template template) throws TemplateException {
+	 
+
+	 private void validationFuncupdate(long id, String name, String subject,
+	   String content, List<Template> templist) throws TemplateException {
+	  for (int i = 0; i < templist.size(); i++) {
+	   String dbname= templist.get(i).getName();
+	     if(templist.get(i).getId() != id){
+	       if(dbname.equalsIgnoreCase(name)){
+	        
+	        throw new TemplateException(ExceptionCodes.TEMPLATE_ALREADY_EXIST,
+	                   ExceptionMessages.TEMPLATE_ALREADY_EXIST);
+	        
+	       }
+	     }
+	  
+	  } 
+	 }
+
+
+	 @AuthorizeEntity(roles={Constants.HR})
+	public List<Template> viewTemplateAOP(Template template) throws TemplateException {
 		List<Template> templates = null;
 		TemplateDAO tempDAOImpl = (TemplateDAO) DAOFactory.getInstance().getTemplateDAO();
 		templates = (List<Template>) tempDAOImpl.viewTemplate(template);
@@ -120,7 +152,30 @@ public List<Template> getTemplates() {
 	}
 	
 	@AuthorizeEntity(roles={Constants.HR})
-	public Template getContentForMailAOP(DisplayNotificationHome gettemplate) {
+	public Template getContentForMailAOP(DisplayNotificationHome gettemplate) throws UserException {
+		String path=null;
+		String stage=null;
+		try
+		{
+		Properties props = ConfigReader.getProperties(Constants.FILE_PATH_VARIABLES);		
+		stage=props.getProperty(Constants.STAGE_ENVIRONMENT);
+		if(stage.equalsIgnoreCase("local"))
+		{
+			path=props.getProperty(Constants.LOCAL_PATH);
+		}
+		else if(stage.equalsIgnoreCase("stage"))
+		{
+			path=props.getProperty(Constants.STAGE_PATH);
+		}
+		else
+		{
+			path=props.getProperty(Constants.PRODUCTION_PATH);
+		}
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
+		}
 		Template receivedtemplatesfromdb = new Template();
 		Template templatescontenttoDisplay = new Template();
 		String finalContent = "";
@@ -133,23 +188,7 @@ public List<Template> getTemplates() {
 		DesignationTypeDAO designationTypeDAOImpl = (DesignationTypeDAO) DAOFactory.getInstance()
 				.getDesignationTypeDAO();
 		
-		for(Employee sendNotificationtoEmp:employeeDetails)
-		{
-			
-			if(sendNotificationtoEmp.getEmail().equals(gettemplate.getEmployeeEmail()))
-			{
-				sendNotification.setEmployeeName(sendNotificationtoEmp.getEmployeeName());
-				sendNotification.setSkype(sendNotificationtoEmp.getSkype());
-				sendNotification.setHighestQualification(sendNotificationtoEmp.getHighestQualification());
-				sendNotification.setCurrentDesignation(sendNotificationtoEmp.getCurrentDesignation());
-				sendNotification.setEmail(sendNotificationtoEmp.getEmail());
-				sendNotification.setSkype(sendNotificationtoEmp.getSkype());
-				sendNotification.setFileId(sendNotificationtoEmp.getFileId());
-				
-				break;
-			}
-			
-		}
+		sendNotification=employeeDAOImpl.getUserByEmail(gettemplate.getEmployeeEmail());
 		FileHandler filehandler=FileHandler.getInstance();
 		if(sendNotification.getFileId()!=0)
 		{
@@ -167,7 +206,7 @@ public List<Template> getTemplates() {
 			
 			if(sendNotification.getFileId()!=0)
 			{
-				 finalContent +="<img src='"+requiredImg.getFilePath()+"' alt='"+sendNotification.getEmployeeName()+"' width='150' height='150'><br/>";
+				 finalContent +="<img src='"+path+requiredImg.getFilePath()+"' alt='"+sendNotification.getEmployeeName()+"' width='150' height='150'><br/>";
 				   
 			}
 			 System.out.println(requiredImg.getFilePath());
@@ -195,11 +234,10 @@ public List<Template> getTemplates() {
 		 finalContent="";
 		
 		 finalContent ="Hi "+sendNotification.getEmployeeName()+"<br/>"+receivedtemplatesfromdb.getContent();
-		System.out.println(sendNotification.getEmployeeName());
-		System.out.println(finalContent);
+		
 		
 		templatescontenttoDisplay.setContent(finalContent);
-		System.out.println(templatescontenttoDisplay.getContent());
+		
 		}
 	return templatescontenttoDisplay;
 

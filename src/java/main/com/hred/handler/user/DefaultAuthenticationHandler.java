@@ -42,7 +42,7 @@ public class DefaultAuthenticationHandler implements AuthenticationHandler {
    EncryptionException {
   
   
-
+	 System.out.println(" Comming to DefaultAuthenticationHandler ");
   DefaultAuthenticationInput daInput = (DefaultAuthenticationInput) input;
   int authStatus = User.AUTH_STATUS_NONE;
   if (isLoginValidated(daInput)){
@@ -81,12 +81,12 @@ public class DefaultAuthenticationHandler implements AuthenticationHandler {
 
      ExceptionMessages.EMAIL_DOESNOT_EXIST);
   }
-/*   else if (!passwordValidity) {
+   else if (!passwordValidity) {
     throw new BusinessException(ExceptionCodes.INVALID_PASSWORD,
  
       ExceptionMessages.INVALID_PASSWORD);
    }
-*/
+
 
 
   authStatus = User.AUTH_STATUS_EXISTING;

@@ -46,7 +46,7 @@ public class TemplateService extends BaseService {
  @Consumes(MediaType.APPLICATION_JSON)
  @Produces(MediaType.APPLICATION_JSON)
  @Path("/save")
- @UnSecure
+
  public String save(@Context HttpHeaders headers, @Context UriInfo uriInfo,
    WebserviceRequest request) throws ObjectNotFoundException,
    BusinessException, EncryptionException {
@@ -65,7 +65,7 @@ public class TemplateService extends BaseService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/gatTemplate")
-	@UnSecure
+	
 	public String getTemplates(@Context HttpHeaders headers,
 			@Context UriInfo uriInfo, WebserviceRequest request)
 			throws ObjectNotFoundException, BusinessException,
@@ -74,7 +74,7 @@ public class TemplateService extends BaseService {
 		Template template = (Template) JsonUtil.getObject(request.getPayload(),
 				Template.class);
 		List<Template> templates = (List<Template>) TemplateHandler
-				.getInstance().getTemplates();
+				.getInstance().getTemplatesAOP();
 		System.out.println("COunt : " + templates.size());
 		// String outputString =
 		// "{\"status\": \"SUCCESS\", \"payload\": \"Test Successful\"}";
@@ -86,7 +86,7 @@ public class TemplateService extends BaseService {
  @Consumes(MediaType.APPLICATION_JSON)
  @Produces(MediaType.APPLICATION_JSON)
  @Path("/viewTemplate")
- @UnSecure
+ 
  public String viewTemplate(@Context HttpHeaders headers,
    @Context UriInfo uriInfo, WebserviceRequest request)
    throws ObjectNotFoundException, BusinessException,
@@ -94,7 +94,7 @@ public class TemplateService extends BaseService {
 
   Template template = (Template) JsonUtil.getObject(request.getPayload(),
     Template.class);
-  List<Template> templates = TemplateHandler.getInstance().viewTemplate(
+  List<Template> templates = TemplateHandler.getInstance().viewTemplateAOP(
     template);
 
   // String outputString =
@@ -110,7 +110,7 @@ public class TemplateService extends BaseService {
  @Consumes(MediaType.APPLICATION_JSON)
  @Produces(MediaType.APPLICATION_JSON)
  @Path("/getContentForMail")
- @UnSecure
+
  public String getContentForMail(@Context HttpHeaders headers,
    @Context UriInfo uriInfo, WebserviceRequest request)
    throws ObjectNotFoundException, BusinessException,
@@ -129,7 +129,7 @@ public class TemplateService extends BaseService {
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   @Path("/updateTemplate")
-  @UnSecure
+  
   public String update(@Context HttpHeaders headers,
     @Context UriInfo uriInfo, WebserviceRequest request)
     throws ObjectNotFoundException, BusinessException,

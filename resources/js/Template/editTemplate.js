@@ -98,7 +98,12 @@ editTemplate.prototype.editTemplateDetailsById=function(dataid){
          $('.subject').val("");
          $('textarea#templateContent').val("");
          App.loadtemplateList();
-        }
+        }else if(data.code==9018){
+            
+            alert("Template already exists");
+            
+           }
+
         else{
          alert("Template failed to update");
         }

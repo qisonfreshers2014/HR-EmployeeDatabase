@@ -37,8 +37,8 @@ public class AllHandsMeetingHandler extends AbstractHandler {
 		return INSTANCE;
 	}
 	
-	
-	public List<AllHandsMeeting> getAllHandsMeeting()throws AllHandsMeetingException {
+	@AuthorizeEntity(roles={Constants.HR})
+	public List<AllHandsMeeting> getAllHandsMeetingAOP()throws AllHandsMeetingException {
 		List<AllHandsMeeting> allhandsmeetinglist = null;
 		AllHandsMeetingDAO AllHandsMeetingDAOImpl = (AllHandsMeetingDAO) DAOFactory.getInstance().getAllHandsMeetingDAO();
 		allhandsmeetinglist = (List<AllHandsMeeting>)AllHandsMeetingDAOImpl.getAllHandsMeeting();
@@ -74,7 +74,7 @@ public class AllHandsMeetingHandler extends AbstractHandler {
 	 }
 	 @AuthorizeEntity(roles={Constants.HR})
 	public AllHandsMeeting saveAOP(AllHandsMeeting allhandsmeetingInput) throws AllHandsMeetingException{
-		List<AllHandsMeeting> allhands = getAllHandsMeeting();
+		List<AllHandsMeeting> allhands = getAllHandsMeetingAOP();
 		  
 		Timestamp date=allhandsmeetingInput.getDate();
 		String employee=allhandsmeetingInput.getEmployee();
@@ -98,7 +98,7 @@ public class AllHandsMeetingHandler extends AbstractHandler {
 	@AuthorizeEntity(roles={Constants.HR})
 	public AllHandsMeeting updateAOP(AllHandsMeeting allhandsmeeting) throws ObjectNotFoundException, AllHandsMeetingException {
 		// TODO Auto-generated method stub
-		List<AllHandsMeeting> allhands = getAllHandsMeeting();
+		List<AllHandsMeeting> allhands = getAllHandsMeetingAOP();
 		Timestamp date=allhandsmeeting.getDate();
 		String employee=allhandsmeeting.getEmployee();
 		String description=allhandsmeeting.getDescription();
