@@ -58,7 +58,7 @@ public class EmployeeService extends BaseService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/authenticate")
-	
+	@UnSecure
 	public String authenticate(@Context HttpHeaders headers,
 			@Context UriInfo uriInfo, WebserviceRequest request)
 			throws ObjectNotFoundException, BusinessException,
