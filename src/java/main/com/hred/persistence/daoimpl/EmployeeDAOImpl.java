@@ -430,8 +430,6 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 		int frommonth = fromdate.get(Calendar.MONTH)+1;
 		int fromday = fromdate.get(Calendar.DATE);
 
-		System.out.println(" To date-"+tomonth+" "+today);
-		System.out.println(" From date-"+frommonth+" "+fromday);
 		Session session = null;
 		List<Employee> list = new ArrayList<Employee>();
 		List<Employee> list1 = null;

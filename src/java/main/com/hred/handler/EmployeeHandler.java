@@ -3,6 +3,7 @@ package com.hred.handler;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 
@@ -27,6 +28,7 @@ import com.hred.model.File;
 import com.hred.model.FilterEmployee;
 import com.hred.model.SendNotificationHistory;
 import com.hred.model.Skills;
+import com.hred.model.output.CompareDates;
 import com.hred.pagination.NotificationPaginationInput;
 import com.hred.pagination.PaginationOutput;
 import com.hred.pagination.Paginator;
@@ -232,18 +234,18 @@ public class EmployeeHandler extends AbstractHandler {
 		if (variable == "") {
 			variable = "0";
 		}
-		/*double variabledouble = Double.parseDouble(variable);
-		DesignationHistory designationHistory = new DesignationHistory();
-		designationHistory.setEmpId(employee.getEmployeeId());
-		designationHistory.setAppraisalDate(employee.getDateOfJoining());
-		designationHistory.setDesignationId(employee.getCurrentDesignation());
-		designationHistory.setSalary(salarydouble);
-		designationHistory.setVariablePay(variabledouble);
-		DesignationHistoryHandler.getInstance().saveAOP(designationHistory); // saving
-																				// in
-																				// designation
-																				// history
-*/
+		/*
+		 * double variabledouble = Double.parseDouble(variable);
+		 * DesignationHistory designationHistory = new DesignationHistory();
+		 * designationHistory.setEmpId(employee.getEmployeeId());
+		 * designationHistory.setAppraisalDate(employee.getDateOfJoining());
+		 * designationHistory
+		 * .setDesignationId(employee.getCurrentDesignation());
+		 * designationHistory.setSalary(salarydouble);
+		 * designationHistory.setVariablePay(variabledouble);
+		 * DesignationHistoryHandler.getInstance().saveAOP(designationHistory);
+		 * // saving // in // designation // history
+		 */
 		Skills empskill = new Skills();
 		empskill.setSkills(employee.getSkill());
 		empskill.setRating(employee.getRating());
@@ -417,8 +419,7 @@ public class EmployeeHandler extends AbstractHandler {
 	public Employee hrUpdateEmployeeAOP(Employee employee)
 			throws ObjectNotFoundException, EmployeeException,
 			EncryptionException {
-		
-		
+
 		Employee empFromDB = (Employee) DAOFactory.getInstance()
 				.getEmployeeDAO().getEmployeeById(employee.getEmployeeId());
 		empFromDB.setContactNo(employee.getContactNo());
@@ -464,12 +465,6 @@ public class EmployeeHandler extends AbstractHandler {
 				.getInstance();
 		notificationHistory = sendnotificationHandler.getHistorydataAOP();
 
-		/*
-		 * SendNotificationHistoryDAO SendNotificationHistoryDAOImpl =
-		 * DAOFactory .getInstance().getSendNotificationHistoryDAO();
-		 * notificationHistory =
-		 * SendNotificationHistoryDAOImpl.getHistorydata();
-		 */
 		EmployeeDAO employeeDAOImpl = DAOFactory.getInstance().getEmployeeDAO();
 		empBirthday = employeeDAOImpl.getBirthday();
 		empWorkAniversay = employeeDAOImpl.getWorkAniversary();
@@ -480,6 +475,8 @@ public class EmployeeHandler extends AbstractHandler {
 				.addAll(getAnivarsaryListAOP(empWorkAniversay));
 		displayNotificationHomeList.addAll(getBirthdaysListAOP(empBirthday));
 		displayNotificationHomeList.addAll(getWelcomeEmployeeListAOP());
+		// Comparing the dates irrespective of year to sort the list
+		Collections.sort(displayNotificationHomeList, new CompareDates());
 
 		return displayNotificationHomeList;
 	}
@@ -562,7 +559,8 @@ public class EmployeeHandler extends AbstractHandler {
 			}
 
 		}
-
+		// Comparing the dates irrespective of year to sort the list
+		Collections.sort(displayNotificationHomeList, new CompareDates());
 		return displayNotificationHomeList;
 
 	}
@@ -706,7 +704,7 @@ public class EmployeeHandler extends AbstractHandler {
 
 	public void changePassword(ChangePassword changePasswordEmployee)
 			throws EncryptionException, BusinessException {
-		System.out.println(changePasswordEmployee.getId());
+
 		Employee empFromDB = (Employee) DAOFactory.getInstance()
 				.getEmployeeDAO()
 				.getEmployeeById(changePasswordEmployee.getId());
@@ -715,10 +713,6 @@ public class EmployeeHandler extends AbstractHandler {
 		String newPassword = changePasswordEmployee.getNewPassword();
 		String confirmNewPassword = changePasswordEmployee
 				.getConfirmNewPassword();
-
-		System.out.println(changePasswordEmployee.getOldPassword());
-		System.out.println(changePasswordEmployee.getNewPassword());
-		System.out.println(changePasswordEmployee.getConfirmNewPassword());
 
 		String encryptedOldPassword = Utils.encrypt(oldpassword.trim());
 		System.out.println(changePasswordEmployee.getId());
