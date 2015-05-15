@@ -13,7 +13,7 @@
 }
 #eventsNotification {
     float: left;
-    margin-left: 10%;
+    margin-left: 11%;
     margin-top: -2%;
 }
 
@@ -21,7 +21,11 @@
     color: #00246B;
      text-align: center;
 }
-
+#backnotificationhome{
+	margin-left:45%;
+	margin-bottom:1%;
+	visibility: hidden;
+}
 #extraActionsNotification {
     padding-top: 3%;
 }

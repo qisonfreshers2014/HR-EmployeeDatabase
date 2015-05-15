@@ -25,10 +25,7 @@ allHandMeeting.prototype.addAllHandsMeeting=function(){
 	
 	  if($('#datepicker').val()==""){
 		 alert("Please enter Date");
-	 }else if(date<=today){
-		 alert("All Hands can be organized for future dates only");
-	 } 
-	  
+	 }	  
 	  else if($('#employeeAll').val()==""){
 		 alert("Please enter employee of the month");
 	 }

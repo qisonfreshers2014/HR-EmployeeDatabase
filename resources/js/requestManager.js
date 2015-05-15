@@ -129,6 +129,10 @@ RequestManager.prototype.save = function(data, callback) {
 RequestManager.prototype.getEditSKill = function(data, callback) {
    this.sendToServer('skills/geteditskills', data, callback);
   }
+
+RequestManager.prototype.editskills = function(data, callback) {
+    this.sendToServer('skills/update', data, callback);
+   }
  
 // RM for filters
 RequestManager.prototype.getFilterEmployee = function(data, callback) {

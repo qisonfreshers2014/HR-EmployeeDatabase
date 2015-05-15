@@ -25,7 +25,7 @@ changePassword.prototype.changePwd = function(employeeId) {
 	var confirmpwderr = $("#confirmpwderr");
 	if (oldPassword == "" || newPassword == "" || confirmPassword == "") {
 		if (oldPassword == "") {
-			$(olepwderr).text("required field");
+			$(olepwderr).text("Required field");
 			$(olepwderr).css("color", "red");
 		} else if (!(oldPassword.match(pwepattern))) {
 			$(olepwderr)
@@ -38,7 +38,7 @@ changePassword.prototype.changePwd = function(employeeId) {
 		}
 
 		if (newPassword == "") {
-			$(newpwderr).text("required field");
+			$(newpwderr).text("Required field");
 			$(newpwderr).css("color", "red");
 		} else if (!(newPassword.match(pwepattern))) {
 			$(newpwderr)
@@ -51,7 +51,7 @@ changePassword.prototype.changePwd = function(employeeId) {
 		}
 
 		if (confirmPassword == "") {
-			$(confirmpwderr).text("required field");
+			$(confirmpwderr).text("Required field");
 			$(confirmpwderr).css("color", "red");
 		} else if (!(confirmPassword.match(pwepattern))) {
 			$(confirmpwderr)
@@ -63,10 +63,15 @@ changePassword.prototype.changePwd = function(employeeId) {
 			// $(pwderr).css("color", "green");
 		}
 	} else if (!(newPassword == confirmPassword)) {
+		$(olepwderr).text("");
+		$(newpwderr).text("");
 		$(confirmpwderr).text("Password and confirm password must match");
 		$(confirmpwderr).css("color", "red");
 
 	} else {
+		$(olepwderr).text("");
+		$(newpwderr).text("");
+		$(confirmpwderr).text("");
 
 		var input = {
 			"payload" : {

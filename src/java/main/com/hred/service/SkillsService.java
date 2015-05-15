@@ -82,10 +82,27 @@ public class SkillsService extends BaseService {
 		Skills skills = (Skills) JsonUtil.getObject(request.getPayload(),
 				Skills.class);
 
-		Skills output = (Skills) SkillsHandler.getInstance().save(skills);
+		Skills output = (Skills) SkillsHandler.getInstance().saveAOP(skills);
 
 		return JsonUtil.getJsonBasedOnDescriptor(output, Skills.class);
 	}
+	@POST
+	@RestService(input = Skills.class, output = Skills.class)
+	@ServiceStatus(value = "complete")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/update")
+	@UnSecure
+	public String update(@Context HttpHeaders headers,
+			@Context UriInfo uriInfo, WebserviceRequest request)
+			throws ObjectNotFoundException, BusinessException,
+			EncryptionException {		
+		Skills skills = (Skills) JsonUtil.getObject(request.getPayload(), Skills.class);
+		Skills output=(Skills) SkillsHandler.getInstance().updateAOP(skills);		
+		return JsonUtil.getJsonBasedOnDescriptor(output,Skills.class);
+	}
+	
+	
 
 	@POST
 	@RestService(input = String.class, output = String.class)

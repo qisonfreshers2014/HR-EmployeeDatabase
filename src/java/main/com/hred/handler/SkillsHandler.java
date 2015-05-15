@@ -4,15 +4,17 @@ package com.hred.handler;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.hred.common.Constants;
 import com.hred.exception.EmployeeException;
 import com.hred.exception.ExceptionCodes;
 import com.hred.exception.ExceptionMessages;
+import com.hred.exception.ObjectNotFoundException;
 import com.hred.exception.SkillsException;
- 
+import com.hred.handler.annotations.AuthorizeEntity;
 import com.hred.model.Employee;
+import com.hred.model.ObjectTypes;
 import com.hred.model.Skills;
 import com.hred.persistence.dao.DAOFactory;
- 
 import com.hred.persistence.dao.SkillsDAO;
 
 
@@ -75,7 +77,7 @@ public class SkillsHandler extends AbstractHandler {
       
       }
 	
-	public Skills save(Skills skills) throws SkillsException, EmployeeException{
+	public Skills saveAOP(Skills skills) throws SkillsException, EmployeeException{
 	List<Skills> skill = getSkillsDetails();
 	Employee emp=new Employee();
 	EmployeeHandler emphandler=EmployeeHandler.getInstance();
@@ -100,6 +102,30 @@ public class SkillsHandler extends AbstractHandler {
 	}
 	 
 	}
+	
+	@AuthorizeEntity(roles={Constants.HR})
+	public Skills updateAOP(Skills skills) throws ObjectNotFoundException, SkillsException {
+		List<Skills> skill = getSkillsDetails();
+		String skillName = skills.getSkills();
+		 boolean trainingAttended = skills.isTrainingAttended();
+		  int empId = skills.getEmpId();
+		  String rating =skills.getRating();
+		  long id=skills.getId();
+		  
+		   
+		//validationFunc(skillName,trainingAttended,empId,rating,skill);
+		
+		Skills skillsfromdb = (Skills)DAOFactory.getInstance().getSkillDAO().getObjectById(id, ObjectTypes.SKILLS);
+		skillsfromdb.setEmpId(skillsfromdb.getEmpId());
+		skillsfromdb.setSkills(skills.getSkills());
+		skillsfromdb.setRating(skills.getRating());
+		skillsfromdb.setTrainingAttended(skills.isTrainingAttended());
+	
+		Skills skillsEdited = (Skills) DAOFactory.getInstance().getSkillDAO().update(skillsfromdb);
+		return skillsEdited;
+	
+}
+
 	 
 
 	public List<Skills> getEditSkills(Skills skills) throws SkillsException {

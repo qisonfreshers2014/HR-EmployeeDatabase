@@ -45,7 +45,7 @@ public class SendNotificationHistoryDAOImpl extends BaseDAOImpl implements SendN
 				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 			}
 			
-			String hql="from SendNotificationHistory";				
+			String hql="from SendNotificationHistory where year(cts)=year(sysdate())";				
 			org.hibernate.Query query = session.createQuery(hql);
 			historydata  = query.list();
 			

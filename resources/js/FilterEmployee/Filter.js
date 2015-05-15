@@ -145,19 +145,19 @@ FilterEmp.prototype.FilterEmployee = function(empid){
 	    RequestManager.getFilterEmployee({"payload" : payload}, function(data, success) {
 	    if(success){
 	    if(data.length != 0){
-		alert("Employee details filtered successfully ");
+		//alert("Employee details filtered successfully ");
 	  	$('#displayData').html('<tr><th>Employee Id</th><th>Employee Name</th><th>Gender</th><th>DOB</th><th>DOJ</th><th>Email</th><th>Fathers Name</th><th>Designation</th><th>Highest Qualification</th><th>Skype Id</th><th>Contact No</th><th>Years Of Experience</th><th>Skills</th><th>View Details</th></tr>');
 	    }
 	    else{
-	    	alert(" No record found");
+	    //	alert(" No record found");
 	    	$('#displayData').html('<tr><th>Employee Id</th><th>Employee Name</th><th>Gender</th><th>DOB</th><th>DOJ</th><th>Email</th><th>Fathers Name</th><th>Designation</th><th>Highest Qualification</th><th>Skype Id</th><th>Contact No</th><th>Years Of Experience</th><th>Skills</th><th>View Details</th></tr>');
-	    	    $("#gender").val("");
+	    	    /*$("#gender").val("");
 			    $("#designation").val("");
 			    $("#datepicker").val("");
 			    $("#year1").val("");
 			    $("#year2").val("");
 			    $("#qualification1").val("");
-			    $("#filter").val("");
+			    $("#filter").val("");*/
 			    $('#displayData tbody').empty();
 	   
 	    }

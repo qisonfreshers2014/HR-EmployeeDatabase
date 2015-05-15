@@ -18,10 +18,10 @@
 <b>Employee Id<span class="red">*</span> &nbsp;</b> <input type="text" id="empid" readonly="true" size="22" onfocusout="empid()"  maxlength="15"/> 
 
 <b class="div">Training Attended<span class="red">*</span>&nbsp;&nbsp;</b><select id="attended1" style="width:18%">
-<option value="0" selected>Select </option>
-<option value="true">true</option>
-<option value="false">false</option> 
-</select>
+																					<option value="">Select </option>
+																					<option value="true">true</option>
+																					<option value="false">false</option> 
+																		</select>
 <br>
 <span class="e1" id="skillerror1"> </span><span class="inputelement1"></span><span  class="e1" id="skillerror2"></span><br>  
 </div>
@@ -31,8 +31,9 @@
 <span class="e1" id="error1"> </span><span class="inputelement1"></span><span  class="e1" id="error2"></span><br> 
 </div>
 <div  class="div"><button  type="button" class="btn btn-primary btn-md" id="save1" >Save</button>
-<button type="reset" value="Reset" class="btn btn-primary btn-md" id="reset">Reset</button></div> </br>
-</div><br><br><br>
+<button type="reset" value="Reset" class="btn btn-primary btn-md" id="reset">Reset</button>
+<button type ="button" value="Update" id="updateskill" class ="btn btn-primary btn-md">Update</button>
+ </div><br><br><br>
  <table id="displayData" class="tble table table-hover"   style="width:96%">
  <tr>
     <th>Skill</th>
@@ -43,7 +44,7 @@
  </tr>
  </table>
 <div>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="Back" class="btn btn-primary btn-md" id="backskill"></div>
+ <input type="button" value="Back" class="btn btn-primary btn-md" id="backskill"></div>
   </body>
 </html>
  

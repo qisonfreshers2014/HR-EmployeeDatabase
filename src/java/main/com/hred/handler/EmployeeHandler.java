@@ -57,78 +57,74 @@ public class EmployeeHandler extends AbstractHandler {
 		return INSTANCE;
 	}
 
-	 public Employee getEmployeeById(int id) throws EmployeeException {
-		  Employee employee = null;
-		  EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
-		    .getEmployeeDAO();
-		  employee = (Employee) empDAOImpl.getEmployeeById(id);
+	public Employee getEmployeeById(int id) throws EmployeeException {
+		Employee employee = null;
+		EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
+				.getEmployeeDAO();
+		employee = (Employee) empDAOImpl.getEmployeeById(id);
 
-		  return employee;
-		 }
+		return employee;
+	}
 
-	 public Employee viewEmployee(int EmployeeId) throws NumberFormatException, BusinessException {
-	     Employee employee = null;
-	     DesignationType desgn=null;
-	     String path=null;
-	     String stage=null;
-	     try
-	     {
-	     Properties props = ConfigReader.getProperties(Constants.FILE_PATH_VARIABLES);  
-	     stage=props.getProperty(Constants.STAGE_ENVIRONMENT);
-	     if(stage.equalsIgnoreCase("local"))
-	     {
-	      path=props.getProperty(Constants.LOCAL_PATH);
-	     }
-	     else if(stage.equalsIgnoreCase("stage"))
-	     {
-	      path=props.getProperty(Constants.STAGE_PATH);
-	     }
-	     else
-	     {
-	      path=props.getProperty(Constants.PRODUCTION_PATH);
-	     }
-	     }
-	     catch(IOException e)
-	     {
-	      e.printStackTrace();
-	     }
-	    
-	     EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
-	       .getEmployeeDAO();
-	     employee= (Employee) empDAOImpl.viewEmployee(EmployeeId);
-	     EmployeeOutFile  employeeout=new EmployeeOutFile(employee);
-	    
-	     if(employee.getFileId()!=0){
-	      File file = FileHandler.getInstance().getFile(employee.getFileId());
-	       String image="<img src='"+path+file.getFilePath()+"' height='150' width='150'>";
-	       employeeout.setFilePath(image);
-	     }
-	     List<Skills> skill=SkillsHandler.getInstance(). getSkillsById(EmployeeId);
-	     String finalSkills=employee.getSkill();
-	     for(Skills sk:skill){
-	      
-	      finalSkills+=" , "+sk.getSkills();
-	     }
-	     
-	     List<DesignationType> desg=DesignationHistoryHandler.getInstance().getDesignationNameAOP(desgn);
-	     
-	     String desgName="";
-	     for(DesignationType dg:desg ){
-	     if(dg.getId()==employee.getCurrentDesignation()){
-	      
-	      
-	      desgName +=dg.getName();
-	      
-	     }
-	     }
-	     
-	     employeeout.setDesignationName(desgName);
-	     
-	      employeeout.setSkill(finalSkills);
-	     return employeeout;
-	     
-	    }
-	
+	public Employee viewEmployee(int EmployeeId) throws NumberFormatException,
+			BusinessException {
+		Employee employee = null;
+		DesignationType desgn = null;
+		String path = null;
+		String stage = null;
+		try {
+			Properties props = ConfigReader
+					.getProperties(Constants.FILE_PATH_VARIABLES);
+			stage = props.getProperty(Constants.STAGE_ENVIRONMENT);
+			if (stage.equalsIgnoreCase("local")) {
+				path = props.getProperty(Constants.LOCAL_PATH);
+			} else if (stage.equalsIgnoreCase("stage")) {
+				path = props.getProperty(Constants.STAGE_PATH);
+			} else {
+				path = props.getProperty(Constants.PRODUCTION_PATH);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
+				.getEmployeeDAO();
+		employee = (Employee) empDAOImpl.viewEmployee(EmployeeId);
+		EmployeeOutFile employeeout = new EmployeeOutFile(employee);
+
+		if (employee.getFileId() != 0) {
+			File file = FileHandler.getInstance().getFile(employee.getFileId());
+			String image = "<img src='" + path + file.getFilePath()
+					+ "' height='150' width='150'>";
+			employeeout.setFilePath(image);
+		}
+		List<Skills> skill = SkillsHandler.getInstance().getSkillsById(
+				EmployeeId);
+		String finalSkills = employee.getSkill();
+		for (Skills sk : skill) {
+
+			finalSkills += " , " + sk.getSkills();
+		}
+
+		List<DesignationType> desg = DesignationHistoryHandler.getInstance()
+				.getDesignationNameAOP(desgn);
+
+		String desgName = "";
+		for (DesignationType dg : desg) {
+			if (dg.getId() == employee.getCurrentDesignation()) {
+
+				desgName += dg.getName();
+
+			}
+		}
+
+		employeeout.setDesignationName(desgName);
+
+		employeeout.setSkill(finalSkills);
+		return employeeout;
+
+	}
+
 	public Employee getEmployeeById(String id) throws EmployeeException {
 		Employee employee = null;
 		EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
@@ -138,101 +134,133 @@ public class EmployeeHandler extends AbstractHandler {
 		return employee;
 	}
 
+	@AuthorizeEntity(roles = { Constants.HR })
+	public List<Employee> getEmployeesAOP(FilterEmployee employee)
+			throws EmployeeException {
+		List<Employee> employees = null;
+		EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
+				.getEmployeeDAO();
+		employees = empDAOImpl.getEmployees(employee);
+		return employees;
 
-	@AuthorizeEntity(roles={Constants.HR})
-	 public List<Employee> getEmployeesAOP(FilterEmployee employee) throws	 EmployeeException { 
-		  List<Employee> employees = null; EmployeeDAO
-	 empDAOImpl = (EmployeeDAO) DAOFactory.getInstance().getEmployeeDAO();
-	 employees = empDAOImpl.getEmployees(employee);
-	 return employees;
-	 
-	 }
+	}
+
 	/*
-	  public List<Employee> getEmployees(FilterEmployee employee) throws
-	  EmployeeException { List<Employee> employees = null; EmployeeDAO
-	  empDAOImpl = (EmployeeDAO) DAOFactory.getInstance().getEmployeeDAO();
-	  employees = empDAOImpl.getEmployees(employee); return employees;
-	  
-	  }
+	 * public List<Employee> getEmployees(FilterEmployee employee) throws
+	 * EmployeeException { List<Employee> employees = null; EmployeeDAO
+	 * empDAOImpl = (EmployeeDAO) DAOFactory.getInstance().getEmployeeDAO();
+	 * employees = empDAOImpl.getEmployees(employee); return employees;
+	 * 
+	 * }
 	 */
 
 	public List<Employee> getEmployees() throws EmployeeException {
 		List<Employee> employees = null;
-		EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance().getEmployeeDAO();
+		EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
+				.getEmployeeDAO();
 		employees = empDAOImpl.getEmployees();
 		return employees;
 	}
 
-	
-	public List<Employee> getEmployee() throws EmployeeException{
+	public List<Employee> getEmployee() throws EmployeeException {
 		List<Employee> employeelist = null;
-		EmployeeDAO EmployeeDAOImpl = (EmployeeDAO) DAOFactory.getInstance().getEmployeeDAO();
-		employeelist = (List<Employee>)EmployeeDAOImpl.getEmployee();
+		EmployeeDAO EmployeeDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
+				.getEmployeeDAO();
+		employeelist = (List<Employee>) EmployeeDAOImpl.getEmployee();
 		return employeelist;
-	
-	}
-	
-	@AuthorizeEntity(roles={Constants.HR})
-	public Employee saveAOP(Employee employee) throws EncryptionException, BusinessException {
-	employee.setDeleted(false);
-	employee.setPassword(Utils.encrypt(employee.getPassword()));
-	String name = employee.getEmployeeName();
-	long id = employee.getEmployeeId();
-	String email = employee.getEmail();
-	String password = employee.getPassword();
-	long descid = employee.getCurrentDesignation();
-	String qualification = employee.getHighestQualification();
-	String salary = employee.getSalary();
-	String blood = employee.getBloodGroup();
-	long num = employee.getContactNo();
-	Timestamp date = employee.getDateOfBirth();
-	String fatherName = employee.getFathersName();
-	String gender = employee.getGender();
-	long contactNum = employee.getContactNo();
-	String skypeid = employee.getSkype();
-	Timestamp doj = employee.getDateOfJoining();
-	String skill = employee.getSkill();
-	String rating = employee.getRating();
-	int YOE = employee.getYearsofexperience();
-	long emercontnum = employee.getEmergencycontactnumber();
-	String emercontname = employee.getEmergencyContactName();
-	String currentaddr = employee.getCurrentAddress();
-	String peraddr = employee.getPermanentAddress();
 
-	validateEmp(name, id, email, password, descid, qualification, salary,
-			blood, num, date, fatherName, gender, contactNum, skypeid, doj,
-			skill, rating, YOE, emercontnum, emercontname, currentaddr,
-			peraddr);
-
-	Boolean isempidExist = DAOFactory.getInstance().getEmployeeDAO()
-			.getEmployeeByEmpId(employee.getEmployeeId());
-
-	Boolean isemailExist = DAOFactory.getInstance().getEmployeeDAO()
-			.isEmployeeEmailExist(employee.getEmail());
-	if (isempidExist) {
-		throw new EmployeeException(
-				ExceptionCodes.EMPLOYEE_EMPID_ALREADY_EXIST,
-				ExceptionMessages.EMPLOYEE_EMPID_ALREADY_EXIST);
 	}
 
-	else if (isemailExist) {
-		throw new EmployeeException(ExceptionCodes.EMPLOYEE_ALREADY_EXIST,
-				ExceptionMessages.EMPLOYEE_ALREADY_EXIST);
+	@AuthorizeEntity(roles = { Constants.HR })
+	public Employee saveAOP(Employee employee) throws EncryptionException,
+			BusinessException {
+		employee.setDeleted(false);
+		employee.setPassword(Utils.encrypt(employee.getPassword()));
+		String name = employee.getEmployeeName();
+		long id = employee.getEmployeeId();
+		String email = employee.getEmail();
+		String password = employee.getPassword();
+		long descid = employee.getCurrentDesignation();
+		String qualification = employee.getHighestQualification();
+		String salary = employee.getSalary();
+		String blood = employee.getBloodGroup();
+		long num = employee.getContactNo();
+		Timestamp date = employee.getDateOfBirth();
+		String fatherName = employee.getFathersName();
+		String gender = employee.getGender();
+		long contactNum = employee.getContactNo();
+		String skypeid = employee.getSkype();
+		Timestamp doj = employee.getDateOfJoining();
+		String skill = employee.getSkill();
+		String rating = employee.getRating();
+		int YOE = employee.getYearsofexperience();
+		long emercontnum = employee.getEmergencycontactnumber();
+		String emercontname = employee.getEmergencyContactName();
+		String currentaddr = employee.getCurrentAddress();
+		String peraddr = employee.getPermanentAddress();
+
+		validateEmp(name, id, email, password, descid, qualification, salary,
+				blood, num, date, fatherName, gender, contactNum, skypeid, doj,
+				skill, rating, YOE, emercontnum, emercontname, currentaddr,
+				peraddr);
+
+		Boolean isempidExist = DAOFactory.getInstance().getEmployeeDAO()
+				.getEmployeeByEmpId(employee.getEmployeeId());
+
+		Boolean isemailExist = DAOFactory.getInstance().getEmployeeDAO()
+				.isEmployeeEmailExist(employee.getEmail());
+		if (isempidExist) {
+			throw new EmployeeException(
+					ExceptionCodes.EMPLOYEE_EMPID_ALREADY_EXIST,
+					ExceptionMessages.EMPLOYEE_EMPID_ALREADY_EXIST);
+		}
+
+		else if (isemailExist) {
+			throw new EmployeeException(ExceptionCodes.EMPLOYEE_ALREADY_EXIST,
+					ExceptionMessages.EMPLOYEE_ALREADY_EXIST);
+		}
+		Employee empSaved = (Employee) DAOFactory.getInstance()
+				.getEmployeeDAO().saveObject(employee);
+
+		String salarydes = employee.getSalary();
+		if (salarydes == "") {
+			salarydes = "0";
+		}
+
+		double salarydouble = Double.parseDouble(salarydes);
+		String variable = employee.getVariableComponent();
+		if (variable == "") {
+			variable = "0";
+		}
+		/*double variabledouble = Double.parseDouble(variable);
+		DesignationHistory designationHistory = new DesignationHistory();
+		designationHistory.setEmpId(employee.getEmployeeId());
+		designationHistory.setAppraisalDate(employee.getDateOfJoining());
+		designationHistory.setDesignationId(employee.getCurrentDesignation());
+		designationHistory.setSalary(salarydouble);
+		designationHistory.setVariablePay(variabledouble);
+		DesignationHistoryHandler.getInstance().saveAOP(designationHistory); // saving
+																				// in
+																				// designation
+																				// history
+*/
+		Skills empskill = new Skills();
+		empskill.setSkills(employee.getSkill());
+		empskill.setRating(employee.getRating());
+		empskill.setEmpId(employee.getEmployeeId());
+		SkillsHandler.getInstance().saveAOP(empskill); // saving in skills table
+		return empSaved;
+
 	}
-	Employee empSaved = (Employee) DAOFactory.getInstance()
-			.getEmployeeDAO().saveObject(employee);
-	return empSaved;
-}
 
 	private void validateEmp(String name, long id, String email,
 			String password, long descid, String qualification, String salary,
 
-			String blood, long num, Timestamp date, String fatherName, String gender,
-			long contactNum, String skypeid, Timestamp doj, String skill, String rating, int YOE,
-			long emercontnum, String emercontname, String currentaddr, String peraddr ) throws BusinessException {
-		
-
-
+			String blood, long num, Timestamp date, String fatherName,
+			String gender, long contactNum, String skypeid, Timestamp doj,
+			String skill, String rating, int YOE, long emercontnum,
+			String emercontname, String currentaddr, String peraddr)
+			throws BusinessException {
 
 		if (currentaddr == null || currentaddr.isEmpty()) {
 			throw new EmployeeException(
@@ -252,11 +280,11 @@ public class EmployeeHandler extends AbstractHandler {
 					ExceptionMessages.EMPLOYEE_EMERNUM_NOT_EMPTY);
 		}
 
-	/*	if (YOE == 0) {
-			throw new EmployeeException(
-					ExceptionCodes.EMPLOYEE_RATING_NOT_EMPTY,
-					ExceptionMessages.EMPLOYEE_RATING_NOT_EMPTY);
-		}*/
+		/*
+		 * if (YOE == 0) { throw new EmployeeException(
+		 * ExceptionCodes.EMPLOYEE_RATING_NOT_EMPTY,
+		 * ExceptionMessages.EMPLOYEE_RATING_NOT_EMPTY); }
+		 */
 
 		if (rating == null || rating.isEmpty()) {
 			throw new EmployeeException(
@@ -360,410 +388,422 @@ public class EmployeeHandler extends AbstractHandler {
 					ExceptionMessages.EMPLOYEE_DOB_NULL);
 		}
 	}
-	
+
 	// updating the details of employee
 	public Employee updateEmployee(Employee employee)
-			   throws ObjectNotFoundException, EmployeeException,
-			   EncryptionException {
+			throws ObjectNotFoundException, EmployeeException,
+			EncryptionException {
 
-			  Employee empFromDB = (Employee) DAOFactory.getInstance()
-			    .getEmployeeDAO().getEmployeeById(employee.getEmployeeId());
-			  empFromDB.setContactNo(employee.getContactNo());
-			  empFromDB.setEmail(employee.getEmail());
-			  empFromDB.setCurrentAddress(employee.getCurrentAddress());
-			  empFromDB.setPermanentAddress(employee.getPermanentAddress());
-			  empFromDB.setEmergencycontactnumber(employee
-			    .getEmergencycontactnumber());
-			  empFromDB.setEmergencyContactName(employee.getEmergencyContactName());
-			  empFromDB.setRelationWithEmergencyConatact(employee
-			    .getRelationWithEmergencyConatact());
-			  empFromDB.setSkype(employee.getSkype());
-			  EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
-			    .getEmployeeDAO();
-			  employee = (Employee) empDAOImpl.update(empFromDB);
-			  return employee;
-			 }
-
+		Employee empFromDB = (Employee) DAOFactory.getInstance()
+				.getEmployeeDAO().getEmployeeById(employee.getEmployeeId());
+		empFromDB.setContactNo(employee.getContactNo());
+		empFromDB.setEmail(employee.getEmail());
+		empFromDB.setCurrentAddress(employee.getCurrentAddress());
+		empFromDB.setPermanentAddress(employee.getPermanentAddress());
+		empFromDB.setEmergencycontactnumber(employee
+				.getEmergencycontactnumber());
+		empFromDB.setEmergencyContactName(employee.getEmergencyContactName());
+		empFromDB.setRelationWithEmergencyConatact(employee
+				.getRelationWithEmergencyConatact());
+		empFromDB.setSkype(employee.getSkype());
+		EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
+				.getEmployeeDAO();
+		employee = (Employee) empDAOImpl.update(empFromDB);
+		return employee;
+	}
 
 	// updating the details of employee by hr
-	@AuthorizeEntity(roles={Constants.HR})
-			 public Employee hrUpdateEmployeeAOP(Employee employee)
-			   throws ObjectNotFoundException, EmployeeException,
-			   EncryptionException {
-
-			  Employee empFromDB = (Employee) DAOFactory.getInstance()
-			    .getEmployeeDAO().getEmployeeById(employee.getEmployeeId());
-			  empFromDB.setContactNo(employee.getContactNo());
-			 // empFromDB.setEmail(employee.getEmail());
-			  empFromDB.setCurrentAddress(employee.getCurrentAddress());
-			  empFromDB.setPermanentAddress(employee.getPermanentAddress());
-			  empFromDB.setEmergencycontactnumber(employee
-			    .getEmergencycontactnumber());
-			  empFromDB.setEmergencyContactName(employee.getEmergencyContactName());
-			  empFromDB.setRelationWithEmergencyConatact(employee
-			    .getRelationWithEmergencyConatact());
-			  empFromDB.setDateOfBirth(employee.getDateOfBirth());
-			 // empFromDB.setPassword(Utils.encrypt(employee.getPassword()));
-			  empFromDB.setFileId(employee.getFileId());
-			  empFromDB.setSkype(employee.getSkype());
-			  empFromDB.setBankAccountNo(employee.getBankAccountNo());
-			  empFromDB.setFathersName(employee.getFathersName());
-			  empFromDB.setHighestQualification(employee.getHighestQualification());
-			  empFromDB.setPan(employee.getPan());
-			  empFromDB.setPfNo(employee.getPfNo());
-			  empFromDB.setSalary(employee.getSalary());
-			  empFromDB.setGender(employee.getGender());
-			  empFromDB.setBloodGroup(employee.getBloodGroup());
-			//  empFromDB.setEmployeeId(employee.getEmployeeId());
-			  empFromDB.setEmployeeName(employee.getEmployeeName());
-			  empFromDB.setVariableComponent(employee.getVariableComponent());
-			  EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
-			    .getEmployeeDAO();
-			  employee = (Employee) empDAOImpl.update(empFromDB);
-			  return employee;
-			 }
-
-	
-@SuppressWarnings("null")
-// This method will return all the event of the company within one month
-@AuthorizeEntity(roles={Constants.HR})
-public List<DisplayNotificationHome> getAllEventsAOP()
-  throws BusinessException {
-
- List<DisplayNotificationHome> displayNotificationHomeList = new ArrayList<DisplayNotificationHome>();
- List<SendNotificationHistory> notificationHistory = new ArrayList<SendNotificationHistory>();
-
- SendNotificationHistoryHandler sendnotificationHandler= SendNotificationHistoryHandler.getInstance();
- notificationHistory = sendnotificationHandler.getHistorydataAOP();
- 
-/* SendNotificationHistoryDAO SendNotificationHistoryDAOImpl = DAOFactory
-   .getInstance().getSendNotificationHistoryDAO();
- notificationHistory = SendNotificationHistoryDAOImpl.getHistorydata();*/
- EmployeeDAO employeeDAOImpl = DAOFactory.getInstance().getEmployeeDAO();
- empBirthday = employeeDAOImpl.getBirthday();
- empWorkAniversay = employeeDAOImpl.getWorkAniversary();
-
- // Converting eachEmployeeHistory to map
-
- displayNotificationHomeList.addAll(getAnivarsaryListAOP(empWorkAniversay));
- displayNotificationHomeList.addAll(getBirthdaysListAOP(empBirthday));
- displayNotificationHomeList.addAll(getWelcomeEmployeeListAOP());
-
- return displayNotificationHomeList;
-}
-
-// This method will return the event which are satisfying the criteria
-// conditions
-@AuthorizeEntity(roles={Constants.HR})
-public List<DisplayNotificationHome> getNotificationDisplayCriteriaAOP(
-  NotificationHomeFilterInputDiscriptor filterCriteria)
-  throws BusinessException {
- List<DisplayNotificationHome> displayNotificationHomeList = new ArrayList<DisplayNotificationHome>();
-
- List<Employee> empBirthdayWithDates = null;
- List<Employee> empWorkAniversayWithdates = null;
- String selectedEvent = filterCriteria.getSelectedEvent();
- System.out.println(selectedEvent);
- EmployeeDAO employeeDAOImpl = DAOFactory.getInstance().getEmployeeDAO();
- if (filterCriteria.getFromdate() == null
-   || filterCriteria.getTodate() == null) {
-  empBirthdayWithDates = employeeDAOImpl.getBirthday();
-  empWorkAniversayWithdates = employeeDAOImpl.getWorkAniversary();
-  if (selectedEvent.equalsIgnoreCase("Welcome")) {
-	  displayNotificationHomeList=getWelcomeEmployeeListAOP();
-  }
-  }
-  
- else {
-
-  // Retriving the Birthday from the database which lies within the
-  // the selected dates
-  empBirthdayWithDates = employeeDAOImpl
-    .getBirthdayWithindate(filterCriteria);
-  // Retriving the Aniversaries from the database which lies within
-  // the the selected dates
-  empWorkAniversayWithdates = employeeDAOImpl
-    .getWorkAniversarywithdate(filterCriteria);
- }
-
-
- // Entering Birthdays Records To be displayed along with the
- // notification status
- if (selectedEvent.equalsIgnoreCase("birthDay")) {
-  displayNotificationHomeList = getBirthdaysListAOP(empBirthdayWithDates);
-  if(displayNotificationHomeList.size() ==0)
-  {
-	  throw new UserException(ExceptionCodes.NO_BIRTHDAY_FOUND, ExceptionMessages.NO_BIRTHDAY_FOUND);
-  }
- }
- 
- 
- else if (selectedEvent.equalsIgnoreCase("Welcome"))
- {
-	 if(displayNotificationHomeList.size()==0)
-	  {
-	 throw new UserException(ExceptionCodes.NO_WELCOME_EMPLOYEE, ExceptionMessages.NO_WELCOME_EMPLOYEE);
-	  }
- }
- 
- 
- // Entering Aniversary Records To be displayed along with the
- // notification status
- else if (selectedEvent.equalsIgnoreCase("workAniversary")) {
-
-  displayNotificationHomeList = getAnivarsaryListAOP(empWorkAniversayWithdates);
-	
-  if(displayNotificationHomeList.size() ==0)
-  {
-	  throw new UserException(ExceptionCodes.NO_EMPLOYEE_JOINED_TODAY, ExceptionMessages.NO_EMPLOYEE_JOINED_TODAY);
-  }
- }
- // If no date criteria is selected this else will return the events in
- // the current month
- else {
-  displayNotificationHomeList
-    .addAll(getAnivarsaryListAOP(empWorkAniversayWithdates));
-  displayNotificationHomeList
-    .addAll(getBirthdaysListAOP(empBirthdayWithDates));
-  if(displayNotificationHomeList.size()==0)
-  {
-	  throw new UserException(ExceptionCodes.NO_EVENT_FOUND, ExceptionMessages.NO_EVENT_FOUND); 
-  }
-
- }
-
- return displayNotificationHomeList;
-
-}
-
-
-// This Method will return the birthday list with a selected criteria
-@AuthorizeEntity(roles={Constants.HR})
-public List<DisplayNotificationHome> getBirthdaysListAOP(
-		List<Employee> employeeBirthday) throws BusinessException {
-
-	 List<SendNotificationHistory> notificationHistory = new ArrayList<SendNotificationHistory>();
-	 SendNotificationHistoryHandler sendnotificationHandler= SendNotificationHistoryHandler.getInstance();
-	 notificationHistory = sendnotificationHandler.getHistorydataAOP();
-	List<DisplayNotificationHome> displayNotificationHomeList = new ArrayList<DisplayNotificationHome>();
-
-	for (Employee birthday : employeeBirthday) {
-		DisplayNotificationHome displayNotificationHome = new DisplayNotificationHome(
-				"Birthday", birthday.getDateOfBirth(), birthday.getEmail(),
-				birthday.getEmployeeName());
-
-		if (notificationHistory.size() != 0) {
-			for (SendNotificationHistory checkingHistory : notificationHistory) {
-				if (checkingHistory.getEmployeeId() == birthday
-						.getEmployeeId()
-						&& checkingHistory.getTemplateId().equals("01")) {
-					displayNotificationHome.setStatus("Sent");
-					break;
-				} else {
-					displayNotificationHome.setStatus("Not Sent");
-				}
-			}
-		} else {
-			displayNotificationHome.setStatus("Not Sent");
-		}
-
-		displayNotificationHomeList.add(displayNotificationHome);
-	}
-	return displayNotificationHomeList;
-}
-
-// This Method will return the Anivarsary list with a selected criteria
-@AuthorizeEntity(roles={Constants.HR})
-public List<DisplayNotificationHome> getAnivarsaryListAOP(
-		List<Employee> employeeAniversary) throws BusinessException {
-
-	 List<SendNotificationHistory> notificationHistory = new ArrayList<SendNotificationHistory>();
-	 SendNotificationHistoryHandler sendnotificationHandler= SendNotificationHistoryHandler.getInstance();
-	 notificationHistory = sendnotificationHandler.getHistorydataAOP();
-	List<DisplayNotificationHome> displayNotificationHomeList = new ArrayList<DisplayNotificationHome>();
-
-	for (Employee anivarsary : employeeAniversary) {
-		DisplayNotificationHome displayNotificationHome = new DisplayNotificationHome(
-				"Anniversary", anivarsary.getDateOfJoining(),
-				anivarsary.getEmail(), anivarsary.getEmployeeName());
-
-		if (notificationHistory.size() != 0) {
-			for (SendNotificationHistory checkingHistory : notificationHistory) {
-				if (checkingHistory.getEmployeeId() == anivarsary
-						.getEmployeeId()
-						&& checkingHistory.getTemplateId().equals("02")) {
-					displayNotificationHome.setStatus("Sent");
-					break;
-				} else {
-					displayNotificationHome.setStatus("Not Sent");
-				}
-			}
-		} else {
-			displayNotificationHome.setStatus("Not Sent");
-		}
-
-		displayNotificationHomeList.add(displayNotificationHome);
-	}
-	return displayNotificationHomeList;
-}
-
-// This Method will return the birthday list with a selected criteria
-@AuthorizeEntity(roles={Constants.HR})
-public List<DisplayNotificationHome> getWelcomeEmployeeListAOP()
-		throws BusinessException
-
-{
-	EmployeeDAO employeeDAOImpl = DAOFactory.getInstance().getEmployeeDAO();
-
-	 List<SendNotificationHistory> notificationHistory = new ArrayList<SendNotificationHistory>();
-	 SendNotificationHistoryHandler sendnotificationHandler= SendNotificationHistoryHandler.getInstance();
-	 notificationHistory = sendnotificationHandler.getHistorydataAOP();
-	List<DisplayNotificationHome> displayNotificationHomeList = new ArrayList<DisplayNotificationHome>();
-	welcomeemp = employeeDAOImpl.getWelcomeEmployee();
-	for (Employee welEmp : welcomeemp) {
-		DisplayNotificationHome displayNotificationHome = new DisplayNotificationHome(
-				"Welcome", welEmp.getDateOfJoining(),
-				welEmp.getEmail(), welEmp.getEmployeeName());
-
-		if (notificationHistory.size() != 0) {
-			for (SendNotificationHistory checkingHistory : notificationHistory) {
-				if (checkingHistory.getEmployeeId() == welEmp
-						.getEmployeeId()
-						&& checkingHistory.getTemplateId().equals("03")) {
-					displayNotificationHome.setStatus("Sent");
-					break;
-				} else {
-					displayNotificationHome.setStatus("Not Sent");
-
-				}
-			}
-		} else {
-			displayNotificationHome.setStatus("Not Sent");
-		}
-
-		displayNotificationHomeList.add(displayNotificationHome);
-	}
-	return displayNotificationHomeList;
-}
-@AuthorizeEntity(roles={Constants.HR})
-public List<Employee> searchEmployeeAOP(EmployeeSearchInputDescriptor employee) {
-
-	List<Employee> employeelist = null;
-	EmployeeDAO EmployeeDAOImpl = (EmployeeDAO) DAOFactory.getInstance().getEmployeeDAO();
-	employeelist = (List<Employee>)EmployeeDAOImpl.searchEmployee(employee);
-	return employeelist;
-}
-
-//hr delete operation
-@AuthorizeEntity(roles={Constants.HR})
-public Employee deleteEmployeeAOP(Employee employee) throws EmployeeException {
-	Employee empFromDB = (Employee) DAOFactory.getInstance()
-		    .getEmployeeDAO().getEmployeeById(employee.getEmployeeId());
-		  empFromDB.setDeleted(true);
-		  EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
-		    .getEmployeeDAO();
-		  employee = (Employee) empDAOImpl.update(empFromDB);
-		  return employee;
-}
-
-public void changePassword(ChangePassword changePasswordEmployee) throws EncryptionException, BusinessException
-{
-	System.out.println(changePasswordEmployee.getId());
-	Employee empFromDB = (Employee) DAOFactory.getInstance()
-		    .getEmployeeDAO().getEmployeeById(changePasswordEmployee.getId());
-	String passwordFromDB=empFromDB.getPassword();
-	String oldpassword =changePasswordEmployee.getOldPassword();
-	String newPassword=changePasswordEmployee.getNewPassword();
-	String confirmNewPassword=changePasswordEmployee.getConfirmNewPassword();
-	
-	System.out.println(changePasswordEmployee.getOldPassword());
-	System.out.println(changePasswordEmployee.getNewPassword());
-	System.out.println(changePasswordEmployee.getConfirmNewPassword());
-	
-	String encryptedOldPassword=Utils.encrypt(oldpassword.trim());
-	System.out.println(changePasswordEmployee.getId());
-	
-	if (newPassword == null || newPassword.isEmpty() || newPassword.trim().isEmpty() || confirmNewPassword == null || confirmNewPassword.isEmpty() || confirmNewPassword.trim().isEmpty() ) {
-		throw new BusinessException(
-				ExceptionCodes.PASSWORD_CANNOT_BE_EMPTY,
-				ExceptionMessages.PASSWORD_CANNOT_BE_EMPTY);
-	}
-	
-	boolean passwordValidity = passwordFromDB.equals(encryptedOldPassword);
-	boolean newPasswordValidity = newPassword.equals(confirmNewPassword);
-	if(passwordValidity && newPasswordValidity)
-	{
-		empFromDB.setPassword(Utils.encrypt(newPassword));
-		updateEmployee(empFromDB);
-	}
-	else if(!passwordValidity)
-	{
-		throw new UserException(ExceptionCodes.INVALID_OLD_PASSWORD, ExceptionMessages.INVALID_OLD_PASSWORD);
-	}
-	else if(!newPasswordValidity)
-	{
-		throw new UserException(ExceptionCodes.INVALID_NEW_PASSWORD, ExceptionMessages.INVALID_NEW_PASSWORD);
-	}
-}
-
-
-public boolean logout(){
-	boolean isLogout = false;
-	String userSessionId = ServiceRequestContextHolder.getContext()
-			.getUserSessionToken().getUserSessionId();
-	
-	isLogout = CacheManager.getInstance().getCache(CacheRegionType.USER_SESSION_CACHE).remove(userSessionId);
-	return isLogout;
-}
-
-public List<Employee> getTodaysBirthday() throws BusinessException
-{
-	List<Employee> employeeTodaysBirthday = null;
-	EmployeeDAO employeeDAOImpl = (EmployeeDAO) DAOFactory.getInstance().getEmployeeDAO();
-	employeeTodaysBirthday=employeeDAOImpl.getTodaysBirthday();
-	return employeeTodaysBirthday;
-}
-
-public List<Employee> getTodayWorkAniversary() throws BusinessException
-{
-	List<Employee> employeeTodayWorkAniversary = null;
-	EmployeeDAO employeeDAOImpl = (EmployeeDAO) DAOFactory.getInstance().getEmployeeDAO();
-	employeeTodayWorkAniversary=employeeDAOImpl.getTodayWorkAniversary();
-	return employeeTodayWorkAniversary;
-}
-
-//updating designation details
-@AuthorizeEntity(roles={Constants.HR})
-	public Employee updateDesigantionDetailsAOP(DesignationHistory desHistory)
-			   throws ObjectNotFoundException, EmployeeException,
-			   EncryptionException {
-
-			  Employee empFromDB = (Employee) DAOFactory.getInstance()
-			    .getEmployeeDAO().getEmployeeById(desHistory.getEmpId());
-			  String salary=""+desHistory.getSalary();
-			  String variablePay=""+desHistory.getVariablePay();
-			  
-			  empFromDB.setSalary(salary);
-			  empFromDB.setCurrentDesignation(desHistory.getDesignationId());
-			  empFromDB.setVariableComponent(variablePay);
-			  EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
-			    .getEmployeeDAO();
-			  Employee employee = (Employee) empDAOImpl.update(empFromDB);
-			  return employee;
-			 }
-
-	public PaginationOutput <NotificationPaginationInput> getEmployeesPaginated(NotificationPaginationInput employee) {
-			 
-			 Paginator<NotificationPaginationInput> paginator = new Paginator<>();
-			 
-			 
-			 paginator = DAOFactory.getInstance().getEmployeeDAO().getEmployeesPaginated(employee);
-			 
-			 
-			 
-			 PaginationOutput<NotificationPaginationInput> empPaginationOutput = new PaginationOutput<NotificationPaginationInput>(paginator, employee.getPageNo(), employee.getPageSize());
-			 
+	@AuthorizeEntity(roles = { Constants.HR })
+	public Employee hrUpdateEmployeeAOP(Employee employee)
+			throws ObjectNotFoundException, EmployeeException,
+			EncryptionException {
 		
-			 return empPaginationOutput;
+		
+		Employee empFromDB = (Employee) DAOFactory.getInstance()
+				.getEmployeeDAO().getEmployeeById(employee.getEmployeeId());
+		empFromDB.setContactNo(employee.getContactNo());
+		// empFromDB.setEmail(employee.getEmail());
+		empFromDB.setCurrentAddress(employee.getCurrentAddress());
+		empFromDB.setPermanentAddress(employee.getPermanentAddress());
+		empFromDB.setEmergencycontactnumber(employee
+				.getEmergencycontactnumber());
+		empFromDB.setEmergencyContactName(employee.getEmergencyContactName());
+		empFromDB.setRelationWithEmergencyConatact(employee
+				.getRelationWithEmergencyConatact());
+		empFromDB.setDateOfBirth(employee.getDateOfBirth());
+		// empFromDB.setPassword(Utils.encrypt(employee.getPassword()));
+		empFromDB.setFileId(employee.getFileId());
+		empFromDB.setSkype(employee.getSkype());
+		empFromDB.setBankAccountNo(employee.getBankAccountNo());
+		empFromDB.setFathersName(employee.getFathersName());
+		empFromDB.setHighestQualification(employee.getHighestQualification());
+		empFromDB.setPan(employee.getPan());
+		empFromDB.setPfNo(employee.getPfNo());
+		empFromDB.setSalary(employee.getSalary());
+		// empFromDB.setGender(employee.getGender());
+		empFromDB.setBloodGroup(employee.getBloodGroup());
+		// empFromDB.setEmployeeId(employee.getEmployeeId());
+		empFromDB.setEmployeeName(employee.getEmployeeName());
+		empFromDB.setVariableComponent(employee.getVariableComponent());
+		EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
+				.getEmployeeDAO();
+		employee = (Employee) empDAOImpl.update(empFromDB);
+		return employee;
+	}
+
+	@SuppressWarnings("null")
+	// This method will return all the event of the company within one month
+	@AuthorizeEntity(roles = { Constants.HR })
+	public List<DisplayNotificationHome> getAllEventsAOP()
+			throws BusinessException {
+
+		List<DisplayNotificationHome> displayNotificationHomeList = new ArrayList<DisplayNotificationHome>();
+		List<SendNotificationHistory> notificationHistory = new ArrayList<SendNotificationHistory>();
+
+		SendNotificationHistoryHandler sendnotificationHandler = SendNotificationHistoryHandler
+				.getInstance();
+		notificationHistory = sendnotificationHandler.getHistorydataAOP();
+
+		/*
+		 * SendNotificationHistoryDAO SendNotificationHistoryDAOImpl =
+		 * DAOFactory .getInstance().getSendNotificationHistoryDAO();
+		 * notificationHistory =
+		 * SendNotificationHistoryDAOImpl.getHistorydata();
+		 */
+		EmployeeDAO employeeDAOImpl = DAOFactory.getInstance().getEmployeeDAO();
+		empBirthday = employeeDAOImpl.getBirthday();
+		empWorkAniversay = employeeDAOImpl.getWorkAniversary();
+
+		// Converting eachEmployeeHistory to map
+
+		displayNotificationHomeList
+				.addAll(getAnivarsaryListAOP(empWorkAniversay));
+		displayNotificationHomeList.addAll(getBirthdaysListAOP(empBirthday));
+		displayNotificationHomeList.addAll(getWelcomeEmployeeListAOP());
+
+		return displayNotificationHomeList;
+	}
+
+	// This method will return the event which are satisfying the criteria
+	// conditions
+	@AuthorizeEntity(roles = { Constants.HR })
+	public List<DisplayNotificationHome> getNotificationDisplayCriteriaAOP(
+			NotificationHomeFilterInputDiscriptor filterCriteria)
+			throws BusinessException {
+		List<DisplayNotificationHome> displayNotificationHomeList = new ArrayList<DisplayNotificationHome>();
+
+		List<Employee> empBirthdayWithDates = null;
+		List<Employee> empWorkAniversayWithdates = null;
+		String selectedEvent = filterCriteria.getSelectedEvent();
+		System.out.println(selectedEvent);
+		EmployeeDAO employeeDAOImpl = DAOFactory.getInstance().getEmployeeDAO();
+		if (filterCriteria.getFromdate() == null
+				|| filterCriteria.getTodate() == null) {
+			empBirthdayWithDates = employeeDAOImpl.getBirthday();
+			empWorkAniversayWithdates = employeeDAOImpl.getWorkAniversary();
+			if (selectedEvent.equalsIgnoreCase("Welcome")) {
+				displayNotificationHomeList = getWelcomeEmployeeListAOP();
 			}
+
+		}
+
+		else {
+
+			// Retriving the Birthday from the database which lies within the
+			// the selected dates
+			empBirthdayWithDates = employeeDAOImpl
+					.getBirthdayWithindate(filterCriteria);
+			// Retriving the Aniversaries from the database which lies within
+			// the the selected dates
+			empWorkAniversayWithdates = employeeDAOImpl
+					.getWorkAniversarywithdate(filterCriteria);
+		}
+
+		// Entering Birthdays Records To be displayed along with the
+		// notification status
+		if (selectedEvent.equalsIgnoreCase("birthDay")) {
+			displayNotificationHomeList = getBirthdaysListAOP(empBirthdayWithDates);
+			if (displayNotificationHomeList.size() == 0) {
+				throw new UserException(ExceptionCodes.NO_BIRTHDAY_FOUND,
+						ExceptionMessages.NO_BIRTHDAY_FOUND);
+			}
+		}
+
+		else if (selectedEvent.equalsIgnoreCase("Welcome")) {
+			if (displayNotificationHomeList.size() == 0) {
+				throw new UserException(ExceptionCodes.NO_WELCOME_EMPLOYEE,
+						ExceptionMessages.NO_WELCOME_EMPLOYEE);
+			}
+		}
+
+		// Entering Aniversary Records To be displayed along with the
+		// notification status
+		else if (selectedEvent.equalsIgnoreCase("workAniversary")) {
+
+			displayNotificationHomeList = getAnivarsaryListAOP(empWorkAniversayWithdates);
+
+			if (displayNotificationHomeList.size() == 0) {
+				throw new UserException(
+						ExceptionCodes.NO_EMPLOYEE_JOINED_TODAY,
+						ExceptionMessages.NO_EMPLOYEE_JOINED_TODAY);
+			}
+		}
+		// If no date criteria is selected this else will return the events in
+		// the current month
+		else {
+			displayNotificationHomeList
+					.addAll(getAnivarsaryListAOP(empWorkAniversayWithdates));
+			displayNotificationHomeList
+					.addAll(getBirthdaysListAOP(empBirthdayWithDates));
+
+			if (displayNotificationHomeList.size() == 0) {
+				throw new UserException(ExceptionCodes.NO_EVENT_FOUND,
+						ExceptionMessages.NO_EVENT_FOUND);
+			}
+
+		}
+
+		return displayNotificationHomeList;
+
+	}
+
+	// This Method will return the birthday list with a selected criteria
+	@AuthorizeEntity(roles = { Constants.HR })
+	public List<DisplayNotificationHome> getBirthdaysListAOP(
+			List<Employee> employeeBirthday) throws BusinessException {
+
+		List<SendNotificationHistory> notificationHistory = new ArrayList<SendNotificationHistory>();
+		SendNotificationHistoryHandler sendnotificationHandler = SendNotificationHistoryHandler
+				.getInstance();
+		notificationHistory = sendnotificationHandler.getHistorydataAOP();
+		List<DisplayNotificationHome> displayNotificationHomeList = new ArrayList<DisplayNotificationHome>();
+
+		for (Employee birthday : employeeBirthday) {
+			DisplayNotificationHome displayNotificationHome = new DisplayNotificationHome(
+					"Birthday", birthday.getDateOfBirth(), birthday.getEmail(),
+					birthday.getEmployeeName());
+
+			if (notificationHistory.size() != 0) {
+				for (SendNotificationHistory checkingHistory : notificationHistory) {
+					if (checkingHistory.getEmployeeId() == birthday
+							.getEmployeeId()
+							&& checkingHistory.getTemplateId().equals("01")) {
+						displayNotificationHome.setStatus("Sent");
+						break;
+					} else {
+						displayNotificationHome.setStatus("Not Sent");
+					}
+				}
+			} else {
+				displayNotificationHome.setStatus("Not Sent");
+			}
+
+			displayNotificationHomeList.add(displayNotificationHome);
+		}
+		return displayNotificationHomeList;
+	}
+
+	// This Method will return the Anivarsary list with a selected criteria
+	@AuthorizeEntity(roles = { Constants.HR })
+	public List<DisplayNotificationHome> getAnivarsaryListAOP(
+			List<Employee> employeeAniversary) throws BusinessException {
+
+		List<SendNotificationHistory> notificationHistory = new ArrayList<SendNotificationHistory>();
+		SendNotificationHistoryHandler sendnotificationHandler = SendNotificationHistoryHandler
+				.getInstance();
+		notificationHistory = sendnotificationHandler.getHistorydataAOP();
+		List<DisplayNotificationHome> displayNotificationHomeList = new ArrayList<DisplayNotificationHome>();
+
+		for (Employee anivarsary : employeeAniversary) {
+			DisplayNotificationHome displayNotificationHome = new DisplayNotificationHome(
+					"Anniversary", anivarsary.getDateOfJoining(),
+					anivarsary.getEmail(), anivarsary.getEmployeeName());
+
+			if (notificationHistory.size() != 0) {
+				for (SendNotificationHistory checkingHistory : notificationHistory) {
+					if (checkingHistory.getEmployeeId() == anivarsary
+							.getEmployeeId()
+							&& checkingHistory.getTemplateId().equals("02")) {
+						displayNotificationHome.setStatus("Sent");
+						break;
+					} else {
+						displayNotificationHome.setStatus("Not Sent");
+					}
+				}
+			} else {
+				displayNotificationHome.setStatus("Not Sent");
+			}
+
+			displayNotificationHomeList.add(displayNotificationHome);
+		}
+		return displayNotificationHomeList;
+	}
+
+	// This Method will return the birthday list with a selected criteria
+	@AuthorizeEntity(roles = { Constants.HR })
+	public List<DisplayNotificationHome> getWelcomeEmployeeListAOP()
+			throws BusinessException
+
+	{
+		EmployeeDAO employeeDAOImpl = DAOFactory.getInstance().getEmployeeDAO();
+
+		List<SendNotificationHistory> notificationHistory = new ArrayList<SendNotificationHistory>();
+		SendNotificationHistoryHandler sendnotificationHandler = SendNotificationHistoryHandler
+				.getInstance();
+		notificationHistory = sendnotificationHandler.getHistorydataAOP();
+		List<DisplayNotificationHome> displayNotificationHomeList = new ArrayList<DisplayNotificationHome>();
+		welcomeemp = employeeDAOImpl.getWelcomeEmployee();
+		for (Employee welEmp : welcomeemp) {
+			DisplayNotificationHome displayNotificationHome = new DisplayNotificationHome(
+					"Welcome", welEmp.getDateOfJoining(), welEmp.getEmail(),
+					welEmp.getEmployeeName());
+
+			if (notificationHistory.size() != 0) {
+				for (SendNotificationHistory checkingHistory : notificationHistory) {
+					if (checkingHistory.getEmployeeId() == welEmp
+							.getEmployeeId()
+							&& checkingHistory.getTemplateId().equals("03")) {
+						displayNotificationHome.setStatus("Sent");
+						break;
+					} else {
+						displayNotificationHome.setStatus("Not Sent");
+
+					}
+				}
+			} else {
+				displayNotificationHome.setStatus("Not Sent");
+			}
+
+			displayNotificationHomeList.add(displayNotificationHome);
+		}
+		return displayNotificationHomeList;
+	}
+
+	@AuthorizeEntity(roles = { Constants.HR })
+	public List<Employee> searchEmployeeAOP(
+			EmployeeSearchInputDescriptor employee) {
+
+		List<Employee> employeelist = null;
+		EmployeeDAO EmployeeDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
+				.getEmployeeDAO();
+		employeelist = (List<Employee>) EmployeeDAOImpl
+				.searchEmployee(employee);
+		return employeelist;
+	}
+
+	// hr delete operation
+	@AuthorizeEntity(roles = { Constants.HR })
+	public Employee deleteEmployeeAOP(Employee employee)
+			throws EmployeeException {
+		Employee empFromDB = (Employee) DAOFactory.getInstance()
+				.getEmployeeDAO().getEmployeeById(employee.getEmployeeId());
+		empFromDB.setDeleted(true);
+		EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
+				.getEmployeeDAO();
+		employee = (Employee) empDAOImpl.update(empFromDB);
+		return employee;
+	}
+
+	public void changePassword(ChangePassword changePasswordEmployee)
+			throws EncryptionException, BusinessException {
+		System.out.println(changePasswordEmployee.getId());
+		Employee empFromDB = (Employee) DAOFactory.getInstance()
+				.getEmployeeDAO()
+				.getEmployeeById(changePasswordEmployee.getId());
+		String passwordFromDB = empFromDB.getPassword();
+		String oldpassword = changePasswordEmployee.getOldPassword();
+		String newPassword = changePasswordEmployee.getNewPassword();
+		String confirmNewPassword = changePasswordEmployee
+				.getConfirmNewPassword();
+
+		System.out.println(changePasswordEmployee.getOldPassword());
+		System.out.println(changePasswordEmployee.getNewPassword());
+		System.out.println(changePasswordEmployee.getConfirmNewPassword());
+
+		String encryptedOldPassword = Utils.encrypt(oldpassword.trim());
+		System.out.println(changePasswordEmployee.getId());
+
+		if (newPassword == null || newPassword.isEmpty()
+				|| newPassword.trim().isEmpty() || confirmNewPassword == null
+				|| confirmNewPassword.isEmpty()
+				|| confirmNewPassword.trim().isEmpty()) {
+			throw new BusinessException(
+					ExceptionCodes.PASSWORD_CANNOT_BE_EMPTY,
+					ExceptionMessages.PASSWORD_CANNOT_BE_EMPTY);
+		}
+
+		boolean passwordValidity = passwordFromDB.equals(encryptedOldPassword);
+		boolean newPasswordValidity = newPassword.equals(confirmNewPassword);
+		if (passwordValidity && newPasswordValidity) {
+			empFromDB.setPassword(Utils.encrypt(newPassword));
+			updateEmployee(empFromDB);
+		} else if (!passwordValidity) {
+			throw new UserException(ExceptionCodes.INVALID_OLD_PASSWORD,
+					ExceptionMessages.INVALID_OLD_PASSWORD);
+		} else if (!newPasswordValidity) {
+			throw new UserException(ExceptionCodes.INVALID_NEW_PASSWORD,
+					ExceptionMessages.INVALID_NEW_PASSWORD);
+		}
+	}
+
+	public boolean logout() {
+		boolean isLogout = false;
+		String userSessionId = ServiceRequestContextHolder.getContext()
+				.getUserSessionToken().getUserSessionId();
+
+		isLogout = CacheManager.getInstance()
+				.getCache(CacheRegionType.USER_SESSION_CACHE)
+				.remove(userSessionId);
+		return isLogout;
+	}
+
+	public List<Employee> getTodaysBirthday() throws BusinessException {
+		List<Employee> employeeTodaysBirthday = null;
+		EmployeeDAO employeeDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
+				.getEmployeeDAO();
+		employeeTodaysBirthday = employeeDAOImpl.getTodaysBirthday();
+		return employeeTodaysBirthday;
+	}
+
+	public List<Employee> getTodayWorkAniversary() throws BusinessException {
+		List<Employee> employeeTodayWorkAniversary = null;
+		EmployeeDAO employeeDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
+				.getEmployeeDAO();
+		employeeTodayWorkAniversary = employeeDAOImpl.getTodayWorkAniversary();
+		return employeeTodayWorkAniversary;
+	}
+
+	// updating designation details
+	@AuthorizeEntity(roles = { Constants.HR })
+	public Employee updateDesigantionDetailsAOP(DesignationHistory desHistory)
+			throws ObjectNotFoundException, EmployeeException,
+			EncryptionException {
+
+		Employee empFromDB = (Employee) DAOFactory.getInstance()
+				.getEmployeeDAO().getEmployeeById(desHistory.getEmpId());
+		String salary = "" + desHistory.getSalary();
+		String variablePay = "" + desHistory.getVariablePay();
+
+		empFromDB.setSalary(salary);
+		empFromDB.setCurrentDesignation(desHistory.getDesignationId());
+		empFromDB.setVariableComponent(variablePay);
+		EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
+				.getEmployeeDAO();
+		Employee employee = (Employee) empDAOImpl.update(empFromDB);
+		return employee;
+	}
+
+	public PaginationOutput<NotificationPaginationInput> getEmployeesPaginated(
+			NotificationPaginationInput employee) {
+
+		Paginator<NotificationPaginationInput> paginator = new Paginator<>();
+
+		paginator = DAOFactory.getInstance().getEmployeeDAO()
+				.getEmployeesPaginated(employee);
+
+		PaginationOutput<NotificationPaginationInput> empPaginationOutput = new PaginationOutput<NotificationPaginationInput>(
+				paginator, employee.getPageNo(), employee.getPageSize());
+
+		return empPaginationOutput;
+	}
 }

@@ -154,11 +154,11 @@ editdesignation.prototype.sendJson = function(empid) {
 							RequestManager.updateDesignationDetails(input,function(data2,success){
 							if(success)
 							{
-								console.log("updated in employee table");
+								//console.log("updated in employee table");
 							}
 							else
 							{
-								console.log("failed to update in employee table");
+								//console.log("failed to update in employee table");
 							}
 							}.ctx(this));
 							var input1 = {
@@ -166,10 +166,10 @@ editdesignation.prototype.sendJson = function(empid) {
 							};
 							RequestManager.getDesignationName(input1,function(data1, success) {
 												if (success) {
-													console.log("Successfully retrieved  from DesType .........");
+													//console.log("Successfully retrieved  from DesType .........");
 													this.appendDesTable(data,data1, status);
 												} else {
-													console.log("Failed to retrieved  from DesType .........");
+													//console.log("Failed to retrieved  from DesType .........");
 												}
 
 											}.ctx(this));
@@ -233,15 +233,15 @@ editdesignation.prototype.getDesignationHistory = function(empid) {
 							};
 							RequestManager.getDesignationName(input1,function(data1, success) {
 												if (success) {
-													console.log("successfully retrieved  from DesType .........");
+													//console.log("successfully retrieved  from DesType .........");
 													this.contentDisplay(content, data1,status);
 												} else {
-													console.log("failed to retrieved from DesType");
+													//console.log("failed to retrieved from DesType");
 												}
 											}.ctx(this));
 						} else {
 
-							console.log("failed to retrieved from DesHistory ");
+							//console.log("failed to retrieved from DesHistory ");
 						}
 
 					}.ctx(this));

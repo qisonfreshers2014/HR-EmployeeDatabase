@@ -42,6 +42,7 @@ HrEditEmployee.prototype.handleShow = function(empid) {
 			$("#currentaddr").val(object.currentAddress);
 			$("#peraddr").val(object.permanentAddress);
 			$("#skype").val(object.skype);
+			$("#filepath").text(object.fileId);
 		} else {
 			alert("failed to edit");
 		}
@@ -212,7 +213,6 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 		} else {
 			$(variableerr).text("");
 			// $(salerr).css("color", "green");
-
 		}
 
 		if (blood == "") {
@@ -435,6 +435,7 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 		$(nerr).css("color", "red");
 	} else {
 		$('.error').css('visibility', 'hidden');
+		
 		var input = {
 			"payload" : {
 				"employeeId" : empid,

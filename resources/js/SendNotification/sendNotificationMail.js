@@ -42,6 +42,13 @@ sendNotificationMail.prototype.handleShow = function(event, email, employeeName)
        //sending the payload to the server
 	$("#SubmitNotification").click(function() {
 		
+		
+		document.getElementById('SendMailNotification').style.display="hidden";
+		document.getElementById('light').style.display='block';
+		document.getElementById('fade').style.display='block';
+		
+		
+		
 		sendbutton[0].disabled = true;
 		
 		var modifiedcontent =$('#contentfieldNotification').val();
@@ -53,9 +60,15 @@ sendNotificationMail.prototype.handleShow = function(event, email, employeeName)
 				"modifiedContent":modifiedcontent
 			}
 		};
-		alert("Sending Mail..........");
+	
+
 		RequestManager.getSentManualMail(input, function(data, success) {
-			if (success) {
+			if (success) { 
+				
+				document.getElementById('light').style.display='hidden';
+				document.getElementById('fade').style.display='hidden';
+				document.getElementById('SendMailNotification').style.display="block";
+				
 				alert("Mail succesfully send");
 				var input={};
 				RequestManager.getAllEvents(input, function(data, success) {

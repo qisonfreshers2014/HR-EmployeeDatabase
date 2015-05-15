@@ -2,7 +2,7 @@ body {
    background-color: #ffffff;
     color: #000000;
     font-family: calibri;
-    font-size:12px;
+    font-size:15px;
     width: 100%;
       overflow-x: hidden;
 }
@@ -19,7 +19,7 @@ body {
     height: 100%;
  
   
-   min-height:510px;
+   min-height:550px;
    
  
    

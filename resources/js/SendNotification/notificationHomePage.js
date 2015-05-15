@@ -58,6 +58,24 @@ loadNotificationHomePage.prototype.handleShow = function(data) {
 		this.calendar();
 
 	}.ctx(this));
+	$("#backnotificationhome").focusin(function() {
+		var input={};
+		RequestManager.getAllEvents(input, function(data, success) {
+			if (success) {		
+			
+								App.loadNotificationHomePage(data);
+					}
+		else
+			{
+			App.loadNotificationHomePage(data);
+			alert("No Data Found");
+					}
+		
+		}
+		
+		);
+
+	}.ctx(this));
 
 }
 
@@ -179,8 +197,12 @@ loadNotificationHomePage.prototype.getdisplayedata = function(input) {
 							out += '<td></td></tr>';
 						}
 
-						document.getElementById("dataTableNotification").innerHTML = out;
+						
 					}
+					out +="</table>";
+					document.getElementById("dataTableNotification").innerHTML = out;
+					$("#backnotificationhome").css("visibility","visible");
+					
 					$('.dynamicSend').on(
 							'click',
 							function() {
@@ -211,4 +233,3 @@ loadNotificationHomePage.prototype.getdisplayedata = function(input) {
 			}.ctx(this));
 	
 }
-

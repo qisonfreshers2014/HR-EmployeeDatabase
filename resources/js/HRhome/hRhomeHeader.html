@@ -12,14 +12,27 @@
 
 <div id="menudiv">
 <ul class="list nav nav-tabs">
-<li ><a id="homeHr" href="#" data-toggle="tab">Home</a></li>
-	   <li class="active"><a id="emp" href="#" data-toggle="tab">Employee</a></li>
-		<li><a id="holiday" href="#" data-toggle="tab">Holidays</a></li>
-		<li><a id="hrpolicy" href="#" data-toggle="tab">HR Policies</a></li>
-			<li><a id="template" href="#" data-toggle="tab">Template</a></li>	
-			<li><a id="notifications" href="#" data-toggle="tab">Notifications</a></li>	
-			<li><a id="allHandsMeeting" href="#" data-toggle="tab">All Hands Meeting</a></li>	
+<li ><a id="homeHr" href="#tab-home" data-value="#home" data-toggle="tab">Home</a></li>
+	  
+	   <li class="active"><a id="emp" href="#tab-employee" data-value="#employee" data-toggle="tab">Employee</a></li>
+		<li><a id="holiday" href="#tab-holiday" data-value="#holiday" data-toggle="tab">Holidays</a></li>
+		<li><a id="hrpolicy" href="#tab-hrpolicy" data-value="#hrpolicy"data-toggle="tab">HR Policies</a></li>
+			<li><a id="template" href="#tab-template"  data-value="#template" data-toggle="tab">Template</a></li>	
+			<li><a id="notifications" href="#tab-notifications" data-value="#notifications" data-toggle="tab">Notifications</a></li>	
+			<li><a id="allHandsMeeting" href="#tab-allHandsMeeting" data-value="#allHandsMeeting" data-toggle="tab">All Hands Meeting</a></li>		
 </ul>
 </div>
 
 </div>
+<script type="text/javascript">
+    $(function () {
+        var navTabs = $('.nav-tabs a');
+        var hash = window.location.hash;
+        hash && navTabs.filter('[data-value="' + hash + '"]').tab('show');
+
+        navTabs.on('shown', function (e) {
+            var newhash = $(e.target).attr('data-value');
+            window.location.hash = newhash;
+        });
+    })
+</script>

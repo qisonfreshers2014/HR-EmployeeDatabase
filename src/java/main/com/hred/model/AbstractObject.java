@@ -49,6 +49,7 @@ public abstract class AbstractObject implements BaseObject{
   this.creatorId = abstractObject.creatorId;
   this.modifierId = abstractObject.modifierId;
   this.mts = abstractObject.mts;
+  this.isDeleted = abstractObject.isDeleted;
  }
 
  @Override

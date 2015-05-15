@@ -40,6 +40,9 @@ public class Objects {
             case ObjectTypes.NOTIFICATIONHISTORY:
                 persistentObjectName = SendNotificationHistory.class;
                 break;
+            case ObjectTypes.SKILLS:
+                persistentObjectName = Skills.class;
+                break;
 
             default:
                 break;

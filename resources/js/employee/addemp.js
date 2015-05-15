@@ -34,7 +34,7 @@ AddEmployee.prototype.handleShow = function() {
 	function UploadClickHandler(event) {
 		var thisEle = event.target;
 		this.uploadMedia(function() {
-			$(thisEle).on('click', UploadClickHandler.ctx(this));
+			$(thisEle).one('click', UploadClickHandler.ctx(this));
 		}.ctx(this));
 	}
 
@@ -92,10 +92,10 @@ AddEmployee.prototype.uploadMedia = function(callback) {
 			var index = imageSrc.lastIndexOf("/") + 1;
 			var filename = imageSrc.substr(index);
 			$('#filepath').text(filename);
-			/*$('.mediaForProfileImage').attr('src', imageSrc);
-			if (imageSrc != null) {
-				$('.mediaForProfileImage').lightBox();
-			}*/
+			/*
+			 * $('.mediaForProfileImage').attr('src', imageSrc); if (imageSrc !=
+			 * null) { $('.mediaForProfileImage').lightBox(); }
+			 */
 		}
 	}.ctx(this));
 	callback();
@@ -401,21 +401,6 @@ AddEmployee.prototype.validateEmp = function() {
 
 	}
 
-	if (password == "") {
-		$(pwderr).text("Required field");
-		$(pwderr).css("color", "red");
-	} else if (!(password.match(pwepattern))) {
-		$(pwderr)
-				.text(
-						"Must be at least 8 characters,At least 1 number, 1 lowercase, 1 uppercase letter, At least 1 special character");
-		$(pwderr).css("color", "red");
-	} else {
-		$(pwderr).text("");
-		flag = false;
-		// $(pwderr).css("color", "green");
-
-	}
-
 	if (salary == "") {
 		$(salerr).text("Required field");
 		$(salerr).css("color", "red");
@@ -505,7 +490,7 @@ AddEmployee.prototype.validateEmp = function() {
 		// $(skillerr).css("color", "green");
 
 	}
-	flag = true;
+
 	if (rating == "") {
 		$(ratingerr).text("Required field");
 		$(ratingerr).css("color", "red");
@@ -520,13 +505,85 @@ AddEmployee.prototype.validateEmp = function() {
 		flag = false;
 	}
 
+	flag = true;
+	if (password == "") {
+		$(pwderr).text("Required field");
+		$(pwderr).css("color", "red");
+	} else if (!(password.match(pwepattern))) {
+		$(pwderr)
+				.text(
+						"Must be at least 8 characters,At least 1 number, 1 lowercase, 1 uppercase letter, At least 1 special character");
+		$(pwderr).css("color", "red");
+	} else if (!(rating == isNaN || rating.match(num))) {
+		$(pwderr).text("");
+		$(ratingerr).text("Please enter only number ");
+		$(ratingerr).css("color", "red");
+	} else if (!(rating > 0 && rating <= 10)) {
+		$(ratingerr).text("Please enter between 1 to 10 ");
+		$(ratingerr).css("color", "red");
+	} else if (!(relation.match(char) || relation == isNaN)) {
+		$(pwderr).text("");
+		$(relationerr).text("enter characters only");
+		$(relationerr).css("color", "red");
+	} else if (salary == isNaN || !(salary.match(salry))) {
+		$(pwderr).text("");
+		$(salerr).text("Please enter numbers only eg:90.00");
+		$(salerr).css("color", "red");
+	} else if (!(skill.match(sklr))) {
+		$(skillerr).text("Please enter a valid skill");
+		$(skillerr).css("color", "red");
+	} else if (txtemercon == isNaN || !(txtemercon.match(num))) {
+		$(pwderr).text("");
+		$(emnumerr).text("Only numbers allowed");
+		$(emnumerr).css("color", "red");
+	} else if (!(txtemercon.length == 10)) {
+		$(emnumerr).text("Please enter 10 digits only");
+		$(emnumerr).css("color", "red");
+	} else if (contnum == isNaN || !(contnum.match(num))) {
+		$(pwderr).text("");
+		$(cnumerr).text("Please enter numbers only");
+		$(cnumerr).css("color", "red");
+	} else if (!(contnum.length == 10)) {
+		$(cnumerr).text("Please enter 10 digits only");
+		$(cnumerr).css("color", "red");
+	} else if (!(qualification.match(qual) || qualification.match(char))) {
+		$(pwderr).text("");
+		$(nerr).text("Please check the qualification ");
+		$(nerr).css("color", "red");
+	} else if (!(email.match(mail))) {
+		$(emlerr).text("Please enter a valid email address");
+		$(emlerr).css("color", "red");
+	} else if (!(eid.match(num) || eid == isNaN)) {
+		$(err).text("EID accepts numbers only");
+		$(err).css("color", "red");
+	} else if (!(txtemname.match(char) || txtemname == isNaN)) {
+		$(pwderr).text("");
+		$(emnameerr).text("Enter characters only");
+		$(emnameerr).css("color", "red");
+	} else if (!(skype.match(skp))) {
+		$(skypeerr).text("Please enter a valid skype ID");
+		$(skypeerr).css("color", "red");
+	} else if (!(skype.length > 5)) {
+		$(skypeerr).text("Please enter minimum 6 letters");
+		$(skypeerr).css("color", "red");
+	} else if (!(blood.match(bloodGroup))) {
+		$(pwderr).text("");
+		$(blodderr).text("Please enter a valid blood group ex:AB+, AB-");
+		$(blodderr).css("color", "red");
+	} else {
+		$(pwderr).text("");
+		flag = false;
+		// $(pwderr).css("color", "green");
+
+	}
+
 	this.GenderValidate();
 	this.ValidateDrpn();
 
 	// sending data to database in the form of json
 
 	if (!flag) {
-	//	$('.error').css('visibility', 'hidden');
+		// $('.error').css('visibility', 'hidden');
 
 		var input = {
 			"payload" : {
@@ -559,6 +616,9 @@ AddEmployee.prototype.validateEmp = function() {
 				"fileId" : fileId
 			}
 		};
+		if (variable == "") {
+			variable = "0";
+		}
 		var input2 = {
 			"payload" : {
 				"designationId" : designation,
@@ -569,26 +629,6 @@ AddEmployee.prototype.validateEmp = function() {
 			}
 
 		};
-
-		var input3 = {
-			"payload" : {
-				"empId" : eid,
-				"rating" : rating,
-				"skills" : skill
-			}
-
-		};
-
-		RequestManager.saveSkill(input3, function(data, success) {
-			if (success) {
-				return true;
-				// alert("Employee ID: " + $("#eid").val()+ " Details
-				// Successfully Added to Skills");
-			} else {
-				return false;
-			}
-		}.ctx(this));
-
 		RequestManager.saveDesignation(input2, function(data, success) {
 			if (success) {
 				return true;

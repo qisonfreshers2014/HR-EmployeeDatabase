@@ -68,6 +68,7 @@ public static final int DESIGNATION_TYPE=182;
  public static final int SENDNOTIFICATIONHISTORY = 142;
 public  static final int HOLIDAY = 143;
 public static final int NOTIFICATIONHISTORY = 144;
+public static final int SKILLS = 145;
  
 
 }

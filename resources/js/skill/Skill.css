@@ -4,7 +4,7 @@
 	text-align:center;
 	margin-left:2%;
 	font-family: Calibri;
- 	font-size:12px;
+ 	font-size:15px;
 
 }
 .data1,th,td,tr{
@@ -13,7 +13,7 @@
 	text-align:center;
 	margin-left:2%;
 	font-family: Calibri;
- 	font-size:12px;
+ 	font-size:15px;
 
 } 
 th{
@@ -22,6 +22,12 @@ th{
 th,td{
 	font-size:15px:
 	 
+}
+#backskill{
+ margin-left:-93%;
+}
+#backfilter{
+ margin-left:2%;
 }
 .red{
 	color:red;

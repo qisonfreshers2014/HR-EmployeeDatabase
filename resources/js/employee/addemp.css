@@ -1,54 +1,65 @@
 
-.table {
-	border: 1px solid white;
-	width: 100%;
-	text-align: left;
-	font-size:12px;
-	text-decoration: blink;
-}
+
 .tr {
 	border: 1px solid #CCC;
-     color: black;
-     font-family: Calibri;
-     font-size: 100%;
-     height: 100%;
-     width: 100%;
-  	background-color:#CCC;
+	color: black;
+	font-family: Calibri;
+	font-size: 100%;
+	height: 100%;
+	width: 100%;
+	background-color: #CCC;
 }
 
 .th {
+	text-align: left;
+	vertical-align: top;
 	border: 1px solid #CCC;
-    background-color:#CCC;
+	background-color: #CCC;
 }
-.td{
+
+.th1 {
+	text-align: right;
+	vertical-align: top;
 	border: 1px solid #CCC;
-	background-color:#CCC;
+	background-color: #CCC;
 }
+.td1 {
+	vertical-align: top;
+	border: 1px solid #CCC;
+	background-color: #CCC;
+}
+.td {
+	vertical-align: top;
+	border: 1px solid #CCC;
+	background-color: #CCC;
+}
+
 .bar {
-     color:  #00246B;
+	color: #00246B;
 }
+
 .error {
 	color: red;
 }
 
 .container {
-	 
-	 background-color: #FFF; 
+	background-color: #FFF;
 }
+
 .leftContainer {
-	 background-color: #FFF; 
+	background-color: #FFF;
+}
 
+.rightContainer {
+	background-color: #FFF;
 }
-.rightContainer{
-	background-color: #FFF; 
-}
+
 .ui-datepicker {
-	
-    background: #CCC;
-    border: 1px solid #66F;
-    color: #000;
-}
-#btnadd{
-	float:right;
+	background: #CCC;
+	border: 1px solid #66F;
+	color: #000;
 }
 
+#btnadd {
+	float: right;
+}

@@ -194,6 +194,7 @@ public List<Template> getTemplatesAOP() {
 		{
 		try {
 			 requiredImg=filehandler.getFile(sendNotification.getFileId());
+			 System.out.println(path+requiredImg.getFilePath());
 		
 		} catch (BusinessException e) {
 			
@@ -206,10 +207,11 @@ public List<Template> getTemplatesAOP() {
 			
 			if(sendNotification.getFileId()!=0)
 			{
+				System.out.println(path+requiredImg.getFilePath());
 				 finalContent +="<img src='"+path+requiredImg.getFilePath()+"' alt='"+sendNotification.getEmployeeName()+"' width='150' height='150'><br/>";
 				   
 			}
-			 System.out.println(requiredImg.getFilePath());
+			
 	 finalContent +="Dear Qisonians,<br/> We take Immense pleasure in welcoming "+ sendNotification.getEmployeeName()+" who has Joined QISON TEAM <br/> ";
 	finalContent +="He is working as "+currentDesignation+"<br/>";
 			 

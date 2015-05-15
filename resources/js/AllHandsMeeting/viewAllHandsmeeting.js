@@ -37,7 +37,7 @@ viewAllHandsMeeting.prototype.getAllHandsMeeting=function(){
 				weekday[5] = "Friday";
 				weekday[6] = "Saturday";
 				var month=new Date(value.date).getMonth()+1;
-				$('table').append("<tr style='text-align:center'><td>"+new Date(value.date).getFullYear()+"-"+month+"-"+new Date(value.date).getDate()+"</td><td>"+weekday[new Date(value.date).getDay()]+"</td><td>"+value.employee+"</td><td>"+value.description+"</td><td><input type='button' class='editAllHand btn btn-primary btn-md' id="+value.id+" value='Edit'/></td></tr>");
+				$('table').append("<tr style='text-align:center'><td>"+new Date(value.date).getFullYear()+"-"+month+"-"+new Date(value.date).getDate()+"</td><td>"+weekday[new Date(value.date).getDay()]+"</td><td>"+value.employee+"</td><td>"+value.description+"</td><td><a href='#allHandsMeeting/editAllHandsMeeting'><input type='button' class='editAllHand btn btn-primary btn-md' id="+value.id+" value='Edit'/></a></td></tr>");
 			});
 			//alert(new Date(value.date).getFullYear()+"-"+new Date(value.date).getDate()+"-"+new Date(value.date).getMonth());
 			$('.editAllHand').click(function(event){

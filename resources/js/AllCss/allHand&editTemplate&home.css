@@ -32,6 +32,8 @@
 }
 #logout1 {
     margin-bottom: 0%;
+    color:white;
+    text-decoration:none;
 }
 
 /* --------------------container -----------------------*/
@@ -132,7 +134,7 @@ td{
 } */
 .inputelement
 {
- font-size:18px;
+
  font-weight: bold;
 }
 #viewAll{
