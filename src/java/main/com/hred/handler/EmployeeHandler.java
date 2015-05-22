@@ -42,6 +42,7 @@ import com.hred.service.descriptors.output.NotificationHomeFilterInputDiscriptor
 
 public class EmployeeHandler extends AbstractHandler {
 
+	private static final int NOT_BE_GRETER_THAN_TO_DOJ = 0;
 	private static EmployeeHandler INSTANCE = null;
 	List<Employee> empBirthday = null;
 	List<Employee> empWorkAniversay = null;
@@ -143,6 +144,33 @@ public class EmployeeHandler extends AbstractHandler {
 		EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
 				.getEmployeeDAO();
 		employees = empDAOImpl.getEmployees(employee);
+		
+		
+		if(employee.getGender()==null && employee.getDateOfJoiningFrom()==null && employee.getDateOfJoiningTo()==null && employee.getHighestQualification()==null && employee.getFilterEmployee()==0 && employee.getFrom()==null && employee.getTo()==null && employee.getCurrentDesignation()==0){
+			
+			throw new EmployeeException(
+					ExceptionCodes.SELECT_ATLEAST_ONE_FIELD,
+					ExceptionMessages.SELECT_ATLEAST_ONE_FIELD);
+			
+		}
+		
+		if(employee.getDateOfJoiningTo()!=null && employee.getDateOfJoiningFrom()!=null){
+			
+		               long time=employee.getDateOfJoiningTo().getTime();
+		
+		           long time2=employee.getDateOfJoiningFrom().getTime();
+		 
+        
+                if(time2>time){
+        	
+        	throw new EmployeeException(
+					ExceptionCodes.FROM_DOJ_CANNOT_BE_GRETER_THAN_TO_DOJ,
+					ExceptionMessages.FROM_DOJ_CANNOT_BE_GRETER_THAN_TO_DOJ);
+        	
+        }
+		
+		}
+		
 		return employees;
 
 	}

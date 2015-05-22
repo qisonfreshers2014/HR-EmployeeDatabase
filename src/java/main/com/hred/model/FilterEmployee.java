@@ -9,18 +9,7 @@ private int currentDesignation;
 private Timestamp dateOfJoining;
 private Timestamp dateOfJoiningFrom;
 private Timestamp dateOfJoiningTo;
-public Timestamp getDateOfJoiningFrom() {
-	return dateOfJoiningFrom;
-}
-public void setDateOfJoiningFrom(Timestamp dateOfJoiningFrom) {
-	this.dateOfJoiningFrom = dateOfJoiningFrom;
-}
-public Timestamp getDateOfJoiningTo() {
-	return dateOfJoiningTo;
-}
-public void setDateOfJoiningTo(Timestamp dateOfJoiningTo) {
-	this.dateOfJoiningTo = dateOfJoiningTo;
-}
+
 private String from;
 private String to;
 private String highestQualification;
@@ -98,7 +87,18 @@ public boolean getDeleted() {
  public void setFilterEmployee( int filterEmployee){
   this.filterEmployee=filterEmployee;
  }
-
+ public Timestamp getDateOfJoiningFrom() {
+		return dateOfJoiningFrom;
+	}
+	public void setDateOfJoiningFrom(Timestamp dateOfJoiningFrom) {
+		this.dateOfJoiningFrom = dateOfJoiningFrom;
+	}
+	public Timestamp getDateOfJoiningTo() {
+		return dateOfJoiningTo;
+	}
+	public void setDateOfJoiningTo(Timestamp dateOfJoiningTo) {
+		this.dateOfJoiningTo = dateOfJoiningTo;
+	}
 
 
 

@@ -651,6 +651,7 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 	    query = query + " and (years_of_experience + timestampdiff(MONTH,DOJ, sysdate())/12.0)<="+filter.getTo();
 	   }
 	 
+	      System.out.println(query);
 	   
 	   Query hql1=session.createQuery(query);
 	   
