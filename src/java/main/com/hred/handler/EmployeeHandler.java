@@ -156,12 +156,11 @@ public class EmployeeHandler extends AbstractHandler {
 		
 		if(employee.getDateOfJoiningTo()!=null && employee.getDateOfJoiningFrom()!=null){
 			
-		               long time=employee.getDateOfJoiningTo().getTime();
+			 long FromDOJ=employee.getDateOfJoiningFrom().getTime();
+			 
+		       long ToDOJ=employee.getDateOfJoiningTo().getTime();
 		
-		           long time2=employee.getDateOfJoiningFrom().getTime();
-		 
-        
-                if(time2>time){
+                if(FromDOJ>ToDOJ){
         	
         	throw new EmployeeException(
 					ExceptionCodes.FROM_DOJ_CANNOT_BE_GRETER_THAN_TO_DOJ,
