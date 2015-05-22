@@ -1,67 +1,101 @@
-.tableviewEmployee {   margin-left:2%;
-           border: 1px solid white;
- width: 80%;
-  font-size: 15px;
- 
- text-decoration: blink;
-        }
-        .trviewEmployee  {
-           border: 1px solid #CCC;
+.tableviewEmployee {
+     border: 1px solid white;
+     font-size: 15px;
+     margin-left: 9%;
+     margin-bottom:2%;
+     text-decoration: blink;
+     width: 80%;
+}
+
+.trviewEmployee {
+     background-color: #cccccc;
+     border: 1px solid #cccccc;
      color: black;
      font-size: 100%;
      height: 100%;
+     text-align: left;
      width: 100%;
-   background-color:#CCC;
-         }
-        .thviewEmployee  {
-            padding:10px;
-            border: 1px solid #CCC;
-            background-color:#CCC;
-        }
-        .td{
-        border: 1px solid #CCC;
-        background-color:#CCC;
-       }
-        .heading {
-            margin-left:2%;
-            color: brown;
-        }
-       
-  .editviewEmployee { margin-top:1%;
-        position:relative;
-     right:2px;
-     left:700px;
-     }
-   .container{
-                  background-color: #FFF; 
-                }
-     
-            .leftContainer {
-  background-color: #FFF; 
+}
 
+.thviewEmployee {
+     background-color: #cccccc;
+     border: 1px solid #cccccc;
+     padding: 10px;
+ 
 }
-          .rightContainer{
- background-color: #FFF; 
+
+.td {
+     background-color: #cccccc;
+     border: 1px solid #cccccc;
 }
-            
-     #fieldsaddTemplate {
-          
-          padding:10px;
-          text_align=center;
-            font-weight:bold;
-             }
-           
-     .startemplate {
-        color:red;
-          font-size:20px;
-          }
-          
-     #align {
-           margin:2.6%;
-     }
-    
-   .inputelement
-                  {
-           font-size:15px;
-             font-weight: bold;
-            }
+
+.heading {
+     color:#00246B;
+     margin-left: 9%;
+}
+
+#employeeimage {
+     left: 30%;
+     margin-top: 2%;
+     position: relative;
+     right: 2px;
+}
+#marginDetail{
+text-align:center;
+	font-size:30px;
+	font-weight:strong;
+}
+
+.editviewEmployee {
+     left: 50%;
+     position: relative;
+     right: 2px;
+  margin-top:2%;
+  margin-bottom:2%;
+}
+#back{
+   margin-left:9%;
+}
+.container {
+     background-color: #ffffff;
+}
+
+.leftContainer {
+     background-color: #ffffff;
+}
+
+.rightContainer {
+     background-color: #ffffff;
+}
+
+#save {
+     text-align: center;
+}
+#addtemp{
+	margin-left:2%;
+	margin-right:2%;
+}
+#alignment {
+  margin-left:25%;
+  margin-top:2%
+}
+
+#fieldsaddTemplate {
+     font-weight: bold;
+     padding: 10px;
+     margin-bottom:3%;
+}
+
+.startemplate {
+     color: red;
+     font-size: 14px;
+}
+
+#align {
+     margin: 2.1%;
+}
+
+.inputelement {
+     font-size: 15px;
+     font-weight: bold;
+}

@@ -4,10 +4,12 @@ package com.hred.handler;
 import java.sql.Timestamp;
 import java.util.List;
 
+import com.hred.common.Constants;
 import com.hred.exception.DesignationHistoryException;
 import com.hred.exception.ExceptionCodes;
 import com.hred.exception.ExceptionMessages;
 import com.hred.exception.HolidaysException;
+import com.hred.handler.annotations.AuthorizeEntity;
 import com.hred.model.DesignationHistory;
 import com.hred.model.DesignationType;
 import com.hred.persistence.dao.DAOFactory;
@@ -28,8 +30,8 @@ public class DesignationHistoryHandler extends AbstractHandler {
 		return INSTANCE;
 	}
 
-	
-	public List<DesignationHistory> getDesignationDetails(DesignationHistory designation) 
+	@AuthorizeEntity(roles={Constants.HR})
+	public List<DesignationHistory> getDesignationDetailsAOP(DesignationHistory designation) 
 	{
 
 		List<DesignationHistory> designations = null;
@@ -37,7 +39,8 @@ public class DesignationHistoryHandler extends AbstractHandler {
 		designations = (List<DesignationHistory>) designationHistorDAOImpl.getDesignationDetails(designation);
 		return designations;
 	}
-	public List<DesignationHistory> getAllDesignationDetails() 
+	@AuthorizeEntity(roles={Constants.HR})
+	public List<DesignationHistory> getAllDesignationDetailsAOP() 
 	{
 
 		List<DesignationHistory> designations = null;
@@ -45,10 +48,11 @@ public class DesignationHistoryHandler extends AbstractHandler {
 		designations = (List<DesignationHistory>) designationHistorDAOImpl.getAllDesignationDetails();
 		return designations;
 	}
-	public DesignationHistory save(DesignationHistory designationhistory) throws DesignationHistoryException
+	@AuthorizeEntity(roles={Constants.HR})
+	public DesignationHistory saveAOP(DesignationHistory designationhistory) throws DesignationHistoryException
 	{
 		
-		List<DesignationHistory> data = getAllDesignationDetails();
+		List<DesignationHistory> data = getAllDesignationDetailsAOP();
 		int eid=designationhistory.getEmpId();
 		Timestamp appraisalDate = designationhistory.getAppraisalDate();
 		int designationId = designationhistory.getDesignationId();
@@ -57,14 +61,13 @@ public class DesignationHistoryHandler extends AbstractHandler {
 		validateDuplicate(data,eid,designationId,salary,variablePay);
 		validateAppraisalDate(appraisalDate);
 		validateDesignationId(designationId);
-		validateSalary(salary);
-		validateVariablePay(variablePay);
 		DesignationHistory designationhistory_saved = (DesignationHistory) DAOFactory.getInstance().getDesignationHistoryDAO()
 				.saveObject(designationhistory);
 		return designationhistory_saved;
 	}
 
-	public List<DesignationType> getDesignationName(DesignationType designation) {
+	@AuthorizeEntity(roles={Constants.HR})
+	public List<DesignationType> getDesignationNameAOP(DesignationType designation) {
 		List<DesignationType> designations = null;
 		DesignationHistoryDAO designationHistorDAOImpl = (DesignationHistoryDAO)DAOFactory.getInstance().getDesignationHistoryDAO();
 		designations = (List<DesignationType>) designationHistorDAOImpl.getDesignationName(designation);
@@ -104,26 +107,5 @@ public class DesignationHistoryHandler extends AbstractHandler {
 					ExceptionMessages.DESIGNATION_DOESNOT_EXIST);
 		}
 
-	}
-	
-	public void validateSalary( double salary) throws DesignationHistoryException
-	{
-
-		if (salary == 0) {
-			throw new DesignationHistoryException(ExceptionCodes.DESIGNATION_DOESNOT_EXIST,
-					ExceptionMessages.DESIGNATION_DOESNOT_EXIST);
-		}
-
-	}
-
-		public void validateVariablePay( double variablePay) throws DesignationHistoryException
-		{
-
-		if (variablePay == 0) 
-		{
-			throw new DesignationHistoryException(ExceptionCodes.DESIGNATION_DOESNOT_EXIST,
-					ExceptionMessages.DESIGNATION_DOESNOT_EXIST);
-		}
-	}
-	 
+	}	 
 }

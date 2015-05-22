@@ -19,6 +19,12 @@ editHandMeeting.prototype.handleShow=function(dataid){
 			
 			
 		}.ctx(this));
+		
+		$('#back').click(function(){
+			
+			App.loadAllHandsMeeting();
+			}.ctx(this));
+
 
 }
 

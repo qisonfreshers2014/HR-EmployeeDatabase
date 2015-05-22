@@ -8,6 +8,12 @@ function HrEditEmployee(empid) {
 HrEditEmployee.prototype.handleShow = function(empid) {
 
 	$('.container').show();
+	
+$('#back').click(function(){
+		
+		App.loadViewEmployee(empid);
+	}.ctx(this));
+ 
 	var eid = $("#eid").val();
 	var input = {
 		"payload" : {

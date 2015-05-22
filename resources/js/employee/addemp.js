@@ -43,6 +43,10 @@ AddEmployee.prototype.handleShow = function() {
 		this.validateEmp();
 
 	}.ctx(this));
+$('#back').click(function(){
+		
+		App.listEmployee();
+	}.ctx(this));
 
 	$('#reset').click(function(e) {
 		e.preventDefault();

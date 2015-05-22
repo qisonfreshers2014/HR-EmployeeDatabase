@@ -10,6 +10,11 @@ empHomePage.prototype.handleShow = function() {
 
  this.checkUser(App.jobRole);
  
+ $('[data-toggle=tab]').click(function(){
+	  if ($(this).parent().hasClass('active')){
+	 $($(this).attr("href")).toggleClass('active');
+	  }
+	})
  
  $('#hr').click(function(event){
   
@@ -39,6 +44,19 @@ empHomePage.prototype.handleShow = function() {
 	 App.listEmployeePolicy(); 
  });
  
+ $('#Allhandsmeeting').click(function(event){
+	  
+	 App.loadempAllhands(); 
+ });
+ 
+ 
+ $('#homeEmployee').click(function(event){
+	  
+	 App.loadEmployeePage(App.userName,App.hr,App.isDeleted);
+	    App.loadFooter();
+	    App.loadEmployee(App.gender,App.contactNo,App.employeeId); 
+ });
+ 
  
  $('#logout').click(function(event){
   this.logout();
@@ -50,7 +68,7 @@ empHomePage.prototype.checkUser = function(jobRole){
  
  
  if(Boolean(App.hr)&&(!Boolean(App.isDeleted)))
- $("#menudiv1").append(' <a href="#" id="hr" class="tabColor">Admin</a>');
+ $("#menudiv2").append(' <li><a href="#" id="hr" data-toggle="tab" class="tabColor">Admin</a></li>');
  return true;
 }
 

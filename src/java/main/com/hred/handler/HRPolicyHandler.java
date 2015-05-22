@@ -1,12 +1,17 @@
 package com.hred.handler;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
+import com.hred.common.ConfigReader;
+import com.hred.common.Constants;
 import com.hred.exception.ExceptionCodes;
 import com.hred.exception.ExceptionMessages;
 import com.hred.exception.HRPolicyException;
+import com.hred.handler.annotations.AuthorizeEntity;
 import com.hred.model.File;
 import com.hred.model.HRPolicy;
 import com.hred.persistence.dao.DAOFactory;
@@ -26,17 +31,31 @@ public class HRPolicyHandler extends AbstractHandler {
 			INSTANCE = new HRPolicyHandler();
 		return INSTANCE;
 	}
-
-	public HRPolicy save(HRPolicy hrpolicy) throws HRPolicyException{
+	@AuthorizeEntity(roles={Constants.HR})
+	public HRPolicy saveAOP(HRPolicy hrpolicy) throws HRPolicyException{
+		List<VeiwHRPolicies> veiwHRPolicieslist=getPolicy();
 		String policyName = hrpolicy.getPolicyName();
-		long fileId = hrpolicy.getFileId();
 		validatePolicyName(policyName);
-		validateFileId(fileId);
+		validateDuplicate(veiwHRPolicieslist,policyName);
 		HRPolicy hrpolicy_saved = (HRPolicy) DAOFactory.getInstance()
 				.getHRPolicyDAO().saveObject(hrpolicy);
 		return hrpolicy_saved;
 	}
+	private void validateDuplicate(List<VeiwHRPolicies> data,String policyName) throws HRPolicyException
+	{
 
+		   for (int i = 0; i < data.size(); i++)
+		   {
+			   	String policyName1=data.get(i).getPolicyName();    
+		         if((policyName1.equalsIgnoreCase(policyName)))
+		         {
+		        	 throw new HRPolicyException(ExceptionCodes.POLICYNAME_ALREADY_EXISTS,
+		             ExceptionMessages.POLICYNAME_ALREADY_EXISTS);
+		        
+		         }    
+		   }		  
+	}
+	
 	public void validatePolicyName(String policyName) throws HRPolicyException
 	{
 
@@ -48,20 +67,31 @@ public class HRPolicyHandler extends AbstractHandler {
 
 
 	}
-	public void validateFileId(long fileId) throws HRPolicyException
-	{
-
-		if (fileId == 0) 
-		{
-			throw new HRPolicyException(ExceptionCodes.HRPolicy_DOESNOT_EXIST,
-					ExceptionMessages.HRPolicy_DOESNOT_EXIST);
-		}
-
-
-	}
 
 	public List<VeiwHRPolicies> getPolicy() {
-
+		String path=null;
+		String stage=null;
+		try
+		{
+		Properties props = ConfigReader.getProperties(Constants.FILE_PATH_VARIABLES);		
+		stage=props.getProperty(Constants.STAGE_ENVIRONMENT);
+		if(stage.equalsIgnoreCase("local"))
+		{
+			path=props.getProperty(Constants.LOCAL_PATH);
+		}
+		else if(stage.equalsIgnoreCase("stage"))
+		{
+			path=props.getProperty(Constants.STAGE_PATH);
+		}
+		else
+		{
+			path=props.getProperty(Constants.PRODUCTION_PATH);
+		}
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
+		}
 		List<VeiwHRPolicies> veiwHRPolicieslist = new ArrayList<VeiwHRPolicies>();
 		HRPolicyDAO HrPolicyDAOImpl = (HRPolicyDAO) DAOFactory.getInstance()
 				.getHRPolicyDAO();
@@ -72,7 +102,8 @@ public class HRPolicyHandler extends AbstractHandler {
 			for (File eachfile : filelist) {
 				if (eachpolicy.getFileId() == eachfile.getId()) {
 					VeiwHRPolicies eachpolicyveiw = new VeiwHRPolicies();
-					eachpolicyveiw.setUrl(eachfile.getFilePath());
+					eachpolicyveiw.setUrl(path+eachfile.getFilePath());
+					
 					eachpolicyveiw.setFileID(eachfile.getId());
 					eachpolicyveiw.setPolicyName(eachpolicy.getPolicyName());
 					veiwHRPolicieslist.add(eachpolicyveiw);

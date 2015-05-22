@@ -23,6 +23,11 @@ AddTemplate.prototype.handleShow = function() {
  
  }.ctx(this));
  
+ $('#back').click(function(){
+		
+		App.loadtemplateList();
+	}.ctx(this));
+ 
 }
 
 
@@ -40,7 +45,7 @@ AddTemplate.prototype.addTem=function(){
 
 RequestManager.addTemplate(input, function(data, success) {
  if(success){
-  alert("Successfully added");
+  alert("Template Successfully added");
   $('.templatename').val("");
   $('.subject').val("");
   $('.content').val("");
@@ -72,30 +77,30 @@ AddTemplate.prototype.duplicatevalidation=function(templates){
  
 if($('.templatename').val()=="" && $('.subject').val()=="" && articleDesc==""){ 
  
-      alert("Failed to add,since mandatory fields are empty");
+      alert("Please enter all the mandatory fields");
         
      }
 else if($('.templatename').val()==""){                          
  
-      alert("Please enter template name");
+      alert("Please enter Template name");
    }
 else if($('.subject').val()==""){
  
-      alert("Please enter subject");
+      alert("Please enter Subject");
   }
 else if (articleDesc==""){
  
-  alert("Please enter content to be save");
+  alert("Please enter Description");
   
    }
       else if(! $('.templatename').val().match(char)){
        
-         alert("Name should contain alphabets,numbers and singlespace only and length should not be more than 30 characters");
+         alert("Template name can contain alphabets,numbers and singlespace only");
     
     }
       else if(! $('.subject').val().match(char1)){
      
-          alert('Subject should contain only alphabets,numbers ,singlespace,(.,")only and length should not be more than 100 characters');
+          alert('Subject can contain  alphabets,numbers and singlespace only');
     }
     
  

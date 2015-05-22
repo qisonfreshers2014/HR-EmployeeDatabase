@@ -44,7 +44,7 @@ employeeHolidayList.prototype.tableDisplay = function(content, status){
 				$('#mandatory').append('<table><tbody></tbody></table>');
 				$('#mandatory tr:last').after("<tr><td>"+year + "-" + month + "-" +date+"</td><td>"+obj.description+"</td><td>"+day+"</td></tr>");
 			}
-			if(obj.type == "Weekdays"){
+			if(obj.type == "Weekend"){
 				$('#weekends').append('<table><tbody></tbody></table>');
 				$('#weekends tr:last').after("<tr><td>"+year + "-" + month + "-" +date+"</td><td>"+obj.description+"</td><td>"+day+"</td></tr>");
 			}

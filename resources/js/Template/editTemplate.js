@@ -20,6 +20,11 @@ editTemplate.prototype.handleShow=function(dataid){
 			   this.editTemplateDetailsById(dataid);
 
 }.ctx(this));
+		 
+ $('#back').click(function(){
+				
+			App.loadtemplateList();
+			}.ctx(this));
 	 
 }
 

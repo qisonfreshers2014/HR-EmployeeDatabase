@@ -13,6 +13,11 @@ $('#saveAllHand').click(function(){
 	this.addAllHandsMeeting();
 	
 }.ctx(this));
+$('#back').click(function(){
+	
+	App.loadAllHandsMeeting();
+	}.ctx(this));
+
 
 }
 allHandMeeting.prototype.addAllHandsMeeting=function(){

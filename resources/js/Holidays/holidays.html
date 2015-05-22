@@ -1,68 +1,57 @@
-
-<h1 class="holidayhead">HOLIDAYS LIST</h1>
-
-<div style="width:100% ;height:100%">
+<div style="width:100%">
+<h1 class="holidayhead">Holidays List</h1>
 <div id="fields">
-<div class="left">
-<span class="inputelement">Date:</span><input type="text" class="date" id="start_from"><span class="star"><sup>*</sup></span><div id="fromDate" class="holidayerror">Enter start date</div>
-</div>
-<div id="main">
-        	<span class="inputelement">Type:</span><select id="dropdown" required>
+<table class="tableholidayfields">
+    
+  <tbody><tr><th class="inputelement">Date:<span class="holidaystar">*</span></th>
+    <td><input type="text" id="start_from" class="date" placeholder="yyyy-mm-dd"><br><span class="holidayerror" id="fromDate"></span></td>
+<th class="inputelement">Type:<span class="holidaystar">*</span></th><td><select style="width:150px" id="dropdown">
             										<option value="Select">Select</option>
 													<option value="Mandatory">Mandatory</option>
 													<option value="Optional">Optional</option>
-													<option value="Weekdays">Weekdays</option>
-													</select><span class="star"><sup>*</sup></span> 
-													<div id="type" class="holidayerror">Enter holiday type</div>
-</div><br/><br/>
-<!-- <div  class="right">
-  ToDate: <input type="text" class="date" id="ends_at" required><div id="toDate" class="error">Enter end date</div>
-</div><br/><br/> -->
-<div class="descrpdiv">
-<span class="inputelement">Description:</span><textarea placeholder="Write description here" rows='3' cols='50' id="description"></textarea><span class="star"><sup>*</sup></span><div id="descrp" class="holidayerror">Enter description</div>
-</div><br/><br/><br/><br/><br/><br/>
+													<option value="Weekend">Weekend</option>
+        											</select><br><span class="holidayerror" id="type"></span></td>
+        <th class="inputelement">Description:<span class="holidaystar">*</span></th><td><input type="text" id="description" maxlength="25" placeholder="Write description here"><br><span class="holidayerror" id="holdescrp"></span></td>			
+<td style="vertcal-align:top"><input type ="button" value="Save" id="save" class="btn btn-primary btn-md"/><input type ="button" value="Update" id="update" class ="btn btn-primary btn-md"/></td>
+
+</tr>
+									
+</tbody></table>
+
+</div><br/>
 <p id="holidayID" style="display:none"></p>
-<div class="buttons">
 
-<!-- <input type="button" value="add" id="add"/>&nbsp;&nbsp; -->
-<center>
-<input type ="button" value="Save" id="save" class="btn btn-primary btn-md"/>
 
-<input type ="button" value="Update" id="update" class ="btn btn-primary btn-md"/>
-</center>
-</div><br/><br/>
-</div>
 
 <div id="display">
 <div>
-<h3>List of Mandatory Holidays</h3>
-<table border="1" class="table table-hover" id="mandatorytable">
+<h3><span >List of Mandatory Holidays</span></h3>
+<table border="1" class="table table-hover table-condensed" id="mandatorytable">
 <thead>
 <tr>
-<th>Date</th><th>Description</th><th>Day</th><th>Edit</th>
-</tr>
-</thead>
-
-</table>
-</div><br>
-
-<div>
-<h3>Holidays Falling On Weekends</h3>
-<table border="1" class="table table-hover" id="weekendstable">
-<thead>
- <tr>
-<th>Date</th><th>Description</th><th>Day</th><th>Edit</th>
+<th class="holidayheadwidth theader">Date</th><th class="holidayheadwidth theader">Description</th><th class="holidayheadwidth theader">Day</th><th class="holidayheadwidth theader">Edit</th><th class="holidayheadwidth theader">Delete</th>
 </tr>
 </thead>
 </table>
-</div><br>
+</div>
 
 <div>
-<h3> Optional Holidays</h3>
-<table border="1" class="table table-hover" id="optionaltable">
+<h3><span>Holidays Falling On Weekends</span></h3>
+<table border="1" class="table table-hover table-condensed " id="weekendstable">
 <thead>
  <tr>
-<th>Date</th><th>Description</th><th>Day</th><th>Edit</th>
+<th class="holidayheadwidth theader">Date</th><th class="holidayheadwidth theader">Description</th><th class="holidayheadwidth theader">Day</th><th class="holidayheadwidth theader">Edit</th><th class="holidayheadwidth theader">Delete</th>
+</tr>
+</thead>
+</table>
+</div>
+
+<div>
+<h3><span>Optional Holidays</span></h3>
+<table border="1" class="table table-hover table-condensed" id="optionaltable">
+<thead>
+ <tr>
+<th class="holidayheadwidth theader">Date</th><th class="holidayheadwidth theader">Description</th><th class="holidayheadwidth theader">Day</th><th class="holidayheadwidth theader">Edit</th><th class="holidayheadwidth theader">Delete</th>
 </tr>
 <thead>
 </table>

@@ -19,12 +19,15 @@ employeeList.prototype.handleShow = function() {
   App.loadEmpl();
   
  }.ctx(this));
+
  
- $('#skill').click(function(){
-  
-  App.loadSkill();
-  
+ $('#backtoemployee').click(function(){
+	 
+	 App.listEmployee();
+	 
  }.ctx(this));
+ 
+ 
  var contentinput = {
   "payload" : {}
  };
@@ -33,55 +36,76 @@ employeeList.prototype.handleShow = function() {
   if (success) {
    var content = data;
    var status = success;
-   this.tableDisplay(content, status);
    
-
-  } else {
+   RequestManager.getDesignationName(contentinput,function(desdata, success) {
+	    if (success) {
+	    	
+	    	this.tableDisplay(content, status,desdata);
+	    	
+	    }	 
+	   }.ctx(this));
+   
+   } else {
 
    alert("No list found");
   }
 
  }.ctx(this));
+ 
+
 
  $('#search').click(function() {
   
-  if($("#searchelement").val() == ""){
+	 if($("#searchelement").val() == ""){
    
-   alert("Please provide data to search");
+	  alert("Please provide data to search");
+	  this.callWholeList();
+	  	 
+	 }else if(!($("#searchelement").val().match('^[a-zA-Z0-9-@. ]*$'))){
+		  
+		  alert("Your search string contains illegal characters");
+		  this.callWholeList();
+	 
+	 }else{
+  
+		 	var contentinput = {"payload" : {"searchKey":$('#searchelement').val()}   };
+  
+		 		RequestManager.getSearchEmp(contentinput, function(data, success) {
+		 		if (success) {
+		 				if(data.length == 0){
+     
+		 						alert("No record found");
+		 						var content = '';
+		 						content += '<tr class="theader"><th>EID</th><th>EmployeeName</th><th> Birth Day </th><th> Joining Date </th><th>Contact No</th><th>Emergency Contact No</th><th>Email ID</th><th>Current Designation</th><th>Current Years of Experience</th><th>PAN</th>';
+		 						$('#employeelist').append('<table><tbody></tbody></table>');
+		 						$('#employeelist').html(content);
+		 						$('#backtoemployee').css("visibility","visible");
+    
+		 				}else{
+		 						
+		 					RequestManager.getDesignationName(contentinput,function(desdata, success) {
+		 					    if (success) {
+		 					    	this.searchOperation(data,desdata);
+		 					    			 					    	
+		 					    }	 
+		 					   }.ctx(this));
+		 					
+		 				}
+    
+    
+		 		}
+    
+    
    
-  }else{
+		 		}.ctx(this));
   
-  var contentinput = {
-        "payload" : {"searchKey":$('#searchelement').val()}
-       };
-  
-  RequestManager.getSearchEmp(contentinput, function(data, success) {
-   if (success) {
-    if(data.length == 0){
-     
-     alert("No record found");
-     
-    
-    }else{
-     
-     this.searchOperation(data);
-     
-    }
-    
-    
-   }
-    
-    
-   
-  }.ctx(this));
-  
-  }
+	 	}
   
  }.ctx(this));
 
 }
 
-employeeList.prototype.tableDisplay = function(content, status) {
+employeeList.prototype.tableDisplay = function(content,status,desdata) {
  
  $("#listemp").on("click",".viewindividual",function(event){
   var releaseId=event.target.id;     
@@ -101,15 +125,26 @@ employeeList.prototype.tableDisplay = function(content, status) {
   var jmonth = dojformat.getMonth()+1;
   var jdate = dojformat.getDate();
 
+  var desName;
+  var desId = obj.currentDesignation;
+  
+  for (var j = 0; j < desdata.length; j++) {
+	  var desTypeObj = desdata[j];
+	   if (desId == desTypeObj.id) {
+	    desName = desTypeObj.name;
+	    break;
+	   }
+}
+  
   $('#employeelist').append('<table><tbody></tbody></table>');
   $('#employeelist tr:last').after(
-    "<tr class='info'><td><a href='#' class='viewindividual' id='"+obj.employeeId+"'>" + obj.employeeId
+    "<tr class='info'><td><a href='#employee/viewEmployee' class='viewindividual' id='"+obj.employeeId+"'>" + obj.employeeId
       + "</a></td>" + "<td>" + obj.employeeName + "</td>"
       + "<td>"+byear+"-"+bmonth+"-"+bdate+"</td>" + "<td>"
       +jyear+"-"+jmonth+"-"+jdate+ "</td>" + "<td>" + obj.contactNo
       + "</td>" + "<td>" + obj.emergencycontactnumber
       + "</td>" + "<td>" + obj.email + "</td>" + "<td>"
-      + obj.currentDesignation + "</td>" + "<td>"
+      + desName + "</td>" + "<td>"
       + obj.yearsofexperience + "</td>" + "<td>" + obj.pan
       + "</td></tr>");
   
@@ -121,10 +156,16 @@ employeeList.prototype.tableDisplay = function(content, status) {
 }
 
 
-employeeList.prototype.searchOperation = function(data){
+employeeList.prototype.searchOperation = function(data,desdata){
+	
+	 $("#listemp").on("click",".viewindividual",function(event){
+		  var releaseId=event.target.id;     
+		  App.loadViewEmployee(releaseId);
+		 }.ctx(this));
+	
  
  var content = '';
- content += '<tr><th>EID</th><th>EmployeeName</th><th> Birth Day </th><th> Joining Date </th><th>Contact No</th><th>Emergency Contact No</th><th>Email ID</th><th>Current Designation</th><th>Current Years of Experience</th><th>PAN</th>';
+ content += '<tr class="theader"><th>EID</th><th>EmployeeName</th><th> Birth Day </th><th> Joining Date </th><th>Contact No</th><th>Emergency Contact No</th><th>Email ID</th><th>Current Designation</th><th>Current Years of Experience</th><th>PAN</th>';
  for (var i = 0; i < data.length; i++) {
   var obj = data[i];
   
@@ -138,26 +179,66 @@ employeeList.prototype.searchOperation = function(data){
   var jmonth = dojformat.getMonth()+1;
   var jdate = dojformat.getDate();
  
+  
+  var desName;
+  var desId = obj.currentDesignation;
+  
+  for (var j = 0; j < desdata.length; j++) {
+	  var desTypeObj = desdata[j];
+	   if (desId == desTypeObj.id) {
+	    desName = desTypeObj.name;
+	    break;
+	   }
+  }
+  
+  
            content += '<tr>';
-              content += '<td><a href="'+obj.employeeId+'">' + obj.employeeId+ '</a></td>';
+              content += '<td><a href="#employee/viewEmployee" class="viewindividual" id="'+obj.employeeId+'">' + obj.employeeId+ '</a></td>';
               content += '<td>' + obj.employeeName + '</td>';
               content += '<td>' +byear+"-"+bmonth+"-"+bdate+'</td>';
               content += '<td>' +jyear+"-"+jmonth+"-"+jdate+'</td>';
               content += '<td>' +obj.contactNo + '</td>';
               content += '<td>' +obj.emergencycontactnumber +'</td>';
               content += '<td>' +obj.email +  '</td>';
-              content += '<td>' +obj.currentDesignation +'</td>';
+              content += '<td>' +desName +'</td>';
               content += '<td>' +obj.yearsofexperience +'</td>';
               content += '<td>' +obj.pan +'</td>';
               content += '</tr>';
               }
  
  $('#employeelist').html(content);
- alert("Search found");
- 
- 
+ $('#backtoemployee').css("visibility","visible");
+  
 }
 
+employeeList.prototype.callWholeList = function(){
+	
+	 var contentinput = {
+			  "payload" : {}
+			 };
+			 RequestManager.getEmployee(contentinput, function(data, success) {
+			 
+			  if (success) {
+			   var content = data;
+			   var status = success;
+			   
+			   RequestManager.getDesignationName(contentinput,function(desdata, success) {
+				    if (success) {
+				    	
+				    	this.tableDisplay(content,status,desdata);
+				    	
+				    }	 
+				   }.ctx(this));
+			   
+			   } else {
 
+			   alert("No list found");
+			  }
+
+			 }.ctx(this));
+			 
+	
+	
+}
 
 var employeeList = new employeeList();

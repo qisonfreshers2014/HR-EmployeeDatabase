@@ -1,22 +1,37 @@
-<h3>Add New Policy</h3>
-<div id="addPolicy">
-
-<div class="inputelement">
-<p>Policy Name 
-<input type="text" id="policyName" maxlength="35"><span class="mandatoryStar"><sup>*</sup></span></p>
-<p><span class="errorMessage" id="isPEmpty"></span> <span class="errorMessage" id="Pletter"></span></p>
-<p>&nbsp;</p>
-</div>
-
-<div class="inputelement">
-<p>Upload Policy 
-<input type="button" class="btn-default" id="fileUpload" value="Select Files"><span class="mandatoryStar"><sup>*</sup></span> </p>
-<p><span class="errorMessage" id="isFEmpty"></span></p>
-</div>
 <br>
-<div class="inputelement"> 
-<p><span class="alignInputSave"><input class="btn btn-primary btn-md" type="button" id="savePolicy" value="Save"></span>
-</p>
-</div>
-</div>
+<center><h1 id="addPolicyHeading">Add Policy</h1></center>
+<br>
+<div id="addPolicyDiv">
+<div id="addPolicyReg">
 
+<table class="addPolicyTable">
+
+<tr class="addPolicyRow"> 
+<th class="addPolicyHead">Policy Name<span class="mandatoryStar">*</span> </th> 
+<td class="addPolicyColumn"> <input type="text" id="policyName" maxlength="35">
+</td> 
+</tr>
+
+<tr class="addPolicyRow"> 
+<th class="addPolicyHead">Upload Policy<span class="mandatoryStar">*</span>  </th>
+<td class="addPolicyColumn"> <input type="button" class="btn-default" id="fileUpload" value="Select Files">
+<span class="policyFileName"></span></td> 
+</tr> 
+
+<tr class="addPolicyRow"> 
+<td class="addPolicyBColumn" colspan="2" ><input class="btn btn-primary btn-md" type="button" id="savePolicy" value="Save"></td> 
+</tr>
+<tr class="addPolicyRow"> 
+<td class="addPolicyHead" colspan="2" ><p class="policyNote">Note 1: File size can not be more than 5 MB</p></td> 
+</tr>
+<tr class="addPolicyRow"> 
+<td class="addPolicyHead" colspan="2" ><p class="policyNote">Note 2: Only doc/pdf/odt/docx files are allowed</p></td> 
+</tr>
+
+<tr class="addPolicyRow"> 
+<td class="addPolicyHead" colspan="2" ><button id="back" class="btn btn-primary btn-md">Back</button></td> 
+</tr>
+</table>
+<br>
+</div>
+</div>

@@ -136,7 +136,7 @@ public class EmployeeHandler extends AbstractHandler {
 		return employee;
 	}
 
-	@AuthorizeEntity(roles = { Constants.HR })
+	//@AuthorizeEntity(roles = { Constants.HR })
 	public List<Employee> getEmployeesAOP(FilterEmployee employee)
 			throws EmployeeException {
 		List<Employee> employees = null;

@@ -3,14 +3,31 @@
 <div id="qisonlogo">
 <img src="resources/images/qison-logo.jpg"  width="200" height="95" />
 </div>
-<div id="menudiv1">
-
-    <a href="#" id="myProfile" class="tabColor">My Profile</a>&nbsp&nbsp&nbsp&nbsp
-  <a href="#" id="holiday" class="tabColor">Holidays</a>&nbsp&nbsp&nbsp&nbsp
- <a href="#" id="hrpolicy" class="tabColor">HR Policies</a>&nbsp&nbsp&nbsp&nbsp
+<div id="menudiv1" class="tabbable">
+<ul class="nav nav-tabs" id="menudiv2">
+ <li class="active"><a href="#tab-home" data-value="#home" id="homeEmployee" data-toggle="tab" class="active tabColor">Home</a>&nbsp&nbsp&nbsp&nbsp</li>
+  <li>  <a href="#tab-myProfile"  data-value="#myProfile"id="myProfile" data-toggle="tab" class="tabColor">My Profile</a>&nbsp&nbsp&nbsp&nbsp</li>
+<li>  <a href="#tab-holidays" data-value="#holiday" id="holiday" data-toggle="tab" class="tabColor">Holidays</a>&nbsp&nbsp&nbsp&nbsp</li>
+ <li><a href="#tab-hrPolicies"  data-value="#hrPolicies" id="hrpolicy" data-toggle="tab" class="tabColor">HR Policies</a>&nbsp&nbsp&nbsp&nbsp</li>
+  <li><a href="#tab-Allhandsmeeting"  data-value="#Allhandsmeeting" id="Allhandsmeeting" data-toggle="tab" class="tabColor">All Hand Meetings</a>&nbsp&nbsp&nbsp&nbsp</li>
+ </ul>
 </div>
 <div  class="logoutCorner">
 <div class="empName" ></div>
- <a  href="#" id="logout" >Logout</a>
+ <a  href="#" id="logout" ><span id="log">Logout</span></a>
+ 
  </div>
 </div>
+<script type="text/javascript">
+    $(function () {
+        var navTabs = $('.nav-tabs a');
+        var hash = window.location.hash;
+        hash && navTabs.filter('[data-value="' + hash + '"]').tab('show');
+
+        navTabs.on('shown', function (e) {
+            var newhash = $(e.target).attr('data-value');
+            window.location.hash = newhash;
+        });
+    })
+</script>
+

@@ -12,6 +12,12 @@ changePassword.prototype.handleShow = function(employeeId) {
 
 		this.changePwd(employeeId);
 	}.ctx(this));
+$('#back').click(function(){
+		
+		App.loadempviewemployee(employeeId);
+		
+	}.ctx(this));
+
 
 }
 changePassword.prototype.changePwd = function(employeeId) {

@@ -1,4 +1,3 @@
-
 function addpolicy() {
 Loader.loadHTML('.container','resources/js/addinghrpolicy/addpolicy.html', true, function() {
 				this.handleShow();
@@ -7,7 +6,6 @@ Loader.loadHTML('.container','resources/js/addinghrpolicy/addpolicy.html', true,
 var fileID;
 var nameValidate = 0;
 var fileValidate = 0;
-
 addpolicy.prototype.handleShow = function() {
 	$('.container').show();
 	$('#fileUpload').one('click', UploadClickHandler.ctx(this));
@@ -22,8 +20,12 @@ addpolicy.prototype.handleShow = function() {
 		this.uploadMedia(function() {
 			$(thisEle).one('click', UploadClickHandler.ctx(this));
 		}.ctx(this));
-	}
-
+	}	
+	
+	 $('#back').click(function(){
+			
+		 App.listPolicy();
+		}.ctx(this));
 }
 
 addpolicy.prototype.uploadMedia = function(callback) {
@@ -33,58 +35,56 @@ addpolicy.prototype.uploadMedia = function(callback) {
 			var imageSrc = data.filePath;
 			this.fileId = data.id;
 			fileID = this.fileId;
+			var index = imageSrc.lastIndexOf("/") + 1;
+			var filename = imageSrc.substr(index);
+			$('.policyFileName').text(filename);
 		}
 	}.ctx(this));
 	callback();
 
 }
 
-addpolicy.prototype.validatePolicyInfo = function() {
-	this.policyNameVal();
-	this.fileValidate();
-}
-
+addpolicy.prototype.validatePolicyInfo = function()
+{
 // policy name validations
-addpolicy.prototype.policyNameVal = function() {
-
+var char = /^[A-Za-z0-9_ ]+( [A-Za-z0-9_ ]+)*$/;
 	var policyName = $('#policyName').val();
-	var lengthx = policyName.length;
-	if (policyName == "") {
-		$('#isPEmpty').text("You can't leave empty.");
+    var x=fileID;
+	if ((policyName == "") &&(x == ""||x==null||x==" ")) 
+	{
+		alert("Please enter all the mandatory fields");
+		nameValidate = 0;
+		fileValidate = 0;
+		return false;
+
+	}
+	if (policyName == "") 
+	{
+		alert("Please enter policy name");
 		nameValidate = 0;
 		return false;
 
 	} else {
-		$('#isPEmpty').text("");
 		nameValidate = 1;
 	}
-	var letters = /^[A-z0-9 ]+$/;
-	if (!(policyName.match(letters))) {
-		$('#Pletter').text("Enter alphabet,numbers and spaces only");
+	if (!(policyName.match(char))) {
+		alert("Policy name contains alphabet,numbers, _ and single space only");
 		nameValidate = 0;
 		return false;
-
 	} else {
-		$('#Pletter').text("");
 		nameValidate = 1;
 
 	}
-
-}
-
 // file validation
-addpolicy.prototype.fileValidate = function() {
-	var x = fileID;
 
-	if (x == "" || x == undefined) {
-		$('#isFEmpty').text("Upload a file");
+
+	if (x == ""||x==null||x==" ") {
+		alert("Please upload a file");
 		fileValidate = 0;
 		return false;
 
 	} else {
-		$('#isFEmpty').text("");
 		fileValidate = 1;
-
 	}
 
 }
@@ -104,10 +104,18 @@ addpolicy.prototype.saveToDatabase = function() {
 	RequestManager.savePolicy(input, function(data, success) {
 		if (success) {
 			$('#policyName').val("");
-		
-			alert("Successfully added");
+			fileID="";
+			$('.policyFileName').val("");
+			alert("Successfully saved the policy");
+			App.listPolicy();
 		} else {
+		 if (data.code == 228) {
+				alert("Policy name already exists");
+
+			}
+		 else{
 			alert("Failed to add");
+		 }
 		}
 	}.ctx(this));
 }

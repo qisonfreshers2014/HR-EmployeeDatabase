@@ -14,8 +14,7 @@ employeePolicyList.prototype.handleShow = function() {
 			 var content = data;
 			 var status = success;
 			 this.policyDisplay(content, status);
-			
-		 	
+					 	
 		}else{
 		  
 		  alert("failed to add");
@@ -32,7 +31,8 @@ employeePolicyList.prototype.policyDisplay = function(content, status) {
 			
 			var obj = content[i];
 			
-			$("#policylist").append(++j +" .<a href='"+obj.fileId+"'>"+obj.policyName+"</a><br>");
+			$("#policylist").append('<table><tbody></tbody></table>');
+			$("#policylist tr:last").after('<tr><td style="font-size:14px">'+ ++j +'</td><td style="font-size:14px"><a href="'+obj.url+'" target="_blank">'+obj.policyName+'</a></td></tr>');
 						
 		}
 	}else{

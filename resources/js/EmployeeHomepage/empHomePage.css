@@ -23,19 +23,18 @@
 }
 
 .logoutCorner {
-/*   position:absolute;
-    left:1028px;
-    top:51px; */
-    
-   color: #0088cc;
-  font-size: 20px;
-  left: 910px;
+  color: white;
+   font-size: 20px;
+  left: 1157px;
   position: relative;
-  top: -2px;
+  top: -91px;
 }
 .tabColor{
 	color:#ffffff;
 }
 .empName{
      color: #ffffff;  
+}
+#log{
+	color:#ffffff;
 }

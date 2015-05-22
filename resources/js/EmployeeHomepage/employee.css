@@ -1,12 +1,12 @@
 #table{
- 	color: black;
-  bottom: 280px;
-    font-size: 15px;
-    left: 202px;
-    margin-left: 6px;
-    margin-top: 424px;
-    position: relative;
-    width: 60%;
+ 	  color: black;
+  bottom: 300px;
+  font-size: 15px;
+  left: 202px;
+  margin-left: 6px;
+  margin-top: 457px;
+  position: relative;
+  width: 60%;
 }
 
 .tableHeading{
@@ -14,27 +14,28 @@
     color: #000000;
     border: 1px solid black;
     border-collapse:collapse;
-     height: 21px;
+     height: 26px;
   width: 30%;
     
 }
 #tableColumn{
 	 border: 1px solid black;
-	 
-	  
+	 text-align:center;
+	  height: 26px;
 	   border-collapse:collapse;
 }
 
 #tableColumn1{
 	 border: 1px solid black;
-	  
-	 
+	  height: 26px;
+	 text-align:center;
 	   border-collapse:collapse;
 }
 
 #tableColumn2{
 	 border: 1px solid black;
-	 
+	 text-align:center;
+	 height: 26px;
 	  border-collapse:collapse; 
 }
 

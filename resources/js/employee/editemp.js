@@ -12,6 +12,10 @@ EditEmployee.prototype.handleShow = function(employeeId) {
 		e.preventDefault();
 		this.validateUpdateEmp(employeeId);
 	}.ctx(this));
+	 $('#back').click(function(){
+			
+			App.loadempviewemployee(employeeId);
+		}.ctx(this));
 }
 EditEmployee.prototype.validateEditEmp = function(employeeId) {
 

@@ -607,7 +607,8 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 		}
 		return results;
 	}
-	 @Override
+	 @SuppressWarnings("unchecked")
+	@Override
 	 public List<Employee> getEmployees(FilterEmployee filter) {
 	  Session session = null;
 	  List<Employee> list = null;
@@ -626,14 +627,22 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 	    if(filter.getCurrentDesignation() != 0){
 	    query = query+" and currentDesignation="+filter.getCurrentDesignation();
 	   }
-	    if(filter.getDateOfJoining() != null){
+	   /* if(filter.getDateOfJoining() != null){
 	    query = query + " and DOJ='"+filter.getDateOfJoining()+"'";
-	   }
+	   }*/
+	    
+	    if(filter.getDateOfJoiningFrom() !=null){
+		    if(filter.getDateOfJoiningFrom().compareTo(filter.getDateOfJoiningTo())<=0){
+		        
+		    	  query=query+"and DOJ between '"+filter.getDateOfJoiningFrom()+"' and '"+filter.getDateOfJoiningTo()+"' ";  
+		    	   
+		    	     }
+		    }
 	     if(filter.getFrom()!=null){
 	    query = query + " and (years_of_experience + timestampdiff(MONTH,DOJ, sysdate())/12.0)>="+filter.getFrom();
 	   }
 	    if(filter.getGender() != null){
-	    query = query + " and gender='"+filter.getGender()+"'";
+	    query = query + " and gender='"+filter.getGender()+"'";                                       
 	   }
 	    if(filter.getHighestQualification() != null){
 	    query = query + " and highestQualification='"+filter.getHighestQualification()+"'";
@@ -641,7 +650,7 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 	     if(filter.getTo() !=null){
 	    query = query + " and (years_of_experience + timestampdiff(MONTH,DOJ, sysdate())/12.0)<="+filter.getTo();
 	   }
-	   System.out.println("Query :\n"+ query);
+	 
 	   
 	   Query hql1=session.createQuery(query);
 	   
@@ -654,10 +663,18 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 	   if(filter.getCurrentDesignation() != 0){
 	    query1 = query1+" and currentDesignation="+filter.getCurrentDesignation();
 	   }
-	    
+	  /*  
 	   if(filter.getDateOfJoining() != null){
 	    query1 = query1+ " and DOJ='"+filter.getDateOfJoining()+"'";
-	   }
+	   }*/
+	   if(filter.getDateOfJoiningFrom() !=null){
+		    if(filter.getDateOfJoiningFrom().compareTo(filter.getDateOfJoiningTo())<=0){
+		        
+		    	  query1=query1+"and DOJ between '"+filter.getDateOfJoiningFrom()+"' and '"+filter.getDateOfJoiningTo()+"' ";  
+		    	 
+		    	      
+		    	     }
+		    }
 	   if(filter.getFrom()!=null){
 	    query1 = query1 + " and (years_of_experience + timestampdiff(MONTH,DOJ, sysdate())/12.0)>="+filter.getFrom();
 	   }

@@ -1,16 +1,19 @@
+<div id="addtemp">
 <div>
-<div class="heading">
-<h3>Add Template</h3>
+<legend><h1 class="heading">Add Template</h1></legend>
 </div>
 <p id="fileId" class="hide"></p>
 <div id="fieldsaddTemplate" class="inputelement">
-Template Name<input type="text" class="templatename" maxlength="30" minlength="3"/><span class="startemplate"><sup>*</sup></span><br><br>
+Template Name<span class="startemplate">*</span><input type="text" class="templatename" maxlength="30" minlength="3"/><br><br>
 
-Subject<span id="align"></span><input type="text" class="subject" maxlength="100" minlength="3"/><span class="startemplate"><sup>*</sup></span><br><br>
+Subject<span class="startemplate">*</span><span id="align"></span><input type="text" class="subject" maxlength="100" minlength="3"/><br><br>
 
-Description<br><br>
+Description<span class="startemplate">*</span><br><br>
   <textarea rows="15" cols="50" class="content" id="editor1" name="editor1"></textarea><br><br>
+<div>
 
- <input type="button" class="save btn btn-primary btn-md" value="save">
+<center> <input type="button" class="save btn btn-primary btn-md" id="save" value="save"></center>
+<button id="back" class="btn btn-primary btn-md">Back</button>
+</div>
 </div>
 </div>

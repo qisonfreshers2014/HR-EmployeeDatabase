@@ -139,6 +139,11 @@ App.prototype.loadAllhandmeeting = function() {
 		new allHandMeeting();
 	});
 }
+App.prototype.loadempAllhands= function() {
+	Loader.loadempAllhands(function() {
+		new empAllHands();
+	});
+}
 App.prototype.loadAllhandmeetings = function(dataid) {
 	Loader.loadAllhandmeetings(function() {
 		new editHandMeeting(dataid);

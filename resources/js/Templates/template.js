@@ -4,16 +4,21 @@ function Template(dataid) {
 	}.ctx(this));
 }
 
-Template.prototype.handleShow = function(dataid) {		
+Template.prototype.handleShow = function(dataid) {	
+	
+	$('#backButton').click(function(){
+		 App.loadtemplateList();
+		 }.ctx(this));
+	
 	var input = {"payload":{"id":dataid}};
 	RequestManager.getTemplateById(input, function(data, success) {
 
 		if(success){
 			 var obj=data[0];
 			 
-			 $('.templateName').prepend(obj.name);
-			 $('.templateSubject').prepend(obj.subject);
-			 $('.templateContent').prepend(obj.content);
+			 $('.templateName1').prepend(obj.name);
+			 $('.templateSubject1').prepend(obj.subject);
+			 $('.templateContent1').prepend(obj.content);
 		  }
 		 }.ctx(this));
 }

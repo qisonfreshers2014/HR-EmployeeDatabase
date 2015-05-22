@@ -25,7 +25,7 @@ public class CompareDates implements Comparator<DisplayNotificationHome> {
 		todatetocomapre.setTime(emp2.getDate());
 		int tomonthtocomapre = todatetocomapre.get(Calendar.MONTH) + 1;
 		int todaytocomapre = todatetocomapre.get(Calendar.DATE);
-System.out.println("Employee 1 "+tomonth+" Employee 2 "+tomonthtocomapre);
+
 		
 		if (today == todaytocomapre && tomonth == tomonthtocomapre) {
 			
@@ -48,7 +48,7 @@ System.out.println("Employee 1 "+tomonth+" Employee 2 "+tomonthtocomapre);
 			System.out.println(" Inside month 2 is greater");
 			i = 1;
 		} 
-		System.out.println(" Value "+i);
+	
 		return i;
 	}
 

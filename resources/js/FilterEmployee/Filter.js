@@ -1,6 +1,6 @@
-function FilterEmp() {
+function FilterEmp(empid) {
 	Loader.loadHTML('.container', 'resources/js/FilterEmployee/FilterEmployee.html', true, function(){
-		this.handleShow();
+		this.handleShow(empid);
 	}.ctx(this));
 }
 
@@ -10,12 +10,16 @@ FilterEmp.prototype.handleShow = function(empid) {
 	$( "#datepicker" ).datepicker({dateFormat:'yy-mm-dd',showButtonPanel:
 	 true,changeMonth:true,changeYear:true,showAnim:'drop',minDate:new Date(1993,12,31),
 	 maxDate:new Date(2050,12,31)});
+	$( "#datepicker2" ).datepicker({dateFormat:'yy-mm-dd',showButtonPanel:
+		 true,changeMonth:true,changeYear:true,showAnim:'drop',minDate:new Date(1993,12,31),
+		 maxDate:new Date(2050,12,31)});
 		
 	$('#Filter').click(function(){
-	if($('#filter').val()!=0 || $('#gender').val()!=0 || $('#qualification1').val()!="" || $('#datepicker').val()!=""||
+	if($('#filter').val()!=0 || $('#gender').val()!=0 || $('#qualification1').val()!="" || $('#datepicker').val()!=""|| $('#datepicker2').val()=="" ||
 				$('#designation').val()!=0 || $('#year1').val()!="" || $('#year2').val()!=""){
-			$('.heading1').css("visibility","visible");
+			
 	}
+	
 			this.FilterEmployee(empid);
 		
 		//this.Filterdata();
@@ -26,6 +30,7 @@ FilterEmp.prototype.handleShow = function(empid) {
 		//$('.error').css('visibility', 'hidden');
 		$("#gender").val("");
 		$("#datepicker").val("");
+		$("#datepicker2").val("");
 		$("#filter").val("");
 		$("#qualification1").val("");
 		$("#year1").val("");
@@ -46,7 +51,7 @@ FilterEmp.prototype.handleShow = function(empid) {
 
 FilterEmp.prototype.FilterEmployee = function(empid){
 	
-	if($('#filter').val()==0 && $('#gender').val()==0 && $('#qualification1').val()=="" && $('#datepicker').val()==""&&
+	if($('#filter').val()==0 && $('#gender').val()==0 && $('#qualification1').val()=="" && $('#datepicker').val()==""&& $('#datepicker2').val()=="" &&
 			$('#designation').val()==0 && $('#year1').val()=="" && $('#year2').val()==""){
 				
 			alert("Select at least one field");
@@ -62,18 +67,39 @@ FilterEmp.prototype.FilterEmployee = function(empid){
 		 
 		}
 	} 
-   //validations for date of join
-	var x=document.getElementById("datepicker").value;
-	var doj=new Date(x);
-	var today= new Date();
-	var dojday=doj.getDate();
-	var day;
-	 if(doj>today)
+   //validations for date of joining
+	
+	
+	var fromdate=document.getElementById("datepicker").value;
+	var todate=document.getElementById("datepicker2").value;
+	var fromdoj=new Date(fromdate);
+	var todoj= new Date(todate);
+	var today=new Date();
+	if($('#datepicker').val()!="" && $('#datepicker2').val()!=""){
+
+	 if(fromdoj>todoj)
 	{
-		alert("Please do not enter future date of join");
+		alert("From date can not be greater than To date ");
 		return;
 	}
+	 if(fromdoj>today || todoj>today){
+		 
+		 alert("Please do not enter future date");
+		 return;
+	 }
 
+	}	 
+	
+	if($('#datepicker').val()=="" && $('#datepicker2').val()!=""){
+		
+		alert("Please enter From date");
+		return;
+	}
+if($('#datepicker').val()!="" && $('#datepicker2').val()==""){
+	
+	$('#datepicker2').val($('#datepicker').val());
+		
+	}
 	 //validations for qualification
       var text = document.getElementById("qualification1").value;
 	 
@@ -132,7 +158,10 @@ FilterEmp.prototype.FilterEmployee = function(empid){
 		payload.currentDesignation = $('#designation').val();
 	}
 	if($('#datepicker').val().trim().length != 0){
-		payload.dateOfJoining = $('#datepicker').val() + ' 00:00:00';
+		payload.dateOfJoiningFrom = $('#datepicker').val() + ' 00:00:00';
+	}
+	if($('#datepicker2').val().trim().length != 0){
+		payload.dateOfJoiningTo = $('#datepicker2').val() + ' 00:00:00';
 	}
 	if($('#year1').val().trim().length != 0 && $('#year2').val().trim().length !=0 ){
 		payload.from = ($('#year1').val());
@@ -140,13 +169,15 @@ FilterEmp.prototype.FilterEmployee = function(empid){
 	
  }
 
- 
+           var content='';
 	
 	    RequestManager.getFilterEmployee({"payload" : payload}, function(data, success) {
 	    if(success){
 	    if(data.length != 0){
 		//alert("Employee details filtered successfully ");
+	    	$('.heading1').css("visibility","visible");
 	  	$('#displayData').html('<tr><th>Employee Id</th><th>Employee Name</th><th>Gender</th><th>DOB</th><th>DOJ</th><th>Email</th><th>Fathers Name</th><th>Designation</th><th>Highest Qualification</th><th>Skype Id</th><th>Contact No</th><th>Years Of Experience</th><th>Skills</th><th>View Details</th></tr>');
+	  	//content+='<tr><th>Employee Id</th><th>Employee Name</th><th>Gender</th><th>DOB</th><th>DOJ</th><th>Email</th><th>Fathers Name</th><th>Designation</th><th>Highest Qualification</th><th>Skype Id</th><th>Contact No</th><th>Years Of Experience</th><th>Skills</th><th>View Details</th></tr>';
 	    }
 	    else{
 	    //	alert(" No record found");
@@ -175,6 +206,34 @@ $('#displayData').append("<tr><td>"+item.employeeId+"</td><td>"+item.employeeNam
 +item.currentDesignation+"</td><td>"+item.highestQualification+"</td><td>"+item.skype+"</td><td>"+item.contactNo+"</td>" +
 		"<td>"+item.yearsofexperience+"</td><td>"+item.skill+"</td><td><input type='button' value='View' id='"+item.id+"' class='dynamicView btn-primary btn-md'></td></tr>");
 	
+       /* content+='<tr>';
+        content+='<td>' +item.employeeId+'</td>';
+        content+= '<td>'+item.employeeName+'</td>';
+        content+='<td>'+item.gender+'</td>';
+        content+='<td>'
+        		   +new Date(item.dateOfBirth).getFullYear()+"-"+(new Date(item.dateOfBirth).getMonth()+1)+"-"+new Date(item.dateOfBirth).getDate()+'</td>';
+        		   
+        content+='<td>'
+        		+new Date(item.dateOfJoining).getFullYear()+"-"+(new Date(item.dateOfJoining).getMonth()+1)+"-"+new Date(item.dateOfJoining).getDate()+'</td>';
+        content+='<td>'+item.email+'</td>';
+        
+        content+='<td>'+item.fathersName+'</td>';
+        content+='<td>'
+        		+item.currentDesignation+'</td>';
+        content+='<td>'+item.highestQualification+'</td>';
+        
+        content+='<td>'+item.skype+'</td>';
+        
+        content+='<td>'+item.contactNo+'</td>';
+        
+        content+='<td>'+item.yearsofexperience+'</td>';
+        content+='<td>'+item.skill+'</td>';
+        content+='<td>'<input type="button" value="View" id=+item.id+ class="dynamicView btn-primary btn-md">'</td>'
+        content+='</tr>';
+        
+        $('#displayData').html(content);
+        */
+        			
 	   }
 	   $('.dynamicView').bind("click", function(empid){
 			  

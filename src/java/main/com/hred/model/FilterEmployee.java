@@ -7,6 +7,20 @@ public class FilterEmployee {
 private String gender;
 private int currentDesignation;
 private Timestamp dateOfJoining;
+private Timestamp dateOfJoiningFrom;
+private Timestamp dateOfJoiningTo;
+public Timestamp getDateOfJoiningFrom() {
+	return dateOfJoiningFrom;
+}
+public void setDateOfJoiningFrom(Timestamp dateOfJoiningFrom) {
+	this.dateOfJoiningFrom = dateOfJoiningFrom;
+}
+public Timestamp getDateOfJoiningTo() {
+	return dateOfJoiningTo;
+}
+public void setDateOfJoiningTo(Timestamp dateOfJoiningTo) {
+	this.dateOfJoiningTo = dateOfJoiningTo;
+}
 private String from;
 private String to;
 private String highestQualification;
@@ -15,11 +29,13 @@ private int filterEmployee;
 
 
 public FilterEmployee(String gender, int currentDesignation, Timestamp dateOfJoining,
-  String from, String to, String highestQualification, boolean isDeleted,int filterEmployee ) {
+  String from, String to, String highestQualification, boolean isDeleted,int filterEmployee, Timestamp dateOfJoiningFrom, Timestamp dateOfJoiningTo ) {
  super();
  this.gender = gender;
  this.currentDesignation = currentDesignation;
  this.dateOfJoining = dateOfJoining;
+ this.dateOfJoiningFrom = dateOfJoiningFrom;
+ this.dateOfJoiningTo = dateOfJoiningTo;
  this.from = from;
  this.to = to;
  this.highestQualification = highestQualification;

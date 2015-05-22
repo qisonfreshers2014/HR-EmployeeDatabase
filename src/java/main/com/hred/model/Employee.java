@@ -307,7 +307,78 @@ public String getSkill() {
   this.variableComponent = variableComponent;
  }
 
- @Override
+ public Employee(AbstractObject abstractObject, int employeeId,
+		String employeeName, String gender, Timestamp dateOfBirth,
+		Timestamp dateOfJoining, int yearsofexperience, long contactNo,
+		String currentAddress, String permanentAddress, String email,
+		String password, long emergencycontactnumber, String fathersName,
+		String emergencyContactName, String relationWithEmergencyConatact,
+		String bloodGroup, int currentDesignation, String highestQualification,
+		String pan, String pfNo, String bankAccountNo, String skype,
+		String skill, String rating, String variableComponent, String salary,
+		int fileId) {
+	super(abstractObject);
+	this.employeeId = employeeId;
+	this.employeeName = employeeName;
+	this.gender = gender;
+	this.dateOfBirth = dateOfBirth;
+	this.dateOfJoining = dateOfJoining;
+	this.yearsofexperience = yearsofexperience;
+	this.contactNo = contactNo;
+	this.currentAddress = currentAddress;
+	this.permanentAddress = permanentAddress;
+	this.email = email;
+	this.password = password;
+	this.emergencycontactnumber = emergencycontactnumber;
+	this.fathersName = fathersName;
+	this.emergencyContactName = emergencyContactName;
+	this.relationWithEmergencyConatact = relationWithEmergencyConatact;
+	this.bloodGroup = bloodGroup;
+	this.currentDesignation = currentDesignation;
+	this.highestQualification = highestQualification;
+	this.pan = pan;
+	this.pfNo = pfNo;
+	this.bankAccountNo = bankAccountNo;
+	this.skype = skype;
+	this.skill = skill;
+	this.rating = rating;
+	this.variableComponent = variableComponent;
+	this.salary = salary;
+	this.fileId = fileId;
+}
+
+public Employee(Employee employee) {
+	
+	super(employee);
+	this.employeeId = employee.getEmployeeId();
+	this.employeeName = employee.getEmployeeName();
+	this.gender = employee.getGender();
+	this.dateOfBirth = employee.getDateOfBirth();
+	this.dateOfJoining = employee.getDateOfJoining();
+	this.yearsofexperience = employee.getYearsofexperience();
+	this.contactNo = employee.getContactNo();
+	this.currentAddress = employee.getCurrentAddress();
+	this.permanentAddress = employee.getPermanentAddress();
+	this.email = employee.getEmail();
+	this.emergencycontactnumber = employee.getEmergencycontactnumber();
+	this.fathersName = employee.getFathersName();
+	this.emergencyContactName = employee.getEmergencyContactName();
+	this.relationWithEmergencyConatact = employee.getRelationWithEmergencyConatact();
+	this.bloodGroup = employee.getBloodGroup();
+	this.currentDesignation = employee.getCurrentDesignation();
+	this.highestQualification = employee.getHighestQualification();
+	this.pan = employee.getPan();
+	this.pfNo = employee.getPfNo();
+	this.bankAccountNo = employee.getBankAccountNo();
+	this.skype = employee.getSkype();
+	this.skill = employee.getSkill();
+	this.rating = employee.getRating();
+	this.variableComponent = employee.getVariableComponent();
+	this.salary = employee.getSalary();
+	this.fileId = employee.getFileId();
+}
+
+@Override
  public int getObjectType() {
   return ObjectTypes.EMPLOYEE;
  }

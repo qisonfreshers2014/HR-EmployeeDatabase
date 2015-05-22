@@ -21,7 +21,7 @@ Login.prototype.handleShow = function() {
  Login.prototype.authenticate = function() { 
   
   var input = {"payload":{"authType":"REGULAR",
-        "email":$('.username').val(),
+        "email":$('.username').val().trim(),
         "password":$('.password').val()
         }};
   
@@ -35,7 +35,7 @@ Login.prototype.handleShow = function() {
        var contactNo=data.employeeDetails.contactNo;
        var employeeId=data.employeeDetails.employeeId;
        var hr=data.roleHr;
-       var isDeleted=data.employeeDetails.deleted;
+       var isDeleted=data.employeeDetails.isDeleted;
     App.loadEmployeePage(name,hr,isDeleted);
     App.loadFooter();
     App.loadEmployee(gender,contactNo,employeeId);
@@ -46,18 +46,17 @@ Login.prototype.handleShow = function() {
   }.ctx(this));
  }
  
- Login.prototype.validateLogin = function(email,password){
+ Login.prototype.validateLogin = function(email,password){	 
   $(".errormessage1").hide();
   $(".errormessage").hide();
-  console.log(email+" validation "+password);
      var isValid = false;
      var emailReg = /^[_A-Za-z]+[_A-Za-z0-9-]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$/;
-   //  var emailVal = email;
      var minMaxLength = /^[\s\S]{8,32}$/;
      var number = /[0-9]/;
      var special = /[ !"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]/;
      var upper = /[A-Z]/;
      var lower = /[a-z]/;
+     var email=email.trim();
      if(email == "" || email == null) {
       $(".errormessage1").show();
       $('.errormessage1').focus();
@@ -74,7 +73,7 @@ Login.prototype.handleShow = function() {
      else if (email.length > 128){
       $(".errormessage1").show();
       $('.errormessage1').focus();
-      $('.errormessage1').text("Email length is large(?)");
+      $('.errormessage1').text("Email length is too large(?)");
          isValid = false;     
      }
      else if(password == "" || password == null ){
@@ -84,10 +83,11 @@ Login.prototype.handleShow = function() {
          isValid = false;
   } 
      else if((!minMaxLength.test(password))||(!special.test(password))||(!number.test(password))||(!upper.test(password))||(!lower.test(password))){
-      $(".errormessage").show();
+/*      $(".errormessage").show();
       $('.errormessage').focus();
       $('.errormessage').html("<span>Password should be atleast 8 characters and contain one number</span><br>" +
-   "<span>one Uppercase one Lowercase and one Special character</span>");
+   "<span>one Uppercase one Lowercase and one Special character</span>");*/
+      alert("Password should be atleast 8 characters and contain one number one uppercase one lowercase and one special character");
          isValid = false;
   } 
      /*else if(!special.test(password) ){

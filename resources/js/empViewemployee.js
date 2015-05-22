@@ -14,24 +14,24 @@ empViewemployee.prototype.handleShow = function(employeeId) {
  
  App.loadEditEmp(employeeId);
 }.ctx(this));
-$('#changepwd').click(function(){
+  $('#changepwd').click(function(){
 	 
 	 App.loadchangePassword(employeeId);
 	}.ctx(this));
+}
 
-  
- }
 empViewemployee.prototype.empviewEmployee=function(employeeId){
   var input= {"payload":{"employeeId":employeeId}};
 
   RequestManager.viewEmployeedetails(input, function(data, success) {
    if(success){
-   var obj=data[0];
+	  
+   var obj=data;
     var dobformat = new Date(obj.dateOfBirth);
     var byear = dobformat.getFullYear();
     var bmonth = dobformat.getMonth()+1;
     var bdate = dobformat.getDate();
- 
+    $('#employeeimage').append(obj.filePath);
    $('#eid').val(obj.employeeId);
    $('#name').val(obj.employeeName);
    $('#gender').val(obj.gender);

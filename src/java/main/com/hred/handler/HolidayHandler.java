@@ -4,14 +4,17 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import com.hred.common.Constants;
+import com.hred.exception.EmployeeException;
 import com.hred.exception.ExceptionCodes;
 import com.hred.exception.ExceptionMessages;
 import com.hred.exception.HolidaysException;
 import com.hred.exception.ObjectNotFoundException;
 import com.hred.handler.annotations.AuthorizeEntity;
+import com.hred.model.Employee;
 import com.hred.model.Holiday;
 import com.hred.model.ObjectTypes;
 import com.hred.persistence.dao.DAOFactory;
+import com.hred.persistence.dao.EmployeeDAO;
 import com.hred.persistence.dao.HolidayDAO;
 
 /**
@@ -34,7 +37,8 @@ public class HolidayHandler extends AbstractHandler {
 	}
 
 	//getting Holiday By id
-	public List<Holiday> getHolidayById(Holiday holiday) throws HolidaysException {
+	@AuthorizeEntity(roles={Constants.HR})
+	public List<Holiday> getHolidayByIdAOP(Holiday holiday) throws HolidaysException {
 		List<Holiday> holidays = null;
 		HolidayDAO HolidaysDAOImpl =(HolidayDAO) DAOFactory.getInstance().getHolidayDAO();
 		holidays = (List<Holiday>)HolidaysDAOImpl.getHolidayById(holiday);
@@ -42,6 +46,28 @@ public class HolidayHandler extends AbstractHandler {
 		return holidays;
 	
 	}
+	
+	//getting Holiday By date
+	@AuthorizeEntity(roles={Constants.HR})
+	public Holiday getHolidayByDateAOP(Holiday holiday)  throws HolidaysException {
+		Holiday holidays = null;
+		HolidayDAO HolidaysDAOImpl =(HolidayDAO) DAOFactory.getInstance().getHolidayDAO();
+		holidays = HolidaysDAOImpl.getHolidayByDate(holiday);
+		
+		long id = holidays.getId();
+		Timestamp dbDate =holidays.getFromDate();
+		
+		System.out.println(id +" "+ dbDate);
+		
+		Timestamp date = holiday.getFromDate();
+		if(date.compareTo(dbDate) == 0){
+			holidays.setDeleted(true);
+			
+		}
+		Holiday deleteholiday = (Holiday)  DAOFactory.getInstance().getHolidayDAO().update(holidays);
+		return deleteholiday;
+	}
+	
 	
 	//Getting list of holidays
 	public List<Holiday> getHolidays()throws HolidaysException {
@@ -57,12 +83,14 @@ public class HolidayHandler extends AbstractHandler {
 	@AuthorizeEntity(roles={Constants.HR})
 	public Holiday saveAOP(Holiday holidayInput)throws HolidaysException{
 		
+		
 		List<Holiday> data = getHolidays();
 		
 		Timestamp fromDate = holidayInput.getFromDate();
 		Timestamp toDate = holidayInput.getFromDate();
 		String description = holidayInput.getDescription();
 		String type = holidayInput.getType();
+		holidayInput.setDeleted(false);
 		
 		holidayValidationFunc(data,fromDate,toDate,description,type,holidayInput);
 		
@@ -165,6 +193,4 @@ public class HolidayHandler extends AbstractHandler {
 	 }
 
 	
-
-
 }

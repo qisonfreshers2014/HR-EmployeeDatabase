@@ -1,40 +1,87 @@
-#name{
-position:absolute;
-margin-left:73px;
-margin-top:56px;		
+.container{
+ height: 40.2pc;
+   top: -1px;
+     overflow-y: hidden;
+  overflow-x: hidden;
 }
-#tempName{
-position:absolute;
-margin-left:185px;
-margin-top:69px;	
-font-family: Calibri;
-font-size:15px;	
+
+#nameTemp{
+ 
+ 
+ top:88px;
 }
-#subject{
-position:absolute;
-margin-left:73px;
-margin-top:110px;		
+#subTemp{
+ 
+ position: relative;
+  top: 6px;
 }
-#tempSubject{
-position:absolute;
-margin-left:185px;
-margin-top:126px;		
-font-family: Calibri;
-font-size:15px;
+#conTemp{
+ top:-75px;
+   height: 221px;
 }
-#content{
-position:absolute;
-margin-left:73px;
-margin-top:160px;		
+.common{
+   position: relative;
+    height: 61px;
+  width: 186px;
+    font-size: 22px;
+    padding-top: 22px;
+  left: 135px;
+    text-align: center;
+  background-color: rgb(76, 102, 128);
 }
-#tempContent{
-position:absolute;
-margin-left:185px;
-margin-top:171px;	
-font-family: Calibri;	
-font-size:15px;
+
+#nameTemplate{
+   position: relative;
+  height: 61px;
+  width: 777px;
+  padding-top: 22px;
+  top: 5px;
+  font-size: 22px;
+  left: 322px;
+  text-align: center;
+  background-color: rgb(213, 223, 232);
 }
-#tempBackground{
-	height: 439px;
-	background-color:lightgrey;
+#subjectTemplate{
+   position: relative;
+  height: 61px;
+  width: 777px;
+  padding-top: 22px;
+  top: -77px;
+    font-size: 22px;
+  left: 322px;
+  overflow-y:scroll;
+  text-align: center;
+  background-color: rgb(213, 223, 232);
+}
+#contentTemplate{
+   position: relative;
+  height: 221px;
+  width: 777px;
+  padding-top: 22px;
+  left: 322px;
+    font-size: 22px;
+    overflow-y:scroll;
+  top: -318px;
+  text-align: center;
+  background-color: rgb(213, 223, 232);
+}
+
+.templateView1{
+ position: relative;
+  top: 48px;
+  left: 532px;
+  color:#00246b;
+}
+#templateBody{
+   top: 10px;
+  left: 32px;;
+}
+#backButton{
+ position: relative;
+  top: -294px;
+  left: 600px;
+}
+#descTemp {
+    position: relative;
+    top: 77px;
 }
