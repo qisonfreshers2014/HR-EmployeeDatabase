@@ -133,14 +133,18 @@ Uploader.prototype.validateFile = function(allowedFileType) {
         fileExt = this.getFileExtension(filePath);
         fileExt = fileExt.toLowerCase();
         if ($.inArray(fileExt, this.allowExtArray) == -1) {
-            alert("Sorry" + " " + filePath + " is not allowed. "); // Message.get('common.notallowextensions.message'));+
+            alert("Only doc/pdf/odt/docx files are allowed ");
+            //alert("Sorry" + " " + filePath + " is not allowed. "); // Message.get('common.notallowextensions.message'));+
             // this.allowExtArray.join(", "));
             $('.uploadMediaInput').val('');
-            return;
+            //return;
         }
         fileSize = this.getFileSize(fileObj);
-        if (fileSize > this.allowFileSize) {
-            alert("Sorry" + filePath + "SIze" + fileSize + "Size" + this.allowFileSize);
+       //alert("file size is "+fileSize+"allowed file size is "+this.allowFileSize);
+        if (fileSize > (5242880))//checking that not more than 5 MB
+        {
+            //alert("Sorry" + filePath + "SIze" + fileSize + "Size" + this.allowFileSize);
+        	alert("Sorry, File size is not more than 5 MB");
             $('.uploadMediaInput').val('');
             return;
         }
@@ -180,11 +184,14 @@ Uploader.prototype.getFileSize = function(fileObj) {
     // iSize = iSize / 1024;
     // } else {
     //console.dir(fileObj)
-    iSize = (fileObj[0].files[0].size / 1024);
-    // }
-    iSize = (Math.round((iSize / 1024) * 100) / 100);
+    //alert("file size is "+fileObj[0].files[0].size)
+   iSize = (fileObj[0].files[0].size);
+//    // }
+//    iSize = (Math.round((iSize / 1024) * 100) / 100);
     return iSize;
 }
+
+
 Uploader.prototype.populateFileLimits = function() {
     /*
      * var d = '{}'; $.ajax({ url: '/services/v1/fileUpload/limits', type:
@@ -198,11 +205,12 @@ Uploader.prototype.populateFileLimits = function() {
      * alert('xhr:'+xhr); alert('error:'+error); alert('exception:'+exception); }
      * }.ctx(this));
      */
-
+	
+	this.allowFileSize = 5+' MB';
 }
 Uploader.prototype.getAllowedExtensions = function(allowedFileType) {
 if(allowedFileType == "image")
 	this.allowExtArray = ['jpg', 'png', 'jpeg'];
 else
-	this.allowExtArray = ['oda','pdf','doc','odt','docx'];
+	this.allowExtArray = ['pdf','doc','odt','docx'];
 }

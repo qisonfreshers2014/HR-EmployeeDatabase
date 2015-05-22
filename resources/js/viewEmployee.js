@@ -1,20 +1,27 @@
-function ViewEmployee(empid) {
+ function ViewEmployee(empid) {
  Loader.loadHTML('.container', 'resources/viewEmployee.html', true, function(){
   this.handleShow(empid);
  }.ctx(this));
 }
 $('.container').show();
 ViewEmployee.prototype.handleShow = function(empid) {
- var contentinput= {"payload":{}};
- RequestManager.getDesignationName(contentinput,function(desdata, success) {
-      if (success) {
-       this.viewEmployeedetails(empid,content, status,desdata);
-      }
- }.ctx(this));
+
+ this.viewEmployeedetails(empid);
 
  $('#Editdetails').click(function(){
   
   App.loadhrEditEmp(empid);
+ }.ctx(this));
+ 
+ 
+ $('#back').click(function(){
+  
+   App.listEmployee();
+ }.ctx(this));
+ 
+
+ $('#Editskills').click(function(){
+  App.loadSkill(empid);
  }.ctx(this));
  
  
@@ -25,18 +32,24 @@ ViewEmployee.prototype.handleShow = function(empid) {
   
   App.loadDesignation(empid, sendname,sendjoin);
  }.ctx(this));
+   
+}
  
-  
-
- }
-ViewEmployee.prototype.viewEmployeedetails=function(empid,content, status,desdata){
+ViewEmployee.prototype.viewEmployeedetails=function(empid){
 
  var input= {"payload":{"employeeId":empid}};
 
 RequestManager.viewEmployeedatails(input, function(data, success) {
  if(success){
+ 
+ var obj=data;
 
- var obj=data[0];
+ if(obj.deleted==true){
+	    
+	    $('#Editdetails').css("visibility","hidden");
+	    $('#Editskills').css("visibility","hidden");
+	    $('#Editdesgn').css("visibility","hidden");
+	   }
  
  var dobformat = new Date(obj.dateOfBirth);
    var byear = dobformat.getFullYear();
@@ -48,18 +61,7 @@ RequestManager.viewEmployeedatails(input, function(data, success) {
    var dojmonth = dojformat.getMonth()+1;
    var dojdate = dojformat.getDate();
   
-   // Retrieving designation 
-   var desName;
-   var desId = obj.currentDesignation;
-   
-   for (var j = 0; j < desdata.length; j++) {
-    var desTypeObj = desdata[j];
-     if (desId == desTypeObj.id) {
-      desName = desTypeObj.name;
-      break;
-     }
-   }
-   
+  $('#employeeimage').append(obj.filePath);
  $('#eid').val(obj.employeeId);
  $('#name').val(obj.employeeName);
  $('#gender').val(obj.gender);
@@ -75,7 +77,7 @@ RequestManager.viewEmployeedatails(input, function(data, success) {
  $('#contactname').val(obj.emergencyContactName);
  $('#relation').val(obj.relationWithEmergencyConatact);
  $('#blood').val(obj.bloodGroup);
- $('#designation').val(desName);
+ $('#designation').val(obj.designationName);
  $('#variable').val(obj.variableComponent);
  $('#qual').val(obj.highestQualification);                            
  $('#pannum').val(obj.pan);
@@ -86,6 +88,7 @@ RequestManager.viewEmployeedatails(input, function(data, success) {
  $('#salary').val(obj.salary);
  $('#yearofexp').val(obj.yearsofexperience);
  $('#skill').val(obj.skill);
+ 
  
  
   $('#senddesgname').text(obj.employeeName);

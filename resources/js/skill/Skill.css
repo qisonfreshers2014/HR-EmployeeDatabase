@@ -16,6 +16,8 @@
  	font-size:15px;
 
 } 
+
+
 th{
 	  background-color:#7094b8;
 }
@@ -28,6 +30,7 @@ th,td{
 }
 #backfilter{
  margin-left:2%;
+ margin-bottom:1%;
 }
 .red{
 	color:red;
@@ -103,4 +106,13 @@ font-family:calibri;
  font-weight: bold;
    margin-left:1%;
 } 
+#displayData{
+	margin-left:1%;
+	 table-layout: fixed;
+    width: 95%;
+}
+td{
+	 word-wrap:break-word;
+}
+
 } 
