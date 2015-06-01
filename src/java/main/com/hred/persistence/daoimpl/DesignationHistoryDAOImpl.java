@@ -5,8 +5,10 @@ import java.util.List;
  *
  */
 
+
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
@@ -106,10 +108,13 @@ if (null == session) {
 session = SessionFactoryUtil.getInstance().openSession();
 tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 }
-Criteria createCriteria = session.createCriteria(DesignationType.class);
+String hql="from DesignationType where is_deleted =0";
+Query query = session.createQuery(hql);
+list = query.list();
+//Criteria createCriteria = session.createCriteria(hql);
 
 //createCriteria.add(Restrictions.eq("isDeleted",false));
- list = (List<DesignationType>)createCriteria.list();
+ //list = (List<DesignationType>)createCriteria.list();
  } finally {
 try {
 if (tx != null) {

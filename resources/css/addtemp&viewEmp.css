@@ -24,6 +24,7 @@
  
 }
 
+
 .td {
      background-color: #cccccc;
      border: 1px solid #cccccc;
@@ -47,7 +48,7 @@ text-align:center;
 }
 
 .editviewEmployee {
-     left: 50%;
+     left: 25%;
      position: relative;
      right: 2px;
   margin-top:2%;
@@ -98,4 +99,15 @@ text-align:center;
 .inputelement {
      font-size: 15px;
      font-weight: bold;
+}
+.viewemployee{
+	       left:25%;
+	       margin-top:2%;
+  margin-bottom:2%;
+   position: relative;
+}
+.empviewemployee{
+	left:40%;
+	margin-bottom:2%;
+	
 }

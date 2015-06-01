@@ -5,6 +5,10 @@
 }
 $('.container').show();
 ViewEmployee.prototype.handleShow = function(empid) {
+	 $('#emphidden').show();
+	$('#changepwd').css("visibility","hidden");
+	 $('#Editempdetails').css("visibility","hidden");
+	 $('#Editempskills').css("visibility","hidden");
 
  this.viewEmployeedetails(empid);
 
@@ -20,10 +24,7 @@ ViewEmployee.prototype.handleShow = function(empid) {
  }.ctx(this));
  
 
- $('#Editskills').click(function(){
-  App.loadSkill(empid);
- }.ctx(this));
- 
+
  
    $('#Editdesgn').click(function(){
     
@@ -60,6 +61,11 @@ RequestManager.viewEmployeedatails(input, function(data, success) {
    var dojyear = dojformat.getFullYear();
    var dojmonth = dojformat.getMonth()+1;
    var dojdate = dojformat.getDate();
+  var hr=true;
+   $('#Editskills').click(function(){
+	   App.loadSkill(empid,hr);
+	  }.ctx(this));
+	  
   
   $('#employeeimage').append(obj.filePath);
  $('#eid').val(obj.employeeId);

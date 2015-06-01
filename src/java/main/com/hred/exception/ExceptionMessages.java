@@ -237,5 +237,7 @@ public interface ExceptionMessages {
 	public static final String INVALID_OLD_PASSWORD = "The entered password is not matched with the old saved password";
 	public static final String FROM_DOJ_CANNOT_BE_GRETER_THAN_TO_DOJ ="From date can not be greater than To date";
 	public static final String SELECT_ATLEAST_ONE_FIELD= "Please select atleast one field";
+	public static final String DESIGNATION_TYPE_DOES_NOT_EXIST = "DesignationType with this name is not exist";
+	public static final String PLEASE_ENTER_DESIGNATION_TYPE = "Please enter designation type to be added";
 }
 

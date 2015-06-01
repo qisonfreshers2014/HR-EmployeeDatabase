@@ -74,9 +74,9 @@ App.prototype.loadFilter = function(cb) {
 		new FilterEmp(cb);
 	});
 }
-App.prototype.loadSkill = function(empid) {
+App.prototype.loadSkill = function(empid,designation) {
 	Loader.loadSkill(function() {
-		new skill(empid);
+		new skill(empid,designation);
 	});
 }
 

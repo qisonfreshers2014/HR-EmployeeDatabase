@@ -8,6 +8,11 @@ function employeeList() {
 employeeList.prototype.handleShow = function() {
 
  $('.container').show();
+ $("#searchdiv").keyup(function (event) {
+	  if (event.keyCode == 13){
+	   $("#search").trigger('click');
+	   } 
+	    }.ctx(this));
  
  $('#filter').click(function(){
   App.loadFilter();

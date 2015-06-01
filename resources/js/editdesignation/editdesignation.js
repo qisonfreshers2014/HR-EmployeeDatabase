@@ -11,6 +11,23 @@ var dropDownVal = 0;
 var variablePayVal = 0;
 editdesignation.prototype.handleShow = function(empid, name, dojoin) {
 	$('.container').show();
+	
+	
+	var emptyinput={};
+	 RequestManager.getDesignationName(emptyinput, function(data, success){
+		               
+		 if(success){
+			 for(i=0;i<data.length;i++){
+			  var object=data[i];
+			 $('#designation').append($("<option value="+object.id+"> "+object.name+"</option>"));
+			 
+			 }
+			 
+		 }
+		 
+	 }.ctx(this));
+	 
+	 
 	var empId = empid;
 	var empName1 = name;
 	var doj1 = dojoin;

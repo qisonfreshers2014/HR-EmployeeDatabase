@@ -7,7 +7,83 @@ function AddEmployee() {
 }
 AddEmployee.prototype.handleShow = function() {
 	$('.container').show();
-
+	
+	$('#removedesignation').hide();
+	$('#savedesignation').hide();
+	$('#deletedesignation').hide();
+	
+	this.dropDown();
+	$('#adddesignation').click(function(){
+		$('#extradesg').css("visibility","visible");
+		$('#deletedesignation').hide();
+		$('#savedesignation').show();
+	}.ctx(this));
+	
+	// This function is to add new designation type
+	$('#savedesignation').click(function(){
+		var val=$('#extradesg').val();
+		
+		if(val==""){
+			
+			alert("Please enter designation type to be added");
+		}
+		 $('#designation').append($("<option value="+newvalue+">" + val + "</option>"));
+		 var designationinput={"payload":{"name":val}};
+		 RequestManager.addDesignationType(designationinput, function(data, success){
+			 if(success){
+				 
+				 alert("New designation is succesfully added in the dropdown list");
+				
+			 }
+			 else if(data.code==9027){
+				 
+				  alert(data.message);
+			 }else{
+				 alert("failed to add new designation type");
+			 }
+			 
+		 }.ctx(this));
+		 
+		 $('#extradesg').val("");
+		 $('#extradesg').css("visibility","hidden");
+			$('#savedesignation').hide();	
+			return false;
+	}.ctx(this));
+	/*$('#removedesignation').click(function(){
+		$('#extradesg').css("visibility","visible");
+		$('#savedesignation').hide();
+		$('#deletedesignation').show();
+		designation=$( "#designation option:selected" ).text();
+		
+	    $('#extradesg').val(designation);
+		
+	}.ctx(this));
+	
+	$('#deletedesignation').click(function(){ 
+		
+		//$("#designation option[value='"+designation+"']").remove();
+		
+		  var inputtodelete= $('#designation option:selected').val();
+		  
+		  var inputpayload={"payload":{"id":inputtodelete}}
+		  
+		 RequestManager.deleteDesignationType (inputpayload, function(data, success){
+		
+			 if(success){
+				 alert("Designation successfully removed from the dropdown list");
+				 $("#designation").append($("<option value="+0+">"+Select Designation+"</option>"));
+				 //$('#designation').append($("<option value="Select Designation">Select Designation</option>"));
+				 $('#designation').empty();
+				 this.dropDown();
+			 }
+			 
+		 }.ctx(this));
+	 $('#extradesg').val("");
+	 $('#extradesg').css("visibility","hidden");
+		$('#deletedesignation').hide();	
+		return false;
+}.ctx(this));
+	*/
 	$('#dob').datepicker({
 		// dateFormat : $.datepicker.TIMESTAMP,
 		dateFormat : 'yy-mm-dd',
@@ -26,7 +102,7 @@ AddEmployee.prototype.handleShow = function() {
 		changeMonth : true,
 		changeYear : true,
 		showAnim : 'drop',
-		minDate : new Date(2010, 12, 31),
+		minDate : new Date(2010, 10, 30),
 		maxDate : new Date(2015, 5, 31)
 	})
 
@@ -711,6 +787,26 @@ AddEmployee.prototype.ValidateDrpn = function() {
 		$(descerr).text("");
 
 	}
+}
+
+// This function is to append designation types from database to a drop down list
+AddEmployee.prototype.dropDown = function(){
+	var emptyinput={};
+	 RequestManager.getDesignationName(emptyinput, function(data, success){
+		               
+		 if(success){
+			          arraylength=data.length;
+			           lastId=data[arraylength-1].id;
+			           newvalue=lastId+1;
+			 for(i=0;i<data.length;i++){
+			  var object=data[i];
+			 $('#designation').append($("<option value="+object.id+"> "+object.name+"</option>"));			 
+			 }
+			 
+		 }
+		 
+	 }.ctx(this));
+	
 }
 
 // var AddEmployee = new AddEmployee();

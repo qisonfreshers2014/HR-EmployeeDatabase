@@ -9,11 +9,18 @@ import com.hred.persistence.annotations.Increment;
 @Table(name="DESIGNATION_TYPE")
 @Increment
 public class DesignationType extends AbstractObject{
-	
 
+	public DesignationType() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public DesignationType(String name) {
+		super();
+		this.name = name;
+	}
+	
 	@Column(name="name")
 	private String name;
-
 
 	public String getName() {
 		return name;
@@ -25,10 +32,6 @@ public class DesignationType extends AbstractObject{
 	}
 
 
-	public DesignationType() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
 
 
 	public DesignationType(AbstractObject abstractObject) {
@@ -37,10 +40,7 @@ public class DesignationType extends AbstractObject{
 	}
 
 
-	public DesignationType(String name) {
-		super();
-		this.name = name;
-	}
+
 
 
 	@Override

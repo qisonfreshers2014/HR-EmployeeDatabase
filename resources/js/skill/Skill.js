@@ -1,14 +1,18 @@
-function skill(empid) {
+function skill(empid,hr) {
 	
 	Loader.loadHTML('.container', 'resources/js/skill/Skill.html', true, function(){
-	this.handleShow(empid);
+	this.handleShow(empid,hr);
 	}.ctx(this));
 }
 
 
-skill.prototype.handleShow = function(empid) {
+skill.prototype.handleShow = function(empid,hr) {
 	$('.container').show();
+
+
 	this.viewSkillDetails(empid);
+	
+	
 	$('#save1').click(function(){
 		
 		this.validateSkill();
@@ -25,9 +29,16 @@ skill.prototype.handleShow = function(empid) {
 		 
 			}.ctx(this));
 
-	$('#backskill').click(function() {
+	$('#back').click(function() { 
+		  
+		if(hr==true){
 		App.loadViewEmployee(empid);
+		}else{
+			App.loadempviewemployee(empid);
+		}
 	}.ctx(this));
+	
+	
 	
 	
 }
@@ -70,8 +81,8 @@ skill.prototype.viewSkillDetails=function(empid){
 
 
 skill.prototype.validateSkill=function(){
-	  var text = document.getElementById("skill").value;
-	  var text1 = document.getElementById("attended1").value;
+	  var text = $("#skill").val();
+	  var text1 = $("#attended1").val();
 	  var regex = /^[A-Za-z.,0-9]+( [A-Za-z.,0-9]+)*$/;
       var char1=/^[a-zA-Z.]+$/;
       var char2=/^[a-z A-Z]+$/;
@@ -82,7 +93,7 @@ skill.prototype.validateSkill=function(){
  	  var rating= $("#rating").val();
  	   
  		
- 		if(skill=="" && training=="" && empId=="" && rating=="" ){
+ 		if(skill=="" && training=="" && empId==""){
  			 alert("Please enter Employee Id");
  			 return;
  		 }
@@ -99,13 +110,10 @@ skill.prototype.validateSkill=function(){
             alert("Please enter skill");
             return;
            	  }
- 	   else if(training==""){
- 	    	alert("Please enter trainingAttended");
- 	    	 return;
- 	     }
+ 	  
  	    
  	    else if(rating==""){
-            alert("Please enter Rating");
+            alert("Please Select Rating");
             return;
             	  }
   	   else if(!(skill.match(regex))){
@@ -116,21 +124,8 @@ skill.prototype.validateSkill=function(){
  		   alert("Please enter only numbers for EmployeeID");
  		  return;
  	   }
- 	   else if(!(rating.match(num))){
- 		  alert("Please enter only numbers for Rating");
- 		 return;
- 	   }
- 	  /*else  if(rating.length>2){
- 		    alert("Enter only two digits ");
- 		    return;
- 		   }*/
- 	  else if(!(rating>0 && rating<=10)){
- 		  alert("Enter rating between 1 to 10");
- 		  return;
- 	  }
- 		  
- 		 
-	
+ 	 
+ 	 
 	 	  var input={"payload":{"skills":$('#skill').val(),"trainingAttended":$('#attended1').val(),
 			"empId":$('#empid').val(),"rating":$('#rating').val(),
 			  
@@ -214,7 +209,7 @@ skill.prototype.EditEmployeeskillsById=function(obj1){
 	  var rating= $("#rating").val();
 	   
 		
-		if(skill=="" && training=="" && empId=="" && rating=="" ){
+		if(skill=="" && empId=="" && rating=="" ){
 			 alert("Please enter Employee Id");
 			 return;
 		 }
@@ -231,13 +226,13 @@ skill.prototype.EditEmployeeskillsById=function(obj1){
            alert("Please enter skill");
            return;
           	  }
-	   else if(training==""){
+	  /* else if(training==""){
 	    	alert("Please enter trainingAttended");
 	    	 return;
-	     }
+	     }*/
 	    
 	    else if(rating==""){
-           alert("Please enter Rating");
+           alert("Please Select Rating");
            return;
            	  }
  	   else if(!(skill.match(regex))){
@@ -248,20 +243,20 @@ skill.prototype.EditEmployeeskillsById=function(obj1){
 		   alert("Please enter only numbers for EmployeeID");
 		  return;
 	   }
-	   else if(!(rating.match(num))){
+	  /* else if(!(rating.match(num))){
 		  alert("Please enter only numbers for Rating");
 		 return;
-	   }
+	   }*/
 	  /*else  if(rating.length>2){
 		    alert("Enter only two digits ");
 		    return;
 		   }*/
-	  else if(!(rating>0 && rating<=10)){
+	 /* else if(!(rating>0 && rating<=10)){
 		  alert("Enter rating between 1 to 10");
 		  return;
-	  }
+	  }*/
 		 
-	 else{
+	 else{  
 		 var input={"payload":{"id":obj1,"skills":$('#skill').val(),"trainingAttended":$('#attended1').val(),
 				"empId":$('#empid').val(),"rating":$('#rating').val(),
 				}}; 

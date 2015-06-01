@@ -18,6 +18,18 @@ public class Template extends AbstractObject{
 		 private String subject;
 		 @Column(name = "content")
 		 private String content;
+		 
+		 
+ public Template(){
+			 
+		 }
+		 
+		 
+  public Template(long id,String name){
+	  
+	  super.setId(id);
+	  this.name=name;
+  }
 	     
 	 public int getFileId() {
 		return fileId;

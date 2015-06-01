@@ -36,7 +36,7 @@
 
 
     <!-- put everything in a temp folder with the right structure during the build -->
-    <property name="temp.dir" value="../temp"/>
+    <property name="temp.dir" value="../../temp"/>
     <property name="temp.dir.web-inf" value="${temp.dir}/WEB-INF"/>
     <property name="temp.dir.upload" value="${temp.dir}/upload"/>
     <property name="temp.dir.lib" value="${temp.dir.web-inf}/lib"/>
@@ -48,7 +48,7 @@
     <!--<property name="uploadbackup.dir" value="uploadbackup"></property>-->
 
 
-    <property name="temp.dir.classes.woa" value="../tempclasses"/>
+    <property name="temp.dir.classes.woa" value="../../tempclasses"/>
     <property name="temp.dir.config" value="${temp.dir}/config"/>
     <property name="log.dir" value="../logs"/>
 

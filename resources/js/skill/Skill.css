@@ -114,5 +114,14 @@ font-family:calibri;
 td{
 	 word-wrap:break-word;
 }
+#back{
+	margin-bottom:1%;
+}
+#noteforrating{
+	margin-left:40%;
+	color:#D14719;
+	font-size:12px;
+	font-style: italic;
+}
 
 } 

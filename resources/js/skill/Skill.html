@@ -17,7 +17,7 @@
 
 <b>Employee Id<span class="red">*</span> &nbsp;</b> <input type="text" id="empid" readonly="true" size="22" onfocusout="empid()"  maxlength="15"/> 
 
-<b class="div">Training Attended<span class="red">*</span>&nbsp;&nbsp;</b><select id="attended1" style="width:18%">
+<b class="div">Training Attended &nbsp;&nbsp;</b><select id="attended1" style="width:18%">
 																					<option value="">Select </option>
 																					<option value="true">true</option>
 																					<option value="false">false</option> 
@@ -27,7 +27,27 @@
 </div>
 <div  class="div">
 <b>Skill<span class="red">*</span> </b><span class="inputelement1">&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;</span><input type="text" id="skill" size="22" maxlength="30" >
-<b class="div"> Rating<span class="red">*</span><span class="inputelement1"></span><span class="inputelement1"></span> &nbsp;&nbsp; </b> <input type="text"  maxlength="2" min="1" max="10" onfocusout="rating()" size="22" id="rating"/><br>
+<b class="div"> Rating<span class="red">*</span><span class="inputelement1"></span><span class="inputelement1"></span> &nbsp;&nbsp; </b><!--  <input type="text"  maxlength="2" min="1" max="10" onfocusout="rating()" size="22" id="rating"/> -->
+
+<select id="rating" style="width:18%">
+		<option value="">Select </option>
+		<option value="Learner">1</option>
+		<option value="Average">2</option> 
+		<option value="Good">3</option>
+		<option value="Excellent">4</option>
+		<option value="Proficient">5</option>
+</select><br><br>
+<div id="noteforrating">
+<p>Note: 1 - Learner</p><br>
+        <p>2 - Average</p><br>
+        <p>3 - Good</p><br>
+       <p> 4 -Excellent</p><br>
+       <p> 5 -Proficient</p>
+       </div>
+
+
+
+<br>
 <span class="e1" id="error1"> </span><span class="inputelement1"></span><span  class="e1" id="error2"></span><br> 
 </div>
 <div  class="div"><button  type="button" class="btn btn-primary btn-md" id="save1" >Save</button>
@@ -44,7 +64,8 @@
  </tr>
  </table>
 <div>
- <input type="button" value="Back" class="btn btn-primary btn-md" id="backskill"></div>
+ <input type="button" value="Back" class="btn btn-primary btn-md" id="back"></div>
+ 
   </body>
 </html>
  

@@ -112,9 +112,25 @@
                       <th  class="thviewEmployee"></th><td class="td"></td>
                 </tr>
             </table>
+             <table class="tableviewEmployee"  border="0">
+                <tr class="trviewEmployee">
+               <legend>
+                        <h3 class="heading">Skills</h3>
+                                </legend>
+                    <th class="thviewEmployee" >Skills</th>
+                    <td class="td">
+                        <textarea name="skill[]" id="skill" ReadOnly="true"></textarea>
+                    </td>
+                    <th class="thviewEmployee">Rating</th>
+                    <td class="td">
+                        <input type="text" name="rating[]" id="rating" ReadOnly="true">
+                    </td>
+                   
+                </tr>
+            </table>
 
 
-       
+       <div id="emphidden">
             <table class="tableviewEmployee"  border="0">
              <legend>
                     <h3 class="heading">Designation Details</h3>
@@ -146,32 +162,20 @@
                      <th  class="thviewEmployee"></th><td class="td"></td>
                 </tr>
             </table>
-
-     
-            <table class="tableviewEmployee"  border="0">
-                <tr class="trviewEmployee">
-               <legend>
-                        <h3 class="heading">Skills</h3>
-                                </legend>
-                    <th class="thviewEmployee" >Skills</th>
-                    <td class="td">
-                        <textarea name="skill[]" id="skill" ReadOnly="true"></textarea>
-                    </td>
-                    <th class="thviewEmployee">Rating</th>
-                    <td class="td">
-                        <input type="text" name="rating[]" id="rating" ReadOnly="true">
-                    </td>
-                   
-                </tr>
-            </table>
+        </div>     
+           
      
         
         <p id="senddesgname" style="display:none"></p><p id="senddoj" style="display:none"></p>
   </div>
   <div>
         <input type=button value="Back" id="back" class="btn btn-primary btn-md"/>
-		 <a href="#employee/viewEmployee/editEmpoyeeDetails"><input type=button value="Edit Details" id="Editdetails" class="editviewEmployee btn btn-primary btn-md"/></a>
-		<a href="#employee/viewEmployee/changeEmployeeDesignationDetails"><input type="button" value="Change Designation" id="Editdesgn"  class="editviewEmployee btn btn-primary btn-md"/></a>
-		  <a href="#employee/viewEmployee/editEmployeeSkillDetails"><input type="button" value="Edit Skills" id="Editskills"  class="editviewEmployee btn btn-primary btn-md"/></a>
+        <input type=button value="Edit Details" id="Editempdetails" class=" editviewEmployee btn btn-primary btn-md"/>
+        <input type=button value="Change Password" id="changepwd" class="editviewEmployee  btn btn-primary btn-md"/>
+         <input type="button" value="Edit Skills" id="Editempskills"  class="editviewEmployee btn btn-primary btn-md"/>
+        <input type="button" value="Edit Skills" id="Editskills"  class="editviewEmployee btn btn-primary btn-md"/>
+		<input type=button value="Edit Details" id="Editdetails" class="editviewEmployee btn btn-primary btn-md"/>
+		<input type="button" value="Change Designation" id="Editdesgn"  class="editviewEmployee btn btn-primary btn-md"/>
+		
 		 </div>
   

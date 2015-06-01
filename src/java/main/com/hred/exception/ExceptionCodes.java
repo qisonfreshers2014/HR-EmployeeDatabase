@@ -373,4 +373,6 @@ public interface ExceptionCodes {
 	public static final int INVALID_OLD_PASSWORD = 9023;
 	
 	public static final int SELECT_ATLEAST_ONE_FIELD = 9025;
+	public static final int DESIGNATION_TYPE_DOES_NOT_EXIST = 9026;
+	public static final int PLEASE_ENTER_DESIGNATION_TYPE = 9027;
 	}

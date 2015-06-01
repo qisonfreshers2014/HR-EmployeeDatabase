@@ -71,6 +71,7 @@ RequestManager.prototype.getNotificationDisplayCriteria=function(data,callback){
  RequestManager.prototype.addTemplate = function(data, callback) {
   this.sendToServer('template/save', data, callback);
  }
+
 RequestManager.prototype.viewEmployeedatails = function(data, callback) {
   this.sendToServer('employee/viewEmployee', data, callback);
  }
@@ -199,7 +200,17 @@ RequestManager.prototype.getSearchEmp=function(data,callback){
  RequestManager.prototype.updateDesignationDetails=function(data,callback){
 	 this.sendToServer('employee/updateDesignation', data, callback);
 } 
+ RequestManager.prototype.addDesignationType = function(data, callback) {
+	  this.sendToServer('designationtype/save', data, callback);
+	 }
  
- 
+ RequestManager.prototype.getDesignationTypes = function(data, callback) {
+	  this.sendToServer('designationtype/getDesignationTypes', data, callback);
+	 }
+
+ RequestManager.prototype.deleteDesignationType = function(data, callback) {
+	  this.sendToServer('designationtype/deleteDesignationType', data, callback);
+	 }
+
 
 var RequestManager = new RequestManager();

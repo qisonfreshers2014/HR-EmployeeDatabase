@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
@@ -140,12 +141,12 @@ public class TemplateDAOimpl extends BaseDAOImpl implements TemplateDAO {
 		session = SessionFactoryUtil.getInstance().openSession();
 		tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 		}
-		Criteria createCriteria = session.createCriteria(Template.class);
-		 
-		//createCriteria.add(Restrictions.eq("id", employee.getId()));
-		 
-		//createCriteria.add(Restrictions.eq("isDeleted",false));
-		list = (List<Template>)createCriteria.list();
+		
+		String hql="select new Template(id,name) from Template";
+		
+		Query query = session.createQuery(hql);
+		
+		list =query.list();
 		 } finally {
 		try {
 		if (tx != null) {
