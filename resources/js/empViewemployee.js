@@ -16,14 +16,14 @@ empViewemployee.prototype.handleShow = function(employeeId) {
     this.empviewEmployee(employeeId);
  
  $('#Editempdetails').click(function(){
- 
- App.loadEditEmp(employeeId);
+   routie("employeeedit");
+
 }.ctx(this));
 
  
   $('#changepwd').click(function(){
-	 
-	 App.loadchangePassword(employeeId);
+	 routie("changepassword");
+	
 	}.ctx(this));
 }
 
@@ -38,7 +38,7 @@ empViewemployee.prototype.empviewEmployee=function(employeeId){
     var byear = dobformat.getFullYear();
     var bmonth = dobformat.getMonth()+1;
     var bdate = dobformat.getDate();
-    var hr=false;
+     var hr=false;
     $('#Editempskills').click(function(){
  	   App.loadSkill(employeeId,hr);
  	  }.ctx(this));

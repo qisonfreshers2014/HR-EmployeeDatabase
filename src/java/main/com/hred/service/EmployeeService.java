@@ -28,6 +28,7 @@ import com.hred.pagination.PaginationOutput;
 import com.hred.service.annotations.RestService;
 import com.hred.service.annotations.ServiceStatus;
 import com.hred.service.annotations.UnSecure;
+import com.hred.service.common.ServiceRequestContextHolder;
 import com.hred.service.common.WebserviceRequest;
 import com.hred.service.descriptors.input.ChangePassword;
 import com.hred.service.descriptors.input.EmployeeSearchInputDescriptor;
@@ -74,6 +75,38 @@ public class EmployeeService extends BaseService {
 		return JsonUtil.getJsonBasedOnDescriptor(output,
 				AuthenticationOutput.class);
 	}
+	
+	@POST
+	@RestService(input = String.class, output = String.class)
+	@ServiceStatus(value = "complete")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/getLoggedInUserDetails")
+	
+	public String getLoggedInUserDetails(@Context HttpHeaders headers, @Context UriInfo uriInfo,
+			WebserviceRequest request) throws ObjectNotFoundException,
+			BusinessException, EncryptionException {
+
+		long userId = ServiceRequestContextHolder.getContext().getUserSessionToken().getUserId();
+		System.out.println("**********************"+userId);
+
+		 Employee employees = (Employee) EmployeeHandler
+				    .getInstance().getLoggedInUser(userId);
+		 return JsonUtil.getJsonBasedOnDescriptor(employees, Employee.class);
+	}
+	
+	@POST
+	@RestService(input = String.class, output = String.class)
+	@ServiceStatus(value = "complete")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/isloggedin")
+	public String isUserLoggedIn(@Context HttpHeaders headers,
+			@Context UriInfo uriInfo, WebserviceRequest request) {
+		return JsonUtil.getJsonBasedOnDescriptor(Boolean.TRUE, Boolean.class);
+	}
+	
+
 
 	@POST
 	@RestService(input = String.class, output = String.class)

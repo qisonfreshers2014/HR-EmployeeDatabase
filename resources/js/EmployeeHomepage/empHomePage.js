@@ -18,43 +18,39 @@ empHomePage.prototype.handleShow = function() {
  
  $('#hr').click(function(event){
   
-  App.loadHRHomeHeader(App.userName);
-  App.loadHRHomePage();
-  App.loadHRHomeFooter();
+	 routie('employee');
  });
  
  
  
  $('#myProfile').click(function(event){
  
-	App.loadempviewemployee(App.employeeId);
+	 routie('myprofile');
  });
  
  
  
  $('#holiday').click(function(event){
   
-  App.loadEmployeeHoliday();
+	 routie('hrholiday');
  });
  
  
  
  $('#hrpolicy').click(function(event){
   
-	 App.listEmployeePolicy(); 
+	 routie('hrPolicies');
  });
  
  $('#Allhandsmeeting').click(function(event){
 	  
-	 App.loadempAllhands(); 
+	 routie('empAllhands');
  });
  
  
  $('#homeEmployee').click(function(event){
 	  
-	 App.loadEmployeePage(App.userName,App.hr,App.isDeleted);
-	    App.loadFooter();
-	    App.loadEmployee(App.gender,App.contactNo,App.employeeId); 
+	 routie("home");
  });
  
  

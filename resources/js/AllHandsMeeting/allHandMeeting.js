@@ -15,7 +15,7 @@ $('#saveAllHand').click(function(){
 }.ctx(this));
 $('#back').click(function(){
 	
-	App.loadAllHandsMeeting();
+	routie("allHandsMeeting");
 	}.ctx(this));
 
 

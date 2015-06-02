@@ -14,7 +14,7 @@ EditEmployee.prototype.handleShow = function(employeeId) {
 	}.ctx(this));
 	 $('#back').click(function(){
 			
-			App.loadempviewemployee(employeeId);
+			routie("myprofile");
 		}.ctx(this));
 }
 EditEmployee.prototype.validateEditEmp = function(employeeId) {

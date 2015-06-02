@@ -10,7 +10,7 @@ viewAllHandsMeeting.prototype.handleShow = function() {
 	this.getAllHandsMeeting();
 $('#add').click(function(){
 
-	this.addAllHandsMeeting();
+	routie("addallHandsMeeting");
 
 
 }.ctx(this));
@@ -57,10 +57,7 @@ viewAllHandsMeeting.prototype.getAllHandsMeeting=function(){
 
 }
 
-viewAllHandsMeeting.prototype.addAllHandsMeeting=function(){
-	App.loadAllhandmeeting();
-
-	}
+	
 viewAllHandsMeeting.prototype.editAllHandsMeeting=function(dataid){
 
 	App.loadAllhandmeetings(dataid);

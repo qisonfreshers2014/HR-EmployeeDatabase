@@ -15,13 +15,14 @@ employeeList.prototype.handleShow = function() {
 	    }.ctx(this));
  
  $('#filter').click(function(){
-  App.loadFilter();
+ 
+	 routie("filteremployee");
  
  }.ctx(this));
  
  $('#empadd').click(function(){
  
-  App.loadEmpl();
+ routie("addemployee");
   
  }.ctx(this));
 
@@ -143,7 +144,7 @@ employeeList.prototype.tableDisplay = function(content,status,desdata) {
   
   $('#employeelist').append('<table><tbody></tbody></table>');
   $('#employeelist tr:last').after(
-    "<tr class='info'><td><a href='#employee/viewEmployee' class='viewindividual' id='"+obj.employeeId+"'>" + obj.employeeId
+    "<tr class='info'><td><a href='#employee' class='viewindividual' id='"+obj.employeeId+"'>" + obj.employeeId
       + "</a></td>" + "<td>" + obj.employeeName + "</td>"
       + "<td>"+byear+"-"+bmonth+"-"+bdate+"</td>" + "<td>"
       +jyear+"-"+jmonth+"-"+jdate+ "</td>" + "<td>" + obj.contactNo
@@ -198,7 +199,7 @@ employeeList.prototype.searchOperation = function(data,desdata){
   
   
            content += '<tr>';
-              content += '<td><a href="#employee/viewEmployee" class="viewindividual" id="'+obj.employeeId+'">' + obj.employeeId+ '</a></td>';
+              content += '<td><a href="#employee" class="viewindividual" id="'+obj.employeeId+'">' + obj.employeeId+ '</a></td>';
               content += '<td>' + obj.employeeName + '</td>';
               content += '<td>' +byear+"-"+bmonth+"-"+bdate+'</td>';
               content += '<td>' +jyear+"-"+jmonth+"-"+jdate+'</td>';

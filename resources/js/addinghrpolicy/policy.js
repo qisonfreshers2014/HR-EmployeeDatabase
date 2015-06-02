@@ -10,7 +10,7 @@ policyList.prototype.handleShow = function() {
 	
 	$('#addPolicy').click(function(){
 		  
-		  App.loadPolicy();
+		 routie("addpolicy");
 		 }.ctx(this));
 	
 	var contentinput = {"payload":{} };

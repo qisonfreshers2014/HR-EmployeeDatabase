@@ -61,7 +61,7 @@ RequestManager.viewEmployeedatails(input, function(data, success) {
    var dojyear = dojformat.getFullYear();
    var dojmonth = dojformat.getMonth()+1;
    var dojdate = dojformat.getDate();
-  var hr=true;
+   var hr=true;
    $('#Editskills').click(function(){
 	   App.loadSkill(empid,hr);
 	  }.ctx(this));

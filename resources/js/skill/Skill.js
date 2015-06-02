@@ -30,17 +30,14 @@ skill.prototype.handleShow = function(empid,hr) {
 			}.ctx(this));
 
 	$('#back').click(function() { 
-		  
+		 
 		if(hr==true){
 		App.loadViewEmployee(empid);
 		}else{
 			App.loadempviewemployee(empid);
 		}
 	}.ctx(this));
-	
-	
-	
-	
+		
 }
 
 
@@ -226,10 +223,6 @@ skill.prototype.EditEmployeeskillsById=function(obj1){
            alert("Please enter skill");
            return;
           	  }
-	  /* else if(training==""){
-	    	alert("Please enter trainingAttended");
-	    	 return;
-	     }*/
 	    
 	    else if(rating==""){
            alert("Please Select Rating");
@@ -243,18 +236,7 @@ skill.prototype.EditEmployeeskillsById=function(obj1){
 		   alert("Please enter only numbers for EmployeeID");
 		  return;
 	   }
-	  /* else if(!(rating.match(num))){
-		  alert("Please enter only numbers for Rating");
-		 return;
-	   }*/
-	  /*else  if(rating.length>2){
-		    alert("Enter only two digits ");
-		    return;
-		   }*/
-	 /* else if(!(rating>0 && rating<=10)){
-		  alert("Enter rating between 1 to 10");
-		  return;
-	  }*/
+	 
 		 
 	 else{  
 		 var input={"payload":{"id":obj1,"skills":$('#skill').val(),"trainingAttended":$('#attended1').val(),

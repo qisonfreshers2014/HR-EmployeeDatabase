@@ -913,6 +913,41 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 		return null;
 	}
 
+	@Override
+	public Employee getLoggedInUser(long userId) throws EmployeeException {
+		 Session session = null;
+	     List<Employee> list = null;
+	     Transaction tx = null;
+	     try {
+	      session = getSession();
+	      if (null == session) {
+	       session = SessionFactoryUtil.getInstance().openSession();
+	       tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+	      }
+	      Criteria createCriteria = session.createCriteria(Employee.class);
+	      /*String hql="from Employee where id="+id+"";  
+	      org.hibernate.Query query = session.createQuery(hql);
+	       list  = query.list();*/
+	      createCriteria.add(Restrictions.eq("id", userId));
+	      list = createCriteria.list();
+	      if (list.size() == 0) {
+	       throw new EmployeeException(ExceptionCodes.EMPLOYEE_DOESNOT_EXIST, ExceptionMessages.EMPLOYEE_DOESNOT_EXIST);
+	        } 
+	     }finally {
+	        try {
+	         if (tx != null) {
+	          tx.commit();
+	          if (session.isConnected())
+	           session.close();
+	         }
+	        } catch (HibernateException e) {
+
+	         e.printStackTrace();
+	        }
+	        }
+	       return list.iterator().next();
+	}
+
 	 /*@Override
 	 public Paginator<NotificationPaginationInput> getEmployeesPaginated(
 			 NotificationPaginationInput employee) {

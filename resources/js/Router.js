@@ -5,9 +5,8 @@ function Router() {
 }
 
 Router.prototype.handleShow = function(callBack) {
-	App.loadHeader();
-	
-	App.whiteLabelConfigs();
+	App.loadEmployeePage(App.userName,App.hr,App.isDeleted);
+	//App.whiteLabelConfigs();
 	/*if (getParameterByName("action") == "resetPassword") {
 		Loader.loadResetPassword(function() {
 			setTimeout('new ResetPassword(getParameterByName("resetPasswordToken"))', 1000);
@@ -20,57 +19,95 @@ Router.prototype.routeManager = function() {
 	var self = this;
 	routie({
 	    '': function() {
-	    	//$('#contentRegion').empty();
-	    	App.loadRightPanel();
-	    	App.loadIndexFiles();
+	    	routie("home");
 	    },
 	    'home': function() {
-	    	App.reloadIndex();
+	    	//App.loadEmployeePage(App.userName,App.hr,App.isDeleted);
+	    	 App.loadEmployee(App.gender,App.contactNo,App.employeeId);
 	    },
-		'category/:categoryId/:engagementModel/:pageNo/:pageSize/:tag?': function(categoryId, engagementModel, pageNo, pageSize, tag) {
-			self.routeCategories(categoryId, engagementModel, pageNo, pageSize, tag);
+		'myprofile': function() {
+			//App.loadEmployeePage(App.userName,App.hr,App.isDeleted);
+			App.loadempviewemployee(App.employeeId);
 	    },
-	    'pollCategory/:pageNo/:pageSize': function(pageNo, pageSize) {
-	    	self.routePollCategories(pageNo, pageSize);
+	    'hrholiday': function() {
+	    	//App.loadEmployeePage(App.userName,App.hr,App.isDeleted);
+	    	App.loadEmployeeHoliday();
 	    },
-	    'article/:id/:categoryId/:selectedCommentId/:rightPanelCommentReplyFlag/:reload': function(id, categoryId, selectedCommentId, rightPanelCommentReplyFlag, reload) {
-	    	self.routeArticles(id, categoryId,selectedCommentId, rightPanelCommentReplyFlag, reload);
+	    'hrPolicies': function() {
+	    	//App.loadEmployeePage(App.userName,App.hr,App.isDeleted);
+	    	 App.listEmployeePolicy(); 
 	    },
-	    'tagItems/:tagName': function(tagName) {
-	    	self.routeTagItems(tagName);
+	    'empAllhands': function() {
+	    	//App.loadEmployeePage(App.userName,App.hr,App.isDeleted);
+	    	 App.loadempAllhands(); 
 	    },
-	    'marker/:markerId/:pageNo/:pageSize': function(markerId, pageNo, pageSize) {
-	    	self.routeMarkerItems(markerId, pageNo, pageSize);
+	    'employeeedit': function() {
+	    	 App.loadEditEmp(App.employeeId);
 	    },
-	    'poll/:pollId': function(pollId) {
-	    	self.routePolls(pollId)
+	   
+	    'changepassword': function() {
+	    	 App.loadchangePassword(App.employeeId);
 	    },
-	    'myAccount': function() {
-	    	App.MyAccount()
+	   
+
+	    'employee': function() {
+	    	App.loadHRHomeHeader(App.userName);
+	    	App.listEmployee();
 	    },
-	    'pollResult/:pollId': function(pollId) {
-	    	self.routePollResults(pollId)
+	    'addemployee': function() {
+	    	App.loadHRHomeHeader(App.userName);
+	    	  App.loadEmpl();
+	    },
+	    'filteremployee': function() {
+	    	App.loadHRHomeHeader(App.userName);
+	    	 App.loadFilter();
+	    },
+	    'holiday': function() {
+	    	App.loadHRHomeHeader(App.userName);
+	    	  App.loadHoliday();
+	    },
+	    'hrpolicy': function() {
+	    	App.loadHRHomeHeader(App.userName);
+	    	  App.listPolicy();
 		},
-		'staticContent/:staticContentId': function(staticContentId) {
-			App.loadStaticPage(null, staticContentId);
+		'addpolicy': function() {
+	    	App.loadHRHomeHeader(App.userName);
+	    	 App.loadPolicy();
 		},
-		'login' : function() {
-			App.reloadIndex(function() {
-				if(App.communtyType == 1) {
-					$('#loginModal').modal('show');
-					$('.user_email').val('');
-					$('.user_password').val('');
-					$('.alert-success').show();
-					$('.successMsg').text(Message.get('common.pwdchangedmsg.message'));
-				} else {
-					$('.loginPanel').show();
-					$('.userEmail').val('');
-					$('.userPassword').val('');
-					$('.login .alert-success').show();
-					$('.login .successMsg').text(Message.get('common.pwdchangedmsg.message'));
-				}
+		'template': function() {
+	    	App.loadHRHomeHeader(App.userName);
+	    	App.loadtemplateList();
+	    },
+	    'addtemplate': function() {
+	    	App.loadHRHomeHeader(App.userName);
+	    	App.loadAddTemplate();
+	    },
+		'notifications': function() {
+			App.loadHRHomeHeader(App.userName);
+			var input={};
+			RequestManager.getAllEvents(input, function(data, success) {
+				if (success) {		
+				
+									App.loadNotificationHomePage(data);
+						}
+			else
+				{
+				App.loadNotificationHomePage(data);
+				alert("No Data Found");
+						}
 			});
-		}
+		},
+		
+		'allHandsMeeting': function() {
+			App.loadHRHomeHeader(App.userName);
+			 App.loadAllHandsMeeting();
+	    },
+	    'addallHandsMeeting': function() {
+			App.loadHRHomeHeader(App.userName);
+			App.loadAllhandmeeting();
+	    },
+	   
+	    
 	});
 }
 

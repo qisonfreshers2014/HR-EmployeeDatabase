@@ -36,11 +36,10 @@ Login.prototype.handleShow = function() {
        var employeeId=data.employeeDetails.employeeId;
        var hr=data.roleHr;
        var isDeleted=data.employeeDetails.isDeleted;
-    App.loadEmployeePage(name,hr,isDeleted);
-    App.loadFooter();
-    App.loadEmployee(gender,contactNo,employeeId);
-   // App.loadempviewemployee(employeeId);
-    //App.loadTemplate();
+       App.loadRouter(name, hr,isDeleted,gender, contactNo,employeeId,function(){
+    	   new Router();
+       });
+       
    }
    else alert(data.message);
   }.ctx(this));
@@ -134,4 +133,4 @@ Login.prototype.handleShow = function() {
   return isValid; 
  }
 
-var Login= new Login();
+//var Login= new Login();

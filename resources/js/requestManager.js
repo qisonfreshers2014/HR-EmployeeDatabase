@@ -211,6 +211,12 @@ RequestManager.prototype.getSearchEmp=function(data,callback){
  RequestManager.prototype.deleteDesignationType = function(data, callback) {
 	  this.sendToServer('designationtype/deleteDesignationType', data, callback);
 	 }
+ RequestManager.prototype.getLoggedInUserDetails=function(data,callback){
+	 this.sendToServer('employee/getLoggedInUserDetails', data, callback);
+} 
+ RequestManager.prototype.isLoggedin=function(data,callback){
+	 this.sendToServer('employee/isloggedin', data, callback);
+	}
 
 
 var RequestManager = new RequestManager();

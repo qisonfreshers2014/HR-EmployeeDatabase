@@ -91,7 +91,7 @@ AddEmployee.prototype.handleShow = function() {
 		changeMonth : true,
 		changeYear : true,
 		showAnim : 'drop',
-		minDate : new Date(1980, 12, 31),
+		minDate : new Date(1960, 12, 31),
 		maxDate : new Date(1994, 12, 31)
 	})
 
@@ -120,8 +120,7 @@ AddEmployee.prototype.handleShow = function() {
 
 	}.ctx(this));
 $('#back').click(function(){
-		
-		App.listEmployee();
+		routie("employee");
 	}.ctx(this));
 
 	$('#reset').click(function(e) {
@@ -184,14 +183,15 @@ AddEmployee.prototype.uploadMedia = function(callback) {
 
 // validating each employee field
 AddEmployee.prototype.validateEmp = function() {
-	var char = /^[A-Za-z]+( [A-Za-z]+)*$/;
+	var char = /^[A-Za-z .]+( [A-Za-z]+)*$/;
 	var qual = /^[A-Za-z]+(.[A-Za-z]+)*$/;
 	var skp = /^[A-Za-z0-9]+(.[A-Za-z0-9]+)*$/;
 	var sklr = /^[A-Za-z0-9]+(,.[A-Za-z0-9]+)*$/;
 	var num = /^[0-9]+$/;
 	var mail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 	var illegalChars = /\W/
-	var letters = /^[0-9a-zA-Z]+$/;
+	var letters = "^[a-zA-Z0-9-]*$";
+	var exprnce= /^[0-9.]+$/;
 	// var pfchar = /^[0-9]+(/[0-9]+)*$/;
 	var err = $("#eiderr");
 	var eid = $("#eid").val();
@@ -304,7 +304,7 @@ AddEmployee.prototype.validateEmp = function() {
 		$(blodderr).text("Please enter a valid blood group ex:AB+, AB-");
 		$(blodderr).css("color", "red");
 	} else if (!(blood.length < 4)) {
-		$(blodderr).text("Please enter 3 char only");
+		$(blodderr).text("Please enter 3 characters only");
 		$(blodderr).css("color", "red");
 	} else {
 		$(blodderr).text("");
@@ -316,8 +316,8 @@ AddEmployee.prototype.validateEmp = function() {
 	if (eid == "") {
 		$(err).text("Required field");
 		$(err).css("color", "red");
-	} else if (!(eid.match(num) || eid == isNaN)) {
-		$(err).text("EID accepts numbers only");
+	} else if (!(eid.match(letters))) {
+		$(err).text("EID accepts numbers and characters only");
 		$(err).css("color", "red");
 	} else {
 		$(err).text("");
@@ -405,7 +405,7 @@ AddEmployee.prototype.validateEmp = function() {
 	}
 	if (pfnum == "") {
 		$(pferr).text("");
-	} else if (pfnum == isNaN || !(pfnum.match(num))) {
+	} else if (!(pfnum.match(letters))) {
 		$(pferr).text("Please enter a valid pf number");
 		$(pferr).css("color", "red");
 	} else if (!(pfnum.length == 16)) {
@@ -465,7 +465,7 @@ AddEmployee.prototype.validateEmp = function() {
 	if (txtemname == "") {
 		$(emnameerr).text("Required field");
 		$(emnameerr).css("color", "red");
-	} else if (txtemname.charAt(0) == " ") {
+	}else if (txtemname.charAt(0) == " ") {
 		$(emnameerr).text("First letter shouldn't be space");
 		$(emnameerr).css("color", "red");
 	} else if (!(txtemname.match(char) || txtemname == isNaN)) {
@@ -527,10 +527,10 @@ AddEmployee.prototype.validateEmp = function() {
 
 	}
 
-	if (relation == "") {
+	/*if (relation == "") {
 		$(relationerr).text("Required field");
 		$(relationerr).css("color", "red");
-	} else if (!(relation.match(char) || relation == isNaN)) {
+	}*/ if (!(relation.match(char))) {
 		$(relationerr).text("enter characters only");
 		$(relationerr).css("color", "red");
 	} else {
@@ -543,7 +543,7 @@ AddEmployee.prototype.validateEmp = function() {
 	if (yearexp == "") {
 		$(yearexperr).text("Required field");
 		$(yearexperr).css("color", "red");
-	} else if (yearexp == isNaN || !(yearexp.match(num))) {
+	} else if (!(yearexp.match(num))) {
 		$(yearexperr).text("Only numbers allowed");
 		$(yearexperr).css("color", "red");
 	}

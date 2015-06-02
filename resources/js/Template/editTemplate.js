@@ -23,7 +23,7 @@ editTemplate.prototype.handleShow=function(dataid){
 		 
  $('#back').click(function(){
 				
-			App.loadtemplateList();
+			routie("template");
 			}.ctx(this));
 	 
 }

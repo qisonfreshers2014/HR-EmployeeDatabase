@@ -65,6 +65,7 @@ public interface EmployeeDAO extends BaseDAO {
  public Boolean isEmployeeEmailExist(String email);
 
 Paginator<NotificationPaginationInput> getEmployeesPaginated(NotificationPaginationInput employee);
+public Employee getLoggedInUser(long userId) throws EmployeeException;
 
 	
 	

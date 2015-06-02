@@ -5,8 +5,10 @@ function hRHomePage() {
 }
 
 hRHomePage.prototype.handleShow = function() {
-	
-	
+	 App.listEmployee();
+	 $('#empadd').css("visibility","hidden");
+	 $('#filter').css("visibility","hidden");
+
 	$('.container').show();
 
 }

@@ -1,16 +1,56 @@
 function App() {
-
-	this.handleShow();
-}
-App.prototype.handleShow = function() {
 	this.userName = "";
 	this.jobRole = "";
 	this.contactNo = "";
 	this.gender = "";
 	this.employeeId = "";
 	 this.hr = "";
-	 this.isDeleted = "";
+	this.isDeleted = "";
+	this.handleShow();
 }
+App.prototype.handleShow = function() { 
+	
+	 var input={}
+		RequestManager.getLoggedInUserDetails(input,function(data,success){
+			if(success){
+				var obj=data;
+				
+			var employeeId=obj.employeeId;	
+			var	name=obj.employeeName;
+			var designation=obj.currentDesignation;
+			var isDeleted=obj.deleted;
+			var contactNo=obj.contactNo;
+			var gender=obj.gender;
+			var hr;
+			if(designation==5){
+				hr=true;
+			}else{
+				hr=false;
+			}
+			
+			App.loadRouter(name, hr,isDeleted,gender, contactNo,employeeId,function(){
+				new Router();
+			});
+			}else{
+				
+				new Login();
+			}
+			
+		}.ctx(this));
+    //this.routing();
+}
+
+App.prototype.routing=function(){
+	
+	 var input={};
+	 
+    RequestManager.isLoggedin(input, function(data,success){
+  	  if(success){
+  	   new Router();
+  	  }  
+  	 }.ctx(this));
+}
+
 
 App.prototype.loadTemplate = function(dataid) {
 	 Loader.loadTemplate();
@@ -74,9 +114,9 @@ App.prototype.loadFilter = function(cb) {
 		new FilterEmp(cb);
 	});
 }
-App.prototype.loadSkill = function(empid,designation) {
+App.prototype.loadSkill = function(empid,hr) {
 	Loader.loadSkill(function() {
-		new skill(empid,designation);
+		new skill(empid,hr);
 	});
 }
 
@@ -139,17 +179,16 @@ App.prototype.loadAllhandmeeting = function() {
 		new allHandMeeting();
 	});
 }
-App.prototype.loadempAllhands= function() {
-	Loader.loadempAllhands(function() {
-		new empAllHands();
-	});
-}
 App.prototype.loadAllhandmeetings = function(dataid) {
 	Loader.loadAllhandmeetings(function() {
 		new editHandMeeting(dataid);
 	});
 }
-
+App.prototype.loadempAllhands= function() {
+	Loader.loadempAllhands(function() {
+		new empAllHands();
+	});
+}
 App.prototype.loadHRHomeHeader = function(name) {
 	this.userName = name;
 	Loader.loadHRHomeHeader();
@@ -191,4 +230,14 @@ App.prototype.loadchangePassword = function(employeeId) {
 		new changePassword(employeeId);
 	});
 }
+App.prototype.loadRouter= function(name, hr,isDeleted,gender, contactNo,employeeId,callback) {
+	 this.userName = name;
+	 this.hr = hr;
+	 this.isDeleted=isDeleted;
+	 this.gender = gender;
+	 this.contactNo = contactNo;
+	 this.employeeId=employeeId;
+	 callback();
+	}
+
 var App = new App();

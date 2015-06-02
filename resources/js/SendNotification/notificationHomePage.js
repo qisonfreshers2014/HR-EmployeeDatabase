@@ -39,7 +39,6 @@ loadNotificationHomePage.prototype.handleShow = function(data) {
 
 	});
 
-
 	$("#eventsNotification").change(function() {
 		var selectedEvent = $("#eventsNotification").val();
 		var input = {

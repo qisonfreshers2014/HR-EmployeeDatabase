@@ -24,7 +24,7 @@ addpolicy.prototype.handleShow = function() {
 	
 	 $('#back').click(function(){
 			
-		 App.listPolicy();
+		routie("hrpolicy");
 		}.ctx(this));
 }
 

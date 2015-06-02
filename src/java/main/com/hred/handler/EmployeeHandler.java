@@ -94,20 +94,28 @@ public class EmployeeHandler extends AbstractHandler {
 				.getEmployeeDAO();
 		employee = (Employee) empDAOImpl.viewEmployee(EmployeeId);
 		EmployeeOutFile employeeout = new EmployeeOutFile(employee);
-
+     
+		
+		
 		if (employee.getFileId() != 0) {
 			File file = FileHandler.getInstance().getFile(employee.getFileId());
 			String image = "<img src='" + path + file.getFilePath()
 					+ "' height='150' width='150'>";
 			employeeout.setFilePath(image);
+			
+			System.out.println("file path is"+file.getFilePath());
+		
 		}
 		List<Skills> skill = SkillsHandler.getInstance().getSkillsById(
 				EmployeeId);
 		String finalSkills = employee.getSkill();
+		String finalRatings=employee.getRating();
 		for (Skills sk : skill) {
 
 			finalSkills += " , " + sk.getSkills();
+			finalRatings +=" , " +sk.getRating();
 		}
+		
 
 		List<DesignationType> desg = DesignationHistoryHandler.getInstance()
 				.getDesignationNameAOP(desgn);
@@ -120,10 +128,10 @@ public class EmployeeHandler extends AbstractHandler {
 
 			}
 		}
-
+   System.out.println(finalRatings);
 		employeeout.setDesignationName(desgName);
-
 		employeeout.setSkill(finalSkills);
+		employeeout.setRating(finalRatings);
 		return employeeout;
 
 	}
@@ -297,12 +305,12 @@ public class EmployeeHandler extends AbstractHandler {
 					ExceptionMessages.EMPLOYEE_CURRENTADDR_NOT_EMPTY);
 		}
 
-		if (emercontname == null || emercontname.isEmpty()) {
+		/*if (emercontname == null || emercontname.isEmpty()) {
 			throw new EmployeeException(
 					ExceptionCodes.EMPLOYEE_EMERNAME_NOT_EMPTY,
 					ExceptionMessages.EMPLOYEE_EMERNAME_NOT_EMPTY);
 		}
-
+*/
 		if (emercontnum == 0) {
 			throw new EmployeeException(
 					ExceptionCodes.EMPLOYEE_EMERNUM_NOT_EMPTY,
@@ -826,5 +834,14 @@ public class EmployeeHandler extends AbstractHandler {
 				paginator, employee.getPageNo(), employee.getPageSize());
 
 		return empPaginationOutput;
+	}
+
+	public Employee getLoggedInUser(long userId) throws EmployeeException {
+		Employee employee = null;
+		EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
+				.getEmployeeDAO();
+		employee = (Employee) empDAOImpl.getLoggedInUser(userId);
+
+		return employee;
 	}
 }

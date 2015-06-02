@@ -109,6 +109,10 @@ Loader.prototype.loadempAllhands=function(cb){
 	 LazyLoad.css('resources/js/AllCss/allHand&editTemplate&home.css');
 	 LazyLoad.js('resources/js/AllHandsMeeting/empAllHands.js', cb);
 }
+Loader.prototype.loadempAllhands=function(cb){
+	 LazyLoad.css('resources/js/AllCss/allHand&editTemplate&home.css');
+	 LazyLoad.js('resources/js/AllHandsMeeting/empAllHands.js', cb);
+}
 Loader.prototype.loadAllhandmeetings = function (cb) {
 
  LazyLoad.css('resources/js/AllCss/allHand&editTemplate&home.css');

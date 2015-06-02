@@ -5,7 +5,7 @@ function hRHomeHeader() {
 }
 
 hRHomeHeader.prototype.handleShow = function() {
-	 App.listEmployee();
+	
  $('.empName').text(App.userName);
  $('.container').show();
 
@@ -16,43 +16,29 @@ hRHomeHeader.prototype.handleShow = function() {
 	})
 
  $('#template').click(function(){
- App.loadtemplateList();
+routie("template");
  }.ctx(this));
 
  
  $('#hrpolicy').click(function(){
-  App.listPolicy();
+	 routie("hrpolicy");
     }.ctx(this));
  
  $('#holiday').click(function(){
-  App.loadHoliday();
+	 routie("holiday");
     }.ctx(this));
  
  $('#emp').click(function(){
-  App.listEmployee();
+	 routie("employee");
     }.ctx(this));
  
  
  $('#notifications').click(function(){
-		var input={};
-		RequestManager.getAllEvents(input, function(data, success) {
-			if (success) {		
-			
-								App.loadNotificationHomePage(data);
-					}
-		else
-			{
-			App.loadNotificationHomePage(data);
-			alert("No Data Found");
-					}
-		
-		}
-		
-		);
+	 routie("notifications");
     }.ctx(this));
  
  $('#allHandsMeeting').click(function(){
-  App.loadAllHandsMeeting();
+	 routie("allHandsMeeting");
     }.ctx(this));
  
  $('#logout1').click(function(event){
@@ -60,9 +46,8 @@ hRHomeHeader.prototype.handleShow = function() {
 	 }.ctx(this));
 	  
  $('#homeHr').click(function(){
-	  App.loadEmployeePage(App.userName,App.hr,App.isDeleted);
-	     App.loadFooter();
-	     App.loadEmployee(App.gender,App.contactNo,App.employeeId); 
+	 App.loadEmployeePage(App.userName,App.hr,App.isDeleted);
+	routie("home");
 	  }.ctx(this));
 
 }
