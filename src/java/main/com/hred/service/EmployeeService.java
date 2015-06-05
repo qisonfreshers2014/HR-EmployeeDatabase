@@ -23,6 +23,7 @@ import com.hred.model.Employee;
 import com.hred.model.FilterEmployee;
 import com.hred.model.user.AuthenticationInput;
 import com.hred.model.user.AuthenticationOutput;
+import com.hred.pagination.EmployeeListPaginationInput;
 import com.hred.pagination.NotificationPaginationInput;
 import com.hred.pagination.PaginationOutput;
 import com.hred.service.annotations.RestService;
@@ -33,6 +34,7 @@ import com.hred.service.common.WebserviceRequest;
 import com.hred.service.descriptors.input.ChangePassword;
 import com.hred.service.descriptors.input.EmployeeSearchInputDescriptor;
 import com.hred.service.descriptors.output.DisplayNotificationHome;
+import com.hred.service.descriptors.output.EmployeeListPaginationOutputDescriptor;
 import com.hred.service.descriptors.output.NotificationHomeFilterInputDiscriptor;
 import com.hred.service.descriptors.outputDescriptors.EmployeeListOutputDescriptors;
 
@@ -402,7 +404,7 @@ public class EmployeeService extends BaseService {
 
 				return JsonUtil.getJsonBasedOnDescriptor(output, Employee.class);
 			}	
-			 @POST
+			 /*@POST
 			 @RestService(input = String.class, output = String.class)
 			 @ServiceStatus(value = "complete")
 			 @Consumes(MediaType.APPLICATION_JSON)
@@ -420,6 +422,24 @@ public class EmployeeService extends BaseService {
 			  return JsonUtil.getJsonBasedOnDescriptor(employees,
 					  NotificationPaginationInput.class);
 			  // return outputString;
+			 }*/
+			 @POST
+			 @RestService(input = String.class, output = String.class)
+			 @ServiceStatus(value = "complete")
+			 @Consumes(MediaType.APPLICATION_JSON)
+			 @Produces(MediaType.APPLICATION_JSON)
+			 @Path("/getEmployeesListPaginated")
+			 @UnSecure
+			 public String getEmployeesPaginated(@Context HttpHeaders headers,
+			   @Context UriInfo uriInfo, WebserviceRequest request)
+			   throws ObjectNotFoundException, BusinessException,
+			   EncryptionException {
+			  EmployeeListPaginationInput employee = (EmployeeListPaginationInput) JsonUtil.getObject(
+			    request.getPayload(), EmployeeListPaginationInput.class);
+			  PaginationOutput<Employee> employees = EmployeeHandler.getInstance().getEmployeesListPaginated(employee);
+			  return JsonUtil.getJsonBasedOnDescriptor(employees,
+			     EmployeeListPaginationOutputDescriptor.class);
+			  
 			 }
-
+	
 }

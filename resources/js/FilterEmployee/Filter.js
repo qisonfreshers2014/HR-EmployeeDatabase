@@ -41,7 +41,7 @@ FilterEmp.prototype.handleShow = function(empid) {
 	}.ctx(this));
 
 	$('#backfilter').click(function() {
-		App.listEmployee();
+		routie("employee");
 	}.ctx(this));
 	
 	
@@ -182,7 +182,7 @@ if($('#dojFrom').val()!="" && $('#dojTo').val()==""){
 	  	
 	    }
 	    else{
-	   
+	          alert("No record found");
 	    	$('#displayData').html('<tr><th>Employee Id</th><th>Employee Name</th><th>Gender</th><th>DOB</th><th>DOJ</th><th>Email</th><th>Fathers Name</th><th>Designation</th><th>Highest Qualification</th><th>Skype Id</th><th>Contact No</th><th>Years Of Experience</th><th>Skills</th><th>View Details</th></tr>');
 	    	   
 			    $('#displayData tbody').empty();

@@ -35,12 +35,7 @@ AddEmployee.prototype.handleShow = function() {
 				 alert("New designation is succesfully added in the dropdown list");
 				
 			 }
-			 else if(data.code==9027){
-				 
-				  alert(data.message);
-			 }else{
-				 alert("failed to add new designation type");
-			 }
+		
 			 
 		 }.ctx(this));
 		 
@@ -543,8 +538,8 @@ AddEmployee.prototype.validateEmp = function() {
 	if (yearexp == "") {
 		$(yearexperr).text("Required field");
 		$(yearexperr).css("color", "red");
-	} else if (!(yearexp.match(num))) {
-		$(yearexperr).text("Only numbers allowed");
+	} else if (!(yearexp.match(exprnce))) {
+		$(yearexperr).text("Only numbers and dot are allowed");
 		$(yearexperr).css("color", "red");
 	}
 	/*
@@ -751,7 +746,7 @@ AddEmployee.prototype.validateEmp = function() {
 				$('#variable').val("");
 				$('#designation').val("");
 				$('#gender').val("");
-				App.listEmployee();
+				routie("employee");
 			} else if (data.code == 297) {
 
 				alert(data.message);

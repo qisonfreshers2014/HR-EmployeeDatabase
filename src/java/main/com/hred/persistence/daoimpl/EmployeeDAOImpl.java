@@ -26,6 +26,7 @@ import com.hred.exception.ExceptionMessages;
 import com.hred.exception.UserException;
 import com.hred.model.Employee;
 import com.hred.model.FilterEmployee;
+import com.hred.pagination.EmployeeListPaginationInput;
 import com.hred.pagination.NotificationPaginationInput;
 import com.hred.pagination.Paginator;
 import com.hred.persistence.dao.EmployeeDAO;
@@ -178,9 +179,9 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 	   
 	   if(employee.getSearchKey().matches("[0-9]*")){
 	    
-	    int emp = Integer.parseInt(employee.getSearchKey());
-
-	    Criterion id = Restrictions.eq("employeeId", emp);
+	    double emp = Double.parseDouble(employee.getSearchKey());
+        int emp1=(int) emp;
+	    Criterion id = Restrictions.eq("employeeId", emp1);
 	    Criterion years = Restrictions.eq("yearsofexperience", emp);
 	    Criterion active = Restrictions.eq("isDeleted",Boolean.FALSE);
 	    Criterion search = Restrictions.and(Restrictions.or(id,years), active);
@@ -224,7 +225,6 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 	  }
 	  return list;
 	 }
-	
 	
 	@SuppressWarnings("unchecked")
 	@Override
@@ -947,6 +947,26 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 	        }
 	       return list.iterator().next();
 	}
+	@Override
+	 public Paginator<Employee> getEmployeesListPaginated(
+	   EmployeeListPaginationInput employee) {
+	  int pageNo = employee.getPageNo();
+	  int pageSize = employee.getPageSize();
+	  
+	  int skipCount = (pageNo - 1) * pageSize;  
+	  Criteria criteria=createCustomCriteria(Employee.class);
+	  
+
+	        criteria.setFirstResult(skipCount).setMaxResults(pageSize);
+	  List<Employee> consultantList=criteria.list();
+	  
+	  Criteria countCriteria=createCustomCriteria(Employee.class); 
+	  Long totalCount = getRecordCount(countCriteria);
+
+	  Paginator<Employee> employeePaginator = new Paginator<>(consultantList, totalCount);
+	  return employeePaginator;
+	 }
+
 
 	 /*@Override
 	 public Paginator<NotificationPaginationInput> getEmployeesPaginated(

@@ -7,6 +7,7 @@ import com.hred.exception.EmployeeException;
 import com.hred.exception.UserException;
 import com.hred.model.Employee;
 import com.hred.model.FilterEmployee;
+import com.hred.pagination.EmployeeListPaginationInput;
 import com.hred.pagination.NotificationPaginationInput;
 import com.hred.pagination.Paginator;
 import com.hred.service.descriptors.input.EmployeeSearchInputDescriptor;
@@ -58,6 +59,7 @@ public interface EmployeeDAO extends BaseDAO {
 	public List<Employee> searchEmployee(EmployeeSearchInputDescriptor employee);
 
 
+
 	public List<Employee> getEmployee();
 
  public	Boolean getEmployeeByEmpId(int empid) throws EmployeeException;
@@ -66,6 +68,8 @@ public interface EmployeeDAO extends BaseDAO {
 
 Paginator<NotificationPaginationInput> getEmployeesPaginated(NotificationPaginationInput employee);
 public Employee getLoggedInUser(long userId) throws EmployeeException;
+
+public Paginator<Employee> getEmployeesListPaginated(EmployeeListPaginationInput employee);
 
 	
 	

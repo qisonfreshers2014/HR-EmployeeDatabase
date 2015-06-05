@@ -45,7 +45,6 @@ RequestManager.prototype.sendToServer = function (api, data, callback, options) 
         //alert(preferences);
     }
 
-
 }
 
 RequestManager.prototype.getSentManualMail=function(data,callback){
@@ -217,6 +216,10 @@ RequestManager.prototype.getSearchEmp=function(data,callback){
  RequestManager.prototype.isLoggedin=function(data,callback){
 	 this.sendToServer('employee/isloggedin', data, callback);
 	}
+ RequestManager.prototype.getPaginatedEmployees=function(data,callback){
+	 this.sendToServer('employee/getEmployeesListPaginated', data, callback);
+}
+ 
 
 
 var RequestManager = new RequestManager();

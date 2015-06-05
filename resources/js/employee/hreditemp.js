@@ -105,6 +105,7 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 	var char = /^[A-Za-z]+( [A-Za-z]+)*$/;
 	var qual = /^[A-Za-z]+(.[A-Za-z]+)*$/;
 	var num = /^[0-9]+$/;
+	var experience=/^[0-9.]+$/;
 	var skp = /^[A-Za-z0-9]+(.[A-Za-z0-9]+)*$/;
 	var mail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 	var illegalChars = /\W/
@@ -472,7 +473,7 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 			if (success) {
 				console.dir(data);
 				alert("Employee ID:" + eid + " Details Successfully Updated");
-				App.listEmployee();
+				routie("employee");
 			} else {
 				alert("failed to Update the Details");
 			}

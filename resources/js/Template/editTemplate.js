@@ -23,7 +23,7 @@ editTemplate.prototype.handleShow=function(dataid){
 		 
  $('#back').click(function(){
 				
-			routie("template");
+	  App.loadtemplateList();
 			}.ctx(this));
 	 
 }
@@ -102,7 +102,7 @@ editTemplate.prototype.editTemplateDetailsById=function(dataid){
          $('.templatename').val("");
          $('.subject').val("");
          $('textarea#templateContent').val("");
-         App.loadtemplateList();
+      routie("template");
         }else if(data.code==9018){
             
             alert("Template already exists");

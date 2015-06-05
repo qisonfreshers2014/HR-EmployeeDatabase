@@ -65,7 +65,7 @@ allHandMeeting.prototype.addAllHandsMeeting=function(){
          $('#datepicker').val("");
          $('#employeeAll').val("");
          $('#description').val("");
-         App.loadAllHandsMeeting();
+        routie("allHandsMeeting");
       
         }else if(data.code == 204){
         	alert("Date already exists");

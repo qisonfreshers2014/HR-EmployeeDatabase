@@ -9,8 +9,7 @@ package com.hred.service.descriptors.input;
  *
  */
 public class EmployeeSearchInputDescriptor {
-
-	private String searchKey;
+private String searchKey;
 	
 	public String getSearchKey() {
 		return searchKey;
@@ -29,6 +28,8 @@ public class EmployeeSearchInputDescriptor {
 		super();
 		
 	}
+	
+	
 	
 	
 	

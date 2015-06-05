@@ -6,6 +6,7 @@ function Router() {
 
 Router.prototype.handleShow = function(callBack) {
 	App.loadEmployeePage(App.userName,App.hr,App.isDeleted);
+	 App.loadEmployee(App.gender,App.contactNo,App.employeeId);
 	//App.whiteLabelConfigs();
 	/*if (getParameterByName("action") == "resetPassword") {
 		Loader.loadResetPassword(function() {
@@ -52,7 +53,16 @@ Router.prototype.routeManager = function() {
 
 	    'employee': function() {
 	    	App.loadHRHomeHeader(App.userName);
-	    	App.listEmployee();
+	    	 var contentinput = {"payload":{"pageNo":1,"pageSize":10}};
+	    	 RequestManager.getPaginatedEmployees(contentinput, function(data, success) {
+	    		 
+	    			
+	    		 
+	    		  if (success) {
+	    			 
+	    			 App.listEmployee(data);
+	    		  }
+	    	 });
 	    },
 	    'addemployee': function() {
 	    	App.loadHRHomeHeader(App.userName);
@@ -106,7 +116,6 @@ Router.prototype.routeManager = function() {
 			App.loadHRHomeHeader(App.userName);
 			App.loadAllhandmeeting();
 	    },
-	   
 	    
 	});
 }

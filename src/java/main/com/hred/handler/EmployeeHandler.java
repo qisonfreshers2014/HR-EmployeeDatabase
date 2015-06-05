@@ -29,6 +29,7 @@ import com.hred.model.FilterEmployee;
 import com.hred.model.SendNotificationHistory;
 import com.hred.model.Skills;
 import com.hred.model.output.CompareDates;
+import com.hred.pagination.EmployeeListPaginationInput;
 import com.hred.pagination.NotificationPaginationInput;
 import com.hred.pagination.PaginationOutput;
 import com.hred.pagination.Paginator;
@@ -230,7 +231,7 @@ public class EmployeeHandler extends AbstractHandler {
 		Timestamp doj = employee.getDateOfJoining();
 		String skill = employee.getSkill();
 		String rating = employee.getRating();
-		int YOE = employee.getYearsofexperience();
+		double YOE = employee.getYearsofexperience();
 		long emercontnum = employee.getEmergencycontactnumber();
 		String emercontname = employee.getEmergencyContactName();
 		String currentaddr = employee.getCurrentAddress();
@@ -295,7 +296,7 @@ public class EmployeeHandler extends AbstractHandler {
 
 			String blood, long num, Timestamp date, String fatherName,
 			String gender, long contactNum, String skypeid, Timestamp doj,
-			String skill, String rating, int YOE, long emercontnum,
+			String skill, String rating, double YOE, long emercontnum,
 			String emercontname, String currentaddr, String peraddr)
 			throws BusinessException {
 
@@ -844,4 +845,15 @@ public class EmployeeHandler extends AbstractHandler {
 
 		return employee;
 	}
+
+	public PaginationOutput<Employee> getEmployeesListPaginated(
+			  EmployeeListPaginationInput employee) {
+			 
+			 Paginator<Employee> paginator = new Paginator<>();
+			 paginator = DAOFactory.getInstance().getEmployeeDAO().getEmployeesListPaginated(employee);
+			 
+			 PaginationOutput<Employee> empPaginationOutput = new PaginationOutput<>(paginator, employee.getPageNo(), employee.getPageSize());
+			 return empPaginationOutput;
+			 
+			}
 }

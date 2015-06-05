@@ -124,12 +124,11 @@ public List<Template> getTemplatesAOP() {
 	}
 
 
-	 
-
 	 private void validationFuncupdate(long id, String name, String subject,
 	   String content, List<Template> templist) throws TemplateException {
 	  for (int i = 0; i < templist.size(); i++) {
 	   String dbname= templist.get(i).getName();
+	  
 	     if(templist.get(i).getId() != id){
 	       if(dbname.equalsIgnoreCase(name)){
 	        
@@ -138,7 +137,6 @@ public List<Template> getTemplatesAOP() {
 	        
 	       }
 	     }
-	  
 	  } 
 	 }
 

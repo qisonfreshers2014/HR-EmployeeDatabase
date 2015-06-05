@@ -135,3 +135,11 @@ p {
 	margin-left:2%;
 	margin-right:2%;
 }
+#employeelist{
+	margin-left:1%;
+	 table-layout: fixed;
+    width: 95%;
+}
+td{
+	 word-wrap:break-word;
+}

@@ -107,7 +107,7 @@ addpolicy.prototype.saveToDatabase = function() {
 			fileID="";
 			$('.policyFileName').val("");
 			alert("Successfully saved the policy");
-			App.listPolicy();
+			routie("hrpolicy");
 		} else {
 		 if (data.code == 228) {
 				alert("Policy name already exists");

@@ -53,6 +53,7 @@ EditEmployee.prototype.validateUpdateEmp = function(employeeId) {
 	var num = /^[0-9]+$/;
 	var mail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 	var skp = /^[A-Za-z0-9]+(.[A-Za-z0-9]+)*$/;
+	
 	var illegalChars = /\W/
 	var letters = /^[0-9a-zA-Z]+$/;
 	var cnumerr = $("#cnumerr");
@@ -226,7 +227,7 @@ EditEmployee.prototype.validateUpdateEmp = function(employeeId) {
 			if (success) {
 				console.dir(data);
 				alert("Employee Details Successfully Updated");
-				App.loadempviewemployee(employeeId);
+				routie("myprofile");
 			} else {
 				alert("failed to Update the Details");
 			}

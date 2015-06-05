@@ -92,9 +92,12 @@ App.prototype.listPolicy = function() {
 	});
 }
 
-App.prototype.listEmployee = function() {
+App.prototype.listEmployee = function(data) {
+	
+	Loader.loadPagination();
+	
 	Loader.listEmployee(function() {
-		new employeeList();
+		new employeeList(data);
 	});
 }
 

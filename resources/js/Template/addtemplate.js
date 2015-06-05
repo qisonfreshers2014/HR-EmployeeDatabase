@@ -50,7 +50,7 @@ RequestManager.addTemplate(input, function(data, success) {
   $('.subject').val("");
   $('.content').val("");
   parseInt($('#fileId').text(""));
-  App.loadtemplateList();
+ routie("template");
  }else if(data.code==9017){
  
   alert(data.message);

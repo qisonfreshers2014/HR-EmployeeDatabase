@@ -54,9 +54,9 @@ Loader.prototype.loadEmployeeHoliday = function(){
 
 }
 
-Loader.prototype.listEmployee = function(){
+Loader.prototype.listEmployee = function(cb){
  LazyLoad.css('resources/js/Holidays/holidays.css');
- LazyLoad.js('resources/js/EmployeeList/employeeList.js');
+ LazyLoad.js('resources/js/EmployeeList/employeeList.js',cb);
 
 }
 Loader.prototype.loadHoliday = function(){
@@ -213,5 +213,10 @@ Loader.prototype.loadchangePassword = function(dataId){
 	LazyLoad.js('resources/js/employee/changePassword.js', dataId);
 	LazyLoad.css('resources/js/employee/addemp.css');
 }
+Loader.prototype.loadPagination = function(){
+	
+	 LazyLoad.css('resources/js/flaviusmatis-simplePagination.js-7be6bd6/simplePagination.css');
+	 LazyLoad.js('resources/js/flaviusmatis-simplePagination.js-7be6bd6/jquery.simplePagination.js');
 
+	}
 var Loader = new Loader();

@@ -23,9 +23,10 @@
     margin-top: 1%;
 }
 #menudiv {
-    float: left;
+  /*  float: left; */
     margin-left: -1%;
     margin-top: 3%;
+    padding:50px;
 }
 #span1 {
     margin-top: 8%;

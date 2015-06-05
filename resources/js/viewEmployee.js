@@ -19,13 +19,10 @@ ViewEmployee.prototype.handleShow = function(empid) {
  
  
  $('#back').click(function(){
-  
-   App.listEmployee();
+ 
+  routie("employee");
  }.ctx(this));
- 
 
-
- 
    $('#Editdesgn').click(function(){
     
    var sendname = $('#senddesgname').text();

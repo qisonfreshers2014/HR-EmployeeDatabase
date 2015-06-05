@@ -9,6 +9,7 @@ import javax.persistence.Table;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import com.hred.exception.ExceptionCodes;
@@ -155,7 +156,12 @@ public class BaseDAOImpl implements BaseDAO{
 		return objectList;
 	} 
 
-
+	@Override
+    public Long getRecordCount(Criteria countCriteria) {
+        countCriteria.setProjection(Projections.rowCount());
+        return (Long) countCriteria.uniqueResult();
+    }
+  
   
 	
 }

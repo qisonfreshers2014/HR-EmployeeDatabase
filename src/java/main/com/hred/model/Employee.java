@@ -34,7 +34,7 @@ public class Employee extends AbstractObject {
  @Column(name = "DOJ")
  private Timestamp dateOfJoining;
  @Column(name = "years_of_experience")
- private int yearsofexperience;
+ private double yearsofexperience;
  @Column(name = "contact_number")
  private long contactNo;
  @Column(name = "current_address")
@@ -154,11 +154,11 @@ public String getSkill() {
   this.dateOfJoining = dateOfJoining;
  }
 
- public int getYearsofexperience() {
+ public double getYearsofexperience() {
   return yearsofexperience;
  }
 
- public void setYearsofexperience(int yearsofexperience) {
+ public void setYearsofexperience(double yearsofexperience) {
   this.yearsofexperience = yearsofexperience;
  }
 
