@@ -24,14 +24,23 @@ $('#back').click(function(){
 		if (success) {
 			var object = data;
 			console.dir(data);
+			
 			var dobformat = new Date(object.dateOfBirth);
 			var byear = dobformat.getFullYear();
 			var bmonth = dobformat.getMonth() + 1;
 			var bdate = dobformat.getDate();
+			
+			var actualdobformat = new Date(object.actualdateOfBirth);
+			var actualdobyear = actualdobformat.getFullYear();
+			var actualdobmonth = actualdobformat.getMonth() + 1;
+			var actualdobdate = actualdobformat.getDate();
+		
+			 
 			$("#emal").val(object.email);
 			$("#eid").val(object.employeeId);
 			$("#name").val(object.employeeName);
 			$("#dob").val(byear + "-" + bmonth + "-" + bdate);
+			$("#actualdob").val(actualdobyear + "-" + actualdobmonth + "-" + actualdobdate);
 			$("#blood").val(object.bloodGroup);
 			$("#qual").val(object.highestQualification);
 			$("#fathername").val(object.fathersName);
@@ -49,12 +58,23 @@ $('#back').click(function(){
 			$("#peraddr").val(object.permanentAddress);
 			$("#skype").val(object.skype);
 			$("#filepath").text(object.fileId);
+			$("#yearofexp").val(object.yearsofexperience);
 		} else {
 			alert("failed to edit");
 		}
 
 	}.ctx(this));
 	$('#dob').datepicker({
+		// dateFormat : $.datepicker.TIMESTAMP,
+		dateFormat : 'yy-mm-dd',
+		showButtonPanel : true,
+		changeMonth : true,
+		changeYear : true,
+		showAnim : 'drop',
+		minDate : new Date(1980, 12, 31),
+		maxDate : new Date(1994, 12, 31)
+	})
+	$('#actualdob').datepicker({
 		// dateFormat : $.datepicker.TIMESTAMP,
 		dateFormat : 'yy-mm-dd',
 		showButtonPanel : true,
@@ -102,7 +122,7 @@ HrEditEmployee.prototype.uploadMedia = function(callback) {
 }
 
 HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
-	var char = /^[A-Za-z]+( [A-Za-z]+)*$/;
+	var char = /^[A-Za-z .]+( [A-Za-z]+)*$/;
 	var qual = /^[A-Za-z]+(.[A-Za-z]+)*$/;
 	var num = /^[0-9]+$/;
 	var experience=/^[0-9.]+$/;
@@ -150,7 +170,9 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 	var skype = $('#skype').val();
 	var skypeerr = $('#skypeerr');
 	var dob = $('#dob').val();
+	var actualDOB=$('#actualdob').val();
 	var file = $('#filename').val();
+	var yearofexp=$("#yearofexp").val();
 	var variable = $('#variable').val();
 	var variableerr = $('#variableerr');
 	var Gender = $("#gender option:selected").val();
@@ -161,7 +183,7 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 	if (blood == "" || name == "" || qualification == "" || fathername == ""
 			|| contnum == "" || txtemercon == "" || txtemname == ""
 			|| currentaddr == "" || peraddr == "" || relation == ""
-			|| skype == "" || Gender == "" || dob == "" || salary == "") {
+			|| skype == "" || Gender == "" || dob == "" || salary == ""||actualDOB=="") {
 		$('.error').css('visibility', 'visible');
 
 		if (dob == "") {
@@ -172,6 +194,13 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 			 */
 		else {
 			$('#dateerr').text("");
+		}
+
+		if (actualDOB == "") {
+			$('#actualdoberr').text('please enter the Actual DOB').css('color', 'red');
+		}
+		else {
+			$('#actualdoberr').text("");
 		}
 
 		if (qualification == "") {
@@ -380,6 +409,13 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 			$(relationerr).text("");
 			// $(relationerr).css("color", "green");
 		}
+		if (yearexp == "") {
+			$(yearexperr).text("Required field");
+			$(yearexperr).css("color", "red");
+		} else if (!(yearexp.match(experience))) {
+			$(yearexperr).text("Only numbers and dot are allowed");
+			$(yearexperr).css("color", "red");
+		}
 
 		if (skype == "") {
 			$(skypeerr).text("Required field");
@@ -451,9 +487,11 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 				"fathersName" : fathername,
 				"bloodGroup" : blood,
 				"highestQualification" : qualification,
+				"yearsofexperience" : yearofexp,
 				"salary" : salary,
 				"variableComponent" : variable,
 				"dateOfBirth" : dob + " 00:00:00",
+				"actualdateOfBirth" : actualDOB + " 00:00:00",
 				"contactNo" : contnum,
 				"currentAddress" : currentaddr,
 				"permanentAddress" : peraddr,
@@ -519,6 +557,7 @@ HrEditEmployee.prototype.deleteEmployee = function(empid) {
 			$("#peraddr").val("");
 			$("#relation").val("");
 			$('#dob').val("");
+			$("#actualdob").val("");
 			$('#doj').val("");
 			$("#emal").val("");
 			$("#password").val("");
@@ -527,11 +566,12 @@ HrEditEmployee.prototype.deleteEmployee = function(empid) {
 			$('#variable').val("");
 			$('#gender').val("");
 			$('#skype').val("");
+			$("#yearofexp").val("");
 			$('#filepath').text("");
 			// document.getElementById("hredit").disabled = true;
 			document.getElementById("hrupdate").disabled = true;
 			document.getElementById("hrdelete").disabled = true;
-			App.listEmployee();
+			routie("employee");
 		} else {
 			alert("failed to Delete");
 		}

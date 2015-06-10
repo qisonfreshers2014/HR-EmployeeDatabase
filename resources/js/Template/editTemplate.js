@@ -63,9 +63,9 @@ editTemplate.prototype.EditTemplateDetails=function(dataid){
 editTemplate.prototype.editTemplateDetailsById=function(dataid){
 //	alert(4);
 	var articleDesc = $('textarea#templateContent').val();//CKEDITOR.instances.templateContent.getData();
-	var regex = /^[A-Za-z]+( [A-Za-z]+)*$/;
+	/*var regex = /^[A-Za-z]+( [A-Za-z]+)*$/;
 	
-	var subjectRegex=/^[A-Za-z0-9.,"]+( [A-Za-z]+)*$/;
+	var subjectRegex=/^[A-Za-z0-9.,"]+( [A-Za-z]+)*$/;*/
 	
 	
 	 if($('.templatename').val()==""){
@@ -78,7 +78,7 @@ editTemplate.prototype.editTemplateDetailsById=function(dataid){
 	 }	 
 	 
 	 
-	 else if($('.templatename').val().charAt(0)==" "||$('.subject').val().charAt(0)==" "){
+	 /*else if($('.templatename').val().charAt(0)==" "||$('.subject').val().charAt(0)==" "){
 		 alert("Please don't enter space as first letter");
 	 }
 	 else if(!($('.templatename').val()).match(regex))
@@ -91,7 +91,7 @@ editTemplate.prototype.editTemplateDetailsById=function(dataid){
 		 }
 	 else if(!($('.subject').val()).match(subjectRegex)){
 		 alert("Please enter only characters and numbers with one space for subject");
-	 }
+	 }*/
 		 else{
     var input ={"payload":{"id":dataid,"name":$('.templatename').val(),"subject":$('.subject').val(),"content":articleDesc}};
     RequestManager.editTemplateDetails(input, function(data, success)
@@ -102,7 +102,7 @@ editTemplate.prototype.editTemplateDetailsById=function(dataid){
          $('.templatename').val("");
          $('.subject').val("");
          $('textarea#templateContent').val("");
-      routie("template");
+       routie("template");
         }else if(data.code==9018){
             
             alert("Template already exists");

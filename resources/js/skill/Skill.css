@@ -80,7 +80,6 @@ font-family:calibri;
 }
 
 .div{
-	margin-left:8%;
 	font-family: Calibri;
 	font-size:15px;
 	font-weight: bold;
@@ -118,7 +117,7 @@ td{
 	margin-bottom:1%;
 }
 #noteforrating{
-	margin-left:40%;
+	margin-left:20%;
 	color:#D14719;
 	font-size:12px;
 	font-style: italic;

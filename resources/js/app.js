@@ -172,9 +172,11 @@ App.prototype.loadViewTemplate = function(dataid) {
 		new editTemplate(dataid);
 	});
 }
-App.prototype.loadAllHandsMeeting = function() {
+App.prototype.loadAllHandsMeeting = function(data) {
+	
+	Loader.loadPagination();
 	Loader.loadAllHandsMeeting(function() {
-		new viewAllHandsMeeting();
+		new viewAllHandsMeeting(data);
 	});
 }
 App.prototype.loadAllhandmeeting = function() {

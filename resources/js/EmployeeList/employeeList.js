@@ -82,7 +82,7 @@ employeeList.prototype.handleShow = function(data) {
      
 		 						alert("No record found");
 		 						var content = '';
-		 						content += '<tr class="theader"><th>EID</th><th>EmployeeName</th><th> Birth Day </th><th> Joining Date </th><th>Contact No</th><th>Emergency Contact No</th><th>Email ID</th><th>Current Designation</th><th>Current Years of Experience</th><th>PAN</th>';
+		 						 tabledata += '<tr class="theader"><th>EID</th><th>Employee Name</th><th> Birth Day </th><th> Actual Birth Day </th><th> Joining Date </th><th>Contact No</th><th>Emergency Contact No</th><th>Email ID</th><th>Current Designation</th><th>Years of Experience at the time of joining</th><th>Experience at Qison</th><th>Current Years of Experience</th><th>PAN</th>';
 		 						$('#employeelist').append('<table><tbody></tbody></table>');
 		 						$('#employeelist').html(content);
 		 						$('#backtoemployee').css("visibility","visible");
@@ -192,7 +192,7 @@ employeeList.prototype.tableDisplay = function(content,status,desdata) {
  
 $('#employeelist').empty();
  var tabledata = '';
- tabledata += '<tr class="theader"><th>EID</th><th>EmployeeName</th><th> Birth Day </th><th> Joining Date </th><th>Contact No</th><th>Emergency Contact No</th><th>Email ID</th><th>Current Designation</th><th>Current Years of Experience</th><th>PAN</th>';
+ tabledata += '<tr class="theader"><th>EID</th><th>Employee Name</th><th> Birth Day </th><th> Actual Birth Day </th><th> Joining Date </th><th>Contact No</th><th>Emergency Contact No</th><th>Email ID</th><th>Current Designation</th><th>Years of Experience at the time of joining</th><th>Experience at Qison</th><th>Current Years of Experience</th><th>PAN</th>';
  for (var i = 0; i < content.length; i++) {
   var obj = content[i];
   
@@ -201,11 +201,51 @@ $('#employeelist').empty();
   var byear = dobformat.getFullYear();
   var bmonth = dobformat.getMonth()+1;
   var bdate = dobformat.getDate();
+  var actualdobformat = new Date(obj.actualdateOfBirth);
+  var actualdobyear = actualdobformat.getFullYear();
+  var actualdobmonth = actualdobformat.getMonth()+1;
+  var actualdobdate = actualdobformat.getDate();
   var dojformat = new Date(obj.dateOfJoining);
   var jyear = dojformat.getFullYear();
   var jmonth = dojformat.getMonth()+1;
   var jdate = dojformat.getDate();
-
+  
+  
+  // Calculating Current years of experience
+  var today=new Date();
+  var diff=Math.floor(today.getTime() - dojformat.getTime());
+  var day = 1000 * 60 * 60 * 24;
+  var days = Math.floor(diff/day);
+  var months = Math.floor(days/31);
+  var expAtQisonInYears=Math.floor(months/12);
+  var expAtQisonInMonths=months%12;
+  var exp=obj.yearsofexperience;
+  var isDecimal=exp%1;
+  var parts=exp.toString().split('.');
+  
+  var afterdecimal=parseInt(parts[1]);
+  var beforedecimal=parseInt(parts[0]);
+  
+if(isDecimal!=0){
+	 months=months+afterdecimal;
+	
+	  years = Math.floor(months/12);
+	
+	  totalYearsOfExpMnths=months%12;
+	 
+    totalYearsOfExp=years+beforedecimal;
+   
+	 
+  }
+  else{ 
+	  years = Math.floor(months/12);
+	
+	  totalYearsOfExpMnths=months%12;
+	 
+	  totalYearsOfExp=years+obj.yearsofexperience;
+	
+  }
+  
   var desName;
   var desId = obj.currentDesignation;
   
@@ -221,12 +261,15 @@ $('#employeelist').empty();
   tabledata += '<td><a href="#view" class="viewindividual" id="'+obj.employeeId+'">' + obj.employeeId+ '</a></td>';
   tabledata += '<td>' + obj.employeeName + '</td>';
   tabledata += '<td>' +byear+"-"+bmonth+"-"+bdate+'</td>';
+  tabledata += '<td>' +actualdobyear+"-"+actualdobmonth+"-"+actualdobdate+'</td>';
   tabledata += '<td>' +jyear+"-"+jmonth+"-"+jdate+'</td>';
   tabledata += '<td>' +obj.contactNo + '</td>';
   tabledata += '<td>' +obj.emergencycontactnumber +'</td>';
   tabledata += '<td>' +obj.email +  '</td>';
   tabledata += '<td>' +desName +'</td>';
-  tabledata += '<td>' +obj.yearsofexperience +'</td>';
+  tabledata += '<td>' +exp+  '</td>';
+  tabledata += '<td>' +expAtQisonInYears+"."+expAtQisonInMonths+'</td>';
+  tabledata += '<td>' +totalYearsOfExp+"."+totalYearsOfExpMnths+'</td>';
   tabledata += '<td>' +obj.pan +'</td>';
   tabledata += '</tr>';
  
@@ -235,17 +278,17 @@ $('#employeelist').empty();
 }
 }
 
-
 employeeList.prototype.searchOperation = function(data,desdata){
 	
 	 $("#listemp").on("click",".viewindividual",function(event){
 		  var releaseId=event.target.id;     
 		  App.loadViewEmployee(releaseId);
 		 }.ctx(this));
+	 
 	
  
  var content = '';
- content += '<tr class="theader"><th>EID</th><th>EmployeeName</th><th> Birth Day </th><th> Joining Date </th><th>Contact No</th><th>Emergency Contact No</th><th>Email ID</th><th>Current Designation</th><th>Current Years of Experience</th><th>PAN</th>';
+ content += '<tr class="theader"><th>EID</th><th>Employee Name</th><th> Birth Day </th><th> Actual Birth Day </th><th> Joining Date </th><th>Contact No</th><th>Emergency Contact No</th><th>Email ID</th><th>Current Designation</th><th>Years of Experience at the time of joining</th><th>Experience at Qison</th><th>Current Years of Experience</th><th>PAN</th>';
  for (var i = 0; i < data.length; i++) {
   var obj = data[i];
   
@@ -254,10 +297,51 @@ employeeList.prototype.searchOperation = function(data,desdata){
   var bmonth = dobformat.getMonth()+1;
   var bdate = dobformat.getDate();
   
+  var actualdobformat = new Date(obj.actualdateOfBirth);
+  var actualdobyear = actualdobformat.getFullYear();
+  var actualdobmonth = actualdobformat.getMonth()+1;
+  var actualdobdate = actualdobformat.getDate();
+  
   var dojformat = new Date(obj.dateOfJoining);
   var jyear = dojformat.getFullYear();
   var jmonth = dojformat.getMonth()+1;
   var jdate = dojformat.getDate();
+ 
+  // Calculating Current years of experience
+  var today=new Date();
+  var diff=Math.floor(today.getTime() - dojformat.getTime());
+  var day = 1000 * 60 * 60 * 24;
+  var days = Math.floor(diff/day);
+  var months = Math.floor(days/31);
+  var expAtQisonInYears=Math.floor(months/12);
+  var expAtQisonInMonths=months%12;
+  var exp=obj.yearsofexperience;
+  var isDecimal=exp%1;
+  var parts=exp.toString().split('.');
+  var afterdecimal=parseInt(parts[1]);
+  var beforedecimal=parseInt(parts[0]);
+  
+  if(isDecimal!=0){
+		 months=months+afterdecimal;
+		
+		  years = Math.floor(months/12);
+		
+		  totalYearsOfExpMnths=months%12;
+		 
+	    totalYearsOfExp=years+beforedecimal;
+	   
+		 
+	  }
+	  else{ 
+		  years = Math.floor(months/12);
+		
+		  totalYearsOfExpMnths=months%12;
+		 
+		  totalYearsOfExp=years+obj.yearsofexperience;
+		
+	  }
+	  
+  
  
   
   var desName;
@@ -275,12 +359,15 @@ employeeList.prototype.searchOperation = function(data,desdata){
               content += '<td><a href="#view" class="viewindividual" id="'+obj.employeeId+'">' + obj.employeeId+ '</a></td>';
               content += '<td>' + obj.employeeName + '</td>';
               content += '<td>' +byear+"-"+bmonth+"-"+bdate+'</td>';
+              content += '<td>' +actualdobyear+"-"+actualdobmonth+"-"+actualdobdate+'</td>';
               content += '<td>' +jyear+"-"+jmonth+"-"+jdate+'</td>';
               content += '<td>' +obj.contactNo + '</td>';
               content += '<td>' +obj.emergencycontactnumber +'</td>';
               content += '<td>' +obj.email +  '</td>';
               content += '<td>' +desName +'</td>';
-              content += '<td>' +obj.yearsofexperience +'</td>';
+              content += '<td>' +exp+  '</td>';
+              content += '<td>' +expAtQisonInYears+"."+expAtQisonInMonths+'</td>';
+              content += '<td>' +totalYearsOfExp+"."+totalYearsOfExpMnths+'</td>';
               content += '<td>' +obj.pan +'</td>';
               content += '</tr>';
               }
@@ -290,3 +377,5 @@ employeeList.prototype.searchOperation = function(data,desdata){
  $('.selector').css("visibility","hidden");
   
 }
+
+

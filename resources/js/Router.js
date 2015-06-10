@@ -110,7 +110,14 @@ Router.prototype.routeManager = function() {
 		
 		'allHandsMeeting': function() {
 			App.loadHRHomeHeader(App.userName);
-			 App.loadAllHandsMeeting();
+			var contentinput = {"payload":{"pageNo":1,"pageSize":10}};
+			 RequestManager.getAllHandsMeetingSchedule(contentinput, function(data, success) {
+				 if(success){
+			
+			 App.loadAllHandsMeeting(data);
+			 
+				 }
+			 });
 	    },
 	    'addallHandsMeeting': function() {
 			App.loadHRHomeHeader(App.userName);

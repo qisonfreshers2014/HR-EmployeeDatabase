@@ -68,9 +68,9 @@ RequestManager.addTemplate(input, function(data, success) {
 }
 
 AddTemplate.prototype.duplicatevalidation=function(templates){ 
- 
+ /*
    var char = /^[A-Za-z0-9_]+( [A-Za-z]+)*$/;
-   var char1 = /^[A-Za-z0-9.,"_]+( [A-Za-z]+)*$/;
+   var char1 = /^[A-Za-z0-9.,"_]+( [A-Za-z]+)*$/;*/
  var name = $('.templatename').val();
 
  var articleDesc = $('textarea#editor1').val();
@@ -93,7 +93,7 @@ else if (articleDesc==""){
   alert("Please enter Description");
   
    }
-      else if(! $('.templatename').val().match(char)){
+     /* else if(! $('.templatename').val().match(char)){
        
          alert("Template name can contain alphabets,numbers and singlespace only");
     
@@ -101,7 +101,7 @@ else if (articleDesc==""){
       else if(! $('.subject').val().match(char1)){
      
           alert('Subject can contain  alphabets,numbers and singlespace only');
-    }
+    }*/
     
  
 else{ 

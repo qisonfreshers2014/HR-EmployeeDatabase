@@ -37,9 +37,11 @@ policyList.prototype.policyDisplay = function(content, status) {
 			
 			var obj = content[i];
 			var path="file:///"+obj.fileURL;
+			
+		
 			//If the file upload folder is not in the server
 			/*$("#policylist").append('<p><a href="http://localhost:9956/downloadServlet?fileId='+obj.fileID+'">'+obj.policyName+"</a></p><br>");*/
-		
+		    var url=obj.url;
 			$("#policylist").append('<table><tbody></tbody></table>');
 		
 			$("#policylist tr:last").after('<tr><td style="font-size:14px">'+ ++j +'</td><td style="font-size:14px"><a href="'+obj.url+'" target="_blank">'+obj.policyName+'</a></td></tr>');

@@ -38,16 +38,25 @@ empViewemployee.prototype.empviewEmployee=function(employeeId){
     var byear = dobformat.getFullYear();
     var bmonth = dobformat.getMonth()+1;
     var bdate = dobformat.getDate();
+    
+    
+    var actualDOBformat=new Date(obj.actualdateOfBirth);
+    var actualDOByear=actualDOBformat.getFullYear();
+    var actualDOBmonth=actualDOBformat.getMonth()+1;
+    var actualDOBdate=actualDOBformat.getDate();
+    
      var hr=false;
     $('#Editempskills').click(function(){
  	   App.loadSkill(employeeId,hr);
  	  }.ctx(this));
-    	 
-    $('#employeeimage').append(obj.filePath);
+    	var image=obj.filePath;
+    	 var skills=obj.skills;
+    $('#employeeimage').append('<img src="'+image+'" height="150" width="150">');
    $('#eid').val(obj.employeeId);
    $('#name').val(obj.employeeName);
    $('#gender').val(obj.gender);
    $('#DOB').val(byear+"-"+bmonth+"-"+bdate);
+   $('#actualDOB').val(actualDOByear+"-"+actualDOBmonth+"-"+actualDOBdate);
    $('#cnct').val(obj.contactNo);
    $('#curaddr').val(obj.currentAddress);
    $('#peraddr').val(obj.permanentAddress);
@@ -61,8 +70,12 @@ empViewemployee.prototype.empviewEmployee=function(employeeId){
    $('#pannum').val(obj.pan);
    $('#pfnum').val(obj.pfNo);
    $('#accountnum').val(obj.bankAccountNo);
-   $('#skill').val(obj.skill);
-   $('#rating').val(obj.rating);
+   
+   for(i=0;i<skills.length;i++){
+		 var skillsObj=skills[i];
+	 $('#displaySkills').append('<tr><td>'+skillsObj.skills+'</td><td>'+skillsObj.rating+'</td></tr>');
+	 
+	 }
    }else{
     
     alert("failed to add");

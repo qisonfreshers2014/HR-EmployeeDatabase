@@ -111,3 +111,16 @@ text-align:center;
 	margin-bottom:2%;
 	
 }
+#displaySkills{
+	 width:80%;
+  margin-left:9%;
+ 
+	
+}
+#displaySkills th, #displaySkills td{
+  text-align:center
+}
+.skillheader{
+	font-size:16px;
+	  background-color:#7094b8;
+}

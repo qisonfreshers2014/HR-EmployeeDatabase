@@ -1,30 +1,55 @@
-function viewAllHandsMeeting() {
+function viewAllHandsMeeting(data) {
 	Loader.loadHTML('.container', 'resources/js/AllHandsMeeting/viewAllHandsMeeting.html', true, function(){
-		this.handleShow();
+		this.handleShow(data);
 	}.ctx(this));
 }
 
-viewAllHandsMeeting.prototype.handleShow = function() {
+viewAllHandsMeeting.prototype.handleShow = function(data) {
 
 	$('.container').show();
-	this.getAllHandsMeeting();
+	
+	var self=this;
+	
+	var pageNo=1;
+	
+	 $('.selector').pagination(
+		  		{
+		      items:data.count,
+		      itemsOnPage:10,
+		      cssStyle: 'light-theme',
+		      	
+		  	  onPageClick: function(pageNumber) { 
+		  		  
+		  		self.getAllHandsMeeting(pageNumber);
+		           
+		           
+		       }
+		  });
+
+
+	this.getAllHandsMeeting(pageNo);
+	
+	
 $('#add').click(function(){
 
-	routie("addallHandsMeeting");
+	this.addAllHandsMeeting();
 
 
 }.ctx(this));
 
 }
-viewAllHandsMeeting.prototype.getAllHandsMeeting=function(){
-	var input = {"payload":{}};
-	 RequestManager.getAllHandsMeetingDetails(input, function(data, success) {
+viewAllHandsMeeting.prototype.getAllHandsMeeting=function(pageNo){
+	 var contentinput = {"payload":{"pageNo":pageNo,"pageSize":10}};
+	 RequestManager.getAllHandsMeetingSchedule(contentinput, function(data, success) {
 		 if(success){
 			var id=0;
 			var name='';
 			console.log(data);
+			$('#displayData').empty();
+			$('table').append('<tr><th class="theader">Date</th><th class="theader">Day</th><th class="theader">Employee of the Month</th><th class="theader">Description</th><th class="theader">Edit</th></tr>')
+			var content=data.allhands;
 
-			$.each(data,function(obj, value){
+			$.each(content,function(obj, value){
 				
 				console.log('obj'+'  '+obj);
 				console.log('Obj'+ '   '+value);
@@ -37,8 +62,30 @@ viewAllHandsMeeting.prototype.getAllHandsMeeting=function(){
 				weekday[5] = "Friday";
 				weekday[6] = "Saturday";
 				var month=new Date(value.date).getMonth()+1;
-				$('table').append("<tr style='text-align:center'><td>"+new Date(value.date).getFullYear()+"-"+month+"-"+new Date(value.date).getDate()+"</td><td>"+weekday[new Date(value.date).getDay()]+"</td><td>"+value.employee+"</td><td>"+value.description+"</td><td><a href='#allHandsMeeting/editAllHandsMeeting'><input type='button' class='editAllHand btn btn-primary btn-md' id="+value.id+" value='Edit'/></a></td></tr>");
+				
+				$('table').append("<tr style='text-align:center'><td>"+new Date(value.date).getFullYear()+"-"+month+"-"+new Date(value.date).getDate()+"</td><td>"+weekday[new Date(value.date).getDay()]+"</td><td>"+value.employee+"</td><td>"+value.description+"</td><td><a href='#editAllHandsMeeting'><input type='button' class='editAllHand btn btn-primary btn-md' id="+value.id+" value='Edit'/></a></td></tr>");
 			});
+			
+			 $(function(){
+				  
+				  var perPage = 10;
+					
+				 
+				  var checkFragment = function() {
+				 
+				      var hash = window.location.hash;
+			
+				      hash = hash.match(/^#page-(\d+)$/);
+				      if(hash)
+				        
+				          $("#pagination").pagination("selectPage", parseInt(hash[1]));
+				  };
+				
+				  $(window).bind("popstate", checkFragment);
+		
+				  checkFragment();
+				  });
+				 
 			//alert(new Date(value.date).getFullYear()+"-"+new Date(value.date).getDate()+"-"+new Date(value.date).getMonth());
 			$('.editAllHand').click(function(event){
 				var releaseId=event.target.id;
@@ -57,7 +104,10 @@ viewAllHandsMeeting.prototype.getAllHandsMeeting=function(){
 
 }
 
-	
+viewAllHandsMeeting.prototype.addAllHandsMeeting=function(){
+	App.loadAllhandmeeting();
+
+	}
 viewAllHandsMeeting.prototype.editAllHandsMeeting=function(dataid){
 
 	App.loadAllhandmeetings(dataid);

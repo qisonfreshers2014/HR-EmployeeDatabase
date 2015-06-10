@@ -27,10 +27,10 @@
 			<td class="td"><input type="text" class="date" id="dob"
 				placeholder="YYYY-MM-DD" maxlength="16"><br> <span
 				class="error" id="dateerr"></span></td>
-			<th class="th">Blood Group<span class="error">*</span> 
+			<th class="th">Actual DOB<span class="error">*</span> 
 			</th>
-			<td class="td"><input type="text" name="bloodgroup" id="blood"
-				maxlength="16"><br><span class="error" id="blooderr"></span></td>
+			<td class="td"><input type="text" name="actualdob" id="actualdob"
+			placeholder="YYYY-MM-DD" maxlength="16"><br><span class="error" id="actualdoberror"></span></td>
 			<th class="th">Highest Qualification<span class="error">*</span>
 			</th>
 			<td class="td"><input type="text" name="highqualification"
@@ -54,8 +54,13 @@
 		</tr>
 		<tr class="tr">
 			<th class="th">Profile Image</th>
-			<td colspan="6" class="td"><input type="button" name="file"
+			<td class="td"><input type="button" name="file"
 				id="filename" value="Upload Image"><span id="filepath"></span></td>
+				
+				<th class="th">Blood Group<span class="error">*</span> 
+			</th>
+			<td class="td" colspan="3"><input type="text" name="bloodgroup" id="blood"
+				maxlength="16"><br><span class="error" id="blooderr"></span></td>
 
 		</tr>
 	</table>

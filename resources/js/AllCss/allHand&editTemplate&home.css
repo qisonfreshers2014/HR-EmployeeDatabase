@@ -152,6 +152,9 @@ background-color: lightgray;
 	 width:80%;
 	  margin-left: 9%;	
 }
+.selector{
+	margin-left:3%;
+}
 /* #editdescription,#editemployee,#editdatepicker{
 	margin-left: 0%;
 }

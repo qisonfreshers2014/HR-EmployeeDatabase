@@ -8,7 +8,7 @@ function Uploader(allowedFileType, callback, forAdmin, isQSPAdmin, mediaUpload) 
         this.populateFileLimits();
     }
     this.allowFileSize;
-    this.mediaUpload = mediaUpload
+    this.mediaUpload = mediaUpload;
     this.errorMsg = '';
     this.iN = 1;
     this.minInput = 1; // Should not be changed, it should be one only

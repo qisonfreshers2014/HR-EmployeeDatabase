@@ -22,10 +22,10 @@
 		</tr>
 
 		<tr class="tr">
-			<th class="th">Blood Group<span class="error">*</span>
+			<th class="th">Actual DOB<span class="error">*</span>
 			</th>
-			<td class="td"><input type="text" name="bloodgroup" id="blood"
-				maxlength="16"><br> <span class="error" id="blooderr"></span></td>
+			<td class="td"><input type="text" name="actualdob" id="actualdob"
+				maxlength="16"><br> <span class="error" id="actualdoberr"></span></td>
 			<th class="th">Highest Qualification<span class="error">*</span>
 			</th>
 			<td class="td"><input type="text" name="highqualification"
@@ -51,7 +51,12 @@
 			<td class="td"><input type="button" name="file" id="filename"
 				value="Upload Image"><span id="filepath"></span></td>
 		</tr>
-
+		<tr class="tr">
+		<th class="th">Blood Group<span class="error">*</span>
+			</th>
+			<td class="td" colspan="6"><input type="text" name="bloodgroup" id="blood"
+				maxlength="16"><br> <span class="error" id="blooderr"></span></td>
+        </tr>
 	</table>
 </fieldset>
 
@@ -121,9 +126,14 @@
 				id="emlerr"></span></td>
 			<th class="th">Skype ID<span class="error">*</span>
 			</th>
-			<td class="td" colspan="3"><input type="text" name="skype"
+			<td class="td"><input type="text" name="skype"
 				id="skype" maxlength="30"><br> <span class="error"
 				id="skypeerr"></span></td>
+				<th class="th">Years Of Experience At the time of joining<span class="error">*</span>
+			</th>
+			<td class="td"><input type="text" name="skype"
+				id="yearofexp" maxlength="4"><br> <span class="error"
+				id="yearofexperr"></span></td>
 		</tr>
 	</table>
 	<!-- <button type="submit" class="btn btn-primary btn-md" id="hredit">Edit</button> -->

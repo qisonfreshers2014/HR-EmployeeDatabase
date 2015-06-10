@@ -19,13 +19,9 @@ skill.prototype.handleShow = function(empid,hr) {
 		}.ctx(this));
 	
 	$('#reset').click(function() {
-		//e.preventDefault();
-		//$('.error').css('visibility', 'hidden');
-		$("#skill").val("");
-		$("#attended1").val("");
-		$("#rating").val("");
 		
-		//$("#empid").val("");
+		$("#skill").val("");
+		$("#rating").val("");
 		 
 			}.ctx(this));
 
@@ -58,11 +54,7 @@ skill.prototype.viewSkillDetails=function(empid){
   		 
   		var skill = data[i];
   		
-  		//$('#displayData').append('<table></table>');
-		 
-		$('#displayData').append("<tr><td>"+skill.skills+"</td><td>"
-		+skill.trainingAttended+"</td><td>"+skill.empId+"</td><td>"
-		+skill.rating+"</td><td><input type='button' value='Edit' id='"+skill.id+"' class='dynamicEdit btn-primary btn-md'></td></tr>");
+		$('#displayData').append("<tr><td>"+skill.skills+"</td><td>"+skill.empId+"</td><td>"+skill.rating+"</td><td><input type='button' value='Edit' id='"+skill.id+"' class='dynamicEdit btn-primary btn-md'></td></tr>");
 		
 		var obj1=skill.id;
   		}
@@ -123,7 +115,7 @@ skill.prototype.validateSkill=function(){
  	   }
  	 
  	 
-	 	  var input={"payload":{"skills":$('#skill').val(),"trainingAttended":$('#attended1').val(),
+	 	  var input={"payload":{"skills":$('#skill').val(),
 			"empId":$('#empid').val(),"rating":$('#rating').val(),
 			  
 			}};
@@ -132,13 +124,9 @@ skill.prototype.validateSkill=function(){
 			$("#save1").css("visibility","visible");
 	  		if(success){
 	  	 alert("Skills successfully inserted");
-	  		//$('#displayData').append("<table></table>");
-	  		$('#displayData').append("<tr><td>"+data.skills+"</td><td>"
-			+data.trainingAttended+"</td><td>"+data.empId+"</td><td>"
-			+data.rating+"</td><td><input type='button' value='Edit' id='"+data.id+"' class='dynamicEdit btn-primary btn-md'></td></tr>");
+	  	
+	  		$('#displayData').append("<tr><td>"+data.skills+"</td><td>"+data.empId+"</td><td>"+data.rating+"</td><td><input type='button' value='Edit' id='"+data.id+"' class='dynamicEdit btn-primary btn-md'></td></tr>");
 	  		$("#skill").val("");
-		    $("#attended1").val("");
-		   // $("#empid").val("");
 		    $("#rating").val("");
 	  		var obj1=data.id;
 	  		$("#save1").show();
@@ -147,11 +135,9 @@ skill.prototype.validateSkill=function(){
 				this.editSkill($(event.target).attr("id"));
 			   
 		    }.ctx(this));
-		      //$( "input#clear" ).trigger( "click" );		
+		     	
 			}
-	  		/*else if(data.code == 221){
-		         alert("Employee ID doesnot  exist");
-		        }*/
+	  		
 			else{
 				  alert("Failed to inserted");
 				 
@@ -168,7 +154,6 @@ skill.prototype.editSkill = function(obj1){
 		 if(success){
 			 console.log(data[0].trainingAttended);
 			$('#skill').val(data[0].skills);
-		    $('#attended1').val('"'+data[0].trainingAttended+'"');
 		    $('#empid').val(data[0].empId);
 		    $('#rating').val(data[0].rating);
 			$("#save1").css("visibility","hidden");
@@ -195,14 +180,12 @@ skill.prototype.editSkill = function(obj1){
 
 skill.prototype.EditEmployeeskillsById=function(obj1){
 	 var text = document.getElementById("skill").value;
-	  var text1 = document.getElementById("attended1").value;
 	  var regex = /^[A-Za-z.,0-9]+( [A-Za-z.,0-9]+)*$/;
      var char1=/^[a-zA-Z.]+$/;
      var char2=/^[a-z A-Z]+$/;
      var num	= /^[0-9-+]+$/;
 	  var skill= $("#skill").val();
 	  var empId= $("#empid").val();
-	  var training= $("#attended1").val();
 	  var rating= $("#rating").val();
 	   
 		
@@ -239,7 +222,7 @@ skill.prototype.EditEmployeeskillsById=function(obj1){
 	 
 		 
 	 else{  
-		 var input={"payload":{"id":obj1,"skills":$('#skill').val(),"trainingAttended":$('#attended1').val(),
+		 var input={"payload":{"id":obj1,"skills":$('#skill').val(),
 				"empId":$('#empid').val(),"rating":$('#rating').val(),
 				}}; 
     RequestManager.editskills(input, function(data, success)
@@ -248,9 +231,7 @@ skill.prototype.EditEmployeeskillsById=function(obj1){
         if(success){
         alert("Edit skill successfully updated");
         $("#save1").css("visibility","visible");
-		//$("#update").css("visibility","hidden");
         $("#skill").val("");
- 		$("#attended1").val("");
  		$("#rating").val("");
  		App.loadSkill(empId);
  		

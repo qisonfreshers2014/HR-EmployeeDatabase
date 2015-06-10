@@ -220,6 +220,10 @@ RequestManager.prototype.getSearchEmp=function(data,callback){
 	 this.sendToServer('employee/getEmployeesListPaginated', data, callback);
 }
  
+ RequestManager.prototype.getAllHandsMeetingSchedule=function(data,callback){
+	 this.sendToServer('allhandsmeeting/getallhandsschedule', data, callback);
+} 
+ 
 
 
 var RequestManager = new RequestManager();

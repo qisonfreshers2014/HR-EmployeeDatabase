@@ -28,9 +28,9 @@
                     <td class="td">
                         <input type="text" id="DOB" ReadOnly="true">
                     </td>
-                    <th class="thviewEmployee">Blood Group</th>
+                    <th class="thviewEmployee">Actual DOB</th>
                     <td class="td">
-                        <input type="text"  id="blood" ReadOnly="true">
+                        <input type="text"  id="actualDOB" ReadOnly="true">
                     </td>
                 
                 
@@ -47,7 +47,10 @@
                     <th class="thviewEmployee">Father's Name</th>
                     <td class="td">
                         <input type="text" name="fathersname" id="fathername" ReadOnly="true"></td>
-                        <th  class="thviewEmployee"></th><td class="td"></td>
+                         <th class="thviewEmployee">Blood Group</th>
+                    <td class="td">
+                        <input type="text"  id="blood" ReadOnly="true">
+                    </td>
 </tr>
 </table>
 
@@ -112,24 +115,7 @@
                       <th  class="thviewEmployee"></th><td class="td"></td>
                 </tr>
             </table>
-             <table class="tableviewEmployee"  border="0">
-                <tr class="trviewEmployee">
-               <legend>
-                        <h3 class="heading">Skills</h3>
-                                </legend>
-                    <th class="thviewEmployee" >Skills</th>
-                    <td class="td">
-                        <textarea name="skill[]" id="skill" ReadOnly="true"></textarea>
-                    </td>
-                    <th class="thviewEmployee">Rating</th>
-                    <td class="td">
-                        <textarea type="text" name="rating[]" id="rating" ReadOnly="true"></textarea>
-                    </td>
-                   
-                </tr>
-            </table>
-
-       <div id="emphidden">
+             <div id="emphidden">
             <table class="tableviewEmployee"  border="0">
              <legend>
                     <h3 class="heading">Designation Details</h3>
@@ -162,6 +148,14 @@
                 </tr>
             </table>
         </div>     
+ <table class="displayData table table-hover" id="displaySkills" border=1>
+ <legend>
+                    <h3 class="heading">Skills</h3>
+                            </legend>
+<tr><th class="skillheader">Skill</th>
+<th class="skillheader">Rating</th>
+</table>
+
            
      
         

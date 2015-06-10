@@ -25,7 +25,7 @@ TemplateList.prototype.getTemplateName=function(){
 					//  var obj = data[i];
 
 						$('#displayData').append('<table><tbody></tbody></table>');
-						$('#displayData tr:last').after("<tr class='tr'><td>"+value.name+"</td><td><br><input type='button' value='Edit' id='"+value.id+"' class='dynamicEdit btn btn-primary'></td><td><br><input type='button' value='View' id='"+value.id+"' class='dynamicView btn btn-primary'></td></tr></table>");
+						$('#displayData tr:last').after("<tr class='tr'><td>"+value.name+"</td><td><br><a href='#edittemplate'><input type='button' value='Edit' id='"+value.id+"' class='dynamicEdit btn btn-primary'></a></td><td><br><input type='button' value='View' id='"+value.id+"' class='dynamicView btn btn-primary'></td></tr></table>");
 			  });	
 		$('.dynamicEdit').click(function(event){
 			//console.log(event);

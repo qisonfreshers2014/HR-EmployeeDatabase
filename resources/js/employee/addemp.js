@@ -89,6 +89,17 @@ AddEmployee.prototype.handleShow = function() {
 		minDate : new Date(1960, 12, 31),
 		maxDate : new Date(1994, 12, 31)
 	})
+	$('#actualdob').datepicker({
+		// dateFormat : $.datepicker.TIMESTAMP,
+		dateFormat : 'yy-mm-dd',
+		showButtonPanel : true,
+		changeMonth : true,
+		changeYear : true,
+		showAnim : 'drop',
+		minDate : new Date(1960, 12, 31),
+		maxDate : new Date(1994, 12, 31)
+	})
+
 
 	$('#doj').datepicker({
 		// dateFormat : $.datepicker.TIMESTAMP,
@@ -140,6 +151,7 @@ $('#back').click(function(){
 		$("#skype").val("");
 		$('designation').val("");
 		$('#dob').val("");
+		$('#actualdob').val("");
 		$('#doj').val("");
 		$("#emal").val("");
 		$("#password").val("");
@@ -173,9 +185,7 @@ AddEmployee.prototype.uploadMedia = function(callback) {
 		}
 	}.ctx(this));
 	callback();
-
 }
-
 // validating each employee field
 AddEmployee.prototype.validateEmp = function() {
 	var char = /^[A-Za-z .]+( [A-Za-z]+)*$/;
@@ -235,6 +245,7 @@ AddEmployee.prototype.validateEmp = function() {
 	var skype = $('#skype').val();
 	var skypeerr = $('#skypeerr');
 	var dob = $('#dob').val();
+	var actualDOB=$('#actualdob').val();
 	var doj = $('#doj').val();
 	var file = $('#filename').val();
 	var variable = $('#variable').val();
@@ -261,6 +272,16 @@ AddEmployee.prototype.validateEmp = function() {
 				'color', 'red');
 	} else {
 		$('#dateerr').text("");
+		flag = false;
+		// $('#dateerr').css("color", "green");
+	}
+	if (actualDOB == "") {
+		$('#actualdoberror').text('Please enter the Actual DOB').css('color', 'red');
+	} else if (!(actualDOB.match(dateformat))) {
+		$('#actualdoberror').text('Please enter in the format of YYYY-MM-DD').css(
+				'color', 'red');
+	} else {
+		$('#actualdoberror').text("");
 		flag = false;
 		// $('#dateerr').css("color", "green");
 	}
@@ -656,6 +677,7 @@ AddEmployee.prototype.validateEmp = function() {
 	this.ValidateDrpn();
 
 	// sending data to database in the form of json
+	alert(actualDOB);
 
 	if (!flag) {
 		// $('.error').css('visibility', 'hidden');
@@ -666,6 +688,7 @@ AddEmployee.prototype.validateEmp = function() {
 				"employeeName" : name,
 				"gender" : Gender,
 				"dateOfBirth" : dob + " 00:00:00",
+				"actualdateOfBirth" : actualDOB + " 00:00:00",
 				"dateOfJoining" : doj + " 00:00:00",
 				"yearsofexperience" : yearexp,
 				"contactNo" : contnum,
@@ -738,6 +761,7 @@ AddEmployee.prototype.validateEmp = function() {
 				$("#skype").val("");
 				$('designation').val("");
 				$('#dob').val("");
+				$('#actualdob').val("");
 				$('#doj').val("");
 				$("#emal").val("");
 				$("#password").val("");

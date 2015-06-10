@@ -17,7 +17,6 @@ ViewEmployee.prototype.handleShow = function(empid) {
   App.loadhrEditEmp(empid);
  }.ctx(this));
  
- 
  $('#back').click(function(){
  
   routie("employee");
@@ -36,12 +35,9 @@ ViewEmployee.prototype.handleShow = function(empid) {
 ViewEmployee.prototype.viewEmployeedetails=function(empid){
 
  var input= {"payload":{"employeeId":empid}};
-
 RequestManager.viewEmployeedatails(input, function(data, success) {
  if(success){
- 
  var obj=data;
-
  if(obj.deleted==true){
 	    
 	    $('#Editdetails').css("visibility","hidden");
@@ -58,17 +54,60 @@ RequestManager.viewEmployeedatails(input, function(data, success) {
    var dojyear = dojformat.getFullYear();
    var dojmonth = dojformat.getMonth()+1;
    var dojdate = dojformat.getDate();
+   
+   var actualDOBformat=new Date(obj.actualdateOfBirth);
+   var actualDOByear=actualDOBformat.getFullYear();
+   var actualDOBmonth=actualDOBformat.getMonth()+1;
+   var actualDOBdate=actualDOBformat.getDate();
+   
+// Calculating Current years of experience
+   var today=new Date();
+   var diff=Math.floor(today.getTime() - dojformat.getTime());
+   var day = 1000 * 60 * 60 * 24;
+   var days = Math.floor(diff/day);
+   var months = Math.floor(days/31);
+   var exp=obj.yearsofexperience;
+   var isDecimal=exp%1;
+   var parts=exp.toString().split('.');
+   
+   var afterdecimal=parseInt(parts[1]);
+   var beforedecimal=parseInt(parts[0]);
+   
+ if(isDecimal!=0){
+ 	 months=months+afterdecimal;
+ 	
+ 	  years = Math.floor(months/12);
+ 	
+ 	  totalYearsOfExpMnths=months%12;
+ 	 
+     totalYearsOfExp=years+beforedecimal;
+    
+ 	 
+   }
+   else{ 
+ 	  years = Math.floor(months/12);
+ 	
+ 	  totalYearsOfExpMnths=months%12;
+ 	 
+ 	  totalYearsOfExp=years+obj.yearsofexperience;
+ 	
+   }
+ 
+ 
    var hr=true;
+  
    $('#Editskills').click(function(){
 	   App.loadSkill(empid,hr);
 	  }.ctx(this));
-	  
-  
-  $('#employeeimage').append(obj.filePath);
+   var image=obj.filePath;
+   
+   var skills=obj.skills;
+$('#employeeimage').append('<img src="'+image+'" height="150" width="150">');
  $('#eid').val(obj.employeeId);
  $('#name').val(obj.employeeName);
  $('#gender').val(obj.gender);
  $('#DOB').val(byear+"-"+bmonth+"-"+bdate);
+ $('#actualDOB').val(actualDOByear+"-"+actualDOBmonth+"-"+actualDOBdate);
  $('#doj').val(dojyear+"-"+dojmonth+"-"+dojdate);
  $('#cnct').val(obj.contactNo);
  $('#curaddr').val(obj.currentAddress);
@@ -86,14 +125,14 @@ RequestManager.viewEmployeedatails(input, function(data, success) {
  $('#pannum').val(obj.pan);
  $('#pfnum').val(obj.pfNo);
  $('#accountnum').val(obj.bankAccountNo);
- $('#rating').val(obj.rating);
  $('#skype').val(obj.skype);
  $('#salary').val(obj.salary);
- $('#yearofexp').val(obj.yearsofexperience);
- $('#skill').val(obj.skill);
+ $('#yearofexp').val(totalYearsOfExp+"."+totalYearsOfExpMnths);
+ for(i=0;i<skills.length;i++){
+	 var skillsObj=skills[i];
+ $('#displaySkills').append('<tr><td>'+skillsObj.skills+'</td><td>'+skillsObj.rating+'</td></tr>');
  
- 
- 
+ }
   $('#senddesgname').text(obj.employeeName);
   $('#senddoj').text(dojyear+"-"+dojmonth+"-"+dojdate);
  }else{

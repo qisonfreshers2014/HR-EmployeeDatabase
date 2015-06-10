@@ -169,10 +169,7 @@ loadNotificationHomePage.prototype.currentMonthEvents = function() {
 
 
 loadNotificationHomePage.prototype.getdisplayedata = function(input) {
-	RequestManager
-	.getNotificationDisplayCriteria(
-			input,
-			function(data, success) {					
+	RequestManager.getNotificationDisplayCriteria(input,function(data, success) {					
 				if (success) {					
 					
 					var i;
