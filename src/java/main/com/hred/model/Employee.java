@@ -31,7 +31,9 @@ public class Employee extends AbstractObject {
  @Column(name = "DOB")
  private Timestamp dateOfBirth;
  //@Temporal(TemporalType.DATE)
- @Column(name = "DOJ")
+ @Column(name = "Actual_DOB")
+ private Timestamp actualdateOfBirth;
+@Column(name = "DOJ")
  private Timestamp dateOfJoining;
  @Column(name = "years_of_experience")
  private double yearsofexperience;
@@ -145,7 +147,13 @@ public String getSkill() {
  public void setDateOfBirth(Timestamp dateOfBirth) {
   this.dateOfBirth = dateOfBirth;
  }
+ public Timestamp getActualdateOfBirth() {
+		return actualdateOfBirth;
+	}
 
+	public void setActualdateOfBirth(Timestamp actualdateOfBirth) {
+		this.actualdateOfBirth = actualdateOfBirth;
+	}
  public Timestamp getDateOfJoining() {
   return dateOfJoining;
  }
@@ -316,10 +324,11 @@ public String getSkill() {
 		String bloodGroup, int currentDesignation, String highestQualification,
 		String pan, String pfNo, String bankAccountNo, String skype,
 		String skill, String rating, String variableComponent, String salary,
-		int fileId) {
+		int fileId, Timestamp actualdateOfBirth) {
 	super(abstractObject);
 	this.employeeId = employeeId;
 	this.employeeName = employeeName;
+	this.actualdateOfBirth=actualdateOfBirth;
 	this.gender = gender;
 	this.dateOfBirth = dateOfBirth;
 	this.dateOfJoining = dateOfJoining;
@@ -354,6 +363,7 @@ public Employee(Employee employee) {
 	this.employeeName = employee.getEmployeeName();
 	this.gender = employee.getGender();
 	this.dateOfBirth = employee.getDateOfBirth();
+	this.actualdateOfBirth=employee.getActualdateOfBirth();
 	this.dateOfJoining = employee.getDateOfJoining();
 	this.yearsofexperience = employee.getYearsofexperience();
 	this.contactNo = employee.getContactNo();

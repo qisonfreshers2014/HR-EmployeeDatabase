@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
@@ -96,30 +97,19 @@ public class EmployeeHandler extends AbstractHandler {
 		employee = (Employee) empDAOImpl.viewEmployee(EmployeeId);
 		EmployeeOutFile employeeout = new EmployeeOutFile(employee);
      
-		
-		
 		if (employee.getFileId() != 0) {
 			File file = FileHandler.getInstance().getFile(employee.getFileId());
-			String image = "<img src='" + path + file.getFilePath()
-					+ "' height='150' width='150'>";
-			employeeout.setFilePath(image);
-			
-			System.out.println("file path is"+file.getFilePath());
+			String image = path + file.getFilePath();
+		   String replacedImage=image.replace("\\", "/");
+				
+			employeeout.setFilePath(replacedImage);
 		
 		}
-		List<Skills> skill = SkillsHandler.getInstance().getSkillsById(
-				EmployeeId);
-		String finalSkills = employee.getSkill();
-		String finalRatings=employee.getRating();
-		for (Skills sk : skill) {
-
-			finalSkills += " , " + sk.getSkills();
-			finalRatings +=" , " +sk.getRating();
-		}
 		
-
+		List<Skills> skill = SkillsHandler.getInstance().getSkillsById(EmployeeId);
+		
 		List<DesignationType> desg = DesignationHistoryHandler.getInstance()
-				.getDesignationNameAOP(desgn);
+				.getDesignationName(desgn);
 
 		String desgName = "";
 		for (DesignationType dg : desg) {
@@ -129,10 +119,8 @@ public class EmployeeHandler extends AbstractHandler {
 
 			}
 		}
-   System.out.println(finalRatings);
+		employeeout.setSkills(skill);
 		employeeout.setDesignationName(desgName);
-		employeeout.setSkill(finalSkills);
-		employeeout.setRating(finalRatings);
 		return employeeout;
 
 	}
@@ -146,7 +134,7 @@ public class EmployeeHandler extends AbstractHandler {
 		return employee;
 	}
 
-	//@AuthorizeEntity(roles = { Constants.HR })
+	@AuthorizeEntity(roles = { Constants.HR })
 	public List<Employee> getEmployeesAOP(FilterEmployee employee)
 			throws EmployeeException {
 		List<Employee> employees = null;
@@ -224,6 +212,7 @@ public class EmployeeHandler extends AbstractHandler {
 		String blood = employee.getBloodGroup();
 		long num = employee.getContactNo();
 		Timestamp date = employee.getDateOfBirth();
+		Timestamp actualDOB = employee.getActualdateOfBirth();
 		String fatherName = employee.getFathersName();
 		String gender = employee.getGender();
 		long contactNum = employee.getContactNo();
@@ -236,9 +225,8 @@ public class EmployeeHandler extends AbstractHandler {
 		String emercontname = employee.getEmergencyContactName();
 		String currentaddr = employee.getCurrentAddress();
 		String peraddr = employee.getPermanentAddress();
-
 		validateEmp(name, id, email, password, descid, qualification, salary,
-				blood, num, date, fatherName, gender, contactNum, skypeid, doj,
+				blood, num, date,actualDOB, fatherName, gender, contactNum, skypeid, doj,
 				skill, rating, YOE, emercontnum, emercontname, currentaddr,
 				peraddr);
 
@@ -294,7 +282,7 @@ public class EmployeeHandler extends AbstractHandler {
 	private void validateEmp(String name, long id, String email,
 			String password, long descid, String qualification, String salary,
 
-			String blood, long num, Timestamp date, String fatherName,
+			String blood, long num, Timestamp date, Timestamp actualDOB, String fatherName,
 			String gender, long contactNum, String skypeid, Timestamp doj,
 			String skill, String rating, double YOE, long emercontnum,
 			String emercontname, String currentaddr, String peraddr)
@@ -425,6 +413,10 @@ public class EmployeeHandler extends AbstractHandler {
 			throw new EmployeeException(ExceptionCodes.EMPLOYEE_DOB_NULL,
 					ExceptionMessages.EMPLOYEE_DOB_NULL);
 		}
+		if (actualDOB == null) {
+			throw new EmployeeException(ExceptionCodes.EMPLOYEE_ACTUAL_DOB_NULL,
+					ExceptionMessages.EMPLOYEE_ACTUAL_DOB_NULL);
+		}
 	}
 
 	// updating the details of employee
@@ -438,14 +430,11 @@ public class EmployeeHandler extends AbstractHandler {
 		empFromDB.setEmail(employee.getEmail());
 		empFromDB.setCurrentAddress(employee.getCurrentAddress());
 		empFromDB.setPermanentAddress(employee.getPermanentAddress());
-		empFromDB.setEmergencycontactnumber(employee
-				.getEmergencycontactnumber());
+		empFromDB.setEmergencycontactnumber(employee.getEmergencycontactnumber());
 		empFromDB.setEmergencyContactName(employee.getEmergencyContactName());
-		empFromDB.setRelationWithEmergencyConatact(employee
-				.getRelationWithEmergencyConatact());
+		empFromDB.setRelationWithEmergencyConatact(employee.getRelationWithEmergencyConatact());
 		empFromDB.setSkype(employee.getSkype());
-		EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
-				.getEmployeeDAO();
+		EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance().getEmployeeDAO();
 		employee = (Employee) empDAOImpl.update(empFromDB);
 		return employee;
 	}
@@ -462,14 +451,14 @@ public class EmployeeHandler extends AbstractHandler {
 		// empFromDB.setEmail(employee.getEmail());
 		empFromDB.setCurrentAddress(employee.getCurrentAddress());
 		empFromDB.setPermanentAddress(employee.getPermanentAddress());
-		empFromDB.setEmergencycontactnumber(employee
-				.getEmergencycontactnumber());
+		empFromDB.setEmergencycontactnumber(employee.getEmergencycontactnumber());
+		empFromDB.setYearsofexperience(employee.getYearsofexperience());
 		empFromDB.setEmergencyContactName(employee.getEmergencyContactName());
 		empFromDB.setRelationWithEmergencyConatact(employee
 				.getRelationWithEmergencyConatact());
 		empFromDB.setDateOfBirth(employee.getDateOfBirth());
+		empFromDB.setActualdateOfBirth(employee.getActualdateOfBirth());
 		// empFromDB.setPassword(Utils.encrypt(employee.getPassword()));
-		empFromDB.setFileId(employee.getFileId());
 		empFromDB.setSkype(employee.getSkype());
 		empFromDB.setBankAccountNo(employee.getBankAccountNo());
 		empFromDB.setFathersName(employee.getFathersName());
@@ -614,7 +603,7 @@ public class EmployeeHandler extends AbstractHandler {
 
 		for (Employee birthday : employeeBirthday) {
 			DisplayNotificationHome displayNotificationHome = new DisplayNotificationHome(
-					"Birthday", birthday.getDateOfBirth(), birthday.getEmail(),
+					"Birthday", birthday.getActualdateOfBirth(), birthday.getEmail(),
 					birthday.getEmployeeName());
 
 			if (notificationHistory.size() != 0) {
@@ -751,7 +740,6 @@ public class EmployeeHandler extends AbstractHandler {
 				.getConfirmNewPassword();
 
 		String encryptedOldPassword = Utils.encrypt(oldpassword.trim());
-		System.out.println(changePasswordEmployee.getId());
 
 		if (newPassword == null || newPassword.isEmpty()
 				|| newPassword.trim().isEmpty() || confirmNewPassword == null
@@ -851,9 +839,10 @@ public class EmployeeHandler extends AbstractHandler {
 			 
 			 Paginator<Employee> paginator = new Paginator<>();
 			 paginator = DAOFactory.getInstance().getEmployeeDAO().getEmployeesListPaginated(employee);
-			 
+			List li= paginator.getList();
 			 PaginationOutput<Employee> empPaginationOutput = new PaginationOutput<>(paginator, employee.getPageNo(), employee.getPageSize());
 			 return empPaginationOutput;
 			 
 			}
+
 }

@@ -118,7 +118,7 @@ public class DesignationHistoryService extends BaseService{
 		DesignationType designation = (DesignationType) JsonUtil.getObject(request.getPayload(),
 		DesignationType.class);
 		 
-		List<DesignationType> designationName = DesignationHistoryHandler.getInstance().getDesignationNameAOP(designation);
+		List<DesignationType> designationName = DesignationHistoryHandler.getInstance().getDesignationName(designation);
 		System.out.println("Count : "+ designationName.size());
 
 		return JsonUtil.getJsonForListBasedOnDescriptor(designationName, DesignationType.class, DesignationType.class);

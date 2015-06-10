@@ -12,8 +12,9 @@ import org.hibernate.criterion.Restrictions;
 import com.hred.exception.AllHandsMeetingException;
 import com.hred.exception.ExceptionCodes;
 import com.hred.exception.ExceptionMessages;
-import com.hred.exception.UserException;
 import com.hred.model.AllHandsMeeting;
+import com.hred.pagination.AllhandsmeetingInput;
+import com.hred.pagination.Paginator;
 import com.hred.persistence.dao.AllHandsMeetingDAO;
 import com.hred.persistence.session.SessionFactoryUtil;
 
@@ -104,7 +105,24 @@ public class AllHandsMeetingDAOImpl extends BaseDAOImpl implements AllHandsMeeti
 		return  list;	 
 	}
 
+	@Override
+	public Paginator<AllHandsMeeting> getAllHandsSchedule(AllhandsmeetingInput allhands) {
+		 int pageNo = allhands.getPageNo();
+		  int pageSize = allhands.getPageSize();
+		  
+		  int skipCount = (pageNo - 1) * pageSize;  
+		  Criteria criteria=createCustomCriteria(AllHandsMeeting.class);
+		  
 
+		        criteria.setFirstResult(skipCount).setMaxResults(pageSize);
+		  List<AllHandsMeeting> consultantList=criteria.list();
+		  
+		  Criteria countCriteria=createCustomCriteria(AllHandsMeeting.class); 
+		  Long totalCount = getRecordCount(countCriteria);
+
+		  Paginator<AllHandsMeeting> allhandsPaginator = new Paginator<>(consultantList, totalCount);
+		  return allhandsPaginator;
+	}
 
 	
 

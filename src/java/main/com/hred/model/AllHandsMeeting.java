@@ -41,7 +41,7 @@ public class AllHandsMeeting extends AbstractObject{
 		return employee;
 	}
 
-
+                         
 
 	public void setEmployee(String employee) {
 		this.employee = employee;
@@ -58,10 +58,6 @@ public class AllHandsMeeting extends AbstractObject{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
-
-
-
 
 
 	@Override

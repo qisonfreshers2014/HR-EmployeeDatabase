@@ -66,8 +66,8 @@ public class DesignationHistoryHandler extends AbstractHandler {
 		return designationhistory_saved;
 	}
 
-	@AuthorizeEntity(roles={Constants.HR})
-	public List<DesignationType> getDesignationNameAOP(DesignationType designation) {
+	//@AuthorizeEntity(roles={Constants.HR})
+	public List<DesignationType> getDesignationName(DesignationType designation) {
 		List<DesignationType> designations = null;
 		DesignationHistoryDAO designationHistorDAOImpl = (DesignationHistoryDAO)DAOFactory.getInstance().getDesignationHistoryDAO();
 		designations = (List<DesignationType>) designationHistorDAOImpl.getDesignationName(designation);

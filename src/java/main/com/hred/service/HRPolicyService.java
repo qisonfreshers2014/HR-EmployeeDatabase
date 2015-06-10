@@ -91,7 +91,6 @@ public class HRPolicyService extends BaseService {
 				BusinessException, EncryptionException {		
 			HRPolicy policy = (HRPolicy) JsonUtil.getObject(request.getPayload(), HRPolicy.class);
 			List<VeiwHRPolicies> policies = HRPolicyHandler.getInstance().getPolicy();
-			System.out.println("Count : "+ policies.size());
 			return JsonUtil.getJsonForListBasedOnDescriptor(policies, VeiwHRPolicyDiscriptor.class, VeiwHRPolicies.class);
 
 		}

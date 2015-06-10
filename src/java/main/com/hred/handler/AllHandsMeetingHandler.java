@@ -8,15 +8,14 @@ import com.hred.exception.AllHandsMeetingException;
 import com.hred.exception.ExceptionCodes;
 import com.hred.exception.ExceptionMessages;
 import com.hred.exception.ObjectNotFoundException;
-import com.hred.exception.TemplateException;
 import com.hred.handler.annotations.AuthorizeEntity;
 import com.hred.model.AllHandsMeeting;
 import com.hred.model.ObjectTypes;
-import com.hred.model.Template;
+import com.hred.pagination.AllhandsmeetingInput;
+import com.hred.pagination.PaginationOutput;
+import com.hred.pagination.Paginator;
 import com.hred.persistence.dao.AllHandsMeetingDAO;
 import com.hred.persistence.dao.DAOFactory;
-import com.hred.persistence.dao.TemplateDAO;
-import com.hred.persistence.daoimpl.AllHandsMeetingDAOImpl;
 
 /**
  * @author saisudha
@@ -37,8 +36,8 @@ public class AllHandsMeetingHandler extends AbstractHandler {
 		return INSTANCE;
 	}
 	
-	@AuthorizeEntity(roles={Constants.HR})
-	public List<AllHandsMeeting> getAllHandsMeetingAOP()throws AllHandsMeetingException {
+	//@AuthorizeEntity(roles={Constants.HR})
+	public List<AllHandsMeeting> getAllHandsMeeting()throws AllHandsMeetingException {
 		List<AllHandsMeeting> allhandsmeetinglist = null;
 		AllHandsMeetingDAO AllHandsMeetingDAOImpl = (AllHandsMeetingDAO) DAOFactory.getInstance().getAllHandsMeetingDAO();
 		allhandsmeetinglist = (List<AllHandsMeeting>)AllHandsMeetingDAOImpl.getAllHandsMeeting();
@@ -74,7 +73,7 @@ public class AllHandsMeetingHandler extends AbstractHandler {
 	 }
 	 @AuthorizeEntity(roles={Constants.HR})
 	public AllHandsMeeting saveAOP(AllHandsMeeting allhandsmeetingInput) throws AllHandsMeetingException{
-		List<AllHandsMeeting> allhands = getAllHandsMeetingAOP();
+		List<AllHandsMeeting> allhands = getAllHandsMeeting();
 		  
 		Timestamp date=allhandsmeetingInput.getDate();
 		String employee=allhandsmeetingInput.getEmployee();
@@ -98,7 +97,7 @@ public class AllHandsMeetingHandler extends AbstractHandler {
 	@AuthorizeEntity(roles={Constants.HR})
 	public AllHandsMeeting updateAOP(AllHandsMeeting allhandsmeeting) throws ObjectNotFoundException, AllHandsMeetingException {
 		// TODO Auto-generated method stub
-		List<AllHandsMeeting> allhands = getAllHandsMeetingAOP();
+		List<AllHandsMeeting> allhands = getAllHandsMeeting();
 		Timestamp date=allhandsmeeting.getDate();
 		String employee=allhandsmeeting.getEmployee();
 		String description=allhandsmeeting.getDescription();
@@ -142,6 +141,17 @@ public class AllHandsMeetingHandler extends AbstractHandler {
 			      }
 		
 	}
+	
+	
+	public PaginationOutput<AllHandsMeeting> getAllhandsSchedule(AllhandsmeetingInput allhands) {
+		 Paginator<AllHandsMeeting> paginator = new Paginator<>();
+		 paginator = DAOFactory.getInstance().getAllHandsMeetingDAO().getAllHandsSchedule(allhands);
+		 
+		 PaginationOutput<AllHandsMeeting> allHandsOutput = new PaginationOutput<>(paginator, allhands.getPageNo(), allhands.getPageSize());
+		 return allHandsOutput;
+	}
+
+
 
 	
 }

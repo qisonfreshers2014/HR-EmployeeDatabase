@@ -101,7 +101,7 @@ public class UploadServlet extends HttpServlet {
         	 		String tempPath = tempDir + File.separator + fileNameToSave;
         	 		File tempStore = new File(tempPath);
         	 		String tmpPath = File.separator +"FileUpload"+File.separator+fileNameToSave;
-                    
+                    System.out.println(File.separator);
                     file.setName(fileName);
                     file.setFilePath(tmpPath); 
                     // saves the file on disk

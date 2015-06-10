@@ -12,6 +12,7 @@ public class EmployeeListPaginationInput extends PaginationInput {
 	private boolean isDeleted;
 	private int yearsofexperience;
 	private Timestamp dateOfBirth;
+	private Timestamp actualdateOfBirth;
 	private long contactNo;
 	private String email;
 	private long emergencycontactnumber;
@@ -80,6 +81,16 @@ public class EmployeeListPaginationInput extends PaginationInput {
 	public void setDateOfBirth(Timestamp dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
+     
+	
+	
+	public Timestamp getActualdateOfBirth() {
+		return actualdateOfBirth;
+	}
+
+	public void setActualdateOfBirth(Timestamp actualdateOfBirth) {
+		this.actualdateOfBirth = actualdateOfBirth;
+	}
 
 	public long getContactNo() {
 		return contactNo;
@@ -108,7 +119,7 @@ public class EmployeeListPaginationInput extends PaginationInput {
 	public EmployeeListPaginationInput(int employeeId, int currentDesignation,
 			Timestamp dateOfJoining, String employeeName, String pan,
 			boolean isDeleted, int yearsofexperience, Timestamp dateOfBirth,
-			long contactNo, String email, long emergencycontactnumber) {
+			long contactNo, String email, long emergencycontactnumber, Timestamp actualdateOfBirth) {
 		super();
 		this.employeeId = employeeId;
 		this.currentDesignation = currentDesignation;
@@ -121,6 +132,7 @@ public class EmployeeListPaginationInput extends PaginationInput {
 		this.contactNo = contactNo;
 		this.email = email;
 		this.emergencycontactnumber = emergencycontactnumber;
+		this.actualdateOfBirth=actualdateOfBirth;
 	}
 	
 	public EmployeeListPaginationInput() {

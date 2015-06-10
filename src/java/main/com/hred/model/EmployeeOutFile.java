@@ -1,6 +1,7 @@
 package com.hred.model;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class EmployeeOutFile extends Employee {
 
@@ -21,6 +22,7 @@ public EmployeeOutFile(int employeeId) {
  
  private String filePath;
  private String designationName;
+ private List<Skills> skills;
 
  public String getDesignationName() {
   return designationName;
@@ -34,11 +36,19 @@ public EmployeeOutFile(int employeeId) {
  public void setFilePath(String filePath) {
   this.filePath = filePath;
  }
- public EmployeeOutFile(Employee employee,String filePath,String designationName) {
+ 
+ public List<Skills> getSkills() {
+	return skills;
+}
+public void setSkills(List<Skills> skills) {
+	this.skills = skills;
+}
+public EmployeeOutFile(Employee employee,String filePath,String designationName,List<Skills> skills) {
      
   super(employee);
   this.filePath=filePath;
   this.designationName=designationName;
+  this.skills=skills;
  }
 
  
