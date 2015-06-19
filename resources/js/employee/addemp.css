@@ -36,6 +36,7 @@
 
 .bar {
 	color: #00246B;
+	margin-left:2%;
 }
 
 .error {
@@ -60,9 +61,51 @@
 	color: #000;
 }
 
-#btnadd {
-	float: right;
-}
 .savealign{
 	margin-left:35%;
+}
+#alignaddemp{
+	margin-left:40%;
+}
+#buttonsdiv{
+	padding-left:2%;
+}
+#backchangepassword{
+	margin-left:2%;
+}
+#displayDatatemplist,.templisttr,.temlistth,.templisttd{
+	border:1px solid black;
+	border-collapse:collapse;
+	
+}
+.temlistth{
+ background-color:#7094b8;
+ color:white;
+}
+.templisttr,.temlistth,.templisttd{
+	text-align:center;
+}
+.templisthead{
+	margin-top:2%;
+	 color: #00246B;
+}
+#btnaddtemp{
+	margin-top:2%;
+	margin-bottom:1%;
+}
+#displayDatatemplist{
+	margin-left:15%;
+	width:70%;
+}
+#updateemp{
+  margin-left:45%;
+}
+#backtoprofile{
+ margin-left:2%; 
+}
+#backtohrview{
+	margin-left:2%;
+}
+.hreditbuttons{
+	margin-left:40%;
 }

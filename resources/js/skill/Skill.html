@@ -13,46 +13,47 @@
 <div> <h1 class="align">Employee Skills Details</h1></div><br/><br/>
 <div class="body1"><br>
  
-<div class="div" >
-
-<b>Employee Id<span class="red">*</span> &nbsp;</b> <input type="text" id="empid" readonly="true" size="22" onfocusout="empid()"  maxlength="15"/> 
+<table class="skilltable" >
+<tr class="inputtr">
+<th class="inputth">Employee Id<span class="red">*</span></th><td class="inputtd"><input type="text" id="empid" readonly="true" onfocusout="empid()"  maxlength="15"/></td>
 <span class="e1" id="skillerror1"> </span><span class="inputelement1"></span><span  class="e1" id="skillerror2"></span>
-<b>Skill<span class="red">*</span> </b><span class="inputelement1">&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;</span><input type="text" id="skill" size="22" maxlength="30" >
-</div><br><br>
-<div class="div" >
-<b class="div"> Rating<span class="red">*</span><span class="inputelement1"></span><span class="inputelement1"></span> &nbsp;&nbsp; </b>
-<select id="rating" style="width:10%">
+<th inputth>Skill<span class="red">*</span></th><td class="inputtd"><input type="text" id="skill"  maxlength="30" ></td>
+<th class="inputth"> Rating<span class="red">*</span></th>
+<td class="inputtd">
+<select id="rating">
 		<option value="">Select </option>
-		<option value="Learner">1</option>
-		<option value="Average">2</option> 
-		<option value="Good">3</option>
-		<option value="Excellent">4</option>
-		<option value="Proficient">5</option>
-</select><br><br>
-<div id="noteforrating">
-<p>Note: 1 - Learner</p><br>
-        <p>2 - Average</p><br>
-        <p>3 - Good</p><br>
-       <p> 4 -Excellent</p><br>
-       <p> 5 -Proficient</p>
-       </div>
+		<option value="Learner">1-Learner</option>
+		<option value="Average">2-Average</option> 
+		<option value="Good">3-Good</option>
+		<option value="Excellent">4-Excellent</option>
+		<option value="Proficient">5-Proficient</option>
+</select></td></tr></table><span id="skillbuttons"></span>
+<table class="buttonstable"><tr class="buttonstr">
+<td class="buttonstd"><button  type="button" class=" btn btn-primary btn-md" id="save1" >Save</button></td>
+<td class="buttonstd"><button type="reset" value="Reset" class=" btn btn-primary btn-md" id="Resetskill">Reset</button></td>
+<td class="buttonstd"><button type ="button" value="Update" id="updateskill" class =" btn btn-primary btn-md">Update</button></td>
+<!-- <td class="noteforrating" class="buttonstd">
+<p class="noteforrating">Note: 1 - Learner</p><br>
+        <p class="noteforrating">2 - Average</p><br>
+        <p class="noteforrating">3 - Good</p><br>
+       <p class="noteforrating"> 4 -Excellent</p><br>
+       <p class="noteforrating"> 5 -Proficient</p></td> -->
+       </table>
 <br>
-<span class="e1" id="error1"> </span><span class="inputelement1"></span><span  class="e1" id="error2"></span><br> 
+<div id="navigationbuttons">
+
 </div>
-<div  class="div"><button  type="button" class="btn btn-primary btn-md" id="save1" >Save</button>
-<button type="reset" value="Reset" class="btn btn-primary btn-md" id="reset">Reset</button>
-<button type ="button" value="Update" id="updateskill" class ="btn btn-primary btn-md">Update</button>
- </div><br><br><br>
- <table id="displayData" class="tble table table-hover"   style="width:96%">
- <tr>
-    <th>Skill</th>
-    <th >Employee Id</th>		
-    <th >Rating</th>
-	<th >Update</th>
+
+ <table id="displayDataskill" class="tble table table-hover">
+ <tr class="skilltr">
+    <th class="skillth">Skill</th>
+    <th class="skillth">Employee Id</th>		
+    <th class="skillth">Rating</th>
+	<th class="skillth">Update</th>
  </tr>
  </table>
 <div>
- <input type="button" value="Back" class="btn btn-primary btn-md" id="back"></div>
+ <input type="button" value="Back" class="btn btn-primary btn-md" id="backtoemp"></div>
  
   </body>
 </html>

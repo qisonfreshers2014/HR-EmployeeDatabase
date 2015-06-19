@@ -94,8 +94,7 @@ public class TemplateService extends BaseService {
 
   Template template = (Template) JsonUtil.getObject(request.getPayload(),
     Template.class);
-  List<Template> templates = TemplateHandler.getInstance().viewTemplateAOP(
-    template);
+  List<Template> templates = TemplateHandler.getInstance().viewTemplateAOP(template.getId());
 
   // String outputString =
   // "{\"status\": \"SUCCESS\", \"payload\": \"Test Successful\"}";
@@ -119,8 +118,7 @@ public class TemplateService extends BaseService {
   DisplayNotificationHome template = (DisplayNotificationHome) JsonUtil.getObject(request.getPayload(),
     DisplayNotificationHome.class);
 
-  Template subject = TemplateHandler.getInstance().getContentForMailAOP(
-    template);
+  Template subject = TemplateHandler.getInstance().getContentForMailAOP(template);
   return JsonUtil.getJsonBasedOnDescriptor(subject, Template.class);
  }
  @POST

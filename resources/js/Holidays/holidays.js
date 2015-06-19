@@ -8,6 +8,7 @@ function listHoliday() {
 listHoliday.prototype.handleShow = function() {
 
 	$('.container').show();
+	$('#holiday').parent().addClass('active');
 	var contentinput = {
 		"payload" : {}
 	};
@@ -34,8 +35,8 @@ listHoliday.prototype.handleShow = function() {
 			changeMonth : true,
 			changeYear : true,
 			showAnim : 'drop',
-			minDate : (new Date((currentYear - 2), 12, 1)),
-			maxDate : new Date((currentYear + 1), 11, 31)
+			minDate : (new Date((currentYear - 2),1, 12)),
+			maxDate : new Date((currentYear + 1),31, 11 )
 		});
 
 	}.ctx(this));
@@ -56,13 +57,13 @@ listHoliday.prototype.validateHolidays = function() {
 	var date = (new Date).getDate();
 	var letters = /^\d\d\d\d-(0\d|1[012])-(0\d|1\d|2\d|3[01])$/;
 	$(".date").datepicker({
-		dateFormat : 'yy-mm-dd',
+		dateFormat : 'dd-mm-yy',
 		showButtonPanel : true,
 		changeMonth : true,
 		changeYear : true,
 		showAnim : 'drop',
-		minDate : (new Date((currentYear - 2), 12, 1)),
-		maxDate : new Date((currentYear + 1), 11, 31)
+		minDate : (new Date((currentYear - 2),1, 12)),
+		maxDate : new Date((currentYear + 1),31, 11 )
 	});
 
 	if ($("#start_from").val() == "" || $("select").val() == "Select"
@@ -149,6 +150,22 @@ listHoliday.prototype.validateHolidays = function() {
 
 }
 
+
+var monthsArray=new Array(12);
+    monthsArray[0]="January";
+	monthsArray[1]="Febravary";
+	monthsArray[2]="March";
+	monthsArray[3]="April";
+	monthsArray[4]="May";
+	monthsArray[5]="June";
+	monthsArray[6]="July";
+	monthsArray[7]="August";
+	monthsArray[8]="September";
+	monthsArray[9]="October";
+	monthsArray[10]="November";
+	monthsArray[11]="December";
+	
+
 // function to display whole Holidays data in a table and update call back
 listHoliday.prototype.tableDisplay = function(content, status) {
 	$("#save").show();
@@ -176,7 +193,7 @@ listHoliday.prototype.tableDisplay = function(content, status) {
 
 	$("#update")
 			.click(
-					function() {
+					function() { 
 												
 						if ($("#start_from").val() == "" || $("select").val() == "Select"
 							|| $("#description").val() == "") {
@@ -186,7 +203,7 @@ listHoliday.prototype.tableDisplay = function(content, status) {
 
 						} else if (!($("#start_from").val().match(letters))) {
 							$(".holidayerror").css("visibility", "visible");
-							$("#fromDate").text("Please enter date in yyyy-mm-dd format");
+							$("#fromDate").text("Please enter date in dd-mm-yyyy format");
 
 						} else {
 							$("#fromDate").text("");
@@ -263,13 +280,16 @@ listHoliday.prototype.tableDisplay = function(content, status) {
 						}
 
 					});
-
+          
+	
+	 
 	for (var i = 0; i < content.length; i++) {
 		var obj = content[i];
 
 		var fromdateformat = new Date(obj.fromDate);
 		var year = fromdateformat.getFullYear();
-		var month = fromdateformat.getMonth() + 1;
+		var month = monthsArray[fromdateformat.getMonth()];
+		var payloadmonth=fromdateformat.getMonth()+1;
 		var date = fromdateformat.getDate();
 
 		var dayNames = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday',
@@ -281,11 +301,11 @@ listHoliday.prototype.tableDisplay = function(content, status) {
 			$('#mandatorytable tr:last')
 					.after(
 							"<tr><td>"
-									+ year
+									+ date
 									+ "-"
 									+ month
 									+ "-"
-									+ date
+									+ year
 									+ "</td><td>"
 									+ obj.description
 									+ "</td><td>"
@@ -293,7 +313,7 @@ listHoliday.prototype.tableDisplay = function(content, status) {
 									+ "</td><td><input type='button' value='Edit' id='"
 									+ obj.id
 									+ "' class='dynamicEdit'></td><td><input type='button' value='Delete' class='deleteHoliday' id='"
-									+ (year + "-" + month + "-" + date)
+									+ (year + "-" + payloadmonth + "-" + date)
 									+ "'></td></tr>");
 
 		}
@@ -303,11 +323,11 @@ listHoliday.prototype.tableDisplay = function(content, status) {
 			$('#weekendstable tr:last')
 					.after(
 							"<tr><td>"
-									+ year
+									+ date
 									+ "-"
 									+ month
 									+ "-"
-									+ date
+									+ year
 									+ "</td><td>"
 									+ obj.description
 									+ "</td><td>"
@@ -315,7 +335,7 @@ listHoliday.prototype.tableDisplay = function(content, status) {
 									+ "</td><td><input type='button' value='Edit' id='"
 									+ obj.id
 									+ "' class='dynamicEdit'></td><td><input type='button' value='Delete' class='deleteHoliday' id='"
-									+ (year + "-" + month + "-" + date)
+									+ (year + "-" + payloadmonth + "-" + date)
 									+ "'></td></tr>");
 
 		}
@@ -325,11 +345,11 @@ listHoliday.prototype.tableDisplay = function(content, status) {
 			$('#optionaltable tr:last')
 					.after(
 							"<tr><td>"
-									+ year
+									+ date
 									+ "-"
 									+ month
 									+ "-"
-									+ date
+									+ year
 									+ "</td><td>"
 									+ obj.description
 									+ "</td><td>"
@@ -337,7 +357,7 @@ listHoliday.prototype.tableDisplay = function(content, status) {
 									+ "</td><td><input type='button' value='Edit' id='"
 									+ obj.id
 									+ "' class='dynamicEdit'></td><td><input type='button' value='Delete' class='deleteHoliday' id='"
-									+ (year + "-" + month + "-" + date)
+									+ (year + "-" + payloadmonth + "-" + date)
 									+ "'></td></tr>");
 
 		}
@@ -359,14 +379,15 @@ listHoliday.prototype.editData = function(releaseId) {
 		if (success) {
 
 			var editdata = data[0];
+			
 
 			var fromvalue = editdata.fromDate;
 			var fromres = new Date(fromvalue);
 			var fromyear = fromres.getFullYear();
-			var frommonth = fromres.getMonth() + 1;
+			var frommonth = fromres.getMonth()+1;;
 			var fromdate = fromres.getDate();
 
-			$("#start_from").val(fromyear + "-" + frommonth + "-" + fromdate);
+			$("#start_from").val(fromyear + "-" + frommonth + "-" +fromdate);
 			// $("#ends_at").val(toyear+"-"+tomonth+"-"+ todate);
 			$("#description").val(editdata.description);
 			$("#dropdown").val(editdata.type);
@@ -385,7 +406,8 @@ listHoliday.prototype.contentDisplay = function(content, status) {
 		var value = content.fromDate;
 		var res = new Date(value);
 		var year = res.getFullYear();
-		var month = res.getMonth() + 1;
+		var month = monthsArray[res.getMonth()];
+		var payloadmonth=res.getMonth()+1;
 		var date = res.getDate();
 
 		var dayNames = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday',
@@ -397,11 +419,11 @@ listHoliday.prototype.contentDisplay = function(content, status) {
 			$('#mandatorytable tr:last')
 					.after(
 							"<tr><td>"
-									+ year
+									+ date
 									+ "-"
 									+ month
 									+ "-"
-									+ date
+									+ year
 									+ "</td><td>"
 									+ content.description
 									+ "</td><td>"
@@ -409,7 +431,7 @@ listHoliday.prototype.contentDisplay = function(content, status) {
 									+ "</td><td><input type='button' value='Edit' id='"
 									+ content.id
 									+ "' class='dynamicEdit'></td><td><input type='button' value='Delete' class='deleteHoliday' id='"
-									+ (year + "-" + month + "-" + date)
+									+ (year + "-" + payloadmonth + "-" + date)
 									+ "'></td></tr>");
 
 		}
@@ -420,11 +442,11 @@ listHoliday.prototype.contentDisplay = function(content, status) {
 			$('#weekendstable tr:last')
 					.after(
 							"<tr><td>"
-									+ year
+									+ date
 									+ "-"
 									+ month
 									+ "-"
-									+ date
+									+ year
 									+ "</td><td>"
 									+ content.description
 									+ "</td><td>"
@@ -432,7 +454,7 @@ listHoliday.prototype.contentDisplay = function(content, status) {
 									+ "</td><td><input type='button' value='Edit' id='"
 									+ content.id
 									+ "' class='dynamicEdit'></td><td><input type='button' value='Delete' class='deleteHoliday' id='"
-									+ (year + "-" + month + "-" + date)
+									+ (year + "-" + payloadmonth + "-" + date)
 									+ "'></td></tr>");
 
 		}
@@ -443,11 +465,11 @@ listHoliday.prototype.contentDisplay = function(content, status) {
 			$('#optionaltable tr:last')
 					.after(
 							"<tr><td>"
-									+ year
+									+ date
 									+ "-"
 									+ month
 									+ "-"
-									+ date
+									+ year
 									+ "</td><td>"
 									+ content.description
 									+ "</td><td>"
@@ -455,7 +477,7 @@ listHoliday.prototype.contentDisplay = function(content, status) {
 									+ "</td><td><input type='button' value='Edit' id='"
 									+ content.id
 									+ "' class='dynamicEdit'></td><td><input type='button' value='Delete' class='deleteHoliday' id='"
-									+ (year + "-" + month + "-" + date)
+									+ (year + "-" + payloadmonth + "-" + date)
 									+ "'></td></tr>");
 
 		}

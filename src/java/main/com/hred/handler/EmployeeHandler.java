@@ -138,12 +138,14 @@ public class EmployeeHandler extends AbstractHandler {
 	public List<Employee> getEmployeesAOP(FilterEmployee employee)
 			throws EmployeeException {
 		List<Employee> employees = null;
+		DesignationType desgn = null;
 		EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
 				.getEmployeeDAO();
 		employees = empDAOImpl.getEmployees(employee);
 		
+
 		
-		if(employee.getGender()==null && employee.getDateOfJoiningFrom()==null && employee.getDateOfJoiningTo()==null && employee.getHighestQualification()==null && employee.getFilterEmployee()==0 && employee.getFrom()==null && employee.getTo()==null && employee.getCurrentDesignation()==0){
+		if(employee.getGender()==null && employee.getDateOfJoiningFrom()==null && employee.getDateOfJoiningTo()==null && employee.getHighestQualification()==null && employee.getFilterEmployee().equalsIgnoreCase("notselected")&& employee.getFrom()==null && employee.getTo()==null && employee.getCurrentDesignation()==0){
 			
 			throw new EmployeeException(
 					ExceptionCodes.SELECT_ATLEAST_ONE_FIELD,
@@ -197,7 +199,7 @@ public class EmployeeHandler extends AbstractHandler {
 
 	}
 
-	@AuthorizeEntity(roles = { Constants.HR })
+	//@AuthorizeEntity(roles = { Constants.HR })
 	public Employee saveAOP(Employee employee) throws EncryptionException,
 			BusinessException {
 		employee.setDeleted(false);
@@ -225,10 +227,13 @@ public class EmployeeHandler extends AbstractHandler {
 		String emercontname = employee.getEmergencyContactName();
 		String currentaddr = employee.getCurrentAddress();
 		String peraddr = employee.getPermanentAddress();
+		String employeeType=employee.getEmployeeType();
+		String university=employee.getUniversity();
+		System.out.println(employeeType);
 		validateEmp(name, id, email, password, descid, qualification, salary,
 				blood, num, date,actualDOB, fatherName, gender, contactNum, skypeid, doj,
 				skill, rating, YOE, emercontnum, emercontname, currentaddr,
-				peraddr);
+				peraddr,employeeType,university);
 
 		Boolean isempidExist = DAOFactory.getInstance().getEmployeeDAO()
 				.getEmployeeByEmpId(employee.getEmployeeId());
@@ -285,7 +290,7 @@ public class EmployeeHandler extends AbstractHandler {
 			String blood, long num, Timestamp date, Timestamp actualDOB, String fatherName,
 			String gender, long contactNum, String skypeid, Timestamp doj,
 			String skill, String rating, double YOE, long emercontnum,
-			String emercontname, String currentaddr, String peraddr)
+			String emercontname, String currentaddr, String peraddr,String employeeType,String university)
 			throws BusinessException {
 
 		if (currentaddr == null || currentaddr.isEmpty()) {
@@ -330,11 +335,11 @@ public class EmployeeHandler extends AbstractHandler {
 
 		}
 
-		if (skypeid == null || skypeid.isEmpty()) {
+		/*if (skypeid == null || skypeid.isEmpty()) {
 			throw new EmployeeException(
 					ExceptionCodes.EMPLOYEE_SKYPEID_NOT_EMPTY,
 					ExceptionMessages.EMPLOYEE_SKYPEID_NOT_EMPTY);
-		}
+		}*/
 
 		if (contactNum == 0) {
 			throw new EmployeeException(
@@ -399,11 +404,11 @@ public class EmployeeHandler extends AbstractHandler {
 			throw new EmployeeException(ExceptionCodes.EMPLOYEE_SALARY,
 					ExceptionMessages.EMPLOYEE_SALARY);
 		}
-
+/*
 		if (blood == null || blood.isEmpty()) {
 			throw new EmployeeException(ExceptionCodes.EMPLOYEE_BLOOD_GROUP,
 					ExceptionMessages.EMPLOYEE_BLOOD_GROUP);
-		}
+		}*/
 
 		if (num == 0) {
 			throw new EmployeeException(ExceptionCodes.EMPLOYEE_NUMBER,
@@ -416,6 +421,18 @@ public class EmployeeHandler extends AbstractHandler {
 		if (actualDOB == null) {
 			throw new EmployeeException(ExceptionCodes.EMPLOYEE_ACTUAL_DOB_NULL,
 					ExceptionMessages.EMPLOYEE_ACTUAL_DOB_NULL);
+		}
+		if(employeeType==null||employeeType.isEmpty()){
+			
+			throw new EmployeeException(ExceptionCodes.EMPLYEE_TYPE_NULL,ExceptionMessages.EMPLYEE_TYPE_NULL);
+			
+			                             
+		}
+        if(university==null||university.isEmpty()){
+			
+			throw new EmployeeException(ExceptionCodes.EMPLYEE_UNIVERSITY_NULL,ExceptionMessages.EMPLYEE_UNIVERSITY_NULL);
+			
+			                             
 		}
 	}
 
@@ -434,6 +451,7 @@ public class EmployeeHandler extends AbstractHandler {
 		empFromDB.setEmergencyContactName(employee.getEmergencyContactName());
 		empFromDB.setRelationWithEmergencyConatact(employee.getRelationWithEmergencyConatact());
 		empFromDB.setSkype(employee.getSkype());
+		empFromDB.setHobbies(employee.getHobbies());
 		EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance().getEmployeeDAO();
 		employee = (Employee) empDAOImpl.update(empFromDB);
 		return employee;
@@ -466,6 +484,8 @@ public class EmployeeHandler extends AbstractHandler {
 		empFromDB.setPan(employee.getPan());
 		empFromDB.setPfNo(employee.getPfNo());
 		empFromDB.setSalary(employee.getSalary());
+		empFromDB.setFileId(employee.getFileId());
+		empFromDB.setEmployeeType(employee.getEmployeeType());
 		// empFromDB.setGender(employee.getGender());
 		empFromDB.setBloodGroup(employee.getBloodGroup());
 		// empFromDB.setEmployeeId(employee.getEmployeeId());
@@ -519,8 +539,7 @@ public class EmployeeHandler extends AbstractHandler {
 		String selectedEvent = filterCriteria.getSelectedEvent();
 		System.out.println(selectedEvent);
 		EmployeeDAO employeeDAOImpl = DAOFactory.getInstance().getEmployeeDAO();
-		if (filterCriteria.getFromdate() == null
-				|| filterCriteria.getTodate() == null) {
+		if (filterCriteria.getFromdate() == null|| filterCriteria.getTodate() == null) {
 			empBirthdayWithDates = employeeDAOImpl.getBirthday();
 			empWorkAniversayWithdates = employeeDAOImpl.getWorkAniversary();
 			if (selectedEvent.equalsIgnoreCase("Welcome")) {

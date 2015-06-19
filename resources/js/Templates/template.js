@@ -16,8 +16,8 @@ Template.prototype.handleShow = function(dataid) {
 		if(success){
 			 var obj=data[0];
 			 
-			 $('.templateName1').prepend(obj.name);
-			 $('.templateSubject1').prepend(obj.subject);
+			 $('.templateName1').val(obj.name);
+			 $('.templateSubject1').val(obj.subject);
 			 $('.templateContent1').prepend(obj.content);
 		  }
 		 }.ctx(this));

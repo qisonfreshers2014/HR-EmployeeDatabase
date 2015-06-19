@@ -8,11 +8,11 @@ EditEmployee.prototype.handleShow = function(employeeId) {
 
 	$('.container').show();
 	this.validateEditEmp(employeeId);
-	$('#update').click(function(e) {
+	$('#updateemp').click(function(e) {
 		e.preventDefault();
 		this.validateUpdateEmp(employeeId);
 	}.ctx(this));
-	 $('#back').click(function(){
+	 $('#backtoprofile').click(function(){
 			
 			routie("myprofile");
 		}.ctx(this));
@@ -38,6 +38,8 @@ EditEmployee.prototype.validateEditEmp = function(employeeId) {
 			$("#currentaddr").val(object.currentAddress);
 			$("#peraddr").val(object.permanentAddress);
 			$("#skype").val(object.skype);
+			$("#hobbies").val(object.hobbies);
+			
 		} else {
 			console.dir(data);
 			// alert("failed to edit");
@@ -74,11 +76,12 @@ EditEmployee.prototype.validateUpdateEmp = function(employeeId) {
 	var peraddrerr = $("#peraddrerr");
 	var peraddr = $("#peraddr").val();
 	var skype = $('#skype').val();
+	var hobbies=$("#hobbies").val();
 	var skypeerr = $('#skypeerr');
 
 	if (contnum == "" || txtemercon == "" || txtemname == "" || password == ""
 			|| peraddr == "" || relation == "" || skype == "" || email == ""
-			|| currentaddr == "") {
+			|| currentaddr == ""||hobbies=="") {
 		$('.error').css('visibility', 'visible');
 
 		if (contnum == "") {
@@ -151,6 +154,13 @@ EditEmployee.prototype.validateUpdateEmp = function(employeeId) {
 			// $(peraddrerr).css("color", "green");
 
 		}
+		if (hobbies == "") {
+			$('#hobbieserr').text("Required field");
+			$('#hobbieserr').css("color", "red");
+		}else {
+			$('#hobbieserr').text("");
+
+		}
 
 		if (relation == "") {
 			$(relationerr).text("Required field");
@@ -220,7 +230,8 @@ EditEmployee.prototype.validateUpdateEmp = function(employeeId) {
 				"emergencycontactnumber" : txtemercon,
 				"emergencyContactName" : txtemname,
 				"relationWithEmergencyConatact" : relation,
-				"skype" : skype
+				"skype" : skype,
+				"hobbies":hobbies
 			}
 		};
 		RequestManager.updateEmp(input, function(data, success) {

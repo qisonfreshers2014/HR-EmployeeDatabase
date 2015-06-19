@@ -17,7 +17,6 @@ empHomePage.prototype.handleShow = function() {
 	})
  
  $('#hr').click(function(event){
-  
 	 routie('employee');
  });
  

@@ -11,6 +11,8 @@ function employeeList(data) {
 
 
 employeeList.prototype.handleShow = function(data) {
+	
+	$('#emp').parent().addClass('active');
 	var self=this;
 	
 	var pagno=1;
@@ -83,7 +85,7 @@ employeeList.prototype.handleShow = function(data) {
 		 						alert("No record found");
 		 						var content = '';
 		 						 tabledata += '<tr class="theader"><th>EID</th><th>Employee Name</th><th> Birth Day </th><th> Actual Birth Day </th><th> Joining Date </th><th>Contact No</th><th>Emergency Contact No</th><th>Email ID</th><th>Current Designation</th><th>Years of Experience at the time of joining</th><th>Experience at Qison</th><th>Current Years of Experience</th><th>PAN</th>';
-		 						$('#employeelist').append('<table><tbody></tbody></table>');
+		 						$('#employeelist').append('<table><tbody id="emplisttable"></tbody></table>');
 		 						$('#employeelist').html(content);
 		 						$('#backtoemployee').css("visibility","visible");
 		 						 $('.selector').css("visibility","hidden");
@@ -106,6 +108,20 @@ employeeList.prototype.handleShow = function(data) {
  }.ctx(this));
 
 }
+
+var monthsArray=new Array(12);
+monthsArray[0]="January";
+monthsArray[1]="Febravary";
+monthsArray[2]="March";
+monthsArray[3]="April";
+monthsArray[4]="May";
+monthsArray[5]="June";
+monthsArray[6]="July";
+monthsArray[7]="August";
+monthsArray[8]="September";
+monthsArray[9]="October";
+monthsArray[10]="November";
+monthsArray[11]="December";
  
 
  employeeList.prototype.paginationFunc=function(pagno){
@@ -192,22 +208,25 @@ employeeList.prototype.tableDisplay = function(content,status,desdata) {
  
 $('#employeelist').empty();
  var tabledata = '';
- tabledata += '<tr class="theader"><th>EID</th><th>Employee Name</th><th> Birth Day </th><th> Actual Birth Day </th><th> Joining Date </th><th>Contact No</th><th>Emergency Contact No</th><th>Email ID</th><th>Current Designation</th><th>Years of Experience at the time of joining</th><th>Experience at Qison</th><th>Current Years of Experience</th><th>PAN</th>';
+ tabledata += '<tr class="theader"><th>EID</th><th>Employee Name</th><th> Birth Day </th><th> Actual Birth Day </th><th> Joining Date </th><th>Contact No</th><th>Emergency Contact No</th><th>Email ID</th><th>Current Designation</th><th>Experience at joining</th><th>Experience at Qison</th><th>Current Years of Experience</th><th>PAN</th>';
+ 
+ 
+	
  for (var i = 0; i < content.length; i++) {
   var obj = content[i];
   
  
   var dobformat = new Date(obj.dateOfBirth);
   var byear = dobformat.getFullYear();
-  var bmonth = dobformat.getMonth()+1;
+  var bmonth = monthsArray[dobformat.getMonth()];
   var bdate = dobformat.getDate();
   var actualdobformat = new Date(obj.actualdateOfBirth);
   var actualdobyear = actualdobformat.getFullYear();
-  var actualdobmonth = actualdobformat.getMonth()+1;
+  var actualdobmonth = monthsArray[actualdobformat.getMonth()];
   var actualdobdate = actualdobformat.getDate();
   var dojformat = new Date(obj.dateOfJoining);
   var jyear = dojformat.getFullYear();
-  var jmonth = dojformat.getMonth()+1;
+  var jmonth = monthsArray[dojformat.getMonth()];
   var jdate = dojformat.getDate();
   
   
@@ -260,9 +279,9 @@ if(isDecimal!=0){
   tabledata += '<tr>';
   tabledata += '<td><a href="#view" class="viewindividual" id="'+obj.employeeId+'">' + obj.employeeId+ '</a></td>';
   tabledata += '<td>' + obj.employeeName + '</td>';
-  tabledata += '<td>' +byear+"-"+bmonth+"-"+bdate+'</td>';
-  tabledata += '<td>' +actualdobyear+"-"+actualdobmonth+"-"+actualdobdate+'</td>';
-  tabledata += '<td>' +jyear+"-"+jmonth+"-"+jdate+'</td>';
+  tabledata += '<td>' +bdate+"-"+bmonth+"-"+byear+'</td>';
+  tabledata += '<td>' +actualdobdate+"-"+actualdobmonth+"-"+actualdobyear+'</td>';
+  tabledata += '<td>' +jdate+"-"+jmonth+"-"+jyear+'</td>';
   tabledata += '<td>' +obj.contactNo + '</td>';
   tabledata += '<td>' +obj.emergencycontactnumber +'</td>';
   tabledata += '<td>' +obj.email +  '</td>';
@@ -276,6 +295,8 @@ if(isDecimal!=0){
   $('#employeelist').html(tabledata);
 
 }
+ 
+ $('#emp').unbind();
 }
 
 employeeList.prototype.searchOperation = function(data,desdata){
@@ -288,23 +309,23 @@ employeeList.prototype.searchOperation = function(data,desdata){
 	
  
  var content = '';
- content += '<tr class="theader"><th>EID</th><th>Employee Name</th><th> Birth Day </th><th> Actual Birth Day </th><th> Joining Date </th><th>Contact No</th><th>Emergency Contact No</th><th>Email ID</th><th>Current Designation</th><th>Years of Experience at the time of joining</th><th>Experience at Qison</th><th>Current Years of Experience</th><th>PAN</th>';
+ content += '<tr class="theader"><th>EID</th><th>Employee Name</th><th> Birth Day </th><th> Actual Birth Day </th><th> Joining Date </th><th>Contact No</th><th>Emergency Contact No</th><th>Email ID</th><th>Current Designation</th><th>Experience at joining</th><th>Experience at Qison</th><th>Current Years of Experience</th><th>PAN</th>';
  for (var i = 0; i < data.length; i++) {
   var obj = data[i];
   
   var dobformat = new Date(obj.dateOfBirth);
   var byear = dobformat.getFullYear();
-  var bmonth = dobformat.getMonth()+1;
+  var bmonth = monthsArray[dobformat.getMonth()];
   var bdate = dobformat.getDate();
   
   var actualdobformat = new Date(obj.actualdateOfBirth);
   var actualdobyear = actualdobformat.getFullYear();
-  var actualdobmonth = actualdobformat.getMonth()+1;
+  var actualdobmonth = monthsArray[actualdobformat.getMonth()];
   var actualdobdate = actualdobformat.getDate();
   
   var dojformat = new Date(obj.dateOfJoining);
   var jyear = dojformat.getFullYear();
-  var jmonth = dojformat.getMonth()+1;
+  var jmonth = monthsArray[dojformat.getMonth()];
   var jdate = dojformat.getDate();
  
   // Calculating Current years of experience
@@ -358,9 +379,9 @@ employeeList.prototype.searchOperation = function(data,desdata){
            content += '<tr>';
               content += '<td><a href="#view" class="viewindividual" id="'+obj.employeeId+'">' + obj.employeeId+ '</a></td>';
               content += '<td>' + obj.employeeName + '</td>';
-              content += '<td>' +byear+"-"+bmonth+"-"+bdate+'</td>';
-              content += '<td>' +actualdobyear+"-"+actualdobmonth+"-"+actualdobdate+'</td>';
-              content += '<td>' +jyear+"-"+jmonth+"-"+jdate+'</td>';
+              content += '<td>' +bdate+"-"+bmonth+"-"+byear+'</td>';
+              content += '<td>' +actualdobdate+"-"+actualdobmonth+"-"+actualdobyear+'</td>';
+              content += '<td>' +jdate+"-"+jmonth+"-"+jyear+'</td>';
               content += '<td>' +obj.contactNo + '</td>';
               content += '<td>' +obj.emergencycontactnumber +'</td>';
               content += '<td>' +obj.email +  '</td>';

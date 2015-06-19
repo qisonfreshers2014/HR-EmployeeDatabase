@@ -12,7 +12,7 @@ changePassword.prototype.handleShow = function(employeeId) {
 
 		this.changePwd(employeeId);
 	}.ctx(this));
-$('#back').click(function(){
+$('#backchangepassword').click(function(){
 		
 		routie("myprofile");
 		

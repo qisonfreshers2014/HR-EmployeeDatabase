@@ -9,7 +9,7 @@ HrEditEmployee.prototype.handleShow = function(empid) {
 
 	$('.container').show();
 	
-$('#back').click(function(){
+$('#backtohrview').click(function(){
 		
 		App.loadViewEmployee(empid);
 	}.ctx(this));
@@ -25,22 +25,43 @@ $('#back').click(function(){
 			var object = data;
 			console.dir(data);
 			
+			var monthsArray=new Array(12);
+			monthsArray[0]="January";
+			monthsArray[1]="Febravary";
+			monthsArray[2]="March";
+			monthsArray[3]="April";
+			monthsArray[4]="May";
+			monthsArray[5]="June";
+			monthsArray[6]="July";
+			monthsArray[7]="August";
+			monthsArray[8]="September";
+			monthsArray[9]="October";
+			monthsArray[10]="November";
+			monthsArray[11]="December";
+			
 			var dobformat = new Date(object.dateOfBirth);
 			var byear = dobformat.getFullYear();
-			var bmonth = dobformat.getMonth() + 1;
+			var bmonth = monthsArray[dobformat.getMonth()];
+			var payloadmonth=dobformat.getMonth()+1;
 			var bdate = dobformat.getDate();
+			
+			payloadBday=byear + "-" + payloadmonth + "-" + bdate;
+	
 			
 			var actualdobformat = new Date(object.actualdateOfBirth);
 			var actualdobyear = actualdobformat.getFullYear();
-			var actualdobmonth = actualdobformat.getMonth() + 1;
+			var actualdobmonth = monthsArray[actualdobformat.getMonth()];
+			var payloadactualdobmonth=actualdobformat.getMonth()+1;
 			var actualdobdate = actualdobformat.getDate();
-		
+			
+			payloadactualdob=actualdobyear + "-" + payloadactualdobmonth + "-" + actualdobdate
+			
 			 
 			$("#emal").val(object.email);
 			$("#eid").val(object.employeeId);
 			$("#name").val(object.employeeName);
-			$("#dob").val(byear + "-" + bmonth + "-" + bdate);
-			$("#actualdob").val(actualdobyear + "-" + actualdobmonth + "-" + actualdobdate);
+			$("#dob").val(bdate + "-" + bmonth + "-" + byear);
+			$("#actualdob").val(actualdobdate + "-" + actualdobmonth + "-" + actualdobyear);
 			$("#blood").val(object.bloodGroup);
 			$("#qual").val(object.highestQualification);
 			$("#fathername").val(object.fathersName);
@@ -57,8 +78,9 @@ $('#back').click(function(){
 			$("#currentaddr").val(object.currentAddress);
 			$("#peraddr").val(object.permanentAddress);
 			$("#skype").val(object.skype);
-			$("#filepath").text(object.fileId);
+			$("#fileid").val(object.fileId);
 			$("#yearofexp").val(object.yearsofexperience);
+			$('#employeetype').val(object.employeeType);
 		} else {
 			alert("failed to edit");
 		}
@@ -171,6 +193,7 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 	var skypeerr = $('#skypeerr');
 	var dob = $('#dob').val();
 	var actualDOB=$('#actualdob').val();
+	var employeeType=$("#employeetype option:selected").val();
 	var file = $('#filename').val();
 	var yearofexp=$("#yearofexp").val();
 	var variable = $('#variable').val();
@@ -183,7 +206,7 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 	if (blood == "" || name == "" || qualification == "" || fathername == ""
 			|| contnum == "" || txtemercon == "" || txtemname == ""
 			|| currentaddr == "" || peraddr == "" || relation == ""
-			|| skype == "" || Gender == "" || dob == "" || salary == ""||actualDOB=="") {
+			|| skype == "" || Gender == "" || dob == "" || salary == ""||actualDOB=="" ||employeeType=="") {
 		$('.error').css('visibility', 'visible');
 
 		if (dob == "") {
@@ -430,6 +453,8 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 			$(skypeerr).text("");
 		}
 		this.GenderValidate();
+		
+		this.employeeTypeValidate();
 
 	}
 	else if (!(qualification.match(qual) || qualification.match(char))) {
@@ -479,6 +504,12 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 	} else {
 		$('.error').css('visibility', 'hidden');
 		
+		
+	if(typeof fileId==='undefined'){
+		
+		fileId=$('#fileid').val();
+	}
+		
 		var input = {
 			"payload" : {
 				"employeeId" : empid,
@@ -490,8 +521,8 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 				"yearsofexperience" : yearofexp,
 				"salary" : salary,
 				"variableComponent" : variable,
-				"dateOfBirth" : dob + " 00:00:00",
-				"actualdateOfBirth" : actualDOB + " 00:00:00",
+				"dateOfBirth" : payloadBday + " 00:00:00",
+				"actualdateOfBirth" : payloadactualdob + " 00:00:00",
 				"contactNo" : contnum,
 				"currentAddress" : currentaddr,
 				"permanentAddress" : peraddr,
@@ -504,7 +535,8 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 				"emergencyContactName" : txtemname,
 				"relationWithEmergencyConatact" : relation,
 				"skype" : skype,
-				"fileId" : fileId
+				"fileId" : fileId,
+				"employeeType" : employeeType
 			}
 		};
 		RequestManager.hrupdateEmp(input, function(data, success) {
@@ -529,6 +561,17 @@ HrEditEmployee.prototype.GenderValidate = function() {
 	} else {
 		$(error).text("");
 		// $(error).css("color", "green");
+	}
+}
+HrEditEmployee.prototype.employeeTypeValidate = function() {
+	var empType = $("#employeetype option:selected").val();
+	var empTypeError = document.getElementById('employeetypeerr');
+	if (empType == "") {
+		empTypeError.innerHTML = "Please select employee type";
+		$(empTypeError).css("color", "red");
+	} else {
+		$(empTypeError).text("");
+
 	}
 }
 
@@ -565,6 +608,7 @@ HrEditEmployee.prototype.deleteEmployee = function(empid) {
 			$("#salary").val("");
 			$('#variable').val("");
 			$('#gender').val("");
+			$('#employeetype').val("");
 			$('#skype').val("");
 			$("#yearofexp").val("");
 			$('#filepath').text("");

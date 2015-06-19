@@ -1,16 +1,14 @@
  <div style="width:100%;height:100%">
- <div class="navbuttons">
-  <input type="button" id="empadd" value="Add Employee" class="btn btn-primary btn-md"/>
-  <input type="button"  id="filter" class="btn btn-primary btn-md"  value="Filter Employee"/>
+ <table class="navbuttons">
+ <tr class="emplistheadtr">
+ <td class="emplistheadtd"> <input type="button" id="empadd" value="Add Employee" class="btn btn-primary btn-md"/>
+  <input type="button"  id="filter" class="btn btn-primary btn-md"  value="Filter Employee"/></td>
    
-    </div>
+ <td  class="emplistheadtd"><h1 class="emphead">Employee List</h1></td>
 
-<h1 class="emphead">Employee List</h1>
-<div id="list">
 
-<div id="searchdiv">
-<input type="text" placeholder="Search" class="form-control" id="searchelement" maxlength="16"><a href="#searchedemployees"><input type="button" class="btn btn-primary btn-md" id="search" value="Search"></a>
-</div><br>
+<td class="emplistheadtd"><input type="text" placeholder="Search" class="form-control" id="searchelement" maxlength="16"><a href="#searchedemployees"><input type="button" class="btn btn-primary btn-md" id="search" value="Search"></a></td>
+</tr></table><br>
 
 <div id="listemp"> 
 
@@ -26,8 +24,9 @@
 <th>Emergency Contact No</th>
 <th>Email ID</th>
 <th>Current Designation</th>
-<th>Current Years of Experience</th>
+<th> Experience at joining</th>
 <th>Experience at Qison</th>
+<th>Current Years of Experience</th>
 <th>PAN</th>
 </tr>
 
@@ -41,5 +40,5 @@
 <div><input type="button" value="Back" class="btn btn-primary btn-md" id="backtoemployee"></div>
 
 </div>
-</div>
+
 

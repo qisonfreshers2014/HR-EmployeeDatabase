@@ -10,7 +10,7 @@
 }
 
 .tableHeading{
-    background-color: #7094b8;
+    background-color: #00246b;
     color: #000000;
     border: 1px solid black;
     border-collapse:collapse;
@@ -44,4 +44,18 @@
 }
 .tableEmployee{
 	 border: 1px solid black;
+}
+#emphomehead{
+	color: #00246b;
+	margin-top:1%;
+}
+h3{
+	color:#00246B;
+}
+#parah1,#parah2{
+ padding:10px;
+  font-size:15px;
+}
+.images{
+ margin-left:5%; 
 }

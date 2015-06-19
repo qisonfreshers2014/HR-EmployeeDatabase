@@ -7,56 +7,64 @@
 
 <div class="align"><h1>Filter Employee</h1></div><br/><br>
 <div class="body1"><br>
-<div  class="inputelement1">
-&nbsp;&nbsp;<b>Gender&nbsp;&nbsp;&nbsp;</b> <select id="gender" style="width:10%">
+<div class="filtercriteria">
+<table class="filtable" border="">
+<tr class="filtr">
+<th class="filth">Gender </th>
+<td class="filtd"> <select id="gender" >
 <option value="" selected>Select </option>
 <option value="Female">Female</option>
 <option value="Male">Male</option> 
-</select>&nbsp;&nbsp;
-<b  class="element">Date Of Joining From</b></span>&nbsp;<input type="text" id="dojFrom"> 
-<b>To</b>&nbsp;<input type="text" id="dojTo"> 
-<p id="derror"></p> 
-</div>
+</select></td>
 
-<div class="inputelement1">
-<b>&nbsp;&nbsp;Filter Employees<span class="inputelement1"></span>&nbsp;&nbsp;</b><select id="filter" style="width:19%">
-<option value="0">Select Filter</option>
-<option value="1">Active User</option>
-<option value="2">Inactive User</option>
-</select>
-<b class="element">&nbsp;&nbsp;Current Designation&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b> <select id="designation" style="width:19%">
+<th class="filth">Date Of Joining From</th>
+<td class="filtd">
+<input type="text" id="dojFrom"> </td>
+<th class="filth">
+To </th><td class="filtd"><input type="text" id="dojTo"> 
+<p id="derror"></p> </td></tr>
+
+<tr class="filtr">
+<th class="filth">Employee Type</th>
+<td class="filtd">
+<select id="emptype">
+<option value="notselected">Select Filter</option>
+<option value="Fulltime">Fulltime Employees</option>
+<option value="Contract">Contract Employees</option>
+<option value="Inactive">Inactive User</option>
+</select></td>
+<th class="filth">Current Designation</th>
+<td class="filtd">
+<select id="filterdesignation">
 <option value="0">Select Designation</option>
-<option value="1">CEO</option>
-<option value="2">COO</option>
-<option value="3">Architect</option>
-<option value="4">Marketing Engineer</option>
-<option value="5">HR</option>
-<option value="6">Project Manager</option>
-<option value="7">Senior Software Engineer</option>
-<option value="8">Software Engineer</option>
-<option value="9">Trainee Software Engineer</option>
-</select> 
-</div>
+</select> </td><th class="filth"><td class="filtd"></td></th></tr>
 
-<div>
-<b class="element">Highest Qualification<span class="inputelement2"></span></b> <input type="text" name="qualification" size="25"  id="qualification1" onfocusout="highest_qualification()" maxlength="30"/> 
-<b class="element">&nbsp;&nbsp;&nbsp;&nbsp;Year Of Experience&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b><b style="font-size:15px">&nbsp;From</b> <input type="text" id="year1" maxlength="4" size="7"><b style="font-size:15px">To</b> <input type="text" size="7" id="year2" maxlength="3"><br>
+
+<tr class="filtr"><th class="filth">Highest Qualification</th>
+<td class="filtd"> <input type="text" name="qualification" id="qualification1" onfocusout="highest_qualification()" maxlength="30"/> </td>
+<th class="filth">Year Of Experience <b style="font-size:15px">From</b> </th><td class="filtd"><input type="text" id="year1" maxlength="4" ><b style="font-size:15px"></td><th class="filth">To</th> <td class="filtd"><input type="text"  id="year2" maxlength="3"></td></tr><br>
 <span  class="p" id="herror"></span> <span class="inputelement"></span><span  class="p" id="yerror"></span>
+</table>
+
 </div>
 
-<div  class="element"><span class="right"></span><button type="button"  id="Filter" class="btn btn-primary btn-md">Filter</button>
-<button type="reset" value="Reset" class="btn btn-primary btn-md" id="reset">Reset</button></div>
- <br/> 
-</div></br>
+
+<div  class="element">
+
+<button type="button" value="Back" class="btn btn-primary btn-md" id="backfilter">Back</button>
+
+<span id="right"></span>
+<button type="button"  id="Filter" class="btn btn-primary btn-md">Filter</button>
+<button type="reset" value="Reset" class="btn btn-primary btn-md" id="reset">Reset</button></div> </div>
+</br>
 
 <div class="heading1"><h3 style="color:#00246B">Filter Employee Details</h3> </div><br>
  
-<table id="displayData" class="tble table table-hover">
-<tr>
+<table id="displayData" class="table table-hover">
+<tr id="displaytr">
 </tr>
  </table>
- <div>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="Back" class="btn btn-primary btn-md" id="backfilter"></div>
+ 
  
 </body>
 </html>

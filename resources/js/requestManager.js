@@ -54,6 +54,10 @@ RequestManager.prototype.getSentManualMail=function(data,callback){
 RequestManager.prototype.getSentMailContent=function(data,callback){
  this.sendToServer('employee/getSentMailContent', data, callback);
 }
+
+RequestManager.prototype.getSentMailContent=function(data,callback){
+	 this.sendToServer('SendNotificationHistory/sendmanualMail', data, callback);
+	}
 RequestManager.prototype.getAllEvents=function(data,callback){
  this.sendToServer('employee/getAllEvents', data, callback);
 } 

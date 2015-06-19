@@ -5,6 +5,8 @@ function policyList() {
 }
 
 policyList.prototype.handleShow = function() {
+	
+	$('#hrpolicy').parent().addClass('active');
 
 	$('.container').show();
 	
@@ -44,7 +46,7 @@ policyList.prototype.policyDisplay = function(content, status) {
 		    var url=obj.url;
 			$("#policylist").append('<table><tbody></tbody></table>');
 		
-			$("#policylist tr:last").after('<tr><td style="font-size:14px">'+ ++j +'</td><td style="font-size:14px"><a href="'+obj.url+'" target="_blank">'+obj.policyName+'</a></td></tr>');
+			$("#policylist tr:last").after('<tr><td style="font-size:14px" class="policytd">'+ ++j +'</td><td style="font-size:14px" class="policytd"><a href="'+obj.url+'" target="_blank">'+obj.policyName+'</a></td></tr>');
 			
 		}
 	}else{		

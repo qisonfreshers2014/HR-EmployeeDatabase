@@ -5,9 +5,14 @@
     width: 100%;
 }
 .SubmitdivNotification {
-    margin-left: 91%;
+    margin-left: 40%;
     margin-top: 2%;
-    padding: 1%;
+    margin-bottom:1%;
+    
+}
+#backtonotifications{
+	margin-top:2%;
+	margin-bottom:1%;
 }
 #sendtoDdbNotification {
     width: 97%;
@@ -61,4 +66,16 @@ visibility: hidden;
 }
 #back{
 	margin-bottom:2%;
+}
+#Tomail{
+	visibility:hidden;
+}
+#subjectformail{
+	visibility:hidden;
+}
+#alignmail1{
+  margin-left:5.5%;
+}
+#alignmail{
+  margin-left:3%;
 }

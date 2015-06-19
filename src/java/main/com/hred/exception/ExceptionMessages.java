@@ -72,6 +72,8 @@ public interface ExceptionMessages {
 	public static final String EMPLOYEE_EMERNUM_NOT_EMPTY ="Please enter emergency contact number.....!!!!";
 	public static final String EMPLOYEE_YOE_NOT_EMPTY ="Please enter years of experience....!!!!";
 	public static final String EMPLOYEE_ACTUAL_DOB_NULL = "Please enter Actual date of birth.....!!!!";
+	public static final String EMPLYEE_TYPE_NULL = "Please select employee type.....!!!!";
+	public static final String EMPLYEE_UNIVERSITY_NULL = "Please enter University/college.....!!!!";
 	
 	public static final String EMPLOYEE_RATING_NOT_EMPTY ="Please enter skill rating.....!!!!";
 	public static final String EMPLOYEE_CURRENTADDR_NOT_EMPTY ="Please enter current address.....!!!!";
@@ -240,6 +242,8 @@ public interface ExceptionMessages {
 	public static final String SELECT_ATLEAST_ONE_FIELD= "Please select atleast one field";
 	public static final String DESIGNATION_TYPE_DOES_NOT_EXIST = "DesignationType with this name is not exist";
 	public static final String PLEASE_ENTER_DESIGNATION_TYPE = "Please enter designation type to be added";
+	
+	
 	
 }
 

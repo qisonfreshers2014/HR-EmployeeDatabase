@@ -18,14 +18,14 @@ skill.prototype.handleShow = function(empid,hr) {
 		this.validateSkill();
 		}.ctx(this));
 	
-	$('#reset').click(function() {
+	$('#Resetskill').click(function() {
 		
 		$("#skill").val("");
 		$("#rating").val("");
 		 
 			}.ctx(this));
 
-	$('#back').click(function() { 
+	$('#backtoemp').click(function() { 
 		 
 		if(hr==true){
 		App.loadViewEmployee(empid);
@@ -54,7 +54,7 @@ skill.prototype.viewSkillDetails=function(empid){
   		 
   		var skill = data[i];
   		
-		$('#displayData').append("<tr><td>"+skill.skills+"</td><td>"+skill.empId+"</td><td>"+skill.rating+"</td><td><input type='button' value='Edit' id='"+skill.id+"' class='dynamicEdit btn-primary btn-md'></td></tr>");
+		$('#displayDataskill').append("<tr class='skilltr'><td class='skilltd'>"+skill.skills+"</td><td class='skilltd'>"+skill.empId+"</td><td class='skilltd'>"+skill.rating+"</td><td class='skilltd'><input type='button' value='Edit' id='"+skill.id+"' class='dynamicEdit btn-primary btn-md'></td></tr>");
 		
 		var obj1=skill.id;
   		}
@@ -125,7 +125,7 @@ skill.prototype.validateSkill=function(){
 	  		if(success){
 	  	 alert("Skills successfully inserted");
 	  	
-	  		$('#displayData').append("<tr><td>"+data.skills+"</td><td>"+data.empId+"</td><td>"+data.rating+"</td><td><input type='button' value='Edit' id='"+data.id+"' class='dynamicEdit btn-primary btn-md'></td></tr>");
+	  		$('#displayDataskill').append("<tr class='skilltr'><td class='skilltd'>"+data.skills+"</td><td class='skilltd'>"+data.empId+"</td><td class='skilltd'>"+data.rating+"</td><td class='skilltd'><input type='button' value='Edit' id='"+data.id+"' class='dynamicEdit btn-primary btn-md'></td></tr>");
 	  		$("#skill").val("");
 		    $("#rating").val("");
 	  		var obj1=data.id;
@@ -230,6 +230,7 @@ skill.prototype.EditEmployeeskillsById=function(obj1){
     	 
         if(success){
         alert("Edit skill successfully updated");
+        $("updateskill").css("visibility","hidden");
         $("#save1").css("visibility","visible");
         $("#skill").val("");
  		$("#rating").val("");

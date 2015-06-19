@@ -1,4 +1,4 @@
-.tble,th,td,tr{
+.tble,.skillth,.skilltd,.skilltr{
 	border: 1px solid black;
 	border-collapse:collapse;
 	text-align:center;
@@ -7,7 +7,7 @@
  	font-size:15px;
 
 }
-.data1,th,td,tr{
+.data1,.skillth,.skilltd,.skilltr{
 	border: 1px solid black;
 	border-collapse:collapse;
 	text-align:center;
@@ -18,10 +18,11 @@
 } 
 
 
-th{
+.skillth{
 	  background-color:#7094b8;
+	  color:white;
 }
-th,td{
+.skillth,.skilltd{
 	font-size:15px:
 	 
 }
@@ -30,23 +31,28 @@ th,td{
 }
 #backfilter{
  margin-left:2%;
- margin-bottom:1%;
+/*  margin-bottom:1%; */
 }
 .red{
 	color:red;
 	font-size:15px;
 }
-.right{
-	margin-left:25px;
+#right{
+	margin-left:40%;
 }
 .body1{
 background-color: lightgray; 
 width:96%;
 height:190%;
 margin-left:2%;
-text-align:center;
+/* text-align:center; */
 
 font-family:calibri;
+}
+
+.filtercriteria{
+	
+	text-align:left;
 }
 
 .head1{
@@ -91,14 +97,9 @@ font-family:calibri;
   font-size:15px;
   font-weight: bold;
   font-family: Calibri;
-  margin-left:4%;
+  margin-bottom:1%;
 } 
-.inputelement1
-{
-	 font-size:15px;
- font-weight: bold;
-   margin-left:3%;
-} 
+
 .inputelement2
 {
 	 font-size:15px;
@@ -113,14 +114,65 @@ font-family:calibri;
 td{
 	 word-wrap:break-word;
 }
-#back{
-	margin-bottom:1%;
+#displayData,.displaytr,.displayth,.displaytd{
+	
+	border:1px solid black;
+	border-collapse:collapse;
+	
+	
 }
-#noteforrating{
-	margin-left:20%;
+.displayth{
+	 background-color:#7094b8;
+	 color:white;
+}
+
+#backtoemp{
+	margin-bottom:1%;
+	margin-left:5%;
+}
+.noteforrating{
+	margin-left:10%;
 	color:#D14719;
 	font-size:12px;
 	font-style: italic;
 }
-
+.filtable
+{
+	 font-size:15px;
+ font-weight: bold;
+   margin-left:3%;
 } 
+.filtd,.filtable,.filtr,.filth{
+    background-color:lightgray;
+    border:none;
+    border-collapse:collapse;
+    padding:5px;
+} 
+#backfilter, #Filter, #reset {
+     margin-bottom: 1%;
+     margin-top:3%;
+}
+#filterdesignation,#emptype,#gender{
+	width:100%;
+}
+.skilltable,.inputtr,.inputth,.inputtd{
+	background-color:lightgray;
+	padding:20px;
+	  margin-left:2%;
+	  margin-bottom:2%;
+}
+.buttonstable,.buttonstr,.buttonstd{
+	background-color:lightgray;
+}
+
+.buttonstable {
+     margin-left:40%;
+}
+
+#displayDataskill {
+  margin-left:5%;
+     width: 90%;
+}
+#displayDataskill th, #displayDataskill td{
+  text-align:center
+}

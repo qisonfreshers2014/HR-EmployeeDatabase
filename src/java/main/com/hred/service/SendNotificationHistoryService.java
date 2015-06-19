@@ -115,6 +115,28 @@ public class SendNotificationHistoryService extends BaseService {
 		return "{\"status\": \"SUCCESS\", \"payload\": \"Test Successful\"}";
 	}
 	
+	@POST
+	@RestService(input = String.class, output = String.class)
+	@ServiceStatus(value = "complete")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/sendmanualMail")
+	
+	public String sendManualMail(@Context HttpHeaders headers,
+			@Context UriInfo uriInfo, WebserviceRequest request)
+			throws ObjectNotFoundException, BusinessException,
+			EncryptionException, EmailException {	
+		
+		DisplayNotificationHome sentMailToEmployee= (DisplayNotificationHome) JsonUtil.getObject(
+				request.getPayload(), DisplayNotificationHome.class);
+		String output = SendNotificationHistoryHandler.getInstance().sentMailManualAOP(sentMailToEmployee);
+		
+		
+		return "{\"status\": \"SUCCESS\", \"payload\": \"Test Successful\"}";
+	}
+	
+	
+	
 	
 	
 		

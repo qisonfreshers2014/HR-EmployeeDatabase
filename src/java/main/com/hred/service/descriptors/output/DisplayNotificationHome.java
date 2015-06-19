@@ -12,7 +12,6 @@ public class DisplayNotificationHome {
  private String employeeEmail;
  private String employeeName;
  private String modifiedContent;
- 
  public DisplayNotificationHome()
  {
   

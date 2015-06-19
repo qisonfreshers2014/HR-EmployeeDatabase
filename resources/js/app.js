@@ -55,6 +55,13 @@ App.prototype.routing=function(){
 App.prototype.loadTemplate = function(dataid) {
 	 Loader.loadTemplate();
 	}
+App.prototype.loadSendMail = function(data) {
+	
+	 Loader.loadSendMail(function(){
+		 
+		 new SendMail(data);
+	 });
+	}
 App.prototype.loadempviewemployee=function(employeeId){
 	 Loader.loadempviewemployee(function(){
 	  new empViewemployee(employeeId);

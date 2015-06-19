@@ -30,7 +30,7 @@
   background-color: rgb(76, 102, 128);
 }
 
-#nameTemplate{
+/* #nameTemplate{
    position: relative;
   height: 61px;
   width: 777px;
@@ -65,7 +65,7 @@
   text-align: center;
   background-color: rgb(213, 223, 232);
 }
-
+ */
 .templateView1{
  position: relative;
   top: 48px;
@@ -78,10 +78,27 @@
 }
 #backButton{
  position: relative;
-  top: -294px;
-  left: 600px;
+  /* top: -294px; */
+  margin-left: 6%;
+  margin-top:-5%;
 }
 #descTemp {
     position: relative;
     top: 77px;
+}
+#alignviewtemp {
+    margin-left:4.5%;
+}
+#contentTemplate {
+    border: 1px solid lightgray;
+    padding: 5px;
+    width: 50%;
+}
+#fieldsaddTemplate{
+	margin-left:5%;
+}
+.templateContent1{
+	font-weight:normal;
+	background-color: #eeeeee;
+	border-color: #ddd;
 }

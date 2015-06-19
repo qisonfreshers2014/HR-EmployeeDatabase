@@ -3,8 +3,8 @@
     color: brown;
 }
 #retriveDataNotification {
-   margin-left: 88%;
-    margin-top: -5%;
+   margin-left: 45%;
+   
 }
 #datedata {
     float: left;
@@ -22,7 +22,7 @@
      text-align: center;
 }
 #backnotificationhome{
-	margin-left:45%;
+	margin-left:2%;
 	margin-bottom:1%;
 	visibility: hidden;
 }
@@ -44,6 +44,7 @@
 }
 .thNotification {
     background-color: #7094b8;
+    color:white;
 }
 #selectevent {
     margin-left: 2%;

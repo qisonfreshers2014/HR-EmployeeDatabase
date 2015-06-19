@@ -11,11 +11,11 @@
 
 			<th class="th">Current Address<span class="error">*</span>
 			</th>
-			<td class="td"><textarea rows="5" id="currentaddr"></textarea><br>
+			<td class="td"><textarea rows="5" cols="18" id="currentaddr"></textarea><br>
 				<span class="error" id="currentaddrerr"></span></td>
 			<th class="th">Permanent Address<span class="error">*</span>
 			</th>
-			<td class="td"><textarea rows="5" id="peraddr"></textarea><br>
+			<td class="td"><textarea rows="5" cols="18" id="peraddr"></textarea><br>
 				<span class="error" id="peraddrerr"></span></td>
 		</tr>
 		<tr class="tr">
@@ -45,15 +45,19 @@
 				maxlength="40" readonly><br><span class="error" id="emlerr"></span></td>
 			<th class="th">Skype ID<span class="error">*</span>
 			</th>
-			<td class="td" colspan="3"><input type="text" name="skype" id="skype"
+			<td class="td"><input type="text" name="skype" id="skype"
 				maxlength="30"><br><span class="error" id="skypeerr"></span></td>
+				<th class="th">Hobbies<span class="error">*</span>
+			</th>
+			<td class="td"><textarea  name="hobbies" id="hobbies" rows="2" cols="18"></textarea><br><span class="error" id="hobbieserr"></span></td>
 		</tr>
 	</table>
 	<br>
 	<!-- <button id="edit" class="btn btn-primary btn-md" type="submit">Edit</button> -->
 	<div>
-	<center><button id="update" class="btn btn-primary btn-md">Update</button></center>
-	<button id="back" class="btn btn-primary btn-md">Back</button>
+	<button id="backtoprofile" class="btn btn-primary btn-md">Back</button>
+	<button id="updateemp" class="btn btn-primary btn-md">Update</button>
+	
 	</div>
 	
 </fieldset>

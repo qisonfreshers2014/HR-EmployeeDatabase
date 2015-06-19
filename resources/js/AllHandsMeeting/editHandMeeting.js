@@ -22,7 +22,7 @@ editHandMeeting.prototype.handleShow=function(dataid){
 		
 		$('#back').click(function(){
 			
-			App.loadAllHandsMeeting();
+			routie("allHandsMeeting");
 			}.ctx(this));
 
 
@@ -106,7 +106,7 @@ editHandMeeting.prototype.editAllHandsMeetingById=function(dataid){
          $('#editdatepicker').val("");
          $('#editemployee').val("");
          $('#editdescription').val("");
-         App.loadAllHandsMeeting();
+         routie("allHandsMeeting");
         }else if(data.code == 204){
         	alert("Date already exists");
         }

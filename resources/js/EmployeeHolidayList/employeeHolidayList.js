@@ -27,14 +27,30 @@ employeeHolidayList.prototype.handleShow = function() {
 //Holidays list for Employees to display
 employeeHolidayList.prototype.tableDisplay = function(content, status){
 	
+	var monthsArray=new Array(12);
+	monthsArray[0]="January";
+	monthsArray[1]="Febravary";
+	monthsArray[2]="March";
+	monthsArray[3]="April";
+	monthsArray[4]="May";
+	monthsArray[5]="June";
+	monthsArray[6]="July";
+	monthsArray[7]="August";
+	monthsArray[8]="September";
+	monthsArray[9]="October";
+	monthsArray[10]="November";
+	monthsArray[11]="December";
+	
+	
 	for(var i = 0; i < content.length; i++) {
 	
 		var obj = content[i];
 		
+		
 		var value = obj.fromDate;
 		var res = new Date(value);
 		var year  = res.getFullYear();
-		var month = res.getMonth()+1 ;
+		var month = monthsArray[res.getMonth()] ;
 		var date = res.getDate (); 
 
 		var dayNames = new Array('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
@@ -42,15 +58,15 @@ employeeHolidayList.prototype.tableDisplay = function(content, status){
 		
 		if(obj.type == "Mandatory"){
 				$('#mandatory').append('<table><tbody></tbody></table>');
-				$('#mandatory tr:last').after("<tr><td>"+year + "-" + month + "-" +date+"</td><td>"+obj.description+"</td><td>"+day+"</td></tr>");
+				$('#mandatory tr:last').after("<tr><td>"+date + "-" + month + "-" +year+"</td><td>"+obj.description+"</td><td>"+day+"</td></tr>");
 			}
 			if(obj.type == "Weekend"){
 				$('#weekends').append('<table><tbody></tbody></table>');
-				$('#weekends tr:last').after("<tr><td>"+year + "-" + month + "-" +date+"</td><td>"+obj.description+"</td><td>"+day+"</td></tr>");
+				$('#weekends tr:last').after("<tr><td>"+date + "-" + month + "-" +year+"</td><td>"+obj.description+"</td><td>"+day+"</td></tr>");
 			}
 			if(obj.type == "Optional"){
 				$('#optional').append('<table><tbody></tbody></table>');
-				$('#optional tr:last').after("<tr><td>"+year + "-" + month + "-" +date+"</td><td>"+obj.description+"</td><td>"+day+"</td></tr>");
+				$('#optional tr:last').after("<tr><td>"+date + "-" + month + "-" +year+"</td><td>"+obj.description+"</td><td>"+day+"</td></tr>");
 			}
 	
 			}

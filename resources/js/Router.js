@@ -6,7 +6,8 @@ function Router() {
 
 Router.prototype.handleShow = function(callBack) {
 	App.loadEmployeePage(App.userName,App.hr,App.isDeleted);
-	 App.loadEmployee(App.gender,App.contactNo,App.employeeId);
+     App.loadEmployee(App.gender,App.contactNo,App.employeeId);
+	// App.loadHRHomeHeader(App.userName);
 	//App.whiteLabelConfigs();
 	/*if (getParameterByName("action") == "resetPassword") {
 		Loader.loadResetPassword(function() {
@@ -92,12 +93,12 @@ Router.prototype.routeManager = function() {
 	    	App.loadHRHomeHeader(App.userName);
 	    	App.loadAddTemplate();
 	    },
-		'notifications': function() {
+		'notifications': function() { 
 			App.loadHRHomeHeader(App.userName);
 			var input={};
 			RequestManager.getAllEvents(input, function(data, success) {
 				if (success) {		
-				
+				                    
 									App.loadNotificationHomePage(data);
 						}
 			else

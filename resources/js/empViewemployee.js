@@ -8,10 +8,11 @@ empViewemployee.prototype.handleShow = function(employeeId) {
  $('.container').show();
  
  $('#emphidden').hide();
- $('#back').css("visibility","hidden");
- $('#Editdetails').css("visibility","hidden");
+ $('#backtoemplist').css("visibility","hidden");
+/* $('#Editdetails').css("visibility","hidden");
  $('#Editdesgn').css("visibility","hidden");
- $('#Editskills').css("visibility","hidden");
+ $('#Editskills').css("visibility","hidden");*/
+ $('.editviewEmployee').css("visibility","hidden");
 
     this.empviewEmployee(employeeId);
  
@@ -34,15 +35,30 @@ empViewemployee.prototype.empviewEmployee=function(employeeId){
   if(success){
 	  
    var obj=data;
+   
+   var monthsArray=new Array(12);
+   monthsArray[0]="January";
+  	monthsArray[1]="Febravary";
+  	monthsArray[2]="March";
+  	monthsArray[3]="April";
+  	monthsArray[4]="May";
+  	monthsArray[5]="June";
+  	monthsArray[6]="July";
+  	monthsArray[7]="August";
+  	monthsArray[8]="September";
+  	monthsArray[9]="October";
+  	monthsArray[10]="November";
+  	monthsArray[11]="December";
+  	
     var dobformat = new Date(obj.dateOfBirth);
     var byear = dobformat.getFullYear();
-    var bmonth = dobformat.getMonth()+1;
+    var bmonth =monthsArray[dobformat.getMonth()];
     var bdate = dobformat.getDate();
     
     
     var actualDOBformat=new Date(obj.actualdateOfBirth);
     var actualDOByear=actualDOBformat.getFullYear();
-    var actualDOBmonth=actualDOBformat.getMonth()+1;
+    var actualDOBmonth=monthsArray[actualDOBformat.getMonth()];
     var actualDOBdate=actualDOBformat.getDate();
     
      var hr=false;
@@ -54,9 +70,9 @@ empViewemployee.prototype.empviewEmployee=function(employeeId){
     $('#employeeimage').append('<img src="'+image+'" height="150" width="150">');
    $('#eid').val(obj.employeeId);
    $('#name').val(obj.employeeName);
-   $('#gender').val(obj.gender);
-   $('#DOB').val(byear+"-"+bmonth+"-"+bdate);
-   $('#actualDOB').val(actualDOByear+"-"+actualDOBmonth+"-"+actualDOBdate);
+   $('#gendr').val(obj.gender);
+   $('#DOB').val(bdate+"-"+bmonth+"-"+byear);
+   $('#actualDOB').val(actualDOBdate+"-"+actualDOBmonth+"-"+actualDOByear);
    $('#cnct').val(obj.contactNo);
    $('#curaddr').val(obj.currentAddress);
    $('#peraddr').val(obj.permanentAddress);
@@ -70,6 +86,8 @@ empViewemployee.prototype.empviewEmployee=function(employeeId){
    $('#pannum').val(obj.pan);
    $('#pfnum').val(obj.pfNo);
    $('#accountnum').val(obj.bankAccountNo);
+   $('#university').val(obj.university);
+   $('#hobbies').val(obj.hobbies);
    
    for(i=0;i<skills.length;i++){
 		 var skillsObj=skills[i];

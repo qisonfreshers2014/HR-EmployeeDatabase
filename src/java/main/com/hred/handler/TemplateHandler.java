@@ -142,10 +142,10 @@ public List<Template> getTemplatesAOP() {
 
 
 	 @AuthorizeEntity(roles={Constants.HR})
-	public List<Template> viewTemplateAOP(Template template) throws TemplateException {
+	public List<Template> viewTemplateAOP(long id) throws TemplateException {
 		List<Template> templates = null;
 		TemplateDAO tempDAOImpl = (TemplateDAO) DAOFactory.getInstance().getTemplateDAO();
-		templates = (List<Template>) tempDAOImpl.viewTemplate(template);
+		templates = (List<Template>) tempDAOImpl.viewTemplate(id);
 		return templates;
 	}
 	

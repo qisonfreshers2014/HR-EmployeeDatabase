@@ -125,11 +125,11 @@ AddEmployee.prototype.handleShow = function() {
 		this.validateEmp();
 
 	}.ctx(this));
-$('#back').click(function(){
+$('#backaddemp').click(function(){
 		routie("employee");
 	}.ctx(this));
 
-	$('#reset').click(function(e) {
+	$('#resetaddemp').click(function(e) {
 		e.preventDefault();
 		$('.error').css('visibility', 'hidden');
 		$("#eid").val("");
@@ -161,6 +161,8 @@ $('#back').click(function(){
 		$('#designation').val("");
 		$('#gender').val("");
 		$('#filepath').text("");
+		$('#employeetype').val("");
+		$('#collagename').val("");
 
 	}.ctx(this));
 
@@ -247,6 +249,8 @@ AddEmployee.prototype.validateEmp = function() {
 	var dob = $('#dob').val();
 	var actualDOB=$('#actualdob').val();
 	var doj = $('#doj').val();
+	var employeeType=$('#employeetype').val();
+	var college=$('#collagename').val();
 	var file = $('#filename').val();
 	var variable = $('#variable').val();
 	var variableerr = $('#variableerr');
@@ -297,10 +301,8 @@ AddEmployee.prototype.validateEmp = function() {
 		flag = false;
 	}
 
-	if (skype == "") {
-		$(skypeerr).text("Required field");
-		$(skypeerr).css("color", "red");
-	} else if (!(skype.match(skp))) {
+	if (skype != "") {
+		 if (!(skype.match(skp))) {
 		$(skypeerr).text("Please enter a valid skype ID");
 		$(skypeerr).css("color", "red");
 	} else if (!(skype.length > 5)) {
@@ -312,11 +314,10 @@ AddEmployee.prototype.validateEmp = function() {
 		// $(skypeerr).css("color", "green");
 
 	}
+	}
+	if(blood!=""){
 
-	if (blood == "") {
-		$(blodderr).text("Required field");
-		$(blodderr).css("color", "red");
-	} else if (!(blood.match(bloodGroup))) {
+ if (!(blood.match(bloodGroup))) {
 		$(blodderr).text("Please enter a valid blood group ex:AB+, AB-");
 		$(blodderr).css("color", "red");
 	} else if (!(blood.length < 4)) {
@@ -328,7 +329,7 @@ AddEmployee.prototype.validateEmp = function() {
 		// $(blodderr).css("color", "green");
 
 	}
-
+	}
 	if (eid == "") {
 		$(err).text("Required field");
 		$(err).css("color", "red");
@@ -543,10 +544,8 @@ AddEmployee.prototype.validateEmp = function() {
 
 	}
 
-	/*if (relation == "") {
-		$(relationerr).text("Required field");
-		$(relationerr).css("color", "red");
-	}*/ if (!(relation.match(char))) {
+if (relation != "") {
+	 if (!(relation.match(char))) {
 		$(relationerr).text("enter characters only");
 		$(relationerr).css("color", "red");
 	} else {
@@ -555,7 +554,7 @@ AddEmployee.prototype.validateEmp = function() {
 		// $(relationerr).css("color", "green");
 
 	}
-
+}
 	if (yearexp == "") {
 		$(yearexperr).text("Required field");
 		$(yearexperr).css("color", "red");
@@ -582,6 +581,15 @@ AddEmployee.prototype.validateEmp = function() {
 		$(skillerr).css("color", "red");
 	} else {
 		$(skillerr).text("");
+		flag = false;
+		// $(skillerr).css("color", "green");
+
+	}
+	if (college == "") {
+		$('#collegeerr').text("Required field");
+		$('#collegeerr').css("color", "red");
+	} else {
+		$('#collegeerr').text("");
 		flag = false;
 		// $(skillerr).css("color", "green");
 
@@ -649,8 +657,8 @@ AddEmployee.prototype.validateEmp = function() {
 	} else if (!(email.match(mail))) {
 		$(emlerr).text("Please enter a valid email address");
 		$(emlerr).css("color", "red");
-	} else if (!(eid.match(num) || eid == isNaN)) {
-		$(err).text("EID accepts numbers only");
+	} else if (!(eid.match(letters))) {
+		$(err).text("EID accepts numbers and alphabets only");
 		$(err).css("color", "red");
 	} else if (!(txtemname.match(char) || txtemname == isNaN)) {
 		$(pwderr).text("");
@@ -672,13 +680,10 @@ AddEmployee.prototype.validateEmp = function() {
 		// $(pwderr).css("color", "green");
 
 	}
-
+    this.employeeTypeValidate();
 	this.GenderValidate();
 	this.ValidateDrpn();
-
 	// sending data to database in the form of json
-	alert(actualDOB);
-
 	if (!flag) {
 		// $('.error').css('visibility', 'hidden');
 
@@ -711,7 +716,10 @@ AddEmployee.prototype.validateEmp = function() {
 				"salary" : salary,
 				"rating" : rating,
 				"skill" : skill,
-				"fileId" : fileId
+				"fileId" : fileId,
+				"employeeType" : employeeType,
+				"university":college
+				
 			}
 		};
 		if (variable == "") {
@@ -770,6 +778,7 @@ AddEmployee.prototype.validateEmp = function() {
 				$('#variable').val("");
 				$('#designation').val("");
 				$('#gender').val("");
+				$('employeetype').val("");
 				routie("employee");
 			} else if (data.code == 297) {
 
@@ -807,6 +816,17 @@ AddEmployee.prototype.ValidateDrpn = function() {
 
 	}
 }
+AddEmployee.prototype.employeeTypeValidate = function() {
+	var empType = $("#employeetype option:selected").val();
+	var empTypeError = document.getElementById('employeetypeerr');
+	if (empType == "") {
+		empTypeError.innerHTML = "Please select employee type";
+		$(empTypeError).css("color", "red");
+	} else {
+		$(empTypeError).text("");
+
+	}
+}
 
 // This function is to append designation types from database to a drop down list
 AddEmployee.prototype.dropDown = function(){
@@ -827,5 +847,7 @@ AddEmployee.prototype.dropDown = function(){
 	 }.ctx(this));
 	
 }
+
+
 
 // var AddEmployee = new AddEmployee();

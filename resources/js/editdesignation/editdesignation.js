@@ -200,11 +200,29 @@ editdesignation.prototype.sendJson = function(empid) {
 
 }
 
+
+var monthsArray=new Array(12);
+monthsArray[0]="January";
+	monthsArray[1]="Febravary";
+	monthsArray[2]="March";
+	monthsArray[3]="April";
+	monthsArray[4]="May";
+	monthsArray[5]="June";
+	monthsArray[6]="July";
+	monthsArray[7]="August";
+	monthsArray[8]="September";
+	monthsArray[9]="October";
+	monthsArray[10]="November";
+	monthsArray[11]="December";
+	
 editdesignation.prototype.appendDesTable = function(data, data1, status) {
 	var j;
 	var desId = data.designationId;
 	var desName;
 	var desTypeObj;
+	
+	
+
 	for (j = 0; j < data1.length; j++) {
 		desTypeObj = data1[j];
 		if (desId == desTypeObj.id) {
@@ -217,9 +235,9 @@ editdesignation.prototype.appendDesTable = function(data, data1, status) {
 	var value = data.appraisalDate;
 	var res = new Date(value);
 	var year = res.getFullYear();
-	var month = res.getMonth() + 1;
+	var month = monthsArray[res.getMonth()];
 	var date = res.getDate();
-	var apprDate = year + "-" + month + "-" + date;
+	var apprDate = date + "-" + month + "-" + year;
 	table.append("<tr><td>" + desName + "</td><td>" + data.salary + "</td><td>"
 			+ data.variablePay + "</td><td>" + apprDate + "</td></tr>");
 	alert("Sucessfully saved the designation details");
@@ -286,9 +304,9 @@ editdesignation.prototype.contentDisplay = function(content, data1, status) {
 		var value = obj.appraisalDate;
 		var res = new Date(value);
 		var year = res.getFullYear();
-		var month = res.getMonth() + 1;
+		var month = monthsArray[res.getMonth()];
 		var date = res.getDate();
-		var apprDate = year + "-" + month + "-" + date;
+		var apprDate = date + "-" + month + "-" + year;
 		table.append("<tr><td>" + desName + "</td><td>" + obj.salary
 				+ "</td><td>" + obj.variablePay + "</td><td>" + apprDate
 				+ "</td></tr>");

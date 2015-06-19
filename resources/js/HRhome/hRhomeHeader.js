@@ -5,23 +5,25 @@ function hRHomeHeader() {
 }
 
 hRHomeHeader.prototype.handleShow = function() {
-	
+	console.log("=== in hrHomeHeader handleShow ===");
  $('.empName').text(App.userName);
  $('.container').show();
 
  $('[data-toggle=tab]').click(function(){
+	 console.log($(this));
 	  if ($(this).parent().hasClass('active')){
-		$($(this).attr("href")).toggleClass('active');
+		$($(this).attr("id")).toggleClass('active');
 	  }
-	})
+	});
 
  $('#template').click(function(){
-routie("template");
+        routie("template");
  }.ctx(this));
 
  
  $('#hrpolicy').click(function(){
 	 routie("hrpolicy");
+	
     }.ctx(this));
  
  $('#holiday').click(function(){
@@ -30,15 +32,18 @@ routie("template");
  
  $('#emp').click(function(){
 	 routie("employee");
+	
     }.ctx(this));
  
  
  $('#notifications').click(function(){
 	 routie("notifications");
+	
     }.ctx(this));
  
  $('#allHandsMeeting').click(function(){
 	 routie("allHandsMeeting");
+	
     }.ctx(this));
  
  $('#logout1').click(function(event){

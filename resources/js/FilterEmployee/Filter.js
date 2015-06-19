@@ -7,6 +7,23 @@ function FilterEmp(empid) {
 FilterEmp.prototype.handleShow = function(empid) {
 	$('.container').show();
 	
+	//Appending designation types to the drop down
+	var emptyinput={};
+	 RequestManager.getDesignationName(emptyinput, function(data, success){
+		               
+		 if(success){
+			          arraylength=data.length;
+			           lastId=data[arraylength-1].id;
+			           newvalue=lastId+1;
+			 for(i=0;i<data.length;i++){
+			  var object=data[i];
+			 $('#filterdesignation').append($("<option value="+object.id+"> "+object.name+"</option>"));			 
+			 }
+			 
+		 }
+		 
+	 }.ctx(this));
+	
 	$( "#dojFrom" ).datepicker({dateFormat:'yy-mm-dd',showButtonPanel:
 	 true,changeMonth:true,changeYear:true,showAnim:'drop',minDate:new Date(1993,12,31),
 	 maxDate:new Date()});
@@ -15,8 +32,8 @@ FilterEmp.prototype.handleShow = function(empid) {
 		 maxDate:new Date()});
 		
 	$('#Filter').click(function(){
-	if($('#filter').val()!=0 || $('#gender').val()!=0 || $('#qualification1').val()!="" || $('#dojFrom').val()!=""|| $('#dojTo').val()=="" ||
-				$('#designation').val()!=0 || $('#year1').val()!="" || $('#year2').val()!=""){
+	if($('#emptype').val()!="" || $('#gender').val()!=0 || $('#qualification1').val()!="" || $('#dojFrom').val()!=""|| $('#dojTo').val()=="" ||
+				$('#filterdesignation').val()!=0 || $('#year1').val()!="" || $('#year2').val()!=""){
 			
 	}
 	
@@ -31,12 +48,12 @@ FilterEmp.prototype.handleShow = function(empid) {
 		$("#gender").val("");
 		$("#dojFrom").val("");
 		$("#dojTo").val("");
-		$("#filter").val("");
+		$("#emptype").val("");
 		$("#qualification1").val("");
 		$("#year1").val("");
 		$("#year2").val("");
-		$("#designation").val("");
-	
+		$("#filterdesignation").val("");
+
 
 	}.ctx(this));
 
@@ -51,8 +68,8 @@ FilterEmp.prototype.handleShow = function(empid) {
 
 FilterEmp.prototype.FilterEmployee = function(empid){
 	
-	if($('#filter').val()==0 && $('#gender').val()==0 && $('#qualification1').val()=="" && $('#dojFrom').val()==""&& $('#dojTo').val()=="" &&
-			$('#designation').val()==0 && $('#year1').val()=="" && $('#year2').val()==""){
+	if($('#emptype').val()=="notselected" && $('#gender').val()==0 && $('#qualification1').val()=="" && $('#dojFrom').val()==""&& $('#dojTo').val()=="" &&
+			$('#filterdesignation').val()==0 && $('#year1').val()=="" && $('#year2').val()==""){
 				
 			alert("Select at least one field");
 			return;
@@ -147,17 +164,17 @@ if($('#dojFrom').val()!="" && $('#dojTo').val()==""){
 	
 	
 	var payload = {};
-	if($('#filter').val() != 0){
-		payload.filterEmployee = $('#filter').val();
-	}
+	if($('#emptype').val() != ""){
+		payload.filterEmployee = $('#emptype').val();
+		}
 	if($('#gender').val().trim().length != 0){
 		payload.gender = $('#gender').val();
 	}
 	if($('#qualification1').val().trim().length != 0){
 		payload.highestQualification = $('#qualification1').val();
 	}
-	if($('#designation').val() != 0){
-		payload.currentDesignation = $('#designation').val();
+	if($('#filterdesignation').val() != 0){
+		payload.currentDesignation = $('#filterdesignation').val();
 	}
 	if($('#dojFrom').val().trim().length != 0){
 		payload.dateOfJoiningFrom = $('#dojFrom').val() + ' 00:00:00';
@@ -178,29 +195,42 @@ if($('#dojFrom').val()!="" && $('#dojTo').val()==""){
 	    if(data.length != 0){
 		
 	    	$('.heading1').css("visibility","visible");
-	  	$('#displayData').html('<tr><th>Employee Id</th><th>Employee Name</th><th>Gender</th><th>DOB</th><th>DOJ</th><th>Email</th><th>Fathers Name</th><th>Designation</th><th>Highest Qualification</th><th>Skype Id</th><th>Contact No</th><th>Years Of Experience</th><th>Skills</th><th>View Details</th></tr>');
+	  	$('#displayData').html('<tr class="displaytr"><th class="displayth">Employee Id</th><th class="displayth">Employee Name</th><th class="displayth">Gender</th><th class="displayth">DOB</th><th class="displayth">DOJ</th><th class="displayth">Email</th><th class="displayth">Fathers Name</th><th class="displayth">Designation</th><th class="displayth">Highest Qualification</th><th class="displayth">Skype Id</th><th class="displayth">Contact No</th><th class="displayth">Years Of Experience</th><th class="displayth">Skills</th><th class="displayth">View Details</th></tr>');
 	  	
 	    }
 	    else{
 	          alert("No record found");
-	    	$('#displayData').html('<tr><th>Employee Id</th><th>Employee Name</th><th>Gender</th><th>DOB</th><th>DOJ</th><th>Email</th><th>Fathers Name</th><th>Designation</th><th>Highest Qualification</th><th>Skype Id</th><th>Contact No</th><th>Years Of Experience</th><th>Skills</th><th>View Details</th></tr>');
+	          $('#displayData').html('<tr class="displaytr"><th class="displayth">Employee Id</th><th class="displayth">Employee Name</th><th class="displayth">Gender</th><th class="displayth">DOB</th><th class="displayth">DOJ</th><th class="displayth">Email</th><th class="displayth">Fathers Name</th><th class="displayth">Designation</th><th class="displayth">Highest Qualification</th><th class="displayth">Skype Id</th><th class="displayth">Contact No</th><th class="displayth">Years Of Experience</th><th class="displayth">Skills</th><th class="displayth">View Details</th></tr>');
 	    	   
 			    $('#displayData tbody').empty();
 	   
 	    }
 	   
-			  		  
+	    var monthsArray=new Array(12);
+		monthsArray[0]="January";
+		monthsArray[1]="Febravary";
+		monthsArray[2]="March";
+		monthsArray[3]="April";
+		monthsArray[4]="May";
+		monthsArray[5]="June";
+		monthsArray[6]="July";
+		monthsArray[7]="August";
+		monthsArray[8]="September";
+		monthsArray[9]="October";
+		monthsArray[10]="November";
+		monthsArray[11]="December";
+		
 	   var i;
 	   for(i = 0; i < data.length; i++) {
         var item = data[i];
 				       
 	 					 
 	 
-$('#displayData').append("<tr><td>"+item.employeeId+"</td><td>"+item.employeeName+"</td><td>"+item.gender+"</td><td>"
-+new Date(item.dateOfBirth).getFullYear()+"-"+(new Date(item.dateOfBirth).getMonth()+1)+"-"+new Date(item.dateOfBirth).getDate()+"</td><td>"
-+new Date(item.dateOfJoining).getFullYear()+"-"+(new Date(item.dateOfJoining).getMonth()+1)+"-"+new Date(item.dateOfJoining).getDate()+"</td><td>"+item.email+"</td><td>"+item.fathersName+"</td><td>"
-+item.currentDesignation+"</td><td>"+item.highestQualification+"</td><td>"+item.skype+"</td><td>"+item.contactNo+"</td>" +
-		"<td>"+item.yearsofexperience+"</td><td>"+item.skill+"</td><td><input type='button' value='View' id='"+item.id+"' class='dynamicView btn-primary btn-md'></td></tr>");
+$('#displayData').append("<tr class='displaytr'><td class='displaytd'>"+item.employeeId+"</td><td class='displaytd'>"+item.employeeName+"</td><td class='displaytd'>"+item.gender+"</td><td class='displaytd'>"
++new Date(item.dateOfBirth).getFullYear()+"-"+monthsArray[new Date(item.dateOfBirth).getMonth()]+"-"+new Date(item.dateOfBirth).getDate()+"</td><td class='displaytd'>"
++new Date(item.dateOfJoining).getFullYear()+"-"+monthsArray[new Date(item.dateOfJoining).getMonth()]+"-"+new Date(item.dateOfJoining).getDate()+"</td><td class='displaytd'>"+item.email+"</td><td>"+item.fathersName+"</td><td class='displaytd'>"
++item.currentDesignation+"</td><td class='displaytd'>"+item.highestQualification+"</td><td class='displaytd'>"+item.skype+"</td><td class='displaytd'>"+item.contactNo+"</td>" +
+		"<td class='displaytd'>"+item.yearsofexperience+"</td><td class='displaytd'>"+item.skill+"</td><td class='displaytd'><input type='button' value='View' id='"+item.id+"' class='dynamicView btn-primary btn-md'></td></tr>");
 	
       
         			
@@ -208,24 +238,24 @@ $('#displayData').append("<tr><td>"+item.employeeId+"</td><td>"+item.employeeNam
 	  
 			    
 var content = '';
-content += '<tr><th>Employee Id</th><th>Employee Name</th><th>Gender</th><th>DOB</th><th>DOJ</th><th>Email</th><th>Fathers Name</th><th>Designation</th><th>Highest Qualification</th><th>Skype Id</th><th>Contact No</th><th>Years Of Experience</th><th>Skills</th><th>View Details</th></tr>';
+content += '<tr class="displaytr"><th class="displayth">Employee Id</th><th class="displayth">Employee Name</th><th class="displayth">Gender</th><th class="displayth">DOB</th><th class="displayth">DOJ</th><th class="displayth">Email</th><th class="displayth">Fathers Name</th><th class="displayth">Designation</th><th class="displayth">Highest Qualification</th><th class="displayth">Skype Id</th><th class="displayth">Contact No</th><th class="displayth">Years Of Experience</th><th class="displayth">Skills</th><th class="displayth">View Details</th></tr>';
 for (var i = 0; i < data.length; i++) {
 			     var item = data[i];
-			     content += '<tr>';
-	             content += '<td>'  + item.employeeId+ '</td>';
-	             content += '<td>' + item.employeeName + '</td>';
-	             content += '<td>' +item.gender+'</td>';
-content += '<td>' +new Date(item.dateOfBirth).getFullYear()+"-"+(new Date(item.dateOfBirth).getMonth()+1)+"-"+new Date(item.dateOfBirth).getDate()+'</td>';
-content += '<td>' +new Date(item.dateOfJoining).getFullYear()+"-"+(new Date(item.dateOfJoining).getMonth()+1) +"-"+new Date(item.dateOfJoining).getDate()+'</td>';
-	              content += '<td>' +item.email +'</td>';
-	              content += '<td>' +item.fathersName +  '</td>';
-	              content += '<td>' +item.currentDesignation +'</td>';
-	              content += '<td>' +item.highestQualification +'</td>';
-	              content += '<td>' +item.skype +'</td>';
-	              content += '<td>' +item.contactNo +'</td>';
-	              content += '<td>' +item.yearsofexperience +'</td>';
-	              content += '<td>' +item.skill +'</td>';
-	              content += '<td>' +"<input type='button' value='View' id='"+item.employeeId+"' class='dynamicView btn-primary btn-md'> "+'</td>';
+			     content += '<tr  class="displaytr">';
+	             content += '<td class="displaytd">'  + item.employeeId+ '</td>';
+	             content += '<td class="displaytd">' + item.employeeName + '</td>';
+	             content += '<td class="displaytd">' +item.gender+'</td>';
+content += '<td class="displaytd">' +new Date(item.dateOfBirth).getFullYear()+"-"+monthsArray[new Date(item.dateOfBirth).getMonth()]+"-"+new Date(item.dateOfBirth).getDate()+'</td>';
+content += '<td class="displaytd">' +new Date(item.dateOfJoining).getFullYear()+"-"+monthsArray[new Date(item.dateOfJoining).getMonth()] +"-"+new Date(item.dateOfJoining).getDate()+'</td>';
+	              content += '<td class="displaytd">' +item.email +'</td>';
+	              content += '<td class="displaytd">' +item.fathersName +  '</td>';
+	              content += '<td class="displaytd">' +item.currentDesignation +'</td>';
+	              content += '<td class="displaytd">' +item.highestQualification +'</td>';
+	              content += '<td class="displaytd">' +item.skype +'</td>';
+	              content += '<td class="displaytd">' +item.contactNo +'</td>';
+	              content += '<td class="displaytd">' +item.yearsofexperience +'</td>';
+	              content += '<td class="displaytd">' +item.skill +'</td>';
+	              content += '<td class="displaytd">' +"<input type='button' value='View' id='"+item.employeeId+"' class='dynamicView btn-primary btn-md'> "+'</td>';
 	              content += '</tr>';
 	              $('#displayData').html(content);
 	             

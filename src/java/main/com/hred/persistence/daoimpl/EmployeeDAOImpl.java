@@ -622,8 +622,14 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 	//Criteria createCriteria = session.createCriteria(FilterEmployee.class);
 	   
 	//when all fields are entered
-	   if(filter.getFilterEmployee()==0 || filter.getFilterEmployee()==1){
+	   System.out.println(filter.getFilterEmployee());
+	   if(!filter.getFilterEmployee().equalsIgnoreCase("Inactive")){
 	   String query = "from Employee where is_Deleted=0";
+	   
+	   if( filter.getFilterEmployee().equalsIgnoreCase("Fulltime")||filter.getFilterEmployee().equalsIgnoreCase("Contract")){
+		    query = query + " and employeeType='"+filter.getFilterEmployee()+"'";                                       
+		   }
+	   
 	    if(filter.getCurrentDesignation() != 0){
 	    query = query+" and currentDesignation="+filter.getCurrentDesignation();
 	   }
@@ -644,6 +650,7 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 	    if(filter.getGender() != null){
 	    query = query + " and gender='"+filter.getGender()+"'";                                       
 	   }
+	   
 	    if(filter.getHighestQualification() != null){
 	    query = query + " and highestQualification='"+filter.getHighestQualification()+"'";
 	   }
@@ -658,7 +665,7 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 	   list = (List<Employee>)hql1.list();
 	   }
 	   
-	   else if(filter.getFilterEmployee()==2){
+	   else if(filter.getFilterEmployee().equalsIgnoreCase("Inactive")){
 	   
 	   String query1= "from Employee where is_Deleted=1";
 	   if(filter.getCurrentDesignation() != 0){

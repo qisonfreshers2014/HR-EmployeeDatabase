@@ -5,9 +5,9 @@ function TemplateList() {
 }
 TemplateList.prototype.handleShow = function() {
 
+	$('#template').parent().addClass('active');
 	
-	
-	$("#btnadd").click(function(){ 
+	$("#btnaddtemp").click(function(){ 
 		
 		routie("addtemplate");
 		
@@ -24,8 +24,8 @@ TemplateList.prototype.getTemplateName=function(){
 			  $.each(data,function(obj, value){
 					//  var obj = data[i];
 
-						$('#displayData').append('<table><tbody></tbody></table>');
-						$('#displayData tr:last').after("<tr class='tr'><td>"+value.name+"</td><td><br><a href='#edittemplate'><input type='button' value='Edit' id='"+value.id+"' class='dynamicEdit btn btn-primary'></a></td><td><br><input type='button' value='View' id='"+value.id+"' class='dynamicView btn btn-primary'></td></tr></table>");
+						$('#displayDatatemplist').append('<table><tbody></tbody></table>');
+						$('#displayDatatemplist tr:last').after("<tr class='templisttr'><td class='templisttd'>"+value.name+"</td><td class='templisttd'><br><a href='#edittemplate'><input type='button' value='Edit' id='"+value.id+"' class='dynamicEdit btn btn-primary'></a></td><td class='templisttd'><br><input type='button' value='View' id='"+value.id+"' class='dynamicView btn btn-primary'></td></tr></table>");
 			  });	
 		$('.dynamicEdit').click(function(event){
 			//console.log(event);

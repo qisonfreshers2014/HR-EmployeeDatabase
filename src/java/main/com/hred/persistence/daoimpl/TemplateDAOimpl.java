@@ -71,7 +71,7 @@ public class TemplateDAOimpl extends BaseDAOImpl implements TemplateDAO {
 
   @SuppressWarnings("unchecked")
   @Override
-  public List< Template> viewTemplate( Template  template) throws TemplateException{
+  public List< Template> viewTemplate( long id) throws TemplateException{
   Session session = null;
   List<Template> list = null;
   Transaction tx = null;
@@ -83,7 +83,7 @@ public class TemplateDAOimpl extends BaseDAOImpl implements TemplateDAO {
   }
   Criteria createCriteria = session.createCriteria(Template.class);
    
-  createCriteria.add(Restrictions.eq("id",  template.getId()));
+  createCriteria.add(Restrictions.eq("id",id));
    
   //createCriteria.add(Restrictions.eq("isDeleted",false));
   list = (List<Template>)createCriteria.list();

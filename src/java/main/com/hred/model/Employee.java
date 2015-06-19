@@ -79,6 +79,12 @@ public class Employee extends AbstractObject {
  private String salary;
  @Column(name="file_id")
  private int fileId;
+ @Column(name="employee_Type")
+ private String employeeType;
+ @Column(name="university")
+ private String university;
+ @Column(name="hobbies")
+ private String hobbies;
 
 public int getFileId() {
 	return fileId;
@@ -314,8 +320,33 @@ public String getSkill() {
  public void setVariableComponent(String variableComponent) {
   this.variableComponent = variableComponent;
  }
+ 
 
- public Employee(AbstractObject abstractObject, int employeeId,
+ public String getEmployeeType() {
+	return employeeType;
+}
+
+public void setEmployeeType(String employeeType) {
+	this.employeeType = employeeType;
+}
+
+public String getUniversity() {
+	return university;
+}
+
+public void setUniversity(String university) {
+	this.university = university;
+}
+
+public String getHobbies() {
+	return hobbies;
+}
+
+public void setHobbies(String hobbies) {
+	this.hobbies = hobbies;
+}
+
+public Employee(AbstractObject abstractObject, int employeeId,
 		String employeeName, String gender, Timestamp dateOfBirth,
 		Timestamp dateOfJoining, int yearsofexperience, long contactNo,
 		String currentAddress, String permanentAddress, String email,
@@ -324,7 +355,7 @@ public String getSkill() {
 		String bloodGroup, int currentDesignation, String highestQualification,
 		String pan, String pfNo, String bankAccountNo, String skype,
 		String skill, String rating, String variableComponent, String salary,
-		int fileId, Timestamp actualdateOfBirth) {
+		int fileId, Timestamp actualdateOfBirth, String employeeType, String university, String hobbies) {
 	super(abstractObject);
 	this.employeeId = employeeId;
 	this.employeeName = employeeName;
@@ -354,6 +385,9 @@ public String getSkill() {
 	this.variableComponent = variableComponent;
 	this.salary = salary;
 	this.fileId = fileId;
+	this.employeeType=employeeType;
+	this.hobbies=hobbies;
+	this.university=university;
 }
 
 public Employee(Employee employee) {
@@ -386,6 +420,9 @@ public Employee(Employee employee) {
 	this.variableComponent = employee.getVariableComponent();
 	this.salary = employee.getSalary();
 	this.fileId = employee.getFileId();
+	this.employeeType=employee.getEmployeeType();
+	this.hobbies=employee.getHobbies();
+	this.university=employee.getUniversity();
 }
 
 @Override

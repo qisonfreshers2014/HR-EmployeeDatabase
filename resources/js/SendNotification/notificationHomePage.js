@@ -6,21 +6,56 @@ function loadNotificationHomePage(data) {
 			}.ctx(this));
 }
 
+
+
 loadNotificationHomePage.prototype.handleShow = function(data) {
 	
+	
+	$('#notifications').parent().addClass('active');
+	
+	var tempinput={};
+	 RequestManager.getTemplatename(tempinput, function(data, success) {
+			if (success) {	
+				var birthday="birthday";
+				var anniversary="anniversary";
+				var welcome="welcome employee";
+				
+				for(i=0;i<data.length;i++){
+					  var object=data[i];
+					  var templatename=object.name.replace(/\s/g, '').toLowerCase();
+					  if(templatename!=birthday.replace(/\s/g, '')&&templatename!=anniversary.replace(/\s/g, '')&&templatename!=welcome.replace(/\s/g, '')){
+					 $('#templates').append($("<option value="+object.id+"> "+object.name+"</option>"));	
+					  }
+					 }
+			}
+			
+	  }.ctx(this));
 		
 	var i;
 	var out;
+	var monthsArray=new Array(12);
+	monthsArray[0]="January";
+	monthsArray[1]="Febravary";
+	monthsArray[2]="March";
+	monthsArray[3]="April";
+	monthsArray[4]="May";
+	monthsArray[5]="June";
+	monthsArray[6]="July";
+	monthsArray[7]="August";
+	monthsArray[8]="September";
+	monthsArray[9]="October";
+	monthsArray[10]="November";
+	monthsArray[11]="December";
 	for (i = 0; i < data.length; i++) {
 		var item = data[i];
 		var value = item.date;
 		var res = new Date(value);
 		var year = res.getFullYear();
-		var month = res.getMonth() + 1;
+		var month = monthsArray[res.getMonth()];
 		var dd = res.getDate();
 		
-		out = '<tr><td id="notificationempname">' + item.employeeName + '</td><td>' + year
-				+ '-' + month + '-' + dd + '</td>' + '<td>' + item.event
+		out = '<tr><td id="notificationempname">' + item.employeeName + '</td><td>' + dd
+				+ '-' + month + '-' + year + '</td>' + '<td>' + item.event
 				+ '</td><td>' + item.employeeEmail + '</td><td>' + item.status
 				+ '</td>';
 		if (item.status == "Not Sent") {
@@ -46,6 +81,15 @@ loadNotificationHomePage.prototype.handleShow = function(data) {
 				
 							}	};
 		this.getdisplayedata(input);
+	}.ctx(this));
+	
+	$("#templates").change(function() {
+		var selectedTemplate = $("#templates").val();
+		var inputtemp = {
+				"payload" : {"id" : selectedTemplate,
+				
+							}};
+		this.getTemplate(inputtemp);
 	}.ctx(this));
 	$("#retriveDataNotification").click(function() {
 		this.eventChangeCriteria();
@@ -125,7 +169,7 @@ loadNotificationHomePage.prototype.eventChangeCriteria = function() {
 	     }
 	    else if(!fromDate.match(dateformat) || !toDate.match(dateformat) )
 	   {
-	  alert("Invalid date,date format should be yyyy-mm-dd")
+	  alert("Invalid date,date format should be yy-mm-dd")
 	   this.currentMonthEvents();
 	   }
 	   else
@@ -170,7 +214,22 @@ loadNotificationHomePage.prototype.currentMonthEvents = function() {
 
 loadNotificationHomePage.prototype.getdisplayedata = function(input) {
 	RequestManager.getNotificationDisplayCriteria(input,function(data, success) {					
-				if (success) {					
+				if (success) {	
+					
+					
+					var monthsArray=new Array(12);
+					monthsArray[0]="January";
+					monthsArray[1]="Febravary";
+					monthsArray[2]="March";
+					monthsArray[3]="April";
+					monthsArray[4]="May";
+					monthsArray[5]="June";
+					monthsArray[6]="July";
+					monthsArray[7]="August";
+					monthsArray[8]="September";
+					monthsArray[9]="October";
+					monthsArray[10]="November";
+					monthsArray[11]="December";
 					
 					var i;
 					var out = '<table border="1" class="table table-hover" id="displayData1"><tbody><tr><th class="thNotification">Employee Name</th><th class="thNotification">Event Date</th><th class="thNotification">Event</th><th class="thNotification">Email ID</th><th class="thNotification">Status</th><th class="thNotification">Action</th></tr>'
@@ -179,11 +238,11 @@ loadNotificationHomePage.prototype.getdisplayedata = function(input) {
 						var value = item.date;
 						var res = new Date(value);
 						var year = res.getFullYear();
-						var month = res.getMonth() + 1;
+						var month = monthsArray[res.getMonth()];
 						var dd = res.getDate();
 						out += '<tr><td id="name">' + item.employeeName
-								+ '</td><td>' + year + '-' + month
-								+ '-' + dd + '</td>' + '<td>'
+								+ '</td><td>' + dd + '-' + month
+								+ '-' + year + '</td>' + '<td>'
 								+ item.event + '</td><td>'
 								+ item.employeeEmail + '</td><td>'
 								+ item.status + '</td>';
@@ -227,5 +286,14 @@ loadNotificationHomePage.prototype.getdisplayedata = function(input) {
 					}
 
 			}.ctx(this));
+}
+
+loadNotificationHomePage.prototype.getTemplate = function(inputtemp) {
+	RequestManager.getTemplateById(inputtemp,function(data, success){
+		var description=data[0];
+		App.loadSendMail(description);
+		
+	});
 	
 }
+

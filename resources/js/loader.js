@@ -41,6 +41,11 @@ Loader.prototype.loadManualMail = function(cb) {
 	LazyLoad.js('resources/js/SendNotification/sendNotificationMail.js', cb);
 }
 
+Loader.prototype.loadSendMail = function(cb) {
+	LazyLoad.css('resources/js/SendNotification/sendNotification.css');
+	LazyLoad.js('resources/js/SendNotification/sendMail.js', cb);
+}
+
 Loader.prototype.loadNotificationHomePage = function(cb) {
 	LazyLoad.css('resources/js/SendNotification/notificationHomePage.css');
 	LazyLoad.js('resources/js/SendNotification/notificationHomePage.js', cb);

@@ -263,7 +263,7 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 			email.setFrom(from);
 			String subjectMail = sentMailToEmployee.getEvent() + " "
 					+ sentMailToEmployee.getEmployeeName();
-				//email.addBcc(bcc);
+			email.addCc(bcc);
 			
 			try {
 				email.setSubject(subjectMail);
@@ -292,7 +292,6 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 				entry.setEmployeeEmail(sentMailToEmployee.getEmployeeEmail());
 				
 				Employee emp=DAOFactory.getInstance().getEmployeeDAO().getUserByEmail(sentMailToEmployee.getEmployeeEmail());
-				System.out.println("employee id="+emp.getEmployeeId());
 				entry.setEmployeeId(emp.getEmployeeId());
 						
 				
@@ -306,4 +305,52 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 			return "{\"status\": \"SUCCESS\", \"payload\": \"Mail Send\"}";
 		}
 	}
+	
+	 @AuthorizeEntity(roles={Constants.HR})
+	    public String sentMailManualAOP(DisplayNotificationHome sentMailToEmployee)
+	            throws EmailException, UserException {
+	       
+	            String hostName=null;
+	            String smtpPort=null;
+	            String authenticatorMail=null;
+	            String authenticatorPassword=null;
+	            String from=null;
+	            String bcc=null;
+	            long file_id;
+	           
+	            try
+	            {
+	                Properties props = ConfigReader.getProperties(Constants.MAIL_CONFIGURATION_SETTING);
+	                hostName=props.getProperty(Constants.HOST_NAME);
+	             smtpPort=props.getProperty(Constants.HOST_NAME);
+	             authenticatorMail=props.getProperty(Constants.AUTHENTICATOR_MAIL);
+	             authenticatorPassword=props.getProperty(Constants.AUTHENTICATOR_PASSWORD);
+	             from=props.getProperty(Constants.SEND_FROM);
+	             bcc=props.getProperty(Constants.SEND_BCC);
+	            }
+	            catch(IOException e)
+	            {
+	                e.printStackTrace();
+	            }
+	           
+	                String body=sentMailToEmployee.getModifiedContent();
+
+	                MultiPartEmail email = new MultiPartEmail();
+	                email.setHostName(hostName);
+	                email.setSmtpPort(465);
+	                email.setAuthenticator(new DefaultAuthenticator(
+	                        authenticatorMail, authenticatorPassword));
+	                email.setSSLOnConnect(true);
+	                email.setFrom(from);
+	               
+	                String subjectMail = sentMailToEmployee.getEvent() + " "
+	                        + sentMailToEmployee.getEmployeeName();
+	               	               
+	                email.setSubject(sentMailToEmployee.getEvent());
+	                email.addTo("rahul.shelke@qison.com");
+	                email.setContent(body, "text/html");
+	                email.send();
+	                return "{\"status\": \"SUCCESS\", \"payload\": \"Mail Send\"}";
+	               
+	        }
 }

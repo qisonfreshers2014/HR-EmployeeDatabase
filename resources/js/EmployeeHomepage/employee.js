@@ -1,5 +1,5 @@
 function empBasicDetails() { 
- Loader.loadHTML('.container', 'resources/js/EmployeeHomepage/employee.html', true, function(){
+ Loader.loadHTML('.container', 'resources/js/EmployeeHomepage/homePage.html', true, function(){
   this.handleShow();
  }.ctx(this));
 }

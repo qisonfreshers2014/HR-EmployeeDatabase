@@ -13,7 +13,7 @@ $('#saveAllHand').click(function(){
 	this.addAllHandsMeeting();
 	
 }.ctx(this));
-$('#back').click(function(){
+$('#backtoallhandslist').click(function(){
 	
 	routie("allHandsMeeting");
 	}.ctx(this));
@@ -42,9 +42,9 @@ allHandMeeting.prototype.addAllHandsMeeting=function(){
 	 }
 	  	 
 	 
-	 else if(!($('#datepicker').val()).match(dateformat)){
-    	 alert("Please enter date in yyyy-mm-dd Format");
-     }
+	/* else if(!($('#datepicker').val()).match(dateformat)){
+    	 alert("Please enter date in dd-mm-yyyy Format");
+     }*/
 	 
      else if(!($('#employeeAll').val()).match(regex))
 		 {
@@ -55,6 +55,8 @@ allHandMeeting.prototype.addAllHandsMeeting=function(){
 		 }
 		 
 		 else{
+			 
+			 
     var input ={"payload":{"date":$('#datepicker').val() + ' 03:00:00',"employee":$('#employeeAll').val(),"description":$('#description').val()}};
 
     RequestManager.addAllHands(input, function(data, success)

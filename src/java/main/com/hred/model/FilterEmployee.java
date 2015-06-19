@@ -14,11 +14,11 @@ private String from;
 private String to;
 private String highestQualification;
 private boolean isDeleted;
-private int filterEmployee;
+private String filterEmployee;
 
 
 public FilterEmployee(String gender, int currentDesignation, Timestamp dateOfJoining,
-  String from, String to, String highestQualification, boolean isDeleted,int filterEmployee, Timestamp dateOfJoiningFrom, Timestamp dateOfJoiningTo ) {
+  String from, String to, String highestQualification, boolean isDeleted,String filterEmployee, Timestamp dateOfJoiningFrom, Timestamp dateOfJoiningTo ) {
  super();
  this.gender = gender;
  this.currentDesignation = currentDesignation;
@@ -80,14 +80,14 @@ public boolean getDeleted() {
    isDeleted = deleted;
   }
  
- public int getFilterEmployee() {
-  return filterEmployee;
-   
- }
- public void setFilterEmployee( int filterEmployee){
-  this.filterEmployee=filterEmployee;
- }
- public Timestamp getDateOfJoiningFrom() {
+ 
+ public String getFilterEmployee() {
+	return filterEmployee;
+}
+public void setFilterEmployee(String filterEmployee) {
+	this.filterEmployee = filterEmployee;
+}
+public Timestamp getDateOfJoiningFrom() {
 		return dateOfJoiningFrom;
 	}
 	public void setDateOfJoiningFrom(Timestamp dateOfJoiningFrom) {

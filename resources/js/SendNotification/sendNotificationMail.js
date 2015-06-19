@@ -10,7 +10,13 @@ function sendNotificationMail(event, email, employeeName) {
 
 
 sendNotificationMail.prototype.handleShow = function(event, email, employeeName) 
-{   
+{
+	$("#backtonotifications").click(function() {
+		
+		routie("notifications");
+		
+	}.ctx(this));
+	
 	$('#contentfieldNotification').ckeditor();
 	var sendbutton = $('#SubmitNotification');
 
@@ -27,7 +33,7 @@ sendNotificationMail.prototype.handleShow = function(event, email, employeeName)
 		if (success) {
 		
 		    
-			content=data.content;			
+			var content=data.content;
 			$('#contentfieldNotification').ckeditor();
 			$('#contentfieldNotification').val(content);
 			
@@ -45,11 +51,14 @@ sendNotificationMail.prototype.handleShow = function(event, email, employeeName)
 		document.getElementById('light').style.display='block';
 		document.getElementById('fade').style.display='block';
 		
-		
+	
 		
 		sendbutton[0].disabled = true;
 		
 		var modifiedcontent =$('#contentfieldNotification').val();
+		
+		alert(modifiedcontent);
+		
 		var input = {
 			"payload" : {
 				"event" : event,
@@ -129,8 +138,5 @@ sendNotificationMail.prototype.handleShow = function(event, email, employeeName)
 			//Apending the Subject to the subject drop down
 			  $("#sendSubjectNotification").append(subject);
 		}
-		
 	
-
-
 }

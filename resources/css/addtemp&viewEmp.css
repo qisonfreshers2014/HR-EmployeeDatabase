@@ -31,12 +31,12 @@
 }
 
 .heading {
-     color:#00246B;
-     margin-left: 9%;
+    color: #00246b;
+    margin-left:4%;
 }
 
 #employeeimage {
-     left: 30%;
+  margin-left: 100%;
      margin-top: 2%;
      position: relative;
      right: 2px;
@@ -47,16 +47,21 @@ text-align:center;
 	font-weight:strong;
 }
 
-.editviewEmployee {
-     left: 25%;
+.editempviewEmployee {
+     left: 30%;
      position: relative;
      right: 2px;
   margin-top:2%;
   margin-bottom:2%;
 }
-#back{
-   margin-left:9%;
+.editviewEmployee {
+     left: 5%;
+     position: relative;
+     right: 2px;
+  margin-top:2%;
+  margin-bottom:2%;
 }
+
 .container {
      background-color: #ffffff;
 }
@@ -112,15 +117,30 @@ text-align:center;
 	
 }
 #displaySkills{
-	 width:80%;
-  margin-left:9%;
+	 width:40%;
+   margin-left:30%;
  
 	
 }
 #displaySkills th, #displaySkills td{
-  text-align:center
+  text-align:center;
 }
 .skillheader{
 	font-size:16px;
+	color:white;
 	  background-color:#7094b8;
+}
+
+
+#marginDetail {
+	  margin-left:35%;
+}
+#addtempalign{
+  margin-left:40%;
+}
+#backtoemplist{
+	margin-left:4%;
+}
+#employeeimage{
+	margin-left:150%;
 }
