@@ -56,6 +56,7 @@ $('#backtohrview').click(function(){
 			
 			payloadactualdob=actualdobyear + "-" + payloadactualdobmonth + "-" + actualdobdate
 			
+			console.log(object.fileId)
 			 
 			$("#emal").val(object.email);
 			$("#eid").val(object.employeeId);
@@ -203,10 +204,10 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 	var salry = /^\d{0,10}(?:\.\d{0,2})?$/;
 	var dateformat = /^(19|20)\d\d-(0\d|1[012])-(0\d|1\d|2\d|3[01])$/;
 
-	if (blood == "" || name == "" || qualification == "" || fathername == ""
+	if (name == "" || qualification == "" || fathername == ""
 			|| contnum == "" || txtemercon == "" || txtemname == ""
-			|| currentaddr == "" || peraddr == "" || relation == ""
-			|| skype == "" || Gender == "" || dob == "" || salary == ""||actualDOB=="" ||employeeType=="") {
+			|| currentaddr == "" || peraddr == ""
+			 || Gender == "" || dob == "" || salary == ""||actualDOB=="" ||employeeType=="") {
 		$('.error').css('visibility', 'visible');
 
 		if (dob == "") {
@@ -441,10 +442,9 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 			$(yearexperr).css("color", "red");
 		}
 
-		if (skype == "") {
-			$(skypeerr).text("Required field");
-			$(skypeerr).css("color", "red");
-		} else if (!(skype.match(skp))) {
+		if (skype != "") {
+			
+         if (!(skype.match(skp))) {
 			$(skypeerr).text("Please enter a valid skype ID");
 			$(skypeerr).css("color", "red");
 		} else if (!(skype.length > 5)) {
@@ -452,6 +452,7 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 			$(skypeerr).css("color", "red");
 		} else {
 			$(skypeerr).text("");
+		}
 		}
 		this.GenderValidate();
 		
@@ -481,7 +482,7 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 		$(emnumerr).text("");
 		$(emnameerr).text("Enter characters only");
 		$(emnameerr).css("color", "red");
-	} else if (!(skype.match(skp))) {
+	}/* else if (!(skype.match(skp))) {
 		$(relationerr).text("");
 		$(blodderr).text("");
 		$(skypeerr).text("Please enter a valid skype ID");
@@ -490,16 +491,16 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 		$(emnameerr).text("");
 		$(relationerr).text("Enter characters only");
 		$(relationerr).css("color", "red");
-	} else if (txtemercon == isNaN || !(txtemercon.match(num))) {
+	} */else if (txtemercon == isNaN || !(txtemercon.match(num))) {
 		$(emnumerr).text("Only numbers allowed");
 		$(emnumerr).css("color", "red");
 	} else if (!(txtemercon.length == 10)) {
 		$(emnumerr).text("Please enter 10 digits only");
 		$(emnumerr).css("color", "red");
-	} else if (!(blood.match(bloodGroup))) {
+	}/* else if (!(blood.match(bloodGroup))) {
 		$(blodderr).text("Please enter a valid blood group eg: AB+, AB-");
 		$(blodderr).css("color", "red");
-	} else if (!(qualification.match(qual) || qualification.match(char))) {
+	}*/ else if (!(qualification.match(qual) || qualification.match(char))) {
 		$(nerr).text("Please check the qualification");
 		$(nerr).css("color", "red");
 	} else {
@@ -509,8 +510,9 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 	if(typeof fileId==='undefined'){
 		
 		fileId=$('#fileid').val();
+		console.log(fileId);
 	}
-		console.log(payloadactualdob);
+		console.log(fileId);
 		var input = {
 			"payload" : {
 				"employeeId" : empid,

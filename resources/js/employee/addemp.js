@@ -664,21 +664,13 @@ if (relation != "") {
 		
 		$(emnameerr).text("Enter characters only");
 		$(emnameerr).css("color", "red");
-	} else if (!(skype.match(skp))) {
-		$(skypeerr).text("Please enter a valid skype ID");
-		$(skypeerr).css("color", "red");
-	} else if (!(skype.length > 5)) {
-		$(skypeerr).text("Please enter minimum 6 letters");
-		$(skypeerr).css("color", "red");
-	} else if (!(blood.match(bloodGroup))) {
-		
-		$(blodderr).text("Please enter a valid blood group ex:AB+, AB-");
-		$(blodderr).css("color", "red");
-	} else {
+	}  
+	 else {
 		flag = false;
 		// $(pwderr).css("color", "green");
 
 	}
+
     this.employeeTypeValidate();
 	this.GenderValidate();
 	this.ValidateDrpn();
