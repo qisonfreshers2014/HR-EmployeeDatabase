@@ -227,6 +227,9 @@ RequestManager.prototype.getSearchEmp=function(data,callback){
  RequestManager.prototype.getAllHandsMeetingSchedule=function(data,callback){
 	 this.sendToServer('allhandsmeeting/getallhandsschedule', data, callback);
 } 
+ RequestManager.prototype.getAlltemplates=function(data,callback){
+	 this.sendToServer('template/getalltemplates', data, callback);
+} 
  
 
 

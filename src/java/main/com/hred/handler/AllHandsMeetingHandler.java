@@ -12,6 +12,7 @@ import com.hred.handler.annotations.AuthorizeEntity;
 import com.hred.model.AllHandsMeeting;
 import com.hred.model.ObjectTypes;
 import com.hred.pagination.AllhandsmeetingInput;
+import com.hred.pagination.PaginationInput;
 import com.hred.pagination.PaginationOutput;
 import com.hred.pagination.Paginator;
 import com.hred.persistence.dao.AllHandsMeetingDAO;
@@ -143,7 +144,7 @@ public class AllHandsMeetingHandler extends AbstractHandler {
 	}
 	
 	
-	public PaginationOutput<AllHandsMeeting> getAllhandsSchedule(AllhandsmeetingInput allhands) {
+	public PaginationOutput<AllHandsMeeting> getAllhandsSchedule(PaginationInput allhands) {
 		 Paginator<AllHandsMeeting> paginator = new Paginator<>();
 		 paginator = DAOFactory.getInstance().getAllHandsMeetingDAO().getAllHandsSchedule(allhands);
 		 

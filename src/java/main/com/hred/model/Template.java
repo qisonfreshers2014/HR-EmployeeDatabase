@@ -23,6 +23,11 @@ public class Template extends AbstractObject{
  public Template(){
 			 
 		 }
+ public Template(String name){
+	 this.name=name;
+	 
+	 
+ }
 		 
 		 
   public Template(long id,String name){

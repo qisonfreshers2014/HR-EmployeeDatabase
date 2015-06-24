@@ -15,12 +15,16 @@ import com.hred.exception.TemplateException;
 import com.hred.exception.UserException;
 import com.hred.handler.AbstractHandler;
 import com.hred.handler.annotations.AuthorizeEntity;
+import com.hred.model.AllHandsMeeting;
 import com.hred.model.DesignationType;
 import com.hred.model.Employee;
 import com.hred.model.File;
 import com.hred.model.ObjectTypes;
 import com.hred.model.Objects;
 import com.hred.model.Template;
+import com.hred.pagination.PaginationInput;
+import com.hred.pagination.PaginationOutput;
+import com.hred.pagination.Paginator;
 import com.hred.persistence.dao.DAOFactory;
 import com.hred.persistence.dao.DesignationTypeDAO;
 import com.hred.persistence.dao.EmployeeDAO;
@@ -241,6 +245,15 @@ public List<Template> getTemplatesAOP() {
 		}
 	return templatescontenttoDisplay;
 
+	}
+
+	public PaginationOutput<Template> getAllTemplatesPaginated(
+			PaginationInput alltemplates) {
+		 Paginator<Template> paginator = new Paginator<>();
+		 paginator = DAOFactory.getInstance().getTemplateDAO().getAllHandsSchedule(alltemplates);
+		 
+		 PaginationOutput<Template> templatesoutput = new PaginationOutput<>(paginator, alltemplates.getPageNo(), alltemplates.getPageSize());
+		 return templatesoutput;
 	}
 
 

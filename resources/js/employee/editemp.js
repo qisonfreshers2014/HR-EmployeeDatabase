@@ -80,7 +80,7 @@ EditEmployee.prototype.validateUpdateEmp = function(employeeId) {
 	var skypeerr = $('#skypeerr');
 
 	if (contnum == "" || txtemercon == "" || txtemname == "" ||  peraddr == ""  || email == ""
-			|| currentaddr == ""||hobbies=="") {
+			|| currentaddr == "") {
 		$('.error').css('visibility', 'visible');
 
 		if (contnum == "") {

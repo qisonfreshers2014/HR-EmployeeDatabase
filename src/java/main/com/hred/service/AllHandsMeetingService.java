@@ -18,6 +18,7 @@ import com.hred.exception.ObjectNotFoundException;
 import com.hred.handler.AllHandsMeetingHandler;
 import com.hred.model.AllHandsMeeting;
 import com.hred.pagination.AllhandsmeetingInput;
+import com.hred.pagination.PaginationInput;
 import com.hred.pagination.PaginationOutput;
 import com.hred.service.annotations.RestService;
 import com.hred.service.annotations.ServiceStatus;
@@ -128,8 +129,8 @@ public String getAllHandsMeetingSchedule(@Context HttpHeaders headers,
   @Context UriInfo uriInfo, WebserviceRequest request)
   throws ObjectNotFoundException, BusinessException,
   EncryptionException {
-	AllhandsmeetingInput allhands = (AllhandsmeetingInput) JsonUtil.getObject(
-   request.getPayload(), AllhandsmeetingInput.class);
+	PaginationInput allhands = (PaginationInput) JsonUtil.getObject(
+   request.getPayload(), PaginationInput.class);
  PaginationOutput<AllHandsMeeting> allhandsSchedule = AllHandsMeetingHandler.getInstance().getAllhandsSchedule(allhands);
  return JsonUtil.getJsonBasedOnDescriptor(allhandsSchedule,
 		 AllhandsOutputDescriptor.class);

@@ -6,6 +6,7 @@ import java.util.List;
 import com.hred.exception.AllHandsMeetingException;
 import com.hred.model.AllHandsMeeting;
 import com.hred.pagination.AllhandsmeetingInput;
+import com.hred.pagination.PaginationInput;
 import com.hred.pagination.Paginator;
 
 public interface AllHandsMeetingDAO extends BaseDAO{
@@ -20,7 +21,7 @@ public interface AllHandsMeetingDAO extends BaseDAO{
 			throws AllHandsMeetingException;
 	
 	public Paginator<AllHandsMeeting> getAllHandsSchedule(
-			AllhandsmeetingInput allhands);
+			PaginationInput allhands);
 
 
 

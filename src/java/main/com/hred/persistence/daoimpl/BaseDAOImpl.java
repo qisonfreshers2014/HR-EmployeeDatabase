@@ -50,6 +50,7 @@ public class BaseDAOImpl implements BaseDAO{
         criteria.add(Restrictions.eq(AbstractObject.LABEL_IS_DELETED, Boolean.FALSE));
         return criteria;
     }
+   
 
     @Override
     public BaseObject saveObject(BaseObject persistentObject) {

@@ -7,6 +7,9 @@ public class EmployeeOutFile extends Employee {
 
 
  private Employee employee;
+ private String filePath;
+ private String designationName;
+ private List<Skills> skills;
 
 public EmployeeOutFile(int employeeId) {
   super(employeeId);
@@ -20,9 +23,7 @@ public EmployeeOutFile(int employeeId) {
      this.employee=employee;
  }
  
- private String filePath;
- private String designationName;
- private List<Skills> skills;
+
 
  public String getDesignationName() {
   return designationName;

@@ -17,13 +17,20 @@ import com.hred.exception.BusinessException;
 import com.hred.exception.EncryptionException;
 import com.hred.exception.ObjectNotFoundException;
 import com.hred.exception.TemplateException;
+import com.hred.handler.AllHandsMeetingHandler;
 import com.hred.handler.TemplateHandler;
+import com.hred.model.AllHandsMeeting;
 import com.hred.model.Template;
+import com.hred.pagination.AllhandsmeetingInput;
+import com.hred.pagination.PaginationInput;
+import com.hred.pagination.PaginationOutput;
 import com.hred.service.annotations.RestService;
 import com.hred.service.annotations.ServiceStatus;
 import com.hred.service.annotations.UnSecure;
 import com.hred.service.common.WebserviceRequest;
+import com.hred.service.descriptors.output.AllhandsOutputDescriptor;
 import com.hred.service.descriptors.output.DisplayNotificationHome;
+import com.hred.service.descriptors.output.TemplateOutputDescriptor;
 
 @Path("/v1/template/")
 public class TemplateService extends BaseService {
@@ -141,6 +148,25 @@ public class TemplateService extends BaseService {
    return JsonUtil.getJsonBasedOnDescriptor(output,Template.class);
   }
   
+ @POST
+ @RestService(input = String.class, output = String.class)
+ @ServiceStatus(value = "complete")
+ @Consumes(MediaType.APPLICATION_JSON)
+ @Produces(MediaType.APPLICATION_JSON)
+ @Path("/getalltemplates")
+ @UnSecure
+ public String getAllTemplatesPaginated(@Context HttpHeaders headers,
+   @Context UriInfo uriInfo, WebserviceRequest request)
+   throws ObjectNotFoundException, BusinessException,
+   EncryptionException {
+ 	PaginationInput alltemplates = (PaginationInput) JsonUtil.getObject(
+    request.getPayload(), PaginationInput.class);
+  PaginationOutput<Template> templates = TemplateHandler.getInstance().getAllTemplatesPaginated(alltemplates);
+  return JsonUtil.getJsonBasedOnDescriptor(templates, TemplateOutputDescriptor.class);
+  
+ }
+
+
   
 
 }

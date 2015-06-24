@@ -167,9 +167,10 @@ App.prototype.loadhrEditEmp = function(empid) {
 		new HrEditEmployee(empid);
 	});
 }
-App.prototype.loadtemplateList = function() {
+App.prototype.loadtemplateList = function(data) {
+	Loader.loadPagination();
 	Loader.loadtemplateList(function() {
-		new TemplateList();
+		new TemplateList(data);
 	});
 }
 

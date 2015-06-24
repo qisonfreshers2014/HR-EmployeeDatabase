@@ -14,6 +14,7 @@ import com.hred.exception.ExceptionCodes;
 import com.hred.exception.ExceptionMessages;
 import com.hred.model.AllHandsMeeting;
 import com.hred.pagination.AllhandsmeetingInput;
+import com.hred.pagination.PaginationInput;
 import com.hred.pagination.Paginator;
 import com.hred.persistence.dao.AllHandsMeetingDAO;
 import com.hred.persistence.session.SessionFactoryUtil;
@@ -106,7 +107,7 @@ public class AllHandsMeetingDAOImpl extends BaseDAOImpl implements AllHandsMeeti
 	}
 
 	@Override
-	public Paginator<AllHandsMeeting> getAllHandsSchedule(AllhandsmeetingInput allhands) {
+	public Paginator<AllHandsMeeting> getAllHandsSchedule(PaginationInput allhands) {
 		 int pageNo = allhands.getPageNo();
 		  int pageSize = allhands.getPageSize();
 		  

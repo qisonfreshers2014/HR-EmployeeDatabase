@@ -130,7 +130,7 @@
     border-bottom: 1px solid #afafaf;
     border-top: none;    
     padding: 4px;
-    text-align: center;
+    text-align: left;
     vertical-align: middle;
 }
 #displayDatatemplist th:last-child,#displayDatatemplist td:last-child
@@ -146,5 +146,11 @@
 	margin-bottom: 0px;
 }
 #backaddemp,#backtohrview,#backtoprofile{
+	margin-left:2%;
+}
+#displayDatatemplist tr{
+	background: url(http://jackrugile.com/images/misc/noise-diagonal.png);	
+}
+#paginationdiv{
 	margin-left:2%;
 }

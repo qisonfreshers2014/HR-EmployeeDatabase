@@ -97,7 +97,16 @@ Router.prototype.routeManager = function() {
 		},
 		'template': function() {
 	    	App.loadHRHomeHeader(App.userName);
-	    	App.loadtemplateList();
+	    	
+	    	var contentinput = {"payload":{"pageNo":1,"pageSize":10}};
+			 RequestManager.getAlltemplates(contentinput, function(data, success) {
+				 if(success){
+			
+					 App.loadtemplateList(data);
+			 
+				 }
+			 });
+	    	
 	    },
 	    'addtemplate': function() {
 	    	App.loadHRHomeHeader(App.userName);
