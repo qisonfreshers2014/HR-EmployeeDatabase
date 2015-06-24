@@ -506,7 +506,6 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 	} else {
 		$('.error').css('visibility', 'hidden');
 		
-		
 	if(typeof fileId==='undefined'){
 		
 		fileId=$('#fileid').val();

@@ -30,7 +30,7 @@ Router.prototype.routeManager = function() {
 		'myprofile': function() {
 			//App.loadEmployeePage(App.userName,App.hr,App.isDeleted);
 			App.loadempviewemployee(App.employeeId);
-	    },
+	    },                                                                                                       
 	    'hrholiday': function() {
 	    	//App.loadEmployeePage(App.userName,App.hr,App.isDeleted);
 	    	App.loadEmployeeHoliday();
@@ -41,7 +41,17 @@ Router.prototype.routeManager = function() {
 	    },
 	    'empAllhands': function() {
 	    	//App.loadEmployeePage(App.userName,App.hr,App.isDeleted);
-	    	 App.loadempAllhands(); 
+	    	var contentinput = {"payload":{"pageNo":1,"pageSize":10}};
+			 RequestManager.getAllHandsMeetingSchedule(contentinput, function(data, success) {
+				 if(success){
+					 
+					 
+					 App.loadempAllhands(data); 
+			
+			 
+				 }
+			 });
+	    	
 	    },
 	    'employeeedit': function() {
 	    	 App.loadEditEmp(App.employeeId);

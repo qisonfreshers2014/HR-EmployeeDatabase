@@ -196,9 +196,10 @@ App.prototype.loadAllhandmeetings = function(dataid) {
 		new editHandMeeting(dataid);
 	});
 }
-App.prototype.loadempAllhands= function() {
+App.prototype.loadempAllhands= function(data) {
+	Loader.loadPagination();
 	Loader.loadempAllhands(function() {
-		new empAllHands();
+		new empAllHands(data);
 	});
 }
 App.prototype.loadHRHomeHeader = function(name) {

@@ -1,28 +1,52 @@
-function empAllHands() {
+function empAllHands(data) {
 	Loader.loadHTML('.container', 'resources/js/AllHandsMeeting/empAllHands.html', true, function(){
-		this.handleShow();
+		this.handleShow(data);
 	}.ctx(this));
 }
 
-empAllHands.prototype.handleShow = function() {
+empAllHands.prototype.handleShow = function(data) {
 	
 	
 
 	$('.container').show();
-	this.getAllHandsMeeting();
+	
+	
+var self=this;
+	
+	var pageNo=1;
+	
+	 $('.selector').pagination(
+		  		{
+		      items:data.count,
+		      itemsOnPage:10,
+		      cssStyle: 'light-theme',
+		      	
+		  	  onPageClick: function(pageNumber) { 
+		  		  
+		  		self.getAllHandsMeeting(pageNumber);
+		           
+		           
+		       }
+		  });
+
+	this.getAllHandsMeeting(pageNo);
 $('#add').css("visibility","hidden");
 $('#edit').css("visibility","hidden");
 
 }
-empAllHands.prototype.getAllHandsMeeting=function(){
-	var input = {"payload":{}};
-	 RequestManager.getAllHandsMeetingDetails(input, function(data, success) {
+empAllHands.prototype.getAllHandsMeeting=function(pageNo){
+	 var contentinput = {"payload":{"pageNo":pageNo,"pageSize":10}};
+	 RequestManager.getAllHandsMeetingSchedule(contentinput, function(data, success) {
 		 if(success){
 			var id=0;
 			var name='';
 			console.log(data);
+			var content=data.allhands;
+			
+			$('#displayallhandsData').empty();
+			$('table').append('<tr><th class="theader">Date</th><th class="theader">Day</th><th class="theader">Employee of the Month</th><th class="theader">Description</th></tr>')
 
-			$.each(data,function(obj, value){
+			$.each(content,function(obj, value){
 				
 				console.log('obj'+'  '+obj);
 				console.log('Obj'+ '   '+value);
@@ -52,6 +76,26 @@ empAllHands.prototype.getAllHandsMeeting=function(){
 				var month=new Date(value.date).getMonth()+1;
 				$('table').append("<tr style='text-align:center'><td>"+new Date(value.date).getDate()+"-"+monthsArray[new Date(value.date).getMonth()]+"-"+new Date(value.date).getFullYear()+"</td><td>"+weekday[new Date(value.date).getDay()]+"</td><td>"+value.employee+"</td><td>"+value.description+"</td></tr>");
 			});
+			
+			 $(function(){
+				  
+				  var perPage = 10;
+					
+				 
+				  var checkFragment = function() {
+				 
+				      var hash = window.location.hash;
+			
+				      hash = hash.match(/^#page-(\d+)$/);
+				      if(hash)
+				        
+				          $("#pagination").pagination("selectPage", parseInt(hash[1]));
+				  };
+				
+				  $(window).bind("popstate", checkFragment);
+		
+				  checkFragment();
+				  });
 		
 			
 		 }
