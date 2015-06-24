@@ -155,6 +155,9 @@ public interface ExceptionCodes {
 	public static final int EMPLOYEE_EMERNAME_NOT_EMPTY= 307;
 	public static final int EMPLOYEE_CURRENTADDR_NOT_EMPTY= 308;
 	public static final int FROM_DOJ_CANNOT_BE_GRETER_THAN_TO_DOJ= 309;
+	public static final int EMPLOYEE_PERMINENTADDRESS_EMPTY = 310;
+	public static final int EMPLOYEE_YOE_EMPTY = 311;
+	
 
 	
 	public static final int DESIGNATION_DOESNOT_EXIST = 225;
@@ -378,6 +381,7 @@ public interface ExceptionCodes {
 	public static final int SELECT_ATLEAST_ONE_FIELD = 9025;
 	public static final int DESIGNATION_TYPE_DOES_NOT_EXIST = 9026;
 	public static final int PLEASE_ENTER_DESIGNATION_TYPE = 9027;
+
 
 	
 

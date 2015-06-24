@@ -79,8 +79,7 @@ EditEmployee.prototype.validateUpdateEmp = function(employeeId) {
 	var hobbies=$("#hobbies").val();
 	var skypeerr = $('#skypeerr');
 
-	if (contnum == "" || txtemercon == "" || txtemname == "" || password == ""
-			|| peraddr == "" || relation == "" || skype == "" || email == ""
+	if (contnum == "" || txtemercon == "" || txtemname == "" ||  peraddr == ""  || email == ""
 			|| currentaddr == ""||hobbies=="") {
 		$('.error').css('visibility', 'visible');
 
@@ -154,29 +153,20 @@ EditEmployee.prototype.validateUpdateEmp = function(employeeId) {
 			// $(peraddrerr).css("color", "green");
 
 		}
-		if (hobbies == "") {
-			$('#hobbieserr').text("Required field");
-			$('#hobbieserr').css("color", "red");
-		}else {
-			$('#hobbieserr').text("");
-
-		}
-
-		if (relation == "") {
-			$(relationerr).text("Required field");
-			$(relationerr).css("color", "red");
-		} else if (!(relation.match(char) || relation == isNaN)) {
+	
+		if (relation != "") {
+		
+              if (!(relation.match(char) || relation == isNaN)) {
 			$(relationerr).text("Enter characters only");
 			$(relationerr).css("color", "red");
 		} else {
 			$(relationerr).text("");
 			// $(relationerr).css("color", "green");
 		}
-
-		if (skype == "") {
-			$(skypeerr).text("Required field");
-			$(skypeerr).css("color", "red");
-		} else if (!(skype.match(skp))) {
+		}
+		if (skype != "") {
+		
+                  if (!(skype.match(skp))) {
 			$(skypeerr).text("Please enter a valid skype ID");
 			$(skypeerr).css("color", "red");
 		} else if (!(skype.length > 5)) {
@@ -184,6 +174,7 @@ EditEmployee.prototype.validateUpdateEmp = function(employeeId) {
 			$(skypeerr).css("color", "red");
 		} else {
 			$(skypeerr).text("");
+		}
 		}
 
 	} else if (contnum == isNaN || !(contnum.match(num))) {
@@ -200,7 +191,7 @@ EditEmployee.prototype.validateUpdateEmp = function(employeeId) {
 	} else if (!(txtemercon.length == 10)) {
 		$(emnumerr).text("Please enter 10 digits only");
 		$(emnumerr).css("color", "red");
-	} else if (!(skype.match(skp))) {
+	} /*else if (!(skype.match(skp))) {
 		$('.error').css('visibility', 'visible');
 		$(relationerr).text("");
 		$(blodderr).text("");
@@ -211,7 +202,7 @@ EditEmployee.prototype.validateUpdateEmp = function(employeeId) {
 		$(emnameerr).text("");
 		$(relationerr).text("Enter characters only");
 		$(relationerr).css("color", "red");
-	} else if (txtemercon == isNaN || !(txtemercon.match(num))) {
+	} */else if (txtemercon == isNaN || !(txtemercon.match(num))) {
 		$('.error').css('visibility', 'visible');
 		$(emnumerr).text("Only numbers allowed");
 		$(emnumerr).css("color", "red");

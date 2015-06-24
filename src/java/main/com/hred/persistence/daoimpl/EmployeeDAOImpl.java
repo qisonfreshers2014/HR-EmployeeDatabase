@@ -17,6 +17,7 @@ import org.hibernate.criterion.Conjunction;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import com.hred.exception.BusinessException;
@@ -962,6 +963,7 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 	  
 	  int skipCount = (pageNo - 1) * pageSize;  
 	  Criteria criteria=createCustomCriteria(Employee.class);
+	  criteria.addOrder(Order.asc("employeeId"));
 	  
 
 	        criteria.setFirstResult(skipCount).setMaxResults(pageSize);

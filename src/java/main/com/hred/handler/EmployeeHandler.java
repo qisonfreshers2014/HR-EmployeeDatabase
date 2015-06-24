@@ -319,24 +319,34 @@ public class EmployeeHandler extends AbstractHandler {
 					ExceptionCodes.EMPLOYEE_CURRENTADDR_NOT_EMPTY,
 					ExceptionMessages.EMPLOYEE_CURRENTADDR_NOT_EMPTY);
 		}
+		if (peraddr == null || peraddr.isEmpty()) {
+			throw new EmployeeException(
+					ExceptionCodes.EMPLOYEE_PERMINENTADDRESS_EMPTY,
+					ExceptionMessages.EMPLOYEE_PERMINENTADDRESS_EMPTY);
+		}
 
-		/*if (emercontname == null || emercontname.isEmpty()) {
+		if (emercontname == null || emercontname.isEmpty()) {
 			throw new EmployeeException(
 					ExceptionCodes.EMPLOYEE_EMERNAME_NOT_EMPTY,
 					ExceptionMessages.EMPLOYEE_EMERNAME_NOT_EMPTY);
 		}
-*/
+
 		if (emercontnum == 0) {
 			throw new EmployeeException(
 					ExceptionCodes.EMPLOYEE_EMERNUM_NOT_EMPTY,
 					ExceptionMessages.EMPLOYEE_EMERNUM_NOT_EMPTY);
 		}
 
-		/*
-		 * if (YOE == 0) { throw new EmployeeException(
-		 * ExceptionCodes.EMPLOYEE_RATING_NOT_EMPTY,
-		 * ExceptionMessages.EMPLOYEE_RATING_NOT_EMPTY); }
-		 */
+		 if (YOE == 0) {
+			 
+			 
+			 throw new EmployeeException(
+				 ExceptionCodes.EMPLOYEE_YOE_EMPTY,
+				 ExceptionMessages.EMPLOYEE_YOE_EMPTY);
+			 
+		 }
+		
+
 
 		if (rating == null || rating.isEmpty()) {
 			throw new EmployeeException(
@@ -459,9 +469,16 @@ public class EmployeeHandler extends AbstractHandler {
 
 	// updating the details of employee
 	public Employee updateEmployee(Employee employee)
-			throws ObjectNotFoundException, EmployeeException,
-			EncryptionException {
-
+			throws EncryptionException, BusinessException {
+      
+		String email=employee.getEmail();
+		long contactnum=employee.getContactNo();
+		String currentaddr=employee.getCurrentAddress();
+		String perminentaddr=employee.getPermanentAddress();
+		long emergencyContactnumber=employee.getEmergencycontactnumber();
+		String emergencyContactname=employee.getEmergencyContactName();
+		
+		validateEmployeeEdit(email,contactnum,currentaddr,perminentaddr,emergencyContactnumber,emergencyContactname);
 		Employee empFromDB = (Employee) DAOFactory.getInstance()
 				.getEmployeeDAO().getEmployeeById(employee.getEmployeeId());
 		empFromDB.setContactNo(employee.getContactNo());
@@ -477,13 +494,71 @@ public class EmployeeHandler extends AbstractHandler {
 		employee = (Employee) empDAOImpl.update(empFromDB);
 		return employee;
 	}
+	
+	
+	//validation function for employee myprofile edit
+
+	public void validateEmployeeEdit(String email, long contactnum,
+			String currentaddr, String perminentaddr,
+			long emergencyContactnumber, String emergencyContactname) throws BusinessException {
+		
+
+		if (email == null || email.isEmpty() || email.trim().isEmpty()) {
+			throw new BusinessException(ExceptionCodes.EMAIL_CANNOT_BE_EMPTY,
+					ExceptionMessages.EMAIL_CANNOT_BE_EMPTY);
+		}
+		if (currentaddr == null || currentaddr.isEmpty()) {
+			throw new EmployeeException(
+					ExceptionCodes.EMPLOYEE_CURRENTADDR_NOT_EMPTY,
+					ExceptionMessages.EMPLOYEE_CURRENTADDR_NOT_EMPTY);
+		}
+
+		if (emergencyContactname == null || emergencyContactname.isEmpty()) {
+			throw new EmployeeException(
+					ExceptionCodes.EMPLOYEE_EMERNAME_NOT_EMPTY,
+					ExceptionMessages.EMPLOYEE_EMERNAME_NOT_EMPTY);
+		}
+
+		if (emergencyContactnumber == 0) {
+			throw new EmployeeException(
+					ExceptionCodes.EMPLOYEE_EMERNUM_NOT_EMPTY,
+					ExceptionMessages.EMPLOYEE_EMERNUM_NOT_EMPTY);
+		}
+		if (perminentaddr == null || perminentaddr.isEmpty()) {
+			throw new EmployeeException(
+					ExceptionCodes.EMPLOYEE_PERMINENTADDRESS_EMPTY,
+					ExceptionMessages.EMPLOYEE_PERMINENTADDRESS_EMPTY);
+		}
+
+		
+		
+	}
 
 	// updating the details of employee by hr
 	@AuthorizeEntity(roles = { Constants.HR })
 	public Employee hrUpdateEmployeeAOP(Employee employee)
-			throws ObjectNotFoundException, EmployeeException,
-			EncryptionException {
-
+			throws EncryptionException, BusinessException {
+         
+		
+		String name = employee.getEmployeeName();
+		long id = employee.getEmployeeId();
+		String email = employee.getEmail();
+		String qualification = employee.getHighestQualification();
+		String salary = employee.getSalary();
+		long num = employee.getContactNo();
+		Timestamp date = employee.getDateOfBirth();
+		Timestamp actualDOB = employee.getActualdateOfBirth();
+		String fatherName = employee.getFathersName();
+		long contactNum = employee.getContactNo();
+		double YOE = employee.getYearsofexperience();
+		long emercontnum = employee.getEmergencycontactnumber();
+		String emercontname = employee.getEmergencyContactName();
+		String currentaddr = employee.getCurrentAddress();
+		String peraddr = employee.getPermanentAddress();
+		String employeeType=employee.getEmployeeType();
+		
+		validateHrEditEmployee(name,id,email,qualification,salary,num,date,actualDOB,fatherName,contactNum,YOE,emercontnum,emercontname,currentaddr,peraddr,employeeType);
+		
 		Employee empFromDB = (Employee) DAOFactory.getInstance()
 				.getEmployeeDAO().getEmployeeById(employee.getEmployeeId());
 		empFromDB.setContactNo(employee.getContactNo());
@@ -516,6 +591,96 @@ public class EmployeeHandler extends AbstractHandler {
 				.getEmployeeDAO();
 		employee = (Employee) empDAOImpl.update(empFromDB);
 		return employee;
+	}
+	
+	
+
+	private void validateHrEditEmployee(String name, long id, String email,
+			String qualification, String salary, long num, Timestamp date,
+			Timestamp actualDOB, String fatherName, long contactNum,
+			double yOE, long emercontnum, String emercontname,
+			String currentaddr, String peraddr, String employeeType) throws BusinessException {
+		
+		if (currentaddr == null || currentaddr.isEmpty()) {
+			throw new EmployeeException(
+					ExceptionCodes.EMPLOYEE_CURRENTADDR_NOT_EMPTY,
+					ExceptionMessages.EMPLOYEE_CURRENTADDR_NOT_EMPTY);
+		}
+		if (peraddr == null || peraddr.isEmpty()) {
+			throw new EmployeeException(
+					ExceptionCodes.EMPLOYEE_PERMINENTADDRESS_EMPTY,
+					ExceptionMessages.EMPLOYEE_PERMINENTADDRESS_EMPTY);
+		}
+
+		if (emercontname == null || emercontname.isEmpty()) {
+			throw new EmployeeException(
+					ExceptionCodes.EMPLOYEE_EMERNAME_NOT_EMPTY,
+					ExceptionMessages.EMPLOYEE_EMERNAME_NOT_EMPTY);
+		}
+
+		if (emercontnum == 0) {
+			throw new EmployeeException(
+					ExceptionCodes.EMPLOYEE_EMERNUM_NOT_EMPTY,
+					ExceptionMessages.EMPLOYEE_EMERNUM_NOT_EMPTY);
+		}
+		if (num == 0) {
+			throw new EmployeeException(ExceptionCodes.EMPLOYEE_NUMBER,
+					ExceptionMessages.EMPLOYEE_NUMBER);
+		}
+		if (date == null) {
+			throw new EmployeeException(ExceptionCodes.EMPLOYEE_DOB_NULL,
+					ExceptionMessages.EMPLOYEE_DOB_NULL);
+		}
+		if (actualDOB == null) {
+			throw new EmployeeException(ExceptionCodes.EMPLOYEE_ACTUAL_DOB_NULL,
+					ExceptionMessages.EMPLOYEE_ACTUAL_DOB_NULL);
+		}
+		if(employeeType==null||employeeType.isEmpty()){
+			
+			throw new EmployeeException(ExceptionCodes.EMPLYEE_TYPE_NULL,ExceptionMessages.EMPLYEE_TYPE_NULL);
+			
+			                             
+		}
+		if (qualification == null || qualification.isEmpty()) {
+			throw new EmployeeException(
+					ExceptionCodes.EMPLOYEE_QUALIFICATION_NOT_EXIST,
+					ExceptionMessages.EMPLOYEE_QUALIFICATION_NOT_EXIST);
+		}
+
+		if (salary == null || salary.isEmpty()) {
+			throw new EmployeeException(ExceptionCodes.EMPLOYEE_SALARY,
+					ExceptionMessages.EMPLOYEE_SALARY);
+		}
+		if (contactNum == 0) {
+			throw new EmployeeException(
+					ExceptionCodes.EMPLOYEE_CONTACTNUM_NOT_EMPTY,
+					ExceptionMessages.EMPLOYEE_CONTACTNUM_NOT_EMPTY);
+		}
+
+		if (fatherName == null || fatherName.isEmpty()) {
+			throw new EmployeeException(
+					ExceptionCodes.EMPLOYEE_FATHERNAME_NOT_EMPTY,
+					ExceptionMessages.EMPLOYEE_FATHERNAME_NOT_EMPTY);
+		}
+
+		if (name == null || name.isEmpty() || name.trim().isEmpty()) {
+			throw new EmployeeException(ExceptionCodes.INVALID_NAME,
+					ExceptionMessages.INVALID_NAME);
+		}
+
+		if (id == 0) {
+			throw new EmployeeException(ExceptionCodes.INVALID_ROLE_ID,
+					ExceptionMessages.INVALID_ROLE_ID);
+		}
+
+		if (email == null || email.isEmpty() || email.trim().isEmpty()) {
+			throw new BusinessException(ExceptionCodes.EMAIL_CANNOT_BE_EMPTY,
+					ExceptionMessages.EMAIL_CANNOT_BE_EMPTY);
+		}
+		 if (yOE == 0) { throw new EmployeeException(
+				 ExceptionCodes.EMPLOYEE_YOE_EMPTY,
+				 ExceptionMessages.EMPLOYEE_YOE_EMPTY); }
+		
 	}
 
 	@SuppressWarnings("null")

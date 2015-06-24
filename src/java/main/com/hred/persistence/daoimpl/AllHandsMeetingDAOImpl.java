@@ -112,12 +112,14 @@ public class AllHandsMeetingDAOImpl extends BaseDAOImpl implements AllHandsMeeti
 		  
 		  int skipCount = (pageNo - 1) * pageSize;  
 		  Criteria criteria=createCustomCriteria(AllHandsMeeting.class);
+		  criteria.addOrder(Order.desc("date"));
 		  
 
 		        criteria.setFirstResult(skipCount).setMaxResults(pageSize);
 		  List<AllHandsMeeting> consultantList=criteria.list();
 		  
 		  Criteria countCriteria=createCustomCriteria(AllHandsMeeting.class); 
+		
 		  Long totalCount = getRecordCount(countCriteria);
 
 		  Paginator<AllHandsMeeting> allhandsPaginator = new Paginator<>(consultantList, totalCount);
