@@ -152,18 +152,18 @@ listHoliday.prototype.validateHolidays = function() {
 
 
 var monthsArray=new Array(12);
-    monthsArray[0]="January";
-	monthsArray[1]="Febravary";
+    monthsArray[0]="Jan";
+	monthsArray[1]="Feb";
 	monthsArray[2]="March";
 	monthsArray[3]="April";
 	monthsArray[4]="May";
 	monthsArray[5]="June";
 	monthsArray[6]="July";
-	monthsArray[7]="August";
-	monthsArray[8]="September";
-	monthsArray[9]="October";
-	monthsArray[10]="November";
-	monthsArray[11]="December";
+	monthsArray[7]="Aug";
+	monthsArray[8]="Sep";
+	monthsArray[9]="Oct";
+	monthsArray[10]="Nov";
+	monthsArray[11]="Dec";
 	
 
 // function to display whole Holidays data in a table and update call back
@@ -312,7 +312,7 @@ listHoliday.prototype.tableDisplay = function(content, status) {
 									+ day
 									+ "</td><td><input type='button' value='Edit' id='"
 									+ obj.id
-									+ "' class='dynamicEdit'></td><td><input type='button' value='Delete' class='deleteHoliday' id='"
+									+ "' class='dynamicEdit btn-info'></td><td><input type='button' value='Delete' class='deleteHoliday  btn-warning' id='"
 									+ (year + "-" + payloadmonth + "-" + date)
 									+ "'></td></tr>");
 
@@ -334,7 +334,7 @@ listHoliday.prototype.tableDisplay = function(content, status) {
 									+ day
 									+ "</td><td><input type='button' value='Edit' id='"
 									+ obj.id
-									+ "' class='dynamicEdit'></td><td><input type='button' value='Delete' class='deleteHoliday' id='"
+									+ "' class='dynamicEdit btn-info'></td><td><input type='button' value='Delete' class='deleteHoliday  btn-warning' id='"
 									+ (year + "-" + payloadmonth + "-" + date)
 									+ "'></td></tr>");
 
@@ -356,7 +356,7 @@ listHoliday.prototype.tableDisplay = function(content, status) {
 									+ day
 									+ "</td><td><input type='button' value='Edit' id='"
 									+ obj.id
-									+ "' class='dynamicEdit'></td><td><input type='button' value='Delete' class='deleteHoliday' id='"
+									+ "' class='dynamicEdit btn-info'></td><td><input type='button' value='Delete' class='deleteHoliday btn-warning' id='"
 									+ (year + "-" + payloadmonth + "-" + date)
 									+ "'></td></tr>");
 
@@ -430,7 +430,7 @@ listHoliday.prototype.contentDisplay = function(content, status) {
 									+ day
 									+ "</td><td><input type='button' value='Edit' id='"
 									+ content.id
-									+ "' class='dynamicEdit'></td><td><input type='button' value='Delete' class='deleteHoliday' id='"
+									+ "' class='dynamicEdit  btn-info'></td><td><input type='button' value='Delete' class='deleteHoliday  btn-warning' id='"
 									+ (year + "-" + payloadmonth + "-" + date)
 									+ "'></td></tr>");
 
@@ -453,7 +453,7 @@ listHoliday.prototype.contentDisplay = function(content, status) {
 									+ day
 									+ "</td><td><input type='button' value='Edit' id='"
 									+ content.id
-									+ "' class='dynamicEdit'></td><td><input type='button' value='Delete' class='deleteHoliday' id='"
+									+ "' class='dynamicEdit  btn-info'></td><td><input type='button' value='Delete' class='deleteHoliday  btn-warning' id='"
 									+ (year + "-" + payloadmonth + "-" + date)
 									+ "'></td></tr>");
 
@@ -476,7 +476,7 @@ listHoliday.prototype.contentDisplay = function(content, status) {
 									+ day
 									+ "</td><td><input type='button' value='Edit' id='"
 									+ content.id
-									+ "' class='dynamicEdit'></td><td><input type='button' value='Delete' class='deleteHoliday' id='"
+									+ "' class='dynamicEdit  btn-info'></td><td><input type='button' value='Delete' class='deleteHoliday  btn-warning' id='"
 									+ (year + "-" + payloadmonth + "-" + date)
 									+ "'></td></tr>");
 

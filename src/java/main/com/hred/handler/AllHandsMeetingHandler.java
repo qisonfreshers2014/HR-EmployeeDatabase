@@ -60,7 +60,7 @@ public class AllHandsMeetingHandler extends AbstractHandler {
 		        }    
 		    }   
 		//}
-		    if (employee == null || employee.isEmpty()
+		    /*if (employee == null || employee.isEmpty()
 		        || employee.trim().isEmpty()) {
 		       throw new AllHandsMeetingException(ExceptionCodes.EVERY_FIELD_IS_MANDATORY,
 		         ExceptionMessages.EVERY_FIELD_IS_MANDATORY);
@@ -68,7 +68,7 @@ public class AllHandsMeetingHandler extends AbstractHandler {
 		    if (description == null || description.isEmpty()) {
 		       throw new AllHandsMeetingException(ExceptionCodes.EVERY_FIELD_IS_MANDATORY,
 		         ExceptionMessages.EVERY_FIELD_IS_MANDATORY);
-		      }
+		      }*/
 		 
 	 }
 	 @AuthorizeEntity(roles={Constants.HR})

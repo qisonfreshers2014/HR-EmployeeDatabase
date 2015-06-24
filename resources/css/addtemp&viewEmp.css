@@ -1,15 +1,17 @@
 .tableviewEmployee {
+	 background: #f8f8f8;
      border: 1px solid white;
      font-size: 15px;
-     margin-left: 9%;
+/*      margin-left: 2%; */
      margin-bottom:2%;
      text-decoration: blink;
-     width: 80%;
+     width:100%;
+     padding: 20px 0px;
 }
 
 .trviewEmployee {
-     background-color: #cccccc;
-     border: 1px solid #cccccc;
+/*      background-color: #cccccc;
+     border: 1px solid #cccccc; */
      color: black;
      font-size: 100%;
      height: 100%;
@@ -18,28 +20,28 @@
 }
 
 .thviewEmployee {
-     background-color: #cccccc;
-     border: 1px solid #cccccc;
+/*      background-color: #cccccc;
+     border: 1px solid #cccccc; */
      padding: 10px;
  
 }
 
 
 .td {
-     background-color: #cccccc;
-     border: 1px solid #cccccc;
+/*      background-color: #cccccc;
+     border: 1px solid #cccccc; */
 }
 
 .heading {
-    color: #00246b;
-    margin-left:4%;
+    color: #FF6600;
+    margin-left:2%;
 }
 
 #employeeimage {
-  margin-left: 100%;
-     margin-top: 2%;
-     position: relative;
-     right: 2px;
+ margin-left: 80%;
+    position: relative;
+    right: -4px;
+    top: 16px;
 }
 #marginDetail{
 text-align:center;
@@ -77,19 +79,18 @@ text-align:center;
 #save {
      text-align: center;
 }
-#addtemp{
-	margin-left:2%;
-	margin-right:2%;
-}
+
 #alignment {
-  margin-left:25%;
-  margin-top:2%
+ position:relative;
+ top:0px;
 }
 
 #fieldsaddTemplate {
      font-weight: bold;
      padding: 10px;
      margin-bottom:3%;
+      position: relative;
+    top: 20px;
 }
 
 .startemplate {
@@ -98,7 +99,7 @@ text-align:center;
 }
 
 #align {
-     margin: 2.1%;
+     margin: 2.3%;
 }
 
 .inputelement {
@@ -125,6 +126,10 @@ text-align:center;
 #displaySkills th, #displaySkills td{
   text-align:center;
 }
+#displaySkills tr{
+	
+	background: url(http://jackrugile.com/images/misc/noise-diagonal.png);	
+}
 .skillheader{
 	font-size:16px;
 	color:white;
@@ -132,15 +137,55 @@ text-align:center;
 }
 
 
-#marginDetail {
-	  margin-left:35%;
+#marginDetail,.templateheading {
+	 background-color: #f9f9f9;
+    border-bottom: 1px solid #d4d4d4;
+    color: #337ab7;
+    float: left;
+    font-family: Helvetica,arial,serif;
+    font-size: 24px;
+    font-weight: 600;
+    margin-top: 0;
+    padding: 20px 0 20px 20px;
+    text-align: left;
+    width: 98.3%;
 }
 #addtempalign{
   margin-left:40%;
 }
 #backtoemplist{
-	margin-left:4%;
+	margin-left:2%;
+	margin-top:0px;
 }
-#employeeimage{
-	margin-left:150%;
+
+.tableviewEmployee th,.tableviewEmployee td{
+	 vertical-align: bottom;
+}
+#displaySkills td,#displaySkills th,#optional td
+
+{
+    border-left: 1px solid #afafaf;
+    border-bottom: 1px solid #afafaf;
+    border-top: none;    
+    padding: 4px;
+    text-align: center;
+    vertical-align: middle;
+}
+#displaySkills th:last-child,#displaySkills td:last-child
+
+{
+    border-right: 1px solid #afafaf;
+} 
+
+
+.inputelement .personalDetails,
+.inputelement .accountDetails,
+.inputelement .contactDetails,
+.inputelement .designationDetails{
+	margin-bottom: 0px;
+}
+
+
+input[disabled], select[disabled], textarea[disabled], input[readonly], select[readonly], textarea[readonly]{
+	border-color: #d4d4d4;
 }

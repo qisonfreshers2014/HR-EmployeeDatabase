@@ -8,8 +8,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
+import org.apache.commons.mail.EmailException;
+
 import com.hred.common.ConfigReader;
 import com.hred.common.Constants;
+import com.hred.common.RandomPasswordGenerator;
 import com.hred.common.Utils;
 import com.hred.common.cache.CacheManager;
 import com.hred.common.cache.CacheRegionType;
@@ -199,11 +202,11 @@ public class EmployeeHandler extends AbstractHandler {
 
 	}
 
-	//@AuthorizeEntity(roles = { Constants.HR })
+	@AuthorizeEntity(roles = { Constants.HR })
 	public Employee saveAOP(Employee employee) throws EncryptionException,
 			BusinessException {
 		employee.setDeleted(false);
-		employee.setPassword(Utils.encrypt(employee.getPassword()));
+		//employee.setPassword(Utils.encrypt(employee.getPassword()));
 		String name = employee.getEmployeeName();
 		long id = employee.getEmployeeId();
 		String email = employee.getEmail();
@@ -275,11 +278,29 @@ public class EmployeeHandler extends AbstractHandler {
 		 * DesignationHistoryHandler.getInstance().saveAOP(designationHistory);
 		 * // saving // in // designation // history
 		 */
+		// saving in skills table
 		Skills empskill = new Skills();
 		empskill.setSkills(employee.getSkill());
 		empskill.setRating(employee.getRating());
 		empskill.setEmpId(employee.getEmployeeId());
-		SkillsHandler.getInstance().saveAOP(empskill); // saving in skills table
+		SkillsHandler.getInstance().saveAOP(empskill);
+		
+		String employeeEmail=employee.getEmail();
+		
+		String employeeName=employee.getEmployeeName();
+		
+		String randomPassword=new String(PasswordGenereation());
+
+		employee.setPassword(Utils.encrypt(randomPassword));
+		try {
+			String out= SendNotificationHistoryHandler.getInstance().sendRegistrationMail(employeeEmail,employeeName,randomPassword);
+			
+			System.out.println(out);
+		} catch (EmailException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return empSaved;
 
 	}
@@ -379,7 +400,7 @@ public class EmployeeHandler extends AbstractHandler {
 		 * BusinessException(ExceptionCodes.INVALID_EMAIL_PATTERN,
 		 * ExceptionMessages.INVALID_EMAIL_PATTERN); }
 		 */
-		if (password == null || password.isEmpty() || password.trim().isEmpty()) {
+	/*	if (password == null || password.isEmpty() || password.trim().isEmpty()) {
 			throw new BusinessException(
 					ExceptionCodes.PASSWORD_CANNOT_BE_EMPTY,
 					ExceptionMessages.PASSWORD_CANNOT_BE_EMPTY);
@@ -388,7 +409,7 @@ public class EmployeeHandler extends AbstractHandler {
 		if (!isPasswordStrengthValid) {
 			throw new BusinessException(ExceptionCodes.WEAK_PASSWORD,
 					ExceptionMessages.WEAK_PASSWORD);
-		}
+		}*/
 		if (descid == 0) {
 			throw new EmployeeException(
 					ExceptionCodes.DESIGNATION_DOESNOT_EXIST,
@@ -829,7 +850,8 @@ public class EmployeeHandler extends AbstractHandler {
 		Employee employee = (Employee) empDAOImpl.update(empFromDB);
 		return employee;
 	}
-
+      
+	
 	public PaginationOutput<NotificationPaginationInput> getEmployeesPaginated(
 			NotificationPaginationInput employee) {
 
@@ -852,7 +874,8 @@ public class EmployeeHandler extends AbstractHandler {
 
 		return employee;
 	}
-
+     
+	@AuthorizeEntity(roles = { Constants.HR })
 	public PaginationOutput<Employee> getEmployeesListPaginated(
 			  EmployeeListPaginationInput employee) {
 			 
@@ -863,5 +886,25 @@ public class EmployeeHandler extends AbstractHandler {
 			 return empPaginationOutput;
 			 
 			}
+	
+	
+	// This method for generating Random password
+	
+	public char[] PasswordGenereation(){
+		
+		        int noOfCAPSAlpha = 1;
+		        int noOfDigits = 1;
+		        int noOfSplChars = 1;
+		        int minLen = 8;
+		        int maxLen = 12;
+		        
+		        char[] pswd=RandomPasswordGenerator.generatePswd(minLen, maxLen,
+	                    noOfCAPSAlpha, noOfDigits, noOfSplChars);
+				return pswd;
+	
+		
+		
+	}
+	}
 
-}
+

@@ -31,28 +31,28 @@ allHandMeeting.prototype.addAllHandsMeeting=function(){
 	  if($('#datepicker').val()==""){
 		 alert("Please enter Date");
 	 }	  
-	  else if($('#employeeAll').val()==""){
+	  /*else if($('#employeeAll').val()==""){
 		 alert("Please enter employee of the month");
-	 }
-	  else if($('#employeeAll').val().charAt(0)==" "){
+	 }*/
+	  /*else if($('#employeeAll').val().charAt(0)==" "){
 			 alert("Please don't enter space as first letter for employee of the month");
-		 }
-	 else if($('#description').val()==""){
+		 }*/
+	/* else if($('#description').val()==""){
 		 alert("Please enter description");
 	 }
-	  	 
+	  	*/ 
 	 
 	/* else if(!($('#datepicker').val()).match(dateformat)){
     	 alert("Please enter date in dd-mm-yyyy Format");
      }*/
 	 
-     else if(!($('#employeeAll').val()).match(regex))
+     /*else if(!($('#employeeAll').val()).match(regex))
 		 {
 		 alert("Please enter only characters and one space between two words for employee of the month");
-		 }
-	 else  if($('#employeeAll').val().length<2){
+		 }*/
+	 /*else  if($('#employeeAll').val().length<2){
 			 alert("Invalid length minimum 2 characters needed!(Upto 30) ");
-		 }
+		 }*/
 		 
 		 else{
 			 

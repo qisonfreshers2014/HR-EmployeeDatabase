@@ -1,20 +1,29 @@
 
-
+.tableaddemp{
+	 background: #f8f8f8 none repeat scroll 0 0;
+    border: 1px solid white;
+    font-size: 15px;
+    margin-bottom: 2%;
+    padding: 20px;
+    text-decoration: blink;
+    width: 100%;	
+}
 .tr {
-	border: 1px solid #CCC;
+	/* border: 1px solid #CCC; */
 	color: black;
 	font-family: Calibri;
 	font-size: 100%;
 	height: 100%;
 	width: 100%;
-	background-color: #CCC;
+	/* background-color: #CCC; */
 }
 
 .th {
 	text-align: left;
 	vertical-align: top;
-	border: 1px solid #CCC;
-	background-color: #CCC;
+	/* border: 1px solid #CCC;
+	background-color: #CCC; */
+	padding:10px;
 }
 
 .th1 {
@@ -30,12 +39,12 @@
 }
 .td {
 	vertical-align: top;
-	border: 1px solid #CCC;
-	background-color: #CCC;
+	/* border: 1px solid #CCC;
+	background-color: #CCC; */
 }
 
 .bar {
-	color: #00246B;
+	color: #ff6600;
 	margin-left:2%;
 }
 
@@ -67,17 +76,15 @@
 #alignaddemp{
 	margin-left:40%;
 }
-#buttonsdiv{
-	padding-left:2%;
-}
+
 #backchangepassword{
-	margin-left:2%;
+	/* margin-left:2%; */
 }
-#displayDatatemplist,.templisttr,.temlistth,.templisttd{
+/* #displayDatatemplist,.templisttr,.temlistth,.templisttd{
 	border:1px solid black;
 	border-collapse:collapse;
 	
-}
+} */
 .temlistth{
  background-color:#7094b8;
  color:white;
@@ -86,26 +93,58 @@
 	text-align:center;
 }
 .templisthead{
-	margin-top:2%;
-	 color: #00246B;
+	 background-color: #f9f9f9;
+    border-bottom: 1px solid #d4d4d4;
+    color: #337ab7;
+    float: left;
+    font-family: Helvetica,arial,serif;
+    font-size: 24px;
+    font-weight: 600;
+    margin-top: 0;
+    padding: 20px 0 20px 20px;
+    text-align: left;
+    width: 98.3%;
 }
 #btnaddtemp{
-	margin-top:2%;
-	margin-bottom:1%;
+	 margin-bottom: 1%;
+    margin-left: 1015px;
+    margin-top: 2%;
 }
 #displayDatatemplist{
-	margin-left:15%;
-	width:70%;
+	/* margin-left:15%;
+	width:70%; */
+  margin-left: 2%;
+    width: 96%;
 }
 #updateemp{
   margin-left:45%;
 }
-#backtoprofile{
- margin-left:2%; 
-}
-#backtohrview{
-	margin-left:2%;
-}
 .hreditbuttons{
 	margin-left:40%;
+}
+#displayDatatemplist th,#displayDatatemplist td
+
+
+{
+    border-left: 1px solid #afafaf;
+    border-bottom: 1px solid #afafaf;
+    border-top: none;    
+    padding: 4px;
+    text-align: center;
+    vertical-align: middle;
+}
+#displayDatatemplist th:last-child,#displayDatatemplist td:last-child
+
+{
+    border-right: 1px solid #afafaf;
+} 
+ .accountdetails,
+ .contactdetails,
+.designationdetails,
+ .skillsdetails,
+  .personalDetails{
+	margin-bottom: 0px;
+}
+#backaddemp,#backtohrview,#backtoprofile{
+	margin-left:2%;
 }

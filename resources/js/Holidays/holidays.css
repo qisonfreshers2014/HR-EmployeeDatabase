@@ -1,19 +1,36 @@
 @charset "ISO-8859-1";
 
 .holidayhead,.hrhead, .empholidayhead{
-     color: #00246B;
-     margin-left: 40%;
-     margin-top: 3%;
+     background-color: #f9f9f9;
+    border-bottom: 1px solid #d4d4d4;
+    color: #337ab7;
+    float: left;
+    font-family: Helvetica,arial,serif;
+    font-size: 24px;
+    font-weight: 600;
+    margin-top: 0;
+    padding: 20px 0 20px 20px;
+    text-align: left;
+    width: 98.3%;
 }
 .employList{
 	color: #00246B;
 }
 .emphead {
-    color: #00246B;
-    margin-left: 40%;
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #d4d4d4;
+    color: #337ab7;
+    float: left;
+    font-family: Helvetica,arial,serif;
+    font-size: 24px;
+    font-weight: 600;
+    margin-top: 0;
+    padding: 20px 0 20px 20px;
+    text-align: left;
+    width: 98.3%;
 }
 h3 {
-     color: #00246B;
+     color:#FF6600;
 }
 
 
@@ -93,6 +110,28 @@ p {
 	padding-right:2%;
 }
 
+.emplistheadtr .emplistheadtd:last-child{
+	float: right;
+}
+
+.emplistheadtd #search{
+	float: right;
+	border-radius: 0 5px 5px 0;
+	-moz-border-radius: 0 5px 5px 0;
+	-webkit-border-radius: 0 5px 5px 0;
+	-khtml-border-radius: 0 5px 5px 0;
+	margin-top: 0px;
+	margin-right: 35px;			
+}
+
+.emplistheadtd  #searchelement {
+	float: left;		
+	border-radius: 5px 0px 0px 5px;
+	-moz-border-radius: 5px 0px 0px 5px;
+	-webkit-border-radius: 5px 0px 0px 5px;
+	-khtml-border-radius: 5px 0px 0px 5px;			
+}
+
 #searchdiv {
       float: right;
      height: 60%;
@@ -137,8 +176,11 @@ p {
 	margin-right:2%;
 }
 #employeelist{
-    width: 95%;
-     font-size: 14px;
+    width: 100%;
+     font-size: 13px;
+}
+#employeelist th{
+ background-color: #7094b8;
 }
 td{
 	 word-wrap:break-word;
@@ -148,22 +190,117 @@ td{
 	color:white;
 }
 #policytable {
-     margin-left: 25%;
-     width: 50%;
+    /*  margin-left: 25%;
+     width: 50%; */
 }
 
 #policytable th,#policytable td{
      text-align: center;
 }
 
-#employeelist th,#employeelist td{
-	 vertical-align: middle;
-	text-align:center;
-	padding:2px;
+#policytable .policyheader:first-child{
+	width: 18%;
 }
-#searchelement{
-  margin-left:40%;
+
+#employeelist th, #employeelist td{
+    border-left: 1px solid #afafaf;
+    border-bottom: 1px solid #afafaf;
+    border-top: none;    
+    padding: 4px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#employeelist th:last-child, #employeelist td:last-child{
+    border-right: 1px solid #afafaf;
+}    
+#mandatorytable th, #mandatorytable td, #weekendstable th, #weekendstable td,#optionaltable th, #optionaltable td,
+#mandatory th,#mandatory td,#weekends th,#weekends td,#optional th,#optional td,#policytable th,#policytable td
+
+{
+    border-left: 1px solid #afafaf;
+    border-bottom: 1px solid #afafaf;
+    border-top: none;    
+    padding: 4px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+#mandatorytable th:last-child, #mandatorytable td:last-child,#weekendstable th:last-child, #weekendstable td:last-child,#optionaltable th:last-child, #optionaltable td:last-child,
+#mandatory th:last-child,#mandatory td:last-child,#weekends th:last-child,#weekends td:last-child,#optional th:last-child,#optional td:last-child,#policytable th:last-child,#policytable td:last-child
+
+{
+    border-right: 1px solid #afafaf;
+} 
+#policytable th,#policytable td{
+	
+	text-align:center;
 }
 #policyheader{
 	margin-top:2%;
+	 background-color: #f9f9f9;
+    border-bottom: 1px solid #d4d4d4;
+    color: #337ab7;
+    float: left;
+    font-family: Helvetica,arial,serif;
+    font-size: 24px;
+    font-weight: 600;
+    margin-top: 0;
+    padding: 20px 0 20px 20px;
+    text-align: left;
+    width: 98.3%;
+}
+#employeelist tr,#mandatorytable tr,#weekends tr,#optional tr,#policytable tr{
+	background: url(http://jackrugile.com/images/misc/noise-diagonal.png);	
+}
+/* 
+#employeelist {
+	background: #f5f5f5;
+	border-collapse: separate;
+	box-shadow: inset 0 1px 0 #fff;
+	font-size: 12px;
+	line-height: 24px;
+	margin: 30px auto;
+	text-align: left;
+	width: 100%;
+}	
+
+#mandatorytable th {
+	background: url(http://jackrugile.com/images/misc/noise-diagonal.png), linear-gradient(#777, #444);
+	background-color: #7094b8;
+	border-left: 1px solid #555;
+	border-right: 1px solid #777;
+	border-top: 1px solid #555;
+	border-bottom: 1px solid #333;
+	box-shadow: inset 0 1px 0 #999;
+	color: #fff;
+  font-weight: bold;
+	padding: 10px 15px;
+	position: relative;
+	text-shadow: 0 1px 0 #000;	
+}
+
+
+#mandatorytable td {
+	border-right: 1px solid #fff;
+	border-left: 1px solid #e8e8e8;
+	border-top: 1px solid #fff;
+	border-bottom: 1px solid #e8e8e8;
+	padding: 10px 15px;
+	position: relative;
+	transition: all 300ms;
+}
+	
+
+#mandatorytable tr {
+	background: url(http://jackrugile.com/images/misc/noise-diagonal.png);	
+}
+
+#mandatorytable tr:nth-child(odd) td {
+	background: #f1f1f1 url(http://jackrugile.com/images/misc/noise-diagonal.png);	
+} */
+
+.addNewPolicy {
+	float: right;
+    margin: 20px 25px 20px 20px;
 }

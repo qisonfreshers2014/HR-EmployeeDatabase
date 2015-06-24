@@ -3,39 +3,58 @@
 /*-------------------- Header---------------------- */
 
 .list {
-  color: white; 
-    font-size: 20px;
-     margin-left: 5%;
+  color:#5c5c5c !important;
+    font-size: 16px;
+/*      margin-left: 5%; */
 }
-#fixedheader {
-    background-color: #4c6680;
-    height: 100%;
+	/*#fixedheader {
+    background-color: #ffffff;
+	border-bottom: 5px solid #f58220; 
+    padding: 10px 15px 0px 15px;
+    width: 97.8%;
+    float:left;
+    height:80px;
   
 }
 #qisonlogo {
     float: left;
+    position:relative;
+    top:39px;
+    
 }
 #namebtn {
-	 color: #ffffff;
+  color: #ffffff;
     float: right;
     font-size: 20px;
     margin-right: 6%;
     margin-top: 1%;
+     color: white;
+  font-size: 20px;
+  left: 1157px; 
+  position: relative;
+  float:right;
+   top: -91px;
+ top: -12px;
 }
 #menudiv {
-  /*  float: left; */
-  
     margin-left: 9%;
-   /*  margin-top:; */
-    padding:50px;
-}
+    padding:0px 50px;
+    position:relative;
+    top:-6px;
+} */
 #span1 {
-    margin-top: 8%;
+     position:relative;
+/*     top:45px; */
+    right:79px;
 }
 #logout1 {
     margin-bottom: 0%;
-    color:white;
+  color:#5c5c5c !important;
+	font-size:  16px;
     text-decoration:none;
+     position:relative;
+/*     top:44px; */
+    right:78px;
 }
 
 /* --------------------container -----------------------*/
@@ -68,9 +87,21 @@
     padding: 10px;
 }
 .headingAll {
- color:#00246B;
-margin-top: 3%;
- /*  margin-left: 10%; */
+ background-color: #f9f9f9;
+    border-bottom: 1px solid #d4d4d4;
+    color: #337ab7;
+    float: left;
+    font-family: Helvetica,arial,serif;
+    font-size: 24px;
+    font-weight: 600;
+    margin-top: 0;
+    padding: 20px 0 20px 20px;
+    text-align: left;
+    width: 98.3%;
+}
+#headingaddallhands{
+	position:relative;
+	top:-23px;
 }
 
 .tableHeadingAll {
@@ -112,11 +143,15 @@ margin-top: 3%;
   }
 /*  view all hands meeting  */
 .displayData{
-	
+	  margin-top:1%;
       margin-left: 2%;
     width: 96%;
      border:1px solid black;
          border-collapse:collapse;
+}
+.displayData tr{
+	
+		background: url(http://jackrugile.com/images/misc/noise-diagonal.png);	
 }
 .allHandMeeting{
 	margin-top: 2%;
@@ -144,7 +179,7 @@ td{
 	border: 0;
 	text-align: left;
 	 width:80%;
-	  margin-left: 20%;
+	  margin-left:20%;
 }
 #viewAllTemp{
 background-color: lightgray;
@@ -158,9 +193,33 @@ background-color: lightgray;
 }
 .addallhands{
 	
-	margin-left: 45%;
-     margin-bottom: 2%;
+    margin-left: 990px;
+    margin-top: 2%;
 }
+.tabcolor{
+	color:#5c5c5c !important;
+	font-size:  16px;
+}
+#displayData th,#displayData td,#displayallhandsData th,#displayallhandsData td
+
+
+{
+    border-left: 1px solid #afafaf;
+    border-bottom: 1px solid #afafaf;
+    border-top: none;    
+    padding: 4px;
+    text-align: left;
+    vertical-align: middle;
+}
+#displayData th:last-child,#displayData td:last-child,#displayallhandsData th:last-child,#displayallhandsData td:last-child
+
+{
+    border-right: 1px solid #afafaf;
+} 
+
+/* .active{
+	background-color: #337ab7;
+} */
 /* #editdescription,#editemployee,#editdatepicker{
 	margin-left: 0%;
 }

@@ -1,8 +1,10 @@
 #fixedheaderLogin {
-    background-color: #4c6680;;
+    background-color: #FFFFFF;
     height: 100%;
     width: 100%;
 }
 #qisonlogoLogin {
  float: left;    
+ position:relative;
+ top:13px;
 }

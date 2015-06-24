@@ -34,18 +34,18 @@ loadNotificationHomePage.prototype.handleShow = function(data) {
 	var i;
 	var out;
 	var monthsArray=new Array(12);
-	monthsArray[0]="January";
-	monthsArray[1]="Febravary";
+	monthsArray[0]="Jan";
+	monthsArray[1]="Feb";
 	monthsArray[2]="March";
 	monthsArray[3]="April";
 	monthsArray[4]="May";
 	monthsArray[5]="June";
 	monthsArray[6]="July";
-	monthsArray[7]="August";
-	monthsArray[8]="September";
-	monthsArray[9]="October";
-	monthsArray[10]="November";
-	monthsArray[11]="December";
+	monthsArray[7]="Aug";
+	monthsArray[8]="Sep";
+	monthsArray[9]="Oct";
+	monthsArray[10]="Nov";
+	monthsArray[11]="Dec";
 	for (i = 0; i < data.length; i++) {
 		var item = data[i];
 		var value = item.date;
@@ -59,7 +59,7 @@ loadNotificationHomePage.prototype.handleShow = function(data) {
 				+ '</td><td>' + item.employeeEmail + '</td><td>' + item.status
 				+ '</td>';
 		if (item.status == "Not Sent") {
-			out += '<td><input type="button" value="Send"  class="dynamicSend btn btn-primary btn-md"/></td></tr>'
+			out += '<td><input type="button" value="Send"  class="dynamicSend  btn btn-success"/></td></tr>'
 		} else {
 			out += '<td></td></tr>';
 		}
@@ -218,18 +218,18 @@ loadNotificationHomePage.prototype.getdisplayedata = function(input) {
 					
 					
 					var monthsArray=new Array(12);
-					monthsArray[0]="January";
-					monthsArray[1]="Febravary";
+					monthsArray[0]="Jan";
+					monthsArray[1]="Feb";
 					monthsArray[2]="March";
 					monthsArray[3]="April";
 					monthsArray[4]="May";
 					monthsArray[5]="June";
 					monthsArray[6]="July";
-					monthsArray[7]="August";
-					monthsArray[8]="September";
-					monthsArray[9]="October";
-					monthsArray[10]="November";
-					monthsArray[11]="December";
+					monthsArray[7]="Aug";
+					monthsArray[8]="Sep";
+					monthsArray[9]="Oct";
+					monthsArray[10]="Nov";
+					monthsArray[11]="Dec";
 					
 					var i;
 					var out = '<table border="1" class="table table-hover" id="displayData1"><tbody><tr><th class="thNotification">Employee Name</th><th class="thNotification">Event Date</th><th class="thNotification">Event</th><th class="thNotification">Email ID</th><th class="thNotification">Status</th><th class="thNotification">Action</th></tr>'
@@ -247,7 +247,7 @@ loadNotificationHomePage.prototype.getdisplayedata = function(input) {
 								+ item.employeeEmail + '</td><td>'
 								+ item.status + '</td>';
 						if (item.status == "Not Sent") {
-							out += '<td><input type="button" value="Send"  class="dynamicSend btn btn-primary btn-md"/></td></tr>';
+							out += '<td><input type="button" value="Send"  class="dynamicSend btn btn-success"/></td></tr>';
 						} else {
 							out += '<td></td></tr>';
 						}

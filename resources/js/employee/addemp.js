@@ -154,7 +154,7 @@ $('#backaddemp').click(function(){
 		$('#actualdob').val("");
 		$('#doj').val("");
 		$("#emal").val("");
-		$("#password").val("");
+		/*$("#password").val("");*/
 		$('#blood').val("");
 		$("#salary").val("");
 		$('#variable').val("");
@@ -227,7 +227,7 @@ AddEmployee.prototype.validateEmp = function() {
 	var salary = $("#salary").val();
 	var emnumerr = $("#emnumerr");
 	var txtemercon = $("#txtemercon").val();
-	var password = $("#password").val();
+/*	var password = $("#password").val();*/
 	var currentaddrerr = $("#currentaddrerr");
 	var currentaddr = $("#currentaddr").val();
 	var ratingerr = $("#ratingerr");
@@ -535,10 +535,10 @@ AddEmployee.prototype.validateEmp = function() {
 	}
 
 	if (peraddr == "") {
-		$(peraddrerr).text("Required field");
-		$(peraddrerr).css("color", "red");
+		$('#peraddrerr').text("Required field");
+		$('#peraddrerr').css("color", "red");
 	} else {
-		$(peraddrerr).text("");
+		$('#peraddrerr').text("");
 		flag = false;
 		// $(peraddrerr).css("color", "green");
 
@@ -610,7 +610,7 @@ if (relation != "") {
 	}
 
 	flag = true;
-	if (password == "") {
+	/*if (password == "") {
 		$(pwderr).text("Required field");
 		$(pwderr).css("color", "red");
 	} else if (!(password.match(pwepattern))) {
@@ -618,40 +618,40 @@ if (relation != "") {
 				.text(
 						"Must be at least 8 characters,At least 1 number, 1 lowercase, 1 uppercase letter, At least 1 special character");
 		$(pwderr).css("color", "red");
-	} else if (!(rating == isNaN || rating.match(num))) {
-		$(pwderr).text("");
+	}*/ if (!(rating == isNaN || rating.match(num))) {
+		
 		$(ratingerr).text("Please enter only number ");
 		$(ratingerr).css("color", "red");
 	} else if (!(rating > 0 && rating <= 10)) {
 		$(ratingerr).text("Please enter between 1 to 10 ");
 		$(ratingerr).css("color", "red");
 	} else if (!(relation.match(char) || relation == isNaN)) {
-		$(pwderr).text("");
+		
 		$(relationerr).text("enter characters only");
 		$(relationerr).css("color", "red");
 	} else if (salary == isNaN || !(salary.match(salry))) {
-		$(pwderr).text("");
+		
 		$(salerr).text("Please enter numbers only eg:90.00");
 		$(salerr).css("color", "red");
 	} else if (!(skill.match(sklr))) {
 		$(skillerr).text("Please enter a valid skill");
 		$(skillerr).css("color", "red");
 	} else if (txtemercon == isNaN || !(txtemercon.match(num))) {
-		$(pwderr).text("");
+		
 		$(emnumerr).text("Only numbers allowed");
 		$(emnumerr).css("color", "red");
 	} else if (!(txtemercon.length == 10)) {
 		$(emnumerr).text("Please enter 10 digits only");
 		$(emnumerr).css("color", "red");
 	} else if (contnum == isNaN || !(contnum.match(num))) {
-		$(pwderr).text("");
+		
 		$(cnumerr).text("Please enter numbers only");
 		$(cnumerr).css("color", "red");
 	} else if (!(contnum.length == 10)) {
 		$(cnumerr).text("Please enter 10 digits only");
 		$(cnumerr).css("color", "red");
 	} else if (!(qualification.match(qual) || qualification.match(char))) {
-		$(pwderr).text("");
+		
 		$(nerr).text("Please check the qualification ");
 		$(nerr).css("color", "red");
 	} else if (!(email.match(mail))) {
@@ -661,7 +661,7 @@ if (relation != "") {
 		$(err).text("EID accepts numbers and alphabets only");
 		$(err).css("color", "red");
 	} else if (!(txtemname.match(char) || txtemname == isNaN)) {
-		$(pwderr).text("");
+		
 		$(emnameerr).text("Enter characters only");
 		$(emnameerr).css("color", "red");
 	} else if (!(skype.match(skp))) {
@@ -671,11 +671,10 @@ if (relation != "") {
 		$(skypeerr).text("Please enter minimum 6 letters");
 		$(skypeerr).css("color", "red");
 	} else if (!(blood.match(bloodGroup))) {
-		$(pwderr).text("");
+		
 		$(blodderr).text("Please enter a valid blood group ex:AB+, AB-");
 		$(blodderr).css("color", "red");
 	} else {
-		$(pwderr).text("");
 		flag = false;
 		// $(pwderr).css("color", "green");
 
@@ -700,7 +699,6 @@ if (relation != "") {
 				"currentAddress" : currentaddr,
 				"permanentAddress" : peraddr,
 				"email" : email,
-				"password" : password,
 				"emergencycontactnumber" : txtemercon,
 				"fathersName" : fathername,
 				"emergencyContactName" : txtemname,
@@ -772,7 +770,6 @@ if (relation != "") {
 				$('#actualdob').val("");
 				$('#doj').val("");
 				$("#emal").val("");
-				$("#password").val("");
 				$('#blood').val("");
 				$("#salary").val("");
 				$('#variable').val("");

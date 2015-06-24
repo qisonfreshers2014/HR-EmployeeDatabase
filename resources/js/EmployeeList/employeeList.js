@@ -13,6 +13,16 @@ function employeeList(data) {
 employeeList.prototype.handleShow = function(data) {
 	
 	$('#emp').parent().addClass('active');
+	
+/*	$('.viewindividual').click(function(event){
+		
+		console.log("syashsah");
+		 var releaseId=event.target.id;     
+		  App.loadViewEmployee(releaseId);
+		
+		
+	});
+	*/
 	var self=this;
 	
 	var pagno=1;
@@ -37,7 +47,7 @@ employeeList.prototype.handleShow = function(data) {
 
  $('.container').show();
  
- $("#searchdiv").keyup(function (event) {
+ $(".emplistheadtd").keyup(function (event) {
 	  if (event.keyCode == 13){
 	   $("#search").trigger('click');
 	   } 
@@ -110,18 +120,18 @@ employeeList.prototype.handleShow = function(data) {
 }
 
 var monthsArray=new Array(12);
-monthsArray[0]="January";
-monthsArray[1]="Febravary";
+monthsArray[0]="Jan";
+monthsArray[1]="Feb";
 monthsArray[2]="March";
 monthsArray[3]="April";
 monthsArray[4]="May";
 monthsArray[5]="June";
 monthsArray[6]="July";
-monthsArray[7]="August";
-monthsArray[8]="September";
-monthsArray[9]="October";
-monthsArray[10]="November";
-monthsArray[11]="December";
+monthsArray[7]="Aug";
+monthsArray[8]="Sepr";
+monthsArray[9]="Oct";
+monthsArray[10]="Nov";
+monthsArray[11]="Dec";
  
 
  employeeList.prototype.paginationFunc=function(pagno){
@@ -204,6 +214,8 @@ employeeList.prototype.tableDisplay = function(content,status,desdata) {
   var releaseId=event.target.id;     
   App.loadViewEmployee(releaseId);
  }.ctx(this));
+
+	
  
  
 $('#employeelist').empty();
@@ -277,7 +289,7 @@ if(isDecimal!=0){
 }
 
   tabledata += '<tr>';
-  tabledata += '<td><a href="#view" class="viewindividual" id="'+obj.employeeId+'">' + obj.employeeId+ '</a></td>';
+  tabledata += '<td id="xyz"><a href="#view" class="viewindividual" id="'+obj.employeeId+'">' + obj.employeeId+ '</a></td>';
   tabledata += '<td>' + obj.employeeName + '</td>';
   tabledata += '<td>' +bdate+"-"+bmonth+"-"+byear+'</td>';
   tabledata += '<td>' +actualdobdate+"-"+actualdobmonth+"-"+actualdobyear+'</td>';
@@ -377,7 +389,7 @@ employeeList.prototype.searchOperation = function(data,desdata){
   }
   
            content += '<tr>';
-              content += '<td><a href="#view" class="viewindividual" id="'+obj.employeeId+'">' + obj.employeeId+ '</a></td>';
+              content += '<td id="xyz"><a href="#view" class="viewindividual" id="'+obj.employeeId+'">' + obj.employeeId+ '</a></td>';
               content += '<td>' + obj.employeeName + '</td>';
               content += '<td>' +bdate+"-"+bmonth+"-"+byear+'</td>';
               content += '<td>' +actualdobdate+"-"+actualdobmonth+"-"+actualdobyear+'</td>';

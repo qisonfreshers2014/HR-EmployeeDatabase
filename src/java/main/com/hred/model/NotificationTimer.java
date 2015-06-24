@@ -13,7 +13,7 @@ public class NotificationTimer extends TimerTask implements Runnable {
 
 		try {
 			SendNotificationHistoryHandler.getInstance()
-					.sentAutomatedMailMailAOP();
+					.sentAutomatedMailMail();
 		} catch (EmailException e) {
 			// TODO Auto-generated catch block
 

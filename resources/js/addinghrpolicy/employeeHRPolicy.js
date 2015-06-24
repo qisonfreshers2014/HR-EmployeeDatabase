@@ -7,7 +7,7 @@ function employeePolicyList() {
 employeePolicyList.prototype.handleShow = function() {
 
 	$('.container').show();
-	$('#addPolicy').hide();
+	$('#addPolicy').css("visibility","hidden");
 	var contentinput = {"payload":{} };
 	RequestManager.getPolicy(contentinput, function(data, success) {
 		 if(success){

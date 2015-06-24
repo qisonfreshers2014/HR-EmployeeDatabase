@@ -47,7 +47,8 @@ public class DefaultAuthenticationHandler implements AuthenticationHandler {
   String email = daInput.getEmail();
   String password = daInput.getPassword();
 
- 
+ System.out.println("**************************"+email+"******************");
+ System.out.println("********************"+password+"*******************");
   Employee emp = null;
   DAOFactory daoFactory = DAOFactory.getInstance();
   // TODO handle email doesn't exists case.
@@ -68,9 +69,12 @@ public class DefaultAuthenticationHandler implements AuthenticationHandler {
   empDetails.setGender(gender);
   empDetails.setEmployeeId(employeeId);
   empDetails.setIsDeleted(deleted);
+  System.out.println("**************************"+emailFromDB+"******************");
+  System.out.println("********************"+passwordFromDB+"*******************");
   
  ////////////////////////////////////////////////////////////
   String encryptedPassword=Utils.encrypt(password.trim());
+  System.out.println("********************"+encryptedPassword+"*******************");
   boolean emailValidity = emailFromDB.equals(email);
   boolean passwordValidity = passwordFromDB.equals(encryptedPassword);
 
@@ -79,12 +83,12 @@ public class DefaultAuthenticationHandler implements AuthenticationHandler {
 
      ExceptionMessages.EMAIL_DOESNOT_EXIST);
   }
-/*   else if (!passwordValidity) {
+   /*else if (!passwordValidity) {
     throw new BusinessException(ExceptionCodes.INVALID_PASSWORD,
  
       ExceptionMessages.INVALID_PASSWORD);
-   }
-*/
+   }*/
+
 
 
   authStatus = User.AUTH_STATUS_EXISTING;

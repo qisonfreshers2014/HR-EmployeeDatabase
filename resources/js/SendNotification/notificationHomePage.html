@@ -2,7 +2,7 @@
 <div id="notificationhome">
 <div id="headNotification" ><h1 id="h1Notification">Notifications</h1></div>
 
-<div id="extraActionsNotification">
+<div id="extraActionsNotification"><div id="criteriasfornotifications">
 <div><div id="selectevent">Select Event:</div><select id="eventsNotification">
   <option value="allEvent">Select All Events</option>
     <option value="birthDay">Birth Days</option>
@@ -15,12 +15,12 @@ From Date:<span class="mandatory">*</span>&nbsp <input type="text" class="date" 
 To Date:<span class="mandatory">*</span>&nbsp<input type="text" class="date" id="toDateNotification" required>
 Select template:&nbsp&nbsp&nbsp<select id="templates">
                        <option value="">Select template</option>
-   </select></div></div><br><br>
+   </select></div></div></div><br><br>
 <div><input type="button" value="Retrieve Data" class="btn btn-primary btn-md" id="retriveDataNotification"></button></div>
 
 
  <div id="dataTableNotification">
-<table border="1" class="table table-hover">
+<table border="0" class="table table-hover" id="notificationsdisplay">
 <tbody id="displayDataNotification">
 <tr>
 <th class="thNotification">Employee Name</th>

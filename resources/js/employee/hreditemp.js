@@ -26,18 +26,18 @@ $('#backtohrview').click(function(){
 			console.dir(data);
 			
 			var monthsArray=new Array(12);
-			monthsArray[0]="January";
-			monthsArray[1]="Febravary";
+			monthsArray[0]="Jan";
+			monthsArray[1]="Feb";
 			monthsArray[2]="March";
 			monthsArray[3]="April";
 			monthsArray[4]="May";
 			monthsArray[5]="June";
 			monthsArray[6]="July";
-			monthsArray[7]="August";
-			monthsArray[8]="September";
-			monthsArray[9]="October";
-			monthsArray[10]="November";
-			monthsArray[11]="December";
+			monthsArray[7]="Aug";
+			monthsArray[8]="Sep";
+			monthsArray[9]="Oct";
+			monthsArray[10]="Nov";
+			monthsArray[11]="Dec";
 			
 			var dobformat = new Date(object.dateOfBirth);
 			var byear = dobformat.getFullYear();
@@ -60,8 +60,8 @@ $('#backtohrview').click(function(){
 			$("#emal").val(object.email);
 			$("#eid").val(object.employeeId);
 			$("#name").val(object.employeeName);
-			$("#dob").val(bdate + "-" + bmonth + "-" + byear);
-			$("#actualdob").val(actualdobdate + "-" + actualdobmonth + "-" + actualdobyear);
+			$("#dob").val(payloadBday);
+			$("#actualdob").val(payloadactualdob);
 			$("#blood").val(object.bloodGroup);
 			$("#qual").val(object.highestQualification);
 			$("#fathername").val(object.fathersName);
@@ -151,7 +151,7 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 	var skp = /^[A-Za-z0-9]+(.[A-Za-z0-9]+)*$/;
 	var mail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 	var illegalChars = /\W/
-	var letters = /^[0-9a-zA-Z]+$/;
+		var letters = "^[a-zA-Z0-9-]*$";
 	// var pfchar = /^[0-9]+(/[0-9]+)*$/;
 	var err = $("#eiderr");
 	var eid = $("#eid").val();
@@ -274,10 +274,9 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 			// $(salerr).css("color", "green");
 		}
 
-		if (blood == "") {
-			$(blodderr).text("Required field");
-			$(blodderr).css("color", "red");
-		} else if (!(blood.match(bloodGroup))) {
+		if (blood != "") {
+			
+		 if (!(blood.match(bloodGroup))) {
 			$(blodderr).text("Please enter a valid blood group eg: AB+, AB-");
 			$(blodderr).css("color", "red");
 		} else if (!(blood.length < 4)) {
@@ -287,6 +286,7 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 			$(blodderr).text("");
 			// $(blodderr).css("color", "green");
 
+		}
 		}
 
 		if (name == "") {
@@ -318,7 +318,7 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 		}
 		if (pfnum == "") {
 			$(pferr).text("");
-		} else if (pfnum == isNaN || !(pfnum.match(num))) {
+		} else if (!(pfnum.match(letters))) {
 			$(pferr).text("Please enter a valid pf number");
 			$(pferr).css("color", "red");
 		} else if (!(pfnum.length == 16)) {
@@ -422,20 +422,21 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 
 		}
 
-		if (relation == "") {
-			$(relationerr).text("Required field");
-			$(relationerr).css("color", "red");
-		} else if (!(relation.match(char) || relation == isNaN)) {
+		if (relation != "") {   
+	
+	      if (!(relation.match(char) || relation == isNaN)) {
 			$(relationerr).text("Enter characters only");
 			$(relationerr).css("color", "red");
 		} else {
 			$(relationerr).text("");
 			// $(relationerr).css("color", "green");
 		}
-		if (yearexp == "") {
+		}
+		
+		if (yearofexp == "") {
 			$(yearexperr).text("Required field");
 			$(yearexperr).css("color", "red");
-		} else if (!(yearexp.match(experience))) {
+		} else if (!(yearofexp.match(experience))) {
 			$(yearexperr).text("Only numbers and dot are allowed");
 			$(yearexperr).css("color", "red");
 		}
@@ -509,7 +510,7 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 		
 		fileId=$('#fileid').val();
 	}
-		
+		console.log(payloadactualdob);
 		var input = {
 			"payload" : {
 				"employeeId" : empid,
@@ -521,8 +522,8 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 				"yearsofexperience" : yearofexp,
 				"salary" : salary,
 				"variableComponent" : variable,
-				"dateOfBirth" : payloadBday + " 00:00:00",
-				"actualdateOfBirth" : payloadactualdob + " 00:00:00",
+				"dateOfBirth" : dob + " 00:00:00",
+				"actualdateOfBirth" : actualDOB + " 00:00:00",
 				"contactNo" : contnum,
 				"currentAddress" : currentaddr,
 				"permanentAddress" : peraddr,

@@ -58,8 +58,8 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 			INSTANCE = new SendNotificationHistoryHandler();
 		return INSTANCE;
 	}
-	@AuthorizeEntity(roles={Constants.HR})
-	public SendNotificationHistory saveAOP(SendNotificationHistory entry) {
+	
+	public SendNotificationHistory save(SendNotificationHistory entry) {
 		SendNotificationHistory entrysaved = (SendNotificationHistory) DAOFactory
 				.getInstance().getSendNotificationHistoryDAO()
 				.saveObject(entry);
@@ -79,8 +79,9 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 	
 	
 //This Method will be used for sending the automated mail by the server
-	@AuthorizeEntity(roles={Constants.HR})
-	public String sentAutomatedMailMailAOP() throws EmailException {
+	
+	public String sentAutomatedMailMail() throws EmailException {
+		System.out.println("Comming to the SNH method");
 		
 		String hostName=null;
 		String smtpPort=null;
@@ -151,7 +152,7 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 					email.setSubject("Happy Birth Day "+birthday.getEmployeeName());
 					email.addTo(birthday.getEmail());
 					email.setContent(body, "text/html");
-					//email.addBcc(bcc);
+					email.addBcc(bcc);
 					email.send();
 					
 						// send message
@@ -161,7 +162,7 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 					entry.setEmployeeName(birthday.getEmployeeName());
 					entry.setDeleted(false);
 					entry.setEmployeeId(birthday.getEmployeeId());
-					saveAOP(entry);
+					save(entry);
 
 				} catch (EmailException e) {
 				e.printStackTrace();	//System.out.println("Unable to send Mail");
@@ -197,7 +198,7 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 					entry.setDeleted(false);
 					entry.setTemplateId("02");
 					entry.setEmployeeId(aniversary.getEmployeeId());
-					saveAOP(entry);
+					save(entry);
 
 				} catch (EmailException e) {
 					System.out.println("Unable to send Mail");
@@ -347,10 +348,60 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 	                        + sentMailToEmployee.getEmployeeName();
 	               	               
 	                email.setSubject(sentMailToEmployee.getEvent());
-	                email.addTo("rahul.shelke@qison.com");
+	                email.addTo(sentMailToEmployee.getEmployeeEmail());
 	                email.setContent(body, "text/html");
 	                email.send();
 	                return "{\"status\": \"SUCCESS\", \"payload\": \"Mail Send\"}";
 	               
 	        }
+	 
+	  public String sendRegistrationMail(String employeeEmail,String employeeName,String randomPassword) throws EmailException{
+		  
+
+          String hostName=null;
+          String smtpPort=null;
+          String authenticatorMail=null;
+          String authenticatorPassword=null;
+          String from=null;
+          String bcc=null;
+          long file_id;
+         
+          try
+          {
+              Properties props = ConfigReader.getProperties(Constants.MAIL_CONFIGURATION_SETTING);
+              hostName=props.getProperty(Constants.HOST_NAME);
+           smtpPort=props.getProperty(Constants.HOST_NAME);
+           authenticatorMail=props.getProperty(Constants.AUTHENTICATOR_MAIL);
+           authenticatorPassword=props.getProperty(Constants.AUTHENTICATOR_PASSWORD);
+           from=props.getProperty(Constants.SEND_FROM);
+           bcc=props.getProperty(Constants.SEND_BCC);
+          }
+          catch(IOException e)
+          {
+              e.printStackTrace();
+          }
+          
+          //Templete templte=TemplateHandler.getInstance().viewTemplateAOP(template.getId());
+          String content="Hi"+employeeName+"You have been added to HRMS You can check it by login into HRMS site with username:"+employeeEmail+"Password:"+randomPassword+"";
+		  
+		  MultiPartEmail email = new MultiPartEmail();
+          email.setHostName(hostName);
+          email.setSmtpPort(465);
+          email.setAuthenticator(new DefaultAuthenticator(
+                  authenticatorMail, authenticatorPassword));
+          email.setSSLOnConnect(true);
+          email.setFrom(from);
+         
+         // String subjectMail = sentMailToEmployee.getEvent() + " "
+                 // + sentMailToEmployee.getEmployeeName();
+         	               
+          email.setSubject("HRMS registration");
+          email.addTo(employeeEmail);
+          email.setContent(content,"text/html");
+          email.send();
+          return "{\"status\": \"SUCCESS\", \"payload\": \"Mail Send\"}";
+		  
+		  
+	  }
+	 
 }

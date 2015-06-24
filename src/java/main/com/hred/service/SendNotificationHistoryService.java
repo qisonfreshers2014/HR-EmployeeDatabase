@@ -47,7 +47,7 @@ public class SendNotificationHistoryService extends BaseService {
 		SendNotificationHistory entry = (SendNotificationHistory) JsonUtil.getObject(request.getPayload(),
 				SendNotificationHistory.class);
 
-		SendNotificationHistory output=(SendNotificationHistory) SendNotificationHistoryHandler.getInstance().saveAOP(entry);
+		SendNotificationHistory output=(SendNotificationHistory) SendNotificationHistoryHandler.getInstance().save(entry);
 		
 		return JsonUtil.getJsonBasedOnDescriptor(output,SendNotificationHistory.class);
 	}

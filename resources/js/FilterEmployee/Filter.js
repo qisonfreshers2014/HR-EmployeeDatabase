@@ -195,30 +195,30 @@ if($('#dojFrom').val()!="" && $('#dojTo').val()==""){
 	    if(data.length != 0){
 		
 	    	$('.heading1').css("visibility","visible");
-	  	$('#displayData').html('<tr class="displaytr"><th class="displayth">Employee Id</th><th class="displayth">Employee Name</th><th class="displayth">Gender</th><th class="displayth">DOB</th><th class="displayth">DOJ</th><th class="displayth">Email</th><th class="displayth">Fathers Name</th><th class="displayth">Designation</th><th class="displayth">Highest Qualification</th><th class="displayth">Skype Id</th><th class="displayth">Contact No</th><th class="displayth">Years Of Experience</th><th class="displayth">Skills</th><th class="displayth">View Details</th></tr>');
+	  	$('#displayData').html('<tr class="displaytr"><th class="displayth">Employee Id</th><th class="displayth">Employee Name</th><th class="displayth">Gender</th><th class="displayth">DOB</th><th class="displayth">DOJ</th><th class="displayth">Email</th><th class="displayth">Fathers Name</th><th class="displayth">Designation</th><th class="displayth">Highest Qualification</th><th class="displayth">Contact No</th><th class="displayth">Years Of Experience</th><th class="displayth">View Details</th></tr>');
 	  	
 	    }
 	    else{
 	          alert("No record found");
-	          $('#displayData').html('<tr class="displaytr"><th class="displayth">Employee Id</th><th class="displayth">Employee Name</th><th class="displayth">Gender</th><th class="displayth">DOB</th><th class="displayth">DOJ</th><th class="displayth">Email</th><th class="displayth">Fathers Name</th><th class="displayth">Designation</th><th class="displayth">Highest Qualification</th><th class="displayth">Skype Id</th><th class="displayth">Contact No</th><th class="displayth">Years Of Experience</th><th class="displayth">Skills</th><th class="displayth">View Details</th></tr>');
+	          $('#displayData').html('<tr class="displaytr"><th class="displayth">Employee Id</th><th class="displayth">Employee Name</th><th class="displayth">Gender</th><th class="displayth">DOB</th><th class="displayth">DOJ</th><th class="displayth">Email</th><th class="displayth">Fathers Name</th><th class="displayth">Designation</th><th class="displayth">Highest Qualification</th><th class="displayth">Contact No</th><th class="displayth">Years Of Experience</th><th class="displayth">View Details</th></tr>');
 	    	   
 			    $('#displayData tbody').empty();
 	   
 	    }
 	   
 	    var monthsArray=new Array(12);
-		monthsArray[0]="January";
-		monthsArray[1]="Febravary";
+		monthsArray[0]="Jan";
+		monthsArray[1]="Feb";
 		monthsArray[2]="March";
 		monthsArray[3]="April";
 		monthsArray[4]="May";
 		monthsArray[5]="June";
 		monthsArray[6]="July";
-		monthsArray[7]="August";
-		monthsArray[8]="September";
-		monthsArray[9]="October";
-		monthsArray[10]="November";
-		monthsArray[11]="December";
+		monthsArray[7]="Aug";
+		monthsArray[8]="Sep";
+		monthsArray[9]="Oct";
+		monthsArray[10]="Nov";
+		monthsArray[11]="Dec";
 		
 	   var i;
 	   for(i = 0; i < data.length; i++) {
@@ -227,10 +227,10 @@ if($('#dojFrom').val()!="" && $('#dojTo').val()==""){
 	 					 
 	 
 $('#displayData').append("<tr class='displaytr'><td class='displaytd'>"+item.employeeId+"</td><td class='displaytd'>"+item.employeeName+"</td><td class='displaytd'>"+item.gender+"</td><td class='displaytd'>"
-+new Date(item.dateOfBirth).getFullYear()+"-"+monthsArray[new Date(item.dateOfBirth).getMonth()]+"-"+new Date(item.dateOfBirth).getDate()+"</td><td class='displaytd'>"
-+new Date(item.dateOfJoining).getFullYear()+"-"+monthsArray[new Date(item.dateOfJoining).getMonth()]+"-"+new Date(item.dateOfJoining).getDate()+"</td><td class='displaytd'>"+item.email+"</td><td>"+item.fathersName+"</td><td class='displaytd'>"
-+item.currentDesignation+"</td><td class='displaytd'>"+item.highestQualification+"</td><td class='displaytd'>"+item.skype+"</td><td class='displaytd'>"+item.contactNo+"</td>" +
-		"<td class='displaytd'>"+item.yearsofexperience+"</td><td class='displaytd'>"+item.skill+"</td><td class='displaytd'><input type='button' value='View' id='"+item.id+"' class='dynamicView btn-primary btn-md'></td></tr>");
++new Date(item.dateOfBirth).getDate()+"-"+monthsArray[new Date(item.dateOfBirth).getMonth()]+"-"+new Date(item.dateOfBirth).getFullYear()+"</td><td class='displaytd'>"
++new Date(item.dateOfJoining).getDate()+"-"+monthsArray[new Date(item.dateOfJoining).getMonth()]+"-"+new Date(item.dateOfJoining).getFullYear()+"</td><td class='displaytd'>"+item.email+"</td><td>"+item.fathersName+"</td><td class='displaytd'>"
++item.currentDesignation+"</td><td class='displaytd'>"+item.highestQualification+"</td><td class='displaytd'>"+item.contactNo+"</td>" +
+		"<td class='displaytd'>"+item.yearsofexperience+"</td><td class='displaytd'><input type='button' value='View' id='"+item.id+"' class='dynamicView  btn btn-success'></td></tr>");
 	
       
         			
@@ -238,24 +238,22 @@ $('#displayData').append("<tr class='displaytr'><td class='displaytd'>"+item.emp
 	  
 			    
 var content = '';
-content += '<tr class="displaytr"><th class="displayth">Employee Id</th><th class="displayth">Employee Name</th><th class="displayth">Gender</th><th class="displayth">DOB</th><th class="displayth">DOJ</th><th class="displayth">Email</th><th class="displayth">Fathers Name</th><th class="displayth">Designation</th><th class="displayth">Highest Qualification</th><th class="displayth">Skype Id</th><th class="displayth">Contact No</th><th class="displayth">Years Of Experience</th><th class="displayth">Skills</th><th class="displayth">View Details</th></tr>';
+content += '<tr class="displaytr"><th class="displayth">Employee Id</th><th class="displayth">Employee Name</th><th class="displayth">Gender</th><th class="displayth">DOB</th><th class="displayth">DOJ</th><th class="displayth">Email</th><th class="displayth">Fathers Name</th><th class="displayth">Designation</th><th class="displayth">Highest Qualification</th><th class="displayth">Contact No</th><th class="displayth">Years Of Experience</th><th class="displayth">View Details</th></tr>';
 for (var i = 0; i < data.length; i++) {
 			     var item = data[i];
 			     content += '<tr  class="displaytr">';
 	             content += '<td class="displaytd">'  + item.employeeId+ '</td>';
 	             content += '<td class="displaytd">' + item.employeeName + '</td>';
 	             content += '<td class="displaytd">' +item.gender+'</td>';
-content += '<td class="displaytd">' +new Date(item.dateOfBirth).getFullYear()+"-"+monthsArray[new Date(item.dateOfBirth).getMonth()]+"-"+new Date(item.dateOfBirth).getDate()+'</td>';
-content += '<td class="displaytd">' +new Date(item.dateOfJoining).getFullYear()+"-"+monthsArray[new Date(item.dateOfJoining).getMonth()] +"-"+new Date(item.dateOfJoining).getDate()+'</td>';
+content += '<td class="displaytd">' +new Date(item.dateOfBirth).getDate()+"-"+monthsArray[new Date(item.dateOfBirth).getMonth()]+"-"+new Date(item.dateOfBirth).getFullYear()+'</td>';
+content += '<td class="displaytd">' +new Date(item.dateOfJoining).getDate()+"-"+monthsArray[new Date(item.dateOfJoining).getMonth()] +"-"+new Date(item.dateOfJoining).getFullYear()+'</td>';
 	              content += '<td class="displaytd">' +item.email +'</td>';
 	              content += '<td class="displaytd">' +item.fathersName +  '</td>';
 	              content += '<td class="displaytd">' +item.currentDesignation +'</td>';
 	              content += '<td class="displaytd">' +item.highestQualification +'</td>';
-	              content += '<td class="displaytd">' +item.skype +'</td>';
 	              content += '<td class="displaytd">' +item.contactNo +'</td>';
-	              content += '<td class="displaytd">' +item.yearsofexperience +'</td>';
-	              content += '<td class="displaytd">' +item.skill +'</td>';
-	              content += '<td class="displaytd">' +"<input type='button' value='View' id='"+item.employeeId+"' class='dynamicView btn-primary btn-md'> "+'</td>';
+	              content += '<td class="displaytd">' +item.yearsofexperience +'</td>';	            
+	              content += '<td class="displaytd">' +"<input type='button' value='View' id='"+item.employeeId+"' class='dynamicView  btn btn-success'> "+'</td>';
 	              content += '</tr>';
 	              $('#displayData').html(content);
 	             

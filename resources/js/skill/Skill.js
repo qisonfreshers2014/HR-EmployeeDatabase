@@ -54,7 +54,7 @@ skill.prototype.viewSkillDetails=function(empid){
   		 
   		var skill = data[i];
   		
-		$('#displayDataskill').append("<tr class='skilltr'><td class='skilltd'>"+skill.skills+"</td><td class='skilltd'>"+skill.empId+"</td><td class='skilltd'>"+skill.rating+"</td><td class='skilltd'><input type='button' value='Edit' id='"+skill.id+"' class='dynamicEdit btn-primary btn-md'></td></tr>");
+		$('#displayDataskill').append("<tr class='skilltr'><td class='skilltd'>"+skill.skills+"</td><td class='skilltd'>"+skill.empId+"</td><td class='skilltd'>"+skill.rating+"</td><td class='skilltd'><input type='button' value='Edit' id='"+skill.id+"' class='dynamicEdit  btn-info '></td></tr>");
 		
 		var obj1=skill.id;
   		}
@@ -125,7 +125,7 @@ skill.prototype.validateSkill=function(){
 	  		if(success){
 	  	 alert("Skills successfully inserted");
 	  	
-	  		$('#displayDataskill').append("<tr class='skilltr'><td class='skilltd'>"+data.skills+"</td><td class='skilltd'>"+data.empId+"</td><td class='skilltd'>"+data.rating+"</td><td class='skilltd'><input type='button' value='Edit' id='"+data.id+"' class='dynamicEdit btn-primary btn-md'></td></tr>");
+	  		$('#displayDataskill').append("<tr class='skilltr'><td class='skilltd'>"+data.skills+"</td><td class='skilltd'>"+data.empId+"</td><td class='skilltd'>"+data.rating+"</td><td class='skilltd'><input type='button' value='Edit' id='"+data.id+"' class='dynamicEdit btn-info'></td></tr>");
 	  		$("#skill").val("");
 		    $("#rating").val("");
 	  		var obj1=data.id;

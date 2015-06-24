@@ -1,22 +1,10 @@
 .tble,.skillth,.skilltd,.skilltr{
-	border: 1px solid black;
-	border-collapse:collapse;
 	text-align:center;
 	margin-left:2%;
 	font-family: Calibri;
  	font-size:15px;
 
 }
-.data1,.skillth,.skilltd,.skilltr{
-	border: 1px solid black;
-	border-collapse:collapse;
-	text-align:center;
-	margin-left:2%;
-	font-family: Calibri;
- 	font-size:15px;
-
-} 
-
 
 .skillth{
 	  background-color:#7094b8;
@@ -41,13 +29,15 @@
 	margin-left:40%;
 }
 .body1{
-background-color: lightgray; 
+/* background-color: lightgray;  */
 width:96%;
 height:190%;
 margin-left:2%;
 /* text-align:center; */
 
 font-family:calibri;
+position:relative;
+top:-;
 }
 
 .filtercriteria{
@@ -66,8 +56,9 @@ font-family:calibri;
 .heading1
 {
 	text-align:center;
-	color:#00246B;
+	color: #337ab7;
     visibility:hidden;
+   /*  margin-top:4%; */
   
 }
 .p{
@@ -81,8 +72,19 @@ font-family:calibri;
 	
 }
 .align{
-	text-align:center;
-	color:#00246B;
+	  background-color: #f9f9f9;
+    border-bottom: 1px solid #d4d4d4;
+    color: #337ab7;
+    float: left;
+    font-family: Helvetica,arial,serif;
+    font-size: 24px;
+    font-weight: 600;
+    margin-top: 0;
+    padding: 20px 0 20px 20px;
+    text-align: left;
+    width: 98.3%;
+    position:relative;
+    top:-20px;
 }
 
 .div{
@@ -107,19 +109,25 @@ font-family:calibri;
    margin-left:1%;
 } 
 #displayData{
-	margin-left:1%;
-	 table-layout: fixed;
+	margin-left:4%;
+	/*  table-layout: fixed; */
     width: 95%;
+    font-size:13px;
 }
 td{
 	 word-wrap:break-word;
 }
 #displayData,.displaytr,.displayth,.displaytd{
-	
+	/* 
 	border:1px solid black;
 	border-collapse:collapse;
+	 */
 	
+}
+#displayData th,#displayData td{
 	
+	padding:4px;
+	text-align:center;
 }
 .displayth{
 	 background-color:#7094b8;
@@ -140,7 +148,8 @@ td{
 {
 	 font-size:15px;
  font-weight: bold;
-   margin-left:3%;
+ width:1082px;
+   margin-left:2%;
 } 
 .filtd,.filtable,.filtr,.filth{
     background-color:lightgray;
@@ -158,15 +167,15 @@ td{
 .skilltable,.inputtr,.inputth,.inputtd{
 	background-color:lightgray;
 	padding:20px;
-	  margin-left:2%;
+	  margin-left:10%;
 	  margin-bottom:2%;
 }
 .buttonstable,.buttonstr,.buttonstd{
-	background-color:lightgray;
+	/* background-color:lightgray; */
 }
 
 .buttonstable {
-     margin-left:40%;
+     margin-left:45%;
 }
 
 #displayDataskill {
@@ -174,5 +183,28 @@ td{
      width: 90%;
 }
 #displayDataskill th, #displayDataskill td{
-  text-align:center
+  text-align:center;
 }
+#displayDataskill tr{
+		background: url(http://jackrugile.com/images/misc/noise-diagonal.png);	
+}
+.skillsdiv{
+	/* background-color:lightgray; */
+}
+
+#displayDataskill th,#displayDataskill td
+
+
+{
+    border-left: 1px solid #afafaf;
+    border-bottom: 1px solid #afafaf;
+    border-top: none;    
+    padding: 4px;
+    text-align: center;
+    vertical-align: middle;
+}
+#displayDataskill th:last-child,#displayDataskill td:last-child
+
+{
+    border-right: 1px solid #afafaf;
+} 

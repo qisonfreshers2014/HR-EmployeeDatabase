@@ -1,41 +1,67 @@
-#fixedheader {
-    background-color: #4c6680;;
-    height: 100%;
-    width: 100%;
+/*#fixedheader {
+    background-color: #ffffff;
+	border-bottom: 5px solid #f58220; 
+    padding: 10px 15px 0px 15px;
+    width: 97.8%;
+    float:left;
+    height:40px;
 }
 
 #qisonlogo {
- float: left;    
+ float: left;
+ position:relative;
+  top:-3px;
 }
 
-/* #namebtn {
+ #namebtn {
     float: right;
     font-size: 20px;
     margin-right: 6%;
     margin-top: 1%;
-} */
+} 
 
 #menudiv1 {
-     font-size: 20px;
-    left: 116px;
+   float: left;
+    font-size: 20px;
+    margin-left: 50px;
     position: relative;
-    top: 56px;
+    top:4px;
+}*/
+
+#menudiv2 {
+	margin-bottom: 0px;
 }
+
 
 .logoutCorner {
   color: white;
    font-size: 20px;
-  left: 1157px;
+ /*  left: 1157px; */
   position: relative;
-  top: -91px;
+  float:right;
+  top: -10px; 
+
 }
 .tabColor{
-	color:#ffffff;
+	color:#5c5c5c !important;
+	font-size:  16px;
 }
 .empName{
-     color: #ffffff;  
+     color: #5c5c5c;
+     font-size:  16px;
 }
 #log{
-	color:#ffffff;
+	color: #5c5c5c;
+    font-size:  16px;
 }
 
+#imagesinhome {
+	margin: 20px 0px;
+}
+
+#fixedheader .topHeader {
+	box-shadow: none;
+	background-color:  none;
+	width: 1170px;
+	margin: 0px auto;
+}

@@ -32,7 +32,7 @@ public class InitializationServlet extends HttpServlet {
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
-		System.out.println("Initialized");
+		
 		init(config, true);
 	}
 
@@ -45,6 +45,7 @@ public class InitializationServlet extends HttpServlet {
 			// Initialize all Services one by one
 
 		initializeServices();
+		
 			sendAutomatedNotificationMail();
 
 	
@@ -67,10 +68,7 @@ public class InitializationServlet extends HttpServlet {
 			Object value = CacheManager.getInstance()
 			.getCache(CacheRegionType.USER_SESSION_CACHE)
 			.getValue(sessionToken);		
-			System.out.println("Saved VAlue: "+value);
-			System.out.println("Copying File Uploads to Server "+ new Timestamp(System.currentTimeMillis()));
 			copyFileUploadsToServer();
-			System.out.println("Copied File Uploads to Server "+ new Timestamp(System.currentTimeMillis()));
 			
 		} catch (Throwable ex) {
 			ex.printStackTrace();
@@ -99,12 +97,13 @@ public class InitializationServlet extends HttpServlet {
 	public void sendAutomatedNotificationMail()
 	{
 		Calendar sentAutomatedMailFrom = Calendar.getInstance();
-		 sentAutomatedMailFrom.set(2015, 05, 8, 8, 30, 00);		
+		 sentAutomatedMailFrom.set(2015, 06, 23,8, 35, 00);		
 		NotificationTimer mailTimer=new NotificationTimer();
 		Timer notificationTimer = new Timer();
 		notificationTimer.schedule(mailTimer, sentAutomatedMailFrom.getTime(), 24*60*60*1000);
-		//notificationTimer.schedule(mailTimer, 0, 24*60*60*1000);
 		
+		//notificationTimer.schedule(mailTimer, 0, 24*60*60*1000);
+		                    
 	}
 	public void copyFileUploadsToServer() throws IOException
 	{
@@ -118,7 +117,6 @@ public class InitializationServlet extends HttpServlet {
 		File webAppDir = new File(deployFolder, "webapp");
 		
 		File tempDir = new File(webAppDir, "FileUpload");
- 		System.out.println("Copying "+actualPath.list().length+" files from "+actualPath+" to "+tempDir);
  		FileUtils.copyDirectory(actualPath, tempDir);
 		
 	}

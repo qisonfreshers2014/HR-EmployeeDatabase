@@ -1,11 +1,18 @@
 #desHeading
 {
-  font-size:2em;
-  color:#00246B;
-  font-weight:bold;
-  margin-top:1%;
-  margin-bottom:1%;
-  font-family:calibri;
+   background-color: #f9f9f9;
+    border-bottom: 1px solid #d4d4d4;
+    color: #337ab7;
+   /*  float: left; */
+    font-family: Helvetica,arial,serif;
+    font-size: 24px;
+    font-weight: 600;
+    margin-top: 0;
+    padding: 20px 0 20px 20px;
+    text-align: left;
+    width: 98.3%;
+    position:relative;
+    top:-20px;
 }
 
 #apprHeading
@@ -91,3 +98,23 @@
  background-color:#7094b8;
  color:white;
 }
+#backDes{
+	margin-bottom:2%;
+}
+#appraisalTable tr{
+	background: url(http://jackrugile.com/images/misc/noise-diagonal.png);	
+}
+#appraisalTable th,#appraisalTable td
+{
+    border-left: 1px solid #afafaf;
+    border-bottom: 1px solid #afafaf;
+    border-top: none;    
+    padding: 4px;
+    text-align: center;
+    vertical-align: middle;
+}
+#appraisalTable th:last-child,#appraisalTable td:last-child
+
+{
+    border-right: 1px solid #afafaf;
+} 
