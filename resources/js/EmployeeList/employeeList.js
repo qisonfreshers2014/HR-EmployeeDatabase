@@ -406,6 +406,7 @@ employeeList.prototype.searchOperation = function(data,desdata){
               }
  
  $('#employeelist').html(content);
+ 
  $('#backtoemployee').css("visibility","visible");
  $('.selector').css("visibility","hidden");
   

@@ -7,7 +7,7 @@ function Template(dataid) {
 Template.prototype.handleShow = function(dataid) {	
 	
 	$('#backButton').click(function(){
-		  App.loadtemplateList();
+		 routie("template");
 		 }.ctx(this));
 	
 	var input = {"payload":{"id":dataid}};

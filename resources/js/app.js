@@ -120,6 +120,8 @@ App.prototype.loadHoliday = function() {
 }
 
 App.prototype.loadFilter = function(cb) {
+	
+	Loader.loadPagination();
 	Loader.loadFilter(function() {
 		new FilterEmp(cb);
 	});

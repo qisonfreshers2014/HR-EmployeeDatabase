@@ -71,6 +71,9 @@ public Employee getLoggedInUser(long userId) throws EmployeeException;
 
 public Paginator<Employee> getEmployeesListPaginated(EmployeeListPaginationInput employee);
 
+public Paginator<Employee> getFilterEmployeesListPaginated(
+		FilterEmployee employee);
+
 	
 	
 }

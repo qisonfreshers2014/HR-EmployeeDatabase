@@ -12,12 +12,11 @@ changePassword.prototype.handleShow = function(employeeId) {
 
 		this.changePwd(employeeId);
 	}.ctx(this));
-$('#backchangepassword').click(function(){
-		
-		routie("myprofile");
-		
-	}.ctx(this));
+	$('#backchangepassword').click(function() {
 
+		routie("myprofile");
+
+	}.ctx(this));
 
 }
 changePassword.prototype.changePwd = function(employeeId) {
@@ -68,6 +67,16 @@ changePassword.prototype.changePwd = function(employeeId) {
 			$(confirmpwderr).text("");
 			// $(pwderr).css("color", "green");
 		}
+	} else if (!(newPassword.match(pwepattern))) {
+		$(newpwderr)
+				.text(
+						"Must be at least 8 characters,At least 1 number, 1 lowercase, 1 uppercase letter, At least 1 special character");
+		$(newpwderr).css("color", "red");
+	} else if (!(confirmPassword.match(pwepattern))) {
+		$(confirmpwderr)
+				.text(
+						"Must be at least 8 characters,At least 1 number, 1 lowercase, 1 uppercase letter, At least 1 special character");
+		$(confirmpwderr).css("color", "red");
 	} else if (!(newPassword == confirmPassword)) {
 		$(olepwderr).text("");
 		$(newpwderr).text("");

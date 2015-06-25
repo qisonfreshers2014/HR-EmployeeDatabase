@@ -1070,6 +1070,17 @@ public class EmployeeHandler extends AbstractHandler {
 		
 		
 	}
+
+	public PaginationOutput<Employee> getFilterEmployeesPaginated(
+			FilterEmployee employee) {
+		
+		 Paginator<Employee> paginator = new Paginator<>();
+		 paginator = DAOFactory.getInstance().getEmployeeDAO().getFilterEmployeesListPaginated(employee);
+		List li= paginator.getList();
+		 PaginationOutput<Employee> empPaginationOutput = new PaginationOutput<>(paginator, employee.getPageNo(), employee.getPageSize());
+		 return empPaginationOutput;
+		
+	}
 	}
 
 

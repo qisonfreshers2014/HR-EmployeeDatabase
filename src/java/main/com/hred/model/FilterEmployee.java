@@ -2,7 +2,9 @@ package com.hred.model;
 
 
 import java.sql.Timestamp;
-public class FilterEmployee {
+
+import com.hred.pagination.PaginationInput;
+public class FilterEmployee extends PaginationInput  {
   
 private String gender;
 private int currentDesignation;
@@ -31,10 +33,7 @@ public FilterEmployee(String gender, int currentDesignation, Timestamp dateOfJoi
  this.isDeleted=isDeleted;
  this.filterEmployee=filterEmployee;
 }
-public FilterEmployee() {
- super();
- // TODO Auto-generated constructor stub
-}
+
 public String getGender() {
  return gender;
 }
@@ -100,6 +99,13 @@ public Timestamp getDateOfJoiningFrom() {
 		this.dateOfJoiningTo = dateOfJoiningTo;
 	}
 
-
+	public FilterEmployee() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public FilterEmployee(int pageNo, int pageSize) {
+		super(pageNo, pageSize);
+		// TODO Auto-generated constructor stub
+	}
 
 }

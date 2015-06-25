@@ -32,12 +32,14 @@ FilterEmp.prototype.handleShow = function(empid) {
 		 maxDate:new Date()});
 		
 	$('#Filter').click(function(){
-	if($('#emptype').val()!="" || $('#gender').val()!=0 || $('#qualification1').val()!="" || $('#dojFrom').val()!=""|| $('#dojTo').val()=="" ||
-				$('#filterdesignation').val()!=0 || $('#year1').val()!="" || $('#year2').val()!=""){
-			
-	}
+		
+		
+		
+		var pagno=1;
+		
+		
 	
-			this.FilterEmployee(empid);
+			this.FilterEmployee(pagno,empid);
 		
 		
 	}.ctx(this));
@@ -66,7 +68,7 @@ FilterEmp.prototype.handleShow = function(empid) {
 
 
 
-FilterEmp.prototype.FilterEmployee = function(empid){
+FilterEmp.prototype.FilterEmployee = function(pagno,empid){
 	
 	if($('#emptype').val()=="notselected" && $('#gender').val()==0 && $('#qualification1').val()=="" && $('#dojFrom').val()==""&& $('#dojTo').val()=="" &&
 			$('#filterdesignation').val()==0 && $('#year1').val()=="" && $('#year2').val()==""){
@@ -159,11 +161,15 @@ if($('#dojFrom').val()!="" && $('#dojTo').val()==""){
 				}
 			}
 		 
-			  	
+
+       
+	
+	
+		  	
 			
 	
 	
-	var payload = {};
+	var payload ={"pageNo":pagno,"pageSize":10};
 	if($('#emptype').val() != ""){
 		payload.filterEmployee = $('#emptype').val();
 		}
@@ -190,9 +196,30 @@ if($('#dojFrom').val()!="" && $('#dojTo').val()==""){
 
            var content='';
 	
-	    RequestManager.getFilterEmployee({"payload" : payload}, function(data, success) {
+	    RequestManager.getPaginatedFilterEmployees({"payload" : payload}, function(data, success) {
 	    if(success){
-	    if(data.length != 0){
+	    	
+	    	
+	    	 var self=this;
+	    	
+	    	
+	    	 $('.selector').pagination(
+				  		{
+				      items:data.count,
+				      itemsOnPage:10,
+				      currentPage:data.pageNo,
+				      cssStyle: 'light-theme',
+				      	
+				  	  onPageClick: function(pageNumber) { 
+				  		  
+				  		self.FilterEmployee(pageNumber,empid);
+				           
+				           
+				       }
+				  });
+	    	var employees=data.employees;
+	    	
+	    if(employees.length != 0){
 		
 	    	$('.heading1').css("visibility","visible");
 	  	$('#displayData').html('<tr class="displaytr"><th class="displayth">Employee Id</th><th class="displayth">Employee Name</th><th class="displayth">Gender</th><th class="displayth">DOB</th><th class="displayth">DOJ</th><th class="displayth">Email</th><th class="displayth">Fathers Name</th><th class="displayth">Designation</th><th class="displayth">Highest Qualification</th><th class="displayth">Contact No</th><th class="displayth">Years Of Experience</th><th class="displayth">View Details</th></tr>');
@@ -200,6 +227,8 @@ if($('#dojFrom').val()!="" && $('#dojTo').val()==""){
 	    }
 	    else{
 	          alert("No record found");
+	          $('.heading1').css("visibility","hidden");
+	          $('#filterPagination').css("visibility","hidden");
 	          $('#displayData').html('<tr class="displaytr"><th class="displayth">Employee Id</th><th class="displayth">Employee Name</th><th class="displayth">Gender</th><th class="displayth">DOB</th><th class="displayth">DOJ</th><th class="displayth">Email</th><th class="displayth">Fathers Name</th><th class="displayth">Designation</th><th class="displayth">Highest Qualification</th><th class="displayth">Contact No</th><th class="displayth">Years Of Experience</th><th class="displayth">View Details</th></tr>');
 	    	   
 			    $('#displayData tbody').empty();
@@ -221,8 +250,8 @@ if($('#dojFrom').val()!="" && $('#dojTo').val()==""){
 		monthsArray[11]="Dec";
 		
 	   var i;
-	   for(i = 0; i < data.length; i++) {
-        var item = data[i];
+	   for(i = 0; i < employees.length; i++) {
+        var item = employees[i];
 				       
 	 					 
 	 
@@ -230,7 +259,7 @@ $('#displayData').append("<tr class='displaytr'><td class='displaytd'>"+item.emp
 +new Date(item.dateOfBirth).getDate()+"-"+monthsArray[new Date(item.dateOfBirth).getMonth()]+"-"+new Date(item.dateOfBirth).getFullYear()+"</td><td class='displaytd'>"
 +new Date(item.dateOfJoining).getDate()+"-"+monthsArray[new Date(item.dateOfJoining).getMonth()]+"-"+new Date(item.dateOfJoining).getFullYear()+"</td><td class='displaytd'>"+item.email+"</td><td>"+item.fathersName+"</td><td class='displaytd'>"
 +item.currentDesignation+"</td><td class='displaytd'>"+item.highestQualification+"</td><td class='displaytd'>"+item.contactNo+"</td>" +
-		"<td class='displaytd'>"+item.yearsofexperience+"</td><td class='displaytd'><input type='button' value='View' id='"+item.id+"' class='dynamicView  btn btn-success'></td></tr>");
+		"<td class='displaytd'>"+item.yearsofexperience+"</td><td class='displaytd'><input type='button' value='View' id='"+item.id+"' class='dynamicView  btn-success'></td></tr>");
 	
       
         			
@@ -239,8 +268,8 @@ $('#displayData').append("<tr class='displaytr'><td class='displaytd'>"+item.emp
 			    
 var content = '';
 content += '<tr class="displaytr"><th class="displayth">Employee Id</th><th class="displayth">Employee Name</th><th class="displayth">Gender</th><th class="displayth">DOB</th><th class="displayth">DOJ</th><th class="displayth">Email</th><th class="displayth">Fathers Name</th><th class="displayth">Designation</th><th class="displayth">Highest Qualification</th><th class="displayth">Contact No</th><th class="displayth">Years Of Experience</th><th class="displayth">View Details</th></tr>';
-for (var i = 0; i < data.length; i++) {
-			     var item = data[i];
+for (var i = 0; i < employees.length; i++) {
+			     var item = employees[i];
 			     content += '<tr  class="displaytr">';
 	             content += '<td class="displaytd">'  + item.employeeId+ '</td>';
 	             content += '<td class="displaytd">' + item.employeeName + '</td>';
@@ -253,11 +282,33 @@ content += '<td class="displaytd">' +new Date(item.dateOfJoining).getDate()+"-"+
 	              content += '<td class="displaytd">' +item.highestQualification +'</td>';
 	              content += '<td class="displaytd">' +item.contactNo +'</td>';
 	              content += '<td class="displaytd">' +item.yearsofexperience +'</td>';	            
-	              content += '<td class="displaytd">' +"<input type='button' value='View' id='"+item.employeeId+"' class='dynamicView  btn btn-success'> "+'</td>';
+	              content += '<td class="displaytd">' +"<input type='button' value='View' id='"+item.employeeId+"' class='dynamicView  btn-success'> "+'</td>';
 	              content += '</tr>';
 	              $('#displayData').html(content);
 	             
 }
+
+
+
+$(function(){
+	  
+	  var perPage = 10;
+		
+	 
+	  var checkFragment = function() {
+	    
+	      var hash = window.location.hash;
+	 
+	      hash = hash.match(/^#page-(\d+)$/);
+	      if(hash)
+	        
+	          $("#pagination").pagination("selectPage", parseInt(hash[1]));
+	  };
+	 
+	  $(window).bind("popstate", checkFragment);
+	  
+	  checkFragment();
+	  });
 	             $('.dynamicView').bind("click", function(event){
 	          
 	            	     var empid = $(event.target).attr('id');
@@ -269,6 +320,7 @@ content += '<td class="displaytd">' +new Date(item.dateOfJoining).getDate()+"-"+
 				   } else{
 					  
 					    alert("no record found");
+					    
 					    }
 					}.ctx(this));
 

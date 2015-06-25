@@ -662,6 +662,8 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 	      System.out.println(query);
 	   
 	   Query hql1=session.createQuery(query);
+	   hql1.setFirstResult(1);
+	   hql1.setMaxResults(10);
 	   
 	   list = (List<Employee>)hql1.list();
 	   }
@@ -699,6 +701,9 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 	   System.out.println("Query :\n"+ query1);
 	   
 	   Query hql1=session.createQuery(query1);
+	   
+	   hql1.setFirstResult(1);
+	   hql1.setMaxResults(10);
 	   
 	   list = (List<Employee>)hql1.list();
 	   }
@@ -970,11 +975,146 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 	  List<Employee> consultantList=criteria.list();
 	  
 	  Criteria countCriteria=createCustomCriteria(Employee.class); 
+	  System.out.println(countCriteria);
 	  Long totalCount = getRecordCount(countCriteria);
 
 	  Paginator<Employee> employeePaginator = new Paginator<>(consultantList, totalCount);
 	  return employeePaginator;
 	 }
+
+	@Override
+	public Paginator<Employee> getFilterEmployeesListPaginated(
+			FilterEmployee filter) {
+		 int pageNo = filter.getPageNo();
+		  int pageSize = filter.getPageSize();
+		  
+		  int skipCount = (pageNo - 1) * pageSize;  
+		  
+		  Session session = null;
+		  List<Employee> list = null;
+		  Long countfilter=(long) 0;
+		  Transaction tx = null;
+		  try {
+		   session = getSession();
+		   if (null == session) {
+		    session = SessionFactoryUtil.getInstance().openSession();
+		    tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+		   }
+		  if(!filter.getFilterEmployee().equalsIgnoreCase("Inactive")){
+			   String query = "from Employee where is_Deleted=0";
+			   
+			   if( filter.getFilterEmployee().equalsIgnoreCase("Fulltime")||filter.getFilterEmployee().equalsIgnoreCase("Contract")){
+				    query = query + " and employeeType='"+filter.getFilterEmployee()+"'";                                       
+				   }
+			   
+			    if(filter.getCurrentDesignation() != 0){
+			    query = query+" and currentDesignation="+filter.getCurrentDesignation();
+			   }
+			   /* if(filter.getDateOfJoining() != null){
+			    query = query + " and DOJ='"+filter.getDateOfJoining()+"'";
+			   }*/
+			    
+			    if(filter.getDateOfJoiningFrom() !=null){
+				    if(filter.getDateOfJoiningFrom().compareTo(filter.getDateOfJoiningTo())<=0){
+				        
+				    	  query=query+"and DOJ between '"+filter.getDateOfJoiningFrom()+"' and '"+filter.getDateOfJoiningTo()+"' ";  
+				    	   
+				    	     }
+				    }
+			     if(filter.getFrom()!=null){
+			    query = query + " and (years_of_experience + timestampdiff(MONTH,DOJ, sysdate())/12.0)>="+filter.getFrom();
+			   }
+			    if(filter.getGender() != null){
+			    query = query + " and gender='"+filter.getGender()+"'";                                       
+			   }
+			   
+			    if(filter.getHighestQualification() != null){
+			    query = query + " and highestQualification='"+filter.getHighestQualification()+"'";
+			   }
+			     if(filter.getTo() !=null){
+			    query = query + " and (years_of_experience + timestampdiff(MONTH,DOJ, sysdate())/12.0)<="+filter.getTo();
+			   }
+			 
+			      System.out.println(query);
+			   
+			   Query hql1=session.createQuery(query);
+			   
+			  Query count=session.createQuery("select count(*)"+query);
+			  
+			 countfilter = (Long)count.uniqueResult();
+			  System.out.println("*********************countfilter"+countfilter);
+			   hql1.setFirstResult(skipCount);
+			   hql1.setMaxResults(pageSize);
+			   
+			   list = (List<Employee>)hql1.list();
+			   }
+			   
+			   else if(filter.getFilterEmployee().equalsIgnoreCase("Inactive")){
+			   
+			   String query1= "from Employee where is_Deleted=1";
+			   if(filter.getCurrentDesignation() != 0){
+			    query1 = query1+" and currentDesignation="+filter.getCurrentDesignation();
+			   }
+			  /*  
+			   if(filter.getDateOfJoining() != null){
+			    query1 = query1+ " and DOJ='"+filter.getDateOfJoining()+"'";
+			   }*/
+			   if(filter.getDateOfJoiningFrom() !=null){
+				    if(filter.getDateOfJoiningFrom().compareTo(filter.getDateOfJoiningTo())<=0){
+				        
+				    	  query1=query1+"and DOJ between '"+filter.getDateOfJoiningFrom()+"' and '"+filter.getDateOfJoiningTo()+"' ";  
+				    	 
+				    	      
+				    	     }
+				    }
+			   if(filter.getFrom()!=null){
+			    query1 = query1 + " and (years_of_experience + timestampdiff(MONTH,DOJ, sysdate())/12.0)>="+filter.getFrom();
+			   }
+			   if(filter.getGender() != null){
+			    query1 = query1+ " and gender='"+filter.getGender()+"'";
+			   }
+			   if(filter.getHighestQualification() != null){
+			    query1 = query1 + " and highestQualification='"+filter.getHighestQualification()+"'";
+			   }
+			   if(filter.getTo() !=null){
+			    query1 = query1 + " and (years_of_experience + timestampdiff(MONTH,DOJ, sysdate())/12.0)<="+filter.getTo();
+			   }
+			   System.out.println("Query :\n"+ query1);
+			   
+			   Query hql1=session.createQuery(query1);
+			   Query count=session.createQuery("select count(*)"+query1);
+				  
+				 countfilter = (Long)count.uniqueResult();
+			   
+			   
+			   hql1.setFirstResult(skipCount);
+			   hql1.setMaxResults(pageSize);
+			   
+			   list = (List<Employee>)hql1.list();
+			   }
+
+		      
+		 // List<Employee> consultantList=criteria.list();
+		  
+		  //Criteria countCriteria=createCustomCriteria(Employee.class); 
+		 // System.out.println(countCriteria);
+		 // Long totalCount = getRecordCount(countCriteria);
+
+		  Paginator<Employee> employeePaginator = new Paginator<>(list, countfilter);
+		  return employeePaginator;
+	}
+		  finally {
+			   try {
+			    if (tx != null) {
+			     tx.commit();
+			     if (session.isConnected())
+			      session.close();
+			    }
+			   } catch (HibernateException e) {
+
+			    e.printStackTrace();
+			   }
+			  }
 
 
 	 /*@Override
@@ -996,4 +1136,5 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 	  return employeePaginator;
 	 }
 */
+}
 }

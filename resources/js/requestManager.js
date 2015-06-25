@@ -230,6 +230,9 @@ RequestManager.prototype.getSearchEmp=function(data,callback){
  RequestManager.prototype.getAlltemplates=function(data,callback){
 	 this.sendToServer('template/getalltemplates', data, callback);
 } 
+ RequestManager.prototype.getPaginatedFilterEmployees=function(data,callback){
+	 this.sendToServer('employee/getFilterEmployeesListPaginated', data, callback);
+} 
  
 
 
