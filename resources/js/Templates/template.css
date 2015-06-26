@@ -78,9 +78,10 @@
 }
 #backButton{
  position: relative;
+ left:285px;
   /* top: -294px; */
-  margin-left: 6%;
- /*  margin-top:-5%; */
+ /*  margin-left: 6%; */
+  margin-top:4%;
 }
 #descTemp {
     position: relative;
@@ -95,10 +96,26 @@
     width: 50%;
 }
 #fieldsaddTemplate{
-	margin-left:5%;
+  margin-left: 5%;
+    position: relative;
+    top: 24px;
 }
 .templateContent1{
 	font-weight:normal;
-	background-color: #eeeeee;
+	/* background-color: #eeeeee; */
 	border-color: #ddd;
+}
+#viewtwmplatehead{
+	
+	 background-color: #f9f9f9;
+    border-bottom: 1px solid #d4d4d4;
+    color: #337ab7;
+    float: left;
+    font-family: Helvetica,arial,serif;
+    font-size: 24px;
+    font-weight: 600;
+    margin-top: 0;
+    padding: 20px 0 20px 20px;
+    text-align: left;
+    width: 98.3%;
 }

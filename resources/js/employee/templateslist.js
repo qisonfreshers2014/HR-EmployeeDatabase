@@ -51,7 +51,7 @@ TemplateList.prototype.getTemplateName=function(pageNo){
 					//  var obj = data[i];
 
 						$('#displayDatatemplist').append('<table><tbody></tbody></table>');
-						$('#displayDatatemplist tr:last').after("<tr class='templisttr'><td class='templisttd'>"+value.name+"</td><td class='templisttd'><br><a href='#edittemplate'><input type='button' value='Edit' id='"+value.id+"' class='dynamicEdit btn btn-info'></a></td><td class='templisttd'><br><input type='button' value='View' id='"+value.id+"' class='dynamicView btn btn-success'></td></tr></table>");
+						$('#displayDatatemplist tr:last').after("<tr class='templisttr'><td class='templisttd'>"+value.name+"</td><td class='templisttd'><br><a href='#edittemplate'><input type='button' value='Edit' id='"+value.id+"' class='dynamicEdit btn btn-info'></a></td><td class='templisttd'><br><a href='#viewtemplate'><input type='button' value='View' id='"+value.id+"' class='dynamicView btn btn-success'></a></td></tr></table>");
 			  });	
 			  
 			  

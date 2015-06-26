@@ -203,12 +203,7 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 	var bloodGroup = /^(A|B|AB|O|0)(\+|-)+$/;
 	var salry = /^\d{0,10}(?:\.\d{0,2})?$/;
 	var dateformat = /^(19|20)\d\d-(0\d|1[012])-(0\d|1\d|2\d|3[01])$/;
-	
-	
-	if(file!=""){
-		
-		$('#profileimageedit').append('<img src="'+file+'" height="50" width="50">');
-	}
+
 
 	if (name == "" || qualification == "" || fathername == ""
 			|| contnum == "" || txtemercon == "" || txtemname == ""

@@ -15,7 +15,6 @@ employeeList.prototype.handleShow = function(data) {
 	$('#emp').parent().addClass('active');
 	
 /*	$('.viewindividual').click(function(event){
-		
 		console.log("syashsah");
 		 var releaseId=event.target.id;     
 		  App.loadViewEmployee(releaseId);
@@ -36,8 +35,7 @@ employeeList.prototype.handleShow = function(data) {
 		  	  onPageClick: function(pageNumber) { 
 		  		  
 		  		self.paginationFunc(pageNumber);
-		           
-		           
+      
 		       }
 		  });
 
@@ -259,7 +257,7 @@ $('#employeelist').empty();
   
 if(isDecimal!=0){
 	 months=months+afterdecimal;
-	
+	 
 	  years = Math.floor(months/12);
 	
 	  totalYearsOfExpMnths=months%12;
@@ -278,6 +276,7 @@ if(isDecimal!=0){
   }
   
   var desName;
+  
   var desId = obj.currentDesignation;
   
   for (var j = 0; j < desdata.length; j++) {
@@ -379,7 +378,6 @@ employeeList.prototype.searchOperation = function(data,desdata){
   
   var desName;
   var desId = obj.currentDesignation;
-  
   for (var j = 0; j < desdata.length; j++) {
 	  var desTypeObj = desdata[j];
 	   if (desId == desTypeObj.id) {

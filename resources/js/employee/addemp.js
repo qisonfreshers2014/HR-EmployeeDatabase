@@ -259,12 +259,6 @@ AddEmployee.prototype.validateEmp = function() {
 	var salry = /^\d{0,10}(?:\.\d{0,2})?$/;
 	var dateformat = /^(19|20)\d\d-(0\d|1[012])-(0\d|1\d|2\d|3[01])$/;
 	var flag = true;
-	
-	
-	if(file!=""){
-		
-		$('#profileimage').append('<img src="'+file+'" height="50" width="50">');
-	}
 
 	/*
 	 * if (blood == "" || eid == "" || name == "" || qualification == "" ||

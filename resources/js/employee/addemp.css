@@ -116,11 +116,11 @@
   margin-left: 2%;
     width: 96%;
 }
-#updateemp{
+/* #updateemp{
   margin-left:45%;
-}
+} */
 .hreditbuttons{
-	margin-left:40%;
+	/* margin-left:40%; */
 }
 #displayDatatemplist th,#displayDatatemplist td
 
@@ -145,12 +145,15 @@
   .personalDetails{
 	margin-bottom: 0px;
 }
-#backaddemp,#backtohrview,#backtoprofile{
+/* #backaddemp,#backtohrview,#backtoprofile{
 	margin-left:2%;
-}
+} */
 #displayDatatemplist tr{
 	background: url(http://jackrugile.com/images/misc/noise-diagonal.png);	
 }
 #paginationdiv{
 	margin-left:2%;
+}
+#filepath{
+	color:blue;
 }

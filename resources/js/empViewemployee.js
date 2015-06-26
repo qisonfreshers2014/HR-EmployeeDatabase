@@ -12,7 +12,9 @@ empViewemployee.prototype.handleShow = function(employeeId) {
 /* $('#Editdetails').css("visibility","hidden");
  $('#Editdesgn').css("visibility","hidden");
  $('#Editskills').css("visibility","hidden");*/
- $('.editviewEmployee').css("visibility","hidden");
+ $('.editempviewEmployee').show();
+ $('.editviewEmployee').hide();
+
 
     this.empviewEmployee(employeeId);
  

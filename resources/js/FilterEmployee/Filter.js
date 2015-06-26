@@ -222,6 +222,7 @@ if($('#dojFrom').val()!="" && $('#dojTo').val()==""){
 	    if(employees.length != 0){
 		
 	    	$('.heading1').css("visibility","visible");
+	    	  $('#filterPagination').css("visibility","visible");
 	  	$('#displayData').html('<tr class="displaytr"><th class="displayth">Employee Id</th><th class="displayth">Employee Name</th><th class="displayth">Gender</th><th class="displayth">DOB</th><th class="displayth">DOJ</th><th class="displayth">Email</th><th class="displayth">Fathers Name</th><th class="displayth">Designation</th><th class="displayth">Highest Qualification</th><th class="displayth">Contact No</th><th class="displayth">Years Of Experience</th><th class="displayth">View Details</th></tr>');
 	  	
 	    }
