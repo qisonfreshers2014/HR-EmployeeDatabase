@@ -21,12 +21,17 @@ $("#backtonotifications").click(function(){
 	
 	
 	$('#SubmitNotification').click(function(){
+		document.getElementById('SendMailNotification').style.display="hidden";
+		document.getElementById('light').style.display='block';
+		document.getElementById('fade').style.display='block';
 		var contentmail=$('#contentfieldNotification').val();
+		
+		var to=$('#Tomail').val();
 
 		var inputmail= {
 				"payload" : {
 					"event" : data.name,
-					"employeeEmail" :"Qison@gmail.com",
+					"employeeEmail" :to,
 					"modifiedContent":contentmail
 				}
 	}
@@ -35,7 +40,22 @@ $("#backtonotifications").click(function(){
 			
 			if(success){
 				
-				alert("successfully sent");
+
+				document.getElementById('light').style.display='hidden';
+				document.getElementById('fade').style.display='hidden';
+				document.getElementById('SendMailNotification').style.display="block";
+				
+				alert("Mail succesfully send");
+				var input={};
+				RequestManager.getAllEvents(input, function(data, success) {
+					if (success) {	
+								App.loadNotificationHomePage(data);
+					}
+					else
+					{
+					App.loadNotificationHomePage(data);
+					alert("No event in the current month");
+							}});
 			}
 			else{
 				alert("failed to send");

@@ -48,10 +48,10 @@
 #emphomehead{
     background-color: #f9f9f9;
     border-bottom: 1px solid #d4d4d4;
-    color: #337ab7;
+    color: #6abc42;
     float: left;
-    font-family: Helvetica,arial,serif;
-    font-size: 24px;
+    font-family: icon;
+    font-size: 20px;
     font-weight: 600;
     margin-top: 0;
     padding: 20px 0 20px 20px;
@@ -59,29 +59,22 @@
     width: 98.3%;
 }
 
-h3{
+h3,.headinghome{
 	color:#FF6600;
 }
 
-#parah1,#parah2{
- padding:10px;
-  font-size:15px;
-  float: left;
-  line-height: 24px;
+#parah1,#parah2,#parah3,.headinghome{
+ font-size: 16px;
+    line-height: 32px;
+    padding: 5px 0 0 10px;
 }
 
 #parah1 h3,#parah2 h3{
 	margin: 10px 0px;
 }
 
-#parah2 ul{
-	margin: 10px 0px;
-}
-
-#parah2 ul li{
-	display: block;
-	margin-bottom: 5px;
-	list-style: none;
+#parah3 ul li{
+	padding:5px;
 }
 .images{
     background-color: #d4d4d4;
@@ -90,6 +83,9 @@ h3{
     -webkit-border-radius: 5px 5px 5px 5px;
     -khtml-border-radius: 5px 5px 5px 5px;    
     float: left;
-    margin-left: 5%;
+    margin-left: 9%;
     padding: 5px;
+}
+#parahgraphs{
+	padding:85px 0px 0px 0px;
 }

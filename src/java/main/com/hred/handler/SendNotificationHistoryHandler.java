@@ -59,6 +59,7 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 		return INSTANCE;
 	}
 	
+	@AuthorizeEntity(roles={Constants.HR})
 	public SendNotificationHistory save(SendNotificationHistory entry) {
 		SendNotificationHistory entrysaved = (SendNotificationHistory) DAOFactory
 				.getInstance().getSendNotificationHistoryDAO()
@@ -348,6 +349,7 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 	                        + sentMailToEmployee.getEmployeeName();
 	               	               
 	                email.setSubject(sentMailToEmployee.getEvent());
+	                System.out.println(sentMailToEmployee.getEmployeeEmail());
 	                email.addTo(sentMailToEmployee.getEmployeeEmail());
 	                email.setContent(body, "text/html");
 	                email.send();
@@ -355,6 +357,8 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 	               
 	        }
 	 
+	 
+		@AuthorizeEntity(roles={Constants.HR})
 	  public String sendRegistrationMail(String employeeEmail,String employeeName,String randomPassword) throws EmailException{
 		  
 
@@ -370,11 +374,11 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
           {
               Properties props = ConfigReader.getProperties(Constants.MAIL_CONFIGURATION_SETTING);
               hostName=props.getProperty(Constants.HOST_NAME);
-           smtpPort=props.getProperty(Constants.HOST_NAME);
+           smtpPort=props.getProperty(Constants.HOST_NAME);                                                               
            authenticatorMail=props.getProperty(Constants.AUTHENTICATOR_MAIL);
            authenticatorPassword=props.getProperty(Constants.AUTHENTICATOR_PASSWORD);
            from=props.getProperty(Constants.SEND_FROM);
-           bcc=props.getProperty(Constants.SEND_BCC);
+           bcc=props.getProperty(Constants.SEND_BCC);                                                            
           }
           catch(IOException e)
           {
@@ -382,7 +386,31 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
           }
           
           //Templete templte=TemplateHandler.getInstance().viewTemplateAOP(template.getId());
-          String content="Hi"+employeeName+"You have been added to HRMS You can check it by login into HRMS site with username:"+employeeEmail+"Password:"+randomPassword+"";
+          String content="";
+          
+          content +="Hi ,    <b>"+employeeName+"</b><br/><br/>";
+        		  
+        content += "Welcome to <b>Qi People.</b><br/><br/>";
+        		   
+        content	+= "You have been registered on the system. You can login to the system with following credentials:<br/><br/>";
+        		   
+        content += "<b>Username:</b>"+employeeEmail+"<br/><br/>";
+        content += "<b>Password:</b>"+randomPassword+"<br/><br/>";
+        		   
+        content += "Please change your password once you login to the system.<br/><br/>";
+        		   
+        content += "<b> Features:</b><br/>";
+        		content +=  " -          Qi People lets you view some of your basic information<br/>";
+        				content +=   "-          Allows you to edit some information and upgrade your skill set<br/>";
+        				content += 	 " -          You can view the yearly Holiday list<br/>";
+        				content +=  "-          One stop for all HR policies<br/>";
+        				content +=  "-          And All Hands data  too<br/><br/><br/>";
+        		   
+        				content +=  " <b>Thanks,</b><br/><br/>";
+        				content +=  "<b>Team HR.</b>";
+        		   
+        		
+
 		  
 		  MultiPartEmail email = new MultiPartEmail();
           email.setHostName(hostName);

@@ -662,9 +662,9 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 	      System.out.println(query);
 	   
 	   Query hql1=session.createQuery(query);
-	   hql1.setFirstResult(1);
+	/*   hql1.setFirstResult(1);
 	   hql1.setMaxResults(10);
-	   
+	   */
 	   list = (List<Employee>)hql1.list();
 	   }
 	   
@@ -701,9 +701,9 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 	   System.out.println("Query :\n"+ query1);
 	   
 	   Query hql1=session.createQuery(query1);
-	   
+	 /*  
 	   hql1.setFirstResult(1);
-	   hql1.setMaxResults(10);
+	   hql1.setMaxResults(10);*/
 	   
 	   list = (List<Employee>)hql1.list();
 	   }

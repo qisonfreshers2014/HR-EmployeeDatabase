@@ -37,7 +37,7 @@ public class AllHandsMeetingHandler extends AbstractHandler {
 		return INSTANCE;
 	}
 	
-	//@AuthorizeEntity(roles={Constants.HR})
+	@AuthorizeEntity(roles={Constants.HR})
 	public List<AllHandsMeeting> getAllHandsMeeting()throws AllHandsMeetingException {
 		List<AllHandsMeeting> allhandsmeetinglist = null;
 		AllHandsMeetingDAO AllHandsMeetingDAOImpl = (AllHandsMeetingDAO) DAOFactory.getInstance().getAllHandsMeetingDAO();

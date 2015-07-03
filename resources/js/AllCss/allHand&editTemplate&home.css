@@ -43,15 +43,20 @@
     top:-6px;
 } */
 #span1 {
+	 color: #337ab7;
+    font-family: calibre 11;
+    font-size: 18px;
+    font-weight:bold;
      position:relative;
 /*     top:45px; */
     right:2px;
 }
 #logout1 {
     margin-bottom: 0%;
-  color:#5c5c5c !important;
-	font-size:  16px;
-	font-weight:bold;
+ color: #337ab7;
+    font-family: calibre 11;
+    font-size: 18px;
+    font-weight:bold;
    /*  text-decoration:none; */
      position:relative;
 /*     top:44px; */
@@ -90,10 +95,10 @@
 .headingAll {
  background-color: #f9f9f9;
     border-bottom: 1px solid #d4d4d4;
-    color: #337ab7;
+    color: #6abc42;
     float: left;
-    font-family: Helvetica,arial,serif;
-    font-size: 24px;
+    font-family: icon;
+    font-size: 20px;
     font-weight: 600;
     margin-top: 0;
     padding: 20px 0 20px 20px;
@@ -102,6 +107,10 @@
 }
 #headingaddallhands{
 	position:relative;
+	top:-23px;
+}
+#editallhandhead{
+		position:relative;
 	top:-23px;
 }
 
@@ -198,9 +207,10 @@ background-color: lightgray;
     margin-top: 2%;
 }
 .tabcolor{
-	color:#5c5c5c !important;
-	font-size:  16px;
-	font-weight:bold;
+	 color: #337ab7;
+    font-family: calibre 11;
+    font-size: 18px;
+      font-weight:bold;
 }
 #displayData th,#displayData td,#displayallhandsData th,#displayallhandsData td
 
@@ -209,7 +219,7 @@ background-color: lightgray;
     border-left: 1px solid #afafaf;
     border-bottom: 1px solid #afafaf;
     border-top: none;    
-    padding: 4px;
+    padding: 7px;
     text-align: left;
     vertical-align: middle;
 }

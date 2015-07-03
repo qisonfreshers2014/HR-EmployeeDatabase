@@ -579,6 +579,11 @@ HrEditEmployee.prototype.employeeTypeValidate = function() {
 }
 
 HrEditEmployee.prototype.deleteEmployee = function(empid) {
+	
+	var text = confirm("Are you sure you want to delete?");
+	if (text == true) {
+		
+	
 	var input = {
 		"payload" : {
 			"employeeId" : empid
@@ -623,4 +628,5 @@ HrEditEmployee.prototype.deleteEmployee = function(empid) {
 			alert("failed to Delete");
 		}
 	}.ctx(this));
+}
 }

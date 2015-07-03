@@ -141,9 +141,6 @@ loadNotificationHomePage.prototype.eventChangeCriteria = function() {
 	var selectedEvent = $("#eventsNotification").val();
 	var fromDate = $("#fromDateNotification").val();
 	var toDate = $("#toDateNotification").val();
-	console.log(fromDate);
-	console.log(toDate);
-
 
 
 	var dateformat = /^(19|20)\d\d-(0\d|1[012])-(0\d|1\d|2\d|3[01])$/;
@@ -269,9 +266,7 @@ loadNotificationHomePage.prototype.getdisplayedata = function(input) {
 										.find('td:eq(2)').text());
 								var email = ($(this).parent().parent()
 										.find('td:eq(3)').text());
-								console.log(event);
-								console.log(email);
-		          				console.log(employeeName);
+
 								App.loadManualMail(event, email,
 										employeeName);
 

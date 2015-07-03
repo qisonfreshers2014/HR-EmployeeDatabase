@@ -181,6 +181,8 @@ public List<Template> getTemplatesAOP() {
 		Template receivedtemplatesfromdb = new Template();
 		Template templatescontenttoDisplay = new Template();
 		String finalContent = "";
+		String gender="";
+		String genderVariable="";
 		Employee sendNotification=new Employee();
 		File requiredImg=new File();
 		EmployeeDAO employeeDAOImpl = DAOFactory.getInstance().getEmployeeDAO();
@@ -209,24 +211,35 @@ public List<Template> getTemplatesAOP() {
 			
 			if(sendNotification.getFileId()!=0)
 			{
-				System.out.println(path+requiredImg.getFilePath());
-				 finalContent +="<img src='"+path+requiredImg.getFilePath()+"' alt='"+sendNotification.getEmployeeName()+"' width='150' height='150'><br/>";
+				 String image=path+requiredImg.getFilePath();
+				 String replacedImage=image.replace("\\", "/");
+				 finalContent +="<img src='"+replacedImage+"' alt='"+sendNotification.getEmployeeName()+"' width='150' height='150'><br/><br/>";
 				   
 			}
 			
-	 finalContent +="Dear Qisonians,<br/> We take Immense pleasure in welcoming "+ sendNotification.getEmployeeName()+" who has Joined QISON TEAM <br/> ";
-	finalContent +="He is working as "+currentDesignation+"<br/>";
+			if(sendNotification.getGender().equalsIgnoreCase("male")){
+				
+				gender="He";
+				genderVariable="His";
+			}else{
+				
+				gender="She";
+				genderVariable="Her";
+			}
+			
+	 finalContent +="Dear Qisonians,<br/><br/> We take Immense pleasure in welcoming <b>"+ sendNotification.getEmployeeName()+"</b> who has Joined QISON TEAM <br/><br/> ";
+	finalContent +=""+gender+" is working as <b>"+currentDesignation+"</b><br/><br/>";
 			 
- finalContent += sendNotification.getEmployeeName()+" as he likes to be called, he has pursued "+ sendNotification.getHighestQualification()+".<br/> He takes keen interest in "+sendNotification.getSkype()+"<br/>";
+ finalContent += "<b>"+sendNotification.getEmployeeName()+"</b> as "+gender+" likes to be called, "+gender+" has pursued <b>"+ sendNotification.getHighestQualification()+"</b> from <b>"+sendNotification.getUniversity()+"</b>.<br/><br/>"+gender+" takes keen interest in <b>"+sendNotification.getHobbies()+"</b><br/><br/>";
 			 
- finalContent += "He can be reached on "+sendNotification.getEmail()+"<br/>";
+ finalContent += ""+gender+" can be reached on <b>"+sendNotification.getEmail()+"</b><br/><br/>";
 			 
- finalContent += "His Skype ID "+sendNotification.getSkype()+"<br/>";
+ finalContent += ""+genderVariable+" Skype ID is<b>"+sendNotification.getSkype()+"</b><br/><br/>";
 			 
- finalContent += "Please join us in welcoming "+sendNotification.getEmployeeName()+" to QISON family and Wish him a Long and Successful career !!!<br/>";
+ finalContent += "Please join us in welcoming <b>"+sendNotification.getEmployeeName()+" </b>to QISON family and Wish him a Long and Successful career !!!<br/><br/>";
 			                                                                                                  
 			 
- finalContent += "Best Regards,<br/>HR Team.";
+ finalContent += "<b>Best Regards,<br/><br/>HR Team.</b>";
  templatescontenttoDisplay.setContent(finalContent);
  
 		}
@@ -246,6 +259,8 @@ public List<Template> getTemplatesAOP() {
 	return templatescontenttoDisplay;
 
 	}
+	
+	@AuthorizeEntity(roles={Constants.HR})
 
 	public PaginationOutput<Template> getAllTemplatesPaginated(
 			PaginationInput alltemplates) {

@@ -29,7 +29,6 @@ Login.prototype.handleShow = function() {
    if(success){
     var  token = data.sessionToken;
          setCookie('hredSessionToken', token, null);
-    console.log("************************");
     var name=data.employeeDetails.employeeName;
        var gender=data.employeeDetails.gender;
        var contactNo=data.employeeDetails.contactNo;

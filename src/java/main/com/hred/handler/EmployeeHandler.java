@@ -337,15 +337,6 @@ public class EmployeeHandler extends AbstractHandler {
 					ExceptionMessages.EMPLOYEE_EMERNUM_NOT_EMPTY);
 		}
 
-		 if (YOE == 0) {
-			 
-			 
-			 throw new EmployeeException(
-				 ExceptionCodes.EMPLOYEE_YOE_EMPTY,
-				 ExceptionMessages.EMPLOYEE_YOE_EMPTY);
-			 
-		 }
-		
 
 
 		if (rating == null || rating.isEmpty()) {
@@ -677,9 +668,7 @@ public class EmployeeHandler extends AbstractHandler {
 			throw new BusinessException(ExceptionCodes.EMAIL_CANNOT_BE_EMPTY,
 					ExceptionMessages.EMAIL_CANNOT_BE_EMPTY);
 		}
-		 if (yOE == 0) { throw new EmployeeException(
-				 ExceptionCodes.EMPLOYEE_YOE_EMPTY,
-				 ExceptionMessages.EMPLOYEE_YOE_EMPTY); }
+		 
 		
 	}
 
@@ -1017,6 +1006,8 @@ public class EmployeeHandler extends AbstractHandler {
 	}
       
 	
+	@AuthorizeEntity(roles={Constants.HR})
+	
 	public PaginationOutput<NotificationPaginationInput> getEmployeesPaginated(
 			NotificationPaginationInput employee) {
 
@@ -1071,6 +1062,7 @@ public class EmployeeHandler extends AbstractHandler {
 		
 	}
 
+	@AuthorizeEntity(roles={Constants.HR})
 	public PaginationOutput<Employee> getFilterEmployeesPaginated(
 			FilterEmployee employee) {
 		

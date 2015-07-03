@@ -2,6 +2,11 @@ package com.hred.common;
 
 import java.util.Random;
 
+/**
+ * @author Rahul Shelke
+ * 
+ */
+
 public class RandomPasswordGenerator {
 	
 	private static final String ALPHA_CAPS  = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";

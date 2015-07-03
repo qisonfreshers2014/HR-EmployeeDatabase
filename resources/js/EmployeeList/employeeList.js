@@ -208,7 +208,9 @@ employeeList.prototype.tableDisplay = function(content,status,desdata) {
 	
 	
 	
- $("#listemp").on("click",".viewindividual",function(event){
+	$('.viewindividual').live('click', function(event) {
+		
+		event.stopImmediatePropagation();
   var releaseId=event.target.id;     
   App.loadViewEmployee(releaseId);
  }.ctx(this));
@@ -312,7 +314,9 @@ if(isDecimal!=0){
 
 employeeList.prototype.searchOperation = function(data,desdata){
 	
-	 $("#listemp").on("click",".viewindividual",function(event){
+$('.viewindividual').live('click', function(event) {
+		
+		event.stopImmediatePropagation();
 		  var releaseId=event.target.id;     
 		  App.loadViewEmployee(releaseId);
 		 }.ctx(this));

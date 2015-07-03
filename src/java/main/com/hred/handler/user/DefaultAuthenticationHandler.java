@@ -35,7 +35,6 @@ import com.hred.service.descriptors.output.EmployeeDetails;
  * 
  */
 public class DefaultAuthenticationHandler implements AuthenticationHandler {
-
  @Override
  public AuthenticationOutput authenticate(AuthenticationInput input)
    throws ObjectNotFoundException, BusinessException,
@@ -71,8 +70,9 @@ public class DefaultAuthenticationHandler implements AuthenticationHandler {
   
  ////////////////////////////////////////////////////////////
   String encryptedPassword=Utils.encrypt(password.trim());
+  System.out.println(encryptedPassword);
  
-  boolean emailValidity = emailFromDB.equals(email);
+  boolean emailValidity = emailFromDB.equalsIgnoreCase(email);
   boolean passwordValidity = passwordFromDB.equals(encryptedPassword);
 
   if (!emailValidity) {
@@ -80,7 +80,7 @@ public class DefaultAuthenticationHandler implements AuthenticationHandler {
 
      ExceptionMessages.EMAIL_DOESNOT_EXIST);
   }
-  /* else if (!passwordValidity) {
+ /*  else if (!passwordValidity) {
     throw new BusinessException(ExceptionCodes.INVALID_PASSWORD,
  
       ExceptionMessages.INVALID_PASSWORD);

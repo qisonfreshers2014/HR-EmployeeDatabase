@@ -7,7 +7,7 @@
 empViewemployee.prototype.handleShow = function(employeeId) {
  $('.container').show();
  
- $('#emphidden').hide();
+ $('#salaryrow').hide();
  $('#backtoemplist').css("visibility","hidden");
 /* $('#Editdetails').css("visibility","hidden");
  $('#Editdesgn').css("visibility","hidden");
@@ -57,11 +57,51 @@ empViewemployee.prototype.empviewEmployee=function(employeeId){
     var bmonth =monthsArray[dobformat.getMonth()];
     var bdate = dobformat.getDate();
     
+    var dojformat = new Date(obj.dateOfJoining);
+    var dojyear = dojformat.getFullYear();
+    var dojmonth = monthsArray[dojformat.getMonth()];
+    var dojdate = dojformat.getDate();
+    
+    
     
     var actualDOBformat=new Date(obj.actualdateOfBirth);
     var actualDOByear=actualDOBformat.getFullYear();
     var actualDOBmonth=monthsArray[actualDOBformat.getMonth()];
     var actualDOBdate=actualDOBformat.getDate();
+    
+ // Calculating Current years of experience
+    var today=new Date();
+    var diff=Math.floor(today.getTime() - dojformat.getTime());
+    var day = 1000 * 60 * 60 * 24;
+    var days = Math.floor(diff/day);
+    var months = Math.floor(days/31);
+    var exp=obj.yearsofexperience;
+    var isDecimal=exp%1;
+    var parts=exp.toString().split('.');
+    
+    var afterdecimal=parseInt(parts[1]);
+    var beforedecimal=parseInt(parts[0]);
+    
+  if(isDecimal!=0){
+  	 months=months+afterdecimal;
+  	
+  	  years = Math.floor(months/12);
+  	
+  	  totalYearsOfExpMnths=months%12;
+  	 
+      totalYearsOfExp=years+beforedecimal;
+     
+  	 
+    }
+    else{ 
+  	  years = Math.floor(months/12);
+  	
+  	  totalYearsOfExpMnths=months%12;
+  	 
+  	  totalYearsOfExp=years+obj.yearsofexperience;
+  	
+    }
+  
     
      var hr=false;
     $('#Editempskills').click(function(){
@@ -90,6 +130,9 @@ empViewemployee.prototype.empviewEmployee=function(employeeId){
    $('#accountnum').val(obj.bankAccountNo);
    $('#university').val(obj.university);
    $('#hobbies').val(obj.hobbies);
+   $('#yearofexp').val(totalYearsOfExp+"."+totalYearsOfExpMnths);
+   $('#doj').val(dojdate+"-"+dojmonth+"-"+dojyear);
+   $('#designation').val(obj.designationName);
    
    for(i=0;i<skills.length;i++){
 		 var skillsObj=skills[i];

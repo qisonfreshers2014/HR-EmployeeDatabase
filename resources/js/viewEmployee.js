@@ -5,7 +5,7 @@
 }
 $('.container').show();
 ViewEmployee.prototype.handleShow = function(empid) {
-	 $('#emphidden').show();
+	 $('#salaryrow').show();
 	/*$('#changepwd').css("visibility","hidden");
 	 $('#Editempdetails').css("visibility","hidden");
 	 $('#Editempskills').css("visibility","hidden");*/
@@ -40,6 +40,7 @@ ViewEmployee.prototype.viewEmployeedetails=function(empid){
  var input= {"payload":{"employeeId":empid}};
 RequestManager.viewEmployeedatails(input, function(data, success) {
  if(success){
+	
  var obj=data;
  if(obj.deleted==true){
 	    

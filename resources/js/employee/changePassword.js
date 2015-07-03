@@ -101,7 +101,7 @@ changePassword.prototype.changePwd = function(employeeId) {
 		RequestManager.changePassword(input, function(data, success) {
 			if (success) {
 				alert("Password Successfully Changed");
-				App.loadempviewemployee(employeeId);
+				routie("myprofile");
 			} else {
 				alert(data.message)
 			}

@@ -12,6 +12,8 @@ FilterEmp.prototype.handleShow = function(empid) {
 	 RequestManager.getDesignationName(emptyinput, function(data, success){
 		               
 		 if(success){
+			 
+			       designationNames=data;
 			          arraylength=data.length;
 			           lastId=data[arraylength-1].id;
 			           newvalue=lastId+1;
@@ -39,7 +41,7 @@ FilterEmp.prototype.handleShow = function(empid) {
 		
 		
 	
-			this.FilterEmployee(pagno,empid);
+			this.FilterEmployee(pagno,empid,designationNames);
 		
 		
 	}.ctx(this));
@@ -68,7 +70,7 @@ FilterEmp.prototype.handleShow = function(empid) {
 
 
 
-FilterEmp.prototype.FilterEmployee = function(pagno,empid){
+FilterEmp.prototype.FilterEmployee = function(pagno,empid,designationNames){
 	
 	if($('#emptype').val()=="notselected" && $('#gender').val()==0 && $('#qualification1').val()=="" && $('#dojFrom').val()==""&& $('#dojTo').val()=="" &&
 			$('#filterdesignation').val()==0 && $('#year1').val()=="" && $('#year2').val()==""){
@@ -212,7 +214,7 @@ if($('#dojFrom').val()!="" && $('#dojTo').val()==""){
 				      	
 				  	  onPageClick: function(pageNumber) { 
 				  		  
-				  		self.FilterEmployee(pageNumber,empid);
+				  		self.FilterEmployee(pageNumber,empid,designationNames);
 				           
 				           
 				       }
@@ -235,6 +237,9 @@ if($('#dojFrom').val()!="" && $('#dojTo').val()==""){
 			    $('#displayData tbody').empty();
 	   
 	    }
+	    
+	    
+	   
 	   
 	    var monthsArray=new Array(12);
 		monthsArray[0]="Jan";
@@ -253,14 +258,62 @@ if($('#dojFrom').val()!="" && $('#dojTo').val()==""){
 	   var i;
 	   for(i = 0; i < employees.length; i++) {
         var item = employees[i];
+        
+        var desgId=item.currentDesignation;
+        
+        for(desg=0;desg<designationNames.length;desg++){
+        	desginationObj=designationNames[desg];
+        	if(desgId==desginationObj.id){
+        		  desName = desginationObj.name;
+        		    break;
+        		
+        	}
+        	
+        }
+        
+        var dojformat = new Date(item.dateOfJoining);
+        // Calculating Current years of experience
+	    var today=new Date();
+	    var diff=Math.floor(today.getTime() - dojformat.getTime());
+	    var day = 1000 * 60 * 60 * 24;
+	    var days = Math.floor(diff/day);
+	    var months = Math.floor(days/31);
+	    var expAtQisonInYears=Math.floor(months/12);
+	    var expAtQisonInMonths=months%12;
+	    var exp=item.yearsofexperience;
+	    var isDecimal=exp%1;
+	    var parts=exp.toString().split('.');
+	    
+	    var afterdecimal=parseInt(parts[1]);
+	    var beforedecimal=parseInt(parts[0]);
+	    
+	  if(isDecimal!=0){
+	  	 months=months+afterdecimal;
+	  	 
+	  	  years = Math.floor(months/12);
+	  	
+	  	  totalYearsOfExpMnths=months%12;
+	  	 
+	      totalYearsOfExp=years+beforedecimal;
+	     
+	  	 
+	    }
+	    else{ 
+	  	  years = Math.floor(months/12);
+	  	
+	  	  totalYearsOfExpMnths=months%12;
+	  	 
+	  	  totalYearsOfExp=years+item.yearsofexperience;
+	  	
+	    }
 				       
 	 					 
 	 
 $('#displayData').append("<tr class='displaytr'><td class='displaytd'>"+item.employeeId+"</td><td class='displaytd'>"+item.employeeName+"</td><td class='displaytd'>"+item.gender+"</td><td class='displaytd'>"
 +new Date(item.dateOfBirth).getDate()+"-"+monthsArray[new Date(item.dateOfBirth).getMonth()]+"-"+new Date(item.dateOfBirth).getFullYear()+"</td><td class='displaytd'>"
 +new Date(item.dateOfJoining).getDate()+"-"+monthsArray[new Date(item.dateOfJoining).getMonth()]+"-"+new Date(item.dateOfJoining).getFullYear()+"</td><td class='displaytd'>"+item.email+"</td><td>"+item.fathersName+"</td><td class='displaytd'>"
-+item.currentDesignation+"</td><td class='displaytd'>"+item.highestQualification+"</td><td class='displaytd'>"+item.contactNo+"</td>" +
-		"<td class='displaytd'>"+item.yearsofexperience+"</td><td class='displaytd'><input type='button' value='View' id='"+item.id+"' class='dynamicView  btn-success'></td></tr>");
++desName+"</td><td class='displaytd'>"+item.highestQualification+"</td><td class='displaytd'>"+item.contactNo+"</td>" +
+		"<td class='displaytd'>"+totalYearsOfExp+'.'+totalYearsOfExpMnths+"</td><td class='displaytd'><input type='button' value='View' id='"+item.id+"' class='dynamicView  btn-success'></td></tr>");
 	
       
         			
@@ -271,6 +324,55 @@ var content = '';
 content += '<tr class="displaytr"><th class="displayth">Employee Id</th><th class="displayth">Employee Name</th><th class="displayth">Gender</th><th class="displayth">DOB</th><th class="displayth">DOJ</th><th class="displayth">Email</th><th class="displayth">Fathers Name</th><th class="displayth">Designation</th><th class="displayth">Highest Qualification</th><th class="displayth">Contact No</th><th class="displayth">Years Of Experience</th><th class="displayth">View Details</th></tr>';
 for (var i = 0; i < employees.length; i++) {
 			     var item = employees[i];
+			     
+			     
+			     var desgId=item.currentDesignation;
+			        
+			        for(desg=0;desg<designationNames.length;desg++){
+			        	desginationObj=designationNames[desg];
+			        	if(desgId==desginationObj.id){
+			        		  desName = desginationObj.name;
+			        		    break;
+			        		
+			        	}
+			        	
+			        }
+			     var dojformat = new Date(item.dateOfJoining);
+			        // Calculating Current years of experience
+				    var today=new Date();
+				    var diff=Math.floor(today.getTime() - dojformat.getTime());
+				    var day = 1000 * 60 * 60 * 24;
+				    var days = Math.floor(diff/day);
+				    var months = Math.floor(days/31);
+				    var expAtQisonInYears=Math.floor(months/12);
+				    var expAtQisonInMonths=months%12;
+				    var exp=item.yearsofexperience;
+				    var isDecimal=exp%1;
+				    var parts=exp.toString().split('.');
+				    
+				    var afterdecimal=parseInt(parts[1]);
+				    var beforedecimal=parseInt(parts[0]);
+				    
+				  if(isDecimal!=0){
+				  	 months=months+afterdecimal;
+				  	 
+				  	  years = Math.floor(months/12);
+				  	
+				  	  totalYearsOfExpMnths=months%12;
+				  	 
+				      totalYearsOfExp=years+beforedecimal;
+				     
+				  	 
+				    }
+				    else{ 
+				  	  years = Math.floor(months/12);
+				  	
+				  	  totalYearsOfExpMnths=months%12;
+				  	 
+				  	  totalYearsOfExp=years+item.yearsofexperience;
+				  	
+				    }
+							       
 			     content += '<tr  class="displaytr">';
 	             content += '<td class="displaytd">'  + item.employeeId+ '</td>';
 	             content += '<td class="displaytd">' + item.employeeName + '</td>';
@@ -279,10 +381,10 @@ content += '<td class="displaytd">' +new Date(item.dateOfBirth).getDate()+"-"+mo
 content += '<td class="displaytd">' +new Date(item.dateOfJoining).getDate()+"-"+monthsArray[new Date(item.dateOfJoining).getMonth()] +"-"+new Date(item.dateOfJoining).getFullYear()+'</td>';
 	              content += '<td class="displaytd">' +item.email +'</td>';
 	              content += '<td class="displaytd">' +item.fathersName +  '</td>';
-	              content += '<td class="displaytd">' +item.currentDesignation +'</td>';
+	              content += '<td class="displaytd">' +desName +'</td>';
 	              content += '<td class="displaytd">' +item.highestQualification +'</td>';
 	              content += '<td class="displaytd">' +item.contactNo +'</td>';
-	              content += '<td class="displaytd">' +item.yearsofexperience +'</td>';	            
+	              content += '<td class="displaytd">' +totalYearsOfExp+"."+totalYearsOfExpMnths+'</td>';	            
 	              content += '<td class="displaytd">' +"<input type='button' value='View' id='"+item.employeeId+"' class='dynamicView  btn-success'> "+'</td>';
 	              content += '</tr>';
 	              $('#displayData').html(content);

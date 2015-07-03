@@ -109,7 +109,7 @@ AddEmployee.prototype.handleShow = function() {
 		changeYear : true,
 		showAnim : 'drop',
 		minDate : new Date(2010, 10, 30),
-		maxDate : new Date(2015, 5, 31)
+		maxDate : new Date()
 	})
 
 	$('#filename').one('click', UploadClickHandler.ctx(this));
@@ -625,10 +625,6 @@ if (relation != "") {
 	} else if (!(rating > 0 && rating <= 10)) {
 		$(ratingerr).text("Please enter between 1 to 10 ");
 		$(ratingerr).css("color", "red");
-	} else if (!(relation.match(char) || relation == isNaN)) {
-		
-		$(relationerr).text("enter characters only");
-		$(relationerr).css("color", "red");
 	} else if (salary == isNaN || !(salary.match(salry))) {
 		
 		$(salerr).text("Please enter numbers only eg:90.00");
@@ -677,8 +673,12 @@ if (relation != "") {
 	// sending data to database in the form of json
 	if (!flag) {
 		// $('.error').css('visibility', 'hidden');
-
+		
+		document.getElementById('addemployeediv').style.display="hidden";
+		document.getElementById('light').style.display='block';
+		document.getElementById('fade').style.display='block';
 		var input = {
+				
 			"payload" : {
 				"employeeId" : eid,
 				"employeeName" : name,
@@ -740,6 +740,10 @@ if (relation != "") {
 				// $('success').val("Successfully Added")
 				alert("Employee ID: " + $("#eid").val()
 						+ " Details Successfully Added to Employee List");
+				
+				document.getElementById('light').style.display='hidden';
+				document.getElementById('fade').style.display='hidden';
+				document.getElementById('addemployeediv').style.display="block";
 				$("#eid").val("");
 				$("#name").val("");
 				$("#qual").val("");
@@ -778,7 +782,7 @@ if (relation != "") {
 				alert(data.message);
 
 			} else {
-				alert("Failed to add");
+				//alert("Failed to add");
 			}
 		}.ctx(this));
 	}

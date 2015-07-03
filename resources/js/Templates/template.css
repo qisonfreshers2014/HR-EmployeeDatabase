@@ -76,12 +76,13 @@
    top: 10px;
   left: 32px;;
 }
-#backButton{
- position: relative;
- left:285px;
+.backViewTemp{
+ /* position: relative;
+ left:68px;
+ top:70px; */
   /* top: -294px; */
- /*  margin-left: 6%; */
-  margin-top:4%;
+  margin-left:9%;
+    margin-top: 3%;
 }
 #descTemp {
     position: relative;
@@ -91,14 +92,18 @@
     margin-left:4.5%;
 }
 #contentTemplate {
+       background-color: #ffffff;
     border: 1px solid lightgray;
+    margin-left: 9%;
     padding: 5px;
     width: 50%;
 }
-#fieldsaddTemplate{
+#fieldsViewTemplate{
   margin-left: 5%;
     position: relative;
-    top: 24px;
+    top: 49px;
+    background-color:lightgray;
+    padding:10px;
 }
 .templateContent1{
 	font-weight:normal;
@@ -109,10 +114,10 @@
 	
 	 background-color: #f9f9f9;
     border-bottom: 1px solid #d4d4d4;
-    color: #337ab7;
+    color: #6abc42;
     float: left;
-    font-family: Helvetica,arial,serif;
-    font-size: 24px;
+    font-family: icon;
+    font-size: 20px;
     font-weight: 600;
     margin-top: 0;
     padding: 20px 0 20px 20px;

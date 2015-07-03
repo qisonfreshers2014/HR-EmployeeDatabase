@@ -90,7 +90,6 @@ public class EmployeeService extends BaseService {
 			BusinessException, EncryptionException {
 
 		long userId = ServiceRequestContextHolder.getContext().getUserSessionToken().getUserId();
-		System.out.println("**********************"+userId);
 
 		 Employee employees = (Employee) EmployeeHandler
 				    .getInstance().getLoggedInUser(userId);

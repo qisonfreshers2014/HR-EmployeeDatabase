@@ -48,6 +48,7 @@ import com.hred.service.common.WebserviceSecurityObject;
  */
 @Aspect
 public class AuthenticationAspect {
+	
 	Logger logger = Logger.getLogger("infodumps");
 	org.apache.log4j.Logger loggerL;
 
@@ -56,6 +57,7 @@ public class AuthenticationAspect {
 			+ " && !cflowbelow(execution(* com.hred.service.*.*(..)))")
 	public Object doAccessCheck(ProceedingJoinPoint thisJoinPoint) {
 		// Object key = null;
+		
 		Transaction tx = null;
 		try {
 			

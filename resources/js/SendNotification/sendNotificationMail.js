@@ -27,7 +27,6 @@ sendNotificationMail.prototype.handleShow = function(event, email, employeeName)
 			"employeeEmail":email
 		}
 	};
-	console.log(email);
 
 	RequestManager.getContentForMail(inputForContent, function(data, success) {
 		if (success) {
@@ -35,16 +34,13 @@ sendNotificationMail.prototype.handleShow = function(event, email, employeeName)
 		    
 			var content=data.content;
 			$('#contentfieldNotification').ckeditor();
-			$('#contentfieldNotification').val(content);
+			$('#contentfieldNotification').html(content);
 			
 		}
 
 	});
-
-
-
        //sending the payload to the server
-	$("#SubmitNotification").click(function() {
+	$("#SubmitNotification").click(function() {  
 		
 		
 		document.getElementById('SendMailNotification').style.display="hidden";
@@ -57,7 +53,7 @@ sendNotificationMail.prototype.handleShow = function(event, email, employeeName)
 		
 		var modifiedcontent =$('#contentfieldNotification').val();
 		
-		alert(modifiedcontent);
+		console.log(modifiedcontent);
 		
 		var input = {
 			"payload" : {
