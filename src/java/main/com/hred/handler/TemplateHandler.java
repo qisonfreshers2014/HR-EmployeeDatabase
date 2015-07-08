@@ -230,8 +230,8 @@ public List<Template> getTemplatesAOP() {
 	 finalContent +="Dear Qisonians,<br/><br/> We take Immense pleasure in welcoming <b>"+ sendNotification.getEmployeeName()+"</b> who has Joined QISON TEAM <br/><br/> ";
 	finalContent +=""+gender+" is working as <b>"+currentDesignation+"</b><br/><br/>";
 			 
- finalContent += "<b>"+sendNotification.getEmployeeName()+"</b> as "+gender+" likes to be called, "+gender+" has pursued <b>"+ sendNotification.getHighestQualification()+"</b> from <b>"+sendNotification.getUniversity()+"</b>.<br/><br/>"+gender+" takes keen interest in <b>"+sendNotification.getHobbies()+"</b><br/><br/>";
-			 
+ finalContent += "<b>"+sendNotification.getEmployeeName()+"</b> as "+gender+" likes to be called, "+gender+" has pursued <b>"+ sendNotification.getHighestQualification()+"</b> from <b>"+sendNotification.getUniversity()+"</b>.<br/><br/>"/*+gender+" takes keen interest in <b>"+sendNotification.getHobbies()+"</b><br/><br/>" */;
+			
  finalContent += ""+gender+" can be reached on <b>"+sendNotification.getEmail()+"</b><br/><br/>";
 			 
  finalContent += ""+genderVariable+" Skype ID is<b>"+sendNotification.getSkype()+"</b><br/><br/>";

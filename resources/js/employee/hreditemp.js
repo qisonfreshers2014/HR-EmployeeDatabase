@@ -580,7 +580,7 @@ HrEditEmployee.prototype.employeeTypeValidate = function() {
 
 HrEditEmployee.prototype.deleteEmployee = function(empid) {
 	
-	var text = confirm("Are you sure you want to delete?");
+	var text = confirm("Are you sure you want to delete this employee?");
 	if (text == true) {
 		
 	

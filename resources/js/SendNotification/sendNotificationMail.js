@@ -14,10 +14,10 @@ sendNotificationMail.prototype.handleShow = function(event, email, employeeName)
 	$("#backtonotifications").click(function() {
 		
 		routie("notifications");
-		
+	
 	}.ctx(this));
 	
-	$('#contentfieldNotification').ckeditor();
+	//$('#contentfieldNotification').ckeditor();
 	var sendbutton = $('#SubmitNotification');
 
 	//Requesting the Template Content from the Template table in HRMS database
@@ -34,7 +34,7 @@ sendNotificationMail.prototype.handleShow = function(event, email, employeeName)
 		    
 			var content=data.content;
 			$('#contentfieldNotification').ckeditor();
-			$('#contentfieldNotification').html(content);
+			$('#contentfieldNotification').val(content);
 			
 		}
 

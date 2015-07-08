@@ -82,10 +82,16 @@ h3,.headinghome{
     -moz-border-radius: 5px 5px 5px 5px;
     -webkit-border-radius: 5px 5px 5px 5px;
     -khtml-border-radius: 5px 5px 5px 5px;    
-    float: left;
-    margin-left: 9%;
+   /*  float: left; */
+    margin-left: 6%;
     padding: 5px;
 }
+/* .images img{
+	border:0;
+}
+img{
+	border:none;
+} */
 #parahgraphs{
 	padding:85px 0px 0px 0px;
 }

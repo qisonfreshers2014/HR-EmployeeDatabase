@@ -445,6 +445,24 @@ public class EmployeeService extends BaseService {
 			 @ServiceStatus(value = "complete")
 			 @Consumes(MediaType.APPLICATION_JSON)
 			 @Produces(MediaType.APPLICATION_JSON)
+			 @Path("/getSearchedEmployeesListPaginated")
+			 @UnSecure
+			 public String getSearchedEmployeesPaginated(@Context HttpHeaders headers,
+			   @Context UriInfo uriInfo, WebserviceRequest request)
+			   throws ObjectNotFoundException, BusinessException,
+			   EncryptionException {
+				 EmployeeSearchInputDescriptor employee = (EmployeeSearchInputDescriptor) JsonUtil.getObject(
+			    request.getPayload(), EmployeeSearchInputDescriptor.class);
+			  PaginationOutput<Employee> employees = EmployeeHandler.getInstance().getSearchedEmployeesListPaginated(employee);
+			  return JsonUtil.getJsonBasedOnDescriptor(employees,
+			     EmployeeListPaginationOutputDescriptor.class);
+			  
+			 }
+			 @POST
+			 @RestService(input = String.class, output = String.class)
+			 @ServiceStatus(value = "complete")
+			 @Consumes(MediaType.APPLICATION_JSON)
+			 @Produces(MediaType.APPLICATION_JSON)
 			 @Path("/getFilterEmployeesListPaginated")
 			 @UnSecure
 			 public String getFilterEmployeesPaginated(@Context HttpHeaders headers,

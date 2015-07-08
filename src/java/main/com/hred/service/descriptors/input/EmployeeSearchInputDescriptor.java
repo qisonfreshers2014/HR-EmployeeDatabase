@@ -3,12 +3,14 @@
  */
 package com.hred.service.descriptors.input;
 
+import com.hred.pagination.PaginationInput;
+
 
 /**
  * @author saisudha
  *
  */
-public class EmployeeSearchInputDescriptor {
+public class EmployeeSearchInputDescriptor extends PaginationInput{
 private String searchKey;
 	
 	public String getSearchKey() {
@@ -28,6 +30,12 @@ private String searchKey;
 		super();
 		
 	}
+	
+	public EmployeeSearchInputDescriptor(int pageNo, int pageSize) {
+		super(pageNo, pageSize);
+		// TODO Auto-generated constructor stub
+	}
+	
 	
 	
 	

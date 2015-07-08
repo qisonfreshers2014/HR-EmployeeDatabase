@@ -233,6 +233,9 @@ RequestManager.prototype.getSearchEmp=function(data,callback){
  RequestManager.prototype.getPaginatedFilterEmployees=function(data,callback){
 	 this.sendToServer('employee/getFilterEmployeesListPaginated', data, callback);
 } 
+ RequestManager.prototype.getPaginatedSearchedEmployees=function(data,callback){
+	 this.sendToServer('employee/getSearchedEmployeesListPaginated', data, callback);
+} 
  
 
 

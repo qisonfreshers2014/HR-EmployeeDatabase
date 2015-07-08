@@ -82,34 +82,11 @@ employeeList.prototype.handleShow = function(data) {
 		  
 		  alert("Your search string contains illegal characters");
 	 
-	 }else{
+	 }else{  
+		 
+		 var pagenumber=1;
   
-		 	var contentinput = {"payload" : {"searchKey":$('#searchelement').val()}   };
-  
-		 		RequestManager.getSearchEmp(contentinput, function(data, success) {
-		 		if (success) {
-		 				if(data.length == 0){
-     
-		 						alert("No record found");
-		 						var content = '';
-		 						 tabledata += '<tr class="theader"><th>EID</th><th>Employee Name</th><th> Birth Day </th><th> Actual Birth Day </th><th> Joining Date </th><th>Contact No</th><th>Emergency Contact No</th><th>Email ID</th><th>Current Designation</th><th>Years of Experience at the time of joining</th><th>Experience at Qison</th><th>Current Years of Experience</th><th>PAN</th>';
-		 						$('#employeelist').append('<table><tbody id="emplisttable"></tbody></table>');
-		 						$('#employeelist').html(content);
-		 						$('#backtoemployee').css("visibility","visible");
-		 						 $('.selector').css("visibility","hidden");
-    
-		 				}else{
-		 						
-		 					RequestManager.getDesignationName(contentinput,function(desdata, success) {
-		 					    if (success) {
-		 					    	this.searchOperation(data,desdata);
-		 					    			 					    	
-		 					    }	 
-		 					   }.ctx(this));
-		 				}
-		 		}
-   
-		 		}.ctx(this));
+		this.searchPaginationfunction(pagenumber);
   
 	 	}
   
@@ -203,7 +180,72 @@ monthsArray[11]="Dec";
  }.ctx(this));
  
  }
+ employeeList.prototype.searchPaginationfunction=function(pagenumber){
+	 	var contentinput = {"payload" : {"pageNo":pagenumber,"pageSize":10,"searchKey":$('#searchelement').val()}};
+	 	  
+ 		RequestManager.getPaginatedSearchedEmployees(contentinput, function(output, success) {
+ 		if (success) {
+ 				if(output.count == 0){
 
+ 						alert("No record found");
+ 						var content = '';
+ 						 tabledata += '<tr class="theader"><th>EID</th><th>Employee Name</th><th> Birth Day </th><th> Actual Birth Day </th><th> Joining Date </th><th>Contact No</th><th>Emergency Contact No</th><th>Email ID</th><th>Current Designation</th><th>Years of Experience at the time of joining</th><th>Experience at Qison</th><th>Current Years of Experience</th><th>PAN</th>';
+ 						$('#employeelist').append('<table><tbody id="emplisttable"></tbody></table>');
+ 						$('#employeelist').html(content);
+ 						$('#backtoemployee').css("visibility","visible");
+ 						 $('.selector').css("visibility","hidden");
+
+ 				}else{ console.log("coming to else");
+ 					   console.log(output.count);
+ 					
+ 					var self=this;
+ 			    	
+ 				
+ 						  
+ 						$('.selector').pagination(
+ 						  		{
+ 						      items:output.count,
+ 						      itemsOnPage:10,
+ 						      currentPage:output.pageNo,
+ 						      cssStyle: 'light-theme',
+ 						      	
+ 						  	  onPageClick: function(pageNumber) { 
+ 						  		  
+ 						  		self.searchPaginationfunction(pageNumber);
+ 						           
+ 						           
+ 						       }
+ 						  });
+ 						
+ 						$(function(){
+ 						 
+ 						  var checkFragment = function() {
+ 						    
+ 						      var hash = window.location.hash;
+ 						 
+ 						      hash = hash.match(/^#page-(\d+)$/);
+ 						      if(hash)
+ 						        
+ 						          $("#pagination").pagination("selectPage", parseInt(hash[1]));
+ 						  };
+ 						 
+ 						  $(window).bind("popstate", checkFragment);
+ 						  
+ 						  checkFragment();
+ 						  });
+ 			    	 
+ 					RequestManager.getDesignationName(contentinput,function(desdata, success) {
+ 					    if (success) {
+ 					    	this.searchOperation(output,desdata);
+ 					    			 					    	
+ 					    }	 
+ 					   }.ctx(this));
+ 				}
+ 		}
+
+ 		}.ctx(this));
+	 
+ }
 employeeList.prototype.tableDisplay = function(content,status,desdata) {
 	
 	
@@ -312,7 +354,7 @@ if(isDecimal!=0){
  $('#emp').unbind();
 }
 
-employeeList.prototype.searchOperation = function(data,desdata){
+employeeList.prototype.searchOperation = function(output,desdata){
 	
 $('.viewindividual').live('click', function(event) {
 		
@@ -321,7 +363,8 @@ $('.viewindividual').live('click', function(event) {
 		  App.loadViewEmployee(releaseId);
 		 }.ctx(this));
 	 
-	
+	var data=output.employees;
+	 $('#employeelist').empty();
  
  var content = '';
  content += '<tr class="theader"><th>EID</th><th>Employee Name</th><th> Birth Day </th><th> Actual Birth Day </th><th> Joining Date </th><th>Contact No</th><th>Emergency Contact No</th><th>Email ID</th><th>Current Designation</th><th>Experience at joining</th><th>Experience at Qison</th><th>Current Years of Experience</th><th>PAN</th>';
@@ -410,7 +453,7 @@ $('.viewindividual').live('click', function(event) {
  $('#employeelist').html(content);
  
  $('#backtoemployee').css("visibility","visible");
- $('.selector').css("visibility","hidden");
+ //$('.selector').css("visibility","hidden");
   
 }
 

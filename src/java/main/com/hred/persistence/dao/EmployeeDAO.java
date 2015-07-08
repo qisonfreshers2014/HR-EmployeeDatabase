@@ -74,6 +74,9 @@ public Paginator<Employee> getEmployeesListPaginated(EmployeeListPaginationInput
 public Paginator<Employee> getFilterEmployeesListPaginated(
 		FilterEmployee employee);
 
+public Paginator<Employee> getSearchedEmployeesListPaginated(
+		EmployeeSearchInputDescriptor employee);
+
 	
 	
 }

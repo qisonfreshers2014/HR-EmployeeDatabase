@@ -232,7 +232,6 @@ public class EmployeeHandler extends AbstractHandler {
 		String peraddr = employee.getPermanentAddress();
 		String employeeType=employee.getEmployeeType();
 		String university=employee.getUniversity();
-		System.out.println(employeeType);
 		validateEmp(name, id, email, password, descid, qualification, salary,
 				blood, num, date,actualDOB, fatherName, gender, contactNum, skypeid, doj,
 				skill, rating, YOE, emercontnum, emercontname, currentaddr,
@@ -300,6 +299,7 @@ public class EmployeeHandler extends AbstractHandler {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		
 		return empSaved;
 
@@ -1044,23 +1044,7 @@ public class EmployeeHandler extends AbstractHandler {
 			}
 	
 	
-	// This method for generating Random password
 	
-	public char[] PasswordGenereation(){
-		
-		        int noOfCAPSAlpha = 1;
-		        int noOfDigits = 1;
-		        int noOfSplChars = 1;
-		        int minLen = 8;
-		        int maxLen = 12;
-		        
-		        char[] pswd=RandomPasswordGenerator.generatePswd(minLen, maxLen,
-	                    noOfCAPSAlpha, noOfDigits, noOfSplChars);
-				return pswd;
-	
-		
-		
-	}
 
 	@AuthorizeEntity(roles={Constants.HR})
 	public PaginationOutput<Employee> getFilterEmployeesPaginated(
@@ -1073,6 +1057,33 @@ public class EmployeeHandler extends AbstractHandler {
 		 return empPaginationOutput;
 		
 	}
+
+	public PaginationOutput<Employee> getSearchedEmployeesListPaginated(
+			EmployeeSearchInputDescriptor employee) {
+		 Paginator<Employee> paginator = new Paginator<>();
+		 paginator = DAOFactory.getInstance().getEmployeeDAO().getSearchedEmployeesListPaginated(employee);
+		List li= paginator.getList();
+		 PaginationOutput<Employee> empPaginationOutput = new PaginationOutput<>(paginator, employee.getPageNo(), employee.getPageSize());
+		 return empPaginationOutput;
+	}
+	
+	// This method for generating Random password
+	
+		public char[] PasswordGenereation(){
+			
+			        int noOfCAPSAlpha = 1;
+			        int noOfDigits = 1;
+			        int noOfSplChars = 1;
+			        int minLen = 8;
+			        int maxLen = 12;
+			        
+			        char[] pswd=RandomPasswordGenerator.generatePswd(minLen, maxLen,
+		                    noOfCAPSAlpha, noOfDigits, noOfSplChars);
+					return pswd;
+		
+			
+			
+		}
 	}
 
 

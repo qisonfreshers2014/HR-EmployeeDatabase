@@ -160,7 +160,9 @@ public class BaseDAOImpl implements BaseDAO{
 	@Override
     public Long getRecordCount(Criteria countCriteria) {
         countCriteria.setProjection(Projections.rowCount());
-        return (Long) countCriteria.uniqueResult();
+        long total = (Long) countCriteria.uniqueResult();
+        countCriteria.setProjection(null);
+        return total;
     }
   
   

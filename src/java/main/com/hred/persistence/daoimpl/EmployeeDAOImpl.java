@@ -18,6 +18,7 @@ import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import com.hred.exception.BusinessException;
@@ -859,9 +860,7 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 	       tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 	      }
 	      Criteria createCriteria = session.createCriteria(Employee.class);
-	      /*String hql="from Employee where id="+id+"";  
-	      org.hibernate.Query query = session.createQuery(hql);
-	       list  = query.list();*/
+	  
 	      createCriteria.add(Restrictions.eq("employeeId", EmployeeId));
 	      list = createCriteria.list();
 	      if (list.size() == 0) {
@@ -975,12 +974,73 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 	  List<Employee> consultantList=criteria.list();
 	  
 	  Criteria countCriteria=createCustomCriteria(Employee.class); 
-	  System.out.println(countCriteria);
 	  Long totalCount = getRecordCount(countCriteria);
 
 	  Paginator<Employee> employeePaginator = new Paginator<>(consultantList, totalCount);
 	  return employeePaginator;
 	 }
+	
+	@Override
+	public Paginator<Employee> getSearchedEmployeesListPaginated(
+			EmployeeSearchInputDescriptor employee) {
+		
+		long totalCount = 0;
+		 Paginator<Employee> employeePaginator=null;
+		 List<Employee> consultantList=null;
+		 int pageNo = employee.getPageNo();
+		  int pageSize = employee.getPageSize();
+		  int skipCount = (pageNo - 1) * pageSize; 
+		  Criteria criteria=createCustomCriteria(Employee.class);
+		   
+		   //session.createQuery("from EMPLOYEE where str(employee_id) like :employeeId").setString("employeeId", "%"+employee.getSearchKey()+"%");
+		   System.out.println(employee.getSearchKey());
+		   if(employee.getSearchKey().matches("[0-9]*")){
+		    
+		    double emp = Double.parseDouble(employee.getSearchKey());
+	        int emp1=(int) emp;
+		    Criterion id = Restrictions.eq("employeeId", emp1);
+		    Criterion years = Restrictions.eq("yearsofexperience", emp);
+		    Criterion active = Restrictions.eq("isDeleted",Boolean.FALSE);
+		    Criterion search = Restrictions.and(Restrictions.or(id,years), active);
+		    criteria.add(search);
+			totalCount = getRecordCount(criteria);
+		    criteria.setFirstResult(skipCount).setMaxResults(pageSize);
+		    
+		    consultantList=criteria.list();
+		    
+		   }else{
+		   
+		   Criterion name = Restrictions.ilike("employeeName", employee.getSearchKey(),MatchMode.ANYWHERE);
+		   Criterion email = Restrictions.ilike("email", employee.getSearchKey(), MatchMode.ANYWHERE);
+		   //Criterion id = Restrictions.eq("employeeId", empid);
+		   Criterion active = Restrictions.eq("isDeleted",Boolean.FALSE);
+		   Criterion search = Restrictions.and(Restrictions.or(name,email), active);
+		   
+		  
+		   /*Disjunction disjunction = Restrictions.disjunction();
+		   Conjunction conjunction = Restrictions.conjunction();
+		   conjunction.add(active);
+		   
+		   disjunction.add(name);
+		   disjunction.add(email);
+		   
+		   disjunction.add(conjunction);*/
+		   
+		   criteria.add(search);
+			totalCount = getRecordCount(criteria);
+		   criteria.setFirstResult(skipCount).setMaxResults(pageSize);
+		 consultantList=criteria.list();
+		   
+		 
+	}         
+		   
+
+		    
+
+			  employeePaginator = new Paginator<>(consultantList, totalCount);
+			  
+		   return employeePaginator;
+	}
 
 	@Override
 	public Paginator<Employee> getFilterEmployeesListPaginated(
@@ -1035,14 +1095,12 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 			    query = query + " and (years_of_experience + timestampdiff(MONTH,DOJ, sysdate())/12.0)<="+filter.getTo();
 			   }
 			 
-			      System.out.println(query);
 			   
 			   Query hql1=session.createQuery(query);
 			   
 			  Query count=session.createQuery("select count(*)"+query);
 			  
 			 countfilter = (Long)count.uniqueResult();
-			  System.out.println("*********************countfilter"+countfilter);
 			   hql1.setFirstResult(skipCount);
 			   hql1.setMaxResults(pageSize);
 			   
@@ -1079,7 +1137,6 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 			   if(filter.getTo() !=null){
 			    query1 = query1 + " and (years_of_experience + timestampdiff(MONTH,DOJ, sysdate())/12.0)<="+filter.getTo();
 			   }
-			   System.out.println("Query :\n"+ query1);
 			   
 			   Query hql1=session.createQuery(query1);
 			   Query count=session.createQuery("select count(*)"+query1);
@@ -1137,4 +1194,6 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 	 }
 */
 }
+
+	
 }

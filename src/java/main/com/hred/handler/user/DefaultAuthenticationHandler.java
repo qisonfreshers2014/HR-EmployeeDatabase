@@ -80,13 +80,13 @@ public class DefaultAuthenticationHandler implements AuthenticationHandler {
 
      ExceptionMessages.EMAIL_DOESNOT_EXIST);
   }
- /*  else if (!passwordValidity) {
+/*   else if (!passwordValidity) {
     throw new BusinessException(ExceptionCodes.INVALID_PASSWORD,
  
       ExceptionMessages.INVALID_PASSWORD);
    }
-*/
 
+*/
 
   authStatus = User.AUTH_STATUS_EXISTING;
 
