@@ -63,8 +63,17 @@
 }
 
 #imagesinhome {
-	margin: 20px 0px;
+	margin: 20px 0px 20px 20%;
 }
+.galleria
+    {
+     width: 700px; 
+     height: 400px;
+      background: #ffffff;
+     
+     }
+ .galleria-errors { display: none !important; }
+
 
 #fixedheader .topHeader {
 	box-shadow: none;

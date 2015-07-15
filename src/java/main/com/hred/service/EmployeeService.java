@@ -1,6 +1,7 @@
 package com.hred.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -20,6 +21,7 @@ import com.hred.handler.EmployeeHandler;
 import com.hred.handler.user.AuthenticationHandlerFactory;
 import com.hred.model.DesignationHistory;
 import com.hred.model.Employee;
+import com.hred.model.File;
 import com.hred.model.FilterEmployee;
 import com.hred.model.user.AuthenticationInput;
 import com.hred.model.user.AuthenticationOutput;
@@ -33,6 +35,7 @@ import com.hred.service.common.ServiceRequestContextHolder;
 import com.hred.service.common.WebserviceRequest;
 import com.hred.service.descriptors.input.ChangePassword;
 import com.hred.service.descriptors.input.EmployeeSearchInputDescriptor;
+import com.hred.service.descriptors.input.ProfilePics;
 import com.hred.service.descriptors.output.DisplayNotificationHome;
 import com.hred.service.descriptors.output.EmployeeListPaginationOutputDescriptor;
 import com.hred.service.descriptors.output.NotificationHomeFilterInputDiscriptor;
@@ -78,6 +81,8 @@ public class EmployeeService extends BaseService {
 				AuthenticationOutput.class);
 	}
 	
+	//Gets the loggedin user details.
+	
 	@POST
 	@RestService(input = String.class, output = String.class)
 	@ServiceStatus(value = "complete")
@@ -95,6 +100,8 @@ public class EmployeeService extends BaseService {
 				    .getInstance().getLoggedInUser(userId);
 		 return JsonUtil.getJsonBasedOnDescriptor(employees, Employee.class);
 	}
+	
+	// To Check weather the user is loggedin or not.
 	
 	@POST
 	@RestService(input = String.class, output = String.class)
@@ -365,6 +372,23 @@ public class EmployeeService extends BaseService {
 		EmployeeHandler
 		.getInstance().changePassword(changePasswordEmployee);
 		return JsonUtil.getJsonBasedOnDescriptor(changePasswordEmployee, ChangePassword.class);
+	
+	}
+	
+	//Gets all the Profile Pics of employees.
+	@POST
+	@RestService(input = String.class, output = String.class)
+	@ServiceStatus(value = "complete")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/getProfilePics")
+	
+	public String getProfilePics(@Context HttpHeaders headers,
+			@Context UriInfo uriInfo, WebserviceRequest request) throws EncryptionException, BusinessException {
+
+		ProfilePics profilePics = (ProfilePics) JsonUtil.getObject(request.getPayload(),ProfilePics.class);
+		List<String> profilefilePaths=EmployeeHandler.getInstance().getProfilePics();
+		return JsonUtil.getJsonBasedOnDescriptor(profilefilePaths, ProfilePics.class);
 	
 	}
 	

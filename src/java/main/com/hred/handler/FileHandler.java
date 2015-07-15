@@ -63,6 +63,7 @@ public class FileHandler extends AbstractHandler {
     public Map<Long, File> getFiles(Long... ids){
         Map<Long, File> fileMap = new HashMap<Long, File>();
         if(null!=ids && ids.length>0){
+        
         fileMap =getFiles(Arrays.asList(ids));
         }
         return fileMap;

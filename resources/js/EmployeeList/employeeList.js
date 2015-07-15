@@ -195,8 +195,7 @@ monthsArray[11]="Dec";
  						$('#backtoemployee').css("visibility","visible");
  						 $('.selector').css("visibility","hidden");
 
- 				}else{ console.log("coming to else");
- 					   console.log(output.count);
+ 				}else{ 
  					
  					var self=this;
  			    	
@@ -348,6 +347,7 @@ if(isDecimal!=0){
   tabledata += '</tr>';
  
   $('#employeelist').html(tabledata);
+ 
 
 }
  
@@ -432,8 +432,7 @@ $('.viewindividual').live('click', function(event) {
 	    break;
 	   }
   }
-  
-           content += '<tr>';
+              content += '<tr>';
               content += '<td id="xyz"><a href="#view" class="viewindividual" id="'+obj.employeeId+'">' + obj.employeeId+ '</a></td>';
               content += '<td>' + obj.employeeName + '</td>';
               content += '<td>' +bdate+"-"+bmonth+"-"+byear+'</td>';
@@ -451,6 +450,15 @@ $('.viewindividual').live('click', function(event) {
               }
  
  $('#employeelist').html(content);
+ var myHilitor = new Hilitor("employeelist");
+ var searchValue=$('#searchelement').val();
+
+ if(isNaN(searchValue)){
+	 
+	 myHilitor.setMatchType("open"); 
+	  myHilitor.apply(searchValue);
+ }
+ 
  
  $('#backtoemployee').css("visibility","visible");
  //$('.selector').css("visibility","hidden");

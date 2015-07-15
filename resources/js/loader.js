@@ -160,15 +160,14 @@ Loader.prototype.listEmployeePolicy = function(){
 Loader.prototype.loadFooter = function(){
   LazyLoad.css('resources/js/EmployeeHomepage/footer.css');
   LazyLoad.js('resources/js/EmployeeHomepage/footer.js');
-
 }
  Loader.prototype.loadEmployeePage = function(){
-  LazyLoad.css('resources/js/EmployeeHomepage/empHomePage.css');
+  LazyLoad.css('resources/js/EmployeeHomepage/empHomePage.css');           
   LazyLoad.js('resources/js/EmployeeHomepage/empHomePage.js');
 }
-Loader.prototype.loadEmployee = function(){
+Loader.prototype.loadEmployee = function(cb){
   LazyLoad.css('resources/js/EmployeeHomepage/employee.css');
-  LazyLoad.js('resources/js/EmployeeHomepage/employee.js');
+  LazyLoad.js('resources/js/EmployeeHomepage/employee.js',cb);
 
 }
 

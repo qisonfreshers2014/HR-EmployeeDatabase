@@ -25,7 +25,7 @@ Router.prototype.routeManager = function() {
 	    },
 	    'home': function() {
 	    	//App.loadEmployeePage(App.userName,App.hr,App.isDeleted);
-	    	 App.loadEmployee(App.gender,App.contactNo,App.employeeId);
+	    	 App.loadEmployee();
 	    },
 		'myprofile': function() {
 			//App.loadEmployeePage(App.userName,App.hr,App.isDeleted);

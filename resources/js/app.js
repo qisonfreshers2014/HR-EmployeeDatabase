@@ -67,11 +67,12 @@ App.prototype.loadempviewemployee=function(employeeId){
 	  new empViewemployee(employeeId);
 	 });
 	 }
-App.prototype.loadEmployee = function(gender, contactNo,employeeId) {
-	this.gender = gender;
-	this.contactNo = contactNo;
-	this.employeeId=employeeId;
-	Loader.loadEmployee();
+App.prototype.loadEmployee = function() {
+	
+	Loader.loadEmployee(function(){
+		
+		new empBasicDetails();
+	});
 }
 App.prototype.loadFooter = function() {
 	Loader.loadFooter(function() {
@@ -100,6 +101,7 @@ App.prototype.listPolicy = function() {
 }
 
 App.prototype.listEmployee = function(data) {
+	
 	
 	Loader.loadPagination();
 	

@@ -236,7 +236,9 @@ RequestManager.prototype.getSearchEmp=function(data,callback){
  RequestManager.prototype.getPaginatedSearchedEmployees=function(data,callback){
 	 this.sendToServer('employee/getSearchedEmployeesListPaginated', data, callback);
 } 
- 
+ RequestManager.prototype.getAllProfilePics=function(data,callback){
+	 this.sendToServer('employee/getProfilePics', data, callback);
+} 
 
 
 var RequestManager = new RequestManager();

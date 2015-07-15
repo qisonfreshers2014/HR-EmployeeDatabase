@@ -881,11 +881,7 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 	       return list.iterator().next();
 	  }
 
-	@Override
-	public Employee getEmployeeById(String id) throws EmployeeException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	@Override
 	public List<Employee> getEmployee() {
@@ -1194,6 +1190,47 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 	 }
 */
 }
+
+
+	@Override
+	public Employee getEmployeeById(String id) throws EmployeeException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List getProfilePics() {
+		Session session = null;
+		List list = null;
+		Transaction tx = null;
+		try {
+			session = getSession();
+			if (null == session) {
+				session = SessionFactoryUtil.getInstance().openSession();
+				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+			}
+			Criteria createCriteria = session.createCriteria(Employee.class);
+			/*String hql="from Employee where id="+id+"";		
+			org.hibernate.Query query = session.createQuery(hql);
+			 list  = query.list();*/
+			createCriteria.setProjection(Projections.property("fileId"));
+			list = createCriteria.list();
+			System.out.println(list);
+			
+		}finally {
+					try {
+						if (tx != null) {
+							tx.commit();
+							if (session.isConnected())
+								session.close();
+						}
+					} catch (HibernateException e) {
+
+						e.printStackTrace();
+					}
+			  }
+				return  list;
+	}
 
 	
 }

@@ -3,9 +3,12 @@ package com.hred.handler;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import org.apache.commons.mail.EmailException;
@@ -42,6 +45,7 @@ import com.hred.persistence.dao.EmployeeDAO;
 import com.hred.service.common.ServiceRequestContextHolder;
 import com.hred.service.descriptors.input.ChangePassword;
 import com.hred.service.descriptors.input.EmployeeSearchInputDescriptor;
+import com.hred.service.descriptors.input.ProfilePics;
 import com.hred.service.descriptors.output.DisplayNotificationHome;
 import com.hred.service.descriptors.output.NotificationHomeFilterInputDiscriptor;
 
@@ -73,7 +77,9 @@ public class EmployeeHandler extends AbstractHandler {
 
 		return employee;
 	}
-
+ 
+	//Method for View employee
+	
 	public Employee viewEmployee(int EmployeeId) throws NumberFormatException,
 			BusinessException {
 		Employee employee = null;
@@ -202,6 +208,8 @@ public class EmployeeHandler extends AbstractHandler {
 
 	}
 
+	//Method to Save employee details
+	
 	@AuthorizeEntity(roles = { Constants.HR })
 	public Employee saveAOP(Employee employee) throws EncryptionException,
 			BusinessException {
@@ -284,6 +292,9 @@ public class EmployeeHandler extends AbstractHandler {
 		empskill.setEmpId(employee.getEmployeeId());
 		SkillsHandler.getInstance().saveAOP(empskill);
 		
+		
+		// Sends Registration mail to the employee.
+		
 		String employeeEmail=employee.getEmail();
 		
 		String employeeName=employee.getEmployeeName();
@@ -296,7 +307,7 @@ public class EmployeeHandler extends AbstractHandler {
 			
 			System.out.println(out);
 		} catch (EmailException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
@@ -584,7 +595,7 @@ public class EmployeeHandler extends AbstractHandler {
 		return employee;
 	}
 	
-	
+	// Validations for update employee
 
 	private void validateHrEditEmployee(String name, long id, String email,
 			String qualification, String salary, long num, Timestamp date,
@@ -908,7 +919,8 @@ public class EmployeeHandler extends AbstractHandler {
 		return employeelist;
 	}
 
-	// hr delete operation
+	// Inactive the employee
+	
 	@AuthorizeEntity(roles = { Constants.HR })
 	public Employee deleteEmployeeAOP(Employee employee)
 			throws EmployeeException {
@@ -920,6 +932,8 @@ public class EmployeeHandler extends AbstractHandler {
 		employee = (Employee) empDAOImpl.update(empFromDB);
 		return employee;
 	}
+	
+	//Method for change password
 
 	public void changePassword(ChangePassword changePasswordEmployee)
 			throws EncryptionException, BusinessException {
@@ -958,6 +972,7 @@ public class EmployeeHandler extends AbstractHandler {
 		}
 	}
 
+	
 	public boolean logout() {
 		boolean isLogout = false;
 		String userSessionId = ServiceRequestContextHolder.getContext()
@@ -985,7 +1000,8 @@ public class EmployeeHandler extends AbstractHandler {
 		return employeeTodayWorkAniversary;
 	}
 
-	// updating designation details
+	// updates designation details of a employee
+	
 	@AuthorizeEntity(roles = { Constants.HR })
 	public Employee updateDesigantionDetailsAOP(DesignationHistory desHistory)
 			throws ObjectNotFoundException, EmployeeException,
@@ -1022,6 +1038,8 @@ public class EmployeeHandler extends AbstractHandler {
 		return empPaginationOutput;
 	}
 
+	// Returns the details of the logged in user
+	
 	public Employee getLoggedInUser(long userId) throws EmployeeException {
 		Employee employee = null;
 		EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
@@ -1031,6 +1049,8 @@ public class EmployeeHandler extends AbstractHandler {
 		return employee;
 	}
      
+	// Returns  All the Active employees 
+	
 	@AuthorizeEntity(roles = { Constants.HR })
 	public PaginationOutput<Employee> getEmployeesListPaginated(
 			  EmployeeListPaginationInput employee) {
@@ -1043,11 +1063,10 @@ public class EmployeeHandler extends AbstractHandler {
 			 
 			}
 	
+     // Takes the input as criteria based on which filtering of employees has to done and returns the output as employees list.
 	
-	
-
-	@AuthorizeEntity(roles={Constants.HR})
-	public PaginationOutput<Employee> getFilterEmployeesPaginated(
+	 @AuthorizeEntity(roles={Constants.HR})
+	 public PaginationOutput<Employee> getFilterEmployeesPaginated(
 			FilterEmployee employee) {
 		
 		 Paginator<Employee> paginator = new Paginator<>();
@@ -1058,6 +1077,9 @@ public class EmployeeHandler extends AbstractHandler {
 		
 	}
 
+	  //Takes the input for searching employees and returns the output as employees list.
+	  
+	@AuthorizeEntity(roles={Constants.HR})
 	public PaginationOutput<Employee> getSearchedEmployeesListPaginated(
 			EmployeeSearchInputDescriptor employee) {
 		 Paginator<Employee> paginator = new Paginator<>();
@@ -1081,7 +1103,67 @@ public class EmployeeHandler extends AbstractHandler {
 		                    noOfCAPSAlpha, noOfDigits, noOfSplChars);
 					return pswd;
 		
+		}
+		
+		
+		
+		// Returns Profile Pics of all the employees as a list
+		
+		public List<String> getProfilePics() throws BusinessException {
 			
+			List<String> filePaths =new ArrayList<String>();
+			String stage = null;
+			String path = null;
+			try {
+				Properties props = ConfigReader
+						.getProperties(Constants.FILE_PATH_VARIABLES);
+				stage = props.getProperty(Constants.STAGE_ENVIRONMENT);
+				
+				if (stage.equalsIgnoreCase("local")) {
+					path = props.getProperty(Constants.LOCAL_PATH);
+				} else if (stage.equalsIgnoreCase("stage")) {
+					path = props.getProperty(Constants.STAGE_PATH);
+				} else {
+					path = props.getProperty(Constants.PRODUCTION_PATH);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			//Returns all the fileIds as a list from employee table
+			List<Long> fileIds=DAOFactory.getInstance().getEmployeeDAO().getProfilePics();
+			
+			//Creating a list of non-Zero fileIds
+			
+			List<Long> fileIdsnotnull=new ArrayList<Long>();
+			
+			Iterator itr=fileIds.iterator();
+			while(itr.hasNext()){
+				
+				long id=(long) itr.next();
+				
+				if(id>0){
+				
+				fileIdsnotnull.add(id);
+				}
+			}
+			
+			// Takes fileIds as input and returns the rowObects corresponding to those fileId's as a Map.
+			 Map<Long, File> fileMap=FileHandler.getInstance().getFiles(fileIdsnotnull);
+		
+			 for(long key: fileMap.keySet()){
+				 
+				 File file=fileMap.get(key);
+				 String profilePic=path+file.getFilePath();
+					
+					 String replacedImage=profilePic.replace("\\", "/");
+				
+					filePaths.add(replacedImage);
+			 
+			 }
+		
+			return filePaths;
+		
 			
 		}
 	}

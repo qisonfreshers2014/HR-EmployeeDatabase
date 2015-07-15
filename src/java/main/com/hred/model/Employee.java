@@ -78,7 +78,7 @@ public class Employee extends AbstractObject {
  @Column(name="Salary")
  private String salary;
  @Column(name="file_id")
- private int fileId;
+ private long fileId;
  @Column(name="employee_Type")
  private String employeeType;
  @Column(name="university")
@@ -86,12 +86,12 @@ public class Employee extends AbstractObject {
  @Column(name="hobbies")
  private String hobbies;
 
-public int getFileId() {
+public long getFileId() {
 	return fileId;
 }
 
-public void setFileId(int fileId) {
-	this.fileId = fileId;
+public void setFileId(long fileId) {
+	this.fileId =fileId;
 }
 
 public String getSkill() {

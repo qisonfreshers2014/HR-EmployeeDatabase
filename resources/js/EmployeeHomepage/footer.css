@@ -1,5 +1,6 @@
 .footerCaption{
     background-color: #FFFFFF;
+    border-top: 1px solid #afafaf;
     padding:20px;
     color: color: #5c5c5c !important;
     width: 100%;

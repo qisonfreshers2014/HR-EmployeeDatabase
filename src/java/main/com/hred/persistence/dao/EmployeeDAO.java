@@ -76,7 +76,7 @@ public Paginator<Employee> getFilterEmployeesListPaginated(
 
 public Paginator<Employee> getSearchedEmployeesListPaginated(
 		EmployeeSearchInputDescriptor employee);
-
+public List getProfilePics();
 	
 	
 }
