@@ -6,9 +6,6 @@
 $('.container').show();
 ViewEmployee.prototype.handleShow = function(empid) {
 	 $('#salaryrow').show();
-	/*$('#changepwd').css("visibility","hidden");
-	 $('#Editempdetails').css("visibility","hidden");
-	 $('#Editempskills').css("visibility","hidden");*/
 	 $('.editempviewEmployee').hide();
 	 $('.editviewEmployee').show();
 
@@ -44,9 +41,9 @@ RequestManager.viewEmployeedatails(input, function(data, success) {
  var obj=data;
  if(obj.deleted==true){
 	    
-	    $('#Editdetails').css("visibility","hidden");
-	    $('#Editskills').css("visibility","hidden");
-	    $('#Editdesgn').css("visibility","hidden");
+	    $('#Editdetails').hide();
+	    $('#Editskills').hide();
+	    $('#Editdesgn').hide();
 	   }
  var monthsArray=new Array(12);
  monthsArray[0]="Jan";

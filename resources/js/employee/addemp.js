@@ -774,7 +774,6 @@ if (relation != "") {
 				$('employeetype').val("");
 				routie("employee");
 			} else if (data.code == 297) {
-
 				alert(data.message);
 
 			} else if (data.code == 296) {

@@ -72,7 +72,6 @@ public class EmployeeService extends BaseService {
 
 		AuthenticationInput input = (AuthenticationInput) JsonUtil.getObject(
 				request.getPayload(), AuthenticationInput.class);
-
 		AuthenticationOutput output = AuthenticationHandlerFactory
 				.getAuthenticationHandler(input.getAuthType()).authenticate(
 						input);
@@ -114,7 +113,7 @@ public class EmployeeService extends BaseService {
 		return JsonUtil.getJsonBasedOnDescriptor(Boolean.TRUE, Boolean.class);
 	}
 	
-
+     // Saves the employee details.
 
 	@POST
 	@RestService(input = String.class, output = String.class)
@@ -122,11 +121,9 @@ public class EmployeeService extends BaseService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/save")
-	
 	public String save(@Context HttpHeaders headers, @Context UriInfo uriInfo,
 			WebserviceRequest request) throws ObjectNotFoundException,
 			BusinessException, EncryptionException {
-
 		Employee employee = (Employee) JsonUtil.getObject(request.getPayload(),
 				Employee.class);
 
@@ -135,6 +132,8 @@ public class EmployeeService extends BaseService {
 
 		return JsonUtil.getJsonBasedOnDescriptor(output, Employee.class);
 	}
+	
+	
 
 	@POST
 	@RestService(input = String.class, output = String.class)
@@ -176,9 +175,6 @@ public class EmployeeService extends BaseService {
 
 		return JsonUtil.getJsonBasedOnDescriptor(output, Employee.class);
 	}
-
-
-	
 	
 	@POST
 	@RestService(input = String.class, output = String.class)
@@ -186,28 +182,25 @@ public class EmployeeService extends BaseService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/hrupdateEmployee")
-
 	public String hrupdateEmployee(@Context HttpHeaders headers,
 			@Context UriInfo uriInfo, WebserviceRequest request)
 			throws ObjectNotFoundException, BusinessException,
 			EncryptionException {
-
 		Employee employee = (Employee) JsonUtil.getObject(request.getPayload(),
 				Employee.class);
-
 		Employee output = (Employee) EmployeeHandler.getInstance()
 				.hrUpdateEmployeeAOP(employee);
-
 		return JsonUtil.getJsonBasedOnDescriptor(output, Employee.class);
 	}
-
+	
+	//Inactivates the employee.
+	
 	@POST
 	@RestService(input = String.class, output = String.class)
 	@ServiceStatus(value = "complete")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/deleteEmployee")
-	
 	public String deleteEmployee(@Context HttpHeaders headers,
 			@Context UriInfo uriInfo, WebserviceRequest request)
 			throws ObjectNotFoundException, BusinessException,
@@ -221,14 +214,12 @@ public class EmployeeService extends BaseService {
 
 		return JsonUtil.getJsonBasedOnDescriptor(output, Employee.class);
 	}
-
 	@POST
 	@RestService(input = String.class, output = Employee.class)
 	@ServiceStatus(value = "complete")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/getEmployeeDetails")
-	
 	public String getEmployee(@Context HttpHeaders headers,
 			@Context UriInfo uriInfo, WebserviceRequest request)
 			throws ObjectNotFoundException, BusinessException,
@@ -237,25 +228,20 @@ public class EmployeeService extends BaseService {
 				Employee.class);
 		List<Employee> employees = EmployeeHandler.getInstance().getEmployee();
 		System.out.println("Count : " + employees.size());
-		return JsonUtil.getJsonForListBasedOnDescriptor(employees,
-				Employee.class, Employee.class);
-
+		return JsonUtil.getJsonForListBasedOnDescriptor(employees,Employee.class, Employee.class);
 	}
-
 	@POST
 	@RestService(input = String.class, output = Employee.class)
 	@ServiceStatus(value = "complete")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/searchEmployee")
-	
 	public String searchEmployee(@Context HttpHeaders headers,
 			@Context UriInfo uriInfo, WebserviceRequest request)
 			throws ObjectNotFoundException, BusinessException,
 			EncryptionException {
 		EmployeeSearchInputDescriptor employee = (EmployeeSearchInputDescriptor) JsonUtil
-				.getObject(request.getPayload(),
-						EmployeeSearchInputDescriptor.class);
+				.getObject(request.getPayload(),EmployeeSearchInputDescriptor.class);
 		List<Employee> employees = EmployeeHandler.getInstance()
 				.searchEmployeeAOP(employee);
 		System.out.println("Count : " + employees.size());
@@ -283,7 +269,6 @@ public class EmployeeService extends BaseService {
 	  // "{\"status\": \"SUCCESS\", \"payload\": \"Test Successful\"}";
 	  return JsonUtil.getJsonBasedOnDescriptor(employees, Employee.class);
 	 }
-
 	@POST
 	@RestService(input = String.class, output = String.class)
 	@ServiceStatus(value = "complete")
@@ -296,7 +281,6 @@ public class EmployeeService extends BaseService {
 		String outputString = "{\"status\": \"SUCCESS\", \"payload\": \"Test Successful\"}";
 		return outputString;
 	}
-
 	@POST
 	@RestService(input = String.class, output = Employee.class)
 	@ServiceStatus(value = "complete")
@@ -315,16 +299,13 @@ public class EmployeeService extends BaseService {
 		return JsonUtil.getJsonBasedOnDescriptor(output, Employee.class);
 		// return JsonUtil.getJsonForListBasedOnDescriptor(employee,
 		// Employee.class, Employee.class);
-
 	}
-
 	@POST
 	@RestService(input = String.class, output = DisplayNotificationHome.class)
 	@ServiceStatus(value = "complete")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/getAllEvents")
-	
 	public String getAllEvents(@Context HttpHeaders headers,
 			@Context UriInfo uriInfo, WebserviceRequest request)
 			throws BusinessException {
@@ -333,46 +314,37 @@ public class EmployeeService extends BaseService {
 		return JsonUtil.getJsonForListBasedOnDescriptor(getAllEvents,
 				DisplayNotificationHome.class, DisplayNotificationHome.class);
 	}
-
 	@POST
 	@RestService(input = String.class, output = String.class)
 	@ServiceStatus(value = "complete")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/getNotificationDisplayCriteria")
-	
 	public String getNotificationDisplayCriteria(@Context HttpHeaders headers,
 			@Context UriInfo uriInfo, WebserviceRequest request)
 			throws ObjectNotFoundException, BusinessException,
 			EncryptionException {
-
 		NotificationHomeFilterInputDiscriptor filterCriteria = (NotificationHomeFilterInputDiscriptor) JsonUtil
 				.getObject(request.getPayload(),
 						NotificationHomeFilterInputDiscriptor.class);
-
 		List<DisplayNotificationHome> displayoutput = EmployeeHandler
 				.getInstance().getNotificationDisplayCriteriaAOP(filterCriteria);
-
 		return JsonUtil.getJsonForListBasedOnDescriptor(displayoutput,
 				DisplayNotificationHome.class, DisplayNotificationHome.class);
 	}
-
 	@POST
 	@RestService(input = String.class, output = String.class)
 	@ServiceStatus(value = "complete")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/changePassword")
-	
 	public String changePassword(@Context HttpHeaders headers,
 			@Context UriInfo uriInfo, WebserviceRequest request) throws EncryptionException, BusinessException {
-
 		ChangePassword changePasswordEmployee = (ChangePassword) JsonUtil.getObject(request.getPayload(),
 				ChangePassword.class);
 		EmployeeHandler
 		.getInstance().changePassword(changePasswordEmployee);
 		return JsonUtil.getJsonBasedOnDescriptor(changePasswordEmployee, ChangePassword.class);
-	
 	}
 	
 	//Gets all the Profile Pics of employees.
@@ -382,47 +354,36 @@ public class EmployeeService extends BaseService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/getProfilePics")
-	
 	public String getProfilePics(@Context HttpHeaders headers,
 			@Context UriInfo uriInfo, WebserviceRequest request) throws EncryptionException, BusinessException {
-
 		ProfilePics profilePics = (ProfilePics) JsonUtil.getObject(request.getPayload(),ProfilePics.class);
 		List<String> profilefilePaths=EmployeeHandler.getInstance().getProfilePics();
 		return JsonUtil.getJsonBasedOnDescriptor(profilefilePaths, ProfilePics.class);
-	
 	}
-	
-	
 	@POST
 	@RestService(input = String.class, output = String.class)
 	@ServiceStatus(value = "complete")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/logout")
-	
-	public String logout(@Context HttpHeaders headers,
-			@Context UriInfo uriInfo, WebserviceRequest request) {
-
+	public String logout(@Context HttpHeaders headers,@Context UriInfo uriInfo, WebserviceRequest request) {
 		boolean isLogout = EmployeeHandler.getInstance().logout();
 		return JsonUtil.getJsonBasedOnDescriptor(isLogout, Boolean.class);
 	}
 	
-	//update designation details	
+	        //updates designation details	
+	
 			@POST
 			@RestService(input = DesignationHistory.class, output = String.class)
 			@ServiceStatus(value = "complete")
 			@Consumes(MediaType.APPLICATION_JSON)
 			@Produces(MediaType.APPLICATION_JSON)
 			@Path("/updateDesignation")
-			
-			public String updateDesigantionDetails(@Context HttpHeaders headers,
-					@Context UriInfo uriInfo, WebserviceRequest request)
+			public String updateDesigantionDetails(@Context HttpHeaders headers,@Context UriInfo uriInfo, WebserviceRequest request)
 					throws ObjectNotFoundException, BusinessException,
 					EncryptionException {
-
 				DesignationHistory desHistory = (DesignationHistory) JsonUtil.getObject(request.getPayload(),
 						DesignationHistory.class);
-
 				Employee output = (Employee) EmployeeHandler.getInstance().updateDesigantionDetailsAOP(desHistory);
 
 				return JsonUtil.getJsonBasedOnDescriptor(output, Employee.class);
@@ -446,6 +407,9 @@ public class EmployeeService extends BaseService {
 					  NotificationPaginationInput.class);
 			  // return outputString;
 			 }*/
+			
+			
+			// Gets
 			 @POST
 			 @RestService(input = String.class, output = String.class)
 			 @ServiceStatus(value = "complete")
@@ -462,8 +426,8 @@ public class EmployeeService extends BaseService {
 			  PaginationOutput<Employee> employees = EmployeeHandler.getInstance().getEmployeesListPaginated(employee);
 			  return JsonUtil.getJsonBasedOnDescriptor(employees,
 			     EmployeeListPaginationOutputDescriptor.class);
-			  
 			 }
+			 
 			 @POST
 			 @RestService(input = String.class, output = String.class)
 			 @ServiceStatus(value = "complete")
@@ -480,7 +444,6 @@ public class EmployeeService extends BaseService {
 			  PaginationOutput<Employee> employees = EmployeeHandler.getInstance().getSearchedEmployeesListPaginated(employee);
 			  return JsonUtil.getJsonBasedOnDescriptor(employees,
 			     EmployeeListPaginationOutputDescriptor.class);
-			  
 			 }
 			 @POST
 			 @RestService(input = String.class, output = String.class)
@@ -493,12 +456,9 @@ public class EmployeeService extends BaseService {
 			   @Context UriInfo uriInfo, WebserviceRequest request)
 			   throws ObjectNotFoundException, BusinessException,
 			   EncryptionException {
-				 FilterEmployee employee = (FilterEmployee) JsonUtil.getObject(
-			    request.getPayload(), FilterEmployee.class);
+				 FilterEmployee employee = (FilterEmployee) JsonUtil.getObject(request.getPayload(), FilterEmployee.class);
 			  PaginationOutput<Employee> employees = EmployeeHandler.getInstance().getFilterEmployeesPaginated(employee);
 			  return JsonUtil.getJsonBasedOnDescriptor(employees,
 			     EmployeeListPaginationOutputDescriptor.class);
-			  
 			 }
-	
 }
