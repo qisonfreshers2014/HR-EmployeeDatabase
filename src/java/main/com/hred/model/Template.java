@@ -14,19 +14,16 @@ public class Template extends AbstractObject{
 	     private int fileId;
 		 @Column(name = "template_name")
 		 private String name;
-		 @Column(name = "subject")
+		 @Column(name = "subject",length=16777213)
 		 private String subject;
 		 @Column(name = "content")
 		 private String content;
-		 
 		 
  public Template(){
 			 
 		 }
  public Template(String name){
-	 this.name=name;
-	 
-	 
+	 this.name=name; 
  }
 		 
 		 

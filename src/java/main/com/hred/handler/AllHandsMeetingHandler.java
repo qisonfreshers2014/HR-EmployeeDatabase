@@ -19,7 +19,7 @@ import com.hred.persistence.dao.AllHandsMeetingDAO;
 import com.hred.persistence.dao.DAOFactory;
 
 /**
- * @author saisudha
+ * @author Sri Vasavi
  *
  */
 public class AllHandsMeetingHandler extends AbstractHandler {
@@ -128,7 +128,6 @@ public class AllHandsMeetingHandler extends AbstractHandler {
 		      
 		     }
 		   }
-		   
 		   
 		  }
 		  if (employee == null || employee.isEmpty()

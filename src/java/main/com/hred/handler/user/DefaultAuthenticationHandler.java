@@ -45,7 +45,6 @@ public class DefaultAuthenticationHandler implements AuthenticationHandler {
   if (isLoginValidated(daInput)){
   String email = daInput.getEmail();
   String password = daInput.getPassword();
-
   Employee emp = null;
   DAOFactory daoFactory = DAOFactory.getInstance();
   // TODO handle email doesn't exists case.
@@ -59,7 +58,7 @@ public class DefaultAuthenticationHandler implements AuthenticationHandler {
   int employeeId=emp.getEmployeeId();
   Boolean deleted=emp.getDeleted();
   /////////////////////////////////////////////////////////////////////////////////
-
+  
   EmployeeDetails empDetails=new EmployeeDetails();
   empDetails.setContactNo(contactNo);
   empDetails.setEmployeeName(employeeName);
@@ -85,9 +84,6 @@ public class DefaultAuthenticationHandler implements AuthenticationHandler {
  
       ExceptionMessages.INVALID_PASSWORD);
    }
-
-
-
   authStatus = User.AUTH_STATUS_EXISTING;
 
   String sessionToken = null;
