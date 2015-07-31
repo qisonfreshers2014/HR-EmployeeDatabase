@@ -9,7 +9,7 @@ import com.hred.persistence.annotations.Increment;
 
 
 @Entity
-@Table(name = "FILE")
+@Table(name = "file")
 @Increment
 public class File extends AbstractObject {
 

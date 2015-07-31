@@ -1,7 +1,6 @@
 package com.hred.service;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -21,12 +20,10 @@ import com.hred.handler.EmployeeHandler;
 import com.hred.handler.user.AuthenticationHandlerFactory;
 import com.hred.model.DesignationHistory;
 import com.hred.model.Employee;
-import com.hred.model.File;
 import com.hred.model.FilterEmployee;
 import com.hred.model.user.AuthenticationInput;
 import com.hred.model.user.AuthenticationOutput;
 import com.hred.pagination.EmployeeListPaginationInput;
-import com.hred.pagination.NotificationPaginationInput;
 import com.hred.pagination.PaginationOutput;
 import com.hred.service.annotations.RestService;
 import com.hred.service.annotations.ServiceStatus;
@@ -423,7 +420,7 @@ public class EmployeeService extends BaseService {
 			   EncryptionException {
 			  EmployeeListPaginationInput employee = (EmployeeListPaginationInput) JsonUtil.getObject(
 			    request.getPayload(), EmployeeListPaginationInput.class);
-			  PaginationOutput<Employee> employees = EmployeeHandler.getInstance().getEmployeesListPaginated(employee);
+			  PaginationOutput<Employee> employees = EmployeeHandler.getInstance().getEmployeesListPaginatedAOP(employee);
 			  return JsonUtil.getJsonBasedOnDescriptor(employees,
 			     EmployeeListPaginationOutputDescriptor.class);
 			 }
@@ -441,7 +438,7 @@ public class EmployeeService extends BaseService {
 			   EncryptionException {
 				 EmployeeSearchInputDescriptor employee = (EmployeeSearchInputDescriptor) JsonUtil.getObject(
 			    request.getPayload(), EmployeeSearchInputDescriptor.class);
-			  PaginationOutput<Employee> employees = EmployeeHandler.getInstance().getSearchedEmployeesListPaginated(employee);
+			  PaginationOutput<Employee> employees = EmployeeHandler.getInstance().getSearchedEmployeesListPaginatedAOP(employee);
 			  return JsonUtil.getJsonBasedOnDescriptor(employees,
 			     EmployeeListPaginationOutputDescriptor.class);
 			 }
@@ -457,7 +454,7 @@ public class EmployeeService extends BaseService {
 			   throws ObjectNotFoundException, BusinessException,
 			   EncryptionException {
 				 FilterEmployee employee = (FilterEmployee) JsonUtil.getObject(request.getPayload(), FilterEmployee.class);
-			  PaginationOutput<Employee> employees = EmployeeHandler.getInstance().getFilterEmployeesPaginated(employee);
+			  PaginationOutput<Employee> employees = EmployeeHandler.getInstance().getFilterEmployeesPaginatedAOP(employee);
 			  return JsonUtil.getJsonBasedOnDescriptor(employees,
 			     EmployeeListPaginationOutputDescriptor.class);
 			 }

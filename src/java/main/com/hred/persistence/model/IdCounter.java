@@ -11,7 +11,7 @@ import javax.persistence.Table;
  */
 
 @Entity
-@Table(name = "ID_COUNTER")
+@Table(name = "id_counter")
 public class IdCounter {
 
 	public static final String NAME = "name";

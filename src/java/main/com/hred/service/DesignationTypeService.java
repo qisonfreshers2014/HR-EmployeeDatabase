@@ -46,7 +46,7 @@ public class DesignationTypeService extends BaseService  {
 	  return JsonUtil.getJsonBasedOnDescriptor(output, DesignationType.class);
 	 }
 	 
-	/* @POST
+	 @POST
 		@RestService(input = String.class, output = String.class)
 		@ServiceStatus(value = "complete")
 		@Consumes(MediaType.APPLICATION_JSON)
@@ -61,10 +61,10 @@ public class DesignationTypeService extends BaseService  {
 		 DesignationType template = (DesignationType) JsonUtil.getObject(request.getPayload(),
 				 DesignationType.class);
 			List<String> designationTypes = (List<String>) DesignationTypeHandler
-					.getInstance().getDesignationTypes();
+					.getInstance().getDesignationTypesAOP();
 		
 			return JsonUtil.getJsonBasedOnDescriptor(designationTypes, DesignationType.class);
-		}*/
+		}
 	 
 	 	/*@POST
 		@RestService(input = String.class, output = String.class)

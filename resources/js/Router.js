@@ -72,7 +72,13 @@ Router.prototype.routeManager = function() {
 	    		  if (success) {
 	    			 
 	    			 App.listEmployee(data);
-	    		  }
+	    		  }else if(data.code==131){
+                          alert("Sorry, you are not a authorized user for this action");
+                           App.loadEmployeePage(App.userName,App.hr,App.isDeleted);
+                           routie("home");
+                         } else{
+                          alert("Failed to get list of employees");
+                        }
 	    	 });
 	    },
 	    'addemployee': function() {
@@ -104,7 +110,13 @@ Router.prototype.routeManager = function() {
 			
 					 App.loadtemplateList(data);
 			 
-				 }
+				 }else if(data.code==131){
+                                     alert("Sorry, you are not a authorized user for this action");
+                                          App.loadEmployeePage(App.userName,App.hr,App.isDeleted);
+                                            routie("home");
+                                   }else{
+                                      alert("Failed to get templates");
+                                      }
 			 });
 	    	
 	    },
@@ -119,7 +131,12 @@ Router.prototype.routeManager = function() {
 				if (success) {		
 				                    
 									App.loadNotificationHomePage(data);
-						}
+						}else if(data.code==131){
+
+                                                    alert("Sorry, you are not a authorized user for this action");
+                                                         App.loadEmployeePage(App.userName,App.hr,App.isDeleted);
+                                                         routie("home");
+                                                }      
 			else
 				{
 				App.loadNotificationHomePage(data);
@@ -136,7 +153,13 @@ Router.prototype.routeManager = function() {
 			
 			 App.loadAllHandsMeeting(data);
 			 
-				 }
+				 }else if(data.code==131){
+                                      alert("Sorry, you are not a authorized user for this action");
+                                       App.loadEmployeePage(App.userName,App.hr,App.isDeleted);
+                                       routie("home");
+                                    }else{
+                                      alert("Failed to get AllHands meeting list");
+                                            }
 			 });
 	    },
 	    'addallHandsMeeting': function() {

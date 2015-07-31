@@ -54,7 +54,13 @@ editHandMeeting.prototype.EditHandMeetingDetails=function(dataid){
 			   $('.editemployee').val(obj.employee);
 			   $('.editdescription').val(obj.description);
 		    //$( "input#clear" ).trigger( "click" );
-		   }else{
+		   }else if(data.code== 131){
+	        	alert("sorry, you are not a authorized user for this action");
+                         App.loadEmployeePage(App.userName,App.hr,App.isDeleted);
+                         routie("home");
+	        }
+
+                      else{
 		    alert("failed to edit");
 		   }
 
@@ -110,7 +116,11 @@ editHandMeeting.prototype.editAllHandsMeetingById=function(dataid){
         }else if(data.code == 204){
         	alert("Date already exists");
         }
-        else{
+        else if(data.code== 131){
+	        	alert("Sorry,you are not a authorized user for this action");
+                          App.loadEmployeePage(App.userName,App.hr,App.isDeleted);
+                                   routie("home");
+	        }else{
          alert("All Hands Meeting Schedule failed to update");
         }
     }.ctx(this));

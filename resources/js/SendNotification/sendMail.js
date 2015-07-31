@@ -7,8 +7,7 @@ SendMail.prototype.handleShow = function(data) {
 	
 	$('#Tomail').css("visibility","visible");
 	$('#subjectformail').css("visibility","visible");
-	
-	$('#Tomail').val("Qison@gmail.com");
+	$('#Tomail').val("all@qison.com");
 	$('#subjectformail').val(data.subject);
 	$('#contentfieldNotification').ckeditor();
 	$('#contentfieldNotification').val(data.content);
@@ -58,7 +57,22 @@ $("#backtonotifications").click(function(){
 							}});
 			}
 			else{
+				
+				document.getElementById('light').style.display='hidden';
+				document.getElementById('fade').style.display='hidden';
+				document.getElementById('SendMailNotification').style.display="block";
 				alert("failed to send");
+				var input={};
+				RequestManager.getAllEvents(input, function(data, success) {
+					if (success) {	
+								App.loadNotificationHomePage(data);
+					}
+					else
+					{
+					App.loadNotificationHomePage(data);
+					alert("No event in the current month");
+							}});
+			
 			}
 		
 	}.ctx(this));

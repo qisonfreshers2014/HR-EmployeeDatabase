@@ -25,6 +25,7 @@ public interface Constants {
 	public static String AUTHENTICATOR_PASSWORD = "authenticatorPassword";
 	public static String SEND_FROM = "from";
 	public static  String SEND_BCC = "bcc";
+	public static  String URL = "URL";
 	
 	
 	public static  String FILE_PATH_VARIABLES = "filePath.properties";	

@@ -112,7 +112,11 @@ addpolicy.prototype.saveToDatabase = function() {
 		 if (data.code == 228) {
 				alert("Policy name already exists");
 
-			}
+			}else if(data.code==131){
+                           alert("Sorry, you are not a authorized user for this action");
+                                  App.loadEmployeePage(App.userName,App.hr,App.isDeleted);
+                                   routie("home");
+                        }
 		 else{
 			alert("Failed to add");
 		 }

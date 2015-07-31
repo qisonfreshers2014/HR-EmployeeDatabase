@@ -58,14 +58,14 @@ Login.prototype.handleShow = function() {
      if(email == "" || email == null) {
       $(".errormessage1").show();
       $('.errormessage1').focus();
-      $('.errormessage1').text("Email must be filled(?)");
+      $('.errormessage1').text("Please Enter Email");
          isValid = false;
      }
 
      else if(!emailReg.test(email)) {
       $('.errormessage1').show();
       $('.errormessage1').focus();
-      $('.errormessage1').text("Enter a valid email(?)");
+      $('.errormessage1').text("Please Enter a valid email(?)");
          isValid = false;
      }
      else if (email.length > 128){

@@ -34,8 +34,14 @@ AddEmployee.prototype.handleShow = function() {
 				 
 				 alert("New designation is succesfully added in the dropdown list");
 				
-			 }
-		
+			 }else if(data.code==131){
+                           alert("Sorry, you are not a authorized user for this action");
+                            App.loadEmployeePage(App.userName,App.hr,App.isDeleted);
+                           routie("home");
+                       }
+		else{
+                          alert("Failed to add new designation type");
+                }
 			 
 		 }.ctx(this));
 		 
@@ -730,7 +736,11 @@ if (relation != "") {
 				return true;
 				// alert("Employee ID: "+ $("#eid").val()+ " Details
 				// Successfully Added to Designation History");
-			} else {
+			}else if(data.code==131){
+                        alert("Sorry, you are not a authorized user for this action");
+    
+                       }
+ else {
 				return false;
 			}
 		}.ctx(this));
@@ -780,7 +790,12 @@ if (relation != "") {
 
 				alert(data.message);
 
-			} else {
+			}else if(data.code==131){
+                          alert("Sorry,you are not a authorized user for this action");
+                             App.loadEmployeePage(App.userName,App.hr,App.isDeleted);
+                            routie("home");  
+                         }
+ else {
 				//alert("Failed to add");
 			}
 		}.ctx(this));
@@ -823,7 +838,7 @@ AddEmployee.prototype.employeeTypeValidate = function() {
 // This function is to append designation types from database to a drop down list
 AddEmployee.prototype.dropDown = function(){
 	var emptyinput={};
-	 RequestManager.getDesignationName(emptyinput, function(data, success){
+	 RequestManager.getDesignationTypes(emptyinput, function(data, success){
 		               
 		 if(success){
 			          arraylength=data.length;
@@ -834,7 +849,13 @@ AddEmployee.prototype.dropDown = function(){
 			 $('#designation').append($("<option value="+object.id+"> "+object.name+"</option>"));			 
 			 }
 			 
-		 }
+		 }else if(data.code==131){
+                  alert("Sorry, you are not autherized user for this action");
+                 App.loadEmployeePage(App.userName,App.hr,App.isDeleted);
+                   routie("home");
+               }else{
+                   alert("Failed to get designation types");
+            }
 		 
 	 }.ctx(this));
 	

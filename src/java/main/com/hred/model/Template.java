@@ -7,14 +7,14 @@ import javax.persistence.Table;
 import com.hred.persistence.annotations.Increment;
 
 @Entity
-@Table(name="TEMPLATE")
+@Table(name="template")
 @Increment
 public class Template extends AbstractObject{
 	     @Column(name = "file_id")
 	     private int fileId;
 		 @Column(name = "template_name")
 		 private String name;
-		 @Column(name = "subject",length=16777213)
+		 @Column(name = "subject")
 		 private String subject;
 		 @Column(name = "content")
 		 private String content;

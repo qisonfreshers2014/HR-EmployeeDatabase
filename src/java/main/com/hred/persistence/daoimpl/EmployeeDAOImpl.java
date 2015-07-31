@@ -1215,7 +1215,6 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 			 list  = query.list();*/
 			createCriteria.setProjection(Projections.property("fileId"));
 			list = createCriteria.list();
-			System.out.println(list);
 			
 		}finally {
 					try {

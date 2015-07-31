@@ -153,7 +153,7 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 					email.setSubject("Happy Birth Day "+birthday.getEmployeeName());
 					email.addTo(birthday.getEmail());
 					email.setContent(body, "text/html");
-					email.addBcc(bcc);
+					email.addCc(bcc);
 					email.send();
 					
 						// send message
@@ -189,7 +189,7 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 					email.setFrom(from);
 					email.setSubject("Happy Work Anniversary  "+aniversary.getEmployeeName());
 					email.addTo(aniversary.getEmail());
-					//email.addBcc(bcc);
+					email.addCc(bcc);
 					email.setContent(body, "text/html");
 					email.send();
 					
@@ -368,6 +368,7 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
           String authenticatorPassword=null;
           String from=null;
           String bcc=null;
+          String URL=null;
           long file_id;
          
           try
@@ -378,7 +379,8 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
            authenticatorMail=props.getProperty(Constants.AUTHENTICATOR_MAIL);
            authenticatorPassword=props.getProperty(Constants.AUTHENTICATOR_PASSWORD);
            from=props.getProperty(Constants.SEND_FROM);
-           bcc=props.getProperty(Constants.SEND_BCC);                                                            
+           bcc=props.getProperty(Constants.SEND_BCC);
+           URL=props.getProperty(Constants.URL);                                                            
           }
           catch(IOException e)
           {
@@ -393,6 +395,8 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
         content += "Welcome to <b>Qi People.</b><br/><br/>";
         		   
         content	+= "You have been registered on the system. You can login to the system with following credentials:<br/><br/>";
+
+        content += "<b>URL:</b>"+URL+"<br/><br/>";
         		   
         content += "<b>Username:</b>"+employeeEmail+"<br/><br/>";
         content += "<b>Password:</b>"+randomPassword+"<br/><br/>";

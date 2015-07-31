@@ -52,7 +52,11 @@ editTemplate.prototype.EditTemplateDetails=function(dataid){
 			  // console.log('value set\n=================================================\n'+$('#templateContent').val());
 			
 		 		
-		   }
+		   }else if(data.code==131){
+                    alert("Sorry,you are not a authorized user for this action");
+                   App.loadEmployeePage(App.userName,App.hr,App.isDeleted);
+                  routie("home");
+}
 		   else{
 		    alert("Failed to Edit");
 		   }
@@ -107,7 +111,11 @@ editTemplate.prototype.editTemplateDetailsById=function(dataid){
             
             alert("Template already exists");
             
-           }
+           }else if(data.code==131){
+             alert("Sorry, you are not a authorized user for this action");
+             App.loadEmployeePage(App.userName,App.hr,App.isDeleted);
+             routie("home");
+}
 
         else{
          alert("Template failed to update");

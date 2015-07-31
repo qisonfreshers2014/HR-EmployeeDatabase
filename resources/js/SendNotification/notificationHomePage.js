@@ -6,8 +6,6 @@ function loadNotificationHomePage(data) {
 			}.ctx(this));
 }
 
-
-
 loadNotificationHomePage.prototype.handleShow = function(data) {
 	
 	
@@ -79,7 +77,7 @@ loadNotificationHomePage.prototype.handleShow = function(data) {
 		var input = {
 				"payload" : {"selectedEvent" : selectedEvent,
 				
-							}	};
+							}};
 		this.getdisplayedata(input);
 	}.ctx(this));
 	
@@ -269,7 +267,6 @@ loadNotificationHomePage.prototype.getdisplayedata = function(input) {
 
 								App.loadManualMail(event, email,
 										employeeName);
-
 							});
 				
 					
@@ -291,4 +288,3 @@ loadNotificationHomePage.prototype.getTemplate = function(inputtemp) {
 	});
 	
 }
-

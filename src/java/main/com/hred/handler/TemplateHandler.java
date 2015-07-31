@@ -262,7 +262,7 @@ public List<Template> getTemplatesAOP() {
 	
 	@AuthorizeEntity(roles={Constants.HR})
 
-	public PaginationOutput<Template> getAllTemplatesPaginated(
+	public PaginationOutput<Template> getAllTemplatesPaginatedAOP(
 			PaginationInput alltemplates) {
 		 Paginator<Template> paginator = new Paginator<>();
 		 paginator = DAOFactory.getInstance().getTemplateDAO().getAllHandsSchedule(alltemplates);

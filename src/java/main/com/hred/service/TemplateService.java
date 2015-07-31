@@ -161,7 +161,7 @@ public class TemplateService extends BaseService {
    EncryptionException {
  	PaginationInput alltemplates = (PaginationInput) JsonUtil.getObject(
     request.getPayload(), PaginationInput.class);
-  PaginationOutput<Template> templates = TemplateHandler.getInstance().getAllTemplatesPaginated(alltemplates);
+  PaginationOutput<Template> templates = TemplateHandler.getInstance().getAllTemplatesPaginatedAOP(alltemplates);
   return JsonUtil.getJsonBasedOnDescriptor(templates, TemplateOutputDescriptor.class);
   
  }

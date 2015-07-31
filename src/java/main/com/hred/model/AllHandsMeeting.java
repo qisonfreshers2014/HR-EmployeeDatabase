@@ -5,15 +5,12 @@ import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.rmi.CORBA.Tie;
-
-import com.hred.persistence.annotations.Increment;
 
 import com.hred.persistence.annotations.Increment;
 
 
 @Entity
-@Table(name = "ALLHANDSMEETING")
+@Table(name = "allhandsmeeting")
 @Increment
 public class AllHandsMeeting extends AbstractObject{
 
@@ -62,7 +59,7 @@ public class AllHandsMeeting extends AbstractObject{
 
 	@Override
 	public int getObjectType() {
-		// TODO Auto-generated method stub
+		
 		return ObjectTypes.ALL_HANDS_MEETING;
 	}
 

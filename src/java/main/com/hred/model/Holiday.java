@@ -13,7 +13,7 @@ import com.hred.persistence.annotations.Increment;
  */
 
 @Entity
-@Table(name = "HOLIDAY")
+@Table(name = " holiday")
 @Increment
 public class Holiday  extends AbstractObject{
 

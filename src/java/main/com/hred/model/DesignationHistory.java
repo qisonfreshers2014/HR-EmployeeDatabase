@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 import com.hred.persistence.annotations.Increment;
 @Entity
-@Table(name="DESIGNATION_HISTORY") 
+@Table(name=" designation_history") 
 @Increment
 public class DesignationHistory extends AbstractObject{
 	

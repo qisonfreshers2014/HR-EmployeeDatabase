@@ -11,7 +11,6 @@ import com.hred.exception.ObjectNotFoundException;
 import com.hred.handler.annotations.AuthorizeEntity;
 import com.hred.model.AllHandsMeeting;
 import com.hred.model.ObjectTypes;
-import com.hred.pagination.AllhandsmeetingInput;
 import com.hred.pagination.PaginationInput;
 import com.hred.pagination.PaginationOutput;
 import com.hred.pagination.Paginator;

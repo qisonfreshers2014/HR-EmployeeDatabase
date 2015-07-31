@@ -43,7 +43,6 @@ public class HRPolicyHandler extends AbstractHandler {
 	}
 	private void validateDuplicate(List<VeiwHRPolicies> data,String policyName) throws HRPolicyException
 	{
-
 		   for (int i = 0; i < data.size(); i++)
 		   {
 			   	String policyName1=data.get(i).getPolicyName();    
@@ -58,14 +57,11 @@ public class HRPolicyHandler extends AbstractHandler {
 	
 	public void validatePolicyName(String policyName) throws HRPolicyException
 	{
-
 		if (policyName == null || policyName.isEmpty()
 				|| policyName.trim().isEmpty()) {
 			throw new HRPolicyException(ExceptionCodes.HRPolicy_DOESNOT_EXIST,
 					ExceptionMessages.HRPolicy_DOESNOT_EXIST);
 		}
-
-
 	}
 
 	public List<VeiwHRPolicies> getPolicy() {
@@ -108,15 +104,11 @@ public class HRPolicyHandler extends AbstractHandler {
 					eachpolicyveiw.setFileID(eachfile.getId());
 					eachpolicyveiw.setPolicyName(eachpolicy.getPolicyName());
 					veiwHRPolicieslist.add(eachpolicyveiw);
-				
 			}
-
 		}
 		}
 		return veiwHRPolicieslist;
 
 	}
-
-
 
 }

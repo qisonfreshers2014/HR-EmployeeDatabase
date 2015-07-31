@@ -71,7 +71,13 @@ allHandMeeting.prototype.addAllHandsMeeting=function(){
       
         }else if(data.code == 204){
         	alert("Date already exists");
-        }
+        }else if(data.code==131){
+
+                     alert("Sorry, you are not a authorized user for this action");
+                           App.loadEmployeePage(App.userName,App.hr,App.isDeleted);
+                             routie("home");
+
+             }   
         else{
          alert("All Hands Meeting Schedule failed to add");
         }

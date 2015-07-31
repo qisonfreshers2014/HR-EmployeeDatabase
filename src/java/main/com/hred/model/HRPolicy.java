@@ -11,7 +11,7 @@ import com.hred.persistence.annotations.Increment;
  */
 
 @Entity
-@Table(name="HR_POLICIES")
+@Table(name=" hr_policies")
 @Increment
 public class HRPolicy extends AbstractObject{
 	@Column(name = "file_id")

@@ -34,15 +34,14 @@
 
 
 .logoutCorner {
-  color: white;
-   font-size: 20px;
- /*  left: 1157px; */
-  position: relative;
-  float:right;
-  top: 14px; 
-  right:10px;
-
+    color: #FFF;
+    font-size: 20px;
+    position: relative;
+    float: right;
+    top: 14px;
+    right: 10px;
 }
+
 .tabColor{
 	 color: #337ab7;
     font-family: calibre 11;

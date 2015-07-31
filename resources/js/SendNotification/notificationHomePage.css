@@ -4,7 +4,6 @@
 }
 #retriveDataNotification {
    margin-left: 45%;
-   
 }
 #datedata {
     float: left;
@@ -60,11 +59,8 @@
 }
 #criteriasfornotifications{
 margin-top:8%;
-
 }
-#notificationsdisplay th,#notificationsdisplay td
-
-
+#notificationsdisplay th,#notificationsdisplay td,#displayData1 th,#displayData1 td
 {
     border-left: 1px solid #afafaf;
     border-bottom: 1px solid #afafaf;
@@ -73,8 +69,7 @@ margin-top:8%;
     text-align: left;
     vertical-align: middle;
 }
-#notificationsdisplay th:last-child,#notificationsdisplay td:last-child
-
+#notificationsdisplay th:last-child,#notificationsdisplay td:last-child,#displayData1 th:last-child,#displayData1 td:last-child
 {
     border-right: 1px solid #afafaf;
 } 

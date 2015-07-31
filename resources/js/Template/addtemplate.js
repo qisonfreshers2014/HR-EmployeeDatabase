@@ -57,7 +57,12 @@ RequestManager.addTemplate(input, function(data, success) {
   
  }else if(data.code==9018){
   alert(data.message);
- }
+ }else if(data.code==131){
+      alert("Sorry,you are not a authorized user for this action");
+              App.loadEmployeePage(App.userName,App.hr,App.isDeleted);
+              routie("home");
+   
+}
  
  else{
   

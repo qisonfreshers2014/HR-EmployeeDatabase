@@ -65,7 +65,6 @@ listHoliday.prototype.validateHolidays = function() {
 		minDate : (new Date((currentYear - 2),1, 12)),
 		maxDate : new Date((currentYear + 1),31, 11 )
 	});
-
 	if ($("#start_from").val() == "" || $("select").val() == "Select"
 			|| $("#description").val() == "") {
 		$(".holidayerror").css("visibility", "visible");
@@ -368,7 +367,7 @@ listHoliday.prototype.tableDisplay = function(content, status) {
 
 // function to edit Holiday data
 listHoliday.prototype.editData = function(releaseId) {
-	$("#update").css("visibility", "visible");
+	
 	var inputvalue = {
 		"payload" : {
 			"id" : releaseId
@@ -377,7 +376,7 @@ listHoliday.prototype.editData = function(releaseId) {
 
 	RequestManager.getHoliday(inputvalue, function(data, success) {
 		if (success) {
-
+			$("#update").css("visibility", "visible");
 			var editdata = data[0];
 			
 
@@ -393,6 +392,9 @@ listHoliday.prototype.editData = function(releaseId) {
 			$("#dropdown").val(editdata.type);
 			$("#holidayID").text(editdata.id);
 			$("#save").hide();
+		}else{
+			
+			alert("You are not authorized user for this action");
 		}
 
 	}.ctx(this));
@@ -498,6 +500,10 @@ listHoliday.prototype.deleteHolidayField = function(date) {
 		if (success) {
 			App.loadHoliday();
 
+		}
+		else{
+			
+			alert("You are not authorized user for this action");
 		}
 
 	}.ctx(this));

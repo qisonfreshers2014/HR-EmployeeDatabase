@@ -42,26 +42,29 @@
     position:relative;
     top:-6px;
 } */
+
+
+/* *****************windows************ */
 #span1 {
-	 color: #337ab7;
-    font-family: calibre 11;
+    color: #337AB7;
     font-size: 18px;
-    font-weight:bold;
-     position:relative;
-/*     top:45px; */
-    right:2px;
+    font-weight: bold;
+    position: relative;
+    right: 2px;
 }
+
 #logout1 {
     margin-bottom: 0%;
- color: #337ab7;
-    font-family: calibre 11;
+    color: #337AB7;
     font-size: 18px;
-    font-weight:bold;
-   /*  text-decoration:none; */
-     position:relative;
-/*     top:44px; */
-    right:1px;
+    font-weight: bold;
+    position: relative;
+    right: 1px;
 }
+
+
+/* 
+--------------------------Ubuntu--------------------- */
 
 /* --------------------container -----------------------*/
 .leftcontainer1 {
@@ -229,7 +232,7 @@ background-color: lightgray;
     border-right: 1px solid #afafaf;
 } 
 #backtoallhandslist{
- margin-left:-4%; 
+ margin-left:-2%; 
 }
 .editallhandsback{
 	margin-left:-3%;

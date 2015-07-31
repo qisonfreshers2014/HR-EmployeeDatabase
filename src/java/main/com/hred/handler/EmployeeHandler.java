@@ -1052,7 +1052,7 @@ public class EmployeeHandler extends AbstractHandler {
 	// Returns  All the Active employees 
 	
 	@AuthorizeEntity(roles = { Constants.HR })
-	public PaginationOutput<Employee> getEmployeesListPaginated(
+	public PaginationOutput<Employee> getEmployeesListPaginatedAOP(
 			  EmployeeListPaginationInput employee) {
 			 
 			 Paginator<Employee> paginator = new Paginator<>();
@@ -1066,7 +1066,7 @@ public class EmployeeHandler extends AbstractHandler {
      // Takes the input as criteria based on which filtering of employees has to done and returns the output as employees list.
 	
 	 @AuthorizeEntity(roles={Constants.HR})
-	 public PaginationOutput<Employee> getFilterEmployeesPaginated(
+	 public PaginationOutput<Employee> getFilterEmployeesPaginatedAOP(
 			FilterEmployee employee) {
 		
 		 Paginator<Employee> paginator = new Paginator<>();
@@ -1080,7 +1080,7 @@ public class EmployeeHandler extends AbstractHandler {
 	  //Takes the input for searching employees and returns the output as employees list.
 	  
 	@AuthorizeEntity(roles={Constants.HR})
-	public PaginationOutput<Employee> getSearchedEmployeesListPaginated(
+	public PaginationOutput<Employee> getSearchedEmployeesListPaginatedAOP(
 			EmployeeSearchInputDescriptor employee) {
 		 Paginator<Employee> paginator = new Paginator<>();
 		 paginator = DAOFactory.getInstance().getEmployeeDAO().getSearchedEmployeesListPaginated(employee);
@@ -1089,24 +1089,7 @@ public class EmployeeHandler extends AbstractHandler {
 		 return empPaginationOutput;
 	}
 	
-	// This method for generating Random password
 	
-		public char[] PasswordGenereation(){
-			
-			        int noOfCAPSAlpha = 1;
-			        int noOfDigits = 1;
-			        int noOfSplChars = 1;
-			        int minLen = 8;
-			        int maxLen = 12;
-			        
-			        char[] pswd=RandomPasswordGenerator.generatePswd(minLen, maxLen,
-		                    noOfCAPSAlpha, noOfDigits, noOfSplChars);
-					return pswd;
-		
-		}
-		
-		
-		
 		// Returns Profile Pics of all the employees as a list
 		
 		public List<String> getProfilePics() throws BusinessException {
@@ -1137,7 +1120,7 @@ public class EmployeeHandler extends AbstractHandler {
 			
 			List<Long> fileIdsnotnull=new ArrayList<Long>();
 			
-			Iterator itr=fileIds.iterator();
+			Iterator<Long> itr=fileIds.iterator();
 			while(itr.hasNext()){
 				
 				long id=(long) itr.next();
@@ -1166,6 +1149,22 @@ public class EmployeeHandler extends AbstractHandler {
 		
 			
 		}
+		// This method for generating Random password
+		
+			public char[] PasswordGenereation(){
+				
+				        int noOfCAPSAlpha = 1;
+				        int noOfDigits = 1;
+				        int noOfSplChars = 1;
+				        int minLen = 8;
+				        int maxLen = 12;
+				        
+				        char[] pswd=RandomPasswordGenerator.generatePswd(minLen, maxLen,
+			                    noOfCAPSAlpha, noOfDigits, noOfSplChars);
+						return pswd;
+			
+			}
+			
 	}
 
 

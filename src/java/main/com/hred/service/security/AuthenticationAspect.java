@@ -20,7 +20,6 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import com.hred.common.cache.Cache;
 import com.hred.common.cache.CacheManager;
 import com.hred.common.cache.CacheRegionType;
 import com.hred.common.json.JsonUtil;
@@ -56,6 +55,8 @@ public class AuthenticationAspect {
 			+ " && !execution(* com.hred.service.*.getSessionId(..))"
 			+ " && !cflowbelow(execution(* com.hred.service.*.*(..)))")
 	public Object doAccessCheck(ProceedingJoinPoint thisJoinPoint) {
+		
+	
 		// Object key = null;
 		
 		Transaction tx = null;
@@ -63,8 +64,7 @@ public class AuthenticationAspect {
 			
 			authenticateUser(thisJoinPoint);
 			RequestId id = this.createRequestId();
-			ServiceRequestContextHolder.getContext().setRequestId(
-					this.createRequestId());
+			ServiceRequestContextHolder.getContext().setRequestId(this.createRequestId());
 			SessionFactoryUtil sessionUtil = SessionFactoryUtil.getInstance();
 			Session session=sessionUtil.getCurrentSession();
 			tx = SessionFactoryUtil.getInstance().beginTransaction(session);

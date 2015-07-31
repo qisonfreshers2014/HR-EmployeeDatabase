@@ -54,6 +54,8 @@ public DesignationType getDesignationByIDAOP(Employee getDesignationNameByID)
 	
 }
 
+
+@AuthorizeEntity(roles={Constants.HR})
 public DesignationType saveAOP(DesignationType designationType) throws DesignationTypeException {
 	   String name=designationType.getName();
 	   if (name == null || name.isEmpty()
@@ -66,7 +68,8 @@ public DesignationType saveAOP(DesignationType designationType) throws Designati
 	return designationsaved;
 }
 
-public List<String> getDesignationTypes(){
+@AuthorizeEntity(roles={Constants.HR})
+public List<String> getDesignationTypesAOP(){
 	
 	List<String> designationTypes = null;
 	DesignationTypeDAO desgTypeDAOImpl = (DesignationTypeDAO) DAOFactory.getInstance().getDesignationTypeDAO();

@@ -7,7 +7,7 @@ import javax.persistence.Table;
 import com.hred.persistence.annotations.Increment;
 
 @Entity
-@Table(name = "EMPLOYEESKILLS")
+@Table(name = "employeeskills")
 @Increment
 public class Skills extends AbstractObject{
 

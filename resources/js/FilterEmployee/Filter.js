@@ -9,7 +9,7 @@ FilterEmp.prototype.handleShow = function(empid) {
 	
 	//Appending designation types to the drop down
 	var emptyinput={};
-	 RequestManager.getDesignationName(emptyinput, function(data, success){
+	 RequestManager.getDesignationTypes(emptyinput, function(data, success){
 		               
 		 if(success){
 			 
@@ -22,7 +22,13 @@ FilterEmp.prototype.handleShow = function(empid) {
 			 $('#filterdesignation').append($("<option value="+object.id+"> "+object.name+"</option>"));			 
 			 }
 			 
-		 }
+		 }else if(data.code==131){
+                 alert("Sorry, you are not a authorized user for this action");
+               App.loadEmployeePage(App.userName,App.hr,App.isDeleted);
+                  routie("home");
+               }else{
+                    alert("Failed to get Designation types");
+             }
 		 
 	 }.ctx(this));
 	
@@ -420,7 +426,11 @@ $(function(){
 	     			  
 	     			 }.ctx(this));
 	     			    
-				   } else{
+				   }else if(data.code==131){
+                                     alert("Sorry, you are not a authorized user for this action");
+                                         App.loadEmployeePage(App.userName,App.hr,App.isDeleted);
+                                          routie("home");
+                                } else{
 					  
 					    alert("no record found");
 					    
@@ -429,4 +439,3 @@ $(function(){
 
 }
  
-

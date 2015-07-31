@@ -7,7 +7,7 @@ import javax.persistence.Table;
 import com.hred.persistence.annotations.Increment;
 
 @Entity
-@Table(name = "NOTIFICATIONHISTORY")
+@Table(name = "notificationhistory")
 @Increment
 public class SendNotificationHistory extends AbstractObject {
 
@@ -25,9 +25,6 @@ public class SendNotificationHistory extends AbstractObject {
 /*	@Column(name = "entered_time") 
 	private java.util.Date enteredTime;
 	*/
-	
-
-	
 
 	public SendNotificationHistory() {
 		super();
@@ -35,19 +32,10 @@ public class SendNotificationHistory extends AbstractObject {
 	}
 
 
-
-
-
 	public SendNotificationHistory(AbstractObject abstractObject) {
 		super(abstractObject);
 		// TODO Auto-generated constructor stub
 	}
-
-
-
-
-
-
 
 
 
@@ -62,14 +50,9 @@ public class SendNotificationHistory extends AbstractObject {
 	}
 
 
-
-
-
 	public String getEmployeeEmail() {
 		return employeeEmail;
 	}
-
-
 
 
 
@@ -78,22 +61,14 @@ public class SendNotificationHistory extends AbstractObject {
 	}
 
 
-
-
-
 	public String getEmployeeName() {
 		return employeeName;
 	}
 
 
-
-
-
 	public void setEmployeeName(String employeeName) {
 		this.employeeName = employeeName;
 	}
-
-
 
 
 
@@ -103,16 +78,9 @@ public class SendNotificationHistory extends AbstractObject {
 
 
 
-
-
 	public void setEmployeeId(int employeeId) {
 		this.employeeId = employeeId;
 	}
-
-
-
-
-
 
 
 
@@ -122,14 +90,9 @@ public class SendNotificationHistory extends AbstractObject {
 
 
 
-
-
 	public void setEventName(String eventName) {
 		this.eventName = eventName;
 	}
-
-
-
 
 
 	public String getTemplateId() {
@@ -137,20 +100,9 @@ public class SendNotificationHistory extends AbstractObject {
 	}
 
 
-
-
-
 	public void setTemplateId(String templateId) {
 		this.templateId = templateId;
 	}
-
-
-
-
-
-
-
-
 
 	@Override
 	public int getObjectType() {

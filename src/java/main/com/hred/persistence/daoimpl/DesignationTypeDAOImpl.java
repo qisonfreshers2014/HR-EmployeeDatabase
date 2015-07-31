@@ -83,7 +83,7 @@ public class DesignationTypeDAOImpl extends BaseDAOImpl implements DesignationTy
 				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 			}
 			
-    String hql="select name from DesignationType";			
+    String hql="from DesignationType where is_deleted =0";			
 			org.hibernate.Query query = session.createQuery(hql);
 			odesignationTypes = (List<String>)query.list();
 		}

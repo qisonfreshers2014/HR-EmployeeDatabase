@@ -6,8 +6,11 @@ function App() {
 	this.employeeId = "";
 	 this.hr = "";
 	this.isDeleted = "";
+	this.fullPath="192.168.10.53:9090";
 	this.handleShow();
+
 }
+
 App.prototype.handleShow = function() { 
 	
 	 var input={}

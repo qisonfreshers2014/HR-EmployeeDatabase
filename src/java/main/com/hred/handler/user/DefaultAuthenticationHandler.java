@@ -39,7 +39,6 @@ public class DefaultAuthenticationHandler implements AuthenticationHandler {
  public AuthenticationOutput authenticate(AuthenticationInput input)
    throws ObjectNotFoundException, BusinessException,
    EncryptionException {
- 
   DefaultAuthenticationInput daInput = (DefaultAuthenticationInput) input;
   int authStatus = User.AUTH_STATUS_NONE;
   if (isLoginValidated(daInput)){
@@ -131,7 +130,7 @@ public class DefaultAuthenticationHandler implements AuthenticationHandler {
      ExceptionMessages.USER_ID_AND_PASSWORD_NULL);
   }
   isValidated = validateEmail(daInput.getEmail());
-  isValidated = validatePassword(daInput.getPassword());  
+  isValidated = validatePassword(daInput.getPassword());
   return isValidated;
  }
  private static boolean validateEmail(String email) throws UserException {

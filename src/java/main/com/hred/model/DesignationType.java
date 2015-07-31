@@ -6,7 +6,7 @@ import javax.persistence.Table;
 
 import com.hred.persistence.annotations.Increment;
 @Entity
-@Table(name="DESIGNATION_TYPE")
+@Table(name="designation_type")
 @Increment
 public class DesignationType extends AbstractObject{
 
