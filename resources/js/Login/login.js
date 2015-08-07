@@ -80,7 +80,7 @@ Login.prototype.handleShow = function() {
       $('.errormessage').text("Password cannot be empty");
          isValid = false;
   } 
-     else if((!minMaxLength.test(password))||(!special.test(password))||(!number.test(password))||(!upper.test(password))||(!lower.test(password))){
+     else if((!minMaxLength.test(password))||(!special.test(password))||(!upper.test(password))||(!lower.test(password))){
 /*      $(".errormessage").show();
       $('.errormessage').focus();
       $('.errormessage').html("<span>Password should be atleast 8 characters and contain one number</span><br>" +

@@ -276,7 +276,7 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 			// $(salerr).css("color", "green");
 		}
 
-		if (blood != "") {
+		/*if (blood != "") {
 			
 		 if (!(blood.match(bloodGroup))) {
 			$(blodderr).text("Please enter a valid blood group eg: AB+, AB-");
@@ -289,7 +289,7 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 			// $(blodderr).css("color", "green");
 
 		}
-		}
+		}*/
 
 		if (name == "") {
 			$(nameerr).text("Required field");
@@ -510,9 +510,7 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 	if(typeof fileId==='undefined'){
 		
 		fileId=$('#fileid').val();
-		console.log(fileId);
 	}
-		console.log(fileId);
 		var input = {
 			"payload" : {
 				"employeeId" : empid,

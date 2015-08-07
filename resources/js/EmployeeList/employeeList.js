@@ -156,8 +156,7 @@ monthsArray[11]="Dec";
   // and we'll also call it to check right now!
   checkFragment();
   });
- 
-
+  
   var desInput={"payload":{}};
   
   RequestManager.getDesignationName(desInput,function(desdata, success) {

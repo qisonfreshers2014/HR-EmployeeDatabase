@@ -128,6 +128,7 @@ empViewemployee.prototype.empviewEmployee=function(employeeId){
    $('#pannum').val(obj.pan);
    $('#pfnum').val(obj.pfNo);
    $('#accountnum').val(obj.bankAccountNo);
+   $('#skype').val(obj.skype);
    $('#university').val(obj.university);
    $('#hobbies').val(obj.hobbies);
    $('#yearofexp').val(totalYearsOfExp+"."+totalYearsOfExpMnths);

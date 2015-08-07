@@ -81,10 +81,10 @@ skill.prototype.validateSkill=function(){
           alert("Please Select Rating");
           return;
           	  }
-	   else if(!(skill.match(regex))){
+	  /* else if(!(skill.match(regex))){
 			alert("Please enter characters with one space for skill");
 			 return;
-			  }
+			  }*/
 	   else if (!(empId.match(num))){
 		   alert("Please enter only numbers for EmployeeID");
 		  return;

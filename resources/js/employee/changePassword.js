@@ -20,8 +20,8 @@ changePassword.prototype.handleShow = function(employeeId) {
 
 }
 changePassword.prototype.changePwd = function(employeeId) {
-
-	var pwepattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}/;
+    
+	var pwepattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}/;
 	var oldPassword = $("#oldpassword").val();
 	var newPassword = $("#newpassword").val();
 	var confirmPassword = $("#confirmpassword").val();
@@ -35,7 +35,7 @@ changePassword.prototype.changePwd = function(employeeId) {
 		} else if (!(oldPassword.match(pwepattern))) {
 			$(olepwderr)
 					.text(
-							"Must be at least 8 characters,At least 1 number, 1 lowercase, 1 uppercase letter, At least 1 special character");
+							"Must be at least 8 characters, 1 lowercase, 1 uppercase letter, At least 1 special character");
 			$(olepwderr).css("color", "red");
 		} else {
 			$(olepwderr).text("");
@@ -48,7 +48,7 @@ changePassword.prototype.changePwd = function(employeeId) {
 		} else if (!(newPassword.match(pwepattern))) {
 			$(newpwderr)
 					.text(
-							"Must be at least 8 characters,At least 1 number, 1 lowercase, 1 uppercase letter, At least 1 special character");
+							"Must be at least 8 characters, 1 lowercase, 1 uppercase letter, At least 1 special character");
 			$(newpwderr).css("color", "red");
 		} else {
 			$(newpwderr).text("");
@@ -61,7 +61,7 @@ changePassword.prototype.changePwd = function(employeeId) {
 		} else if (!(confirmPassword.match(pwepattern))) {
 			$(confirmpwderr)
 					.text(
-							"Must be at least 8 characters,At least 1 number, 1 lowercase, 1 uppercase letter, At least 1 special character");
+							"Must be at least 8 characters, 1 lowercase, 1 uppercase letter, At least 1 special character");
 			$(confirmpwderr).css("color", "red");
 		} else {
 			$(confirmpwderr).text("");
@@ -70,12 +70,12 @@ changePassword.prototype.changePwd = function(employeeId) {
 	} else if (!(newPassword.match(pwepattern))) {
 		$(newpwderr)
 				.text(
-						"Must be at least 8 characters,At least 1 number, 1 lowercase, 1 uppercase letter, At least 1 special character");
+						"Must be at least 8 characters, 1 lowercase, 1 uppercase letter, At least 1 special character");
 		$(newpwderr).css("color", "red");
 	} else if (!(confirmPassword.match(pwepattern))) {
 		$(confirmpwderr)
 				.text(
-						"Must be at least 8 characters,At least 1 number, 1 lowercase, 1 uppercase letter, At least 1 special character");
+						"Must be at least 8 characters, 1 lowercase, 1 uppercase letter, At least 1 special character");
 		$(confirmpwderr).css("color", "red");
 	} else if (!(newPassword == confirmPassword)) {
 		$(olepwderr).text("");
