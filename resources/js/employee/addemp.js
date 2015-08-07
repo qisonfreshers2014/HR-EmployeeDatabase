@@ -121,7 +121,7 @@ AddEmployee.prototype.handleShow = function() {
 		changeMonth : true,
 		changeYear : true,
 		showAnim : 'drop',
-		minDate : new Date(2010, 10, 30),
+		minDate : new Date(2009,12 ,31),
 		maxDate : new Date()
 	})
 
