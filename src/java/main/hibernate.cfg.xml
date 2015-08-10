@@ -7,43 +7,31 @@
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
 		<property name="hibernate.connection.url">jdbc:mysql://localhost/hrmsdb</property>
 		<property name="hibernate.connection.username">root</property>
-		<property name="hibernate.connection.password">shelke</property>
+		<property name="hibernate.connection.password">Q1$0N@misql</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="hibernate.connection.pool_size">8</property>
 		<property name="hibernate.current_session_context_class">thread</property>
 		<property name="hibernate.cache.provider_class">org.hibernate.cache.internal.NoCacheProvider</property>
-		
-		  <property name="hibernate.c3p0.min_size">8</property>
-  <property name="hibernate.c3p0.max_size">20</property>
-  <property name="hibernate.c3p0.timeout">3000</property>
-  <property name="hibernate.c3p0.max_statements">50</property>
-  <property name="hibernate.c3p0.idle_test_period">3000</property>
-
+		<property name="hibernate.c3p0.min_size">8</property>
+        <property name="hibernate.c3p0.max_size">20</property>
+        <property name="hibernate.c3p0.timeout">3000</property>
+        <property name="hibernate.c3p0.max_statements">50</property>
+        <property name="hibernate.c3p0.idle_test_period">3000</property>
 		<property name="hibernate.show_sql">true</property>
-
 		<property name="hibernate.hbm2ddl.auto">update</property>
-
-	  <property name="hibernate.connection.zeroDateTimeBehavior">convertToNull</property>
-
+	    <property name="hibernate.connection.zeroDateTimeBehavior">convertToNull</property>
 		<mapping class="com.hred.model.Employee" />
 		<mapping class="com.hred.model.HRPolicy" />
 		<mapping class="com.hred.model.Holiday" />
-
 		<mapping class="com.hred.model.User" />
 		<mapping class="com.hred.model.Template" />
 		<mapping class="com.hred.model.AllHandsMeeting" />
         <mapping class="com.hred.persistence.model.IdCounter"/>
-		
-
 		<!-- <mapping class="com.hred.persistence.dao.model.IdCounter"/>  -->
-
-
 	   	<mapping class="com.hred.model.Skills"/>
 		<mapping class="com.hred.model.File" />
 		<mapping class="com.hred.model.SendNotificationHistory" />
 		<mapping class="com.hred.model.DesignationHistory"/>
 		<mapping class="com.hred.model.DesignationType" />
-
-
 	</session-factory>
 </hibernate-configuration>
