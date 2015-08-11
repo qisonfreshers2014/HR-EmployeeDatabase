@@ -478,7 +478,18 @@ AddEmployee.prototype.employeeIdValidate = function(flag) {
 		$(err).text("Required field");
 		$(err).css("color", "red");
 
-	} else {
+	}
+	else if(empId == isNaN || !(empId.match(num))){
+		
+		$(err).text("Please enter only numbers");
+		$(err).css("color", "red");
+		
+	}else if(empId==0){
+		$(err).text("Employeeid 0 is not allowed");
+		$(err).css("color", "red");
+		
+	}
+		else {
 		$(err).text("");
 		flag = false;
 		return flag;
