@@ -47,7 +47,6 @@ id="WebApp_ID" version="3.0">
    		<servlet-class>com.hred.common.InitializationServlet</servlet-class>
    		 <load-on-startup>2</load-on-startup>
     </servlet>
-    
     <servlet-mapping>
         <servlet-name>InitializationServlet</servlet-name>
         <url-pattern>/InitializationServlet</url-pattern>
