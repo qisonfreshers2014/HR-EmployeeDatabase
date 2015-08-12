@@ -101,7 +101,7 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 			 
 
 			createCriteria.add(Restrictions.eq("email", email));
-			//createCriteria.add(Restrictions.eq("isDeleted", false));
+			createCriteria.add(Restrictions.eq("isDeleted", false));
 			list = createCriteria.list();
 			if (list.size() == 0) {
 				throw new UserException(ExceptionCodes.USER_DOESNOT_EXIST, ExceptionMessages.USER_DOESNOT_EXIST);
