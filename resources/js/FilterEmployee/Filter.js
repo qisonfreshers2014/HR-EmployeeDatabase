@@ -170,13 +170,6 @@ if($('#dojFrom').val()!="" && $('#dojTo').val()==""){
 			}
 		 
 
-       
-	
-	
-		  	
-			
-	
-	
 	var payload ={"pageNo":pagno,"pageSize":10};
 	if($('#emptype').val() != ""){
 		payload.filterEmployee = $('#emptype').val();
@@ -231,14 +224,14 @@ if($('#dojFrom').val()!="" && $('#dojTo').val()==""){
 		
 	    	$('.heading1').css("visibility","visible");
 	    	  $('#filterPagination').css("visibility","visible");
-	  	$('#displayData').html('<tr class="displaytr"><th class="displayth">Employee Id</th><th class="displayth">Employee Name</th><th class="displayth">Gender</th><th class="displayth">DOB</th><th class="displayth">DOJ</th><th class="displayth">Email</th><th class="displayth">Fathers Name</th><th class="displayth">Designation</th><th class="displayth">Highest Qualification</th><th class="displayth">Contact No</th><th class="displayth">Years Of Experience</th><th class="displayth">View Details</th></tr>');
+	  	$('#displayData').html('<tr class="displaytr"><th class="displayth">Employee Id</th><th class="displayth">Employee Name</th><th class="displayth">Gender</th><th class="displayth">DOB</th><th class="displayth">DOJ</th><th class="displayth">Email</th><th class="displayth">Fathers Name</th><th class="displayth">Designation</th><th class="displayth">Highest Qualification</th><th class="displayth">Contact No</th><th class="displayth">Years Of Experience</th><th class="displayth">LastWorking day</th><th class="displayth">View Details</th></tr>');
 	  	
 	    }
 	    else{
 	          alert("No record found");
 	          $('.heading1').css("visibility","hidden");
 	          $('#filterPagination').css("visibility","hidden");
-	          $('#displayData').html('<tr class="displaytr"><th class="displayth">Employee Id</th><th class="displayth">Employee Name</th><th class="displayth">Gender</th><th class="displayth">DOB</th><th class="displayth">DOJ</th><th class="displayth">Email</th><th class="displayth">Fathers Name</th><th class="displayth">Designation</th><th class="displayth">Highest Qualification</th><th class="displayth">Contact No</th><th class="displayth">Years Of Experience</th><th class="displayth">View Details</th></tr>');
+	          $('#displayData').html('<tr class="displaytr"><th class="displayth">Employee Id</th><th class="displayth">Employee Name</th><th class="displayth">Gender</th><th class="displayth">DOB</th><th class="displayth">DOJ</th><th class="displayth">Email</th><th class="displayth">Fathers Name</th><th class="displayth">Designation</th><th class="displayth">Highest Qualification</th><th class="displayth">Contact No</th><th class="displayth">Years Of Experience</th><th class="displayth">LastWorking day</th><th class="displayth">View Details</th></tr>');
 	    	   
 			    $('#displayData tbody').empty();
 	   
@@ -319,7 +312,7 @@ $('#displayData').append("<tr class='displaytr'><td class='displaytd'>"+item.emp
 +new Date(item.dateOfBirth).getDate()+"-"+monthsArray[new Date(item.dateOfBirth).getMonth()]+"-"+new Date(item.dateOfBirth).getFullYear()+"</td><td class='displaytd'>"
 +new Date(item.dateOfJoining).getDate()+"-"+monthsArray[new Date(item.dateOfJoining).getMonth()]+"-"+new Date(item.dateOfJoining).getFullYear()+"</td><td class='displaytd'>"+item.email+"</td><td>"+item.fathersName+"</td><td class='displaytd'>"
 +desName+"</td><td class='displaytd'>"+item.highestQualification+"</td><td class='displaytd'>"+item.contactNo+"</td>" +
-		"<td class='displaytd'>"+totalYearsOfExp+'.'+totalYearsOfExpMnths+"</td><td class='displaytd'><input type='button' value='View' id='"+item.id+"' class='dynamicView  btn-success'></td></tr>");
+		"<td class='displaytd'>"+totalYearsOfExp+'.'+totalYearsOfExpMnths+"</td><td class='displaytd'>"+new Date(item.lastWorkingDay).getDate()+"-"+monthsArray[new Date(item.lastWorkingDay).getMonth()]+"-"+new Date(item.lastWorkingDay).getFullYear()+"</td><td class='displaytd'><input type='button' value='View' id='"+item.id+"' class='dynamicView  btn-success'></td></tr>");
 	
       
         			
@@ -327,7 +320,7 @@ $('#displayData').append("<tr class='displaytr'><td class='displaytd'>"+item.emp
 	  
 			    
 var content = '';
-content += '<tr class="displaytr"><th class="displayth">Employee Id</th><th class="displayth">Employee Name</th><th class="displayth">Gender</th><th class="displayth">DOB</th><th class="displayth">DOJ</th><th class="displayth">Email</th><th class="displayth">Fathers Name</th><th class="displayth">Designation</th><th class="displayth">Highest Qualification</th><th class="displayth">Contact No</th><th class="displayth">Years Of Experience</th><th class="displayth">View Details</th></tr>';
+content += '<tr class="displaytr"><th class="displayth">Employee Id</th><th class="displayth">Employee Name</th><th class="displayth">Gender</th><th class="displayth">DOB</th><th class="displayth">DOJ</th><th class="displayth">Email</th><th class="displayth">Fathers Name</th><th class="displayth">Designation</th><th class="displayth">Highest Qualification</th><th class="displayth">Contact No</th><th class="displayth">Years Of Experience</th><th class="displayth">LastWorking day</th><th class="displayth">View Details</th></tr>';
 for (var i = 0; i < employees.length; i++) {
 			     var item = employees[i];
 			     
@@ -390,7 +383,8 @@ content += '<td class="displaytd">' +new Date(item.dateOfJoining).getDate()+"-"+
 	              content += '<td class="displaytd">' +desName +'</td>';
 	              content += '<td class="displaytd">' +item.highestQualification +'</td>';
 	              content += '<td class="displaytd">' +item.contactNo +'</td>';
-	              content += '<td class="displaytd">' +totalYearsOfExp+"."+totalYearsOfExpMnths+'</td>';	            
+	              content += '<td class="displaytd">' +totalYearsOfExp+"."+totalYearsOfExpMnths+'</td>';
+	              content += '<td class="displaytd">' +new Date(item.lastWorkingDay).getDate()+"-"+monthsArray[new Date(item.lastWorkingDay).getMonth()] +"-"+new Date(item.lastWorkingDay).getFullYear()+'</td>';
 	              content += '<td class="displaytd">' +"<input type='button' value='View' id='"+item.employeeId+"' class='dynamicView  btn-success'> "+'</td>';
 	              content += '</tr>';
 	              $('#displayData').html(content);

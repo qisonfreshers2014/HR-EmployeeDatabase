@@ -419,10 +419,17 @@ AddEmployee.prototype.validateEmp = function() {
 								routie("employee");
 							} else if (data.code == 297) {
 								alert(data.message);
-
+								document.getElementById('light').style.display = 'hidden';
+								document.getElementById('fade').style.display = 'hidden';
+								document.getElementById('addemployeediv').style.display = "block";
+						    	  App.loadEmpl();
 							} else if (data.code == 296) {
 
 								alert(data.message);
+								document.getElementById('light').style.display = 'hidden';
+								document.getElementById('fade').style.display = 'hidden';
+								document.getElementById('addemployeediv').style.display = "block";
+								App.loadEmpl();
 
 							} else if (data.code == 131) {
 								alert("Sorry,you are not a authorized user for this action");
@@ -431,6 +438,10 @@ AddEmployee.prototype.validateEmp = function() {
 								routie("home");
 							} else {
 								alert("Failed to add");
+								document.getElementById('light').style.display = 'hidden';
+								document.getElementById('fade').style.display = 'hidden';
+								document.getElementById('addemployeediv').style.display = "block";
+								App.loadEmpl();
 							}
 						}.ctx(this));
 	}
@@ -606,21 +617,22 @@ AddEmployee.prototype.employeeFathersNameValidate = function(flag) {
 	var fathererr = $("#fathererr");
 	var fathername = $("#fathername").val();
 	if (fathername == "") {
-		$(fathererr).text("Required field");
-		$(fathererr).css("color", "red");
-	} else if (!(fathername.match(char) || fathername == isNaN)) {
+		$(fathererr).text("");
+		flag = false;
+		return flag;
+	}
+		/*$(fathererr).text("Required field");
+		$(fathererr).css("color", "red");*/
+	else if (!(fathername.match(char) || fathername == isNaN)) {
 		$(fathererr).text("Please enter characters only");
-		$(fathererr).css("color", "red");
-	} else if (fathername < 5) {
-		$(fathererr).text("Please enter min 6 characters ");
 		$(fathererr).css("color", "red");
 	} else {
 		$(fathererr).text("");
 		flag = false;
 		return flag;
 		// $(fathererr).css("color", "green");
-
 	}
+	
 
 }
 AddEmployee.prototype.employeeContactNumberValidate = function(flag) {

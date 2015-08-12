@@ -1231,5 +1231,5 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 				return  list;
 	}
 
-	
+
 }

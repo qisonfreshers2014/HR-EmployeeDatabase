@@ -239,6 +239,9 @@ RequestManager.prototype.getSearchEmp=function(data,callback){
  RequestManager.prototype.getAllProfilePics=function(data,callback){
 	 this.sendToServer('employee/getProfilePics', data, callback);
 } 
+ RequestManager.prototype.saveLastWorkingDay=function(data,callback){
+	 this.sendToServer('employee/SaveLastWorkingDayOfEmployee', data, callback);
+} 
 
 
 var RequestManager = new RequestManager();

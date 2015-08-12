@@ -458,4 +458,19 @@ public class EmployeeService extends BaseService {
 			  return JsonUtil.getJsonBasedOnDescriptor(employees,
 			     EmployeeListPaginationOutputDescriptor.class);
 			 }
+			 @POST
+				@RestService(input = DesignationHistory.class, output = String.class)
+				@ServiceStatus(value = "complete")
+				@Consumes(MediaType.APPLICATION_JSON)
+				@Produces(MediaType.APPLICATION_JSON)
+				@Path("/SaveLastWorkingDayOfEmployee")
+				public String SaveLastWorkingDayOfEmployee(@Context HttpHeaders headers,@Context UriInfo uriInfo, WebserviceRequest request)
+						throws ObjectNotFoundException, BusinessException,
+						EncryptionException {
+					Employee employee = (Employee) JsonUtil.getObject(request.getPayload(),
+							Employee.class);
+					Employee output = (Employee) EmployeeHandler.getInstance().saveLastWorkingDayOfEmployeeAOP(employee);
+
+					return JsonUtil.getJsonBasedOnDescriptor(output, Employee.class);
+				}	
 }

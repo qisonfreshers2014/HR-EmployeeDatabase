@@ -107,6 +107,16 @@ $('#backtohrview').click(function(){
 		minDate : new Date(1980, 12, 31),
 		maxDate : new Date(1994, 12, 31)
 	})
+	$('#lastwrkday').datepicker({
+		// dateFormat : $.datepicker.TIMESTAMP,
+		dateFormat : 'yy-mm-dd',
+		showButtonPanel : true,
+		changeMonth : true,
+		changeYear : true,
+		showAnim : 'drop',
+		minDate : new Date(2009, 12, 31),
+		maxDate : new Date()
+	})
 	$('#filename').one('click', UploadClickHandler.ctx(this));
 	function UploadClickHandler(event) {
 		var thisEle = event.target;
@@ -205,8 +215,7 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 	var dateformat = /^(19|20)\d\d-(0\d|1[012])-(0\d|1\d|2\d|3[01])$/;
 
 
-	if (name == "" || qualification == "" || fathername == ""
-			|| contnum == "" || txtemercon == "" || txtemname == ""
+	if (name == "" || qualification == "" || contnum == "" || txtemercon == "" || txtemname == ""
 			|| currentaddr == "" || peraddr == ""
 			 || Gender == "" || dob == "" || salary == ""||actualDOB=="" ||employeeType=="") {
 		$('.error').css('visibility', 'visible');
@@ -241,8 +250,8 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 		}
 
 		if (fathername == "") {
-			$(fathererr).text("Required field");
-			$(fathererr).css("color", "red");
+			$(fathererr).text("");
+			//$(fathererr).css("color", "red");
 		} else if (!(fathername.match(char) || fathername == isNaN)) {
 			$(fathererr).text("Enter characters only");
 			$(fathererr).css("color", "red");
@@ -463,10 +472,7 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 	else if (!(qualification.match(qual) || qualification.match(char))) {
 		$(nerr).text("Please check the qualification");
 		$(nerr).css("color", "red");
-	}  else if (!(fathername.match(char) || fathername == isNaN)) {
-		$(fathererr).text("Enter characters only");
-		$(fathererr).css("color", "red");
-	} else if (salary == isNaN || !(salary.match(salry))) { 
+	}  else if (salary == isNaN || !(salary.match(salry))) { 
 		$(salerr).text("Please enter a valid value ex: 100.00");
 		$(salerr).css("color", "red");
 	} else if (contnum == isNaN || !(contnum.match(num))) {
@@ -542,7 +548,6 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 		};
 		RequestManager.hrupdateEmp(input, function(data, success) {
 			if (success) {
-				console.dir(data);
 				alert("Employee ID:" + eid + " Details Successfully Updated");
 				routie("employee");
 			} else {
@@ -581,50 +586,82 @@ HrEditEmployee.prototype.deleteEmployee = function(empid) {
 	var text = confirm("Are you sure you want to delete this employee?");
 	if (text == true) {
 		
-	
-	var input = {
-		"payload" : {
-			"employeeId" : empid
-		}
-	};
-	RequestManager.hrDeleteEmployee(input, function(data, success) {
-		if (success) {
-			console.dir(data);
-			alert("EmployeeID: " + $("#eid").val()
-					+ " Details Successfully Deleted");
-			$("#eid").val("");
-			$("#name").val("");
-			$("#qual").val("");
-			$("#fathername").val("");
-			$("#pfnum").val("");
-			$("#pannum").val("");
-			$("#accountnum").val("");
-			$("#contnum").val("");
-			$("#txtemercon").val("");
-			$("#txtemname").val("");
-			$("#currentaddr").val("");
-			$("#peraddr").val("");
-			$("#relation").val("");
-			$('#dob').val("");
-			$("#actualdob").val("");
-			$('#doj').val("");
-			$("#emal").val("");
-			$("#password").val("");
-			$('#blood').val("");
-			$("#salary").val("");
-			$('#variable').val("");
-			$('#gender').val("");
-			$('#employeetype').val("");
-			$('#skype').val("");
-			$("#yearofexp").val("");
-			$('#filepath').text("");
-			// document.getElementById("hredit").disabled = true;
-			document.getElementById("hrupdate").disabled = true;
-			document.getElementById("hrdelete").disabled = true;
-			routie("employee");
-		} else {
-			alert("failed to Delete");
-		}
-	}.ctx(this));
+		 $('#LastWorkingDay').dialog({
+             modal: true,
+             buttons:
+           { "Cancel": function() {
+               $(this).dialog("close")
+           },
+               "Submit": function() {
+            	  
+            	  var lastWrkingDay=$('#lastwrkday').val();
+            	  if(lastWrkingDay==""){
+            		  
+            		  alert("Please Select the Last working day");
+            	  }
+            	  console.log(lastWrkingDay+"00:00:00");
+            	  var input={"payload":{"employeeId":empid,"lastWorkingDay":lastWrkingDay + " 00:00:00"}}
+            	   RequestManager.saveLastWorkingDay(input, function(data, success) {
+            		   if(success){
+            			   
+            			   var employeeId=data.employeeId;
+            			   var inputTodelete = {
+            						"payload" : {
+            							"employeeId" : employeeId
+            						}
+            					};
+            					RequestManager.hrDeleteEmployee(inputTodelete, function(data, success) {
+            						if (success) {
+            							console.dir(data);
+            							alert("EmployeeID: " + $("#eid").val()
+            									+ " Details Successfully Deleted");
+            							$("#eid").val("");
+            							$("#name").val("");
+            							$("#qual").val("");
+            							$("#fathername").val("");
+            							$("#pfnum").val("");
+            							$("#pannum").val("");
+            							$("#accountnum").val("");
+            							$("#contnum").val("");
+            							$("#txtemercon").val("");
+            							$("#txtemname").val("");
+            							$("#currentaddr").val("");
+            							$("#peraddr").val("");
+            							$("#relation").val("");
+            							$('#dob').val("");
+            							$("#actualdob").val("");
+            							$('#doj').val("");
+            							$("#emal").val("");
+            							$("#password").val("");
+            							$('#blood').val("");
+            							$("#salary").val("");
+            							$('#variable').val("");
+            							$('#gender').val("");
+            							$('#employeetype').val("");
+            							$('#skype').val("");
+            							$("#yearofexp").val("");
+            							$('#filepath').text("");
+            							// document.getElementById("hredit").disabled = true;
+            							document.getElementById("hrupdate").disabled = true;
+            							document.getElementById("hrdelete").disabled = true;
+            							routie("employee");
+            						} else {
+            							alert("failed to Delete");
+            						}
+            					}.ctx(this));
+
+            		   }else if(data.code==312){
+            			   
+            			   alert(data.message);
+            		   }else{
+            			   
+            			   alert("Failed to delete employee");
+            		   }
+            		   
+            	   }.ctx(this));
+            	  $(this).dialog("close")
+            } }
+        });
+		
 }
 }

@@ -85,6 +85,8 @@ public class Employee extends AbstractObject {
  private String university;
  @Column(name="hobbies")
  private String hobbies;
+ @Column(name = "Last_Working_day")
+ private Timestamp lastWorkingDay;
 
 public long getFileId() {
 	return fileId;
@@ -346,6 +348,14 @@ public void setHobbies(String hobbies) {
 	this.hobbies = hobbies;
 }
 
+public Timestamp getLastWorkingDay() {
+	return lastWorkingDay;
+}
+
+public void setLastWorkingDay(Timestamp lastWorkingDay) {
+	this.lastWorkingDay = lastWorkingDay;
+}
+
 public Employee(AbstractObject abstractObject, int employeeId,
 		String employeeName, String gender, Timestamp dateOfBirth,
 		Timestamp dateOfJoining, int yearsofexperience, long contactNo,
@@ -355,7 +365,7 @@ public Employee(AbstractObject abstractObject, int employeeId,
 		String bloodGroup, int currentDesignation, String highestQualification,
 		String pan, String pfNo, String bankAccountNo, String skype,
 		String skill, String rating, String variableComponent, String salary,
-		int fileId, Timestamp actualdateOfBirth, String employeeType, String university, String hobbies) {
+		int fileId, Timestamp actualdateOfBirth, String employeeType, String university, String hobbies,Timestamp lastWorkingDay) {
 	super(abstractObject);
 	this.employeeId = employeeId;
 	this.employeeName = employeeName;
@@ -388,6 +398,7 @@ public Employee(AbstractObject abstractObject, int employeeId,
 	this.employeeType=employeeType;
 	this.hobbies=hobbies;
 	this.university=university;
+	this.lastWorkingDay=lastWorkingDay;
 }
 
 public Employee(Employee employee) {
@@ -423,6 +434,7 @@ public Employee(Employee employee) {
 	this.employeeType=employee.getEmployeeType();
 	this.hobbies=employee.getHobbies();
 	this.university=employee.getUniversity();
+	this.lastWorkingDay=employee.getLastWorkingDay();
 }
 
 @Override

@@ -166,6 +166,7 @@ public interface ExceptionCodes {
 	public static final int EMPLOYEE_ACTUAL_DOB_NULL = 9028;
 	public static final int EMPLYEE_TYPE_NULL = 310;
 	public static final int EMPLYEE_UNIVERSITY_NULL = 311;
+	public static final int PLEASE_ENTER_LASTWORKING_DAY = 312;
 	
 	
 	//Mongo related exception Codes
@@ -381,6 +382,7 @@ public interface ExceptionCodes {
 	public static final int SELECT_ATLEAST_ONE_FIELD = 9025;
 	public static final int DESIGNATION_TYPE_DOES_NOT_EXIST = 9026;
 	public static final int PLEASE_ENTER_DESIGNATION_TYPE = 9027;
+	
 
 
 	

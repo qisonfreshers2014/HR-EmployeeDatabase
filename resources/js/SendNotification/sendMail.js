@@ -58,12 +58,23 @@ $("#backtonotifications").click(function(){
 							}});
 			}
 			else{
+                              
+
+				alert("failed to send");
+                              
                                 document.getElementById('light').style.display='hidden';
                                 document.getElementById('fade').style.display='hidden';
                                 document.getElementById('SendMailNotification').style.display="block";
-
-				alert("failed to send");
-                                routie("notifications");
+                                var input={};
+                				RequestManager.getAllEvents(input, function(data, success) {
+                					if (success) {	
+                								App.loadNotificationHomePage(data);
+                					}
+                					else
+                					{
+                					App.loadNotificationHomePage(data);
+                					alert("No event in the current month");
+                							}});
 			}
 
 		

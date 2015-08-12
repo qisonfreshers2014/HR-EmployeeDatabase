@@ -342,7 +342,7 @@ public class EmployeeHandler extends AbstractHandler {
 					ExceptionMessages.EMPLOYEE_EMERNAME_NOT_EMPTY);
 		}
 
-		if (emercontnum == 0) {
+		if (emercontnum==0) {
 			throw new EmployeeException(
 					ExceptionCodes.EMPLOYEE_EMERNUM_NOT_EMPTY,
 					ExceptionMessages.EMPLOYEE_EMERNUM_NOT_EMPTY);
@@ -380,11 +380,11 @@ public class EmployeeHandler extends AbstractHandler {
 					ExceptionMessages.EMPLOYEE_CONTACTNUM_NOT_EMPTY);
 		}
 
-		if (fatherName == null || fatherName.isEmpty()) {
+		/*if (fatherName == null || fatherName.isEmpty()) {
 			throw new EmployeeException(
 					ExceptionCodes.EMPLOYEE_FATHERNAME_NOT_EMPTY,
 					ExceptionMessages.EMPLOYEE_FATHERNAME_NOT_EMPTY);
-		}
+		}*/
 
 		if (gender == "" || gender.isEmpty()) {
 			throw new EmployeeException(
@@ -659,11 +659,11 @@ public class EmployeeHandler extends AbstractHandler {
 					ExceptionMessages.EMPLOYEE_CONTACTNUM_NOT_EMPTY);
 		}
 
-		if (fatherName == null || fatherName.isEmpty()) {
+		/*if (fatherName == null || fatherName.isEmpty()) {
 			throw new EmployeeException(
 					ExceptionCodes.EMPLOYEE_FATHERNAME_NOT_EMPTY,
 					ExceptionMessages.EMPLOYEE_FATHERNAME_NOT_EMPTY);
-		}
+		}*/
 
 		if (name == null || name.isEmpty() || name.trim().isEmpty()) {
 			throw new EmployeeException(ExceptionCodes.INVALID_NAME,
@@ -1163,6 +1163,28 @@ public class EmployeeHandler extends AbstractHandler {
 			                    noOfCAPSAlpha, noOfDigits, noOfSplChars);
 						return pswd;
 			
+			}
+
+			
+			  // This method updates the last working day of the employee
+			@AuthorizeEntity(roles = { Constants.HR })
+			public Employee saveLastWorkingDayOfEmployeeAOP(Employee employee) throws EmployeeException {
+				
+				Timestamp lastWorkingDay = employee.getLastWorkingDay();
+               
+				if(lastWorkingDay==null){
+					
+					throw new EmployeeException(ExceptionCodes.PLEASE_ENTER_LASTWORKING_DAY,
+							ExceptionMessages.PLEASE_ENTER_LASTWORKING_DAY);
+				}
+				
+				Employee empfromDb =(Employee) DAOFactory.getInstance()
+						.getEmployeeDAO().getEmployeeById(employee.getEmployeeId());
+				empfromDb.setLastWorkingDay(lastWorkingDay);
+				EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
+						.getEmployeeDAO();
+				Employee empSaved=(Employee) empDAOImpl.update(empfromDb);
+				return empSaved;
 			}
 			
 	}
