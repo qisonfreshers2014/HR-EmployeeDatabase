@@ -8,7 +8,7 @@ function HrEditEmployee(empid) {
 HrEditEmployee.prototype.handleShow = function(empid) {
 
 	$('.container').show();
-	
+	$('#LastWorkingDay').hide();
 $('#backtohrview').click(function(){
 		
 		App.loadViewEmployee(empid);
@@ -585,6 +585,7 @@ HrEditEmployee.prototype.deleteEmployee = function(empid) {
 	
 	var text = confirm("Are you sure you want to delete this employee?");
 	if (text == true) {
+		$('#LastWorkingDay').show();
 		
 		 $('#LastWorkingDay').dialog({
              modal: true,
