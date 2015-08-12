@@ -6,7 +6,7 @@ function FilterEmp(empid) {
 
 FilterEmp.prototype.handleShow = function(empid) {
 	$('.container').show();
-	
+
 	//Appending designation types to the drop down
 	var emptyinput={};
 	 RequestManager.getDesignationTypes(emptyinput, function(data, success){
@@ -240,90 +240,43 @@ if($('#dojFrom').val()!="" && $('#dojTo').val()==""){
 	    
 	   
 	   
-	    var monthsArray=new Array(12);
-		monthsArray[0]="Jan";
-		monthsArray[1]="Feb";
-		monthsArray[2]="March";
-		monthsArray[3]="April";
-		monthsArray[4]="May";
-		monthsArray[5]="June";
-		monthsArray[6]="July";
-		monthsArray[7]="Aug";
-		monthsArray[8]="Sep";
-		monthsArray[9]="Oct";
-		monthsArray[10]="Nov";
-		monthsArray[11]="Dec";
+
+				var monthsArray = new Array(12);
+				monthsArray[0] = "Jan";
+				monthsArray[1] = "Feb";
+				monthsArray[2] = "March";
+				monthsArray[3] = "April";
+				monthsArray[4] = "May";
+				monthsArray[5] = "June";
+				monthsArray[6] = "July";
+				monthsArray[7] = "Aug";
+				monthsArray[8] = "Sep";
+				monthsArray[9] = "Oct";
+				monthsArray[10] = "Nov";
+				monthsArray[11] = "Dec";
 		
-	   var i;
-	   for(i = 0; i < employees.length; i++) {
-        var item = employees[i];
-        
-        var desgId=item.currentDesignation;
-        
-        for(desg=0;desg<designationNames.length;desg++){
-        	desginationObj=designationNames[desg];
-        	if(desgId==desginationObj.id){
-        		  desName = desginationObj.name;
-        		    break;
-        		
-        	}
-        	
-        }
-        
-        var dojformat = new Date(item.dateOfJoining);
-        // Calculating Current years of experience
-	    var today=new Date();
-	    var diff=Math.floor(today.getTime() - dojformat.getTime());
-	    var day = 1000 * 60 * 60 * 24;
-	    var days = Math.floor(diff/day);
-	    var months = Math.floor(days/31);
-	    var expAtQisonInYears=Math.floor(months/12);
-	    var expAtQisonInMonths=months%12;
-	    var exp=item.yearsofexperience;
-	    var isDecimal=exp%1;
-	    var parts=exp.toString().split('.');
-	    
-	    var afterdecimal=parseInt(parts[1]);
-	    var beforedecimal=parseInt(parts[0]);
-	    
-	  if(isDecimal!=0){
-	  	 months=months+afterdecimal;
-	  	 
-	  	  years = Math.floor(months/12);
-	  	
-	  	  totalYearsOfExpMnths=months%12;
-	  	 
-	      totalYearsOfExp=years+beforedecimal;
-	     
-	  	 
-	    }
-	    else{ 
-	  	  years = Math.floor(months/12);
-	  	
-	  	  totalYearsOfExpMnths=months%12;
-	  	 
-	  	  totalYearsOfExp=years+item.yearsofexperience;
-	  	
-	    }
-				       
-	 					 
-	 
-$('#displayData').append("<tr class='displaytr'><td class='displaytd'>"+item.employeeId+"</td><td class='displaytd'>"+item.employeeName+"</td><td class='displaytd'>"+item.gender+"</td><td class='displaytd'>"
-+new Date(item.dateOfBirth).getDate()+"-"+monthsArray[new Date(item.dateOfBirth).getMonth()]+"-"+new Date(item.dateOfBirth).getFullYear()+"</td><td class='displaytd'>"
-+new Date(item.dateOfJoining).getDate()+"-"+monthsArray[new Date(item.dateOfJoining).getMonth()]+"-"+new Date(item.dateOfJoining).getFullYear()+"</td><td class='displaytd'>"+item.email+"</td><td>"+item.fathersName+"</td><td class='displaytd'>"
-+desName+"</td><td class='displaytd'>"+item.highestQualification+"</td><td class='displaytd'>"+item.contactNo+"</td>" +
-		"<td class='displaytd'>"+totalYearsOfExp+'.'+totalYearsOfExpMnths+"</td><td class='displaytd'>"+new Date(item.lastWorkingDay).getDate()+"-"+monthsArray[new Date(item.lastWorkingDay).getMonth()]+"-"+new Date(item.lastWorkingDay).getFullYear()+"</td><td class='displaytd'><input type='button' value='View' id='"+item.id+"' class='dynamicView  btn-success'></td></tr>");
-	
-      
-        			
-	   }
-	  
-			    
-var content = '';
-content += '<tr class="displaytr"><th class="displayth">Employee Id</th><th class="displayth">Employee Name</th><th class="displayth">Gender</th><th class="displayth">DOB</th><th class="displayth">DOJ</th><th class="displayth">Email</th><th class="displayth">Fathers Name</th><th class="displayth">Designation</th><th class="displayth">Highest Qualification</th><th class="displayth">Contact No</th><th class="displayth">Years Of Experience</th><th class="displayth">LastWorking day</th><th class="displayth">View Details</th></tr>';
+	      
+               var content = '';
+		      content += '<tr class="displaytr">';
+			  content += '<th class="displayth">Employee Id</th>';
+			  content += '<th class="displayth">Employee Name</th>';
+			  content += '<th class="displayth">Gender</th>';
+			  content += '<th class="displayth">DOB</th>';
+			  content += '<th class="displayth">DOJ</th>';
+			  content += '<th class="displayth">Email</th>';
+			  content += '<th class="displayth">Fathers Name</th>';
+			  content += '<th class="displayth">Designation</th>';
+			  content += '<th class="displayth">Highest Qualification</th>';
+			  content += '<th class="displayth">Contact No</th>';
+			  content += '<th class="displayth">Years Of Experience</th>';
+
+			  if ($('#emptype').val() == "Inactive") {
+			  content += '<th class="displayth">LastWorking day</th>';
+				}
+				content += '<th class="displayth">View Details</th>';
+				content += '</tr>';
 for (var i = 0; i < employees.length; i++) {
 			     var item = employees[i];
-			     
 			     
 			     var desgId=item.currentDesignation;
 			        
@@ -384,7 +337,11 @@ content += '<td class="displaytd">' +new Date(item.dateOfJoining).getDate()+"-"+
 	              content += '<td class="displaytd">' +item.highestQualification +'</td>';
 	              content += '<td class="displaytd">' +item.contactNo +'</td>';
 	              content += '<td class="displaytd">' +totalYearsOfExp+"."+totalYearsOfExpMnths+'</td>';
+	              
+	              console.log($('#emptype').val());
+	              if($('#emptype').val()=="Inactive"){
 	              content += '<td class="displaytd">' +new Date(item.lastWorkingDay).getDate()+"-"+monthsArray[new Date(item.lastWorkingDay).getMonth()] +"-"+new Date(item.lastWorkingDay).getFullYear()+'</td>';
+	              }
 	              content += '<td class="displaytd">' +"<input type='button' value='View' id='"+item.employeeId+"' class='dynamicView  btn-success'> "+'</td>';
 	              content += '</tr>';
 	              $('#displayData').html(content);
