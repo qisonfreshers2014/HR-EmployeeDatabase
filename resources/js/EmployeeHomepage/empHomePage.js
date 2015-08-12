@@ -52,7 +52,6 @@ empHomePage.prototype.handleShow = function() {
 	 routie("home");
  });
  
- 
  $('#logout').click(function(event){
   this.logout();
  }.ctx(this));
