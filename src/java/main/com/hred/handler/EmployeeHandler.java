@@ -558,8 +558,10 @@ public class EmployeeHandler extends AbstractHandler {
 		String currentaddr = employee.getCurrentAddress();
 		String peraddr = employee.getPermanentAddress();
 		String employeeType=employee.getEmployeeType();
+		String gender=employee.getGender();
+		Timestamp lastWorkingDay=employee.getLastWorkingDay();
 		
-		validateHrEditEmployee(name,id,email,qualification,salary,num,date,actualDOB,fatherName,contactNum,YOE,emercontnum,emercontname,currentaddr,peraddr,employeeType);
+		validateHrEditEmployee(name,id,email,qualification,salary,num,date,actualDOB,fatherName,contactNum,YOE,emercontnum,emercontname,currentaddr,peraddr,employeeType,gender,lastWorkingDay);
 		
 		Employee empFromDB = (Employee) DAOFactory.getInstance()
 				.getEmployeeDAO().getEmployeeById(employee.getEmployeeId());
@@ -589,6 +591,8 @@ public class EmployeeHandler extends AbstractHandler {
 		// empFromDB.setEmployeeId(employee.getEmployeeId());
 		empFromDB.setEmployeeName(employee.getEmployeeName());
 		empFromDB.setVariableComponent(employee.getVariableComponent());
+		empFromDB.setGender(employee.getGender());
+		empFromDB.setLastWorkingDay(employee.getLastWorkingDay());
 		EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
 				.getEmployeeDAO();
 		employee = (Employee) empDAOImpl.update(empFromDB);
@@ -601,7 +605,7 @@ public class EmployeeHandler extends AbstractHandler {
 			String qualification, String salary, long num, Timestamp date,
 			Timestamp actualDOB, String fatherName, long contactNum,
 			double yOE, long emercontnum, String emercontname,
-			String currentaddr, String peraddr, String employeeType) throws BusinessException {
+			String currentaddr, String peraddr, String employeeType,String gender,Timestamp lastWorkingDay) throws BusinessException {
 		
 		if (currentaddr == null || currentaddr.isEmpty()) {
 			throw new EmployeeException(
@@ -679,8 +683,17 @@ public class EmployeeHandler extends AbstractHandler {
 			throw new BusinessException(ExceptionCodes.EMAIL_CANNOT_BE_EMPTY,
 					ExceptionMessages.EMAIL_CANNOT_BE_EMPTY);
 		}
+		if (gender == "" || gender.isEmpty()) {
+			throw new EmployeeException(
+					ExceptionCodes.EMPLOYEE_GENDER_NOT_EMPTY,
+					ExceptionMessages.EMPLOYEE_GENDER_NOT_EMPTY);
+		}
+		if(lastWorkingDay==null){
+			
+			throw new EmployeeException(ExceptionCodes.PLEASE_ENTER_LASTWORKING_DAY,
+					ExceptionMessages.PLEASE_ENTER_LASTWORKING_DAY);
+		}
 		 
-		
 	}
 
 	@SuppressWarnings("null")

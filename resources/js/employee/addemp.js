@@ -121,7 +121,7 @@ AddEmployee.prototype.handleShow = function() {
 		changeMonth : true,
 		changeYear : true,
 		showAnim : 'drop',
-		minDate : new Date(2009,12 ,31),
+		minDate : new Date(2009, 12, 31),
 		maxDate : new Date()
 	})
 
@@ -422,7 +422,7 @@ AddEmployee.prototype.validateEmp = function() {
 								document.getElementById('light').style.display = 'hidden';
 								document.getElementById('fade').style.display = 'hidden';
 								document.getElementById('addemployeediv').style.display = "block";
-						    	  App.loadEmpl();
+								App.loadEmpl();
 							} else if (data.code == 296) {
 
 								alert(data.message);
@@ -455,8 +455,8 @@ AddEmployee.prototype.GenderValidate = function(flag) {
 	} else {
 		$(error).text("");
 		flag = false;
-		return flag;
 	}
+	return flag;
 }
 AddEmployee.prototype.ValidateDrpn = function(flag) {
 	var designation = document.getElementById('designation').value;
@@ -467,8 +467,9 @@ AddEmployee.prototype.ValidateDrpn = function(flag) {
 	} else {
 		$(descerr).text("");
 		flag = false;
-		return flag;
+
 	}
+	return flag;
 }
 AddEmployee.prototype.employeeTypeValidate = function(flag) {
 	var empType = $("#employeetype option:selected").val();
@@ -479,8 +480,9 @@ AddEmployee.prototype.employeeTypeValidate = function(flag) {
 	} else {
 		$(empTypeError).text("");
 		flag = false;
-		return flag;
+
 	}
+	return flag;
 }
 AddEmployee.prototype.employeeIdValidate = function(flag) {
 	var empId = $("#eid").val();
@@ -489,22 +491,21 @@ AddEmployee.prototype.employeeIdValidate = function(flag) {
 		$(err).text("Required field");
 		$(err).css("color", "red");
 
-	}
-	else if(empId == isNaN || !(empId.match(num))){
-		
+	} else if (empId == isNaN || !(empId.match(num))) {
+
 		$(err).text("Please enter only numbers");
 		$(err).css("color", "red");
-		
-	}else if(empId==0){
+
+	} else if (empId == 0) {
 		$(err).text("Employeeid 0 is not allowed");
 		$(err).css("color", "red");
-		
-	}
-		else {
+
+	} else {
 		$(err).text("");
 		flag = false;
-		return flag;
+
 	}
+	return flag;
 }
 AddEmployee.prototype.employeeNameValidate = function(flag) {
 	var nameerr = $("#nameerr");
@@ -524,24 +525,22 @@ AddEmployee.prototype.employeeNameValidate = function(flag) {
 	} else {
 		$(nameerr).text("");
 		flag = false;
-		return flag;
-		// $(nameerr).css("color", "green");
-
 	}
+	return flag;
 }
 AddEmployee.prototype.employeeDOBValidate = function(flag) {
 	var dob = $('#dob').val();
 	if (dob == "") {
 		$('#dateerr').text('Please enter the DOB').css('color', 'red');
-	} else if (!(dob.match(dateformat))) {
+	} /*else if (!(dob.match(dateformat))) {
 		$('#dateerr').text('Please enter in the format of YYYY-MM-DD').css(
 				'color', 'red');
-	} else {
+	} */else {
 		$('#dateerr').text("");
 		flag = false;
-		return flag;
 		// $('#dateerr').css("color", "green");
 	}
+	return flag;
 
 }
 AddEmployee.prototype.employeeActualDOBValidate = function(flag) {
@@ -549,15 +548,16 @@ AddEmployee.prototype.employeeActualDOBValidate = function(flag) {
 	if (actualDOB == "") {
 		$('#actualdoberror').text('Please enter the Actual DOB').css('color',
 				'red');
-	} else if (!(actualDOB.match(dateformat))) {
+	} /*else if (!(actualDOB.match(dateformat))) {
 		$('#actualdoberror').text('Please enter in the format of YYYY-MM-DD')
 				.css('color', 'red');
-	} else {
+	} */else {
 		$('#actualdoberror').text("");
 		flag = false;
-		return flag;
+
 		// $('#dateerr').css("color", "green");
 	}
+	return flag;
 
 }
 AddEmployee.prototype.employeeHighestQualification = function(flag) {
@@ -575,10 +575,11 @@ AddEmployee.prototype.employeeHighestQualification = function(flag) {
 	} else {
 		$(nerr).text("");
 		flag = false;
-		return flag;
+
 		// $(nerr).css("color", "green");
 
 	}
+	return flag;
 
 }
 AddEmployee.prototype.employeeSalaryValidate = function(flag) {
@@ -593,10 +594,11 @@ AddEmployee.prototype.employeeSalaryValidate = function(flag) {
 	} else {
 		$(salerr).text("");
 		flag = false;
-		return flag;
+
 		// $(salerr).css("color", "green");
 
 	}
+	return flag;
 
 }
 AddEmployee.prototype.employeeUniversityValidate = function(flag) {
@@ -607,10 +609,11 @@ AddEmployee.prototype.employeeUniversityValidate = function(flag) {
 	} else {
 		$('#collegeerr').text("");
 		flag = false;
-		return flag;
+
 		// $(skillerr).css("color", "green");
 
 	}
+	return flag;
 
 }
 AddEmployee.prototype.employeeFathersNameValidate = function(flag) {
@@ -619,20 +622,20 @@ AddEmployee.prototype.employeeFathersNameValidate = function(flag) {
 	if (fathername == "") {
 		$(fathererr).text("");
 		flag = false;
-		return flag;
+
 	}
-		/*$(fathererr).text("Required field");
-		$(fathererr).css("color", "red");*/
+	/*$(fathererr).text("Required field");
+	$(fathererr).css("color", "red");*/
 	else if (!(fathername.match(char) || fathername == isNaN)) {
 		$(fathererr).text("Please enter characters only");
 		$(fathererr).css("color", "red");
 	} else {
 		$(fathererr).text("");
 		flag = false;
-		return flag;
+
 		// $(fathererr).css("color", "green");
 	}
-	
+	return flag;
 
 }
 AddEmployee.prototype.employeeContactNumberValidate = function(flag) {
@@ -650,10 +653,11 @@ AddEmployee.prototype.employeeContactNumberValidate = function(flag) {
 	} else {
 		$(cnumerr).text("");
 		flag = false;
-		return flag;
+
 		// $(cnumerr).css("color", "green");
 
 	}
+	return flag;
 }
 AddEmployee.prototype.employeeCurrentAddressValidate = function(flag) {
 	var currentaddrerr = $("#currentaddrerr");
@@ -664,10 +668,11 @@ AddEmployee.prototype.employeeCurrentAddressValidate = function(flag) {
 	} else {
 		$(currentaddrerr).text("");
 		flag = false;
-		return flag;
+
 		// $(currentaddrerr).css("color", "green");
 
 	}
+	return flag;
 
 }
 AddEmployee.prototype.employeePerminentAddressValidate = function(flag) {
@@ -679,10 +684,11 @@ AddEmployee.prototype.employeePerminentAddressValidate = function(flag) {
 	} else {
 		$('#peraddrerr').text("");
 		flag = false;
-		return flag;
+
 		// $(peraddrerr).css("color", "green");
 
 	}
+	return flag;
 
 }
 AddEmployee.prototype.employeeEmergencyContactNumberValidate = function(flag) {
@@ -700,10 +706,11 @@ AddEmployee.prototype.employeeEmergencyContactNumberValidate = function(flag) {
 	} else {
 		$(emnumerr).text("");
 		flag = false;
-		return flag;
+
 		// $(emnumerr).css("color", "green");
 
 	}
+	return flag;
 }
 AddEmployee.prototype.employeeEmergencyContactNameValidate = function(flag) {
 	var txtemname = $("#txtemname").val();
@@ -723,10 +730,11 @@ AddEmployee.prototype.employeeEmergencyContactNameValidate = function(flag) {
 	} else {
 		$(emnameerr).text("");
 		flag = false;
-		return flag;
+
 		// $(emnameerr).css("color", "green");
 
 	}
+	return flag;
 
 }
 AddEmployee.prototype.employeeEmailValidate = function(flag) {
@@ -742,10 +750,11 @@ AddEmployee.prototype.employeeEmailValidate = function(flag) {
 	} else {
 		$(emlerr).text("");
 		flag = false;
-		return flag;
+
 		// $(emlerr).css("color", "green");
 
 	}
+	return flag;
 
 }
 AddEmployee.prototype.employeeDOJValidate = function(flag) {
@@ -754,15 +763,16 @@ AddEmployee.prototype.employeeDOJValidate = function(flag) {
 	if (doj == "") {
 		$('#dojerr').text('Please enter the DOJ').css('color', 'red');
 
-	} else if (!(doj.match(dateformat))) {
+	} /*else if (!(doj.match(dateformat))) {
 		$('#dojerr').text('Please enter in the format of YYYY-MM-DD').css(
 				'color', 'red');
-	} else {
+	} */else {
 		$('#dojerr').text("");
 		flag = false;
-		return flag;
+
 		// $('.dojerr').css("color", "green");
 	}
+	return flag;
 
 }
 AddEmployee.prototype.employeeYearsOfExperienceValidate = function(flag) {
@@ -779,10 +789,11 @@ AddEmployee.prototype.employeeYearsOfExperienceValidate = function(flag) {
 	else {
 		$(yearexperr).text("");
 		flag = false;
-		return flag;
+
 		// $(yearexperr).css("color", "green");
 
 	}
+	return flag;
 
 }
 AddEmployee.prototype.employeeSkillValidate = function(flag) {
@@ -794,10 +805,11 @@ AddEmployee.prototype.employeeSkillValidate = function(flag) {
 	} else {
 		$(skillerr).text("");
 		flag = false;
-		return flag;
+
 		// $(skillerr).css("color", "green");
 
 	}
+	return flag;
 
 }
 AddEmployee.prototype.employeeRatingValidate = function(flag) {
@@ -809,8 +821,9 @@ AddEmployee.prototype.employeeRatingValidate = function(flag) {
 	} else {
 		$(ratingerr).text("");
 		flag = false;
-		return flag;
+
 	}
+	return flag;
 
 }
 AddEmployee.prototype.employeeNonMandatoryFieldsValidation = function(flag) {
@@ -837,47 +850,44 @@ AddEmployee.prototype.employeeNonMandatoryFieldsValidation = function(flag) {
 		} else {
 			$(skypeerr).text("");
 			flag = false;
-			return flag;
 
 		}
+		return flag;
 	}
 
 	if (pannum == "") {
 		$(panerr).text("");
 		flag = false;
-		return flag;
+
 	} else if (pannum == isNaN || !(pannum.match(letters))) {
 		$(panerr).text("Please enter a valid pan");
-		$(panerr).css("color", "red");
-	} else if (!(pannum.length == 10)) {
-		$(panerr).text("Please enter 10 letters only");
 		$(panerr).css("color", "red");
 	} else {
 		$(panerr).text("");
 		flag = false;
-		return flag;
+
 		// $(panerr).css("color", "green");
 	}
 	if (pfnum == "") {
 		$(pferr).text("");
 		flag = false;
-		return flag;
+
 	} else if (!(pfnum.match(letters))) {
 		$(pferr).text("Please enter a valid pf number");
 		$(pferr).css("color", "red");
 	} else if (!(pfnum.length == 16)) {
-		$(pferr).text("Please check the pf format");
+		$(pferr).text("Length should be 16 letters");
 		$(pferr).css("color", "red");
 	} else {
 		$(pferr).text("");
 		flag = false;
-		return flag;
+
 		// $(pferr).css("color", "green");
 	}
 	if (accountnum == "") {
 		$(acterr).text("");
 		flag = false;
-		return flag;
+
 	} else if (accountnum == isNaN || !(accountnum.match(num))) {
 		$(acterr).text("Please enter a valid account number");
 		$(acterr).css("color", "red");
@@ -887,21 +897,21 @@ AddEmployee.prototype.employeeNonMandatoryFieldsValidation = function(flag) {
 	} else {
 		$(acterr).text("");
 		flag = false;
-		return flag;
+
 		// $(acterr).css("color", "green");
 	}
 
 	if (variable == "") {
 		$(variableerr).text("");
 		flag = false;
-		return flag;
+
 	} else if (variable == isNaN || !(variable.match(salry))) {
 		$(variableerr).text("Please enter a valid decimal value ex: 100.00");
 		$(variableerr).css("color", "red");
 	} else {
 		$(variableerr).text("");
 		flag = false;
-		return flag;
+
 		// $(salerr).css("color", "green");
 
 	}
@@ -913,11 +923,13 @@ AddEmployee.prototype.employeeNonMandatoryFieldsValidation = function(flag) {
 		} else {
 			$(relationerr).text("");
 			flag = false;
-			return flag;
+
 			// $(relationerr).css("color", "green");
 
 		}
 	}
+
+	return flag;
 }
 // This function is to append designation types from database to a drop down
 // list

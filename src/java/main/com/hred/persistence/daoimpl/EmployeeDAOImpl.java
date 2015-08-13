@@ -1210,6 +1210,7 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 			}
 			Criteria createCriteria = session.createCriteria(Employee.class);
+			createCriteria.add(Restrictions.eq("isDeleted", false));
 			/*String hql="from Employee where id="+id+"";		
 			org.hibernate.Query query = session.createQuery(hql);
 			 list  = query.list();*/

@@ -39,12 +39,12 @@ RequestManager.viewEmployeedatails(input, function(data, success) {
  if(success){
 	
  var obj=data;
- if(obj.deleted==true){
+/* if(obj.deleted==true){
 	    
 	    $('#Editdetails').hide();
 	    $('#Editskills').hide();
 	    $('#Editdesgn').hide();
-	   }
+	   }*/
  var monthsArray=new Array(12);
  monthsArray[0]="Jan";
 	monthsArray[1]="Feb";

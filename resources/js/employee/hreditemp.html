@@ -66,7 +66,14 @@
 					<option value="Fulltime">Fulltime</option>
 					<option value="Contract">Contract</option>
 			</select><br><span class="error" id="employeetypeerr"></span></td>
-			<th class="th"><td class="td"><span id="profileimageedit"></span></td></th>
+			<!-- <th class="th"><td class="td"><span id="profileimageedit"></span></td></th> -->
+			<th class="th">Gender<span class="error">*</span>
+			</th>
+			<td class="td"><select name="gender" id="gender" style="width:100%">
+					<option value="">Select Gender</option>
+					<option value="Male">Male</option>
+					<option value="Female">Female</option>
+			</select><br> <span class="error" id="generr"></span></td>
         </tr>
 	</table>
 	<span id="filepath"></span>
@@ -151,8 +158,17 @@
 				id="yearofexp" maxlength="4"><br> <span class="error"
 				id="yearofexperr"></span></td>
 		</tr>
+		<tr class="tr" id="LastWorkingDay">
+			<th class="th">Last Working day<span class="error">*</span>
+			</th>
+			<td class="td"><input style="height:0px; border:none;width:0px"/><input type="text" name="lastworking" id="lastwrkday" class="date"><br> <span class="error" id="emlerr"></span></td>
+			<th class="th"></th>
+			<td class="td"></td>
+				<th class="th">
+			</th>
+			<td class="td"></td>
+		</tr>
 	</table>
-	<!-- <button type="submit" class="btn btn-primary btn-md" id="hredit">Edit</button> -->
 	<br>
 	
 	<div><center>
@@ -162,7 +178,7 @@
 	
 	</div>
 	<br>
-	<div id="LastWorkingDay">
+<!-- 	<div id="LastWorkingDay">
 	<input style="height:0px; border:none;width:0px"/>
 	LastWorking day:<input type="text" id="lastwrkday" class="date">
-	</div>
+	</div> -->
