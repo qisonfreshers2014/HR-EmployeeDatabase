@@ -39,12 +39,7 @@ RequestManager.viewEmployeedatails(input, function(data, success) {
  if(success){
 	
  var obj=data;
-/* if(obj.deleted==true){
-	    
-	    $('#Editdetails').hide();
-	    $('#Editskills').hide();
-	    $('#Editdesgn').hide();
-	   }*/
+
  var monthsArray=new Array(12);
  monthsArray[0]="Jan";
 	monthsArray[1]="Feb";
@@ -58,7 +53,6 @@ RequestManager.viewEmployeedatails(input, function(data, success) {
 	monthsArray[9]="Oct";
 	monthsArray[10]="Nov";
 	monthsArray[11]="Dec";
-
  var dobformat = new Date(obj.dateOfBirth);
    var byear = dobformat.getFullYear();
    var bmonth =monthsArray[dobformat.getMonth()];
