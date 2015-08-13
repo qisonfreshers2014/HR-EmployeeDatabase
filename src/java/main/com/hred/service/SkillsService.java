@@ -98,7 +98,7 @@ public class SkillsService extends BaseService {
 			throws ObjectNotFoundException, BusinessException,
 			EncryptionException {		
 		Skills skills = (Skills) JsonUtil.getObject(request.getPayload(), Skills.class);
-		Skills output=(Skills) SkillsHandler.getInstance().updateAOP(skills);		
+		Skills output=(Skills) SkillsHandler.getInstance().update(skills);		
 		return JsonUtil.getJsonBasedOnDescriptor(output,Skills.class);
 	}
 	

@@ -88,8 +88,8 @@ public class SkillsHandler extends AbstractHandler {
 	 
 	}
 	
-	@AuthorizeEntity(roles={Constants.HR})
-	public Skills updateAOP(Skills skills) throws ObjectNotFoundException, SkillsException {
+	//@AuthorizeEntity(roles={Constants.HR})
+	public Skills update(Skills skills) throws ObjectNotFoundException, SkillsException {
 		List<Skills> skill = getSkillsDetails();
 		String skillName = skills.getSkills();
 		  int empId = skills.getEmpId();
