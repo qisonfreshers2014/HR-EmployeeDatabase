@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.hred.common.Constants;
 import com.hred.exception.DesignationHistoryException;
+import com.hred.exception.EmployeeException;
 import com.hred.exception.ExceptionCodes;
 import com.hred.exception.ExceptionMessages;
 import com.hred.exception.HolidaysException;
@@ -19,6 +20,7 @@ import com.hred.model.Skills;
 import com.hred.persistence.dao.DAOFactory;
 import com.hred.persistence.dao.DesignationHistoryDAO;
 import com.hred.persistence.dao.EmployeeDAO;
+import com.hred.persistence.daoimpl.EmployeeDAOImpl;
 /**
  * @author Bhargavi Uppoju
  *
@@ -71,7 +73,7 @@ public class DesignationHistoryHandler extends AbstractHandler {
 		return designationhistory_saved;
 	}
 	@AuthorizeEntity(roles={Constants.HR})
-public DesignationHistory updateDesignationDetailsAOP(DesignationHistory designation) throws ObjectNotFoundException, DesignationHistoryException{
+public DesignationHistory updateDesignationDetailsAOP(DesignationHistory designation) throws ObjectNotFoundException, DesignationHistoryException, EmployeeException{
 		
 	List<DesignationHistory> data = getAllDesignationDetailsAOP();
 		int eid=designation.getEmpId();
@@ -92,6 +94,15 @@ public DesignationHistory updateDesignationDetailsAOP(DesignationHistory designa
 		designationFrmdb.setDesignationId(designation.getDesignationId());
 		designationFrmdb.setAppraisalDate(designation.getAppraisalDate());
 		DesignationHistory updatedDesignation=(DesignationHistory) DAOFactory.getInstance().getDesignationHistoryDAO().update(designationFrmdb);
+		
+		EmployeeDAOImpl employeeDaoImpl=(EmployeeDAOImpl) DAOFactory.getInstance().getEmployeeDAO();
+		Employee employee=employeeDaoImpl.getEmployeeById(updatedDesignation.getEmpId());
+		
+		
+		if(employee.getCurrentDesignation()==designation.getCurrentdesgId()){
+		employee.setCurrentDesignation(updatedDesignation.getDesignationId());
+		Employee updateEmployee=(Employee) employeeDaoImpl.update(employee);	
+     }
 		return updatedDesignation;
 	
 	}

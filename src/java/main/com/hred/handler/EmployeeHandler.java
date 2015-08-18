@@ -560,8 +560,9 @@ public class EmployeeHandler extends AbstractHandler {
 		String employeeType=employee.getEmployeeType();
 		String gender=employee.getGender();
 		Timestamp lastWorkingDay=employee.getLastWorkingDay();
+		Timestamp doj=employee.getDateOfJoining();
 		
-		validateHrEditEmployee(name,id,email,qualification,salary,num,date,actualDOB,fatherName,contactNum,YOE,emercontnum,emercontname,currentaddr,peraddr,employeeType,gender,lastWorkingDay);
+		validateHrEditEmployee(name,id,email,qualification,salary,num,date,actualDOB,fatherName,contactNum,YOE,emercontnum,emercontname,currentaddr,peraddr,employeeType,gender,lastWorkingDay,doj);
 		
 		Employee empFromDB = (Employee) DAOFactory.getInstance()
 				.getEmployeeDAO().getEmployeeById(employee.getEmployeeId());
@@ -592,6 +593,7 @@ public class EmployeeHandler extends AbstractHandler {
 		empFromDB.setEmployeeName(employee.getEmployeeName());
 		empFromDB.setVariableComponent(employee.getVariableComponent());
 		empFromDB.setGender(employee.getGender());
+		empFromDB.setDateOfJoining(employee.getDateOfJoining());
 		empFromDB.setLastWorkingDay(employee.getLastWorkingDay());
 		EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
 				.getEmployeeDAO();
@@ -605,7 +607,7 @@ public class EmployeeHandler extends AbstractHandler {
 			String qualification, String salary, long num, Timestamp date,
 			Timestamp actualDOB, String fatherName, long contactNum,
 			double yOE, long emercontnum, String emercontname,
-			String currentaddr, String peraddr, String employeeType,String gender,Timestamp lastWorkingDay) throws BusinessException {
+			String currentaddr, String peraddr, String employeeType,String gender,Timestamp lastWorkingDay,Timestamp doj) throws BusinessException {
 		
 		if (currentaddr == null || currentaddr.isEmpty()) {
 			throw new EmployeeException(
@@ -688,6 +690,13 @@ public class EmployeeHandler extends AbstractHandler {
 					ExceptionCodes.EMPLOYEE_GENDER_NOT_EMPTY,
 					ExceptionMessages.EMPLOYEE_GENDER_NOT_EMPTY);
 		}
+		
+		if (doj == null) {
+			throw new EmployeeException(ExceptionCodes.EMPLOYEE_DOJ_NOT_EMPTY,
+					ExceptionMessages.EMPLOYEE_DOJ_NOT_EMPTY);
+
+		}
+
 		if(lastWorkingDay==null){
 			
 			throw new EmployeeException(ExceptionCodes.PLEASE_ENTER_LASTWORKING_DAY,

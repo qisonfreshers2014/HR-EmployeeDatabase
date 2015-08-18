@@ -294,9 +294,10 @@ editdesignation.prototype.editDesignation=function(id,empid,empName1,doj1){
 		   apprDate = year + "-" + month + "-" + date;
 			$("#datepicker").val(apprDate);
 			$("#designation").val(data.designationId);
+			
 			$("#salary").val(data.salary);
 			$("#variablePay").val(data.variablePay);
-			
+			//$('#designation').attr("disabled", true);
 			
 			$('#updateDesignation').click(function(){
 				
@@ -332,7 +333,8 @@ editdesignation.prototype.updateEditedDesignation=function(data,empName1,doj1){
 				"appraisalDate" : apprDate +" 00:00:00",
 				"designationId" : designationId1,
 				"salary" : salary1,
-				"variablePay" : variablePay1
+				"variablePay" : variablePay1,
+				"currentdesgId":data.designationId
 			}
 		};
 	

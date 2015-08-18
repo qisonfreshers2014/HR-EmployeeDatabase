@@ -1,10 +1,12 @@
 package com.hred.model;
 
+import java.beans.Transient;
 import java.sql.Timestamp;
 /**
  * @author Bhargavi Uppoju
  *
  */
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -39,6 +41,8 @@ public class DesignationHistory extends AbstractObject{
 	@Column(name="variable_pay")	
 	private double variablePay;
 	
+	@javax.persistence.Transient
+	private int currentdesgId;
 
 
 	public int getEmpId() {
@@ -97,6 +101,18 @@ public class DesignationHistory extends AbstractObject{
 
 	public void setAppraisalDate(Timestamp appraisalDate) {
 		this.appraisalDate = appraisalDate;
+	}
+
+
+
+	public int getCurrentdesgId() {
+		return currentdesgId;
+	}
+
+
+
+	public void setCurrentdesgId(int currentdesgId) {
+		this.currentdesgId = currentdesgId;
 	}
 
 

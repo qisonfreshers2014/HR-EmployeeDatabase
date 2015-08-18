@@ -55,6 +55,14 @@ $('#backtohrview').click(function(){
 			
 			payloadactualdob=actualdobyear + "-" + payloadactualdobmonth + "-" + actualdobdate;
 			
+			 var dojformat = new Date(object.dateOfJoining);
+			   var dojyear = dojformat.getFullYear();
+			   var payloadDOJmonth=dojformat.getMonth()+1;
+			   var dojmonth = monthsArray[dojformat.getMonth()];
+			   var dojdate = dojformat.getDate();
+			   
+			   payloadDOJ=dojyear + "-" + payloadDOJmonth + "-" + dojdate;
+			
 			var lastWorkingDayOfEmployee=new Date(object.lastWorkingDay);
 			
 			var LWDYear=lastWorkingDayOfEmployee.getFullYear();
@@ -93,7 +101,9 @@ $('#backtohrview').click(function(){
 			$("#yearofexp").val(object.yearsofexperience);
 			$('#employeetype').val(object.employeeType);
 		    $("#gender").val(object.gender);
+		    $('#doj').val(payloadDOJ);
 			$('#lastwrkday').val(payloadLWD);
+			
 		} else {
 			alert("failed to edit");
 		}
@@ -119,6 +129,18 @@ $('#backtohrview').click(function(){
 		minDate : new Date(1980, 12, 31),
 		maxDate : new Date(1994, 12, 31)
 	})
+	
+	$('#doj').datepicker({
+		// dateFormat : $.datepicker.TIMESTAMP,
+		dateFormat : 'yy-mm-dd',
+		showButtonPanel : true,
+		changeMonth : true,
+		changeYear : true,
+		showAnim : 'drop',
+		minDate : new Date(2009, 12, 31),
+		maxDate : new Date()
+	})
+
 	$('#lastwrkday').datepicker({
 		// dateFormat : $.datepicker.TIMESTAMP,
 		dateFormat : 'yy-mm-dd',
@@ -228,6 +250,7 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 	var variable = $('#variable').val();
 	var variableerr = $('#variableerr');
 	var Gender = $("#gender option:selected").val();
+	var doj=$("#doj").val();
 	var lastWorkingDay=	$('#lastwrkday').val();
 	var flag = true;
 	
@@ -249,6 +272,7 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 				& !flag == this.employeePerminentAddressValidate(flag)
 				& !flag == this.employeeNameValidate(flag)
 				& !flag == this.employeeDOBValidate(flag)
+				& !flag == this.employeeDOJValidate(flag)
 				& !flag == this.employeeActualDOBValidate(flag)
 				& !flag == this.employeeNonMandatoryFieldsValidation(flag)){
 			
@@ -284,6 +308,7 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 				"skype" : skype,
 				"fileId" : fileId,
 				"employeeType" : employeeType,
+				"dateOfJoining": doj + " 00:00:00",
 				"lastWorkingDay":lastWorkingDay +" 00:00:00"
 			}
 		};
@@ -622,6 +647,25 @@ HrEditEmployee.prototype.employeeYearsOfExperienceValidate = function(flag) {
 		
 		// $(yearexperr).css("color", "green");
 
+	}
+	return flag;
+
+}
+
+HrEditEmployee.prototype.employeeDOJValidate = function(flag) {
+
+	var doj = $('#doj').val();
+	if (doj == "") {
+		$('#dojerr').text('Please enter the DOJ').css('color', 'red');
+
+	} /*else if (!(doj.match(dateformat))) {
+		$('#dojerr').text('Please enter in the format of YYYY-MM-DD').css(
+				'color', 'red');
+	} */else {
+		$('#dojerr').text("");
+		flag = false;
+
+		// $('.dojerr').css("color", "green");
 	}
 	return flag;
 
