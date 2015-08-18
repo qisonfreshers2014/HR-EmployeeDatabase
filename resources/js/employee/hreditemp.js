@@ -692,9 +692,13 @@ HrEditEmployee.prototype.employeeNonMandatoryFieldsValidation = function(flag) {
 	else if (!(skype.match(skp))) {
 			$(skypeerr).text("Please enter a valid skype ID");
 			$(skypeerr).css("color", "red");
+			flag = true;
+			return flase;
 		} else if (!(skype.length > 5)) {
 			$(skypeerr).text("Please enter minimum 6 letters");
 			$(skypeerr).css("color", "red");
+			flag = true;
+			return flase;
 		} else {
 			$(skypeerr).text("");
 			flag = false;
@@ -708,6 +712,8 @@ HrEditEmployee.prototype.employeeNonMandatoryFieldsValidation = function(flag) {
 	} else if (pannum == isNaN || !(pannum.match(letters))) {
 		$(panerr).text("Please enter a valid pan");
 		$(panerr).css("color", "red");
+		flag = true;
+		return flase;
 	} else {
 		$(panerr).text("");
 		flag = false;
@@ -721,9 +727,13 @@ HrEditEmployee.prototype.employeeNonMandatoryFieldsValidation = function(flag) {
 	} else if (!(pfnum.match(letters))) {
 		$(pferr).text("Please enter a valid pf number");
 		$(pferr).css("color", "red");
+		flag = true;
+		return flase;
 	} else if (!(pfnum.length == 16)) {
 		$(pferr).text("Length should be 16 letters");
 		$(pferr).css("color", "red");
+		flag = true;
+		return flase;
 	} else {
 		$(pferr).text("");
 		flag = false;
@@ -737,9 +747,13 @@ HrEditEmployee.prototype.employeeNonMandatoryFieldsValidation = function(flag) {
 	} else if (accountnum == isNaN || !(accountnum.match(num))) {
 		$(acterr).text("Please enter a valid account number");
 		$(acterr).css("color", "red");
+		flag = true;
+		return flase;
 	} else if (!(accountnum.length == 15)) {
 		$(acterr).text("Please enter 15 digits only");
 		$(acterr).css("color", "red");
+		flag = true;
+		return flase;
 	} else {
 		$(acterr).text("");
 		flag = false;
@@ -754,6 +768,8 @@ HrEditEmployee.prototype.employeeNonMandatoryFieldsValidation = function(flag) {
 	} else if (variable == isNaN || !(variable.match(salry))) {
 		$(variableerr).text("Please enter a valid decimal value ex: 100.00");
 		$(variableerr).css("color", "red");
+		flag = true;
+		return flase;
 	} else {
 		$(variableerr).text("");
 		flag = false;
@@ -769,6 +785,8 @@ HrEditEmployee.prototype.employeeNonMandatoryFieldsValidation = function(flag) {
 	else if (!(relation.match(char))) {
 			$(relationerr).text("enter characters only");
 			$(relationerr).css("color", "red");
+			flag = true;
+			return flase;
 		} else {
 			$(relationerr).text("");
 			flag = false;
@@ -800,7 +818,6 @@ HrEditEmployee.prototype.deleteEmployee = function(empid) {
             		  
             		  alert("Please Select the Last working day");
             	  }
-            	  console.log(lastWrkingDay+"00:00:00");
             	  var input={"payload":{"employeeId":empid,"lastWorkingDay":lastWrkingDay + " 00:00:00"}}
             	   RequestManager.saveLastWorkingDay(input, function(data, success) {
             		   if(success){

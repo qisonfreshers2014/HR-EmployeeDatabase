@@ -241,9 +241,13 @@ EditEmployee.prototype.employeeNonMandatoryFieldsValidation = function(flag) {
 	} else if (!(skype.match(skp))) {
 		$(skypeerr).text("Please enter a valid skype ID");
 		$(skypeerr).css("color", "red");
+		flag = true;
+		return flase;
 	} else if (!(skype.length > 5)) {
 		$(skypeerr).text("Please enter minimum 6 letters");
 		$(skypeerr).css("color", "red");
+		flag = true;
+		return flase;
 	} else {
 		$(skypeerr).text("");
 		flag = false;
@@ -256,6 +260,8 @@ EditEmployee.prototype.employeeNonMandatoryFieldsValidation = function(flag) {
 	} else if (!(relation.match(char))) {
 		$(relationerr).text("enter characters only");
 		$(relationerr).css("color", "red");
+		flag = true;
+		return flase;
 	} else {
 		$(relationerr).text("");
 		flag = false;
