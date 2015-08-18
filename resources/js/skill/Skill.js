@@ -101,7 +101,7 @@ skill.prototype.validateSkill=function(){
 	  		if(success){
 	  	 alert("Skills successfully inserted");
 	  	
-	  		$('#displayDataskill').append("<tr class='skilltr'><td class='skilltd'>"+data.empId+"</td><td class='skilltd'>"+data.skills+"</td><td class='skilltd'>"+data.rating+"</td><td class='skilltd'><input type='button' value='Edit' id='"+data.id+"' class='dynamicEdit btn-info'></td></tr>");
+	  		$('#displayDataskill').append("<tr class='skilltr'><td class='skilltd'>"+data.empId+"</td><td class='skilltd'>"+data.skills+"</td><td class='skilltd'>"+data.rating+"</td><td class='skilltd'><input type='button' value='Edit' id='"+data.id+"' class='dynamicEdit btn-info'></td><td class='skilltd'><input type='button' value='Edit' id='"+data.id+"' class='dynamicDelete btn-warning'></td></tr>");
 	  		$("#skill").val("");
 		    $("#rating").val("");
 	  		var obj1=data.id;
@@ -134,6 +134,13 @@ skill.prototype.viewSkillDetails=function(data,success){
 		this.editSkill(releaseId);
 		}.ctx(this));
 		
+		$('.dynamicDelete').live('click', function(event)  {
+			event.stopImmediatePropagation();	
+  			$("#skill").val("");
+		    $("#rating").val("");
+		    var releaseId = event.target.id;
+		this.deleteSkill(releaseId);
+		}.ctx(this));
 		
 		$('#updateskill').click(function(e) {
 			
@@ -214,7 +221,7 @@ skill.prototype.viewSkillDetails=function(data,success){
   		 
   		var skill = data[i];
   		
-		$('#displayDataskill').append("<tr class='skilltr'><td class='skilltd'>"+skill.empId+"</td><td class='skilltd'>"+skill.skills+"</td><td class='skilltd'>"+skill.rating+"</td><td class='skilltd'><input type='button' value='Edit' id='"+skill.id+"' class='dynamicEdit  btn-info '></td></tr>");
+		$('#displayDataskill').append("<tr class='skilltr'><td class='skilltd'>"+skill.empId+"</td><td class='skilltd'>"+skill.skills+"</td><td class='skilltd'>"+skill.rating+"</td><td class='skilltd'><input type='button' value='Edit' id='"+skill.id+"' class='dynamicEdit  btn-info '></td><td class='skilltd'><input type='button' value='Delete' id='"+skill.id+"' class='dynamicDelete  btn-warning '></td></tr>");
 		
 		var obj1=skill.id;
   		}
@@ -250,7 +257,23 @@ skill.prototype.editSkill = function(obj1){
 		
 		 }.ctx(this));
 }
-
+skill.prototype.deleteSkill=function(id){
+	var text = confirm("Are you sure you want to delete this employee?");
+	if(text==true){
+		var inputTodelete={"payload":{"id":id}};
+		
+		RequestManager.deleteSkillById(inputTodelete,function(data,success){
+			
+			if(success){
+				
+				alert("Successfullt deleted the skill");
+				App.loadSkill(data.empId);
+			}
+			
+		}.ctx(this));
+		
+	}
+}
 
 
 

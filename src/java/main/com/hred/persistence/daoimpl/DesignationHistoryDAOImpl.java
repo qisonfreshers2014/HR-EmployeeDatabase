@@ -46,8 +46,7 @@ tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 }
 Criteria createCriteria = session.createCriteria(DesignationHistory.class);
 createCriteria.add(Restrictions.eq("empId", designationHistory.getEmpId()));
-
-//createCriteria.add(Restrictions.eq("isDeleted",false));
+createCriteria.add(Restrictions.eq("isDeleted",false));
 list = (List<DesignationHistory>)createCriteria.list();
  } finally {
 try {

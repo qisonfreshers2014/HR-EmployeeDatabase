@@ -108,6 +108,7 @@ public class SkillDAOImpl extends BaseDAOImpl implements SkillsDAO{
 	   Criteria createCriteria = session.createCriteria(Skills.class);
 	   
 	    createCriteria.add(Restrictions.eq("empId",empId));
+	    createCriteria.add(Restrictions.eq("isDeleted",false));
 	   list = (List<Skills>)createCriteria.list();
 	   
 	    } finally {

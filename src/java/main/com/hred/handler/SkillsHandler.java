@@ -117,6 +117,15 @@ public class SkillsHandler extends AbstractHandler {
 		skill = (List<Skills>) skillsDAOImpl.getEditSkills(skills);
 		return skill;
 	}
+
+	public Skills deleteSkillsById(long id) throws ObjectNotFoundException {
+		Skills skillsfromdb = (Skills)DAOFactory.getInstance().getSkillDAO().getObjectById(id, ObjectTypes.SKILLS);
+		skillsfromdb.setDeleted(true);
+		Skills skillsEdited = (Skills) DAOFactory.getInstance().getSkillDAO().update(skillsfromdb);
+		return skillsEdited;
+	}
+
+	
 	
 	
 }

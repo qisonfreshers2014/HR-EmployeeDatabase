@@ -184,6 +184,27 @@ public class SkillsService extends BaseService {
 	  //return outputString;
 	   
 	 }
+	
+	@POST
+	 @RestService(input = String.class, output = String.class)
+	 @ServiceStatus(value = "complete")
+	 @Consumes(MediaType.APPLICATION_JSON)
+	 @Produces(MediaType.APPLICATION_JSON)
+	 @Path("/deleteSkillById")
+
+	 public String deleteSkillsById(@Context HttpHeaders headers, @Context UriInfo uriInfo,
+	   WebserviceRequest request) throws ObjectNotFoundException,
+	   BusinessException, EncryptionException, SkillsException { 
+
+	  Skills skills = (Skills) JsonUtil.getObject(request.getPayload(),
+	    Skills.class);
+	  Skills Skills = SkillsHandler.getInstance().deleteSkillsById(skills.getId());
+	  //System.out.println("COunt : "+ Skills.size());
+	  return JsonUtil.getJsonBasedOnDescriptor(Skills, Skills.class);
+	  //String outputString = "{\"status\": \"SUCCESS\", \"payload\": \"COunt\"}";
+	  //return outputString;
+	   
+	 }
 	 
 
 }

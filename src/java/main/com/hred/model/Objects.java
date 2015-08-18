@@ -43,6 +43,9 @@ public class Objects {
             case ObjectTypes.SKILLS:
                 persistentObjectName = Skills.class;
                 break;
+            case ObjectTypes.DESIGNATION_HISTORY:
+            	persistentObjectName = DesignationHistory.class;
+            	break;
 
             default:
                 break;

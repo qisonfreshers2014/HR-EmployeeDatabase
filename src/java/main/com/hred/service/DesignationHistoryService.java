@@ -70,6 +70,24 @@ public class DesignationHistoryService extends BaseService{
 		@ServiceStatus(value = "complete")
 		@Consumes(MediaType.APPLICATION_JSON)
 		@Produces(MediaType.APPLICATION_JSON)
+		@Path("/upadateDesignation")
+		
+		public String upadateDesignation(@Context HttpHeaders headers, @Context UriInfo uriInfo,
+				WebserviceRequest request) throws ObjectNotFoundException,
+				BusinessException, EncryptionException {
+
+			DesignationHistory designationmaster = (DesignationHistory) JsonUtil.getObject(request.getPayload(),DesignationHistory.class);
+
+			DesignationHistory output = (DesignationHistory) DesignationHistoryHandler.getInstance().updateDesignationDetailsAOP(designationmaster);
+
+			return JsonUtil.getJsonBasedOnDescriptor(output, DesignationHistory.class);
+		}
+		
+		@POST
+		@RestService(input = DesignationHistory.class, output = DesignationHistory.class)
+		@ServiceStatus(value = "complete")
+		@Consumes(MediaType.APPLICATION_JSON)
+		@Produces(MediaType.APPLICATION_JSON)
 		@Path("/getDesignations")
 	
 		public String getDesignationDetails(@Context HttpHeaders headers, @Context UriInfo uriInfo,
@@ -124,6 +142,45 @@ public class DesignationHistoryService extends BaseService{
 		return JsonUtil.getJsonForListBasedOnDescriptor(designationName, DesignationType.class, DesignationType.class);
 }		
 
+		@POST
+		@RestService(input = DesignationType.class, output = DesignationType.class)
+		@ServiceStatus(value = "complete")
+		@Consumes(MediaType.APPLICATION_JSON)
+		@Produces(MediaType.APPLICATION_JSON)
+		@Path("/getDesignationById")
+	
+		public String getDesignationById(@Context HttpHeaders headers, @Context UriInfo uriInfo,
+		WebserviceRequest request) throws ObjectNotFoundException,
+		BusinessException, EncryptionException, DesignationHistoryException {
+		 
+			DesignationHistory designation = (DesignationHistory) JsonUtil.getObject(request.getPayload(),
+					DesignationHistory.class);
+		 
+		DesignationHistory designationName = DesignationHistoryHandler.getInstance().getDesignationByIdAOP(designation);
+	
+
+		return JsonUtil.getJsonForListBasedOnDescriptor(designationName, DesignationType.class, DesignationType.class);
+}		
 		
+		@POST
+		@RestService(input = DesignationType.class, output = DesignationType.class)
+		@ServiceStatus(value = "complete")
+		@Consumes(MediaType.APPLICATION_JSON)
+		@Produces(MediaType.APPLICATION_JSON)
+		@Path("/deleteDesignationById")
+	
+		public String deleteDesignationById(@Context HttpHeaders headers, @Context UriInfo uriInfo,
+		WebserviceRequest request) throws ObjectNotFoundException,
+		BusinessException, EncryptionException, DesignationHistoryException {
+		 
+			DesignationHistory designation = (DesignationHistory) JsonUtil.getObject(request.getPayload(),
+					DesignationHistory.class);
+		 
+		DesignationHistory designationName = DesignationHistoryHandler.getInstance().deleteDesignationByIdAOP(designation);
+	
+
+		return JsonUtil.getJsonForListBasedOnDescriptor(designationName, DesignationType.class, DesignationType.class);
+}		
+
 
 }

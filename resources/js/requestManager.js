@@ -137,6 +137,9 @@ RequestManager.prototype.getEditSKill = function(data, callback) {
 RequestManager.prototype.editskills = function(data, callback) {
     this.sendToServer('skills/update', data, callback);
    }
+RequestManager.prototype.deleteSkillById = function(data, callback) {
+    this.sendToServer('skills/deleteSkillById', data, callback);
+   }
  
 // RM for filters
 RequestManager.prototype.getFilterEmployee = function(data, callback) {
@@ -242,6 +245,14 @@ RequestManager.prototype.getSearchEmp=function(data,callback){
  RequestManager.prototype.saveLastWorkingDay=function(data,callback){
 	 this.sendToServer('employee/SaveLastWorkingDayOfEmployee', data, callback);
 } 
-
+ RequestManager.prototype.editDesignation=function(data,callback){
+	 this.sendToServer('designation_history/upadateDesignation', data, callback);
+} 
+ RequestManager.prototype.getDesignationById=function(data,callback){
+	 this.sendToServer('designation_history/getDesignationById', data, callback);
+} 
+ RequestManager.prototype.deleteDesignationById=function(data,callback){
+	 this.sendToServer('designation_history/deleteDesignationById', data, callback);
+} 
 
 var RequestManager = new RequestManager();

@@ -9,11 +9,16 @@ import com.hred.exception.DesignationHistoryException;
 import com.hred.exception.ExceptionCodes;
 import com.hred.exception.ExceptionMessages;
 import com.hred.exception.HolidaysException;
+import com.hred.exception.ObjectNotFoundException;
 import com.hred.handler.annotations.AuthorizeEntity;
 import com.hred.model.DesignationHistory;
 import com.hred.model.DesignationType;
+import com.hred.model.Employee;
+import com.hred.model.ObjectTypes;
+import com.hred.model.Skills;
 import com.hred.persistence.dao.DAOFactory;
 import com.hred.persistence.dao.DesignationHistoryDAO;
+import com.hred.persistence.dao.EmployeeDAO;
 /**
  * @author Bhargavi Uppoju
  *
@@ -65,6 +70,31 @@ public class DesignationHistoryHandler extends AbstractHandler {
 				.saveObject(designationhistory);
 		return designationhistory_saved;
 	}
+	@AuthorizeEntity(roles={Constants.HR})
+public DesignationHistory updateDesignationDetailsAOP(DesignationHistory designation) throws ObjectNotFoundException, DesignationHistoryException{
+		
+	List<DesignationHistory> data = getAllDesignationDetailsAOP();
+		int eid=designation.getEmpId();
+		Timestamp appraisalDate = designation.getAppraisalDate();
+		
+		
+		int designationId = designation.getDesignationId();
+		double salary=designation.getSalary();
+		double variablePay=designation.getVariablePay();
+		validateDuplicate(data,eid,designationId,salary,variablePay);
+		validateAppraisalDate(appraisalDate);
+		validateDesignationId(designationId);
+		DesignationHistory designationFrmdb=(DesignationHistory)DAOFactory.getInstance().getDesignationHistoryDAO().getObjectById(designation.getId(), ObjectTypes.DESIGNATION_HISTORY);
+		
+		designationFrmdb.setEmpId(designation.getEmpId());
+		designationFrmdb.setSalary(designation.getSalary());
+		designationFrmdb.setVariablePay(designation.getVariablePay());
+		designationFrmdb.setDesignationId(designation.getDesignationId());
+		designationFrmdb.setAppraisalDate(designation.getAppraisalDate());
+		DesignationHistory updatedDesignation=(DesignationHistory) DAOFactory.getInstance().getDesignationHistoryDAO().update(designationFrmdb);
+		return updatedDesignation;
+	
+	}
 
 	//@AuthorizeEntity(roles={Constants.HR})
 	public List<DesignationType> getDesignationName(DesignationType designation) {
@@ -107,5 +137,21 @@ public class DesignationHistoryHandler extends AbstractHandler {
 					ExceptionMessages.DESIGNATION_DOESNOT_EXIST);
 		}
 
+	}
+
+	@AuthorizeEntity(roles={Constants.HR})
+	public DesignationHistory getDesignationByIdAOP(DesignationHistory designation) throws ObjectNotFoundException {
+		DesignationHistory designationFrmdb=(DesignationHistory)DAOFactory.getInstance().getDesignationHistoryDAO().getObjectById(designation.getId(), ObjectTypes.DESIGNATION_HISTORY);
+		return designationFrmdb;
+	}
+	@AuthorizeEntity(roles={Constants.HR})
+	public DesignationHistory deleteDesignationByIdAOP(DesignationHistory designation) throws ObjectNotFoundException {
+		DesignationHistory designationFrmdb=getDesignationByIdAOP(designation);
+		designationFrmdb.setDeleted(true);
+		DesignationHistory updatedDesignation=(DesignationHistory) DAOFactory.getInstance().getDesignationHistoryDAO().update(designationFrmdb);
+		return designationFrmdb;
 	}	 
+	
+	
+	
 }
