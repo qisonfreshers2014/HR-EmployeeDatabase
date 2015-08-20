@@ -20,7 +20,7 @@ import com.hred.service.common.ServiceRequestContextHolder;
  */
 public final class Utils {
 
-    public static final String EMAIL_PATTERN = "^[_A-Za-z]+[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+    public static final String EMAIL_PATTERN = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
     public static final String NAME_PATTERN = "^[A-Za-z0-9\\s]*$";
     public static final String USER_NAME_PATTERN = "^[A-Za-z\\s]*$";
     public static final String DESIGNATION = "^([A-Z]+)$";
