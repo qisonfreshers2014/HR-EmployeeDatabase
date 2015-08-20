@@ -355,7 +355,7 @@ editdesignation.prototype.updateEditedDesignation=function(data,empName1,doj1){
 }
 
 editdesignation.prototype.deleteDesignation=function(id,empName1,doj1){
-	var text = confirm("Are you sure you want to delete this employee?");
+	var text = confirm("Are you sure you want to delete this Designation?");
 	if(text==true){
 	
 	var inputFordelete={"payload":{"id":id}};

@@ -258,7 +258,7 @@ skill.prototype.editSkill = function(obj1){
 		 }.ctx(this));
 }
 skill.prototype.deleteSkill=function(id){
-	var text = confirm("Are you sure you want to delete this employee?");
+	var text = confirm("Are you sure you want to delete this Skill?");
 	if(text==true){
 		var inputTodelete={"payload":{"id":id}};
 		
