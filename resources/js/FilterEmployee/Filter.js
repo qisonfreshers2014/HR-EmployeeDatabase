@@ -82,6 +82,7 @@ FilterEmp.prototype.FilterEmployee = function(pagno,empid,designationNames){
 			$('#filterdesignation').val()==0 && $('#year1').val()=="" && $('#year2').val()==""){
 				
 			alert("Select at least one field");
+			$('#displayData tbody').empty();
 			return;
 			
 	}
@@ -89,7 +90,7 @@ FilterEmp.prototype.FilterEmployee = function(pagno,empid,designationNames){
 		var from = $('#year1').val();
 		var to = $('#year2').val();
 		if(parseInt(from)>parseInt(to)){
-			alert("From value always less than To value");
+			alert("From value Should be less than To value");
 			return;
 		 
 		}
@@ -168,7 +169,16 @@ if($('#dojFrom').val()!="" && $('#dojTo').val()==""){
 					return;
 				}
 			}
-		 
+		if($('#year1').val()!="" && $('#year2').val()==""){
+			
+			$('#year2').val($('#year1').val());
+				
+			}
+        if($('#year1').val()=="" && $('#year2').val()!=""){
+			
+			alert("Please select From value");
+				return;
+			}
 
 	var payload ={"pageNo":pagno,"pageSize":10};
 	if($('#emptype').val() != ""){

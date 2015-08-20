@@ -111,7 +111,7 @@ skill.prototype.validateSkill=function(){
 	  		
 			else{
 				  alert("Failed to inserted");
-				 
+			
 				}
 		}.ctx(this));
 

@@ -624,8 +624,7 @@ AddEmployee.prototype.employeeFathersNameValidate = function(flag) {
 		flag = false;
 
 	}
-	/*$(fathererr).text("Required field");
-	$(fathererr).css("color", "red");*/
+	
 	else if (!(fathername.match(char) || fathername == isNaN)) {
 		$(fathererr).text("Please enter characters only");
 		$(fathererr).css("color", "red");
