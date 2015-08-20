@@ -49,7 +49,7 @@ EditEmployee.prototype.validateEditEmp = function(employeeId) {
 
 }
 
-var char = /^[A-Za-z]+( [A-Za-z]+)*$/;
+var char = /^[A-Za-z]+( \s[A-Za-z]+)*$/;
 var qual = /^[a-zA-Z.""]+$/;
 var num = /^[0-9]+$/;
 var mail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -146,10 +146,10 @@ EditEmployee.prototype.employeeEmergencyContactNameValidate = function(flag) {
 	} else if (txtemname.charAt(0) == " ") {
 		$(emnameerr).text("First letter shouldn't be space");
 		$(emnameerr).css("color", "red");
-	} else if (!(txtemname.match(char) || txtemname == isNaN)) {
+	} /*else if (!(txtemname.match(char) || txtemname == isNaN)) {
 		$(emnameerr).text("Enter characters only");
 		$(emnameerr).css("color", "red");
-	} else if (txtemname.length < 2) {
+	} */else if (txtemname.length < 2) {
 		$(emnameerr).text("Please enter min 3 characters");
 		$(emnameerr).css("color", "red");
 	} else {

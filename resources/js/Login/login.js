@@ -48,7 +48,7 @@ Login.prototype.handleShow = function() {
   $(".errormessage1").hide();
   $(".errormessage").hide();
      var isValid = false;
-     var emailReg = /^[_A-Za-z]+[_A-Za-z0-9-]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$/;
+     var emailReg = /^[_A-Za-z0-9-]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$/;
      var minMaxLength = /^[\s\S]{8,32}$/;
      var number = /[0-9]/;
      var special = /[ !"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]/;
