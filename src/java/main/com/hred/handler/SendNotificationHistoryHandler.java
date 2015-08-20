@@ -140,7 +140,7 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 			Template birthdayTemplate=tempDAOImpl.getContentForMail(requiredContent);
 			
 			for (Employee birthday : todaysBithday) {
-				String body="Hi "+birthday.getEmployeeName()+"</br>"+birthdayTemplate.getContent();
+				String body="Hi "+birthday.getEmployeeName()+"</br></br>"+birthdayTemplate.getContent();
 
 				try {	
 					Email email = new MultiPartEmail();
@@ -176,7 +176,7 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 			Template anivarsaryTemplate=tempDAOImpl.getContentForMail(requiredContent);
 			
 			for (Employee aniversary : todaysWorkAniversay) {
-				String body="Hi "+aniversary.getEmployeeName()+"</br>"+anivarsaryTemplate.getContent();
+				String body="Hi "+aniversary.getEmployeeName()+"</br></br>"+anivarsaryTemplate.getContent();
 				String aniversarytext = null;
 				try {
 					

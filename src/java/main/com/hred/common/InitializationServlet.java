@@ -46,7 +46,7 @@ public class InitializationServlet extends HttpServlet {
 
 		initializeServices();
 		
-			sendAutomatedNotificationMail();
+			//sendAutomatedNotificationMail();
 
 	
 		
@@ -97,7 +97,7 @@ public class InitializationServlet extends HttpServlet {
 	public void sendAutomatedNotificationMail()
 	{
 		Calendar sentAutomatedMailFrom = Calendar.getInstance();
-		 sentAutomatedMailFrom.set(2015, 06, 23,8,30, 00);		
+		 sentAutomatedMailFrom.set(2015,06,23,8,30, 00);		
 		NotificationTimer mailTimer=new NotificationTimer();
 		Timer notificationTimer = new Timer();
 		notificationTimer.schedule(mailTimer, sentAutomatedMailFrom.getTime(), 24*60*60*1000);
