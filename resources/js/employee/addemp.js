@@ -624,11 +624,11 @@ AddEmployee.prototype.employeeFathersNameValidate = function(flag) {
 		flag = false;
 
 	}
-	
+	/*
 	else if (!(fathername.match(char) || fathername == isNaN)) {
 		$(fathererr).text("Please enter characters only");
 		$(fathererr).css("color", "red");
-	} else {
+	}*/ else {
 		$(fathererr).text("");
 		flag = false;
 

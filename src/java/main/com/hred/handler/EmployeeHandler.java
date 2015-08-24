@@ -866,7 +866,7 @@ public class EmployeeHandler extends AbstractHandler {
 
 		for (Employee anivarsary : employeeAniversary) {
 			DisplayNotificationHome displayNotificationHome = new DisplayNotificationHome(
-					"Anniversary", anivarsary.getDateOfJoining(),
+					"Work Anniversary", anivarsary.getDateOfJoining(),
 					anivarsary.getEmail(), anivarsary.getEmployeeName());
 
 			if (notificationHistory.size() != 0) {
@@ -905,7 +905,7 @@ public class EmployeeHandler extends AbstractHandler {
 		welcomeemp = employeeDAOImpl.getWelcomeEmployee();
 		for (Employee welEmp : welcomeemp) {
 			DisplayNotificationHome displayNotificationHome = new DisplayNotificationHome(
-					"Welcome", welEmp.getDateOfJoining(), welEmp.getEmail(),
+					"Welcome Employee", welEmp.getDateOfJoining(), welEmp.getEmail(),
 					welEmp.getEmployeeName());
 
 			if (notificationHistory.size() != 0) {

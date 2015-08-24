@@ -10,6 +10,19 @@ Template.prototype.handleShow = function(dataid) {
 		 routie("template");
 		 }.ctx(this));
 	
+
+	 $('textarea#contentTemplate').ckeditor({
+	  filebrowserImageUploadUrl :'/UploadServletForCKEditor',
+	  filebrowserUploadUrl : '/UploadServletForCKEditor'
+	 });
+	 $('textarea#contentTemplate').ckeditor(function(){
+			
+			this.viewTemplate(dataid);
+	     }.ctx(this));
+	
+}
+
+Template.prototype.viewTemplate = function(dataid) {	
 	var input = {"payload":{"id":dataid}};
 	RequestManager.getTemplateById(input, function(data, success) {
 
@@ -18,7 +31,7 @@ Template.prototype.handleShow = function(dataid) {
 			 
 			 $('.templateName1').val(obj.name);
 			 $('.templateSubject1').val(obj.subject);
-			 $('.templateContent1').prepend(obj.content);
+			 $('textarea#contentTemplate').val(obj.content);
 		  }
 		 }.ctx(this));
 }

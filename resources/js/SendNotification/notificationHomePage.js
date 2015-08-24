@@ -15,7 +15,7 @@ loadNotificationHomePage.prototype.handleShow = function(data) {
 	 RequestManager.getTemplatename(tempinput, function(data, success) {
 			if (success) {	
 				var birthday="birthday";
-				var anniversary="anniversary";
+				var anniversary="work anniversary";
 				var welcome="welcome employee";
 				
 				for(i=0;i<data.length;i++){

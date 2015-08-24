@@ -13,7 +13,23 @@ sendNotificationMail.prototype.handleShow = function(event, email, employeeName)
 {
 	$("#backtonotifications").click(function() {
 		
-		routie("notifications");
+		var input={};
+		RequestManager.getAllEvents(input, function(data, success) {
+			if (success) {		
+			                    
+								App.loadNotificationHomePage(data);
+					}else if(data.code==131){
+
+                                                alert("Sorry, you are not a authorized user for this action");
+                                                     App.loadEmployeePage(App.userName,App.hr,App.isDeleted);
+                                                     routie("home");
+                                            }      
+		else
+			{
+			App.loadNotificationHomePage(data);
+			alert("No Data Found");
+					}
+		});
 	
 	}.ctx(this));
 	
