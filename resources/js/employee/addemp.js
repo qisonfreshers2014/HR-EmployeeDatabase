@@ -201,7 +201,7 @@ AddEmployee.prototype.uploadMedia = function(callback) {
 	}.ctx(this));
 	callback();
 }
-
+var idReg=/^[a-zA-Z0-9]*$/;
 var char = /^[A-Za-z .]+( [A-Za-z]+)*$/;
 var qual = /^[A-Za-z]+(.[A-Za-z]+)*$/;
 var skp = /^[A-Za-z0-9]+(.[A-Za-z0-9]+)*$/;
@@ -491,9 +491,9 @@ AddEmployee.prototype.employeeIdValidate = function(flag) {
 		$(err).text("Required field");
 		$(err).css("color", "red");
 
-	} else if (empId == isNaN || !(empId.match(num))) {
+	} else if (!(empId.match(idReg))) {
 
-		$(err).text("Please enter only numbers");
+		$(err).text("Please enter numbers and characters only");
 		$(err).css("color", "red");
 
 	} else if (empId == 0) {

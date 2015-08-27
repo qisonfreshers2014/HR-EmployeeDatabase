@@ -122,7 +122,7 @@ sendNotificationMail.prototype.handleShow = function(event, email, employeeName)
 
 
 		//Checking the event and accordingly displaying the data 
-		if (event == "Anniversary") {
+		if (event.replace(/\s/g, '').toLowerCase() == "workanniversary") {
 			var send = '<select  id="sendtoDdbNotification"><option>'+employeeName+' (' + email + ') </option></select>';
 //Apending the name in the To drop  down
 		 $("#sendToNotification").append(send);
@@ -131,7 +131,7 @@ sendNotificationMail.prototype.handleShow = function(event, email, employeeName)
 					+ "</option>";
 			//Apending the Subject to the subject drop down
 			  $("#sendSubjectNotification").append(subject);
-		} else if(event=="Birthday") {
+		} else if(event.replace(/\s/g, '').toLowerCase() =="birthday") {
 			var send = '<select  id="sendtoDdbNotification"><option>'+employeeName+' (' + email + ') </option></select>';
 			//Apending the name in the To drop  down
  $("#sendToNotification").append(send);

@@ -102,7 +102,9 @@ $('#backtohrview').click(function(){
 			$('#employeetype').val(object.employeeType);
 		    $("#gender").val(object.gender);
 		    $('#doj').val(payloadDOJ);
+		    $('#university').val(object.university);
 			$('#lastwrkday').val(payloadLWD);
+			
 			
 		} else {
 			alert("failed to edit");
@@ -251,6 +253,7 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 	var variableerr = $('#variableerr');
 	var Gender = $("#gender option:selected").val();
 	var doj=$("#doj").val();
+	var college = $('#collagename').val();
 	var lastWorkingDay=	$('#lastwrkday').val();
 	var flag = true;
 	
@@ -273,6 +276,7 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 				& !flag == this.employeeNameValidate(flag)
 				& !flag == this.employeeDOBValidate(flag)
 				& !flag == this.employeeDOJValidate(flag)
+				& !flag == this.employeeUniversityValidate(flag)
 				& !flag == this.employeeActualDOBValidate(flag)
 				& !flag == this.employeeNonMandatoryFieldsValidation(flag)){
 			
@@ -309,7 +313,8 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 				"fileId" : fileId,
 				"employeeType" : employeeType,
 				"dateOfJoining": doj + " 00:00:00",
-				"lastWorkingDay":lastWorkingDay +" 00:00:00"
+				"lastWorkingDay" : lastWorkingDay +" 00:00:00",
+				"university" : college
 			}
 		};
 		RequestManager.hrupdateEmp(input, function(data, success) {
@@ -433,6 +438,7 @@ HrEditEmployee.prototype.employeeActualDOBValidate = function(flag) {
 	return flag;
 
 }
+
 HrEditEmployee.prototype.employeeHighestQualification = function(flag) {
 	var qualification = $("#qual").val();
 	var nerr = $("#qualerr");
@@ -474,7 +480,7 @@ HrEditEmployee.prototype.employeeSalaryValidate = function(flag) {
 	return flag;
 
 }
-/*HrEditEmployee.prototype.employeeUniversityValidate = function(flag) {
+HrEditEmployee.prototype.employeeUniversityValidate = function(flag) {
 	var college = $('#collagename').val();
 	if (college == "") {
 		$('#collegeerr').text("Required field");
@@ -487,7 +493,7 @@ HrEditEmployee.prototype.employeeSalaryValidate = function(flag) {
 
 	}
 
-}*/
+}
 HrEditEmployee.prototype.employeeFathersNameValidate = function(flag) {
 	var fathererr = $("#fathererr");
 	var fathername = $("#fathername").val();

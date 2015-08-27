@@ -561,8 +561,9 @@ public class EmployeeHandler extends AbstractHandler {
 		String gender=employee.getGender();
 		Timestamp lastWorkingDay=employee.getLastWorkingDay();
 		Timestamp doj=employee.getDateOfJoining();
+		String university=employee.getUniversity();
 		
-		validateHrEditEmployee(name,id,email,qualification,salary,num,date,actualDOB,fatherName,contactNum,YOE,emercontnum,emercontname,currentaddr,peraddr,employeeType,gender,lastWorkingDay,doj);
+		validateHrEditEmployee(name,id,email,qualification,salary,num,date,actualDOB,fatherName,contactNum,YOE,emercontnum,emercontname,currentaddr,peraddr,employeeType,gender,lastWorkingDay,doj,university);
 		
 		Employee empFromDB = (Employee) DAOFactory.getInstance()
 				.getEmployeeDAO().getEmployeeById(employee.getEmployeeId());
@@ -595,6 +596,7 @@ public class EmployeeHandler extends AbstractHandler {
 		empFromDB.setGender(employee.getGender());
 		empFromDB.setDateOfJoining(employee.getDateOfJoining());
 		empFromDB.setLastWorkingDay(employee.getLastWorkingDay());
+		empFromDB.setUniversity(employee.getUniversity());
 		EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
 				.getEmployeeDAO();
 		employee = (Employee) empDAOImpl.update(empFromDB);
@@ -607,7 +609,7 @@ public class EmployeeHandler extends AbstractHandler {
 			String qualification, String salary, long num, Timestamp date,
 			Timestamp actualDOB, String fatherName, long contactNum,
 			double yOE, long emercontnum, String emercontname,
-			String currentaddr, String peraddr, String employeeType,String gender,Timestamp lastWorkingDay,Timestamp doj) throws BusinessException {
+			String currentaddr, String peraddr, String employeeType,String gender,Timestamp lastWorkingDay,Timestamp doj,String university) throws BusinessException {
 		
 		if (currentaddr == null || currentaddr.isEmpty()) {
 			throw new EmployeeException(
@@ -696,6 +698,12 @@ public class EmployeeHandler extends AbstractHandler {
 					ExceptionMessages.EMPLOYEE_DOJ_NOT_EMPTY);
 
 		}
+		 if(university==null||university.isEmpty()){
+				
+				throw new EmployeeException(ExceptionCodes.EMPLYEE_UNIVERSITY_NULL,ExceptionMessages.EMPLYEE_UNIVERSITY_NULL);
+				
+				                             
+			}
 
 		if(lastWorkingDay==null){
 			
