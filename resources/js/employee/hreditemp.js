@@ -102,7 +102,7 @@ $('#backtohrview').click(function(){
 			$('#employeetype').val(object.employeeType);
 		    $("#gender").val(object.gender);
 		    $('#doj').val(payloadDOJ);
-		    $('#university').val(object.university);
+		    $('#collagename').val(object.university);
 			$('#lastwrkday').val(payloadLWD);
 			
 			
