@@ -988,7 +988,7 @@ public class EmployeeHandler extends AbstractHandler {
 					ExceptionMessages.PASSWORD_CANNOT_BE_EMPTY);
 		}
 
-		boolean passwordValidity = passwordFromDB.equals(oldpassword);
+		boolean passwordValidity = passwordFromDB.equals(encryptedOldPassword);
 		boolean newPasswordValidity = newPassword.equals(confirmNewPassword);
 		if (passwordValidity && newPasswordValidity) {
 			empFromDB.setPassword(Utils.encrypt(newPassword));

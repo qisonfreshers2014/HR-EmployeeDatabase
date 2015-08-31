@@ -71,7 +71,7 @@ public class DefaultAuthenticationHandler implements AuthenticationHandler {
   System.out.println(encryptedPassword);
  
   boolean emailValidity = emailFromDB.equalsIgnoreCase(email);
-  boolean passwordValidity = passwordFromDB.equals(password);
+  boolean passwordValidity = passwordFromDB.equals(encryptedPassword);
 
   if (!emailValidity) {
    throw new BusinessException(ExceptionCodes.EMAIL_DOESNOT_EXIST,
