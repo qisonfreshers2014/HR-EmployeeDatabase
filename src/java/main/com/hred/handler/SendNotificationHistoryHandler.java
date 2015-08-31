@@ -172,7 +172,7 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 			}
 		}
 		if (todaysWorkAniversay.size() != 0) {
-			requiredContent.setEvent("Anniversary");
+			requiredContent.setEvent("Work Anniversary");
 			Template anivarsaryTemplate=tempDAOImpl.getContentForMail(requiredContent);
 			
 			for (Employee aniversary : todaysWorkAniversay) {
@@ -195,7 +195,7 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 					
 					entry.setEmployeeEmail(aniversary.getEmail());
 					entry.setEmployeeName(aniversary.getEmployeeName());
-					entry.setEventName("Anniversary");
+					entry.setEventName("Work Anniversary");
 					entry.setDeleted(false);
 					entry.setTemplateId("02");
 					entry.setEmployeeId(aniversary.getEmployeeId());
@@ -275,9 +275,9 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 					entry.setEventName("Birthday");
 								
 				
-				} else if (sentMailToEmployee.getEvent().equalsIgnoreCase("Anniversary")) {
+				} else if (sentMailToEmployee.getEvent().equalsIgnoreCase("Work Anniversary")) {
 					entry.setTemplateId("02");
-					entry.setEventName("Anniversary");
+					entry.setEventName("Work Anniversary");
 					
 							}
 				else

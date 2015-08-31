@@ -46,7 +46,7 @@ public class InitializationServlet extends HttpServlet {
 
 		initializeServices();
 		
-			//sendAutomatedNotificationMail();
+			sendAutomatedNotificationMail();
 
 	
 		
