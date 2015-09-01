@@ -90,7 +90,6 @@ public class AllHandsMeetingService  extends BaseService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/update")
-	@UnSecure
 	public String update(@Context HttpHeaders headers,
 			@Context UriInfo uriInfo, WebserviceRequest request)
 			throws ObjectNotFoundException, BusinessException,
@@ -106,7 +105,6 @@ public class AllHandsMeetingService  extends BaseService {
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 @Path("/getAllHandsMeeting")
-@UnSecure
 public String getAllHandsMeeting(@Context HttpHeaders headers, @Context UriInfo uriInfo,
 		WebserviceRequest request) throws ObjectNotFoundException,
 		BusinessException, EncryptionException {		
@@ -124,7 +122,6 @@ AllHandsMeeting allhandsmeeting = (AllHandsMeeting) JsonUtil.getObject(
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 @Path("/getallhandsschedule")
-@UnSecure
 public String getAllHandsMeetingSchedule(@Context HttpHeaders headers,
   @Context UriInfo uriInfo, WebserviceRequest request)
   throws ObjectNotFoundException, BusinessException,

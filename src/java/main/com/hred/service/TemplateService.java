@@ -154,7 +154,6 @@ public class TemplateService extends BaseService {
  @Consumes(MediaType.APPLICATION_JSON)
  @Produces(MediaType.APPLICATION_JSON)
  @Path("/getalltemplates")
- @UnSecure
  public String getAllTemplatesPaginated(@Context HttpHeaders headers,
    @Context UriInfo uriInfo, WebserviceRequest request)
    throws ObjectNotFoundException, BusinessException,

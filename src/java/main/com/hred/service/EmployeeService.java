@@ -475,6 +475,7 @@ public class EmployeeService extends BaseService {
 					return JsonUtil.getJsonBasedOnDescriptor(output, Employee.class);
 				}	
 			 
+			 // Service for Forgot Password
 			 @POST
 				@RestService(input = DesignationHistory.class, output = String.class)
 				@ServiceStatus(value = "complete")

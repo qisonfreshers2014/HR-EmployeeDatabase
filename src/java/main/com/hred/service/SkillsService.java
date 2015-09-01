@@ -92,7 +92,6 @@ public class SkillsService extends BaseService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/update")
-	@UnSecure
 	public String update(@Context HttpHeaders headers,
 			@Context UriInfo uriInfo, WebserviceRequest request)
 			throws ObjectNotFoundException, BusinessException,
