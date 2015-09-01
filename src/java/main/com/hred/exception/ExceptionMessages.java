@@ -83,6 +83,7 @@ public interface ExceptionMessages {
 	
 	public static final String EMPLOYEE_PERADDR_NOT_EMPTY ="Please enter permanent address.....!!!!";
 	public static final String PLEASE_ENTER_LASTWORKING_DAY = "Please Select Lastworking Day...!!!!";
+	public static final String PLEASE_ENTER_THE_EMAIL_WHICH_YOU_HAVE_GIVEN_AT_THE_TIME_OF_REGISTRATION ="Please Enter Email id which you have given at the time of Registration";
 
 	//Releases Exception Messages
 	public static final String RELEASES_NAME_CANNOT_BE_EMPTY = "Releases Name Cannot Be Empty.";
@@ -246,6 +247,7 @@ public interface ExceptionMessages {
 	public static final String SELECT_ATLEAST_ONE_FIELD= "Please select atleast one field";
 	public static final String DESIGNATION_TYPE_DOES_NOT_EXIST = "DesignationType with this name is not exist";
 	public static final String PLEASE_ENTER_DESIGNATION_TYPE = "Please enter designation type to be added";
+	
 	
 	
 	

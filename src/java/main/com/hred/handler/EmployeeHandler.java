@@ -1216,6 +1216,37 @@ public class EmployeeHandler extends AbstractHandler {
 				Employee empSaved=(Employee) empDAOImpl.update(empfromDb);
 				return empSaved;
 			}
+
+			public Employee forgotPassword(String email) throws EncryptionException, BusinessException  {
+				
+				Employee empSaved=null;
+				Employee emp=(Employee)DAOFactory.getInstance().getEmployeeDAO().getUserByEmail(email);
+				if (email == null || email.isEmpty() || email.trim().isEmpty()) {
+					throw new BusinessException(ExceptionCodes.EMAIL_CANNOT_BE_EMPTY,
+							ExceptionMessages.EMAIL_CANNOT_BE_EMPTY);
+				}
+				else if(emp == null){
+					throw new EmployeeException(ExceptionCodes.PLEASE_ENTER_THE_EMAIL_WHICH_YOU_HAVE_GIVEN_AT_THE_TIME_OF_REGISTRATION,
+							ExceptionMessages.PLEASE_ENTER_THE_EMAIL_WHICH_YOU_HAVE_GIVEN_AT_THE_TIME_OF_REGISTRATION);	
+				}
+				else{
+				String randomPassword=new String(PasswordGenereation());
+				emp.setPassword(Utils.encrypt(randomPassword));
+				EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
+						.getEmployeeDAO();
+				empSaved=(Employee) empDAOImpl.update(emp);
+				
+				try {
+					String out= SendNotificationHistoryHandler.getInstance().sendForgotPasswordMail(emp.getEmail(),emp.getEmployeeName(),randomPassword);
+					
+					System.out.println(out);
+				} catch (EmailException e) {
+					
+					e.printStackTrace();
+				}
+				}
+				return empSaved;
+			}
 			
 	}
 

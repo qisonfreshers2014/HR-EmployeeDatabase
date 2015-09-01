@@ -5,12 +5,62 @@ function Login() {
 }
 
 Login.prototype.handleShow = function() {  
+	$('#forgotPassworddiv').hide();
  $('#userName').focus(); 
  $("#login").keyup(function (event) {
   if (event.keyCode == 13){
    $("#Submit").trigger('click');
    } 
     }.ctx(this));
+ 
+ $('#forgotPassword').click(function(){
+	 $('#forgotPassworddiv').show();
+	 
+	 $('#forgotPassworddiv').dialog({
+         modal: true,
+         buttons:
+       { "Cancel": function() {
+    	   $('#enterEmail').val("");
+           $(this).dialog("close")
+          
+       },
+           "Submit": function() {
+        	   var email=$('#enterEmail').val();
+        		 var mail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        		 
+        		 if(email==""||!email.match(mail)){
+        			 
+        			 alert("Please Provide Valid email");
+        			 return false;
+        		 }else{
+        		 
+        		 $('.container').show();
+        		 input={"payload":{"email":email}};
+        		 RequestManager.forgotPassword(input,function(data,success){
+        			 
+        			 if(success){
+        				 alert("The password has sent to Your mail please check");
+        				 $('#enterEmail').val("");
+        				 $(this).dialog("close")
+        				
+        			 }else if(data.code==116){
+        				 
+        				 alert("Please Provide The mail which you have given At the time of Registration");
+        				 
+        			 }else{
+        				 alert("Failed");
+        				 $('#enterEmail').val("");
+        				 $(this).dialog("close") 
+        			 }
+        			 
+        		 }.ctx(this));
+        		 
+        		 }  
+        } }
+    });
+	 
+ });
+ 
  
  $("#Submit").click(function(event){
    if(this.validateLogin($('input.username').val(),$('input.password').val())){  

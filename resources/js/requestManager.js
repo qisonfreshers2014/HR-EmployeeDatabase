@@ -254,5 +254,8 @@ RequestManager.prototype.getSearchEmp=function(data,callback){
  RequestManager.prototype.deleteDesignationById=function(data,callback){
 	 this.sendToServer('designation_history/deleteDesignationById', data, callback);
 } 
+ RequestManager.prototype.forgotPassword=function(data,callback){
+	 this.sendToServer('employee/forgotPassword', data, callback);
+} 
 
 var RequestManager = new RequestManager();

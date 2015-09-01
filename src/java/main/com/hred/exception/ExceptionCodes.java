@@ -167,7 +167,7 @@ public interface ExceptionCodes {
 	public static final int EMPLYEE_TYPE_NULL = 310;
 	public static final int EMPLYEE_UNIVERSITY_NULL = 311;
 	public static final int PLEASE_ENTER_LASTWORKING_DAY = 312;
-	
+	public static final int PLEASE_ENTER_THE_EMAIL_WHICH_YOU_HAVE_GIVEN_AT_THE_TIME_OF_REGISTRATION =313;
 	
 	//Mongo related exception Codes
 	public static final int COULD_NOT_START_MONGO_CLIENT = 1001;
@@ -382,6 +382,8 @@ public interface ExceptionCodes {
 	public static final int SELECT_ATLEAST_ONE_FIELD = 9025;
 	public static final int DESIGNATION_TYPE_DOES_NOT_EXIST = 9026;
 	public static final int PLEASE_ENTER_DESIGNATION_TYPE = 9027;
+	
+	
 	
 
 

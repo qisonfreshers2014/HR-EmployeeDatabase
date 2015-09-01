@@ -154,7 +154,9 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 					email.addTo(birthday.getEmail());
 					email.setContent(body, "text/html");
 					email.addCc(bcc);
+					
 					email.send();
+					
 					
 						// send message
 										entry.setTemplateId("01");
@@ -435,5 +437,63 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 		  
 		  
 	  }
+
+		public String sendForgotPasswordMail(String email, String employeeName,String randomPassword) throws EmailException {
+			 String hostName=null;
+	          String smtpPort=null;
+	          String authenticatorMail=null;
+	          String authenticatorPassword=null;
+	          String from=null;
+	          String bcc=null;
+	          String URL=null;
+	          long file_id;
+	         
+	          try
+	          {
+	              Properties props = ConfigReader.getProperties(Constants.MAIL_CONFIGURATION_SETTING);
+	              hostName=props.getProperty(Constants.HOST_NAME);
+	           smtpPort=props.getProperty(Constants.HOST_NAME);                                                               
+	           authenticatorMail=props.getProperty(Constants.AUTHENTICATOR_MAIL);
+	           authenticatorPassword=props.getProperty(Constants.AUTHENTICATOR_PASSWORD);
+	           from=props.getProperty(Constants.SEND_FROM);
+	           bcc=props.getProperty(Constants.SEND_BCC);
+	           URL=props.getProperty(Constants.URL);                                                            
+	          }
+	          catch(IOException e)
+	          {
+	              e.printStackTrace();
+	          }
+	          
+	          //Templete templte=TemplateHandler.getInstance().viewTemplateAOP(template.getId());
+	          String content="";
+	          
+	          content +="Hi ,    <b>"+employeeName+"</b><br/><br/>";
+	          
+	        content	+= "You can Login by using following credentials<br/><br/>";
+		   
+	        content += "<b>Username:</b>"+email+"<br/><br/>";
+	        content += "<b>Password:</b>"+randomPassword+"<br/><br/>";
+	        		   
+	        content += "Please change your password once you login to the system.<br/><br/>";
+
+			  MultiPartEmail mulEmail = new MultiPartEmail();
+			  mulEmail.setHostName(hostName);
+			  mulEmail.setSmtpPort(465);
+			  mulEmail.setAuthenticator(new DefaultAuthenticator(
+	                  authenticatorMail, authenticatorPassword));
+			  mulEmail.setSSLOnConnect(true);
+			  mulEmail.setFrom(from);
+	         
+	         // String subjectMail = sentMailToEmployee.getEvent() + " "
+	                 // + sentMailToEmployee.getEmployeeName();
+	         	               
+			  mulEmail.setSubject("Forgot Password");
+			  mulEmail.addTo(email);
+			  mulEmail.setContent(content,"text/html");
+			  mulEmail.setBounceAddress("rahul.shelke@qison.com");
+			  mulEmail.send();
+	          return "{\"status\": \"SUCCESS\", \"payload\": \"Mail Send\"}";
+			  
+		}
 	 
 }

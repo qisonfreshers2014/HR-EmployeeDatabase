@@ -25,6 +25,7 @@ import com.hred.model.user.AuthenticationInput;
 import com.hred.model.user.AuthenticationOutput;
 import com.hred.pagination.EmployeeListPaginationInput;
 import com.hred.pagination.PaginationOutput;
+import com.hred.persistence.dao.DAOFactory;
 import com.hred.service.annotations.RestService;
 import com.hred.service.annotations.ServiceStatus;
 import com.hred.service.annotations.UnSecure;
@@ -413,7 +414,7 @@ public class EmployeeService extends BaseService {
 			 @Consumes(MediaType.APPLICATION_JSON)
 			 @Produces(MediaType.APPLICATION_JSON)
 			 @Path("/getEmployeesListPaginated")
-			 @UnSecure
+			
 			 public String getEmployeesPaginated(@Context HttpHeaders headers,
 			   @Context UriInfo uriInfo, WebserviceRequest request)
 			   throws ObjectNotFoundException, BusinessException,
@@ -431,7 +432,7 @@ public class EmployeeService extends BaseService {
 			 @Consumes(MediaType.APPLICATION_JSON)
 			 @Produces(MediaType.APPLICATION_JSON)
 			 @Path("/getSearchedEmployeesListPaginated")
-			 @UnSecure
+			 
 			 public String getSearchedEmployeesPaginated(@Context HttpHeaders headers,
 			   @Context UriInfo uriInfo, WebserviceRequest request)
 			   throws ObjectNotFoundException, BusinessException,
@@ -448,7 +449,7 @@ public class EmployeeService extends BaseService {
 			 @Consumes(MediaType.APPLICATION_JSON)
 			 @Produces(MediaType.APPLICATION_JSON)
 			 @Path("/getFilterEmployeesListPaginated")
-			 @UnSecure
+			
 			 public String getFilterEmployeesPaginated(@Context HttpHeaders headers,
 			   @Context UriInfo uriInfo, WebserviceRequest request)
 			   throws ObjectNotFoundException, BusinessException,
@@ -470,6 +471,23 @@ public class EmployeeService extends BaseService {
 					Employee employee = (Employee) JsonUtil.getObject(request.getPayload(),
 							Employee.class);
 					Employee output = (Employee) EmployeeHandler.getInstance().saveLastWorkingDayOfEmployeeAOP(employee);
+
+					return JsonUtil.getJsonBasedOnDescriptor(output, Employee.class);
+				}	
+			 
+			 @POST
+				@RestService(input = DesignationHistory.class, output = String.class)
+				@ServiceStatus(value = "complete")
+				@Consumes(MediaType.APPLICATION_JSON)
+				@Produces(MediaType.APPLICATION_JSON)
+				@Path("/forgotPassword")
+			    @UnSecure
+				public String forgotPassword(@Context HttpHeaders headers,@Context UriInfo uriInfo, WebserviceRequest request)
+						throws ObjectNotFoundException, BusinessException,
+						EncryptionException {
+					Employee employee = (Employee) JsonUtil.getObject(request.getPayload(),
+							Employee.class);
+					Employee output = EmployeeHandler.getInstance().forgotPassword(employee.getEmail());
 
 					return JsonUtil.getJsonBasedOnDescriptor(output, Employee.class);
 				}	
