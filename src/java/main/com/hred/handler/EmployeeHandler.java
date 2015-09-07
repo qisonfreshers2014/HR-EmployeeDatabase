@@ -866,8 +866,8 @@ public class EmployeeHandler extends AbstractHandler {
 
 			if (notificationHistory.size() != 0) {
 				for (SendNotificationHistory checkingHistory : notificationHistory) {
-					if (checkingHistory.getEmployeeId() == birthday
-							.getEmployeeId()
+					if (checkingHistory.getEmployeeId().equalsIgnoreCase(birthday
+							.getEmployeeId())
 							&& checkingHistory.getTemplateId().equals("01")) {
 						displayNotificationHome.setStatus("Sent");
 						break;
@@ -902,8 +902,8 @@ public class EmployeeHandler extends AbstractHandler {
 
 			if (notificationHistory.size() != 0) {
 				for (SendNotificationHistory checkingHistory : notificationHistory) {
-					if (checkingHistory.getEmployeeId() == anivarsary
-							.getEmployeeId()
+					if (checkingHistory.getEmployeeId().equalsIgnoreCase(anivarsary
+							.getEmployeeId())
 							&& checkingHistory.getTemplateId().equals("02")) {
 						displayNotificationHome.setStatus("Sent");
 						break;
@@ -941,8 +941,8 @@ public class EmployeeHandler extends AbstractHandler {
 
 			if (notificationHistory.size() != 0) {
 				for (SendNotificationHistory checkingHistory : notificationHistory) {
-					if (checkingHistory.getEmployeeId() == welEmp
-							.getEmployeeId()
+					if (checkingHistory.getEmployeeId().equalsIgnoreCase(welEmp
+							.getEmployeeId())
 							&& checkingHistory.getTemplateId().equals("03")) {
 						displayNotificationHome.setStatus("Sent");
 						break;
@@ -978,7 +978,7 @@ public class EmployeeHandler extends AbstractHandler {
 	public Employee deleteEmployeeAOP(Employee employee)
 			throws EmployeeException {
 		Employee empFromDB = (Employee) DAOFactory.getInstance()
-				.getEmployeeDAO().getEmployeeById(employee.getEmployeeId());
+				.getEmployeeDAO().getEmployeeById(employee.getId());
 		empFromDB.setDeleted(true);
 		EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
 				.getEmployeeDAO();
@@ -1232,7 +1232,7 @@ public class EmployeeHandler extends AbstractHandler {
 				}
 				
 				Employee empfromDb =(Employee) DAOFactory.getInstance()
-						.getEmployeeDAO().getEmployeeById(employee.getEmployeeId());
+						.getEmployeeDAO().getEmployeeById(employee.getId());
 				empfromDb.setLastWorkingDay(lastWorkingDay);
 				EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
 						.getEmployeeDAO();

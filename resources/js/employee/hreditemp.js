@@ -828,7 +828,7 @@ HrEditEmployee.prototype.employeeNonMandatoryFieldsValidation = function(flag) {
 	return flag;
 }
 
-HrEditEmployee.prototype.deleteEmployee = function(empid) {
+HrEditEmployee.prototype.deleteEmployee = function(id) {
 	$('#lastwrkday').val("");
 	var text = confirm("Are you sure you want to delete this employee?");
 	if (text == true) {
@@ -847,14 +847,14 @@ HrEditEmployee.prototype.deleteEmployee = function(empid) {
             		  
             		  alert("Please Select the Last working day");
             	  }
-            	  var input={"payload":{"employeeId":empid,"lastWorkingDay":lastWrkingDay + " 00:00:00"}}
+            	  var input={"payload":{"id":id,"lastWorkingDay":lastWrkingDay + " 00:00:00"}}
             	   RequestManager.saveLastWorkingDay(input, function(data, success) {
             		   if(success){
             			   
             			   var employeeId=data.employeeId;
             			   var inputTodelete = {
             						"payload" : {
-            							"employeeId" : employeeId
+            							"id" : id
             						}
             					};
             					RequestManager.hrDeleteEmployee(inputTodelete, function(data, success) {
