@@ -7,7 +7,9 @@ public class EmployeeDetails {
  private String employeeId;
  private String employeeName;
  private String gender;
- 
+ private long contactNo;
+ private Boolean isDeleted;
+ private long id;
 
  
  @JsonProperty
@@ -48,6 +50,13 @@ public class EmployeeDetails {
  public void setIsDeleted(Boolean isDeleted) {
   this.isDeleted = isDeleted;
  }
- private long contactNo;
- private Boolean isDeleted;
+ @JsonProperty
+public long getId() {
+	return id;
+}
+
+public void setId(long id) {
+	this.id = id;
+}
+
 }

@@ -55,6 +55,7 @@ public class DefaultAuthenticationHandler implements AuthenticationHandler {
   String employeeName=emp.getEmployeeName();
   String gender=emp.getGender();
   String employeeId=emp.getEmployeeId();
+  long id=emp.getId();
   Boolean deleted=emp.getDeleted();
   /////////////////////////////////////////////////////////////////////////////////
   
@@ -64,7 +65,7 @@ public class DefaultAuthenticationHandler implements AuthenticationHandler {
   empDetails.setGender(gender);
   empDetails.setEmployeeId(employeeId);
   empDetails.setIsDeleted(deleted);
- 
+  empDetails.setId(id);
   
  ////////////////////////////////////////////////////////////
   String encryptedPassword=Utils.encrypt(password.trim());
