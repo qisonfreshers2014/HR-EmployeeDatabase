@@ -11,7 +11,7 @@ public class EmployeeOutFile extends Employee {
  private String designationName;
  private List<Skills> skills;
 
-public EmployeeOutFile(int employeeId) {
+public EmployeeOutFile(String employeeId) {
   super(employeeId);
   // TODO Auto-generated constructor stub
  }

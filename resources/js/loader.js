@@ -21,7 +21,6 @@ Loader.prototype.loadHTML = function(container, filePath, empty, callback) {
 				// console.log(container)
 				// $(container).msgkey();
 			}
-
 			
 			/*
 			 * var compiledTemplate = Ember.Handlebars.compile(data);
@@ -30,11 +29,7 @@ Loader.prototype.loadHTML = function(container, filePath, empty, callback) {
 			 */
 		}
 	});
-
-
 }
-
-
 
 Loader.prototype.loadManualMail = function(cb) {
 	LazyLoad.css('resources/js/SendNotification/sendNotification.css');

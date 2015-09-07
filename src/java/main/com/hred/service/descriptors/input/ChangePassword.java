@@ -9,7 +9,7 @@ public class ChangePassword {
 	String oldPassword;
 	String newPassword;
 	String confirmNewPassword;
-	int id;
+	String id;
 	
 	public ChangePassword()
 	{
@@ -17,7 +17,7 @@ public class ChangePassword {
 	}
 	
 	public ChangePassword(String oldPassword, String newPassword,
-			String confirmNewPassword, int id) {
+			String confirmNewPassword, String id) {
 		super();
 		this.oldPassword = oldPassword;
 		this.newPassword = newPassword;
@@ -42,10 +42,10 @@ public class ChangePassword {
 	public void setConfirmNewPassword(String confirmNewPassword) {
 		this.confirmNewPassword = confirmNewPassword;
 	}
-	public int getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	

@@ -85,7 +85,8 @@ Login.prototype.handleShow = function() {
        var employeeId=data.employeeDetails.employeeId;
        var hr=data.roleHr;
        var isDeleted=data.employeeDetails.isDeleted;
-       App.loadRouter(name, hr,isDeleted,gender, contactNo,employeeId,function(){
+       var id=data.employeeDetails.id;
+       App.loadRouter(id,name, hr,isDeleted,gender, contactNo,employeeId,function(){
     	   new Router();
        });
        

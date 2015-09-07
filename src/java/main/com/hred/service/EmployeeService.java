@@ -292,8 +292,10 @@ public class EmployeeService extends BaseService {
 			EncryptionException {
 		Employee employee = (Employee) JsonUtil.getObject(request.getPayload(),
 				Employee.class);
+		System.out.println("****************************************"+employee.getId());
+		
 		Employee output = (Employee) EmployeeHandler.getInstance()
-				.getEmployeeById(employee.getEmployeeId());
+				.getEmployeeById(employee.getId());
 		return JsonUtil.getJsonBasedOnDescriptor(output, Employee.class);
 		// return JsonUtil.getJsonForListBasedOnDescriptor(employee,
 		// Employee.class, Employee.class);

@@ -50,7 +50,7 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 
 	@SuppressWarnings("unchecked")
 	 @Override
-	 public Employee getEmployeeById(int id) throws EmployeeException {
+	 public Employee getEmployeeById(String id) throws EmployeeException {
 	  // TODO Auto-generated method stub
 	  Session session = null;
 	  List<Employee> list = null;
@@ -764,7 +764,7 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 
 	 @SuppressWarnings("unchecked")
 		@Override
-		public Boolean getEmployeeByEmpId(int empid) throws EmployeeException {
+		public Boolean getEmployeeByEmpId(String empid) throws EmployeeException {
 			Session session = null;
 			List<Employee> list = null;
 			Transaction tx = null;
@@ -849,7 +849,7 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 	@SuppressWarnings("unchecked")
 
 	  @Override
-	  public Employee viewEmployee(int EmployeeId) throws EmployeeException {
+	  public Employee viewEmployee(String EmployeeId) throws EmployeeException {
 	    Session session = null;
 	     List<Employee> list = null;
 	     Transaction tx = null;
@@ -1193,12 +1193,6 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 
 
 	@Override
-	public Employee getEmployeeById(String id) throws EmployeeException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public List getProfilePics() {
 		Session session = null;
 		List list = null;
@@ -1232,5 +1226,41 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 				return  list;
 	}
 
+	@Override
+	public Employee getEmployeeById(long id) throws EmployeeException {
+		 Session session = null;
+		  List<Employee> list = null;
+		  Transaction tx = null;
+		  try {
+		   session = getSession();
+		   if (null == session) {
+		    session = SessionFactoryUtil.getInstance().openSession();
+		    tx = SessionFactoryUtil.getInstance().beginTransaction(session);
+		   }
+		   Criteria createCriteria = session.createCriteria(Employee.class);
+		   /*String hql="from Employee where id="+id+"";  
+		   org.hibernate.Query query = session.createQuery(hql);
+		    list  = query.list();*/
+		   createCriteria.add(Restrictions.eq("id", id));
+		   list = createCriteria.list();
+		   if (list.size() == 0) {
+		    throw new EmployeeException(ExceptionCodes.EMPLOYEE_DOESNOT_EXIST, ExceptionMessages.EMPLOYEE_DOESNOT_EXIST);
+		     } 
+		  }finally {
+		     try {
+		      if (tx != null) {
+		       tx.commit();
+		       if (session.isConnected())
+		        session.close();
+		      }
+		     } catch (HibernateException e) {
 
+		      e.printStackTrace();
+		     }
+		     }
+		    return  (Employee) list.iterator().next();
+	}
+
+	
+	
 }

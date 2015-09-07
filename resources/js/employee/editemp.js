@@ -1,28 +1,28 @@
-function EditEmployee(employeeId) {
+function EditEmployee(id) {
 	Loader.loadHTML(".container", "resources/js/employee/EditEmp.html", true,
 			function() {
-				this.handleShow(employeeId);
+				this.handleShow(id);
 			}.ctx(this));
 }
-EditEmployee.prototype.handleShow = function(employeeId) {
+EditEmployee.prototype.handleShow = function(id) {
 
 	$('.container').show();
-	this.validateEditEmp(employeeId);
+	this.validateEditEmp(id);
 	$('#updateemp').click(function(e) {
 		e.preventDefault();
-		this.validateUpdateEmp(employeeId);
+		this.validateUpdateEmp(id);
 	}.ctx(this));
 	$('#backtoprofile').click(function() {
 
 		routie("myprofile");
 	}.ctx(this));
 }
-EditEmployee.prototype.validateEditEmp = function(employeeId) {
+EditEmployee.prototype.validateEditEmp = function(id) {
 
 	$('.error').css('visibility', 'hidden');
 	var input = {
 		"payload" : {
-			"employeeId" : employeeId
+			"id" : id
 		}
 	};
 	RequestManager.geteditEmployee(input, function(data, success) {
@@ -57,7 +57,7 @@ var skp = /^[A-Za-z0-9]+(.[A-Za-z0-9]+)*$/;
 
 var illegalChars = /\W/
 var letters = /^[0-9a-zA-Z]+$/;
-EditEmployee.prototype.validateUpdateEmp = function(employeeId) {
+EditEmployee.prototype.validateUpdateEmp = function(id) {
 
 	var cnumerr = $("#cnumerr");
 	var contnum = $("#contnum").val();
@@ -91,7 +91,7 @@ EditEmployee.prototype.validateUpdateEmp = function(employeeId) {
 
 		var input = {
 			"payload" : {
-				"employeeId" : employeeId,
+				"id" :id,
 				"contactNo" : contnum,
 				"currentAddress" : currentaddr,
 				"permanentAddress" : peraddr,

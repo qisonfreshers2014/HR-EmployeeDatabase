@@ -4,19 +4,19 @@ import org.codehaus.jackson.annotate.JsonProperty;
 
 public class EmployeeDetails {
 
- private int employeeId;
+ private String employeeId;
  private String employeeName;
  private String gender;
  
 
  
  @JsonProperty
- public int getEmployeeId() {
+ public String getEmployeeId() {
   return employeeId;
  }
  
- public void setEmployeeId(int employeeId) {
-  this.employeeId = employeeId;
+ public void setEmployeeId(String employeeId2) {
+  this.employeeId = employeeId2;
  }
  
  @JsonProperty

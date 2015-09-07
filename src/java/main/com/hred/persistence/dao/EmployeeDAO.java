@@ -21,7 +21,7 @@ import com.hred.service.descriptors.output.NotificationHomeFilterInputDiscriptor
  */
 public interface EmployeeDAO extends BaseDAO {
 	
-	public Employee viewEmployee(int EmployeeId) throws EmployeeException;
+	public Employee viewEmployee(String string) throws EmployeeException;
 
 	public Employee getUserByEmail(String email) throws UserException;
 
@@ -33,7 +33,7 @@ public interface EmployeeDAO extends BaseDAO {
 
 	public List<Employee> getEmployees();
 
-	public Employee getEmployeeById(int id) throws EmployeeException;
+	//public Employee getEmployeeById(int id) throws EmployeeException;
 	 public List<Employee> getWelcomeEmployee() throws BusinessException;
 
 	 public List<Employee> getTodaysBirthday() throws BusinessException;
@@ -62,7 +62,7 @@ public interface EmployeeDAO extends BaseDAO {
 
 	public List<Employee> getEmployee();
 
- public	Boolean getEmployeeByEmpId(int empid) throws EmployeeException;
+ public	Boolean getEmployeeByEmpId(String string) throws EmployeeException;
 
  public Boolean isEmployeeEmailExist(String email);
 
@@ -77,6 +77,8 @@ public Paginator<Employee> getFilterEmployeesListPaginated(
 public Paginator<Employee> getSearchedEmployeesListPaginated(
 		EmployeeSearchInputDescriptor employee);
 public List getProfilePics();
+
+public Employee getEmployeeById(long id) throws EmployeeException;
 	
 	
 }

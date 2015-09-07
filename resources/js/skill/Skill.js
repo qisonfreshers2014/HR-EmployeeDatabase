@@ -52,10 +52,12 @@ skill.prototype.validateSkill=function(){
     var char1=/^[a-zA-Z.]+$/;
     var char2=/^[a-z A-Z]+$/;
     var num	= /^[0-9-+]+$/;
+    var idReg=/^[a-zA-Z0-9]*$/;
 	  var skill= $("#skill").val();
 	  var empId= $("#empid").val();
 	  var training= $("#attended1").val();
 	  var rating= $("#rating").val();
+	  
 	   
 		
 		if(skill=="" && training=="" && empId==""){
@@ -85,11 +87,6 @@ skill.prototype.validateSkill=function(){
 			alert("Please enter characters with one space for skill");
 			 return;
 			  }*/
-	   else if (!(empId.match(num))){
-		   alert("Please enter only numbers for EmployeeID");
-		  return;
-	   }
-	 
 	 
 	 	  var input={"payload":{"skills":$('#skill').val(),
 			"empId":$('#empid').val(),"rating":$('#rating').val(),
@@ -180,13 +177,7 @@ skill.prototype.viewSkillDetails=function(data,success){
 					alert("Please enter characters with one space for skill");
 					 return;
 					  }
-			   else if (!(empId.match(num))){
-				   alert("Please enter only numbers for EmployeeID");
-				  return;
-			   }
-					
-
-				 
+			  
 			 else{  
 				 
 				 var id = $("#skillid").text();

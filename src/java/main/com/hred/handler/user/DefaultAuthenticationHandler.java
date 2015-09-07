@@ -54,7 +54,7 @@ public class DefaultAuthenticationHandler implements AuthenticationHandler {
   long contactNo=emp.getContactNo();
   String employeeName=emp.getEmployeeName();
   String gender=emp.getGender();
-  int employeeId=emp.getEmployeeId();
+  String employeeId=emp.getEmployeeId();
   Boolean deleted=emp.getDeleted();
   /////////////////////////////////////////////////////////////////////////////////
   

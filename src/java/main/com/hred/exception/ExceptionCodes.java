@@ -164,8 +164,8 @@ public interface ExceptionCodes {
 	public static final int HRPolicy_DOESNOT_EXIST = 226;
 	public static final int DESIGNATIONDETAILS_ALREADY_EXISTS=227;
 	public static final int EMPLOYEE_ACTUAL_DOB_NULL = 9028;
-	public static final int EMPLYEE_TYPE_NULL = 310;
-	public static final int EMPLYEE_UNIVERSITY_NULL = 311;
+	public static final int EMPLYEE_TYPE_NULL = 314;
+	public static final int EMPLYEE_UNIVERSITY_NULL = 315;
 	public static final int PLEASE_ENTER_LASTWORKING_DAY = 312;
 	public static final int PLEASE_ENTER_THE_EMAIL_WHICH_YOU_HAVE_GIVEN_AT_THE_TIME_OF_REGISTRATION =313;
 	

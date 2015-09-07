@@ -42,22 +42,22 @@ public class SkillsHandler extends AbstractHandler {
 		return skill;
 	}
 	
-	 public List<com.hred.model.Skills> getSkillsById(int empId) throws SkillsException {
+	 public List<com.hred.model.Skills> getSkillsById(String string) throws SkillsException {
 		  List<Skills> skill = null;
 		  SkillsDAO skillsDAOImpl = (SkillsDAO) DAOFactory.getInstance().getSkillDAO();
-		  skill = (List<Skills>) skillsDAOImpl.getSkillsById(empId);
+		  skill = (List<Skills>) skillsDAOImpl.getSkillsById(string);
 		  
 		  return skill;
 		 }
 	
- private void validationFunc( String skillName,int empId, String rating,List<Skills> skill )  throws SkillsException{
+ private void validationFunc( String skillName,String empId, String rating,List<Skills> skill )  throws SkillsException{
      
 	 	   
       if(skillName == null || skillName.isEmpty()|| skillName.trim().isEmpty()) {
   		throw new SkillsException(ExceptionCodes.Skills_DOESNOT_EXIST,ExceptionMessages.Skills_DOESNOT_EXIST);
   		}
    
-      if (empId==0){
+      if (empId=="" || empId.isEmpty()){
 			throw new SkillsException(ExceptionCodes.Skills_DOESNOT_EXIST,ExceptionMessages.Skills_DOESNOT_EXIST);
       	}
       
@@ -79,7 +79,7 @@ public class SkillsHandler extends AbstractHandler {
 	else
 	{
 		 String skillName = skills.getSkills();
-		  int empId = skills.getEmpId();
+		  String empId = skills.getEmpId();
 		  String rating =skills.getRating();
 		validationFunc(skillName,empId,rating,skill);
 		Skills skillssaved=(Skills) DAOFactory.getInstance().getSkillDAO().saveObject(skills);
@@ -92,7 +92,7 @@ public class SkillsHandler extends AbstractHandler {
 	public Skills update(Skills skills) throws ObjectNotFoundException, SkillsException {
 		List<Skills> skill = getSkillsDetails();
 		String skillName = skills.getSkills();
-		  int empId = skills.getEmpId();
+		  String empId = skills.getEmpId();
 		  String rating =skills.getRating();
 		  long id=skills.getId();
 		  

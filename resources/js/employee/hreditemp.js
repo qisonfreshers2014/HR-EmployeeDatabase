@@ -9,15 +9,11 @@ HrEditEmployee.prototype.handleShow = function(empid) {
 
 	$('.container').show();
 	$('#LastWorkingDay').hide();
-$('#backtohrview').click(function(){
-		
-		App.loadViewEmployee(empid);
-	}.ctx(this));
- 
+
 	var eid = $("#eid").val();
 	var input = {
 		"payload" : {
-			"employeeId" : empid
+			"id" : empid
 		}
 	};
 	RequestManager.geteditEmployee(input, function(data, success) {
@@ -105,10 +101,14 @@ $('#backtohrview').click(function(){
 		    $('#collagename').val(object.university);
 			$('#lastwrkday').val(payloadLWD);
 			
-			
 		} else {
 			alert("failed to edit");
 		}
+		
+		$('#backtohrview').click(function(){
+			
+			App.loadViewEmployee(object.employeeId);
+		}.ctx(this));
 
 	}.ctx(this));
 	$('#dob').datepicker({
@@ -190,6 +190,7 @@ HrEditEmployee.prototype.uploadMedia = function(callback) {
 
 }
 
+var idReg=/^[a-zA-Z0-9]*$/;
 var char = /^[A-Za-z .]+( [A-Za-z]+)*$/;
 var qual = /^[A-Za-z]+(.[A-Za-z]+)*$/;
 var num = /^[0-9]+$/;
@@ -278,6 +279,8 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 				& !flag == this.employeeDOJValidate(flag)
 				& !flag == this.employeeUniversityValidate(flag)
 				& !flag == this.employeeActualDOBValidate(flag)
+				& !flag == this.employeeIdValidate(flag)
+				& !flag == this.employeeEmailValidate(flag)
 				& !flag == this.employeeNonMandatoryFieldsValidation(flag)){
 			
 		
@@ -287,7 +290,8 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 	}
 		var input = {
 			"payload" : {
-				"employeeId" : empid,
+				"id" : empid,
+				"employeeId" : eid,
 				"employeeName" : name,
 				"gender" : Gender,
 				"fathersName" : fathername,
@@ -334,6 +338,49 @@ HrEditEmployee.prototype.validateUpdatehrEmp = function(empid) {
 		}
 }
 
+HrEditEmployee.prototype.employeeIdValidate = function(flag) {
+	var empId = $("#eid").val();
+	var err = $("#eiderr");
+	if (empId == "") {
+		$(err).text("Required field");
+		$(err).css("color", "red");
+
+	} else if (!(empId.match(idReg))) {
+
+		$(err).text("Please enter numbers and characters only");
+		$(err).css("color", "red");
+
+	} else if (empId == 0) {
+		$(err).text("Employeeid 0 is not allowed");
+		$(err).css("color", "red");
+
+	} else {
+		$(err).text("");
+		flag = false;
+
+	}
+	return flag;
+}
+HrEditEmployee.prototype.employeeEmailValidate = function(flag) {
+
+	var emlerr = $("#emlerr");
+	var email = $("#emal").val();
+	if (email == "") {
+		$(emlerr).text("Required field");
+		$(emlerr).css("color", "red");
+	} else if (!(email.match(mail))) {
+		$(emlerr).text("Please enter a valid email address");
+		$(emlerr).css("color", "red");
+	} else {
+		$(emlerr).text("");
+		flag = false;
+
+		// $(emlerr).css("color", "green");
+
+	}
+	return flag;
+
+}
 HrEditEmployee.prototype.GenderValidate = function(flag) {
 	var Gender = $("#gender option:selected").val();
 	var error = document.getElementById('generr');
@@ -362,31 +409,7 @@ HrEditEmployee.prototype.employeeTypeValidate = function(flag) {
 	}
 	return flag;
 }
-HrEditEmployee.prototype.employeeIdValidate = function(flag) {
-	var empId = $("#eid").val();
-	var err = $("#eiderr");
-	if (empId == "") {
-		$(err).text("Required field");
-		$(err).css("color", "red");
 
-	}
-	else if(empId == isNaN || !(empId.match(num))){
-		
-		$(err).text("Please enter only numbers");
-		$(err).css("color", "red");
-		
-	}else if(empId==0){
-		$(err).text("Employeeid 0 is not allowed");
-		$(err).css("color", "red");
-		
-	}
-		else {
-		$(err).text("");
-		flag = false;
-		
-	}
-	return flag;
-}
 HrEditEmployee.prototype.employeeNameValidate = function(flag) {
 	var nameerr = $("#nameerr");
 	var name = $("#name").val();

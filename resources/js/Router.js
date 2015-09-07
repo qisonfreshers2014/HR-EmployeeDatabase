@@ -43,18 +43,14 @@ Router.prototype.routeManager = function() {
 	    	//App.loadEmployeePage(App.userName,App.hr,App.isDeleted);
 	    	var contentinput = {"payload":{"pageNo":1,"pageSize":10}};
 			 RequestManager.getAllHandsMeetingSchedule(contentinput, function(data, success) {
-				 if(success){
-					 
-					 
+				 if(success){	 
 					 App.loadempAllhands(data); 
-			
-			 
 				 }
 			 });
 	    	
 	    },
 	    'employeeedit': function() {
-	    	 App.loadEditEmp(App.employeeId);
+	    	 App.loadEditEmp(App.id);
 	    },
 	   
 	    'changepassword': function() {

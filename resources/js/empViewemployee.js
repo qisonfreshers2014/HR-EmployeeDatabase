@@ -18,10 +18,6 @@ empViewemployee.prototype.handleShow = function(employeeId) {
 
     this.empviewEmployee(employeeId);
  
- $('#Editempdetails').click(function(){
-   routie("employeeedit");
-
-}.ctx(this));
 
  
   $('#changepwd').click(function(){
@@ -144,6 +140,12 @@ empViewemployee.prototype.empviewEmployee=function(employeeId){
     
     alert("failed to add");
    }
+  
+  $('#Editempdetails').click(function(){
+	   routie("employeeedit");
+
+	}.ctx(this));
+
   }.ctx(this));
  
 }

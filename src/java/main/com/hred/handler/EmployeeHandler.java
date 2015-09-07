@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 import java.util.Properties;
 
@@ -41,7 +42,9 @@ import com.hred.pagination.NotificationPaginationInput;
 import com.hred.pagination.PaginationOutput;
 import com.hred.pagination.Paginator;
 import com.hred.persistence.dao.DAOFactory;
+import com.hred.persistence.dao.DesignationHistoryDAO;
 import com.hred.persistence.dao.EmployeeDAO;
+import com.hred.persistence.dao.SkillsDAO;
 import com.hred.service.common.ServiceRequestContextHolder;
 import com.hred.service.descriptors.input.ChangePassword;
 import com.hred.service.descriptors.input.EmployeeSearchInputDescriptor;
@@ -69,7 +72,7 @@ public class EmployeeHandler extends AbstractHandler {
 		return INSTANCE;
 	}
 
-	public Employee getEmployeeById(int id) throws EmployeeException {
+/*	public Employee getEmployeeById(int id) throws EmployeeException {
 		Employee employee = null;
 		EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
 				.getEmployeeDAO();
@@ -77,10 +80,10 @@ public class EmployeeHandler extends AbstractHandler {
 
 		return employee;
 	}
- 
+ */
 	//Method for View employee
 	
-	public Employee viewEmployee(int EmployeeId) throws NumberFormatException,
+	public Employee viewEmployee(String string) throws NumberFormatException,
 			BusinessException {
 		Employee employee = null;
 		DesignationType desgn = null;
@@ -103,7 +106,7 @@ public class EmployeeHandler extends AbstractHandler {
 
 		EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
 				.getEmployeeDAO();
-		employee = (Employee) empDAOImpl.viewEmployee(EmployeeId);
+		employee = (Employee) empDAOImpl.viewEmployee(string);
 		EmployeeOutFile employeeout = new EmployeeOutFile(employee);
      
 		if (employee.getFileId() != 0) {
@@ -115,7 +118,7 @@ public class EmployeeHandler extends AbstractHandler {
 		
 		}
 		
-		List<Skills> skill = SkillsHandler.getInstance().getSkillsById(EmployeeId);
+		List<Skills> skill = SkillsHandler.getInstance().getSkillsById(string);
 		
 		List<DesignationType> desg = DesignationHistoryHandler.getInstance()
 				.getDesignationName(desgn);
@@ -137,7 +140,7 @@ public class EmployeeHandler extends AbstractHandler {
 	public Employee getEmployeeById(String id) throws EmployeeException {
 		Employee employee = null;
 		EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
-				.getUserDAO();
+				.getEmployeeDAO();
 		employee = empDAOImpl.getEmployeeById(id);
 
 		return employee;
@@ -216,7 +219,7 @@ public class EmployeeHandler extends AbstractHandler {
 		employee.setDeleted(false);
 		//employee.setPassword(Utils.encrypt(employee.getPassword()));
 		String name = employee.getEmployeeName();
-		long id = employee.getEmployeeId();
+		String id = employee.getEmployeeId();
 		String email = employee.getEmail();
 		String password = employee.getPassword();
 		long descid = employee.getCurrentDesignation();
@@ -316,7 +319,7 @@ public class EmployeeHandler extends AbstractHandler {
 
 	}
 
-	private void validateEmp(String name, long id, String email,
+	private void validateEmp(String name, String id, String email,
 			String password, long descid, String qualification, String salary,
 
 			String blood, long num, Timestamp date, Timestamp actualDOB, String fatherName,
@@ -397,7 +400,7 @@ public class EmployeeHandler extends AbstractHandler {
 					ExceptionMessages.INVALID_NAME);
 		}
 
-		if (id == 0) {
+		if (id ==""||id.isEmpty()) {
 			throw new EmployeeException(ExceptionCodes.INVALID_ROLE_ID,
 					ExceptionMessages.INVALID_ROLE_ID);
 		}
@@ -482,7 +485,7 @@ public class EmployeeHandler extends AbstractHandler {
 		
 		validateEmployeeEdit(email,contactnum,currentaddr,perminentaddr,emergencyContactnumber,emergencyContactname);
 		Employee empFromDB = (Employee) DAOFactory.getInstance()
-				.getEmployeeDAO().getEmployeeById(employee.getEmployeeId());
+				.getEmployeeDAO().getEmployeeById(employee.getId());
 		empFromDB.setContactNo(employee.getContactNo());
 		empFromDB.setEmail(employee.getEmail());
 		empFromDB.setCurrentAddress(employee.getCurrentAddress());
@@ -532,18 +535,17 @@ public class EmployeeHandler extends AbstractHandler {
 					ExceptionMessages.EMPLOYEE_PERMINENTADDRESS_EMPTY);
 		}
 
-		
-		
 	}
 
 	// updating the details of employee by hr
+	@SuppressWarnings("null")
 	@AuthorizeEntity(roles = { Constants.HR })
 	public Employee hrUpdateEmployeeAOP(Employee employee)
 			throws EncryptionException, BusinessException {
+		DesignationHistory desgHistoryObj = new DesignationHistory();
          
-		
 		String name = employee.getEmployeeName();
-		long id = employee.getEmployeeId();
+		String id = employee.getEmployeeId();
 		String email = employee.getEmail();
 		String qualification = employee.getHighestQualification();
 		String salary = employee.getSalary();
@@ -562,13 +564,16 @@ public class EmployeeHandler extends AbstractHandler {
 		Timestamp lastWorkingDay=employee.getLastWorkingDay();
 		Timestamp doj=employee.getDateOfJoining();
 		String university=employee.getUniversity();
-		
 		validateHrEditEmployee(name,id,email,qualification,salary,num,date,actualDOB,fatherName,contactNum,YOE,emercontnum,emercontname,currentaddr,peraddr,employeeType,gender,lastWorkingDay,doj,university);
 		
 		Employee empFromDB = (Employee) DAOFactory.getInstance()
-				.getEmployeeDAO().getEmployeeById(employee.getEmployeeId());
+				.getEmployeeDAO().getEmployeeById(employee.getId());
+		
+		List<Skills> skill = SkillsHandler.getInstance().getSkillsById(empFromDB.getEmployeeId());
+		desgHistoryObj.setEmpId(empFromDB.getEmployeeId());
+		List<DesignationHistory> desgnations=DesignationHistoryHandler.getInstance().getDesignationDetailsAOP(desgHistoryObj);
 		empFromDB.setContactNo(employee.getContactNo());
-		// empFromDB.setEmail(employee.getEmail());
+		 empFromDB.setEmail(employee.getEmail());
 		empFromDB.setCurrentAddress(employee.getCurrentAddress());
 		empFromDB.setPermanentAddress(employee.getPermanentAddress());
 		empFromDB.setEmergencycontactnumber(employee.getEmergencycontactnumber());
@@ -588,15 +593,33 @@ public class EmployeeHandler extends AbstractHandler {
 		empFromDB.setSalary(employee.getSalary());
 		empFromDB.setFileId(employee.getFileId());
 		empFromDB.setEmployeeType(employee.getEmployeeType());
-		// empFromDB.setGender(employee.getGender());
 		empFromDB.setBloodGroup(employee.getBloodGroup());
-		// empFromDB.setEmployeeId(employee.getEmployeeId());
+	    empFromDB.setEmployeeId(employee.getEmployeeId());
 		empFromDB.setEmployeeName(employee.getEmployeeName());
 		empFromDB.setVariableComponent(employee.getVariableComponent());
 		empFromDB.setGender(employee.getGender());
 		empFromDB.setDateOfJoining(employee.getDateOfJoining());
 		empFromDB.setLastWorkingDay(employee.getLastWorkingDay());
 		empFromDB.setUniversity(employee.getUniversity());
+		SkillsDAO skillDaoObj=DAOFactory.getInstance().getSkillDAO();
+		DesignationHistoryDAO designationHistoryDao=DAOFactory.getInstance().getDesignationHistoryDAO();
+		ListIterator<Skills> itr=skill.listIterator();
+		while(itr.hasNext()){
+			Skills skl=(Skills) itr.next();
+			
+			skl.setEmpId(employee.getEmployeeId());
+			
+			skillDaoObj.update(skl);
+		}
+		ListIterator<DesignationHistory> itrDesignations=desgnations.listIterator();
+		while(itrDesignations.hasNext()){
+			DesignationHistory desg=(DesignationHistory) itrDesignations.next();
+			
+			desg.setEmpId(employee.getEmployeeId());
+			
+			designationHistoryDao.update(desg);
+		}
+		
 		EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
 				.getEmployeeDAO();
 		employee = (Employee) empDAOImpl.update(empFromDB);
@@ -605,7 +628,7 @@ public class EmployeeHandler extends AbstractHandler {
 	
 	// Validations for update employee
 
-	private void validateHrEditEmployee(String name, long id, String email,
+	private void validateHrEditEmployee(String name, String id, String email,
 			String qualification, String salary, long num, Timestamp date,
 			Timestamp actualDOB, String fatherName, long contactNum,
 			double yOE, long emercontnum, String emercontname,
@@ -678,7 +701,7 @@ public class EmployeeHandler extends AbstractHandler {
 					ExceptionMessages.INVALID_NAME);
 		}
 
-		if (id == 0) {
+		if (id == ""||id.isEmpty()) {
 			throw new EmployeeException(ExceptionCodes.INVALID_ROLE_ID,
 					ExceptionMessages.INVALID_ROLE_ID);
 		}
@@ -1246,6 +1269,15 @@ public class EmployeeHandler extends AbstractHandler {
 				}
 				}
 				return empSaved;
+			}
+
+			public Employee getEmployeeById(long id) throws EmployeeException {
+				Employee employee = null;
+				EmployeeDAO empDAOImpl = (EmployeeDAO) DAOFactory.getInstance()
+						.getEmployeeDAO();
+				employee = empDAOImpl.getEmployeeById(id);
+
+				return employee;
 			}
 			
 	}

@@ -8,6 +8,9 @@ import java.sql.Timestamp;
  */
 
 
+
+
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -19,7 +22,7 @@ import com.hred.persistence.annotations.Increment;
 public class DesignationHistory extends AbstractObject{
 	
 	@Column(name="emp_id")
-	private int empId;
+	private String empId;
 
 /*	@Temporal(TemporalType.DATE)
 	@Column(name="date")
@@ -45,13 +48,13 @@ public class DesignationHistory extends AbstractObject{
 	private int currentdesgId;
 
 
-	public int getEmpId() {
+	public String getEmpId() {
 		return empId;
 	}
 
 
 
-	public void setEmpId(int empId) {
+	public void setEmpId(String empId) {
 		this.empId = empId;
 	}
 

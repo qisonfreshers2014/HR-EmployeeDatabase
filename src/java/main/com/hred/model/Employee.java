@@ -13,16 +13,13 @@ import com.hred.persistence.annotations.Increment;
 @Table(name = "employee")
 @Increment
 public class Employee extends AbstractObject {
-
- 
-
  public static final String AUTH_TYPE_REGULAR = "REGULAR";
  public static final int AUTH_STATUS_EXISTING = 0;
  public static final int AUTH_STATUS_NEW = 1;
  public static final int AUTH_STATUS_NONE = 2;
 
  @Column(name = "employee_id")
- private int employeeId;
+ private String employeeId;
  @Column(name = "name")
  private String employeeName;
  @Column(name = "gender")
@@ -117,17 +114,17 @@ public String getSkill() {
 
  }
 
- public Employee(int employeeId) {
+ public Employee(String employeeId) {
   this.employeeId = employeeId;
   //this.employeeName = employeeName;
  }
 
  
- public int getEmployeeId() {
+ public String getEmployeeId() {
   return employeeId;
  }
 
- public void setEmployeeId(int employeeId) {
+ public void setEmployeeId(String employeeId) {
   this.employeeId = employeeId;
  }
 
@@ -356,7 +353,7 @@ public void setLastWorkingDay(Timestamp lastWorkingDay) {
 	this.lastWorkingDay = lastWorkingDay;
 }
 
-public Employee(AbstractObject abstractObject, int employeeId,
+public Employee(AbstractObject abstractObject, String employeeId,
 		String employeeName, String gender, Timestamp dateOfBirth,
 		Timestamp dateOfJoining, int yearsofexperience, long contactNo,
 		String currentAddress, String permanentAddress, String email,

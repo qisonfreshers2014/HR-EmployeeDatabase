@@ -60,7 +60,7 @@ public class DesignationHistoryHandler extends AbstractHandler {
 	{
 		
 		List<DesignationHistory> data = getAllDesignationDetailsAOP();
-		int eid=designationhistory.getEmpId();
+		String eid=designationhistory.getEmpId();
 		Timestamp appraisalDate = designationhistory.getAppraisalDate();
 		int designationId = designationhistory.getDesignationId();
 		double salary=designationhistory.getSalary();
@@ -76,7 +76,7 @@ public class DesignationHistoryHandler extends AbstractHandler {
 public DesignationHistory updateDesignationDetailsAOP(DesignationHistory designation) throws ObjectNotFoundException, DesignationHistoryException, EmployeeException{
 		
 	List<DesignationHistory> data = getAllDesignationDetailsAOP();
-		int eid=designation.getEmpId();
+		String eid=designation.getEmpId();
 		Timestamp appraisalDate = designation.getAppraisalDate();
 		
 		
@@ -115,12 +115,12 @@ public DesignationHistory updateDesignationDetailsAOP(DesignationHistory designa
 		return designations;
 		}
 	
-	private void validateDuplicate(List<DesignationHistory> data,int eid, int designationId,double salary,double variablePay) throws DesignationHistoryException
+	private void validateDuplicate(List<DesignationHistory> data,String eid, int designationId,double salary,double variablePay) throws DesignationHistoryException
 	{
 
 		   for (int i = 0; i < data.size(); i++)
 		   {
-			   	int eid1=data.get(i).getEmpId();
+			   	String eid1=data.get(i).getEmpId();
 				int designationId1 = data.get(i).getDesignationId();
 				double salary1=data.get(i).getSalary();
 				double variablePay1=data.get(i).getVariablePay();     

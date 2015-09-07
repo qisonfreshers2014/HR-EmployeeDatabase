@@ -95,7 +95,7 @@ public class SkillDAOImpl extends BaseDAOImpl implements SkillsDAO{
 	 
  
 	@Override
-	 public List<Skills> getSkillsById(int empId) {
+	 public List<Skills> getSkillsById(String empId) {
 	  Session session = null;
 	  List<Skills> list = null;
 	  Transaction tx = null;

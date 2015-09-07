@@ -13,7 +13,7 @@ public class Skills extends AbstractObject{
 
 
   @Column(name = "emp_id")
-  private int empId; 
+  private String empId; 
   @Column(name = "skills")
   private String skills;
   @Column(name = "rating")
@@ -34,7 +34,7 @@ public class Skills extends AbstractObject{
   public static final int AUTH_STATUS_NEW = 1; 
   public static final int AUTH_STATUS_NONE = 2;
   
-  public Skills(int empId, String skills,
+  public Skills(String empId, String skills,
     String rating)
     {
   
@@ -46,14 +46,14 @@ public class Skills extends AbstractObject{
 
 
 
-   public int getEmpId() {
+   public String getEmpId() {
   return empId;
  }
 
 
 
 
- public void setEmpId(int empId) {
+ public void setEmpId(String empId) {
   this.empId = empId;
  }
 

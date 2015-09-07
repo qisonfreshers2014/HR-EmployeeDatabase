@@ -1,4 +1,5 @@
 function App() {
+	this.id="";
 	this.userName = "";
 	this.jobRole = "";
 	this.contactNo = "";
@@ -24,6 +25,7 @@ App.prototype.handleShow = function() {
 			var isDeleted=obj.deleted;
 			var contactNo=obj.contactNo;
 			var gender=obj.gender;
+			var id=obj.id;
 			var hr;
 			if(designation==5){
 				hr=true;
@@ -31,7 +33,7 @@ App.prototype.handleShow = function() {
 				hr=false;
 			}
 			
-			App.loadRouter(name, hr,isDeleted,gender, contactNo,employeeId,function(){
+			App.loadRouter(id,name, hr,isDeleted,gender, contactNo,employeeId,function(){
 				new Router();
 			});
 			}else{
@@ -82,6 +84,7 @@ App.prototype.loadFooter = function() {
 		new footer();
 	});
 }
+
 App.prototype.loadEmployeePage = function(name, hr,isDeleted) {
 	 this.userName = name;
 	 this.hr = hr;
@@ -251,7 +254,8 @@ App.prototype.loadchangePassword = function(employeeId) {
 		new changePassword(employeeId);
 	});
 }
-App.prototype.loadRouter= function(name, hr,isDeleted,gender, contactNo,employeeId,callback) {
+App.prototype.loadRouter= function(id,name, hr,isDeleted,gender, contactNo,employeeId,callback) {
+	this.id=id;
 	 this.userName = name;
 	 this.hr = hr;
 	 this.isDeleted=isDeleted;

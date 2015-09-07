@@ -12,10 +12,7 @@ ViewEmployee.prototype.handleShow = function(empid) {
 
  this.viewEmployeedetails(empid);
 
- $('#Editdetails').click(function(){
-  
-  App.loadhrEditEmp(empid);
- }.ctx(this));
+
  
  $('#backtoemplist').click(function(){
  
@@ -151,6 +148,11 @@ $('#employeeimage').append('<img src="'+image+'" height="150" width="150">');
   
   alert("failed to add");
  }
+ 
+ $('#Editdetails').click(function(){
+	  
+	  App.loadhrEditEmp(obj.id);
+	 }.ctx(this));
 }.ctx(this));
   
 }
