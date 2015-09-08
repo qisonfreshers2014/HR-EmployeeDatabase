@@ -963,10 +963,16 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 	  
 	  int skipCount = (pageNo - 1) * pageSize;  
 	  Criteria criteria=createCustomCriteria(Employee.class);
-	  criteria.addOrder(Order.asc("employeeId"));
+	  criteria.addOrder(Order.asc("id"));
+	   /*criteria.addOrder(new org.hibernate.criterion.Order("employeeId", true) {
+		      public <CriteriaQuery> String toSqlString(Criteria criteria,
+		                CriteriaQuery criteriaQuery) throws HibernateException {
+		            return "cast(employeeId as UNSIGNED) desc";
+		        }
+		   });*/
 	  
 
-	        criteria.setFirstResult(skipCount).setMaxResults(pageSize);
+	  criteria.setFirstResult(skipCount).setMaxResults(pageSize);
 	  List<Employee> consultantList=criteria.list();
 	  
 	  Criteria countCriteria=createCustomCriteria(Employee.class); 
@@ -1091,7 +1097,7 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 			    query = query + " and (years_of_experience + timestampdiff(MONTH,DOJ, sysdate())/12.0)<="+filter.getTo();
 			   }
 			 
-			   
+			   query = query +"ORDER BY id asc";
 			   Query hql1=session.createQuery(query);
 			   
 			  Query count=session.createQuery("select count(*)"+query);
@@ -1133,12 +1139,11 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 			   if(filter.getTo() !=null){
 			    query1 = query1 + " and (years_of_experience + timestampdiff(MONTH,DOJ, sysdate())/12.0)<="+filter.getTo();
 			   }
-			   
+			   query1 = query1 +"ORDER BY id asc";
 			   Query hql1=session.createQuery(query1);
 			   Query count=session.createQuery("select count(*)"+query1);
 				  
 				 countfilter = (Long)count.uniqueResult();
-			   
 			   
 			   hql1.setFirstResult(skipCount);
 			   hql1.setMaxResults(pageSize);
