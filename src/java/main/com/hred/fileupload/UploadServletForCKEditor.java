@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Properties;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -20,7 +21,8 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 
-import com.hred.common.json.JsonUtil;
+import com.hred.common.ConfigReader;
+import com.hred.common.Constants;
 import com.hred.handler.FileHandler;
 
 /**
@@ -48,6 +50,22 @@ public class UploadServletForCKEditor extends HttpServlet {
        /* service(httpServletRequest, httpServletResponse);*/
     	// checks if the request actually contains upload file
     	String ckeditorFuncNum = request.getParameter("CKEditorFuncNum");
+    	String path = null;
+		String stage = null;
+		try {
+			Properties props = ConfigReader
+					.getProperties(Constants.FILE_PATH_VARIABLES);
+			stage = props.getProperty(Constants.STAGE_ENVIRONMENT);
+			if (stage.equalsIgnoreCase("local")) {
+				path = props.getProperty(Constants.LOCAL_PATH);
+			} else if (stage.equalsIgnoreCase("stage")) {
+				path = props.getProperty(Constants.STAGE_PATH);
+			} else {
+				path = props.getProperty(Constants.PRODUCTION_PATH);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     	PrintWriter out = response.getWriter();
         if (!ServletFileUpload.isMultipartContent(request)) {
             PrintWriter writer = response.getWriter();
@@ -102,9 +120,9 @@ public class UploadServletForCKEditor extends HttpServlet {
         	 		String tempPath = tempDir + File.separator + fileNameToSave;
         	 		File tempStore = new File(tempPath);
         	 		String tmpPath = File.separator +"FileUpload"+File.separator+fileNameToSave;
-                    
+                    String templatePath=path+tmpPath;
                     file.setName(fileName);
-                    file.setFilePath(tmpPath); 
+                    file.setFilePath(templatePath); 
                     // saves the file on disk
                     item.write(storeFile);
                     item.write(tempStore);
