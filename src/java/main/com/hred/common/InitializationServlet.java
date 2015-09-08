@@ -35,19 +35,15 @@ public class InitializationServlet extends HttpServlet {
 		
 		init(config, true);
 	}
-
 	protected void init(ServletConfig config, boolean initializeAllServices)
 			throws ServletException {
 		if (config != null) {
 			super.init(config);
 		}
 		if (initializeAllServices) {
-			// Initialize all Services one by one
-
+	// Initialize all Services one by one
 		initializeServices();
-		
-			sendAutomatedNotificationMail();
-
+		sendAutomatedNotificationMail();
 		}
 	}
 
@@ -90,19 +86,14 @@ public class InitializationServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	}
-
-	
 	public void sendAutomatedNotificationMail()
 	{
 		Calendar sentAutomatedMailFrom = Calendar.getInstance();
-		 sentAutomatedMailFrom.set(2015,8,07,21,57, 00);		
+		 sentAutomatedMailFrom.set(2015,8,07,11,00, 00);		
 		NotificationTimer mailTimer=new NotificationTimer();
 		Timer notificationTimer = new Timer();
 		notificationTimer.schedule(mailTimer,sentAutomatedMailFrom.getTime(), 24*60*60*1000);
-		
-		
-		//notificationTimer.schedule(mailTimer, 0, 24*60*60*1000);
-		                    
+		//notificationTimer.schedule(mailTimer, 0, 24*60*60*1000);	                    
 	}
 	public void copyFileUploadsToServer() throws IOException
 	{
@@ -119,5 +110,4 @@ public class InitializationServlet extends HttpServlet {
  		FileUtils.copyDirectory(actualPath, tempDir);
 		
 	}
-
 }
