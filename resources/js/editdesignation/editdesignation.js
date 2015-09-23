@@ -43,7 +43,7 @@ editdesignation.prototype.handleShow = function(empid, name, dojoin) {
 		changeMonth : true,
 		changeYear : true,
 		showAnim : 'drop',
-		minDate : new Date((currentYear-1),1,1),
+		minDate : new Date(2010,10,1),
 		maxDate : new Date()
 	});
 	$("#datepicker").datepicker("setDate", new Date());
@@ -317,12 +317,13 @@ editdesignation.prototype.editDesignation=function(id,empid,empName1,doj1){
 
 }
 editdesignation.prototype.updateEditedDesignation=function(data,empName1,doj1){
-	var value = data.appraisalDate;
+	/*var value = data.appraisalDate;
 	var res = new Date(value);
 	var year = res.getFullYear();
 	var month =res.getMonth()+1;
 	var date = res.getDate();
-	 apprDate = year + "-" + month + "-" + date;
+	 apprDate = year + "-" + month + "-" + date;*/
+	 var appraisalDate=$("#datepicker").val();
 	var designationId1 = $("#designation").val();
 	var salary1 = $("#salary").val();
 	var variablePay1 = $("#variablePay").val();
@@ -330,14 +331,13 @@ editdesignation.prototype.updateEditedDesignation=function(data,empName1,doj1){
 			"payload" : {
 				"id":data.id,
 				"empId" : data.empId,
-				"appraisalDate" : apprDate +" 00:00:00",
+				"appraisalDate" : appraisalDate +" 00:00:00",
 				"designationId" : designationId1,
 				"salary" : salary1,
 				"variablePay" : variablePay1,
 				"currentdesgId":data.designationId
 			}
 		};
-	
 	RequestManager.editDesignation(inputEditdesg,function(result,success){
 		
 		if(success){
