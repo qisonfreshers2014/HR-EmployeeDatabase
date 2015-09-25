@@ -37,9 +37,7 @@ import com.hred.service.descriptors.output.DisplayNotificationHome;
 import com.hred.service.descriptors.input.EmployeeSearchInputDescriptor;
 import com.hred.service.descriptors.output.NotificationHomeFilterInputDiscriptor;
 public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
-
 	private static EmployeeDAO INSTANCE = null;
-
 	public static EmployeeDAO getInstance()
 	{
 		if (INSTANCE == null) {
@@ -47,11 +45,9 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 		}
 		return INSTANCE;
 	}
-
 	@SuppressWarnings("unchecked")
 	 @Override
 	 public Employee getEmployeeById(String id) throws EmployeeException {
-	  // TODO Auto-generated method stub
 	  Session session = null;
 	  List<Employee> list = null;
 	  Transaction tx = null;
@@ -62,9 +58,6 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 	    tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 	   }
 	   Criteria createCriteria = session.createCriteria(Employee.class);
-	   /*String hql="from Employee where id="+id+"";  
-	   org.hibernate.Query query = session.createQuery(hql);
-	    list  = query.list();*/
 	   createCriteria.add(Restrictions.eq("employeeId", id));
 	   list = createCriteria.list();
 	   if (list.size() == 0) {
@@ -84,7 +77,6 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 	     }
 	    return  (Employee) list.iterator().next();
 	 }
-
 	@Override
 	public Employee getUserByEmail(String email) throws UserException {
 		Session session = null;
@@ -103,23 +95,19 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 			if (list.size() == 0) {
 				throw new UserException(ExceptionCodes.USER_DOESNOT_EXIST, ExceptionMessages.USER_DOESNOT_EXIST);
 			}
-
 		} finally {
-
 			try {
 				if (tx != null) {
 					tx.commit();
 					if (session.isConnected())
 						session.close();
 				}
-			} catch (HibernateException e) {
-
+			} catch (HibernateException e){
 				e.printStackTrace();
 			}
 		}
 		return list.iterator().next();	
 	}
-	
 	public String getEmployeeName(long id) {
 		Session session = null;
 		session = getSession();
@@ -155,8 +143,6 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 		}
 		return  list;	 
 	}
-
-
 	@Override
 	 public List<Employee> searchEmployee(EmployeeSearchInputDescriptor employee) {
 	  Session session = null;
@@ -179,10 +165,8 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 	    createCriteria.add(search);
 	    list = (List<Employee>)createCriteria.list();
 	   }else{
-	   
 	   Criterion name = Restrictions.ilike("employeeName", employee.getSearchKey(),MatchMode.ANYWHERE);
 	   Criterion email = Restrictions.ilike("email", employee.getSearchKey(), MatchMode.ANYWHERE);
-	   //Criterion id = Restrictions.eq("employeeId", empid);
 	   Criterion active = Restrictions.eq("isDeleted",Boolean.FALSE);
 	   Criterion search = Restrictions.and(Restrictions.or(name,email), active);
 	   createCriteria.add(search);
@@ -202,11 +186,9 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 	  }
 	  return list;
 	 }
-	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Employee> getBirthday() throws BusinessException {
-
 		Session session = null;
 		List<Employee> results = null;
 		Transaction tx = null;
@@ -222,9 +204,7 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 			if (results.size() == 0) {
 				System.out.println("No Birthday");
 			}
-
 		} finally {
-
 			try {
 				if (tx != null) {
 					tx.commit();
@@ -232,13 +212,11 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 						session.close();
 				}
 			} catch (HibernateException e) {
-
 				e.printStackTrace();
 			}
 		}
 		return results;
 	}
-	
 	@Override
 	public List<Employee> getWorkAniversary() throws BusinessException {
 		Session session = null;
@@ -250,17 +228,13 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 				session = SessionFactoryUtil.getInstance().openSession();
 				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 			}
-			
 			String hql="from Employee where is_deleted=0 and  month(dateOfJoining)=month(sysdate()) and year(dateOfJoining)!=year(sysdate()) ORDER BY dateOfJoining ";				
 			org.hibernate.Query query = session.createQuery(hql);
 			 list  = query.list();
-			
 			if (list.size() == 0) {
 				System.out.println("No work Anivarsary");
 			}
-
 		} finally {
-
 			try {
 				if (tx != null) {
 					tx.commit();
@@ -268,7 +242,6 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 						session.close();
 				}
 			} catch (HibernateException e) {
-
 				e.printStackTrace();
 			}
 		}
@@ -297,25 +270,20 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 				session = SessionFactoryUtil.getInstance().openSession();
 				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 			}
-			
 			if(frommonth>tomonth)
 			{
 				String result1 ="from Employee where is_deleted=0 and  ((day(dateOfJoining) between "+fromday+" and 31 ) and (month(dateOfJoining) ="+frommonth+")) and year(dateOfJoining)!=year(sysdate()) ORDER BY dateOfJoining ";				
 				org.hibernate.Query query1 = session.createQuery(result1);
 				 list1  = query1.list();
-				 
 				 String result2 ="from Employee where is_deleted=0 and  ((day(dateOfJoining) between 1 and 31 )  and (month(dateOfJoining) between "+(frommonth+1)+"  and 13)) and year(dateOfJoining)!=year(sysdate()) ORDER BY dateOfJoining ";				
 					org.hibernate.Query query2 = session.createQuery(result2);
 					 list2  = query2.list();
-					 
 					 String result3 ="from Employee where is_deleted=0 and  ((day(dateOfJoining) between 1 and 31 )  and (month(dateOfJoining) between 1  and "+(tomonth-1)+")) and year(dateOfJoining)!=year(sysdate()) ORDER BY dateOfJoining ";				
 						org.hibernate.Query query3= session.createQuery(result3);
 						 list3  = query3.list();
-					
 					 String result4 ="from Employee where is_deleted=0 and  ((day(dateOfJoining) between 1 and "+today+"  ) and (month(dateOfJoining) ="+tomonth+")) and year(dateOfJoining)!=year(sysdate()) ORDER BY dateOfJoining ";	
 						org.hibernate.Query query4 = session.createQuery(result4);
 						 list4  = query4.list();
-						 
 					 if(list1.size()!=0)
 					 {
 					 list.addAll(list1);
@@ -344,15 +312,12 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 				String result1 ="from Employee where is_deleted=0 and  ((day(dateOfJoining) between "+fromday+" and 31 ) and (month(dateOfJoining) ="+frommonth+")) and year(dateOfJoining)!=year(sysdate()) ORDER BY dateOfJoining ";				
 				org.hibernate.Query query1 = session.createQuery(result1);
 				 list1  = query1.list();
-				 
 				 String result2 ="from Employee where is_deleted=0 and  ((day(dateOfJoining) between 1 and 31 )  and (month(dateOfJoining) between "+(frommonth+1)+"  and "+(tomonth-1)+")) and year(dateOfJoining)!=year(sysdate()) ORDER BY dateOfJoining ";				
 					org.hibernate.Query query2 = session.createQuery(result2);
 					 list2  = query2.list();
-					
 					 String result3 ="from Employee where is_deleted=0 and  ((day(dateOfJoining) between 1 and "+today+"  ) and (month(dateOfJoining) ="+tomonth+")) and year(dateOfJoining)!=year(sysdate()) ORDER BY dateOfJoining ";	
 						org.hibernate.Query query3 = session.createQuery(result3);
 						 list3  = query3.list();
-						 
 					 if(list1.size()!=0)
 					 {
 					 list.addAll(list1);
@@ -364,17 +329,13 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 					 if(list3.size()!=0)
 					 {
 					 list.addAll(list3);
-			
 			}
 			}
 			if (list.size() == 0) {
-			
 				System.out.println(" No anivarsary");
 			}
 
-		
 		}finally {
-
 			try {
 				if (tx != null) {
 					tx.commit();
@@ -382,13 +343,11 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 						session.close();
 				}
 			} catch (HibernateException e) {
-
 				e.printStackTrace();
 			}
 		}
 		return list;
 	}
-	
 	@Override
 	public List<Employee> getBirthdayWithindate(NotificationHomeFilterInputDiscriptor filterCriteria) throws BusinessException{
 		Calendar todate = Calendar.getInstance();
@@ -412,25 +371,20 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 				session = SessionFactoryUtil.getInstance().openSession();
 				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 			}
-			
 			if(frommonth>tomonth)
 			{
 				String result1 ="from Employee where is_deleted=0 and  ((day(actualdateOfBirth) between "+fromday+" and 31 ) and (month(actualdateOfBirth) ="+frommonth+")) ORDER BY actualdateOfBirth  ";				
 				org.hibernate.Query query1 = session.createQuery(result1);
 				 list1  = query1.list();
-				 
 				 String result2 ="from Employee where is_deleted=0 and  ((day(actualdateOfBirth) between 1 and 31 )  and (month(actualdateOfBirth) between "+(frommonth+1)+" and 13)) ORDER BY actualdateOfBirth ";				
 					org.hibernate.Query query2 = session.createQuery(result2);
 					 list2  = query2.list();
-					 
 					 String result3 ="from Employee where is_deleted=0 and  ((day(actualdateOfBirth) between 1 and 31 )  and (month(actualdateOfBirth) between 1  and "+(tomonth-1)+")) ORDER BY actualdateOfBirth  ";				
 						org.hibernate.Query query3= session.createQuery(result3);
 						 list3  = query3.list();
-					
 					 String result4 ="from Employee where is_deleted=0 and  ((day(actualdateOfBirth) between 1 and "+today+"  ) and (month(actualdateOfBirth) ="+tomonth+")) ORDER BY actualdateOfBirth ";	
 						org.hibernate.Query query4 = session.createQuery(result4);
 						 list4  = query4.list();
-						 
 					 if(list1.size()!=0)
 					 {
 					 list.addAll(list1);
@@ -459,15 +413,12 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 				String result1 ="from Employee where is_deleted=0 and  ((day(actualdateOfBirth) between "+fromday+" and 31 ) and (month(actualdateOfBirth) ="+frommonth+")) ORDER BY actualdateOfBirth ";				
 				org.hibernate.Query query1 = session.createQuery(result1);
 				 list1  = query1.list();
-				 
 				 String result2 ="from Employee where is_deleted=0 and  ((day(actualdateOfBirth) between 1 and 31 )  and (month(actualdateOfBirth) between "+(frommonth+1)+"  and "+(tomonth-1)+")) ORDER BY actualdateOfBirth ";				
 					org.hibernate.Query query2 = session.createQuery(result2);
 					 list2  = query2.list();
-					
 					 String result3 ="from Employee where is_deleted=0 and  ((day(actualdateOfBirth) between 1 and "+today+"  ) and (month(actualdateOfBirth) ="+tomonth+")) ORDER BY actualdateOfBirth ";	
 						org.hibernate.Query query3 = session.createQuery(result3);
 						 list3  = query3.list();
-						 
 					 if(list1.size()!=0)
 					 {
 					 list.addAll(list1);
@@ -479,14 +430,11 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 					 if(list3.size()!=0)
 					 {
 					 list.addAll(list3);
-			
 			}
 			}
 			if (list.size() == 0) {
-				System.out.println(" No Birthday");
-						
+				System.out.println(" No Birthday");		
 			}
-
 		} finally {
 			try {
 				if (tx != null) {
@@ -495,16 +443,12 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 						session.close();
 				}
 			} catch (HibernateException e) {
-
 				e.printStackTrace();
 			}
 		}
 		return list;
 	}
-
-	
 	public List<Employee> getTodaysBirthday()  {
-
 		Session session = null;
 		List<Employee> results = null;
 		Transaction tx = null;
@@ -514,16 +458,13 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 				session = SessionFactoryUtil.getInstance().openSession();
 				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 			}
-	
     String hql="from Employee where is_deleted=0 and  day(actualdateOfBirth) = day(sysdate()) and month(actualdateOfBirth)=month(sysdate())";			
 			org.hibernate.Query query = session.createQuery(hql);
 			 results = query.list();
 				if (results.size() == 0) {
 					System.out.println("No Birthday");
 				}
-
 		} finally {
-
 			try {
 				if (tx != null) {
 					tx.commit();
@@ -531,7 +472,6 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 						session.close();
 				}
 			} catch (HibernateException e) {
-
 				e.printStackTrace();
 			}
 		}
@@ -553,9 +493,7 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 			if (results.size() == 0) {
 				System.out.println("No Aniversary");
 			}
-
 		} finally {
-
 			try {
 				if (tx != null) {
 					tx.commit();
@@ -563,7 +501,6 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 						session.close();
 				}
 			} catch (HibernateException e) {
-
 				e.printStackTrace();
 			}
 		}
@@ -581,29 +518,18 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 	    session = SessionFactoryUtil.getInstance().openSession();
 	    tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 	   }
-	//Criteria createCriteria = session.createCriteria(FilterEmployee.class);
-	   
 	//when all fields are entered
-	   System.out.println(filter.getFilterEmployee());
 	   if(!filter.getFilterEmployee().equalsIgnoreCase("Inactive")){
 	   String query = "from Employee where is_Deleted=0";
-	   
 	   if( filter.getFilterEmployee().equalsIgnoreCase("Fulltime")||filter.getFilterEmployee().equalsIgnoreCase("Contract")){
 		    query = query + " and employeeType='"+filter.getFilterEmployee()+"'";                                       
 		   }
-	   
 	    if(filter.getCurrentDesignation() != 0){
 	    query = query+" and currentDesignation="+filter.getCurrentDesignation();
 	   }
-	   /* if(filter.getDateOfJoining() != null){
-	    query = query + " and DOJ='"+filter.getDateOfJoining()+"'";
-	   }*/
-	    
 	    if(filter.getDateOfJoiningFrom() !=null){
 		    if(filter.getDateOfJoiningFrom().compareTo(filter.getDateOfJoiningTo())<=0){
-		        
-		    	  query=query+"and DOJ between '"+filter.getDateOfJoiningFrom()+"' and '"+filter.getDateOfJoiningTo()+"' ";  
-		    	   
+		    	  query=query+"and DOJ between '"+filter.getDateOfJoiningFrom()+"' and '"+filter.getDateOfJoiningTo()+"' ";
 		    	     }
 		    }
 	     if(filter.getFrom()!=null){
@@ -612,19 +538,16 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 	    if(filter.getGender() != null){
 	    query = query + " and gender='"+filter.getGender()+"'";                                       
 	   }
-	   
 	    if(filter.getHighestQualification() != null){
 	    query = query + " and highestQualification='"+filter.getHighestQualification()+"'";
 	   }
 	     if(filter.getTo() !=null){
 	    query = query + " and (years_of_experience + timestampdiff(MONTH,DOJ, sysdate())/12.0)<="+filter.getTo();
 	   }
-	      System.out.println(query);
 	   Query hql1=session.createQuery(query);
 	   list = (List<Employee>)hql1.list();
 	   }
 	   else if(filter.getFilterEmployee().equalsIgnoreCase("Inactive")){
-	   
 	   String query1= "from Employee where is_Deleted=1";
 	   if(filter.getCurrentDesignation() != 0){
 	    query1 = query1+" and currentDesignation="+filter.getCurrentDesignation();
@@ -664,8 +587,6 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 	  }
 	  return  list;  
 	 }
-
-
 	@Override
 	public List<Employee> getWelcomeEmployee() throws BusinessException {
 		Session session = null;
@@ -677,16 +598,13 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 				session = SessionFactoryUtil.getInstance().openSession();
 				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 			}
-			
 			String hql="from Employee where is_deleted=0 and   date(dateOfJoining) between  date(sysdate())-6 and date(sysdate()) ORDER BY dateOfJoining ";				
 			org.hibernate.Query query = session.createQuery(hql);
 			 list  = query.list();
 			if (list.size() == 0) {
 				System.out.println(" No employee Joined today");
 			}
-
 		} finally {
-
 			try {
 				if (tx != null) {
 					tx.commit();
@@ -694,13 +612,11 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 						session.close();
 				}
 			} catch (HibernateException e) {
-
 				e.printStackTrace();
 			}
 		}
 		return list;
 	}
-
 	 @SuppressWarnings("unchecked")
 		@Override
 		public Boolean getEmployeeByEmpId(String empid) throws EmployeeException {
@@ -715,6 +631,7 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 				}
 				Criteria createCriteria = session.createCriteria(Employee.class);
 				createCriteria.add(Restrictions.eq("employeeId", empid));
+				createCriteria.add(Restrictions.eq("isDeleted", Boolean.FALSE));
 				list = createCriteria.list();
 				if (list.size() == 0) {
 					return false;
@@ -722,9 +639,7 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 					  return true;
 				  }
 			}
-			
 			finally {
-			
 						try {
 							if (tx != null) {
 								tx.commit();
@@ -737,9 +652,6 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 						}
 				  }
 		}
-
-	
-
 	 @SuppressWarnings("unchecked")
 		@Override
 		public Boolean isEmployeeEmailExist(String email){
@@ -755,6 +667,7 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 				}
 				Criteria createCriteria = session.createCriteria(Employee.class);
 				createCriteria.add(Restrictions.eq("email", email));
+				createCriteria.add(Restrictions.eq("isDeleted", Boolean.FALSE));
 				list = createCriteria.list();
 				if (list.size() == 0) {
 					return false;
@@ -767,16 +680,12 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 									session.close();
 							}
 						} catch (HibernateException e) {
-
 							e.printStackTrace();
 						}
 				  }
 					return  true;
 		}
-
-
 	@SuppressWarnings("unchecked")
-
 	  @Override
 	  public Employee viewEmployee(String EmployeeId) throws EmployeeException {
 	    Session session = null;
@@ -789,7 +698,6 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 	       tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 	      }
 	      Criteria createCriteria = session.createCriteria(Employee.class);
-	  
 	      createCriteria.add(Restrictions.eq("employeeId", EmployeeId));
 	      list = createCriteria.list();
 	      if (list.size() == 0) {
@@ -803,15 +711,11 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 	           session.close();
 	         }
 	        } catch (HibernateException e) {
-
 	         e.printStackTrace();
 	        }
 	        }
 	       return list.iterator().next();
 	  }
-
-
-
 	@Override
 	public List<Employee> getEmployee() {
 		Session session = null;
@@ -834,20 +738,17 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 						session.close();
 				}
 			} catch (HibernateException e) {
-
 				e.printStackTrace();
 			}
 		}
 		return list;
 	}
-
 	@Override
 	public Paginator<NotificationPaginationInput> getEmployeesPaginated(
 			NotificationPaginationInput employee) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 	@Override
 	public Employee getLoggedInUser(long userId) throws EmployeeException {
 		 Session session = null;
@@ -873,7 +774,6 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 	           session.close();
 	         }
 	        } catch (HibernateException e) {
-
 	         e.printStackTrace();
 	        }
 	        }
@@ -904,16 +804,12 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 			}
 			String query ="FROM Employee WHERE is_Deleted=0 ORDER BY LPAD('',employeeId,100)ASC";
-			Query hql1=session.createQuery(query);
-			   
+			  Query hql1=session.createQuery(query);
 			  Query count=session.createQuery("select count(*) FROM Employee WHERE is_Deleted=0");
-			  
-			 countfilter = (Long)count.uniqueResult();
+			   countfilter = (Long)count.uniqueResult();
 			   hql1.setFirstResult(skipCount);
 			   hql1.setMaxResults(pageSize);
-			   
 			   list = (List<Employee>)hql1.list();
-			
 		} finally {
 			try {
 				if (tx != null) {
@@ -922,14 +818,12 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 						session.close();
 				}
 			} catch (HibernateException e) {
-
 				e.printStackTrace();
 			}
 		}
 		 Paginator<Employee> employeePaginator = new Paginator<>(list, countfilter);
 		  return employeePaginator;
 	 }
-	
 	@Override
 	public Paginator<Employee> getSearchedEmployeesListPaginated(
 			EmployeeSearchInputDescriptor employee) {
@@ -940,7 +834,6 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 		  int pageSize = employee.getPageSize();
 		  int skipCount = (pageNo - 1) * pageSize; 
 		  Criteria criteria=createCustomCriteria(Employee.class);
-		   //session.createQuery("from EMPLOYEE where str(employee_id) like :employeeId").setString("employeeId", "%"+employee.getSearchKey()+"%");
 		   System.out.println(employee.getSearchKey());
 		   if(employee.getSearchKey().matches("[0-9]*")){
 		    double emp = Double.parseDouble(employee.getSearchKey());
@@ -956,7 +849,6 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 		   }else{
 		   Criterion name = Restrictions.ilike("employeeName", employee.getSearchKey(),MatchMode.ANYWHERE);
 		   Criterion email = Restrictions.ilike("email", employee.getSearchKey(), MatchMode.ANYWHERE);
-		   //Criterion id = Restrictions.eq("employeeId", empid);
 		   Criterion active = Restrictions.eq("isDeleted",Boolean.FALSE);
 		   Criterion search = Restrictions.and(Restrictions.or(name,email), active);
 		   criteria.add(search);
@@ -967,7 +859,6 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 	 employeePaginator = new Paginator<>(consultantList, totalCount);  
 	 return employeePaginator;
 }
-
 	@Override
 	public Paginator<Employee> getFilterEmployeesListPaginated(
 			FilterEmployee filter) {
@@ -1010,21 +901,15 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 			     if(filter.getTo() !=null){
 			    query = query + " and (years_of_experience + timestampdiff(MONTH,DOJ, sysdate())/12.0)<="+filter.getTo();
 			   }
-			 
 			     query = query +"ORDER BY LPAD('',employeeId,100)ASC";
 			   Query hql1=session.createQuery(query);
-			   
-			  Query count=session.createQuery("select count(*)"+query);
-			  
-			 countfilter = (Long)count.uniqueResult();
+			   Query count=session.createQuery("select count(*)"+query);
+			   countfilter = (Long)count.uniqueResult();
 			   hql1.setFirstResult(skipCount);
 			   hql1.setMaxResults(pageSize);
-			   
 			   list = (List<Employee>)hql1.list();
 			   }
-			   
 			   else if(filter.getFilterEmployee().equalsIgnoreCase("Inactive")){
-			   
 			   String query1= "from Employee where is_Deleted=1";
 			   if(filter.getCurrentDesignation() != 0){
 			    query1 = query1+" and currentDesignation="+filter.getCurrentDesignation();
@@ -1049,12 +934,9 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 			   query1 = query1 +"ORDER BY LPAD('',employeeId,100)ASC";
 			   Query hql1=session.createQuery(query1);
 			   Query count=session.createQuery("select count(*)"+query1);
-				  
-				 countfilter = (Long)count.uniqueResult();
-			   
+			   countfilter = (Long)count.uniqueResult();
 			   hql1.setFirstResult(skipCount);
 			   hql1.setMaxResults(pageSize);
-			   
 			   list = (List<Employee>)hql1.list();
 			   }
 		  Paginator<Employee> employeePaginator = new Paginator<>(list, countfilter);
@@ -1068,13 +950,10 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 			      session.close();
 			    }
 			   } catch (HibernateException e) {
-
 			    e.printStackTrace();
 			   }
 			  }
 }
-
-
 	@Override
 	public List getProfilePics() {
 		Session session = null;
@@ -1090,7 +969,6 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 			createCriteria.add(Restrictions.eq("isDeleted", false));
 			createCriteria.setProjection(Projections.property("fileId"));
 			list = createCriteria.list();
-			
 		}finally {
 					try {
 						if (tx != null) {
@@ -1099,13 +977,11 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 								session.close();
 						}
 					} catch (HibernateException e) {
-
 						e.printStackTrace();
 					}
 			  }
 				return  list;
 	}
-
 	@Override
 	public Employee getEmployeeById(long id) throws EmployeeException {
 		 Session session = null;
@@ -1131,11 +1007,9 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 		        session.close();
 		      }
 		     } catch (HibernateException e) {
-
 		      e.printStackTrace();
 		     }
 		     }
 		    return  (Employee) list.iterator().next();
 	}
-
 }
