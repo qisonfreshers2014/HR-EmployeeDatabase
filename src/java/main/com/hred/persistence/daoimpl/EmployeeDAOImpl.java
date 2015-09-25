@@ -835,10 +835,10 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 		  int skipCount = (pageNo - 1) * pageSize; 
 		  Criteria criteria=createCustomCriteria(Employee.class);
 		   System.out.println(employee.getSearchKey());
-		   if(employee.getSearchKey().matches("[0-9]*")){
+		   if(employee.getSearchKey().matches("[0-9.]*")){
 		    double emp = Double.parseDouble(employee.getSearchKey());
 	        int emp1=(int) emp;
-		    Criterion id = Restrictions.eq("employeeId", emp1);
+		    Criterion id = Restrictions.ilike("employeeId", employee.getSearchKey(),MatchMode.EXACT);
 		    Criterion years = Restrictions.eq("yearsofexperience", emp);
 		    Criterion active = Restrictions.eq("isDeleted",Boolean.FALSE);
 		    Criterion search = Restrictions.and(Restrictions.or(id,years), active);
@@ -847,10 +847,11 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 		    criteria.setFirstResult(skipCount).setMaxResults(pageSize);
 		    consultantList=criteria.list();
 		   }else{
+		   Criterion id = Restrictions.ilike("employeeId", employee.getSearchKey(),MatchMode.ANYWHERE);
 		   Criterion name = Restrictions.ilike("employeeName", employee.getSearchKey(),MatchMode.ANYWHERE);
 		   Criterion email = Restrictions.ilike("email", employee.getSearchKey(), MatchMode.ANYWHERE);
 		   Criterion active = Restrictions.eq("isDeleted",Boolean.FALSE);
-		   Criterion search = Restrictions.and(Restrictions.or(name,email), active);
+		   Criterion search = Restrictions.and(Restrictions.or(id,name,email), active);
 		   criteria.add(search);
 			totalCount = getRecordCount(criteria);
 		   criteria.setFirstResult(skipCount).setMaxResults(pageSize);
