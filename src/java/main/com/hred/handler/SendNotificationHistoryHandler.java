@@ -185,7 +185,12 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 				now.setTime(doj);
 				int dojYear =now.get(Calendar.YEAR);
 				int diff=year-dojYear;
-				String body="<b>Hi "+aniversary.getEmployeeName()+"</br></br>Congratulations on completing " +diff+" years with Qison Software.</br></br></b>"+anivarsaryTemplate.getContent();
+				String body="<b>Hi "+aniversary.getEmployeeName();
+				   if(diff>1){
+						body+="</br></br>Congratulations on completing " +diff+" years with Qison Software.</br></br></b>"+anivarsaryTemplate.getContent();
+				   } else{
+					    body+="</br></br>Congratulations on completing " +diff+" year with Qison Software.</br></br></b>"+anivarsaryTemplate.getContent();
+				   }
 				String aniversarytext = null;
 				try {
 					Email email = new MultiPartEmail();
