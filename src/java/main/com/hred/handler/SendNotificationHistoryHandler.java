@@ -10,7 +10,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Properties;
 
@@ -154,7 +156,6 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 					email.addTo(birthday.getEmail());
 					email.setContent(body, "text/html");
 					email.addCc(bcc);
-					
 					email.send();
 					
 					
@@ -178,10 +179,15 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 			Template anivarsaryTemplate=tempDAOImpl.getContentForMail(requiredContent);
 			
 			for (Employee aniversary : todaysWorkAniversay) {
-				String body="Hi "+aniversary.getEmployeeName()+"</br></br>"+anivarsaryTemplate.getContent();
+				Calendar now = Calendar.getInstance();   // Gets the current date and time
+				int year = now.get(Calendar.YEAR); 
+				Timestamp doj =aniversary.getDateOfJoining();
+				now.setTime(doj);
+				int dojYear =now.get(Calendar.YEAR);
+				int diff=year-dojYear;
+				String body="<b>Hi "+aniversary.getEmployeeName()+"</br></br>Congratulations on completing " +diff+" years with Qison Software.</br></br></b>"+anivarsaryTemplate.getContent();
 				String aniversarytext = null;
 				try {
-					
 					Email email = new MultiPartEmail();
 					email.setHostName(hostName);
 					email.setSmtpPort(465);
@@ -346,7 +352,7 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 	                        authenticatorMail, authenticatorPassword));
 	                email.setSSLOnConnect(true);
 	                email.setFrom(from);
-	               
+	                email.setBounceAddress("rahul.shelke@qison.com");
 	                String subjectMail = sentMailToEmployee.getEvent() + " "
 	                        + sentMailToEmployee.getEmployeeName();
 	               	               
@@ -425,6 +431,7 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
                   authenticatorMail, authenticatorPassword));
           email.setSSLOnConnect(true);
           email.setFrom(from);
+          email.setBounceAddress("rahul.shelke@qison.com");
          
          // String subjectMail = sentMailToEmployee.getEvent() + " "
                  // + sentMailToEmployee.getEmployeeName();
