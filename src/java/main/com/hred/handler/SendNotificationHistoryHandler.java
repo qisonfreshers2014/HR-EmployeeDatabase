@@ -187,9 +187,9 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 				int diff=year-dojYear;
 				String body="<b>Hi "+aniversary.getEmployeeName();
 				   if(diff>1){
-						body+="</br></br>Congratulations on completing " +diff+" years with Qison Software.</br></br></b>"+anivarsaryTemplate.getContent();
+						body+="<br/><br/>Congratulations on completing " +diff+" years with Qison Software.<br/><br/></b>"+anivarsaryTemplate.getContent();
 				   } else{
-					    body+="</br></br>Congratulations on completing " +diff+" year with Qison Software.</br></br></b>"+anivarsaryTemplate.getContent();
+					    body+="<br/><br/>Congratulations on completing " +diff+" year with Qison Software.<br/><br/></b>"+anivarsaryTemplate.getContent();
 				   }
 				String aniversarytext = null;
 				try {
@@ -205,7 +205,6 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 					email.addCc(bcc);
 					email.setContent(body, "text/html");
 					email.send();
-					
 					entry.setEmployeeEmail(aniversary.getEmail());
 					entry.setEmployeeName(aniversary.getEmployeeName());
 					entry.setEventName("Work Anniversary");
@@ -302,7 +301,7 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 				}
 			
 				email.setContent(body, "text/html");
-								email.send();
+				email.send();
 				entry.setEmployeeName(sentMailToEmployee.getEmployeeName());
 				entry.setEmployeeEmail(sentMailToEmployee.getEmployeeEmail());
 				
