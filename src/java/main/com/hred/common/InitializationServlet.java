@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.Calendar;
+import java.util.TimeZone;
 import java.util.Timer;
 
 import javax.servlet.ServletConfig;
@@ -58,7 +59,6 @@ public class InitializationServlet extends HttpServlet {
 			CacheManager.getInstance()
 					.getCache(CacheRegionType.USER_SESSION_CACHE)
 					.put(sessionToken, userSessionToken);
-			
 			Object value = CacheManager.getInstance()
 			.getCache(CacheRegionType.USER_SESSION_CACHE)
 			.getValue(sessionToken);		
@@ -89,7 +89,7 @@ public class InitializationServlet extends HttpServlet {
 	public void sendAutomatedNotificationMail()
 	{
 		Calendar sentAutomatedMailFrom = Calendar.getInstance();
-		 sentAutomatedMailFrom.set(2015,8,07,11,00, 00);		
+		 sentAutomatedMailFrom.set(2015,8,07,06,00, 00);
 		NotificationTimer mailTimer=new NotificationTimer();
 		Timer notificationTimer = new Timer();
 		notificationTimer.schedule(mailTimer,sentAutomatedMailFrom.getTime(), 24*60*60*1000);
@@ -101,13 +101,9 @@ public class InitializationServlet extends HttpServlet {
 		File file1 = new File(workingDir);
 		String parentPath = file1.getParent();
 		File actualPath = new File(parentPath, "FileUpload");
-		
- 		
 		File deployFolder = new File(workingDir, "deploy");
 		File webAppDir = new File(deployFolder, "webapp");
-		
 		File tempDir = new File(webAppDir, "FileUpload");
  		FileUtils.copyDirectory(actualPath, tempDir);
-		
 	}
 }
