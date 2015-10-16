@@ -85,7 +85,7 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 	
 	public String sentAutomatedMailMail() throws EmailException {
 		System.out.println("Comming to the SNH method");
-		
+		System.out.println("mail sent Time**************  "+Calendar.getInstance().getTime());
 		String hostName=null;
 		String smtpPort=null;
 		String authenticatorMail=null;
