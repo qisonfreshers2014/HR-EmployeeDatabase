@@ -187,13 +187,13 @@ public List<Template> getTemplatesAOP() {
 				gender="She";
 				genderVariable="Her";
 			}
-	 finalContent +="Dear Qisonians,<br/><br/> We take Immense pleasure in welcoming <b>"+ sendNotification.getEmployeeName()+"</b> who has Joined QISON TEAM <br/><br/> ";
+	 finalContent +="<span style='color:#003FBE;font-family:verdana'>Dear Qisonians,<br/><br/> We take Immense pleasure in welcoming <b>"+ sendNotification.getEmployeeName()+"</b> who has Joined QISON TEAM <br/><br/> ";
 	 finalContent +=""+gender+" is working as <b>"+currentDesignation+"</b><br/><br/>";	 
      finalContent += "<b>"+sendNotification.getEmployeeName()+"</b> as "+gender+" likes to be called, "+gender+" has pursued <b>"+ sendNotification.getHighestQualification()+"</b> from <b>"+sendNotification.getUniversity()+"</b>.<br/><br/>"/*+gender+" takes keen interest in <b>"+sendNotification.getHobbies()+"</b><br/><br/>" */;	
      finalContent += ""+gender+" can be reached on <b>"+sendNotification.getEmail()+"</b><br/><br/>";	 
      finalContent += ""+genderVariable+" Skype ID is<b>"+sendNotification.getSkype()+"</b><br/><br/>"; 
      finalContent += "Please join us in welcoming <b>"+sendNotification.getEmployeeName()+" </b>to QISON family and Wish him a Long and Successful career !!!<br/><br/>";	 
-     finalContent += "<b>Best Regards,<br/><br/>HR Team.</b>";
+     finalContent += "<b>Best Regards,<br/><br/>HR Team.</b></span>";
       templatescontenttoDisplay.setContent(finalContent);
     }else{
 		TemplateDAO tempDAOImpl = (TemplateDAO) DAOFactory.getInstance().getTemplateDAO();
@@ -207,15 +207,15 @@ public List<Template> getTemplatesAOP() {
 				now.setTime(doj);
 				int dojYear =now.get(Calendar.YEAR);
 				int diff=year-dojYear;
-				 finalContent="<b>Hi "+sendNotification.getEmployeeName();
+				 finalContent="<b> <span style='color:#003FBE;font-family:verdana'>Hi  "+sendNotification.getEmployeeName();
 				   if(diff>1){
-					   finalContent+="<br/><br/>Congratulations on completing " +diff+" years with Qison Software.<br/></b>"+receivedtemplatesfromdb.getContent();
+					   finalContent+="<br/><br/>Congratulations on completing " +diff+" years with Qison Software.</span><br/></b>"+receivedtemplatesfromdb.getContent();
 				   } else{
-					   finalContent+="<br/><br/>Congratulations on completing " +diff+" year with Qison Software.<br/></b>"+receivedtemplatesfromdb.getContent();
+					   finalContent+="<br/><br/>Congratulations on completing " +diff+" year with Qison Software.</span><br/></b>"+receivedtemplatesfromdb.getContent();
 				   }
 		 // finalContent ="<b>Hi "+sendNotification.getEmployeeName()+"</b><br/><br/>"+receivedtemplatesfromdb.getContent(); 
 		 }else{
-		 finalContent ="<b>Hi "+sendNotification.getEmployeeName()+"</b><br/>"+receivedtemplatesfromdb.getContent();
+		 finalContent ="<b><span style='color:#003FBE;font-family:verdana'>Hi  "+sendNotification.getEmployeeName()+"</span></b><br/>"+receivedtemplatesfromdb.getContent();
 		 }
 		templatescontenttoDisplay.setContent(finalContent);
 		}

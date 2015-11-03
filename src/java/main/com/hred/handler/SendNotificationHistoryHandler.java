@@ -142,7 +142,7 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 			Template birthdayTemplate=tempDAOImpl.getContentForMail(requiredContent);
 			
 			for (Employee birthday : todaysBithday) {
-				String body="Hi "+birthday.getEmployeeName()+"</br></br>"+birthdayTemplate.getContent();
+				String body="<b><span style='color:#003FBE;font-family:verdana'>Hi "+birthday.getEmployeeName()+"</span></b></br></br>"+birthdayTemplate.getContent();
 
 				try {	
 					Email email = new MultiPartEmail();
@@ -185,11 +185,11 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 				now.setTime(doj);
 				int dojYear =now.get(Calendar.YEAR);
 				int diff=year-dojYear;
-				String body="<b>Hi "+aniversary.getEmployeeName();
+				String body="<b><span style='color:#003FBE;font-family:verdana'>Hi "+aniversary.getEmployeeName();
 				   if(diff>1){
-						body+="<br/><br/>Congratulations on completing " +diff+" years with Qison Software.<br/><br/></b>"+anivarsaryTemplate.getContent();
+						body+="<br/><br/>Congratulations on completing " +diff+" years with Qison Software.</span><br/><br/></b>"+anivarsaryTemplate.getContent();
 				   } else{
-					    body+="<br/><br/>Congratulations on completing " +diff+" year with Qison Software.<br/><br/></b>"+anivarsaryTemplate.getContent();
+					    body+="<br/><br/>Congratulations on completing " +diff+" year with Qison Software.<br/></span><br/></b>"+anivarsaryTemplate.getContent();
 				   }
 				String aniversarytext = null;
 				try {
