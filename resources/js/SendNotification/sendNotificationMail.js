@@ -146,7 +146,7 @@ sendNotificationMail.prototype.handleShow = function(event, email, employeeName)
 			//Apending the name in the To drop  down
  $("#sendToNotification").append(send);
 			var subject = '<select  id="SubjectNotification">';
-			subject += '<option value=Welcome">'+" Welcome To Qison Family"+ "</option>";
+			subject += '<option value=Welcome">'+" Welcome On Board "+employeeName+""+ "</option>";
 			//Apending the Subject to the subject drop down
 			  $("#sendSubjectNotification").append(subject);
 		}
