@@ -34,9 +34,6 @@ import com.hred.service.descriptors.output.TemplateOutputDescriptor;
 
 @Path("/v1/template/")
 public class TemplateService extends BaseService {
-
-
-
  /**
   * @param headers
   * @param uriInfo
@@ -46,45 +43,32 @@ public class TemplateService extends BaseService {
   * @throws BusinessException
   * @throws EncryptionException
   */
-
  @POST
  @RestService(input = String.class, output = String.class)
  @ServiceStatus(value = "complete")
  @Consumes(MediaType.APPLICATION_JSON)
  @Produces(MediaType.APPLICATION_JSON)
  @Path("/save")
-
  public String save(@Context HttpHeaders headers, @Context UriInfo uriInfo,
    WebserviceRequest request) throws ObjectNotFoundException,
    BusinessException, EncryptionException {
-  Template template = (Template) JsonUtil.getObject(request.getPayload(),
-    Template.class);
-
-  Template output = (Template) TemplateHandler.getInstance().saveAOP(
-    template);
-
+  Template template = (Template) JsonUtil.getObject(request.getPayload(),Template.class);
+  Template output = (Template) TemplateHandler.getInstance().saveAOP(template);
   return JsonUtil.getJsonBasedOnDescriptor(output, Template.class);
  }
-
-	@POST
-	@RestService(input = String.class, output = String.class)
-	@ServiceStatus(value = "complete")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/gatTemplate")
-	
-	public String getTemplates(@Context HttpHeaders headers,
+ @POST
+ @RestService(input = String.class, output = String.class)
+ @ServiceStatus(value = "complete")
+ @Consumes(MediaType.APPLICATION_JSON)
+ @Produces(MediaType.APPLICATION_JSON)
+ @Path("/gatTemplate")
+ public String getTemplates(@Context HttpHeaders headers,
 			@Context UriInfo uriInfo, WebserviceRequest request)
 			throws ObjectNotFoundException, BusinessException,
 			EncryptionException, TemplateException {
-
-		Template template = (Template) JsonUtil.getObject(request.getPayload(),
-				Template.class);
-		List<Template> templates = (List<Template>) TemplateHandler
-				.getInstance().getTemplatesAOP();
+		Template template = (Template) JsonUtil.getObject(request.getPayload(),Template.class);
+		List<Template> templates = (List<Template>) TemplateHandler.getInstance().getTemplatesAOP();
 		System.out.println("COunt : " + templates.size());
-		// String outputString =
-		// "{\"status\": \"SUCCESS\", \"payload\": \"Test Successful\"}";
 		return JsonUtil.getJsonBasedOnDescriptor(templates, Template.class);
 	}
  @POST
@@ -93,61 +77,42 @@ public class TemplateService extends BaseService {
  @Consumes(MediaType.APPLICATION_JSON)
  @Produces(MediaType.APPLICATION_JSON)
  @Path("/viewTemplate")
- 
  public String viewTemplate(@Context HttpHeaders headers,
    @Context UriInfo uriInfo, WebserviceRequest request)
    throws ObjectNotFoundException, BusinessException,
    EncryptionException, TemplateException {
-
-  Template template = (Template) JsonUtil.getObject(request.getPayload(),
-    Template.class);
+  Template template = (Template) JsonUtil.getObject(request.getPayload(),Template.class);
   List<Template> templates = TemplateHandler.getInstance().viewTemplateAOP(template.getId());
-
-  // String outputString =
-  // "{\"status\": \"SUCCESS\", \"payload\": \"Test Successful\"}";
   return JsonUtil.getJsonBasedOnDescriptor(templates, Template.class);
  }
-
-
-
  @POST
  @RestService(input = String.class, output = String.class)
  @ServiceStatus(value = "complete")
  @Consumes(MediaType.APPLICATION_JSON)
  @Produces(MediaType.APPLICATION_JSON)
  @Path("/getContentForMail")
-
  public String getContentForMail(@Context HttpHeaders headers,
    @Context UriInfo uriInfo, WebserviceRequest request)
    throws ObjectNotFoundException, BusinessException,
    EncryptionException {
-
-  DisplayNotificationHome template = (DisplayNotificationHome) JsonUtil.getObject(request.getPayload(),
-    DisplayNotificationHome.class);
-
+  DisplayNotificationHome template = (DisplayNotificationHome) JsonUtil.getObject(request.getPayload(),DisplayNotificationHome.class);
   Template subject = TemplateHandler.getInstance().getContentForMailAOP(template);
   return JsonUtil.getJsonBasedOnDescriptor(subject, Template.class);
  }
- @POST
+  @POST
   @RestService(input = String.class, output = String.class)
   @ServiceStatus(value = "complete")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   @Path("/updateTemplate")
-  
   public String update(@Context HttpHeaders headers,
     @Context UriInfo uriInfo, WebserviceRequest request)
     throws ObjectNotFoundException, BusinessException,
     EncryptionException {
-
-   Template template = (Template) JsonUtil.getObject(
-     request.getPayload(), Template.class);
-
+   Template template = (Template) JsonUtil.getObject(request.getPayload(), Template.class);
    Template output=(Template) TemplateHandler.getInstance().updateAOP(template);
-
    return JsonUtil.getJsonBasedOnDescriptor(output,Template.class);
   }
-  
  @POST
  @RestService(input = String.class, output = String.class)
  @ServiceStatus(value = "complete")
@@ -158,12 +123,9 @@ public class TemplateService extends BaseService {
    @Context UriInfo uriInfo, WebserviceRequest request)
    throws ObjectNotFoundException, BusinessException,
    EncryptionException {
- 	PaginationInput alltemplates = (PaginationInput) JsonUtil.getObject(
-    request.getPayload(), PaginationInput.class);
-  PaginationOutput<Template> templates = TemplateHandler.getInstance().getAllTemplatesPaginatedAOP(alltemplates);
-  return JsonUtil.getJsonBasedOnDescriptor(templates, TemplateOutputDescriptor.class);
-  
+ 	PaginationInput alltemplates = (PaginationInput) JsonUtil.getObject( request.getPayload(), PaginationInput.class);
+    PaginationOutput<Template> templates = TemplateHandler.getInstance().getAllTemplatesPaginatedAOP(alltemplates);
+   return JsonUtil.getJsonBasedOnDescriptor(templates, TemplateOutputDescriptor.class);
  }
-
 }
 

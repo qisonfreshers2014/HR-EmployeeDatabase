@@ -9,18 +9,9 @@ import com.hred.pagination.Paginator;
 import com.hred.service.descriptors.output.DisplayNotificationHome;
 
 public interface TemplateDAO extends BaseDAO{
-
-
-	List<Template> viewTemplate(long id) throws TemplateException;
-
-	List<Template> getTemplates();
-
-	 Template getContentForMail(DisplayNotificationHome template);
-
-	Paginator<Template> getAllHandsSchedule(PaginationInput alltemplates);
-
-	
-
-
+	public List<Template> viewTemplate(long id) throws TemplateException;
+	public List<Template> getTemplates();
+	public Template getContentForMail(DisplayNotificationHome template);
+	public Paginator<Template> getAllHandsSchedule(PaginationInput alltemplates);
 }
 

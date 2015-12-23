@@ -36,12 +36,9 @@ public class BaseDAOImpl implements BaseDAO{
         }
         return session;
 	}
-	
 	private Session checkSession() {
         return ServiceRequestContextHolder.getContext().getSession();
 	}
-
-
     public Criteria createCriteria(Class inputClass) {
         return getSession().createCriteria(inputClass);
     }
@@ -50,8 +47,6 @@ public class BaseDAOImpl implements BaseDAO{
         criteria.add(Restrictions.eq(AbstractObject.LABEL_IS_DELETED, Boolean.FALSE));
         return criteria;
     }
-   
-
     @Override
     public BaseObject saveObject(BaseObject persistentObject) {
      Session session = checkSession();
@@ -164,7 +159,5 @@ public class BaseDAOImpl implements BaseDAO{
         countCriteria.setProjection(null);
         return total;
     }
-  
-  
-	
+
 }

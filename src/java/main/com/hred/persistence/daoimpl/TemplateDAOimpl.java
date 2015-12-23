@@ -25,20 +25,15 @@ import com.hred.persistence.session.SessionFactoryUtil;
 import com.hred.service.descriptors.output.DisplayNotificationHome;
 
 public class TemplateDAOimpl extends BaseDAOImpl implements TemplateDAO {
-
-
 	private static TemplateDAO INSTANCE = null;
-
 	private TemplateDAOimpl() {
 	}
-
 	public static TemplateDAO getInstance() {
 		if (INSTANCE == null) {
 			INSTANCE = new TemplateDAOimpl();
 		}
 		return INSTANCE;
 	}
-
  @SuppressWarnings("unchecked")
  public List<Template> getTemplateByName() {
   Session session = null;
@@ -51,10 +46,6 @@ public class TemplateDAOimpl extends BaseDAOImpl implements TemplateDAO {
   tx = SessionFactoryUtil.getInstance().beginTransaction(session);
   }
   Criteria createCriteria = session.createCriteria(Template.class);
-   
-  //createCriteria.add(Restrictions.eq("id", employee.getId()));
-   
-  //createCriteria.add(Restrictions.eq("isDeleted",false));
   list = (List<Template>)createCriteria.list();
    } finally {
   try {
@@ -64,17 +55,11 @@ public class TemplateDAOimpl extends BaseDAOImpl implements TemplateDAO {
      session.close();
   }
   } catch (HibernateException e) {
-
   e.printStackTrace();
   }
   }
   return  list;  
   }
- 
- 
-
-
-
   @SuppressWarnings("unchecked")
   @Override
   public List< Template> viewTemplate( long id) throws TemplateException{
@@ -88,10 +73,7 @@ public class TemplateDAOimpl extends BaseDAOImpl implements TemplateDAO {
   tx = SessionFactoryUtil.getInstance().beginTransaction(session);
   }
   Criteria createCriteria = session.createCriteria(Template.class);
-   
   createCriteria.add(Restrictions.eq("id",id));
-   
-  //createCriteria.add(Restrictions.eq("isDeleted",false));
   list = (List<Template>)createCriteria.list();
   if (list.size() == 0) {
    throw new TemplateException(ExceptionCodes.TEMPLATE_DOESNOT_EXIST, ExceptionMessages.TEMPLATE_DOES_NOT_EXIST);
@@ -104,37 +86,27 @@ public class TemplateDAOimpl extends BaseDAOImpl implements TemplateDAO {
      session.close();
   }
   } catch (HibernateException e) {
-
   e.printStackTrace();
   }
   }
   return  list;  
   }
-
-  
   public Template getContentForMail(DisplayNotificationHome template)
-
 	{
 		Session session = null;
 		Template list = null;
 		Transaction tx = null;
-		
 		session = getSession();
 		if (null == session) {
 		session = SessionFactoryUtil.getInstance().openSession();
 		tx = SessionFactoryUtil.getInstance().beginTransaction(session);
-		}
+		     }
 		Criteria createCriteria = session.createCriteria(Template.class);
 		createCriteria.add(Restrictions.eq("name",template.getEvent()));
-	/*	createCriteria.add(Restrictions.eq("name",  template.getSubject()));*/
 		list = (Template) createCriteria.uniqueResult();
-	
-	return list;	
-	
+	    return list;	
 	}
-	
 	//This method to retrieve all the templates as a list object
-
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Template> getTemplates() {
@@ -147,11 +119,8 @@ public class TemplateDAOimpl extends BaseDAOImpl implements TemplateDAO {
 		session = SessionFactoryUtil.getInstance().openSession();
 		tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 		}
-		
 		String hql="select new Template(id,name) from Template";
-		
 		Query query = session.createQuery(hql);
-		
 		list =query.list();
 		 } finally {
 		try {
@@ -161,39 +130,26 @@ public class TemplateDAOimpl extends BaseDAOImpl implements TemplateDAO {
 		   session.close();
 		}
 		} catch (HibernateException e) {
-
 		e.printStackTrace();
 		}
 		}
 		return  list; 
 	}
-
 	@Override
 	public Paginator<Template> getAllHandsSchedule(PaginationInput alltemplates) {
 		 int pageNo = alltemplates.getPageNo();
 		  int pageSize = alltemplates.getPageSize();
-		  
 		  int skipCount = (pageNo - 1) * pageSize;  
 		  Criteria criteria=createCustomCriteria(Template.class);
-		  
-		     criteria.setProjection(Projections.projectionList()
-		    	      .add(Projections.property("id"), "id")
-		    	      .add(Projections.property("name"), "name"))
-		    	    .setResultTransformer(Transformers.aliasToBean(Template.class));
-		 // criteria.addOrder(Order.desc("date"));
-		  
-
-		        criteria.setFirstResult(skipCount).setMaxResults(pageSize);
+		           criteria.setProjection(Projections.projectionList()
+		    	            .add(Projections.property("id"), "id")
+		    	            .add(Projections.property("name"), "name"))
+		    	            .setResultTransformer(Transformers.aliasToBean(Template.class));
+		            criteria.setFirstResult(skipCount).setMaxResults(pageSize);
 		  List<Template> consultantList=criteria.list();
-		  
 		  Criteria countCriteria=createCustomCriteria(Template.class); 
-		
 		  Long totalCount = getRecordCount(countCriteria);
-
 		  Paginator<Template> allhandsPaginator = new Paginator<>(consultantList, totalCount);
 		  return allhandsPaginator;
 	}
-
-
- 
 }

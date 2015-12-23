@@ -20,65 +20,28 @@ import com.hred.service.descriptors.output.NotificationHomeFilterInputDiscriptor
  * Rizwan Khan
  */
 public interface EmployeeDAO extends BaseDAO {
-	
 	public Employee viewEmployee(String string) throws EmployeeException;
-
 	public Employee getUserByEmail(String email) throws UserException;
-
-
 	public String getEmployeeName(long id);
- 
-	
 	public Employee getEmployeeById(String id) throws EmployeeException;
-
 	public List<Employee> getEmployees();
-
-	//public Employee getEmployeeById(int id) throws EmployeeException;
-	 public List<Employee> getWelcomeEmployee() throws BusinessException;
-
-	 public List<Employee> getTodaysBirthday() throws BusinessException;
-
-	 public List<Employee> getTodayWorkAniversary() throws BusinessException;
-
-	 public List<Employee> getBirthdayWithindate(
-	   NotificationHomeFilterInputDiscriptor filterCriteria)
-	   throws BusinessException;
-
-	 public List<Employee> getWorkAniversarywithdate(
-	   NotificationHomeFilterInputDiscriptor filterCriteria)
-	   throws BusinessException;
-
-	 List<Employee> getWorkAniversary() throws BusinessException;
-
-	 List<Employee> getBirthday() throws BusinessException;
-
-
+	public List<Employee> getWelcomeEmployee() throws BusinessException;
+	public List<Employee> getTodaysBirthday() throws BusinessException;
+    public List<Employee> getTodayWorkAniversary() throws BusinessException;
+	public List<Employee> getBirthdayWithindate(NotificationHomeFilterInputDiscriptor filterCriteria)throws BusinessException;
+    public List<Employee> getWorkAniversarywithdate(NotificationHomeFilterInputDiscriptor filterCriteria)throws BusinessException;
+	public List<Employee> getWorkAniversary() throws BusinessException;
+	public List<Employee> getBirthday() throws BusinessException;
 	public List<Employee> getEmployees(FilterEmployee filter);
-
-
 	public List<Employee> searchEmployee(EmployeeSearchInputDescriptor employee);
-
-
-
 	public List<Employee> getEmployee();
-
- public	Boolean getEmployeeByEmpId(String string) throws EmployeeException;
-
- public Boolean isEmployeeEmailExist(String email);
-
-Paginator<NotificationPaginationInput> getEmployeesPaginated(NotificationPaginationInput employee);
-public Employee getLoggedInUser(long userId) throws EmployeeException;
-
-public Paginator<Employee> getEmployeesListPaginated(EmployeeListPaginationInput employee);
-
-public Paginator<Employee> getFilterEmployeesListPaginated(
-		FilterEmployee employee);
-
-public Paginator<Employee> getSearchedEmployeesListPaginated(
-		EmployeeSearchInputDescriptor employee);
-public List getProfilePics();
-
-public Employee getEmployeeById(long id) throws EmployeeException;
-	
-	
+    public	Boolean getEmployeeByEmpId(String string) throws EmployeeException;
+    public Boolean isEmployeeEmailExist(String email);
+    public Paginator<NotificationPaginationInput> getEmployeesPaginated(NotificationPaginationInput employee);
+    public Employee getLoggedInUser(long userId) throws EmployeeException;
+    public Paginator<Employee> getEmployeesListPaginated(EmployeeListPaginationInput employee);
+    public Paginator<Employee> getFilterEmployeesListPaginated(FilterEmployee employee);
+    public Paginator<Employee> getSearchedEmployeesListPaginated(EmployeeSearchInputDescriptor employee);
+    public List getProfilePics();
+    public Employee getEmployeeById(long id) throws EmployeeException;
 }

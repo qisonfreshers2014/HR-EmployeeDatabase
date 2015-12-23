@@ -193,10 +193,6 @@ AddEmployee.prototype.uploadMedia = function(callback) {
 			var index = imageSrc.lastIndexOf("/") + 1;
 			var filename = imageSrc.substr(index);
 			$('#filepath').text(filename);
-			/*
-			 * $('.mediaForProfileImage').attr('src', imageSrc); if (imageSrc !=
-			 * null) { $('.mediaForProfileImage').lightBox(); }
-			 */
 		}
 	}.ctx(this));
 	callback();
@@ -219,7 +215,7 @@ var dateformat = /^(19|20)\d\d-(0\d|1[012])-(0\d|1\d|2\d|3[01])$/;
 // validating each employee field
 AddEmployee.prototype.validateEmp = function() {
 
-	// var pfchar = /^[0-9]+(/[0-9]+)*$/;
+
 	var err = $("#eiderr");
 	var eid = $("#eid").val();
 	var nameerr = $("#nameerr");
@@ -277,13 +273,6 @@ AddEmployee.prototype.validateEmp = function() {
 
 	var flag = true;
 
-	/*
-	 * if (blood == "" || eid == "" || name == "" || qualification == "" ||
-	 * email == "" || fathername == "" || contnum == "" || txtemercon == "" ||
-	 * txtemname == "" || password == "" || salary == "" || currentaddr == "" ||
-	 * peraddr == "" || relation == "" || yearexp == "" || skill == "" || rating == "" ||
-	 * skype == "" || dob == "" || doj == "") {
-	 */
 	$('.error').css('visibility', 'visible');
 
 	// sending data to database in the form of json
@@ -365,8 +354,6 @@ AddEmployee.prototype.validateEmp = function() {
 		RequestManager.saveDesignation(input2, function(data, success) {
 			if (success) {
 				return true;
-				// alert("Employee ID: "+ $("#eid").val()+ " Details
-				// Successfully Added to Designation History");
 			} else if (data.code == 131) {
 				alert("Sorry, you are not a authorized user for this action");
 
@@ -380,7 +367,6 @@ AddEmployee.prototype.validateEmp = function() {
 						input,
 						function(data, success) {
 							if (success) {
-								// $('success').val("Successfully Added")
 								alert("Employee ID: "
 										+ $("#eid").val()
 										+ " Details Successfully Added to Employee List");
