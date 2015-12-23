@@ -80,7 +80,8 @@ FilterEmp.prototype.FilterEmployee = function(pagno,empid,designationNames){
 	
 	if($('#emptype').val()=="notselected" && $('#gender').val()==0 && $('#qualification1').val()=="" && $('#dojFrom').val()==""&& $('#dojTo').val()=="" &&
 			$('#filterdesignation').val()==0 && $('#year1').val()=="" && $('#year2').val()==""){
-				
+		 $('.heading1').css("visibility","hidden");
+         $('#filterPagination').css("visibility","hidden");
 			alert("Select at least one field");
 			$('#displayData tbody').empty();
 			return;

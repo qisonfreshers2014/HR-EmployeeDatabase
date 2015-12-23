@@ -73,9 +73,9 @@ public interface Constants {
 	
 	public static final String HR = "HR";
 	public static final String ALL_VIEW = HR;
-
-
-	
+    
+	public static final String FULLTIME = "Fulltime";
+    public static final String CONTRACT = "Contract";
 
 
 }

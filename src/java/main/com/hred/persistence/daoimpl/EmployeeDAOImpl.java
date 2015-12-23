@@ -21,6 +21,7 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
+import com.hred.common.Constants;
 import com.hred.exception.BusinessException;
 import com.hred.exception.EmployeeException;
 import com.hred.exception.ExceptionCodes;
@@ -458,7 +459,7 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 				session = SessionFactoryUtil.getInstance().openSession();
 				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 			}
-    String hql="from Employee where is_deleted=0 and  day(actualdateOfBirth) = day(sysdate()) and month(actualdateOfBirth)=month(sysdate())";			
+    String hql="from Employee where is_deleted=0 and  day(actualdateOfBirth) = day(sysdate()) and month(actualdateOfBirth)=month(sysdate()) and employeeType = '"+Constants.FULLTIME+"'";		
 			org.hibernate.Query query = session.createQuery(hql);
 			 results = query.list();
 				if (results.size() == 0) {
@@ -487,7 +488,7 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 				session = SessionFactoryUtil.getInstance().openSession();
 				tx = SessionFactoryUtil.getInstance().beginTransaction(session);
 			}
-    String hql="from Employee where is_deleted=0 and  day(dateOfJoining) = day(sysdate()) and month(dateOfJoining)=month(sysdate()) and year(dateOfJoining)!=year(sysdate())";//				
+    String hql="from Employee where is_deleted=0 and  day(dateOfJoining) = day(sysdate()) and month(dateOfJoining)=month(sysdate()) and year(dateOfJoining)!=year(sysdate()) and employeeType = '"+Constants.FULLTIME+"'";//			
 			org.hibernate.Query query = session.createQuery(hql);
 			 results = query.list();
 			if (results.size() == 0) {
