@@ -689,6 +689,7 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 	@SuppressWarnings("unchecked")
 	  @Override
 	  public Employee viewEmployee(String EmployeeId) throws EmployeeException {
+     
 	    Session session = null;
 	     List<Employee> list = null;
 	     Transaction tx = null;
@@ -700,6 +701,7 @@ public class EmployeeDAOImpl extends BaseDAOImpl implements EmployeeDAO {
 	      }
 	      Criteria createCriteria = session.createCriteria(Employee.class);
 	      createCriteria.add(Restrictions.eq("employeeId", EmployeeId));
+              createCriteria.addOrder(Order.desc("id"));
 	      list = createCriteria.list();
 	      if (list.size() == 0) {
 	       throw new EmployeeException(ExceptionCodes.EMPLOYEE_DOESNOT_EXIST, ExceptionMessages.EMPLOYEE_DOESNOT_EXIST);

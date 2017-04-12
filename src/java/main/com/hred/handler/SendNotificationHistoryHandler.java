@@ -147,10 +147,10 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 				try {	
 					Email email = new MultiPartEmail();
 					email.setHostName(hostName);
-					email.setSmtpPort(465);
+					email.setSmtpPort(587);
 					email.setAuthenticator(new DefaultAuthenticator(
 							authenticatorMail, authenticatorPassword));
-					email.setSSLOnConnect(true);
+					//email.setSSLOnConnect(true);
 					email.setFrom(from);
 					email.setSubject("Happy Birth Day "+birthday.getEmployeeName());
 					email.addTo(birthday.getEmail());
@@ -195,10 +195,10 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 				try {
 					Email email = new MultiPartEmail();
 					email.setHostName(hostName);
-					email.setSmtpPort(465);
+					email.setSmtpPort(587);
 					email.setAuthenticator(new DefaultAuthenticator(
 							authenticatorMail, authenticatorPassword));
-					email.setSSLOnConnect(true);
+					//email.setSSLOnConnect(true);
 					email.setFrom(from);
 					email.setSubject("Happy Work Anniversary  "+aniversary.getEmployeeName());
 					email.addTo(aniversary.getEmail());
@@ -270,10 +270,10 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 
 			MultiPartEmail email = new MultiPartEmail();
 			email.setHostName(hostName);
-			email.setSmtpPort(465);
+			email.setSmtpPort(587);
 			email.setAuthenticator(new DefaultAuthenticator(
 					authenticatorMail, authenticatorPassword));
-			email.setSSLOnConnect(true);
+			//email.setSSLOnConnect(true);
 			email.setFrom(from);
 			String subjectMail = sentMailToEmployee.getEvent() + " "
 					+ sentMailToEmployee.getEmployeeName();
@@ -351,12 +351,12 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 
 	                MultiPartEmail email = new MultiPartEmail();
 	                email.setHostName(hostName);
-	                email.setSmtpPort(465);
+	                email.setSmtpPort(587);
 	                email.setAuthenticator(new DefaultAuthenticator(
 	                        authenticatorMail, authenticatorPassword));
-	                email.setSSLOnConnect(true);
+	                //email.setSSLOnConnect(true);
 	                email.setFrom(from);
-	                email.setBounceAddress("rahul.shelke@qison.com");
+	               // email.setBounceAddress("rahul.shelke@qison.com");
 	                String subjectMail = sentMailToEmployee.getEvent() + " "
 	                        + sentMailToEmployee.getEmployeeName();
 	               	               
@@ -430,12 +430,12 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 		  
 		  MultiPartEmail email = new MultiPartEmail();
           email.setHostName(hostName);
-          email.setSmtpPort(465);
+          email.setSmtpPort(587);
           email.setAuthenticator(new DefaultAuthenticator(
                   authenticatorMail, authenticatorPassword));
-          email.setSSLOnConnect(true);
+         // email.setSSLOnConnect(true);
           email.setFrom(from);
-          email.setBounceAddress("rahul.shelke@qison.com");
+         // email.setBounceAddress("rahul.shelke@qison.com");
          
          // String subjectMail = sentMailToEmployee.getEvent() + " "
                  // + sentMailToEmployee.getEmployeeName();
@@ -489,10 +489,10 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 
 			  MultiPartEmail mulEmail = new MultiPartEmail();
 			  mulEmail.setHostName(hostName);
-			  mulEmail.setSmtpPort(465);
+			  mulEmail.setSmtpPort(587);
 			  mulEmail.setAuthenticator(new DefaultAuthenticator(
 	                  authenticatorMail, authenticatorPassword));
-			  mulEmail.setSSLOnConnect(true);
+			  //mulEmail.setSSLOnConnect(true);
 			  mulEmail.setFrom(from);
 	         
 	         // String subjectMail = sentMailToEmployee.getEvent() + " "
@@ -501,7 +501,7 @@ public class SendNotificationHistoryHandler extends AbstractHandler {
 			  mulEmail.setSubject("Forgot Password");
 			  mulEmail.addTo(email);
 			  mulEmail.setContent(content,"text/html");
-			  mulEmail.setBounceAddress("rahul.shelke@qison.com");
+			 // mulEmail.setBounceAddress("rahul.shelke@qison.com");
 			  mulEmail.send();
 	          return "{\"status\": \"SUCCESS\", \"payload\": \"Mail Send\"}";
 			  

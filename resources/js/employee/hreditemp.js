@@ -119,7 +119,7 @@ HrEditEmployee.prototype.handleShow = function(empid) {
 		changeYear : true,
 		showAnim : 'drop',
 		minDate : new Date(1980, 12, 31),
-		maxDate : new Date(1994, 12, 31)
+		maxDate : new Date()
 	})
 	$('#actualdob').datepicker({
 		// dateFormat : $.datepicker.TIMESTAMP,
@@ -129,7 +129,7 @@ HrEditEmployee.prototype.handleShow = function(empid) {
 		changeYear : true,
 		showAnim : 'drop',
 		minDate : new Date(1980, 12, 31),
-		maxDate : new Date(1994, 12, 31)
+		maxDate : new Date()
 	})
 	
 	$('#doj').datepicker({

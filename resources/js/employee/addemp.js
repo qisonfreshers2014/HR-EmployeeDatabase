@@ -101,7 +101,7 @@ AddEmployee.prototype.handleShow = function() {
 		changeYear : true,
 		showAnim : 'drop',
 		minDate : new Date(1960, 12, 31),
-		maxDate : new Date(1994, 12, 31)
+		maxDate : new Date()
 	})
 	$('#actualdob').datepicker({
 		// dateFormat : $.datepicker.TIMESTAMP,
@@ -111,7 +111,7 @@ AddEmployee.prototype.handleShow = function() {
 		changeYear : true,
 		showAnim : 'drop',
 		minDate : new Date(1960, 12, 31),
-		maxDate : new Date(1994, 12, 31)
+		maxDate : new Date()
 	})
 
 	$('#doj').datepicker({
